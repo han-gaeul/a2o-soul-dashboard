@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: "7 3,15 * * *"   # KST 12:07, 00:07
   workflow_dispatch:          # Actions 탭에서 수동 실행
+    inputs:
+      rescan:
+        description: "채널 업로드를 처음부터 다시 확인 (필터·멤버 표기 바꾼 뒤)"
+        type: boolean
+        default: false
   push:
     branches: [main]
     paths-ignore:
@@ -45,7 +50,7 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           SITE_URL: https://han-gaeul.github.io/a2o-soul-dashboard/
-        run: python collector/collect.py ${{ github.event_name == 'push' && '--build' || '' }}
+        run: python collector/collect.py ${{ github.event_name == 'push' && '--build' || '' }} ${{ inputs.rescan && '--rescan' || '' }}
 
       - name: Commit data
         run: |

@@ -50,10 +50,8 @@ def load_config():
     members = read_yml("members.yml").get("members") or []
     cfg["members"] = members
     names = {m["name"] for m in members}
-    # 멤버 이름 → 표기 목록 (대소문자 구분 매칭)
-    cfg["member_spellings"] = {
-        m["name"]: [m["name"].replace("-", "-?"), *[re.escape(a) for a in m.get("aliases") or []]] for m in members
-    }
+    # 멤버 이름 → 정규식 (영문은 대소문자 무시, 한글은 앞뒤에 다른 한글이 없을 때만)
+    cfg["member_patterns"] = {m["name"]: member_pattern(m) for m in members}
 
     for v in cfg["videos"]:
         if v.get("member"):
@@ -74,9 +72,24 @@ def load_config():
     return cfg
 
 
+def member_pattern(m):
+    """멤버 한 명의 모든 표기를 묶은 정규식 문자열."""
+    spellings = [str(s) for s in [m["name"], m.get("ko"), *(m.get("aliases") or [])] if s]
+    alts = []
+    for s in spellings:
+        body = re.escape(s).replace(r"\-", "[- ]?").replace(r"\ ", "[- ]?")
+        if re.search(r"[가-힣]", s):
+            # 두 글자 이상이면 '제트의', '소라가'처럼 조사가 붙어도 인식. 한 글자(문, 준)는 '문의', '준비' 오인식 때문에 단독일 때만
+            particle = r"(?:의|가|는|은|이|와|과|랑|도|를|을|에게|한테)?" if len(s) >= 2 else ""
+            alts.append(rf"(?<![가-힣]){body}{particle}(?![가-힣])")
+        else:  # 'SONO의'처럼 한글 조사가 붙어도 잡히게 \b 대신 영문자 경계 사용
+            alts.append(rf"(?<![A-Za-z]){body}(?![A-Za-z])")
+    return "(?:" + "|".join(alts) + ")"
+
+
 def member_regex(cfg):
-    alts = [s for spellings in cfg["member_spellings"].values() for s in spellings]
-    return r"(?-i:\b(?:" + "|".join(alts) + r")\b)" if alts else None
+    pats = list(cfg["member_patterns"].values())
+    return "|".join(pats) if pats else None
 
 
 def compile_filter(cfg, f):
@@ -92,11 +105,7 @@ def compile_filter(cfg, f):
 
 
 def detect_members(cfg, title):
-    found = []
-    for name, spellings in cfg["member_spellings"].items():
-        if re.search(r"\b(?:" + "|".join(spellings) + r")\b", title):
-            found.append(name)
-    return found
+    return [name for name, pat in cfg["member_patterns"].items() if re.search(pat, title, re.I)]
 
 
 def classify(cfg, title, duration_s):
@@ -174,7 +183,7 @@ def resolve_video(cfg, registry, vid, overrides):
 
 # ---------- 수집 ----------
 
-def collect(cfg):
+def collect(cfg, rescan=False):
     registry = load_json("registry.json", {})
     for k in ("videos", "channels", "instagram", "handles"):
         registry.setdefault(k, {})
@@ -206,7 +215,10 @@ def collect(cfg):
         channels[cid] = c
 
     # 채널 지표 + 업로드 자동 등록
-    since = cfg["debut_date"] or None
+    # 처음(또는 --rescan)에는 업로드 전체를 훑고, 이후엔 직전 스캔의 최신 업로드 3일 전까지만 확인
+    scan = registry.setdefault("scan", {})
+    if rescan:
+        scan.clear()
     for cid, d in youtube.fetch_channels(channels).items():
         registry["channels"][cid] = {"title": d["title"]}
         prev = record(f"ch:{cid}", "subscribers", d["subscribers"])
@@ -216,7 +228,15 @@ def collect(cfg):
             if m:
                 events.append(f"🎉 {d['title']} 유튜브 구독자 {kr_num(m)} 돌파!")
         pattern = compile_filter(cfg, channels[cid].get("filter"))
-        for up in youtube.fetch_uploads(d["uploads_playlist"], since=since):
+        since = None
+        if scan.get(cid):
+            since = (date.fromisoformat(scan[cid][:10]) - timedelta(days=3)).isoformat()
+        uploads = youtube.fetch_uploads(d["uploads_playlist"], since=since)
+        newest = max((u["published_at"] for u in uploads if u["published_at"]), default=None)
+        if newest and newest > scan.get(cid, ""):
+            scan[cid] = newest
+        print(f"[YT] {d['title']}: 업로드 {len(uploads)}개 확인" + (f" ({since} 이후)" if since else " (전체)"))
+        for up in uploads:
             if up["id"] in registry["videos"]:
                 continue
             if pattern and not pattern.search(up["title"]):
@@ -405,10 +425,11 @@ def build(cfg):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--build", action="store_true", help="수집 없이 dashboard.json만 생성")
+    ap.add_argument("--rescan", action="store_true", help="채널 업로드를 처음부터 다시 훑기 (필터·멤버 표기 바꾼 뒤)")
     args = ap.parse_args()
     cfg = load_config()
     if not args.build:
-        collect(cfg)
+        collect(cfg, rescan=args.rescan)
     build(cfg)
 
 

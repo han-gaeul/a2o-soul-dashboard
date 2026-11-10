@@ -45,7 +45,7 @@ def resolve_handle(handle):
     return items[0]["id"] if items else None
 
 
-def fetch_uploads(playlist_id, since=None, max_pages=40):
+def fetch_uploads(playlist_id, since=None, max_pages=100):
     """[{id, title, published_at}] 최신순. since(ISO 날짜 문자열)보다 오래된 영상이 나오면 중단."""
     out, token = [], None
     for _ in range(max_pages):
