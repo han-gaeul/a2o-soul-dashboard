@@ -1,8 +1,13 @@
 {
  "accounts": [
   {
-   "name": "유튜브 구독자 · UCAdLPETtxpZeRVqsq_QTneA",
-   "points": []
+   "name": "유튜브 구독자 · A2O SOUL",
+   "points": [
+    [
+     "2026-11-10",
+     141000
+    ]
+   ]
   }
  ],
  "categories": {
@@ -16,17 +21,190 @@
   {
    "delta": null,
    "label": "유튜브 구독자",
-   "sub": "UCAdLPETtxpZeRVqsq_QTneA",
-   "value": null
+   "sub": "A2O SOUL",
+   "value": 141000
   },
   {
    "delta": null,
    "label": "MV 총 조회수",
-   "sub": "0편",
-   "value": 0
+   "sub": "3편",
+   "value": 4843616
   }
  ],
- "mvs": [],
- "recent": [],
- "updated_at": null
+ "mvs": [
+  {
+   "category": "mv",
+   "channel": "A2O SOUL",
+   "delta": null,
+   "id": "IAURqrShEUQ",
+   "likes": 95222,
+   "member": "",
+   "points": [
+    [
+     "2026-11-10",
+     3320614
+    ]
+   ],
+   "published_at": "2026-10-16T10:00:30Z",
+   "title": "A2O SOUL 'SUPERSTAR' Official Music Video",
+   "views": 3320614
+  },
+  {
+   "category": "mv",
+   "channel": "A2O WORLD",
+   "delta": null,
+   "id": "JPJokqIoIJI",
+   "likes": 59159,
+   "member": "",
+   "points": [
+    [
+     "2026-11-10",
+     871000
+    ]
+   ],
+   "published_at": "2026-11-09T09:00:16Z",
+   "title": "A2O SOUL 'Dancing in the Dark' Official Music Video",
+   "views": 871000
+  },
+  {
+   "category": "mv",
+   "channel": "A2O WORLD",
+   "delta": null,
+   "id": "B5Aa4gnnt9I",
+   "likes": 32472,
+   "member": "",
+   "points": [
+    [
+     "2026-11-10",
+     652002
+    ]
+   ],
+   "published_at": "2026-11-05T15:00:28Z",
+   "title": "A2O SOUL 'SUPERSTAR' INFINITE Music Video",
+   "views": 652002
+  }
+ ],
+ "recent": [
+  {
+   "category": "mv",
+   "channel": "A2O WORLD",
+   "delta": null,
+   "id": "JPJokqIoIJI",
+   "member": "",
+   "published_at": "2026-11-09T09:00:16Z",
+   "title": "A2O SOUL 'Dancing in the Dark' Official Music Video",
+   "views": 871000
+  },
+  {
+   "category": "content",
+   "channel": "A2O WORLD",
+   "delta": null,
+   "id": "kTOrPmbYJbw",
+   "member": "",
+   "published_at": "2026-11-09T09:00:13Z",
+   "title": "A2O SOUL DEBUT ALBUM [SUPERSTAR] OUT NOW",
+   "views": 637308
+  },
+  {
+   "category": "content",
+   "channel": "A2O WORLD",
+   "delta": null,
+   "id": "S5U7XkJf8IE",
+   "member": "",
+   "published_at": "2026-11-08T09:00:09Z",
+   "title": "A2O SOUL 'Dancing in the Dark' MV Teaser",
+   "views": 228269
+  },
+  {
+   "category": "content",
+   "channel": "A2O WORLD",
+   "delta": null,
+   "id": "_UdD3EGVtHI",
+   "member": "",
+   "published_at": "2026-11-08T03:00:16Z",
+   "title": "A2O SOUL ‘Dancing in the Dark’ Teaser",
+   "views": 356589
+  },
+  {
+   "category": "mv",
+   "channel": "A2O WORLD",
+   "delta": null,
+   "id": "B5Aa4gnnt9I",
+   "member": "",
+   "published_at": "2026-11-05T15:00:28Z",
+   "title": "A2O SOUL 'SUPERSTAR' INFINITE Music Video",
+   "views": 652002
+  },
+  {
+   "category": "content",
+   "channel": "A2O SOUL",
+   "delta": null,
+   "id": "GfXhRyw4L8A",
+   "member": "",
+   "published_at": "2026-11-04T09:00:10Z",
+   "title": "A2O SOUL DEBUT ALBUM [SUPERSTAR] Highlight Medley",
+   "views": 92656
+  },
+  {
+   "category": "content",
+   "channel": "A2O SOUL",
+   "delta": null,
+   "id": "3km2rkEASWI",
+   "member": "",
+   "published_at": "2026-11-04T09:00:05Z",
+   "title": "A2O SOUL DEBUT ALBUM [SUPERSTAR] Highlight Medley",
+   "views": 269034
+  },
+  {
+   "category": "content",
+   "channel": "A2O SOUL",
+   "delta": null,
+   "id": "_ibsruGmOS0",
+   "member": "",
+   "published_at": "2026-11-03T05:00:39Z",
+   "title": "Music Bank BEHIND 💫 #A2O #A2OSOUL #SUPERSTAR",
+   "views": 98492
+  },
+  {
+   "category": "content",
+   "channel": "A2O SOUL",
+   "delta": null,
+   "id": "q3UIafRZ-m0",
+   "member": "",
+   "published_at": "2026-11-01T10:30:25Z",
+   "title": "A2O SOUL 'SUPERSTAR' INFINITE CLIP 3",
+   "views": 36989
+  },
+  {
+   "category": "content",
+   "channel": "A2O SOUL",
+   "delta": null,
+   "id": "vlNZJRbPSSY",
+   "member": "",
+   "published_at": "2026-10-28T09:00:21Z",
+   "title": "A2O SOUL 'SUPERSTAR' INFINITE CLIP 2",
+   "views": 39399
+  },
+  {
+   "category": "content",
+   "channel": "A2O SOUL",
+   "delta": null,
+   "id": "rSdXwKp6HSw",
+   "member": "",
+   "published_at": "2026-10-26T14:12:53Z",
+   "title": "A2O SOUL을 소개합니다 💙",
+   "views": 111161
+  },
+  {
+   "category": "content",
+   "channel": "A2O SOUL",
+   "delta": null,
+   "id": "vyFY4UYDcDc",
+   "member": "",
+   "published_at": "2026-10-26T10:58:09Z",
+   "title": "쓰담쓰담 🫳",
+   "views": 124623
+  }
+ ],
+ "updated_at": "2026-11-10T14:00+09:00"
 }
