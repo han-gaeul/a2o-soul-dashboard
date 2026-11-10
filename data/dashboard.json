@@ -17,6 +17,32 @@
  },
  "debut_date": "2026-10-13",
  "events": [],
+ "group_links": [
+  {
+   "label": "공식 홈페이지",
+   "url": "https://a2osoul.world"
+  },
+  {
+   "label": "인스타그램 @a2o.soul",
+   "url": "https://www.instagram.com/a2o.soul"
+  },
+  {
+   "label": "유튜브 A2O SOUL",
+   "url": "https://www.youtube.com/@A2OSOUL"
+  },
+  {
+   "label": "유튜브 A2O WORLD",
+   "url": "https://www.youtube.com/@A2OWORLD"
+  },
+  {
+   "label": "플러스챗",
+   "url": "https://artist.mnetplus.world/main/stg/a2osoul"
+  },
+  {
+   "label": "A2O엔터테인먼트 아티스트 페이지",
+   "url": "https://www.a2oentertainment.world/artists/a2o-soul"
+  }
+ ],
  "kpis": [
   {
    "delta": null,
