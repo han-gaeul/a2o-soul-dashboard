@@ -376,7 +376,7 @@ def build(cfg):
 
     slim = ("id", "title", "category", "member", "published_at", "channel", "views", "delta")
 
-    mvs = sorted((v for v in videos if v["category"] == "mv"), key=lambda v: v["views"] or 0, reverse=True)
+    mvs = sorted((v for v in videos if v["category"] == "mv"), key=lambda v: v["published_at"] or "", reverse=True)
     for v in mvs:
         v["forecast"] = forecast(v["points"])
 
