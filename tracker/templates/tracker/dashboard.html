@@ -1,0 +1,165 @@
+{% load humanize %}<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A2O SOUL Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f6f6f9; --card: #ffffff; --text: #16161d; --muted: #6b6b7b;
+    --line: #e6e6ee; --accent: #6c4cf5; --up: #12a150;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0e0e14; --card: #17171f; --text: #ececf3; --muted: #9a9aab;
+            --line: #2a2a36; --accent: #a08bff; --up: #3ddc84; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font-family: Pretendard, -apple-system, "Apple SD Gothic Neo", sans-serif; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 24px 16px 48px; }
+  header { display: flex; justify-content: space-between; align-items: end; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+  h1 { margin: 0; font-size: 28px; font-weight: 800; letter-spacing: -0.02em; }
+  .dday { color: var(--accent); }
+  .meta { color: var(--muted); font-size: 13px; }
+  .grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+  .kpi .label { font-size: 13px; color: var(--muted); }
+  .kpi .value { font-size: 26px; font-weight: 800; margin: 4px 0; font-variant-numeric: tabular-nums; }
+  .kpi .sub { font-size: 12px; color: var(--muted); }
+  .delta { color: var(--up); font-size: 13px; font-weight: 600; }
+  section { margin-top: 20px; }
+  h2 { font-size: 16px; margin: 0 0 12px; }
+  .chart-box { position: relative; height: 280px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+  th, td { padding: 8px 6px; border-bottom: 1px solid var(--line); text-align: left; }
+  th { color: var(--muted); font-weight: 600; font-size: 12px; }
+  td.num, th.num { text-align: right; }
+  .empty { color: var(--muted); font-size: 14px; padding: 24px 0; text-align: center; }
+  .two { display: grid; gap: 12px; grid-template-columns: 1fr; }
+  @media (min-width: 860px) { .two { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>A2O SOUL <span class="dday">D+{{ d_day }}</span></h1>
+      <div class="meta">데뷔 {{ debut_date|date:"Y.m.d" }}</div>
+    </div>
+    <div class="meta">마지막 수집: {% if last_collected %}{{ last_collected|date:"Y.m.d H:i" }}{% else %}아직 없음{% endif %}</div>
+  </header>
+
+  <div class="grid">
+    {% for k in kpis %}
+    <div class="card kpi">
+      <div class="label">{{ k.label }}</div>
+      <div class="value">{% if k.value is not None %}{{ k.value|intcomma }}{% else %}–{% endif %}</div>
+      <div class="sub">{{ k.sub }}{% if k.delta %} · <span class="delta">+{{ k.delta|intcomma }} (24h)</span>{% endif %}</div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <section class="card">
+    <h2>구독자 · 팔로워 추이</h2>
+    <div class="chart-box"><canvas id="accountsChart"></canvas></div>
+  </section>
+
+  <section class="card">
+    <h2>MV 조회수 추이</h2>
+    <div class="chart-box"><canvas id="mvChart"></canvas></div>
+  </section>
+
+  <div class="two">
+    <section class="card">
+      <h2>MV 순위</h2>
+      {% if mv_list %}
+      <table>
+        <thead><tr><th>영상</th><th class="num">조회수</th><th class="num">24h</th></tr></thead>
+        <tbody>
+        {% for v in mv_list %}
+          <tr><td>{{ v.name|truncatechars:40 }}</td>
+              <td class="num">{{ v.value|default_if_none:0|intcomma }}</td>
+              <td class="num delta">{% if v.delta %}+{{ v.delta|intcomma }}{% endif %}</td></tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      {% else %}<div class="empty">등록된 MV가 없어요</div>{% endif %}
+    </section>
+
+    <section class="card">
+      <h2>멤버별 직캠 조회수</h2>
+      {% if fancam_rank %}
+      <div class="chart-box"><canvas id="fancamChart"></canvas></div>
+      <table>
+        <thead><tr><th>#</th><th>멤버</th><th class="num">직캠 수</th><th class="num">합계</th><th class="num">24h</th></tr></thead>
+        <tbody>
+        {% for r in fancam_rank %}
+          <tr><td>{{ forloop.counter }}</td><td>{{ r.member }}</td>
+              <td class="num">{{ r.count }}</td>
+              <td class="num">{{ r.views|intcomma }}</td>
+              <td class="num delta">{% if r.delta %}+{{ r.delta|intcomma }}{% endif %}</td></tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      {% else %}<div class="empty">등록된 직캠이 없어요</div>{% endif %}
+    </section>
+  </div>
+</div>
+
+{{ chart_data|json_script:"chart-data" }}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+(function () {
+  const data = JSON.parse(document.getElementById("chart-data").textContent);
+  const css = getComputedStyle(document.documentElement);
+  const muted = css.getPropertyValue("--muted").trim();
+  const line = css.getPropertyValue("--line").trim();
+  const palette = ["#6c4cf5", "#f5734c", "#12a1a0", "#e0479e", "#d4a017", "#3b82f6", "#8b5cf6", "#22c55e"];
+  Chart.defaults.color = muted;
+  Chart.defaults.borderColor = line;
+  Chart.defaults.font.family = "Pretendard, sans-serif";
+  const fmt = (v) => Number(v).toLocaleString("ko-KR");
+
+  function lineChart(id, seriesList) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const labels = [...new Set(seriesList.flatMap(s => s.points.map(p => p[0])))].sort();
+    if (!labels.length) { el.parentElement.innerHTML = '<div class="empty">수집된 데이터가 없어요</div>'; return; }
+    new Chart(el, {
+      type: "line",
+      data: {
+        labels,
+        datasets: seriesList.map((s, i) => {
+          const m = Object.fromEntries(s.points);
+          return { label: s.name, data: labels.map(l => m[l] ?? null), spanGaps: true,
+                   borderColor: palette[i % palette.length], backgroundColor: palette[i % palette.length],
+                   tension: 0.25, pointRadius: 2 };
+        }),
+      },
+      options: {
+        maintainAspectRatio: false, interaction: { mode: "index", intersect: false },
+        scales: { y: { ticks: { callback: fmt } } },
+        plugins: { tooltip: { callbacks: { label: c => `${c.dataset.label}: ${fmt(c.parsed.y)}` } } },
+      },
+    });
+  }
+
+  lineChart("accountsChart", data.accounts);
+  lineChart("mvChart", data.mvs);
+
+  const fc = document.getElementById("fancamChart");
+  if (fc && data.fancam.length) {
+    new Chart(fc, {
+      type: "bar",
+      data: { labels: data.fancam.map(r => r.member),
+              datasets: [{ label: "직캠 조회수", data: data.fancam.map(r => r.views), backgroundColor: palette[0], borderRadius: 6 }] },
+      options: { indexAxis: "y", maintainAspectRatio: false, plugins: { legend: { display: false } },
+                 scales: { x: { ticks: { callback: fmt } } } },
+    });
+  }
+})();
+</script>
+</body>
+</html>
