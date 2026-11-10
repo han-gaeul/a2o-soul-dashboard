@@ -22,7 +22,8 @@
   <nav class="tabs" id="tabs">
     <a href="#overview" class="on">한눈에</a>
     <a href="#mv">MV</a>
-    <a href="#members">멤버·직캠</a>
+    <a href="#members">멤버</a>
+    <a href="#fancams">직캠</a>
     <a href="#videos">전체 영상</a>
   </nav>
 
@@ -65,7 +66,19 @@
   <!-- 멤버·직캠 -->
   <div data-tab="members" hidden>
     <section class="card">
-      <h2>멤버</h2>
+      <h2>공식 채널</h2>
+      <div class="links" id="groupLinks"></div>
+    </section>
+    <section class="card">
+      <h2>멤버 15명</h2>
+      <div class="profiles" id="profiles"></div>
+    </section>
+  </div>
+
+  <!-- 직캠 -->
+  <div data-tab="fancams" hidden>
+    <section class="card">
+      <h2>멤버별 최신 직캠</h2>
       <div class="members" id="members"></div>
     </section>
   </div>

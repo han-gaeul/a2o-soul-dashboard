@@ -51,7 +51,9 @@ def load_config():
     # MV로 인정하는 채널 (mv: true). 그 밖의 채널에 올라온 MV는 콘텐츠로
     cfg["mv_channels"] = {c["id"] for c in cfg["channels"] if c.get("mv") and c.get("id")}
 
-    members = read_yml("members.yml").get("members") or []
+    members_yml = read_yml("members.yml")
+    cfg["group_links"] = members_yml.get("group_links") or []
+    members = members_yml.get("members") or []
     cfg["members"] = members
     names = {m["name"] for m in members}
     # 멤버 이름 → 정규식 (영문은 대소문자 무시, 한글은 앞뒤에 다른 한글이 없을 때만)
@@ -487,6 +489,7 @@ def build(cfg):
         "accounts": accounts,
         "mvs": mvs,
         "members": members,
+        "group_links": cfg["group_links"],
         "videos": [{k: v[k] for k in slim} for v in sorted(videos, key=lambda v: v["published_at"] or "", reverse=True)],
         "recent": [{k: v[k] for k in slim} for v in recent],
         "events": sorted((e for e in cfg["events"] if e["date"] >= today),

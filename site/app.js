@@ -17,7 +17,7 @@
   const todayKst = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(new Date()); // YYYY-MM-DD
 
   // ---------- 탭 ----------
-  const tabs = ["overview", "mv", "members", "videos"];
+  const tabs = ["overview", "mv", "members", "fancams", "videos"];
   const drawn = new Set();
   const drawers = {};
   function showTab() {
@@ -141,6 +141,22 @@
     if (focus) $(`dlg-${focus}`)?.scrollIntoView();
   }
 
+  // 멤버 탭: 공식 채널 + 프로필 카드
+  for (const l of data.group_links || []) $("groupLinks").append(ext(l.url, l.label, " ↗"));
+  if (!(data.group_links || []).length) $("groupLinks").closest("section").remove();
+  for (const m of data.members) {
+    const card = el("button", { class: "pcard", type: "button" },
+      el("div", { class: "avatar", "aria-hidden": "true" }, m.ko ? m.ko[0] : m.name[0]),
+      el("div", { class: "pinfo" },
+        el("div", { class: "n" }, m.name, el("span", { class: "c" }, m.ko)),
+        el("div", { class: "s" }, [m.position, m.birth_year ? `${m.birth_year}년생` : "", m.nationality].filter(Boolean).join(" · ")),
+        m.nicknames.length ? el("div", { class: "s" }, `별명 ${m.nicknames.join(", ")}`) : null,
+        el("div", { class: "s more-link" }, "프로필 보기 ›")));
+    card.addEventListener("click", () => openMember(m));
+    $("profiles").append(card);
+  }
+
+  // 직캠 탭: 멤버별 최신 직캠
   for (const m of data.members) {
     const v = m.fancams[0] || m.predebut[0]; // 최신 직캠, 없으면 데뷔 전 영상
     const thumb = v
@@ -154,10 +170,10 @@
       el("div", { class: "n" }, m.name, el("span", { class: "c" }, m.position || m.nationality)),
       v ? el("div", { class: "t" }, v.title) : null,
       v ? el("div", { class: "s" }, `${ymd(v.published_at)} · 조회수 ${kr(v.views ?? 0)}`) : null,
-      el("div", { class: "s more-link" }, ["프로필", ...links.map((l) => l[1])].join(" · ") + " 보기 ›"),
+      links.length ? el("div", { class: "s more-link" }, links.map((l) => l[1]).join(" · ") + " 보기 ›") : null,
     ];
     const card = el("button", { class: "member", type: "button" }, ...body);
-    card.addEventListener("click", () => openMember(m));
+    card.addEventListener("click", () => openMember(m, links[0]?.[0]));
     $("members").append(card);
   }
 
