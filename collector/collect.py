@@ -376,7 +376,7 @@ def build(cfg):
 
     slim = ("id", "title", "category", "member", "published_at", "channel", "views", "delta")
 
-    mvs = sorted((v for v in videos if v["category"] == "mv"), key=lambda v: v["views"] or 0, reverse=True)
+    mvs = sorted((v for v in videos if v["category"] == "mv"), key=lambda v: v["published_at"] or "", reverse=True)
     for v in mvs:
         v["forecast"] = forecast(v["points"])
 
@@ -390,7 +390,8 @@ def build(cfg):
             "fancam_count": len(mine),
             "fancam_views": sum(v["views"] or 0 for v in mine),
             "fancam_delta": sum(v["delta"] or 0 for v in mine) or None,
-            "top": {k: mine[0][k] for k in ("id", "title", "views")} if mine else None,
+            "latest": ({k: latest[k] for k in ("id", "title", "views", "published_at", "channel")}
+                       if (latest := max(mine, key=lambda v: v["published_at"] or "", default=None)) else None),
         })
 
     kpis.append({

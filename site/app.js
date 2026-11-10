@@ -75,59 +75,52 @@
     $("eventsSection").remove();
   }
 
+  // ---------- 영상 카드 ----------
+  const ymd = (iso) => (iso ? iso.slice(0, 10).replaceAll("-", ".") : "");
+  function videoCard(v, chipText, ...extra) {
+    return el("a", { class: "video", href: ytUrl(v.id), target: "_blank", rel: "noopener" },
+      el("img", { src: `https://i.ytimg.com/vi/${encodeURIComponent(v.id)}/mqdefault.jpg`, alt: "", loading: "lazy" }),
+      el("div", { class: "t" }, v.title),
+      el("div", { class: "m" }, chipText ? el("span", { class: "chip" }, chipText) : null, ymd(v.published_at)),
+      el("div", { class: "m" }, `조회수 ${fmt(v.views)}`, v.delta ? " · " : null, deltaSpan(v.delta)),
+      ...extra,
+    );
+  }
+
   if (data.recent.length) {
-    for (const v of data.recent) {
-      const chip = el("span", { class: "chip" }, v.member || data.categories[v.category] || v.category);
-      $("recent").append(el("a", { class: "video", href: ytUrl(v.id), target: "_blank", rel: "noopener" },
-        el("img", { src: `https://i.ytimg.com/vi/${encodeURIComponent(v.id)}/mqdefault.jpg`, alt: "", loading: "lazy" }),
-        el("div", { class: "t" }, v.title),
-        el("div", { class: "m" }, chip, `조회수 ${fmt(v.views)}`, v.delta ? " · " : null, deltaSpan(v.delta)),
-      ));
-    }
+    for (const v of data.recent) $("recent").append(videoCard(v, v.member || data.categories[v.category] || v.category));
   } else {
     $("recent").replaceWith(empty("아직 수집된 영상이 없어요"));
   }
 
-  // ---------- 표 ----------
-  function table(headers, rows, emptyMsg = "데이터가 없어요") {
-    if (!rows.length) return empty(emptyMsg);
-    const t = el("table");
-    const wrap = el("div", { class: "table-wrap" }, t);
-    t.append(el("thead", {}, el("tr", {}, ...headers.map(([h, cls]) => el("th", cls ? { class: cls } : {}, h)))));
-    const tb = el("tbody");
-    for (const r of rows) tb.append(el("tr", {}, ...r.map(([v, cls]) => el("td", cls ? { class: cls } : {}, v ?? ""))));
-    t.append(tb);
-    return wrap;
-  }
-
   // ---------- MV ----------
   const goal = (f) => (f
-    ? el("div", { class: "goal" }, el("b", {}, kr(f.target)), ` · 약 ${f.days}일`, el("br"), `하루 +${kr(f.rate)}`)
-    : el("span", { class: "goal" }, "데이터 쌓는 중"));
-  $("mvTable").append(table(
-    [["영상"], ["조회수", "num"], ["다음 목표", "num"]],
-    data.mvs.map((v) => [[ext(ytUrl(v.id), v.title)], [el("div", {}, fmt(v.views), v.delta ? el("br") : null, deltaSpan(v.delta)), "num"], [goal(v.forecast), "num"]]),
-    "등록된 MV가 없어요",
-  ));
+    ? el("div", { class: "m goal" }, "다음 목표 ", el("b", {}, kr(f.target)), ` · 약 ${f.days}일 (하루 +${kr(f.rate)})`)
+    : el("div", { class: "m goal" }, "다음 목표: 데이터 쌓는 중"));
+  const mvs = [...data.mvs].sort((a, b) => (b.published_at || "").localeCompare(a.published_at || ""));
+  if (mvs.length) {
+    for (const v of mvs) $("mvList").append(videoCard(v, null, goal(v.forecast)));
+  } else {
+    $("mvList").replaceWith(empty("등록된 MV가 없어요"));
+  }
 
   // ---------- 멤버·직캠 ----------
   for (const m of data.members) {
-    $("members").append(el("div", { class: "member" },
-      el("div", { class: "n" }, m.name),
-      el("div", { class: "c" }, m.nationality),
-      el("div", { class: "s" }, m.fancam_count ? `직캠 ${m.fancam_count}개 · ${kr(m.fancam_views)}회` : "직캠 집계 전",
-        m.fancam_delta ? " " : null, deltaSpan(m.fancam_delta)),
-      m.top ? ext(ytUrl(m.top.id), `▶ ${m.top.title}`) : null,
-    ));
-    const last = $("members").lastElementChild.querySelector("a");
-    if (last) last.classList.add("top");
+    const v = m.latest;
+    const thumb = v
+      ? el("img", { src: `https://i.ytimg.com/vi/${encodeURIComponent(v.id)}/mqdefault.jpg`, alt: "", loading: "lazy" })
+      : el("div", { class: "nothumb" }, "직캠 집계 전");
+    const body = [
+      thumb,
+      el("div", { class: "n" }, m.name, el("span", { class: "c" }, m.nationality)),
+      v ? el("div", { class: "t" }, v.title) : null,
+      v ? el("div", { class: "s" }, `${v.published_at ? v.published_at.slice(0, 10).replaceAll("-", ".") + " · " : ""}조회수 ${kr(v.views ?? 0)}`) : null,
+      m.fancam_count > 1 ? el("div", { class: "s" }, `직캠 ${m.fancam_count}개`) : null,
+    ];
+    $("members").append(v
+      ? el("a", { class: "member", href: ytUrl(v.id), target: "_blank", rel: "noopener" }, ...body)
+      : el("div", { class: "member" }, ...body));
   }
-
-  $("fancamTable").append(table(
-    [["멤버"], ["영상"], ["조회수", "num"]],
-    data.fancams.map((v) => [[v.member || "단체"], [ext(ytUrl(v.id), v.title)], [el("div", {}, fmt(v.views), v.delta ? el("br") : null, deltaSpan(v.delta)), "num"]]),
-    "아직 수집된 직캠이 없어요",
-  ));
 
   // ---------- 차트 ----------
   const palette = ["#6c4cf5", "#f5734c", "#12a1a0", "#e0479e", "#d4a017", "#3b82f6", "#8b5cf6", "#22c55e"];
@@ -179,17 +172,6 @@
 
   drawers.overview = () => lineChart("accountsChart", data.accounts);
   drawers.mv = () => { lineChart("mvChart", data.mvs); dailyChart("mvDailyChart", data.mvs); };
-  drawers.members = () => {
-    const rows = data.members.filter((m) => m.fancam_count).sort((a, b) => b.fancam_views - a.fancam_views);
-    if (!rows.length) { $("fancamBox").replaceWith(empty("아직 수집된 직캠이 없어요")); return; }
-    $("fancamBox").style.height = `${60 + rows.length * 32}px`;
-    new Chart($("fancamChart"), {
-      type: "bar",
-      data: { labels: rows.map((r) => r.name), datasets: [{ data: rows.map((r) => r.fancam_views), backgroundColor: palette[0], borderRadius: 6 }] },
-      options: { indexAxis: "y", maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip },
-                 scales: { x: { ticks: { callback: fmt } } } },
-    });
-  };
 
   showTab();
 })();
