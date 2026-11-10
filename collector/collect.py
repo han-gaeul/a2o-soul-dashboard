@@ -119,6 +119,18 @@ def is_short(title, duration_s):
     return duration_s <= 60 or (duration_s <= 180 and bool(re.search(r"#shorts?\b", title, re.I)))
 
 
+def in_unit(member, video):
+    """제목에 멤버가 속했던 연습생 유닛(LTB·HTB)이 있고, 그 시기에 소속이었는지."""
+    # 'A2O LTB DAVID'처럼 유닛 뒤에 다른 사람 이름이 붙은 개인 영상은 유닛 전체로 보지 않음
+    if re.search(r"\b(?:LTB|HTB|LTG|HTG)\s+(?!A2O\b)[A-Z]{2,}\b", video["title"]):
+        return False
+    day = kst_date(video.get("published_at"))
+    for u in member.get("units") or []:
+        if re.search(rf"\b{re.escape(str(u['unit']))}\b", video["title"]) and day >= str(u.get("since") or ""):
+            return True
+    return False
+
+
 def classify(cfg, title, duration_s):
     """(category, member)"""
     if FANCAM_PATTERN.search(title):
@@ -443,7 +455,7 @@ def build(cfg):
             "fancams": [{k: v[k] for k in slim} for v in mine],
             "predebut": [{k: v[k] for k in slim}
                          for v in sorted(videos, key=lambda v: v["published_at"] or "", reverse=True)
-                         if v["predebut"] and m["name"] in v["members"]],
+                         if v["predebut"] and (m["name"] in v["members"] or (not v["members"] and in_unit(m, v)))],
         })
 
     kpis.append({
