@@ -1,0 +1,32 @@
+{
+ "accounts": [
+  {
+   "name": "유튜브 구독자 · UCAdLPETtxpZeRVqsq_QTneA",
+   "points": []
+  }
+ ],
+ "categories": {
+  "content": "콘텐츠",
+  "fancam": "직캠",
+  "mv": "MV"
+ },
+ "debut_date": "2026-10-13",
+ "fancam": [],
+ "kpis": [
+  {
+   "delta": null,
+   "label": "유튜브 구독자",
+   "sub": "UCAdLPETtxpZeRVqsq_QTneA",
+   "value": null
+  },
+  {
+   "delta": null,
+   "label": "MV 총 조회수",
+   "sub": "0편",
+   "value": 0
+  }
+ ],
+ "mvs": [],
+ "recent": [],
+ "updated_at": null
+}
