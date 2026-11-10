@@ -31,7 +31,10 @@ jobs:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
+      # 대기열에서 기다리는 동안 다른 실행이 data를 커밋했을 수 있으니 트리거 시점이 아닌 최신 main으로
       - uses: actions/checkout@v4
+        with:
+          ref: main
 
       - uses: actions/setup-python@v5
         with:
@@ -59,7 +62,7 @@ jobs:
           git add data
           if ! git diff --cached --quiet; then
             git commit -m "data: $(TZ=Asia/Seoul date +'%Y-%m-%d %H:%M')"
-            git pull --rebase
+            git pull --rebase -X theirs   # 충돌 시 방금 수집한 data를 우선
             git push
           fi
 
