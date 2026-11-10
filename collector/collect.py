@@ -48,6 +48,8 @@ def load_config():
     cfg["instagram"] = cfg.get("instagram") or []
     cfg["videos"] = cfg.get("videos") or []
     cfg["debut_date"] = str(cfg.get("debut_date") or "")
+    # MV로 인정하는 채널 (mv: true). 그 밖의 채널에 올라온 MV는 콘텐츠로
+    cfg["mv_channels"] = {c["id"] for c in cfg["channels"] if c.get("mv") and c.get("id")}
 
     members = read_yml("members.yml").get("members") or []
     cfg["members"] = members
@@ -108,6 +110,26 @@ def compile_filter(cfg, f):
 
 def detect_members(cfg, title):
     return [name for name, pat in cfg["member_patterns"].items() if re.search(pat, title, re.I)]
+
+
+def is_short(title, duration_s):
+    """쇼츠 추정: 60초 이하, 또는 3분 이하면서 제목에 #shorts."""
+    if duration_s is None:
+        return False
+    return duration_s <= 60 or (duration_s <= 180 and bool(re.search(r"#shorts?\b", title, re.I)))
+
+
+def in_unit(member, video):
+    """제목에 멤버가 속했던 연습생 유닛(LTB·HTB)이 있고, 그 시기에 소속이었는지."""
+    # 'A2O LTB DAVID'처럼 유닛 뒤에 다른 사람 이름이 붙은 개인 영상은 유닛 전체로 보지 않음
+    if re.search(r"\b(?:LTB|HTB|LTG|HTG)\s+(?!A2O\b)[A-Z]{2,}\b", video["title"]):
+        return False
+    day = kst_date(video.get("published_at"))
+    for u in member.get("units") or []:
+        if (re.search(rf"\b{re.escape(str(u['unit']))}\b", video["title"])
+                and day >= str(u.get("since") or "") and day <= str(u.get("until") or "9999")):
+            return True
+    return False
 
 
 def classify(cfg, title, duration_s):
@@ -181,6 +203,8 @@ def resolve_video(cfg, registry, vid, overrides):
     reg = registry["videos"][vid]
     ov = overrides.get(vid, {})
     cat, member = classify(cfg, reg["title"], reg.get("duration_s"))
+    if cat == "mv" and cfg["mv_channels"] and reg.get("channel_id") not in cfg["mv_channels"]:
+        cat = "content"
     cat = ov.get("category") or cat
     if cat != "fancam":
         return cat, ""
@@ -408,9 +432,12 @@ def build(cfg):
             "views": value,
             "delta": delta,
             "points": pts,
+            "short": is_short(reg["title"], reg.get("duration_s")),
+            "predebut": bool(cfg["debut_date"] and kst_date(reg.get("published_at")) < cfg["debut_date"]),
+            "members": detect_members(cfg, reg["title"]),
         })
 
-    slim = ("id", "title", "category", "member", "published_at", "channel", "views", "delta")
+    slim = ("id", "title", "category", "member", "published_at", "channel", "views", "delta", "short", "predebut")
 
     mvs = sorted((v for v in videos if v["category"] == "mv"), key=lambda v: v["published_at"] or "", reverse=True)
     for v in mvs:
@@ -422,11 +449,20 @@ def build(cfg):
         mine = [v for v in fancams if v["member"] == m["name"]]
         members.append({
             "name": m["name"],
+            "ko": m.get("ko", ""),
             "nationality": m.get("nationality", ""),
+            "birth_year": m.get("birth_year"),
+            "position": m.get("position") or "",
+            "nicknames": m.get("nicknames") or [],
+            "career": m.get("career") or [],
+            "notes": m.get("notes") or [],
             "fancam_count": len(mine),
             "fancam_views": sum(v["views"] or 0 for v in mine),
             "fancam_delta": sum(v["delta"] or 0 for v in mine) or None,
-            "fancams": [{k: v[k] for k in ("id", "title", "views", "delta", "published_at", "channel")} for v in mine],
+            "fancams": [{k: v[k] for k in slim} for v in mine],
+            "predebut": [{k: v[k] for k in slim}
+                         for v in sorted(videos, key=lambda v: v["published_at"] or "", reverse=True)
+                         if v["predebut"] and (m["name"] in v["members"] or (not v["members"] and in_unit(m, v)))],
         })
 
     kpis.append({
@@ -451,8 +487,7 @@ def build(cfg):
         "accounts": accounts,
         "mvs": mvs,
         "members": members,
-        "videos": [{**{k: v[k] for k in slim}, "predebut": bool(cfg["debut_date"] and kst_date(v["published_at"]) < cfg["debut_date"])}
-                   for v in sorted(videos, key=lambda v: v["published_at"] or "", reverse=True)],
+        "videos": [{k: v[k] for k in slim} for v in sorted(videos, key=lambda v: v["published_at"] or "", reverse=True)],
         "recent": [{k: v[k] for k in slim} for v in recent],
         "events": sorted((e for e in cfg["events"] if e["date"] >= today),
                          key=lambda e: (e["date"], e.get("time") or "")),

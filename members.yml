@@ -1,21 +1,161 @@
-# A2O SOUL 멤버 (공식 공개 프로필 기준)
-# name: 사이트에 표시하는 이름
-# ko:   한글 표기
-# aliases: 제목에 다르게 쓰이는 표기가 있으면 추가
-# 영문은 대소문자 구분 없이, 한글은 앞뒤에 다른 한글이 붙지 않은 경우만 인식해요 (예: '준비'의 '준'은 제외)
+# A2O SOUL 멤버
+#
+# 매칭용
+#   name: 사이트에 표시하는 이름 / ko: 한글 표기
+#   aliases: 제목에 다르게 쓰이는 표기 (연습생 시절 이름 포함)
+#   units: 데뷔 전 연습생 유닛(A2O Rookies LTB·HTB). since~until 기간 영상만 (없으면 제한 없음)
+#          → 제목에 이름 없이 'A2O LTB'처럼 유닛만 있는 데뷔 전 영상도 해당 멤버에 연결
+#   영문은 대소문자 구분 없이, 한글은 앞뒤에 다른 한글이 붙지 않은 경우만 인식 (예: '준비'의 '준'은 제외)
+#
+# 프로필 (멤버 팝업에 표시)
+#   position, birth_year, nationality, nicknames, career(데뷔 전 경력), notes(여담)
+#   미성년 멤버가 많아 활동 관련 정보만 — 본명·학교·가족·거주지·신체정보·출처 없는 소문은 넣지 않기
+#
+# 출처: 나무위키 각 멤버 문서와 'A2O Rookies' 인원 변천사 (2026-11-10 기준, 요약), kpopbio.com
+#       틀린 게 있으면 고쳐주세요
 members:
-  - { name: MOON,    ko: 문,     nationality: 한국 }
-  - { name: SORA,    ko: 소라,   nationality: 일본 }
-  - { name: SEOHA,   ko: 서하,   nationality: 한국 }
-  - { name: GAKU,    ko: 가쿠,   nationality: 일본 }
-  - { name: TEO,     ko: 테오,   nationality: 중국 }
-  - { name: JUNE,    ko: 준,     nationality: 중국 }
-  - { name: LUCIEN,  ko: 루시엔, nationality: 한국·미국 }
-  - { name: HANSUNG, ko: 한성,   nationality: 한국 }
-  - { name: TAI,     ko: 타이,   nationality: 중국 }
-  - { name: SEE-ONE, ko: 시원,   nationality: 한국·일본, aliases: [SEEONE, SEE ONE] }
-  - { name: SONO,    ko: 소노,   nationality: 일본 }
-  - { name: ALURE,   ko: 알루어, nationality: 태국 }
-  - { name: ZAI,     ko: 자이,   nationality: 중국 }
-  - { name: AYDEN,   ko: 에이든, nationality: 중국 }
-  - { name: ZET,     ko: 제트,   nationality: 중국 }
+  - name: MOON
+    ko: 문
+    nationality: 한국
+    birth_year: 2007
+    position: 보컬, 비주얼 센터
+    career: [창원 TNS보컬댄스학원 출신, 비공개 연습생으로 데뷔]
+    notes: [팀의 맏형으로 동생들을 잘 챙김, 소울메이트로 동갑 멤버 소라를 꼽음]
+
+  - name: SORA
+    ko: 소라
+    nationality: 일본
+    birth_year: 2007
+    position: 메인댄서
+    career:
+      - EXPG STUDIO 오사카 출신
+      - 키즈·틴즈 댄스 배틀 'THE FUTURE' 키즈 부문 준우승 2회, 그랜드 챔피언 대회 키즈 부문 우승
+      - 일본 오디션 'iCON Z' 남성 부문 참가
+      - 댄스 학원 원데이 클래스 진행
+      - 비공개 연습생으로 데뷔
+    notes: [여러 장르를 소화하는 스트리트댄스 기본기, 표정·제스처를 살린 무대 퍼포먼스, 비트박스가 특기]
+
+  - name: SEOHA
+    ko: 서하
+    nationality: 한국
+    birth_year: 2008
+    position: 메인보컬
+    career: [경기소년소녀합창단 활동, 비공개 연습생으로 데뷔]
+    notes: ["'SUPERSTAR' 고음 파트 담당", 데뷔 쇼케이스 영상 영어 내레이션, 무표정과 웃는 얼굴의 반전 매력]
+
+  - name: GAKU
+    ko: 가쿠
+    nationality: 일본
+    birth_year: 2009
+    position: ""
+    career: [URIZIP KPOP ACADEMY 출신, "A2O Rookies LTB(2024.10~) → HTB(2025.2~)", "HTB 'REVOLUTION', 'CHAMPAGNE' 참여"]
+    notes: [해산물을 좋아함]
+    units: [{ unit: LTB, until: 2025-02-13 }, { unit: HTB, since: 2025-02-14 }]
+
+  - name: TEO
+    ko: 테오
+    nationality: 중국
+    birth_year: 2009
+    position: 메인댄서
+    nicknames: [공식 텐션왕]
+    career: [중국 댄스 방송 출연, 다수 댄스 대회 수상, "A2O Rookies LTB(2024.10~) → HTB(2025.2~)"]
+    notes: [댄스 브레이크 센터, 팀에서 흥이 가장 많은 멤버, 소울푸드는 짜장면]
+    units: [{ unit: LTB, until: 2025-02-13 }, { unit: HTB, since: 2025-02-14 }]
+
+  - name: JUNE
+    ko: 준
+    nationality: 중국
+    birth_year: 2009
+    position: ""
+    aliases: [JUNLIN, 쥔린]
+    career: ["A2O Rookies HTB '쥔린(JUNLIN)' (2025.2~)"]
+    notes: [빈티지 옷을 직접 리폼해서 입음, 축구·농구를 좋아하는 운동파]
+    units: [{ unit: HTB, since: 2025-02-14 }]
+
+  - name: LUCIEN
+    ko: 루시엔
+    nationality: 한국·미국
+    birth_year: 2010
+    position: 랩, 댄스
+    career: [AJS·REDSTAGE 아카데미 출신, 비공개 연습생으로 데뷔]
+    notes: [팀에서 가장 차분한 성격, 네오 소울을 좋아함 (최애 아티스트 에리카 바두)]
+
+  - name: HANSUNG
+    ko: 한성
+    nationality: 한국
+    birth_year: 2010
+    position: 메인보컬
+    nicknames: [토마토]
+    career: [POWERVOCAL Star Incubating Center 출신, 비공개 연습생으로 데뷔]
+    notes: [파워풀한 음색, 발라드를 좋아함 (최애곡 EXO 'For Life')]
+
+  - name: TAI
+    ko: 타이
+    nationality: 중국
+    birth_year: 2011
+    position: ""
+    career: [SM엔터테인먼트 아역 모델 선발대회 결선 진출, "영화 'The Marked Sheep'(2022) 조연", A2O Rookies LTB (2024.10~)]
+    notes: [초등학생 때 밴드를 결성해 싱글 발매, 시티워크를 좋아함]
+    units: [{ unit: LTB }]
+
+  - name: SEE-ONE
+    ko: 시원
+    nationality: 한국·일본
+    birth_year: 2011
+    position: 랩, 댄스
+    aliases: [SEEONE, SEE ONE]
+    career: [키즈모델 활동, 댄스 보컬 아카데미 HIBEAT 출신, 전 JYP엔터테인먼트 연습생]
+    notes: ["매력 포인트는 '동굴 보이스' 저음"]
+
+  - name: SONO
+    ko: 소노
+    nationality: 일본
+    birth_year: 2011
+    position: 비주얼
+    career: [A2O Rookies LTB (2025.8~)]
+    notes: [팀의 분위기 메이커, 일본어·한국어·영어·중국어 4개 국어]
+    units: [{ unit: LTB, since: 2025-08-22 }]
+
+  - name: ALURE
+    ko: 알루어
+    nationality: 태국
+    birth_year: 2011
+    position: 보컬
+    nicknames: [아기 명창]
+    career:
+      - "태국어 더빙 아역 성우 — 디즈니 '엔칸토' 안토니오, '피노키오'(2022) 피노키오 등"
+      - "태국 One31 시트콤 'Ban Saran Land'(2018) 출연"
+      - 비공개 연습생으로 데뷔
+    notes: [보컬로 입사해 짧은 기간에 댄스 실력을 크게 끌어올림, 팝·R&B를 좋아함]
+
+  - name: ZAI
+    ko: 자이
+    nationality: 중국
+    birth_year: 2012
+    position: 올라운더 (보컬·댄스)
+    nicknames: [두바이, 지아이]
+    aliases: [JIAYI]
+    career: [A2O Rookies LTB 'JIAYI' (2024.10~), 제트와 같은 댄스 스튜디오 출신으로 약 4년간 함께 연습]
+    notes: [스스로를 '황금 올라운더'로 소개, 가볍고 정확한 춤선]
+    units: [{ unit: LTB }]
+
+  - name: AYDEN
+    ko: 에이든
+    nationality: 중국
+    birth_year: 2012
+    position: 보컬
+    nicknames: [도입 요정]
+    career: [A2O Rookies LTB (2024.10~), "솔로 'Love Is Gone' Zal-Dance 영상(2025.4)"]
+    notes: ["'SUPERSTAR' 1·2절 도입부 담당", 사진 촬영을 좋아해 레트로 감성용 구형 휴대폰을 따로 씀]
+    units: [{ unit: LTB }]
+
+  - name: ZET
+    ko: 제트
+    nationality: 중국
+    birth_year: 2012
+    position: 댄스
+    nicknames: [오케스트라 보이]
+    aliases: [HANZE, 한저]
+    career: [A2O Rookies LTB '한저(HANZE)' (2024.10~), "솔로 'Palette' Zal-Dance 영상(2025.6)"]
+    notes: [시원시원한 큰 춤선, 자주 쓰는 말은 "Lit!", 소울메이트로 맏형 문을 꼽음]
+    units: [{ unit: LTB }]

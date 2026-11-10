@@ -92,9 +92,27 @@ dialog::backdrop { background: rgba(0, 0, 0, .5); }
              width: 32px; height: 32px; font-size: 14px; cursor: pointer; }
 
 /* 전체 영상 필터 */
-.filters { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+.filters { display: grid; gap: 8px; margin-bottom: 14px; }
+.filter-row { display: flex; gap: 6px; flex-wrap: wrap; }
 .filters button { border: 1px solid var(--line); background: var(--card); color: var(--muted); border-radius: 999px;
                   padding: 6px 12px; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; }
 .filters button.on { background: var(--accent); border-color: var(--accent); color: #fff; }
 .more { display: block; margin: 16px auto 0; border: 1px solid var(--line); background: var(--card); color: var(--text);
         border-radius: 999px; padding: 8px 20px; font: inherit; font-size: 14px; cursor: pointer; }
+
+.thumb { position: relative; }
+.thumb .badge { position: absolute; right: 6px; bottom: 6px; font-size: 11px; font-weight: 700; color: #fff;
+                background: rgba(0, 0, 0, .72); padding: 2px 6px; border-radius: 6px; }
+.sec-head { display: flex; justify-content: space-between; align-items: baseline; }
+.see-all { font-size: 13px; font-weight: 600; color: var(--accent); }
+.dlg-sec + .dlg-sec { margin-top: 20px; }
+.dlg-sec h3 { font-size: 14px; margin: 0 0 10px; color: var(--muted); }
+
+/* 멤버 프로필 */
+.profile { font-size: 14px; line-height: 1.55; }
+.pf-facts { font-weight: 600; margin-bottom: 10px; }
+.pf-row { display: grid; grid-template-columns: 64px 1fr; gap: 8px; padding: 8px 0; border-top: 1px solid var(--line); }
+.pf-label { color: var(--muted); font-size: 13px; }
+.pf-row ul { margin: 0; padding-left: 18px; }
+.pf-src { color: var(--muted); font-size: 12px; margin-top: 8px; }
+.pf-src a { text-decoration: underline; }
