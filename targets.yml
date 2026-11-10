@@ -3,25 +3,45 @@
 
 debut_date: 2026-10-13
 
-# 유튜브 채널: 업로드 영상을 자동으로 찾아 등록
-#   filter: 제목 필터. 비우면 전부 등록. "soul" = 그룹명 + 멤버 이름(대문자) 프리셋, 그 외는 정규식
-#   kpi: 구독자 수를 대시보드 상단에 보여줄지 (공용 채널은 false)
+# 유튜브 채널: 업로드 영상을 자동으로 찾아 등록 (데뷔일 이후 영상만)
+#   id 또는 handle 중 하나
+#   filter: 제목 필터. 비우면 전부 등록
+#     soul  = 그룹명 + 멤버 이름(대문자)  — 소속사 공용 채널용
+#     group = 그룹명만                    — 음방 채널용 (다른 그룹 동명 멤버 방지)
+#     그 외 = 정규식
+#   kpi: 구독자 수를 대시보드 상단에 보여줄지
+#   자동 분류: 제목에 직캠/FanCam/Focus → 직캠(멤버 이름 하나면 그 멤버로),
+#             60초 이하 → 콘텐츠(쇼츠), MV/M/V/Music Video → MV, 나머지 → 콘텐츠
 channels:
-  - id: UCAdLPETtxpZeRVqsq_QTneA   # @A2OSOUL
+  - id: UCAdLPETtxpZeRVqsq_QTneA   # A2O SOUL
     kpi: true
-  - id: UCn-SYb1TUz-1itK_uz4imUA   # @A2OWORLD (A2O 공용)
+  - id: UCn-SYb1TUz-1itK_uz4imUA   # A2O WORLD (공용)
     filter: soul
+    kpi: false
+  # 음방 채널 — 직캠·무대 자동 수집
+  - id: UCqJ3rYYs-n5blu6JxpciQjA   # Mnet K-POP (MPD직캠, 엠카)
+    filter: group
+    kpi: false
+  - id: UCeLPm9yH_a_QH8n6445G-Ow   # KBS Kpop (뮤직뱅크)
+    filter: group
+    kpi: false
+  - id: UCe52oeb7Xv_KaJsEzcKXJJg   # MBCkpop (음악중심)
+    filter: group
+    kpi: false
+  - id: UCS_hnpJLQTvBkqALgapi_4g   # SBSKPOP X INKIGAYO (인기가요)
+    filter: group
+    kpi: false
+  - handle: ALLTHEKPOP             # ALL THE K-POP (쇼챔피언)
+    filter: group
     kpi: false
 
 # 인스타그램 공식 계정 (IG_USER_ID / IG_ACCESS_TOKEN 시크릿이 있을 때만 수집)
 instagram:
   - a2o.soul
 
-# 영상 개별 설정
-#   - 직캠처럼 다른 채널 영상은 여기 추가해야 수집돼요
-#   - 자동 분류가 틀린 영상은 여기서 덮어쓰기
+# 영상 개별 설정 — 다른 채널 영상 추가, 자동 분류 덮어쓰기
 #   category: mv | fancam | content
-#   member: MOON SORA SEOHA GAKU TEO JUNE LUCIEN HANSUNG TAI SEE-ONE SONO ALURE ZAI AYDEN ZET
+#   member: members.yml의 이름
 #   active: false 로 두면 수집·표시 안 함
 #
 # 예)

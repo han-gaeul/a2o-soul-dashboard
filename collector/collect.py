@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 """A2O SOUL 지표 수집 + 대시보드 데이터 생성.
 
-  python collector/collect.py           # 수집 후 data/dashboard.json 생성 (YOUTUBE_API_KEY 필요)
-  python collector/collect.py --build   # 수집 없이 dashboard.json만 다시 생성 (targets.yml 수정 반영)
+  python collector/collect.py           # 수집 → 알림 → data/dashboard.json 생성 (YOUTUBE_API_KEY 필요)
+  python collector/collect.py --build   # 수집 없이 dashboard.json만 다시 생성 (yml 수정 반영)
 
 data/registry.json  발견한 영상·채널 메타데이터
 data/history.json   {키: {지표: {KST 날짜: 값}}} — 날짜별 마지막 값
@@ -10,31 +10,141 @@ data/dashboard.json 사이트가 읽는 집계 결과
 """
 import argparse
 import json
+import math
 import re
 import sys
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import instagram  # noqa: E402
+import notify  # noqa: E402
 import youtube  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
 KST = timezone(timedelta(hours=9))
 
-MEMBERS = [
-    "MOON", "SORA", "SEOHA", "GAKU", "TEO", "JUNE", "LUCIEN", "HANSUNG",
-    "TAI", "SEE-ONE", "SONO", "ALURE", "ZAI", "AYDEN", "ZET",
-]
-# 그룹명은 대소문자 무시, 멤버 이름은 일반 단어(moon, june)와 안 겹치게 대문자 단어만
-SOUL_FILTER = (
-    r"A2O ?SOUL|A20 ?SOUL|에이투오 ?소울|"
-    r"(?-i:\b(?:" + "|".join(m.replace("-", "-?") for m in MEMBERS) + r")\b)"
-)
 CATEGORIES = {"mv": "MV", "fancam": "직캠", "content": "콘텐츠"}
+GROUP_PATTERN = r"A2O ?SOUL|A20 ?SOUL|에이투오 ?소울"
+FANCAM_PATTERN = re.compile(r"직캠|fan ?cam|focus|세로캠|vertical", re.I)
+NEW_VIDEO_ALERT_HOURS = 72
+
+
+# ---------- 설정 ----------
+
+def read_yml(name):
+    p = ROOT / name
+    return (yaml.safe_load(p.read_text("utf-8")) or {}) if p.exists() else {}
+
+
+def load_config():
+    cfg = read_yml("targets.yml")
+    cfg["channels"] = cfg.get("channels") or []
+    cfg["instagram"] = cfg.get("instagram") or []
+    cfg["videos"] = cfg.get("videos") or []
+    cfg["debut_date"] = str(cfg.get("debut_date") or "")
+
+    members = read_yml("members.yml").get("members") or []
+    cfg["members"] = members
+    names = {m["name"] for m in members}
+    # 멤버 이름 → 표기 목록 (대소문자 구분 매칭)
+    cfg["member_spellings"] = {
+        m["name"]: [m["name"].replace("-", "-?"), *[re.escape(a) for a in m.get("aliases") or []]] for m in members
+    }
+
+    for v in cfg["videos"]:
+        if v.get("member"):
+            v["member"] = str(v["member"]).upper()
+            if v["member"] not in names:
+                sys.exit(f"targets.yml: 알 수 없는 멤버 {v['member']} (영상 {v['id']})")
+        if v.get("category") and v["category"] not in CATEGORIES:
+            sys.exit(f"targets.yml: category는 mv/fancam/content 중 하나 (영상 {v['id']})")
+
+    events = read_yml("schedule.yml").get("events") or []
+    for e in events:
+        e["date"] = str(e.get("date", ""))
+        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", e["date"]) or not e.get("title"):
+            sys.exit(f"schedule.yml: date(YYYY-MM-DD)와 title이 필요해요: {e}")
+        if e.get("time") is not None:
+            e["time"] = str(e["time"])
+    cfg["events"] = events
+    return cfg
+
+
+def member_regex(cfg):
+    alts = [s for spellings in cfg["member_spellings"].values() for s in spellings]
+    return r"(?-i:\b(?:" + "|".join(alts) + r")\b)" if alts else None
+
+
+def compile_filter(cfg, f):
+    if not f:
+        return None
+    key = str(f).lower()
+    if key == "group":
+        return re.compile(GROUP_PATTERN, re.I)
+    if key == "soul":
+        m = member_regex(cfg)
+        return re.compile(GROUP_PATTERN + (f"|{m}" if m else ""), re.I)
+    return re.compile(f, re.I)
+
+
+def detect_members(cfg, title):
+    found = []
+    for name, spellings in cfg["member_spellings"].items():
+        if re.search(r"\b(?:" + "|".join(spellings) + r")\b", title):
+            found.append(name)
+    return found
+
+
+def classify(cfg, title, duration_s):
+    """(category, member)"""
+    if FANCAM_PATTERN.search(title):
+        found = detect_members(cfg, title)
+        return "fancam", (found[0] if len(found) == 1 else "")
+    if duration_s is not None and duration_s <= 60:  # 쇼츠
+        return "content", ""
+    t = title.upper()
+    if "TEASER" in t or "티저" in title:
+        return "content", ""
+    if "M/V" in t or re.search(r"\bMV\b", t) or "MUSIC VIDEO" in t:
+        return "mv", ""
+    return "content", ""
+
+
+# ---------- 돌파 기준 ----------
+
+def view_milestones():
+    ms = [100_000, 500_000]
+    ms += [n * 1_000_000 for n in range(1, 10)]
+    ms += [n * 10_000_000 for n in range(1, 10)]
+    ms += [n * 100_000_000 for n in range(1, 21)]
+    return ms
+
+
+def subscriber_milestones():
+    return [n * 100_000 for n in range(1, 100)]
+
+
+def crossed(prev, cur, milestones):
+    if prev is None or cur is None:
+        return None
+    hit = [m for m in milestones if prev < m <= cur]
+    return hit[-1] if hit else None
+
+
+def next_milestone(v):
+    return next((m for m in view_milestones() if m > (v or 0)), None)
+
+
+def kr_num(n):
+    if n >= 100_000_000:
+        return f"{n / 100_000_000:g}억"
+    if n >= 10_000:
+        return f"{n / 10_000:g}만"
+    return f"{n:,}"
 
 
 # ---------- 공통 ----------
@@ -49,59 +159,64 @@ def save_json(name, obj):
     (DATA / name).write_text(json.dumps(obj, ensure_ascii=False, indent=1, sort_keys=True) + "\n", "utf-8")
 
 
-def load_config():
-    cfg = yaml.safe_load((ROOT / "targets.yml").read_text("utf-8")) or {}
-    cfg.setdefault("channels", [])
-    cfg["instagram"] = cfg.get("instagram") or []
-    cfg["videos"] = cfg.get("videos") or []
-    for v in cfg["videos"]:
-        if v.get("member"):
-            v["member"] = str(v["member"]).upper()
-            if v["member"] not in MEMBERS:
-                sys.exit(f"targets.yml: 알 수 없는 멤버 {v['member']} (영상 {v['id']})")
-        if v.get("category") and v["category"] not in CATEGORIES:
-            sys.exit(f"targets.yml: category는 mv/fancam/content 중 하나 (영상 {v['id']})")
-    return cfg
-
-
-def compile_filter(f):
-    if not f:
-        return None
-    return re.compile(SOUL_FILTER if str(f).lower() == "soul" else f, re.I)
-
-
-def guess_category(title, duration_s):
-    if duration_s is not None and duration_s <= 60:  # 쇼츠
-        return "content"
-    t = title.upper()
-    if "TEASER" in t or "티저" in title:
-        return "content"
-    if "M/V" in t or re.search(r"\bMV\b", t) or "MUSIC VIDEO" in t:
-        return "mv"
-    return "content"
+def resolve_video(cfg, registry, vid, overrides):
+    reg = registry["videos"][vid]
+    ov = overrides.get(vid, {})
+    cat, member = classify(cfg, reg["title"], reg.get("duration_s"))
+    cat = ov.get("category") or cat
+    if cat != "fancam":
+        return cat, ""
+    if ov.get("member"):
+        return cat, ov["member"]
+    found = detect_members(cfg, reg["title"])
+    return cat, (found[0] if len(found) == 1 else "")
 
 
 # ---------- 수집 ----------
 
 def collect(cfg):
     registry = load_json("registry.json", {})
-    for k in ("videos", "channels", "instagram"):
+    for k in ("videos", "channels", "instagram", "handles"):
         registry.setdefault(k, {})
     history = load_json("history.json", {})
-    today = datetime.now(KST).date().isoformat()
+    now = datetime.now(KST)
+    today = now.date().isoformat()
+    events = []  # 알림 문구
 
     def record(key, metric, value):
-        if value is not None:
-            history.setdefault(key, {}).setdefault(metric, {})[today] = value
+        """오늘 값을 저장하고, 저장 직전의 최신 값을 돌려줌."""
+        if value is None:
+            return None
+        series = history.setdefault(key, {}).setdefault(metric, {})
+        prev = series[max(series)] if series else None
+        series[today] = value
+        return prev
 
-    # 채널 + 업로드 자동 등록
-    channels = {c["id"]: c for c in cfg["channels"]}
+    # 채널 ID 확정 (handle → id, 결과 캐시)
+    channels = {}
+    for c in cfg["channels"]:
+        cid = c.get("id")
+        if not cid and c.get("handle"):
+            h = c["handle"].lstrip("@")
+            cid = registry["handles"].get(h) or youtube.resolve_handle(h)
+            if not cid:
+                print(f"[YT] 핸들을 찾을 수 없음: @{h}")
+                continue
+            registry["handles"][h] = cid
+        channels[cid] = c
+
+    # 채널 지표 + 업로드 자동 등록
+    since = cfg["debut_date"] or None
     for cid, d in youtube.fetch_channels(channels).items():
         registry["channels"][cid] = {"title": d["title"]}
-        record(f"ch:{cid}", "subscribers", d["subscribers"])
+        prev = record(f"ch:{cid}", "subscribers", d["subscribers"])
         record(f"ch:{cid}", "views", d["views"])
-        pattern = compile_filter(channels[cid].get("filter"))
-        for up in youtube.fetch_uploads(d["uploads_playlist"]):
+        if channels[cid].get("kpi"):
+            m = crossed(prev, d["subscribers"], subscriber_milestones())
+            if m:
+                events.append(f"🎉 {d['title']} 유튜브 구독자 {kr_num(m)} 돌파!")
+        pattern = compile_filter(cfg, channels[cid].get("filter"))
+        for up in youtube.fetch_uploads(d["uploads_playlist"], since=since):
             if up["id"] in registry["videos"]:
                 continue
             if pattern and not pattern.search(up["title"]):
@@ -113,13 +228,29 @@ def collect(cfg):
 
     # 영상 지표
     overrides = {v["id"]: v for v in cfg["videos"]}
-    ids = (set(registry["videos"]) | set(overrides)) - {i for i, o in overrides.items() if o.get("active") is False}
+    inactive = {i for i, o in overrides.items() if o.get("active") is False}
+    ids = (set(registry["videos"]) | set(overrides)) - inactive
+    known_before = {i for i in ids if registry["videos"].get(i, {}).get("duration_s") is not None
+                    or f"yt:{i}" in history}
     found = youtube.fetch_videos(sorted(ids))
     for vid, d in found.items():
         reg = registry["videos"].setdefault(vid, {})
         reg.update({k: d[k] for k in ("title", "published_at", "channel_id", "channel_title", "duration_s")})
-        for metric in ("views", "likes", "comments"):
+        prev = record(f"yt:{vid}", "views", d["views"])
+        for metric in ("likes", "comments"):
             record(f"yt:{vid}", metric, d[metric])
+
+        cat, member = resolve_video(cfg, registry, vid, overrides)
+        label = f"[{member or CATEGORIES[cat]}] {d['title']}"
+        url = f"https://youtu.be/{vid}"
+        if vid not in known_before and d["published_at"]:
+            age = now - datetime.fromisoformat(d["published_at"].replace("Z", "+00:00"))
+            if age <= timedelta(hours=NEW_VIDEO_ALERT_HOURS):
+                events.append(f"🆕 새 영상 {label}\n{url}")
+        if cat in ("mv", "fancam"):
+            m = crossed(prev, d["views"], view_milestones())
+            if m:
+                events.append(f"🎉 {label} 조회수 {kr_num(m)} 돌파!\n{url}")
     for vid in sorted(ids - set(found)):
         print(f"[YT] 영상을 찾을 수 없음(비공개/삭제?): {vid}")
 
@@ -137,16 +268,36 @@ def collect(cfg):
     else:
         print("[IG] 토큰 없음 — 건너뜀")
 
-    registry["collected_at"] = datetime.now(KST).isoformat(timespec="minutes")
+    registry["collected_at"] = now.isoformat(timespec="minutes")
     save_json("registry.json", registry)
     save_json("history.json", history)
     print(f"수집 완료: 영상 {len(found)}개, 채널 {len(channels)}개 ({registry['collected_at']})")
 
+    if events:
+        print("알림:\n  " + "\n  ".join(e.replace("\n", " ") for e in events))
+        notify.send(events)
+
 
 # ---------- 집계 ----------
 
+def forecast(pts, window_days=7):
+    """최근 window_days 평균 일일 증가량과 다음 목표까지 남은 일수."""
+    if len(pts) < 2:
+        return None
+    last_d, last_v = date.fromisoformat(pts[-1][0]), pts[-1][1]
+    base = next(((d, v) for d, v in pts if (last_d - date.fromisoformat(d)).days <= window_days), pts[0])
+    days = (last_d - date.fromisoformat(base[0])).days
+    if days <= 0 or last_v <= base[1]:
+        return None
+    rate = (last_v - base[1]) / days
+    target = next_milestone(last_v)
+    if not target:
+        return None
+    return {"rate": round(rate), "target": target, "days": math.ceil((target - last_v) / rate)}
+
+
 def build(cfg):
-    registry = load_json("registry.json", {"videos": {}, "channels": {}, "instagram": {}})
+    registry = load_json("registry.json", {"videos": {}, "channels": {}, "instagram": {}, "handles": {}})
     history = load_json("history.json", {})
 
     def points(key, metric):
@@ -158,13 +309,17 @@ def build(cfg):
         last = pts[-1][1]
         return last, (last - pts[-2][1] if len(pts) >= 2 else None)
 
+    def channel_id(c):
+        return c.get("id") or registry.get("handles", {}).get(str(c.get("handle", "")).lstrip("@"))
+
     kpis, accounts = [], []
     for c in cfg["channels"]:
-        if not c.get("kpi", True):
+        cid = channel_id(c)
+        if not c.get("kpi") or not cid:
             continue
-        pts = points(f"ch:{c['id']}", "subscribers")
+        pts = points(f"ch:{cid}", "subscribers")
         value, delta = last_delta(pts)
-        name = registry["channels"].get(c["id"], {}).get("title", c["id"])
+        name = registry["channels"].get(cid, {}).get("title", cid)
         kpis.append({"label": "유튜브 구독자", "sub": name, "value": value, "delta": delta})
         accounts.append({"name": f"유튜브 구독자 · {name}", "points": pts})
     for u in cfg["instagram"]:
@@ -181,51 +336,70 @@ def build(cfg):
         ov = overrides.get(vid, {})
         if ov.get("active") is False or "title" not in reg:
             continue
+        cat, member = resolve_video(cfg, registry, vid, overrides)
         pts = points(f"yt:{vid}", "views")
         value, delta = last_delta(pts)
         videos.append({
             "id": vid,
             "title": ov.get("title") or reg["title"],
-            "category": ov.get("category") or guess_category(reg["title"], reg.get("duration_s")),
-            "member": ov.get("member", ""),
+            "category": cat,
+            "member": member,
             "published_at": reg.get("published_at"),
             "channel": reg.get("channel_title") or registry["channels"].get(reg.get("channel_id"), {}).get("title", ""),
             "views": value,
             "delta": delta,
-            "likes": last_delta(points(f"yt:{vid}", "likes"))[0],
             "points": pts,
         })
 
+    slim = ("id", "title", "category", "member", "published_at", "channel", "views", "delta")
+
     mvs = sorted((v for v in videos if v["category"] == "mv"), key=lambda v: v["views"] or 0, reverse=True)
+    for v in mvs:
+        v["forecast"] = forecast(v["points"])
+
+    fancams = sorted((v for v in videos if v["category"] == "fancam"), key=lambda v: v["views"] or 0, reverse=True)
+    members = []
+    for m in cfg["members"]:
+        mine = [v for v in fancams if v["member"] == m["name"]]
+        members.append({
+            "name": m["name"],
+            "nationality": m.get("nationality", ""),
+            "fancam_count": len(mine),
+            "fancam_views": sum(v["views"] or 0 for v in mine),
+            "fancam_delta": sum(v["delta"] or 0 for v in mine) or None,
+            "top": {k: mine[0][k] for k in ("id", "title", "views")} if mine else None,
+        })
+
     kpis.append({
         "label": "MV 총 조회수", "sub": f"{len(mvs)}편",
         "value": sum(v["views"] or 0 for v in mvs),
         "delta": sum(v["delta"] or 0 for v in mvs) or None,
     })
+    kpis.append({
+        "label": "직캠 총 조회수", "sub": f"{len(fancams)}개",
+        "value": sum(v["views"] or 0 for v in fancams),
+        "delta": sum(v["delta"] or 0 for v in fancams) or None,
+    })
 
-    fancam = {}
-    for v in videos:
-        if v["category"] == "fancam" and v["member"]:
-            r = fancam.setdefault(v["member"], {"member": v["member"], "views": 0, "delta": 0, "count": 0})
-            r["views"] += v["views"] or 0
-            r["delta"] += v["delta"] or 0
-            r["count"] += 1
-
-    recent = sorted(videos, key=lambda v: v["published_at"] or "", reverse=True)[:12]
+    recent = sorted((v for v in videos if v["category"] != "fancam"),
+                    key=lambda v: v["published_at"] or "", reverse=True)[:12]
+    today = datetime.now(KST).date().isoformat()
 
     dashboard = {
         "updated_at": registry.get("collected_at"),
-        "debut_date": str(cfg.get("debut_date", "")),
+        "debut_date": cfg["debut_date"],
         "kpis": kpis,
         "accounts": accounts,
         "mvs": mvs,
-        "fancam": sorted(fancam.values(), key=lambda r: r["views"], reverse=True),
-        "recent": [{k: v[k] for k in ("id", "title", "category", "member", "published_at", "channel", "views", "delta")}
-                   for v in recent],
+        "members": members,
+        "fancams": [{k: v[k] for k in slim} for v in fancams[:30]],
+        "recent": [{k: v[k] for k in slim} for v in recent],
+        "events": sorted((e for e in cfg["events"] if e["date"] >= today),
+                         key=lambda e: (e["date"], e.get("time") or "")),
         "categories": CATEGORIES,
     }
     save_json("dashboard.json", dashboard)
-    print(f"dashboard.json 생성: 영상 {len(videos)}개 (MV {len(mvs)}, 직캠 멤버 {len(fancam)}명)")
+    print(f"dashboard.json 생성: 영상 {len(videos)}개 (MV {len(mvs)}, 직캠 {len(fancams)}), 일정 {len(dashboard['events'])}개")
 
 
 def main():

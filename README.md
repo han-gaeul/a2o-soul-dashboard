@@ -1,37 +1,67 @@
 # A2O SOUL Tracker
 
-A2O SOUL 공식 유튜브 지표를 하루 2번 모아 보여주는 비공식 팬메이드 대시보드.
+A2O SOUL 유튜브 지표·직캠·일정을 하루 2번 모아 보여주는 비공식 팬메이드 대시보드.
 GitHub Actions가 수집하고 GitHub Pages로 배포합니다. 서버 없음.
+
+**사이트**: https://han-gaeul.github.io/a2o-soul-dashboard/
+
+## 기능
+
+- **한눈에**: 구독자·MV·직캠 총 조회수, 다가오는 일정, 최신 영상, 구독자 추이
+- **MV**: 순위와 다음 목표 돌파 예상(최근 7일 평균 증가량 기준), 누적·일일 증가량 차트
+- **멤버·직캠**: 15명 멤버 카드(국적, 직캠 수·조회수, 대표 직캠), 멤버별 직캠 순위, 직캠 TOP 30
+- **알림**: 새 영상(72시간 이내 업로드), MV·직캠 조회수 돌파, 구독자 10만 단위 돌파 → 디스코드/텔레그램
 
 ## 처음 한 번 설정
 
 1. **Settings → Secrets and variables → Actions → New repository secret**
    - `YOUTUBE_API_KEY` (필수)
-   - `IG_USER_ID`, `IG_ACCESS_TOKEN` (선택 — 인스타 팔로워 수집용)
-2. **Settings → Pages → Build and deployment → Source: GitHub Actions**
+   - `DISCORD_WEBHOOK_URL` (선택) — 디스코드 채널 설정 → 연동 → 웹후크 → URL 복사
+   - `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID` (선택) — @BotFather로 봇 생성, 채널에 봇을 관리자로 추가, chat id는 `@채널이름`
+   - `IG_USER_ID`, `IG_ACCESS_TOKEN` (선택) — 인스타 팔로워 수집용
+2. **Settings → Pages → Source: GitHub Actions**
 3. **Actions → Update dashboard → Run workflow** 로 첫 수집
 
 이후로는 KST 0시·12시경 자동 수집 후 배포됩니다.
 
-## 추적 대상 관리 — `targets.yml`
+## 관리하는 파일
 
-- 공식 채널 업로드는 자동 등록. 공용 채널(@A2OWORLD)은 `filter: soul`로 SOUL 관련 영상만
-- 자동 분류: 60초 이하 → 콘텐츠(쇼츠), 제목에 MV/M/V/Music Video → MV, 티저·나머지 → 콘텐츠
-- 분류가 틀렸거나 직캠을 추가하려면 `videos:`에 영상 ID로 적기
+GitHub 웹에서 편집해 커밋하면 1~2분 뒤 사이트에 반영돼요(수집 없이 다시 빌드).
+
+### `schedule.yml` — 일정
+
+```yaml
+events:
+  - date: 2026-11-13
+    time: "17:00"
+    type: 음방          # 음방 | 라이브 | 발매 | 행사 | 기타
+    title: 뮤직뱅크 출연
+    url: https://...    # 선택
+```
+
+지난 일정은 자동으로 숨겨져요.
+
+### `targets.yml` — 추적 대상
+
+- 공식 채널(@A2OSOUL) 업로드는 전부, 공용 채널(@A2OWORLD)은 `filter: soul`, 음방 채널은 `filter: group`으로 A2O SOUL 영상만 자동 등록
+- 데뷔일 이전 영상은 무시
+- 자동 분류: 제목에 직캠/FanCam/Focus → 직캠(제목에 멤버 이름이 하나면 그 멤버), 60초 이하 → 콘텐츠(쇼츠), MV/M/V/Music Video → MV, 티저·나머지 → 콘텐츠
+- 분류가 틀렸거나 다른 채널 영상을 추가하려면 `videos:`에 영상 ID로
 
 ```yaml
 videos:
-  - id: XXXXXXXXXXX      # 쇼츠인데 MV로 잡힌 영상
+  - id: XXXXXXXXXXX      # 분류 덮어쓰기
     category: content
-  - id: YYYYYYYYYYY      # 음방 직캠
+  - id: YYYYYYYYYYY      # 멤버 지정
     category: fancam
     member: MOON
-  - id: ZZZZZZZZZZZ      # 빼고 싶은 영상
+  - id: ZZZZZZZZZZZ      # 빼기
     active: false
 ```
 
-GitHub 웹에서 이 파일을 편집해 커밋하면 1~2분 뒤 사이트에 반영됩니다(수집 없이 다시 빌드).
-새로 추가한 직캠의 조회수는 다음 자동 수집 때부터 잡혀요. 바로 보고 싶으면 Run workflow.
+### `members.yml` — 멤버
+
+제목에서 멤버를 찾을 때 쓰는 표기. 한글 등 다른 표기는 `aliases`에 추가.
 
 ## 로컬에서 돌려보기
 
@@ -43,16 +73,17 @@ python -m http.server 8000
 ```
 
 브라우저에서 `http://127.0.0.1:8000/site/` (파일을 직접 열면 데이터를 못 불러와요).
-로컬 수집 결과(`data/`)는 커밋하지 말고 버리세요: `git checkout data`
+로컬 수집 결과는 커밋하지 말고 되돌리세요: `git checkout data`
 
 ## 구조
 
 ```
-targets.yml              추적 대상·분류 설정
-collector/collect.py     수집(--build: 집계만)
+targets.yml / schedule.yml / members.yml   설정
+collector/collect.py     수집·알림·집계 (--build: 집계만)
 collector/youtube.py     YouTube Data API
+collector/notify.py      디스코드·텔레그램 알림
 collector/instagram.py   Instagram Business Discovery
 data/                    registry.json, history.json, dashboard.json (Actions가 커밋)
-site/                    정적 대시보드 (index.html, app.js, style.css)
+site/                    정적 대시보드
 .github/workflows/       수집·배포 워크플로
 ```

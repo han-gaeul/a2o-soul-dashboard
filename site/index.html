@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>A2O SOUL Tracker</title>
-<meta name="description" content="A2O SOUL 유튜브 지표를 매일 모아 보여주는 비공식 팬메이드 대시보드">
+<meta name="description" content="A2O SOUL 유튜브 지표·직캠·일정을 매일 모아 보여주는 비공식 팬메이드 대시보드">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
@@ -19,34 +19,64 @@
     <div class="meta" id="updated">불러오는 중…</div>
   </header>
 
-  <div class="grid" id="kpis"></div>
+  <nav class="tabs" id="tabs">
+    <a href="#overview" class="on">한눈에</a>
+    <a href="#mv">MV</a>
+    <a href="#members">멤버·직캠</a>
+  </nav>
 
-  <section class="card">
-    <h2>최신 영상</h2>
-    <div class="videos" id="recent"></div>
-  </section>
+  <!-- 한눈에 -->
+  <div data-tab="overview">
+    <div class="grid" id="kpis"></div>
 
-  <section class="card">
-    <h2>MV 조회수 추이</h2>
-    <div class="chart-box"><canvas id="mvChart"></canvas></div>
-  </section>
-
-  <div class="two">
-    <section class="card">
-      <h2>MV 순위</h2>
-      <div id="mvTable"></div>
+    <section class="card" id="eventsSection">
+      <h2>다가오는 일정</h2>
+      <ul class="events" id="events"></ul>
     </section>
+
+    <section class="card">
+      <h2>최신 영상</h2>
+      <div class="videos" id="recent"></div>
+    </section>
+
     <section class="card">
       <h2>구독자 · 팔로워 추이</h2>
       <div class="chart-box"><canvas id="accountsChart"></canvas></div>
     </section>
   </div>
 
-  <section class="card" id="fancamSection">
-    <h2>멤버별 직캠 조회수</h2>
-    <div class="chart-box" id="fancamBox"><canvas id="fancamChart"></canvas></div>
-    <div id="fancamTable"></div>
-  </section>
+  <!-- MV -->
+  <div data-tab="mv" hidden>
+    <section class="card">
+      <h2>MV 순위 · 다음 목표</h2>
+      <div id="mvTable"></div>
+      <p class="note">다음 목표는 최근 7일 평균 증가량 기준 예상이에요.</p>
+    </section>
+    <section class="card">
+      <h2>MV 누적 조회수</h2>
+      <div class="chart-box"><canvas id="mvChart"></canvas></div>
+    </section>
+    <section class="card">
+      <h2>MV 일일 증가량</h2>
+      <div class="chart-box"><canvas id="mvDailyChart"></canvas></div>
+    </section>
+  </div>
+
+  <!-- 멤버·직캠 -->
+  <div data-tab="members" hidden>
+    <section class="card">
+      <h2>멤버</h2>
+      <div class="members" id="members"></div>
+    </section>
+    <section class="card">
+      <h2>멤버별 직캠 조회수</h2>
+      <div class="chart-box" id="fancamBox"><canvas id="fancamChart"></canvas></div>
+    </section>
+    <section class="card">
+      <h2>직캠 TOP</h2>
+      <div id="fancamTable"></div>
+    </section>
+  </div>
 
   <footer>
     비공식 팬메이드 사이트로, A2O엔터테인먼트와 관련이 없습니다.<br>

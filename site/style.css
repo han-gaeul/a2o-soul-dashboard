@@ -41,4 +41,31 @@ td a:hover { color: var(--accent); }
 .video:hover .t { color: var(--accent); }
 .chip { display: inline-block; font-size: 11px; font-weight: 600; padding: 1px 6px; border-radius: 6px;
         background: var(--chip); color: var(--accent); margin-right: 4px; }
+.tabs { display: flex; gap: 6px; margin: 0 0 16px; position: sticky; top: 0; z-index: 5;
+        background: var(--bg); padding: 8px 0; }
+.tabs a { padding: 8px 14px; border-radius: 999px; font-size: 14px; font-weight: 600; color: var(--muted);
+          border: 1px solid var(--line); background: var(--card); }
+.tabs a.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+[data-tab] > section:first-child, [data-tab] > .grid:first-child { margin-top: 0; }
+.table-wrap { overflow-x: auto; }
+td:first-child, th:first-child { padding-left: 0; white-space: nowrap; }
+td:last-child, th:last-child { padding-right: 0; }
+.note { color: var(--muted); font-size: 12px; margin: 10px 0 0; }
+.events { list-style: none; margin: 0; padding: 0; }
+.events li { display: flex; gap: 12px; align-items: baseline; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.events li:last-child { border-bottom: 0; }
+.events .when { min-width: 92px; font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.events .when b { color: var(--text); }
+.events .today { color: var(--accent); font-weight: 800; }
+.events .what { font-size: 14px; font-weight: 600; }
+.events a.what:hover { color: var(--accent); }
+.members { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+.member { border: 1px solid var(--line); border-radius: 12px; padding: 12px; }
+.member .n { font-weight: 800; font-size: 16px; }
+.member .c { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.member .s { font-size: 12px; margin-top: 8px; font-variant-numeric: tabular-nums; }
+.member a.top { display: block; font-size: 12px; color: var(--accent); margin-top: 4px;
+                white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.goal { font-size: 12px; color: var(--muted); white-space: nowrap; }
+.goal b { color: var(--text); }
 footer { margin-top: 32px; color: var(--muted); font-size: 12px; line-height: 1.6; text-align: center; }
