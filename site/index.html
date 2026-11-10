@@ -2,7 +2,15 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#6c4cf5">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SOUL Tracker">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <title>A2O SOUL Tracker</title>
 <meta name="description" content="A2O SOUL 유튜브 지표·직캠·일정을 매일 모아 보여주는 비공식 팬메이드 대시보드">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,7 +24,10 @@
       <h1>A2O SOUL <span class="dday" id="dday"></span></h1>
       <div class="meta" id="debut"></div>
     </div>
-    <div class="meta" id="updated">불러오는 중…</div>
+    <div class="head-right">
+      <button class="install" id="installBtn" type="button" hidden>앱 설치</button>
+      <div class="meta" id="updated">불러오는 중…</div>
+    </div>
   </header>
 
   <nav class="tabs" id="tabs">
@@ -102,6 +113,15 @@
     멤버 프로필은 나무위키(CC BY-NC-SA 2.0 KR) 문서를 요약했으며 활동 관련 정보만 담았습니다
   </footer>
 </div>
+
+<dialog id="installHelp">
+  <div class="dlg-head"><h2>홈 화면에 추가</h2><button class="dlg-close" id="installHelpClose" aria-label="닫기">✕</button></div>
+  <ol class="install-steps">
+    <li>Safari 아래쪽 <b>공유</b> 버튼(□↑)을 누르세요</li>
+    <li><b>홈 화면에 추가</b>를 누르세요</li>
+    <li>홈 화면의 <b>SOUL Tracker</b> 아이콘으로 앱처럼 열려요</li>
+  </ol>
+</dialog>
 
 <dialog id="memberDialog">
   <div class="dlg-head">

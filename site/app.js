@@ -1,3 +1,26 @@
+// ---------- 앱 설치(PWA) ----------
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+}
+(function installUI() {
+  const btn = document.getElementById("installBtn");
+  const standalone = matchMedia("(display-mode: standalone)").matches || navigator.standalone;
+  if (standalone || !btn) return;
+  let deferred = null;
+  // 안드로이드·크롬: 설치 프롬프트
+  window.addEventListener("beforeinstallprompt", (e) => { e.preventDefault(); deferred = e; btn.hidden = false; });
+  window.addEventListener("appinstalled", () => { btn.hidden = true; });
+  // iOS Safari: 설치 프롬프트가 없어서 안내 팝업
+  const ios = /iphone|ipad|ipod/i.test(navigator.userAgent) && !/crios|fxios/i.test(navigator.userAgent);
+  if (ios) btn.hidden = false;
+  btn.addEventListener("click", async () => {
+    if (deferred) { deferred.prompt(); await deferred.userChoice; deferred = null; btn.hidden = true; return; }
+    const help = document.getElementById("installHelp");
+    help.showModal();
+    document.getElementById("installHelpClose").onclick = () => help.close();
+  });
+})();
+
 (async function () {
   const fmt = (v) => (v == null ? "–" : Number(v).toLocaleString("ko-KR"));
   const kr = (n) => (n >= 1e8 ? `${+(n / 1e8).toFixed(2)}억` : n >= 1e4 ? `${+(n / 1e4).toFixed(1)}만` : fmt(n));
