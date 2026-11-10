@@ -23,6 +23,7 @@
     <a href="#overview" class="on">한눈에</a>
     <a href="#mv">MV</a>
     <a href="#members">멤버·직캠</a>
+    <a href="#videos">전체 영상</a>
   </nav>
 
   <!-- 한눈에 -->
@@ -50,7 +51,6 @@
     <section class="card">
       <h2>뮤직비디오</h2>
       <div class="videos" id="mvList"></div>
-      <p class="note">다음 목표는 최근 7일 평균 증가량 기준 예상이에요.</p>
     </section>
     <section class="card">
       <h2>MV 누적 조회수</h2>
@@ -70,11 +70,28 @@
     </section>
   </div>
 
+  <!-- 전체 영상 -->
+  <div data-tab="videos" hidden>
+    <section class="card">
+      <div class="filters" id="filters"></div>
+      <div class="videos" id="allVideos"></div>
+      <button class="more" id="more" hidden>더 보기</button>
+    </section>
+  </div>
+
   <footer>
     비공식 팬메이드 사이트로, A2O엔터테인먼트와 관련이 없습니다.<br>
-    데이터 출처: YouTube Data API · 하루 2회(KST 0시, 12시경) 갱신 · 증감은 직전 수집일 대비
+    데이터 출처: YouTube Data API · 하루 2회(KST 0시, 12시경) 갱신 · 증감은 직전 수집일 대비 · MV 다음 목표는 최근 7일 평균 증가량 기준 예상
   </footer>
 </div>
+
+<dialog id="memberDialog">
+  <div class="dlg-head">
+    <h2 id="dlgTitle"></h2>
+    <button class="dlg-close" id="dlgClose" aria-label="닫기">✕</button>
+  </div>
+  <div class="videos" id="dlgList"></div>
+</dialog>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="app.js"></script>

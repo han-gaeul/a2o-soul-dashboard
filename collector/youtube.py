@@ -1,4 +1,5 @@
-"""YouTube Data API v3. 모든 호출이 1유닛 (search.list는 안 씀)."""
+"""YouTube Data API v3. search.list만 호출당 100유닛, 나머지는 1유닛."""
+import html
 import os
 import re
 
@@ -95,4 +96,28 @@ def fetch_videos(ids):
                 "likes": int(s["likeCount"]) if "likeCount" in s else None,
                 "comments": int(s["commentCount"]) if "commentCount" in s else None,
             }
+    return out
+
+
+def search(query, published_after, max_pages=10):
+    """search.list (호출당 100유닛). 최신순 [{id, title, published_at, channel_id, channel_title}]"""
+    out, token = [], None
+    for _ in range(max_pages):
+        params = {"part": "snippet", "q": query, "type": "video", "order": "date",
+                  "maxResults": 50, "publishedAfter": published_after}
+        if token:
+            params["pageToken"] = token
+        body = _get("search", params)
+        for it in body.get("items", []):
+            sn = it["snippet"]
+            out.append({
+                "id": it["id"]["videoId"],
+                "title": html.unescape(sn["title"]),
+                "published_at": sn.get("publishedAt"),
+                "channel_id": sn.get("channelId"),
+                "channel_title": html.unescape(sn.get("channelTitle", "")),
+            })
+        token = body.get("nextPageToken")
+        if not token:
+            break
     return out

@@ -46,7 +46,9 @@ events:
 - 공식 채널(@A2OSOUL) 업로드는 전부, 공용 채널(@A2OWORLD)은 `filter: soul`, 음방 채널은 `filter: group`으로 A2O SOUL 영상만 자동 등록
 - 데뷔 전 영상도 포함. 처음엔 채널 업로드 전체를 훑고, 이후엔 새 업로드만 확인
 - 멤버 이름은 영문(대소문자 무관)·한글 표기 모두 인식
-- 필터나 `members.yml` 표기를 바꿨다면 **Actions → Update dashboard → Run workflow**에서 `rescan` 체크 후 실행 (예전 영상까지 다시 확인)
+- 필터나 `members.yml` 표기가 바뀌면 다음 수집 때 해당 채널을 자동으로 처음부터 다시 확인
+- `search:` — 등록 안 된 채널(언론·방송사 등) 영상은 YouTube 검색으로. 제목에 그룹명이 있고 구독자 `min_subscribers` 이상인 채널만 (팬 업로드 제외)
+- 소속사 채널(`filter: soul`)은 데뷔 전 연습생 유닛(LTB·HTB)과 SOULITE 영상도 포함
 - 자동 분류: 제목에 직캠/FanCam/Focus → 직캠(제목에 멤버 이름이 하나면 그 멤버), 60초 이하 → 콘텐츠(쇼츠), MV/M/V/Music Video → MV, 티저·나머지 → 콘텐츠
 - 분류가 틀렸거나 다른 채널 영상을 추가하려면 `videos:`에 영상 ID로
 

@@ -29,6 +29,8 @@ KST = timezone(timedelta(hours=9))
 
 CATEGORIES = {"mv": "MV", "fancam": "직캠", "content": "콘텐츠"}
 GROUP_PATTERN = r"A2O ?SOUL|A20 ?SOUL|에이투오 ?소울"
+# 데뷔 전 연습생 유닛(LTB·HTB)과 세계관(SOULITE) — 소속사 채널(filter: soul)에서만 사용
+PREDEBUT_PATTERN = r"\bLTB\b|\bHTB\b|SOULITE"
 FANCAM_PATTERN = re.compile(r"직캠|fan ?cam|focus|세로캠|vertical", re.I)
 NEW_VIDEO_ALERT_HOURS = 72
 
@@ -46,6 +48,7 @@ def load_config():
     cfg["instagram"] = cfg.get("instagram") or []
     cfg["videos"] = cfg.get("videos") or []
     cfg["debut_date"] = str(cfg.get("debut_date") or "")
+    cfg["search"] = cfg.get("search") or {}
 
     members = read_yml("members.yml").get("members") or []
     cfg["members"] = members
@@ -100,7 +103,7 @@ def compile_filter(cfg, f):
         return re.compile(GROUP_PATTERN, re.I)
     if key == "soul":
         m = member_regex(cfg)
-        return re.compile(GROUP_PATTERN + (f"|{m}" if m else ""), re.I)
+        return re.compile(GROUP_PATTERN + "|" + PREDEBUT_PATTERN + (f"|{m}" if m else ""), re.I)
     return re.compile(f, re.I)
 
 
@@ -158,6 +161,13 @@ def kr_num(n):
 
 # ---------- 공통 ----------
 
+def kst_date(iso):
+    """ISO(UTC) → KST 날짜 문자열. 없으면 빈 문자열."""
+    if not iso:
+        return ""
+    return datetime.fromisoformat(iso.replace("Z", "+00:00")).astimezone(KST).date().isoformat()
+
+
 def load_json(name, default):
     p = DATA / name
     return json.loads(p.read_text("utf-8")) if p.exists() else default
@@ -182,6 +192,44 @@ def resolve_video(cfg, registry, vid, overrides):
 
 
 # ---------- 수집 ----------
+
+def search_videos(cfg, registry, channels, rescan):
+    """검색어별로 새 영상을 찾고, 제목에 그룹명이 있고 구독자 기준을 넘는 채널의 영상만 등록."""
+    sc = cfg["search"]
+    queries = sc.get("queries") or []
+    if not queries:
+        return
+    min_subs = int(sc.get("min_subscribers", 0))
+    pattern = re.compile(GROUP_PATTERN, re.I)
+    state = registry.setdefault("search_scan", {})
+    subs = registry.setdefault("channel_subs", {})  # 검색으로 만난 채널 구독자 수 캐시
+    if rescan:
+        state.clear()
+
+    candidates = []
+    for q in queries:
+        after = state.get(q)
+        after = (datetime.fromisoformat(after.replace("Z", "+00:00")) - timedelta(days=3)) if after \
+            else datetime.fromisoformat(f"{sc.get('since', '2024-01-01')}T00:00:00+00:00")
+        items = youtube.search(q, after.strftime("%Y-%m-%dT%H:%M:%SZ"), max_pages=int(sc.get("max_pages", 10)))
+        newest = max((i["published_at"] for i in items if i["published_at"]), default=None)
+        if newest and newest > state.get(q, ""):
+            state[q] = newest
+        print(f"[검색] '{q}': {len(items)}개 ({after:%Y-%m-%d} 이후)")
+        candidates += [i for i in items if i["id"] not in registry["videos"] and pattern.search(i["title"])]
+
+    unknown = {i["channel_id"] for i in candidates} - set(subs) - set(channels)
+    for cid, d in youtube.fetch_channels(unknown).items():
+        subs[cid] = d["subscribers"] or 0
+    for i in candidates:
+        if i["id"] in registry["videos"]:
+            continue
+        if i["channel_id"] not in channels and subs.get(i["channel_id"], 0) < min_subs:
+            continue
+        registry["videos"][i["id"]] = {"title": i["title"], "published_at": i["published_at"],
+                                       "channel_id": i["channel_id"], "channel_title": i["channel_title"], "source": "search"}
+        print(f"[검색] 새 영상: {i['channel_title']} · {i['title']}")
+
 
 def collect(cfg, rescan=False):
     registry = load_json("registry.json", {})
@@ -228,6 +276,12 @@ def collect(cfg, rescan=False):
             if m:
                 events.append(f"🎉 {d['title']} 유튜브 구독자 {kr_num(m)} 돌파!")
         pattern = compile_filter(cfg, channels[cid].get("filter"))
+        # 필터(멤버 표기 포함)가 바뀌면 그 채널은 자동으로 처음부터 다시 훑기
+        sig = registry.setdefault("scan_filter", {})
+        cur_sig = pattern.pattern if pattern else ""
+        if sig.get(cid) != cur_sig:
+            scan.pop(cid, None)
+            sig[cid] = cur_sig
         since = None
         if scan.get(cid):
             since = (date.fromisoformat(scan[cid][:10]) - timedelta(days=3)).isoformat()
@@ -248,6 +302,9 @@ def collect(cfg, rescan=False):
             print(f"[YT] 새 영상: {up['title']}")
     for cid in set(channels) - set(registry["channels"]):
         print(f"[YT] 채널을 찾을 수 없음: {cid}")
+
+    # 유튜브 검색 — 등록 안 된 채널(언론·방송사 등)의 영상까지
+    search_videos(cfg, registry, channels, rescan)
 
     # 영상 지표
     overrides = {v["id"]: v for v in cfg["videos"]}
@@ -380,7 +437,7 @@ def build(cfg):
     for v in mvs:
         v["forecast"] = forecast(v["points"])
 
-    fancams = sorted((v for v in videos if v["category"] == "fancam"), key=lambda v: v["views"] or 0, reverse=True)
+    fancams = sorted((v for v in videos if v["category"] == "fancam"), key=lambda v: v["published_at"] or "", reverse=True)
     members = []
     for m in cfg["members"]:
         mine = [v for v in fancams if v["member"] == m["name"]]
@@ -390,8 +447,7 @@ def build(cfg):
             "fancam_count": len(mine),
             "fancam_views": sum(v["views"] or 0 for v in mine),
             "fancam_delta": sum(v["delta"] or 0 for v in mine) or None,
-            "latest": ({k: latest[k] for k in ("id", "title", "views", "published_at", "channel")}
-                       if (latest := max(mine, key=lambda v: v["published_at"] or "", default=None)) else None),
+            "fancams": [{k: v[k] for k in ("id", "title", "views", "delta", "published_at", "channel")} for v in mine],
         })
 
     kpis.append({
@@ -416,7 +472,8 @@ def build(cfg):
         "accounts": accounts,
         "mvs": mvs,
         "members": members,
-        "fancams": [{k: v[k] for k in slim} for v in fancams[:30]],
+        "videos": [{**{k: v[k] for k in slim}, "predebut": bool(cfg["debut_date"] and kst_date(v["published_at"]) < cfg["debut_date"])}
+                   for v in sorted(videos, key=lambda v: v["published_at"] or "", reverse=True)],
         "recent": [{k: v[k] for k in slim} for v in recent],
         "events": sorted((e for e in cfg["events"] if e["date"] >= today),
                          key=lambda e: (e["date"], e.get("time") or "")),
