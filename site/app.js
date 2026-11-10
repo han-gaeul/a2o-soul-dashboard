@@ -1,3 +1,26 @@
+// ---------- 앱 설치(PWA) ----------
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+}
+(function installUI() {
+  const btn = document.getElementById("installBtn");
+  const standalone = matchMedia("(display-mode: standalone)").matches || navigator.standalone;
+  if (standalone || !btn) return;
+  let deferred = null;
+  // 안드로이드·크롬: 설치 프롬프트
+  window.addEventListener("beforeinstallprompt", (e) => { e.preventDefault(); deferred = e; btn.hidden = false; });
+  window.addEventListener("appinstalled", () => { btn.hidden = true; });
+  // iOS Safari: 설치 프롬프트가 없어서 안내 팝업
+  const ios = /iphone|ipad|ipod/i.test(navigator.userAgent) && !/crios|fxios/i.test(navigator.userAgent);
+  if (ios) btn.hidden = false;
+  btn.addEventListener("click", async () => {
+    if (deferred) { deferred.prompt(); await deferred.userChoice; deferred = null; btn.hidden = true; return; }
+    const help = document.getElementById("installHelp");
+    help.showModal();
+    document.getElementById("installHelpClose").onclick = () => help.close();
+  });
+})();
+
 (async function () {
   const fmt = (v) => (v == null ? "–" : Number(v).toLocaleString("ko-KR"));
   const kr = (n) => (n >= 1e8 ? `${+(n / 1e8).toFixed(2)}억` : n >= 1e4 ? `${+(n / 1e4).toFixed(1)}만` : fmt(n));
@@ -58,7 +81,25 @@
     ));
   }
 
-  const events = (data.events || []).filter((e) => e.date >= todayKst).slice(0, 10);
+  function upcomingBirthdays(days = 30) {
+    const out = [];
+    const today = Date.parse(todayKst);
+    const year = +todayKst.slice(0, 4);
+    for (const m of data.members || []) {
+      if (!/^\d{2}-\d{2}$/.test(m.birthday || "")) continue;
+      for (const y of [year, year + 1]) {
+        const date = `${y}-${m.birthday}`;
+        const diff = Math.round((Date.parse(date) - today) / 86400000);
+        if (diff >= 0 && diff <= days) {
+          out.push({ date, type: "생일", title: `🎂 ${m.name} 생일${diff ? ` D-${diff}` : " D-DAY"}`, member: m.name });
+          break;
+        }
+      }
+    }
+    return out;
+  }
+  const events = [...(data.events || []).filter((e) => e.date >= todayKst), ...upcomingBirthdays()]
+    .sort((a, b) => (a.date + (a.time || "")).localeCompare(b.date + (b.time || ""))).slice(0, 10);
   if (events.length) {
     const wd = ["일", "월", "화", "수", "목", "금", "토"];
     for (const e of events) {
@@ -67,7 +108,14 @@
       const when = el("div", { class: "when" },
         isToday ? el("span", { class: "today" }, "오늘") : el("b", {}, `${d.getUTCMonth() + 1}.${d.getUTCDate()}`),
         ` (${wd[d.getUTCDay()]})`, e.time ? ` ${e.time}` : null);
-      const title = e.url ? ext(e.url, e.title) : el("span", {}, e.title);
+      let title;
+      if (e.member) {
+        title = el("button", { type: "button", class: "linklike" }, e.title);
+        const mem = data.members.find((x) => x.name === e.member);
+        title.addEventListener("click", () => openMember(mem));
+      } else {
+        title = e.url ? ext(e.url, e.title) : el("span", {}, e.title);
+      }
       title.classList.add("what");
       $("events").append(el("li", {}, when, el("div", {}, e.type ? el("span", { class: "chip" }, e.type) : null, title)));
     }
@@ -138,24 +186,32 @@
   }
 
   function profile(m) {
-    const facts = [m.ko, m.position, m.birth_year ? `${m.birth_year}년생` : "", m.nationality].filter(Boolean).join(" · ");
+    const bday = /^\d{2}-\d{2}$/.test(m.birthday || "") ? `생일 ${+m.birthday.slice(0, 2)}월 ${+m.birthday.slice(3)}일` : "";
+    const facts = [m.position, m.birth_year ? `${m.birth_year}년생` : "", bday, m.nationality].filter(Boolean).join(" · ");
     const list = (label, items) => (items.length
       ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, label), el("ul", {}, ...items.map((x) => el("li", {}, x))))
       : null);
     const embeds = igEmbeds(m.instagram_posts);
     return el("section", { class: "dlg-sec profile" },
-      m.photo ? el("img", { class: "pf-photo", src: m.photo, alt: m.name }) : null,
       embeds.length ? el("div", { class: "ig-row" }, ...embeds) : null,
       el("div", { class: "pf-facts" }, facts),
       m.nicknames.length ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, "별명"), el("div", {}, m.nicknames.join(", "))) : null,
       list("데뷔 전", m.career),
       list("여담", m.notes),
-      el("div", { class: "pf-src" }, "출처: ",
-        ext(`https://namu.wiki/w/${encodeURIComponent(`${m.ko}(A2O SOUL)`)}`, "나무위키"), " 요약"));
+      m.signature ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, "서명"),
+        el("img", { class: "pf-sign", src: m.signature, alt: `${m.name} 서명`, loading: "lazy" })) : null,
+      (m.profile_history || []).length ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, "역대 프로필"),
+        el("div", { class: "pf-history" }, ...m.profile_history.map((h) => el("figure", {},
+          h.photo ? el("img", { src: h.photo, alt: h.label, loading: "lazy" }) : igEmbeds([h.instagram])[0],
+          h.label ? el("figcaption", {}, h.label) : null)))) : null);
   }
 
+  const avatar = (m, cls = "avatar") => el("div", { class: cls, "aria-hidden": "true" },
+    m.photo ? el("img", { src: m.photo, alt: "", loading: "lazy" }) : (m.ko ? m.ko[0] : m.name[0]));
+
   function openMember(m, focus) {
-    $("dlgTitle").textContent = m.name;
+    $("dlgTitle").replaceChildren(avatar(m, "avatar dlg-avatar"), el("span", {}, m.name),
+      m.ko ? el("span", { class: "dlg-ko" }, m.ko) : null);
     const sections = [profile(m)];
     for (const [key, label, list] of [["fancams", "직캠", m.fancams], ["predebut", "데뷔 전", m.predebut]]) {
       if (!list.length) continue;
@@ -163,6 +219,9 @@
         el("h3", {}, `${label} ${list.length}개`),
         el("div", { class: "videos" }, ...list.map((v) => videoCard(v, null)))));
     }
+    // 출처는 맨 아래 작게
+    sections.push(el("div", { class: "pf-src" }, "프로필 출처 ",
+      ext(`https://namu.wiki/w/${encodeURIComponent(`${m.ko}(A2O SOUL)`)}`, "나무위키")));
     $("dlgBody").replaceChildren(...sections);
     dlg.showModal();
     dlg.scrollTop = 0;
@@ -176,8 +235,7 @@
   if (gp.length) $("groupPosts").append(...gp); else $("groupPostsSec").remove();
   for (const m of data.members) {
     const card = el("button", { class: "pcard", type: "button" },
-      el("div", { class: "avatar", "aria-hidden": "true" },
-        m.photo ? el("img", { src: m.photo, alt: "", loading: "lazy" }) : (m.ko ? m.ko[0] : m.name[0])),
+      avatar(m),
       el("div", { class: "pinfo" },
         el("div", { class: "n" }, m.name, el("span", { class: "c" }, m.ko)),
         el("div", { class: "s" }, [m.position, m.birth_year ? `${m.birth_year}년생` : "", m.nationality].filter(Boolean).join(" · ")),

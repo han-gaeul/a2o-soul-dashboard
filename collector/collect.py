@@ -122,12 +122,29 @@ def is_short(title, duration_s):
     return duration_s <= 60 or (duration_s <= 180 and bool(re.search(r"#shorts?\b", title, re.I)))
 
 
-def member_photo(m):
-    """site/img/ 아래 실제로 있는 파일만 사진으로 사용 (외부 URL 불가)."""
-    rel = str(m.get("photo") or "").lstrip("/")
+def local_img(path):
+    """site/img/ 아래 실제로 있는 파일만 사용 (외부 URL 불가)."""
+    rel = str(path or "").lstrip("/")
     if not rel.startswith("img/") or ".." in rel:
         return ""
     return rel if (ROOT / "site" / rel).is_file() else ""
+
+
+IG_POST = re.compile(r"^https://(www\.)?instagram\.com/(p|reel)/[\w-]+/?")
+
+
+def profile_history(m):
+    out = []
+    for h in m.get("profile_history") or []:
+        item = {"label": str(h.get("label") or "")}
+        if h.get("photo") and local_img(h["photo"]):
+            item["photo"] = local_img(h["photo"])
+        elif h.get("instagram") and IG_POST.match(str(h["instagram"])):
+            item["instagram"] = str(h["instagram"])
+        else:
+            continue
+        out.append(item)
+    return out
 
 
 def in_unit(member, video):
@@ -468,7 +485,10 @@ def build(cfg):
             "career": m.get("career") or [],
             "notes": m.get("notes") or [],
             "instagram_posts": [str(u) for u in (m.get("instagram_posts") or [])],
-            "photo": member_photo(m),
+            "photo": local_img(m.get("photo")),
+            "signature": local_img(m.get("signature")),
+            "birthday": str(m.get("birthday") or ""),
+            "profile_history": profile_history(m),
             "fancam_count": len(mine),
             "fancam_views": sum(v["views"] or 0 for v in mine),
             "fancam_delta": sum(v["delta"] or 0 for v in mine) or None,
