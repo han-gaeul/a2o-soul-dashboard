@@ -126,7 +126,8 @@ def in_unit(member, video):
         return False
     day = kst_date(video.get("published_at"))
     for u in member.get("units") or []:
-        if re.search(rf"\b{re.escape(str(u['unit']))}\b", video["title"]) and day >= str(u.get("since") or ""):
+        if (re.search(rf"\b{re.escape(str(u['unit']))}\b", video["title"])
+                and day >= str(u.get("since") or "") and day <= str(u.get("until") or "9999")):
             return True
     return False
 
