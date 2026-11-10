@@ -240,6 +240,9 @@ def collect(cfg, rescan=False):
             if up["id"] in registry["videos"]:
                 continue
             if pattern and not pattern.search(up["title"]):
+                # 소속사 채널(filter: soul) 전체 스캔 때는 걸러진 제목을 로그에 남겨 필터 점검용으로
+                if since is None and str(channels[cid].get("filter")).lower() == "soul":
+                    print(f"[YT]   제외: {up['published_at'][:10] if up['published_at'] else '-'} {up['title']}")
                 continue
             registry["videos"][up["id"]] = {"title": up["title"], "published_at": up["published_at"], "channel_id": cid}
             print(f"[YT] 새 영상: {up['title']}")
