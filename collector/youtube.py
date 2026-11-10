@@ -39,23 +39,30 @@ def fetch_channels(ids):
     return out
 
 
-def fetch_uploads(playlist_id, max_pages=10):
-    """[{id, title, published_at}] 최신순"""
+def resolve_handle(handle):
+    """@handle → 채널 ID. 없으면 None."""
+    items = _get("channels", {"part": "id", "forHandle": handle.lstrip("@")}).get("items", [])
+    return items[0]["id"] if items else None
+
+
+def fetch_uploads(playlist_id, since=None, max_pages=40):
+    """[{id, title, published_at}] 최신순. since(ISO 날짜 문자열)보다 오래된 영상이 나오면 중단."""
     out, token = [], None
     for _ in range(max_pages):
         params = {"part": "snippet", "playlistId": playlist_id, "maxResults": 50}
         if token:
             params["pageToken"] = token
         body = _get("playlistItems", params)
+        reached_old = False
         for it in body.get("items", []):
             sn = it["snippet"]
-            out.append({
-                "id": sn["resourceId"]["videoId"],
-                "title": sn["title"],
-                "published_at": sn.get("publishedAt"),
-            })
+            published = sn.get("publishedAt") or ""
+            if since and published and published[:10] < since:
+                reached_old = True
+                continue
+            out.append({"id": sn["resourceId"]["videoId"], "title": sn["title"], "published_at": published or None})
         token = body.get("nextPageToken")
-        if not token:
+        if not token or reached_old:
             break
     return out
 

@@ -1,0 +1,19 @@
+# A2O SOUL 멤버 (공식 공개 프로필 기준)
+# name: 영상 제목에서 멤버를 찾을 때 쓰는 영문 대문자 표기
+# aliases: 제목에 다르게 쓰이는 표기가 있으면 추가 (한글 표기 등)
+members:
+  - { name: MOON,    nationality: 한국 }
+  - { name: SORA,    nationality: 일본 }
+  - { name: SEOHA,   nationality: 한국 }
+  - { name: GAKU,    nationality: 일본 }
+  - { name: TEO,     nationality: 중국 }
+  - { name: JUNE,    nationality: 중국 }
+  - { name: LUCIEN,  nationality: 한국·미국 }
+  - { name: HANSUNG, nationality: 한국 }
+  - { name: TAI,     nationality: 중국 }
+  - { name: SEE-ONE, nationality: 한국·일본, aliases: [SEEONE] }
+  - { name: SONO,    nationality: 일본 }
+  - { name: ALURE,   nationality: 태국 }
+  - { name: ZAI,     nationality: 중국 }
+  - { name: AYDEN,   nationality: 중국 }
+  - { name: ZET,     nationality: 중국 }

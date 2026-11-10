@@ -1,17 +1,34 @@
 (async function () {
   const fmt = (v) => (v == null ? "–" : Number(v).toLocaleString("ko-KR"));
+  const kr = (n) => (n >= 1e8 ? `${+(n / 1e8).toFixed(2)}억` : n >= 1e4 ? `${+(n / 1e4).toFixed(1)}만` : fmt(n));
   const $ = (id) => document.getElementById(id);
   const el = (tag, attrs = {}, ...children) => {
     const n = document.createElement(tag);
     for (const [k, v] of Object.entries(attrs)) {
       if (k === "class") n.className = v; else n.setAttribute(k, v);
     }
-    for (const c of children) if (c != null) n.append(c);
+    for (const c of children) if (c != null && c !== false) n.append(c);
     return n;
   };
   const deltaSpan = (d) => (d ? el("span", { class: "delta" }, `+${fmt(d)}`) : null);
   const ytUrl = (id) => `https://www.youtube.com/watch?v=${encodeURIComponent(id)}`;
+  const ext = (href, ...children) => el("a", { href, target: "_blank", rel: "noopener" }, ...children);
+  const empty = (msg) => el("div", { class: "empty" }, msg);
+  const todayKst = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(new Date()); // YYYY-MM-DD
 
+  // ---------- 탭 ----------
+  const tabs = ["overview", "mv", "members"];
+  const drawn = new Set();
+  const drawers = {};
+  function showTab() {
+    const cur = tabs.includes(location.hash.slice(1)) ? location.hash.slice(1) : "overview";
+    document.querySelectorAll("[data-tab]").forEach((s) => (s.hidden = s.dataset.tab !== cur));
+    document.querySelectorAll("#tabs a").forEach((a) => a.classList.toggle("on", a.getAttribute("href") === `#${cur}`));
+    if (!drawn.has(cur) && drawers[cur] && window.Chart) { drawn.add(cur); drawers[cur](); }
+  }
+  window.addEventListener("hashchange", showTab);
+
+  // ---------- 데이터 ----------
   // 배포 시에는 ./data, 로컬 미리보기(레포 루트에서 서버 실행)에서는 ../data
   let data;
   for (const path of ["data/dashboard.json", "../data/dashboard.json"]) {
@@ -22,9 +39,8 @@
   }
   if (!data) { $("updated").textContent = "데이터를 불러오지 못했어요"; return; }
 
-  // 헤더
+  // ---------- 헤더 ----------
   if (data.debut_date) {
-    const todayKst = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(new Date()); // YYYY-MM-DD
     const days = Math.round((Date.parse(todayKst) - Date.parse(data.debut_date)) / 86400000) + 1;
     $("dday").textContent = `D+${days}`;
     $("debut").textContent = `데뷔 ${data.debut_date.replaceAll("-", ".")}`;
@@ -33,7 +49,7 @@
     ? `마지막 수집: ${data.updated_at.slice(0, 16).replace("T", " ")} KST`
     : "아직 수집 전";
 
-  // KPI
+  // ---------- 한눈에 ----------
   for (const k of data.kpis) {
     $("kpis").append(el("div", { class: "card kpi" },
       el("div", { class: "label" }, k.label),
@@ -42,7 +58,23 @@
     ));
   }
 
-  // 최신 영상
+  const events = (data.events || []).filter((e) => e.date >= todayKst).slice(0, 10);
+  if (events.length) {
+    const wd = ["일", "월", "화", "수", "목", "금", "토"];
+    for (const e of events) {
+      const d = new Date(`${e.date}T00:00:00Z`);
+      const isToday = e.date === todayKst;
+      const when = el("div", { class: "when" },
+        isToday ? el("span", { class: "today" }, "오늘") : el("b", {}, `${d.getUTCMonth() + 1}.${d.getUTCDate()}`),
+        ` (${wd[d.getUTCDay()]})`, e.time ? ` ${e.time}` : null);
+      const title = e.url ? ext(e.url, e.title) : el("span", {}, e.title);
+      title.classList.add("what");
+      $("events").append(el("li", {}, when, el("div", {}, e.type ? el("span", { class: "chip" }, e.type) : null, title)));
+    }
+  } else {
+    $("eventsSection").remove();
+  }
+
   if (data.recent.length) {
     for (const v of data.recent) {
       const chip = el("span", { class: "chip" }, v.member || data.categories[v.category] || v.category);
@@ -53,50 +85,64 @@
       ));
     }
   } else {
-    $("recent").replaceWith(el("div", { class: "empty" }, "아직 수집된 영상이 없어요"));
+    $("recent").replaceWith(empty("아직 수집된 영상이 없어요"));
   }
 
-  // 표
-  function table(headers, rows) {
-    if (!rows.length) return el("div", { class: "empty" }, "데이터가 없어요");
+  // ---------- 표 ----------
+  function table(headers, rows, emptyMsg = "데이터가 없어요") {
+    if (!rows.length) return empty(emptyMsg);
     const t = el("table");
+    const wrap = el("div", { class: "table-wrap" }, t);
     t.append(el("thead", {}, el("tr", {}, ...headers.map(([h, cls]) => el("th", cls ? { class: cls } : {}, h)))));
     const tb = el("tbody");
-    for (const r of rows) tb.append(el("tr", {}, ...r.map(([v, cls]) => el("td", cls ? { class: cls } : {}, v))));
+    for (const r of rows) tb.append(el("tr", {}, ...r.map(([v, cls]) => el("td", cls ? { class: cls } : {}, v ?? ""))));
     t.append(tb);
-    return t;
+    return wrap;
   }
 
+  // ---------- MV ----------
+  const goal = (f) => (f
+    ? el("div", { class: "goal" }, el("b", {}, kr(f.target)), ` · 약 ${f.days}일`, el("br"), `하루 +${kr(f.rate)}`)
+    : el("span", { class: "goal" }, "데이터 쌓는 중"));
   $("mvTable").append(table(
-    [["영상"], ["조회수", "num"], ["증감", "num"]],
-    data.mvs.map((v) => [
-      [el("a", { href: ytUrl(v.id), target: "_blank", rel: "noopener" }, v.title)],
-      [fmt(v.views), "num"],
-      [deltaSpan(v.delta) || "", "num"],
-    ]),
+    [["영상"], ["조회수", "num"], ["다음 목표", "num"]],
+    data.mvs.map((v) => [[ext(ytUrl(v.id), v.title)], [el("div", {}, fmt(v.views), v.delta ? el("br") : null, deltaSpan(v.delta)), "num"], [goal(v.forecast), "num"]]),
+    "등록된 MV가 없어요",
   ));
 
-  if (data.fancam.length) {
-    $("fancamTable").append(table(
-      [["#"], ["멤버"], ["직캠 수", "num"], ["합계", "num"], ["증감", "num"]],
-      data.fancam.map((r, i) => [[String(i + 1)], [r.member], [String(r.count), "num"], [fmt(r.views), "num"], [deltaSpan(r.delta) || "", "num"]]),
+  // ---------- 멤버·직캠 ----------
+  for (const m of data.members) {
+    $("members").append(el("div", { class: "member" },
+      el("div", { class: "n" }, m.name),
+      el("div", { class: "c" }, m.nationality),
+      el("div", { class: "s" }, m.fancam_count ? `직캠 ${m.fancam_count}개 · ${kr(m.fancam_views)}회` : "직캠 집계 전",
+        m.fancam_delta ? " " : null, deltaSpan(m.fancam_delta)),
+      m.top ? ext(ytUrl(m.top.id), `▶ ${m.top.title}`) : null,
     ));
-  } else {
-    $("fancamSection").remove();
+    const last = $("members").lastElementChild.querySelector("a");
+    if (last) last.classList.add("top");
   }
 
-  // 차트
-  if (!window.Chart) return;
-  const css = getComputedStyle(document.documentElement);
-  Chart.defaults.color = css.getPropertyValue("--muted").trim();
-  Chart.defaults.borderColor = css.getPropertyValue("--line").trim();
-  Chart.defaults.font.family = "Pretendard, sans-serif";
+  $("fancamTable").append(table(
+    [["멤버"], ["영상"], ["조회수", "num"]],
+    data.fancams.map((v) => [[v.member || "단체"], [ext(ytUrl(v.id), v.title)], [el("div", {}, fmt(v.views), v.delta ? el("br") : null, deltaSpan(v.delta)), "num"]]),
+    "아직 수집된 직캠이 없어요",
+  ));
+
+  // ---------- 차트 ----------
   const palette = ["#6c4cf5", "#f5734c", "#12a1a0", "#e0479e", "#d4a017", "#3b82f6", "#8b5cf6", "#22c55e"];
+  if (window.Chart) {
+    const css = getComputedStyle(document.documentElement);
+    Chart.defaults.color = css.getPropertyValue("--muted").trim();
+    Chart.defaults.borderColor = css.getPropertyValue("--line").trim();
+    Chart.defaults.font.family = "Pretendard, sans-serif";
+  }
+  const tooltip = { callbacks: { label: (c) => `${c.dataset.label ?? ""}${c.dataset.label ? ": " : ""}${fmt(c.parsed.y ?? c.parsed.x)}` } };
 
   function lineChart(id, seriesList) {
     const canvas = $(id);
     const labels = [...new Set(seriesList.flatMap((s) => s.points.map((p) => p[0])))].sort();
-    if (!labels.length) { canvas.parentElement.replaceWith(el("div", { class: "empty" }, "아직 수집된 데이터가 없어요")); return; }
+    if (!labels.length) { canvas.parentElement.replaceWith(empty("아직 수집된 데이터가 없어요")); return; }
     new Chart(canvas, {
       type: "line",
       data: {
@@ -108,24 +154,42 @@
                    borderColor: c, backgroundColor: c, tension: 0.25, pointRadius: 2 };
         }),
       },
-      options: {
-        maintainAspectRatio: false, interaction: { mode: "index", intersect: false },
-        scales: { y: { ticks: { callback: fmt } } },
-        plugins: { tooltip: { callbacks: { label: (c) => `${c.dataset.label}: ${fmt(c.parsed.y)}` } } },
-      },
+      options: { maintainAspectRatio: false, interaction: { mode: "index", intersect: false },
+                 scales: { y: { ticks: { callback: fmt } } }, plugins: { tooltip } },
     });
   }
-  lineChart("mvChart", data.mvs);
-  lineChart("accountsChart", data.accounts);
 
-  if (data.fancam.length) {
-    $("fancamBox").style.height = `${60 + data.fancam.length * 32}px`;
+  function dailyChart(id, seriesList) {
+    const canvas = $(id);
+    const diffs = seriesList.map((s) => {
+      const out = {};
+      for (let i = 1; i < s.points.length; i++) out[s.points[i][0]] = s.points[i][1] - s.points[i - 1][1];
+      return { name: s.title, out };
+    });
+    const labels = [...new Set(diffs.flatMap((d) => Object.keys(d.out)))].sort();
+    if (!labels.length) { canvas.parentElement.replaceWith(empty("이틀 이상 수집되면 표시돼요")); return; }
+    new Chart(canvas, {
+      type: "bar",
+      data: { labels, datasets: diffs.map((d, i) => ({ label: d.name, data: labels.map((l) => d.out[l] ?? null),
+                                                         backgroundColor: palette[i % palette.length], borderRadius: 4 })) },
+      options: { maintainAspectRatio: false, interaction: { mode: "index", intersect: false },
+                 scales: { x: { stacked: true }, y: { stacked: true, ticks: { callback: fmt } } }, plugins: { tooltip } },
+    });
+  }
+
+  drawers.overview = () => lineChart("accountsChart", data.accounts);
+  drawers.mv = () => { lineChart("mvChart", data.mvs); dailyChart("mvDailyChart", data.mvs); };
+  drawers.members = () => {
+    const rows = data.members.filter((m) => m.fancam_count).sort((a, b) => b.fancam_views - a.fancam_views);
+    if (!rows.length) { $("fancamBox").replaceWith(empty("아직 수집된 직캠이 없어요")); return; }
+    $("fancamBox").style.height = `${60 + rows.length * 32}px`;
     new Chart($("fancamChart"), {
       type: "bar",
-      data: { labels: data.fancam.map((r) => r.member),
-              datasets: [{ data: data.fancam.map((r) => r.views), backgroundColor: palette[0], borderRadius: 6 }] },
-      options: { indexAxis: "y", maintainAspectRatio: false, plugins: { legend: { display: false } },
+      data: { labels: rows.map((r) => r.name), datasets: [{ data: rows.map((r) => r.fancam_views), backgroundColor: palette[0], borderRadius: 6 }] },
+      options: { indexAxis: "y", maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip },
                  scales: { x: { ticks: { callback: fmt } } } },
     });
-  }
+  };
+
+  showTab();
 })();
