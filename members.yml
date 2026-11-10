@@ -13,6 +13,15 @@
 #
 # 출처: 나무위키 각 멤버 문서와 'A2O Rookies' 인원 변천사 (2026-11-10 기준, 요약), kpopbio.com
 #       틀린 게 있으면 고쳐주세요
+# 그룹 공식 채널 (멤버 탭 상단에 표시). 멤버 개인 공식 SNS는 아직 없음
+group_links:
+  - { label: 공식 홈페이지, url: "https://a2osoul.world" }
+  - { label: 인스타그램 @a2o.soul, url: "https://www.instagram.com/a2o.soul" }
+  - { label: 유튜브 A2O SOUL, url: "https://www.youtube.com/@A2OSOUL" }
+  - { label: 유튜브 A2O WORLD, url: "https://www.youtube.com/@A2OWORLD" }
+  - { label: 플러스챗, url: "https://artist.mnetplus.world/main/stg/a2osoul" }
+  - { label: A2O엔터테인먼트 아티스트 페이지, url: "https://www.a2oentertainment.world/artists/a2o-soul" }
+
 members:
   - name: MOON
     ko: 문
