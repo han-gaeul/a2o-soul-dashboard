@@ -134,3 +134,11 @@ dialog::backdrop { background: rgba(0, 0, 0, .5); }
 .pinfo .c { font-size: 12px; font-weight: 400; color: var(--muted); margin-left: 6px; }
 .pinfo .s { font-size: 12px; color: var(--muted); margin-top: 2px; }
 .pinfo .more-link { color: var(--accent); font-weight: 600; margin-top: 6px; }
+
+/* 새 영상 */
+.thumb .new { position: absolute; left: 6px; top: 6px; font-size: 11px; font-weight: 800; letter-spacing: .03em;
+              color: #fff; background: #ef3b5d; padding: 2px 7px; border-radius: 6px; }
+.video.is-new img { box-shadow: 0 0 0 2px #ef3b5d; }
+.when-new { color: #ef3b5d; font-weight: 700; }
+.new-count { margin-left: 8px; font-size: 12px; font-weight: 800; color: #fff; background: #ef3b5d;
+             padding: 2px 8px; border-radius: 999px; vertical-align: 2px; }

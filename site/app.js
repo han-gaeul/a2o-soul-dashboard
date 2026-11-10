@@ -78,19 +78,35 @@
   // ---------- 영상 카드 ----------
   const kstDay = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" });
   const ymd = (iso) => (iso ? kstDay.format(new Date(iso)).replaceAll("-", ".") : "");
+  // 업로드 24시간 이내 = NEW, 7일 이내는 'N시간 전/N일 전'
+  const NEW_HOURS = 24;
+  const ageHours = (iso) => (iso ? (Date.now() - Date.parse(iso)) / 3600000 : Infinity);
+  const isNew = (v) => ageHours(v.published_at) <= NEW_HOURS;
+  function when(iso) {
+    const h = ageHours(iso);
+    if (h < 1) return "방금 전";
+    if (h < 24) return `${Math.floor(h)}시간 전`;
+    if (h < 24 * 7) return `${Math.floor(h / 24)}일 전`;
+    return ymd(iso);
+  }
   function videoCard(v, chipText, ...extra) {
-    return el("a", { class: "video", href: ytUrl(v.id), target: "_blank", rel: "noopener" },
+    const fresh = isNew(v);
+    return el("a", { class: `video${fresh ? " is-new" : ""}`, href: ytUrl(v.id), target: "_blank", rel: "noopener" },
       el("div", { class: "thumb" },
         el("img", { src: `https://i.ytimg.com/vi/${encodeURIComponent(v.id)}/mqdefault.jpg`, alt: "", loading: "lazy" }),
+        fresh ? el("span", { class: "new" }, "NEW") : null,
         v.short ? el("span", { class: "badge" }, "쇼츠") : null),
       el("div", { class: "t" }, v.title),
-      el("div", { class: "m" }, chipText ? el("span", { class: "chip" }, chipText) : null, ymd(v.published_at),
+      el("div", { class: "m" }, chipText ? el("span", { class: "chip" }, chipText) : null,
+        el("span", { title: ymd(v.published_at), class: fresh ? "when-new" : "" }, when(v.published_at)),
         v.channel ? ` · ${v.channel}` : null),
       el("div", { class: "m" }, `조회수 ${fmt(v.views)}`, v.delta ? " · " : null, deltaSpan(v.delta)),
       ...extra,
     );
   }
 
+  const newCount = data.videos.filter(isNew).length;
+  if (newCount) $("recentHead").append(el("span", { class: "new-count" }, `NEW ${newCount}`));
   if (data.recent.length) {
     for (const v of data.recent) $("recent").append(videoCard(v, v.member || data.categories[v.category] || v.category));
   } else {
