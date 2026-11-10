@@ -1,67 +1,58 @@
 # A2O SOUL Tracker
 
-A2O SOUL 유튜브·인스타 공식 지표를 매일 수집해 추이를 보여주는 팬 대시보드.
+A2O SOUL 공식 유튜브 지표를 하루 2번 모아 보여주는 비공식 팬메이드 대시보드.
+GitHub Actions가 수집하고 GitHub Pages로 배포합니다. 서버 없음.
 
-## 로컬 실행
+## 처음 한 번 설정
+
+1. **Settings → Secrets and variables → Actions → New repository secret**
+   - `YOUTUBE_API_KEY` (필수)
+   - `IG_USER_ID`, `IG_ACCESS_TOKEN` (선택 — 인스타 팔로워 수집용)
+2. **Settings → Pages → Build and deployment → Source: GitHub Actions**
+3. **Actions → Update dashboard → Run workflow** 로 첫 수집
+
+이후로는 KST 0시·12시경 자동 수집 후 배포됩니다.
+
+## 추적 대상 관리 — `targets.yml`
+
+- 공식 채널 업로드는 자동 등록. 공용 채널(@A2OWORLD)은 `filter: soul`로 SOUL 관련 영상만
+- 자동 분류: 60초 이하 → 콘텐츠(쇼츠), 제목에 MV/M/V/Music Video → MV, 티저·나머지 → 콘텐츠
+- 분류가 틀렸거나 직캠을 추가하려면 `videos:`에 영상 ID로 적기
+
+```yaml
+videos:
+  - id: XXXXXXXXXXX      # 쇼츠인데 MV로 잡힌 영상
+    category: content
+  - id: YYYYYYYYYYY      # 음방 직캠
+    category: fancam
+    member: MOON
+  - id: ZZZZZZZZZZZ      # 빼고 싶은 영상
+    active: false
+```
+
+GitHub 웹에서 이 파일을 편집해 커밋하면 1~2분 뒤 사이트에 반영됩니다(수집 없이 다시 빌드).
+새로 추가한 직캠의 조회수는 다음 자동 수집 때부터 잡혀요. 바로 보고 싶으면 Run workflow.
+
+## 로컬에서 돌려보기
 
 ```bash
-python -m venv .venv && source .venv/bin/activate
+python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env        # 키 채우기
-python manage.py migrate
-python manage.py createsuperuser
-python manage.py runserver  # http://127.0.0.1:8000
+YOUTUBE_API_KEY=키 python collector/collect.py
+python -m http.server 8000
 ```
 
-## 추적 대상 등록
-
-```bash
-# 공식 유튜브 채널 — 등록해두면 collect 때 업로드 영상(MV·티저·콘텐츠)을 자동 등록
-python manage.py track channel UCAdLPETtxpZeRVqsq_QTneA   # @A2OSOUL
-# 소속사 공용 채널 — 그룹명이나 멤버 이름(대문자)이 제목에 있는 영상만 등록 (구독자 KPI에서는 제외)
-python manage.py track channel UCn-SYb1TUz-1itK_uz4imUA --filter soul   # @A2OWORLD
-# @핸들/URL도 가능 (API 키 필요)
-python manage.py track channel https://www.youtube.com/@A2OSOUL
-
-# 공식 인스타
-python manage.py track ig a2o.soul
-
-# MV (URL 그대로 넣어도 됨)
-python manage.py track video https://youtu.be/XXXXXXXXXXX --category mv
-
-# 멤버 직캠
-python manage.py track video https://youtu.be/YYYYYYYYYYY --category fancam --member MOON
-```
-
-공식 채널 영상은 제목으로 분류를 추정해요(`MV`/`M/V` → mv, 티저 등 → content). 틀리면 `/admin`에서 바꾸면 되고, 직캠은 음방 채널 영상이라 `track`으로 직접 등록합니다. 영상 제목·업로드일은 첫 수집 때 자동으로 채워집니다. `/admin`에서도 추가·수정 가능.
-
-## 수집
-
-```bash
-python manage.py collect
-```
-
-같은 날 여러 번 돌려도 그래프는 날짜별 마지막 값만 씁니다.
-
-## API 준비
-
-- **YouTube**: Google Cloud에서 YouTube Data API v3 활성화 → API 키 발급. 일일 기본 쿼터 10,000유닛, 이 앱은 영상 50개당 1유닛이라 넉넉함.
-- **Instagram**: Meta 개발자 앱(개인용) + 본인 IG 비즈니스/크리에이터 계정 연결 → `IG_USER_ID`, 장기 액세스 토큰. Business Discovery로 @a2o.soul 팔로워 조회.
-
-## Railway 배포
-
-1. 레포 연결 → Postgres 플러그인 추가 (`DATABASE_URL` 자동 주입)
-2. 환경변수: `DJANGO_SECRET_KEY`, `DJANGO_DEBUG=0`, `DJANGO_ALLOWED_HOSTS`, `DJANGO_CSRF_TRUSTED_ORIGINS`, API 키들
-3. 수집용 Cron 서비스를 같은 레포로 하나 더 만들고 Start Command `python manage.py collect`, 스케줄 예: `0 3,15 * * *` (UTC 기준 = KST 0시·12시)
+브라우저에서 `http://127.0.0.1:8000/site/` (파일을 직접 열면 데이터를 못 불러와요).
+로컬 수집 결과(`data/`)는 커밋하지 말고 버리세요: `git checkout data`
 
 ## 구조
 
 ```
-config/                 Django 설정
-tracker/
-  models.py             Target(추적 대상), Snapshot(시점별 지표)
-  collectors/           youtube.py, instagram.py
-  management/commands/  collect.py(수집), track.py(대상 등록)
-  views.py              대시보드 집계
-  templates/tracker/    dashboard.html (Chart.js)
+targets.yml              추적 대상·분류 설정
+collector/collect.py     수집(--build: 집계만)
+collector/youtube.py     YouTube Data API
+collector/instagram.py   Instagram Business Discovery
+data/                    registry.json, history.json, dashboard.json (Actions가 커밋)
+site/                    정적 대시보드 (index.html, app.js, style.css)
+.github/workflows/       수집·배포 워크플로
 ```
