@@ -19,7 +19,10 @@ channels:
     filter: soul
     kpi: false
   # 음방 채널 — 직캠·무대 자동 수집
-  - id: UCqJ3rYYs-n5blu6JxpciQjA   # Mnet K-POP (MPD직캠, 엠카)
+  - id: UCTQVIXvcHrR9jYoJ6qaBAow   # M2 (MPD직캠)
+    filter: group
+    kpi: false
+  - id: UCqJ3rYYs-n5blu6JxpciQjA   # Mnet K-POP (엠카운트다운)
     filter: group
     kpi: false
   - id: UCeLPm9yH_a_QH8n6445G-Ow   # KBS Kpop (뮤직뱅크)
