@@ -10,6 +10,11 @@
 # 프로필 (멤버 팝업에 표시)
 #   position, birth_year, nationality, nicknames, career(데뷔 전 경력), notes(여담)
 #   미성년 멤버가 많아 활동 관련 정보만 — 본명·학교·가족·거주지·신체정보·출처 없는 소문은 넣지 않기
+#   photo: site/img/members/ 에 올린 사진 파일 경로 (예: img/members/moon.jpg) → 멤버 카드 원형 아이콘·프로필에 표시
+#          사용 권한이 있는 이미지만. 없으면 이니셜 아이콘
+#   instagram_posts: 공식 계정(@a2o.soul 등) 인스타그램 게시물 URL 목록 → 프로필 팝업에 인스타그램 임베드로 표시
+#     예) instagram_posts: ["https://www.instagram.com/p/XXXXXXXXXXX/"]
+#     게시물 → ⋯ → 링크 복사로 얻은 주소. 원본이 삭제되면 임베드도 같이 사라짐
 #
 # 출처: 나무위키 각 멤버 문서와 'A2O Rookies' 인원 변천사 (2026-11-10 기준, 요약), kpopbio.com
 #       틀린 게 있으면 고쳐주세요
@@ -21,6 +26,10 @@ group_links:
   - { label: 유튜브 A2O WORLD, url: "https://www.youtube.com/@A2OWORLD" }
   - { label: 플러스챗, url: "https://artist.mnetplus.world/main/stg/a2osoul" }
   - { label: A2O엔터테인먼트 아티스트 페이지, url: "https://www.a2oentertainment.world/artists/a2o-soul" }
+
+# 그룹 공식 게시물 (멤버 탭 '공식 게시물'에 인스타그램 임베드로 표시). 단체 사진 게시물은 여기에
+#   예) - "https://www.instagram.com/p/XXXXXXXXXXX/"
+group_posts: []
 
 members:
   - name: MOON

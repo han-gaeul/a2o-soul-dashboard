@@ -128,9 +128,24 @@ dialog::backdrop { background: rgba(0, 0, 0, .5); }
          border: 1px solid var(--line); border-radius: 12px; padding: 12px; }
 .pcard:hover { border-color: var(--accent); }
 .pcard:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.avatar { flex: none; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center;
-          background: var(--chip); color: var(--accent); font-weight: 800; font-size: 18px; }
+.avatar { flex: none; width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; overflow: hidden;
+          background: var(--chip); color: var(--accent); font-weight: 800; font-size: 20px; }
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+.pf-photo { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 12px; }
 .pinfo .n { font-weight: 800; font-size: 15px; }
 .pinfo .c { font-size: 12px; font-weight: 400; color: var(--muted); margin-left: 6px; }
 .pinfo .s { font-size: 12px; color: var(--muted); margin-top: 2px; }
 .pinfo .more-link { color: var(--accent); font-weight: 600; margin-top: 6px; }
+
+/* 새 영상 */
+.thumb .new { position: absolute; left: 6px; top: 6px; font-size: 11px; font-weight: 800; letter-spacing: .03em;
+              color: #fff; background: #ef3b5d; padding: 2px 7px; border-radius: 6px; }
+.video.is-new img { box-shadow: 0 0 0 2px #ef3b5d; }
+.when-new { color: #ef3b5d; font-weight: 700; }
+.new-count { margin-left: 8px; font-size: 12px; font-weight: 800; color: #fff; background: #ef3b5d;
+             padding: 2px 8px; border-radius: 999px; vertical-align: 2px; }
+
+/* 인스타그램 임베드 */
+.ig-row { display: flex; gap: 12px; overflow-x: auto; margin-bottom: 14px; }
+.ig-embed { flex: none; width: 326px; max-width: 100%; height: 480px; border: 1px solid var(--line); border-radius: 12px;
+            background: #fff; }

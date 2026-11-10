@@ -78,19 +78,35 @@
   // ---------- 영상 카드 ----------
   const kstDay = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" });
   const ymd = (iso) => (iso ? kstDay.format(new Date(iso)).replaceAll("-", ".") : "");
+  // 업로드 3일(72시간) 이내 = NEW, 7일 이내는 'N시간 전/N일 전'
+  const NEW_HOURS = 72;
+  const ageHours = (iso) => (iso ? (Date.now() - Date.parse(iso)) / 3600000 : Infinity);
+  const isNew = (v) => ageHours(v.published_at) <= NEW_HOURS;
+  function when(iso) {
+    const h = ageHours(iso);
+    if (h < 1) return "방금 전";
+    if (h < 24) return `${Math.floor(h)}시간 전`;
+    if (h < 24 * 7) return `${Math.floor(h / 24)}일 전`;
+    return ymd(iso);
+  }
   function videoCard(v, chipText, ...extra) {
-    return el("a", { class: "video", href: ytUrl(v.id), target: "_blank", rel: "noopener" },
+    const fresh = isNew(v);
+    return el("a", { class: `video${fresh ? " is-new" : ""}`, href: ytUrl(v.id), target: "_blank", rel: "noopener" },
       el("div", { class: "thumb" },
         el("img", { src: `https://i.ytimg.com/vi/${encodeURIComponent(v.id)}/mqdefault.jpg`, alt: "", loading: "lazy" }),
+        fresh ? el("span", { class: "new" }, "NEW") : null,
         v.short ? el("span", { class: "badge" }, "쇼츠") : null),
       el("div", { class: "t" }, v.title),
-      el("div", { class: "m" }, chipText ? el("span", { class: "chip" }, chipText) : null, ymd(v.published_at),
+      el("div", { class: "m" }, chipText ? el("span", { class: "chip" }, chipText) : null,
+        el("span", { title: ymd(v.published_at), class: fresh ? "when-new" : "" }, when(v.published_at)),
         v.channel ? ` · ${v.channel}` : null),
       el("div", { class: "m" }, `조회수 ${fmt(v.views)}`, v.delta ? " · " : null, deltaSpan(v.delta)),
       ...extra,
     );
   }
 
+  const newCount = data.videos.filter(isNew).length;
+  if (newCount) $("recentHead").append(el("span", { class: "new-count" }, `NEW ${newCount}`));
   if (data.recent.length) {
     for (const v of data.recent) $("recent").append(videoCard(v, v.member || data.categories[v.category] || v.category));
   } else {
@@ -112,12 +128,24 @@
   const dlg = $("memberDialog");
   $("dlgClose").addEventListener("click", () => dlg.close());
   dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); }); // 바깥 클릭으로 닫기
+  // 인스타그램 공식 임베드 (instagram.com/p|reel/코드 형식만 허용)
+  function igEmbeds(urls) {
+    return (urls || []).map((u) => /instagram\.com\/(p|reel)\/([\w-]+)/.exec(u)).filter(Boolean)
+      .map(([, kind, code]) => el("iframe", {
+        class: "ig-embed", src: `https://www.instagram.com/${kind}/${code}/embed`, loading: "lazy",
+        title: "Instagram 게시물", allowtransparency: "true", scrolling: "no", referrerpolicy: "strict-origin-when-cross-origin",
+      }));
+  }
+
   function profile(m) {
     const facts = [m.ko, m.position, m.birth_year ? `${m.birth_year}년생` : "", m.nationality].filter(Boolean).join(" · ");
     const list = (label, items) => (items.length
       ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, label), el("ul", {}, ...items.map((x) => el("li", {}, x))))
       : null);
+    const embeds = igEmbeds(m.instagram_posts);
     return el("section", { class: "dlg-sec profile" },
+      m.photo ? el("img", { class: "pf-photo", src: m.photo, alt: m.name }) : null,
+      embeds.length ? el("div", { class: "ig-row" }, ...embeds) : null,
       el("div", { class: "pf-facts" }, facts),
       m.nicknames.length ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, "별명"), el("div", {}, m.nicknames.join(", "))) : null,
       list("데뷔 전", m.career),
@@ -144,9 +172,12 @@
   // 멤버 탭: 공식 채널 + 프로필 카드
   for (const l of data.group_links || []) $("groupLinks").append(ext(l.url, l.label, " ↗"));
   if (!(data.group_links || []).length) $("groupLinks").closest("section").remove();
+  const gp = igEmbeds(data.group_posts);
+  if (gp.length) $("groupPosts").append(...gp); else $("groupPostsSec").remove();
   for (const m of data.members) {
     const card = el("button", { class: "pcard", type: "button" },
-      el("div", { class: "avatar", "aria-hidden": "true" }, m.ko ? m.ko[0] : m.name[0]),
+      el("div", { class: "avatar", "aria-hidden": "true" },
+        m.photo ? el("img", { src: m.photo, alt: "", loading: "lazy" }) : (m.ko ? m.ko[0] : m.name[0])),
       el("div", { class: "pinfo" },
         el("div", { class: "n" }, m.name, el("span", { class: "c" }, m.ko)),
         el("div", { class: "s" }, [m.position, m.birth_year ? `${m.birth_year}년생` : "", m.nationality].filter(Boolean).join(" · ")),
