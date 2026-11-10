@@ -10,6 +10,9 @@
 # 프로필 (멤버 팝업에 표시)
 #   position, birth_year, nationality, nicknames, career(데뷔 전 경력), notes(여담)
 #   미성년 멤버가 많아 활동 관련 정보만 — 본명·학교·가족·거주지·신체정보·출처 없는 소문은 넣지 않기
+#   instagram_posts: 공식 계정(@a2o.soul 등) 인스타그램 게시물 URL 목록 → 프로필 팝업에 인스타그램 임베드로 표시
+#     예) instagram_posts: ["https://www.instagram.com/p/XXXXXXXXXXX/"]
+#     게시물 → ⋯ → 링크 복사로 얻은 주소. 원본이 삭제되면 임베드도 같이 사라짐
 #
 # 출처: 나무위키 각 멤버 문서와 'A2O Rookies' 인원 변천사 (2026-11-10 기준, 요약), kpopbio.com
 #       틀린 게 있으면 고쳐주세요

@@ -142,3 +142,8 @@ dialog::backdrop { background: rgba(0, 0, 0, .5); }
 .when-new { color: #ef3b5d; font-weight: 700; }
 .new-count { margin-left: 8px; font-size: 12px; font-weight: 800; color: #fff; background: #ef3b5d;
              padding: 2px 8px; border-radius: 999px; vertical-align: 2px; }
+
+/* 인스타그램 임베드 */
+.ig-row { display: flex; gap: 12px; overflow-x: auto; margin-bottom: 14px; }
+.ig-embed { flex: none; width: 326px; max-width: 100%; height: 480px; border: 1px solid var(--line); border-radius: 12px;
+            background: #fff; }

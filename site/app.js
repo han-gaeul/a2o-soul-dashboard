@@ -133,7 +133,14 @@
     const list = (label, items) => (items.length
       ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, label), el("ul", {}, ...items.map((x) => el("li", {}, x))))
       : null);
+    // 인스타그램 공식 임베드 (instagram.com/p|reel/코드 형식만 허용)
+    const embeds = (m.instagram_posts || []).map((u) => /instagram\.com\/(p|reel)\/([\w-]+)/.exec(u)).filter(Boolean)
+      .map(([, kind, code]) => el("iframe", {
+        class: "ig-embed", src: `https://www.instagram.com/${kind}/${code}/embed`, loading: "lazy",
+        title: "Instagram 게시물", allowtransparency: "true", scrolling: "no", referrerpolicy: "strict-origin-when-cross-origin",
+      }));
     return el("section", { class: "dlg-sec profile" },
+      embeds.length ? el("div", { class: "ig-row" }, ...embeds) : null,
       el("div", { class: "pf-facts" }, facts),
       m.nicknames.length ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, "별명"), el("div", {}, m.nicknames.join(", "))) : null,
       list("데뷔 전", m.career),

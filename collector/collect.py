@@ -458,6 +458,7 @@ def build(cfg):
             "nicknames": m.get("nicknames") or [],
             "career": m.get("career") or [],
             "notes": m.get("notes") or [],
+            "instagram_posts": [str(u) for u in (m.get("instagram_posts") or [])],
             "fancam_count": len(mine),
             "fancam_views": sum(v["views"] or 0 for v in mine),
             "fancam_delta": sum(v["delta"] or 0 for v in mine) or None,
