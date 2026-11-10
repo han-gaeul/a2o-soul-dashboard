@@ -22,7 +22,7 @@ channels:
   - id: UCTQVIXvcHrR9jYoJ6qaBAow   # M2 (MPD직캠)
     filter: group
     kpi: false
-  - id: UCqJ3rYYs-n5blu6JxpciQjA   # Mnet K-POP (엠카운트다운)
+  - id: UCbD8EppRX3ZwJSou-TVo90A   # Mnet K-POP (엠카운트다운)
     filter: group
     kpi: false
   - id: UCeLPm9yH_a_QH8n6445G-Ow   # KBS Kpop (뮤직뱅크)
@@ -35,6 +35,10 @@ channels:
     filter: group
     kpi: false
   - handle: ALLTHEKPOP             # ALL THE K-POP (쇼챔피언)
+    filter: group
+    kpi: false
+  # 음원 유통사
+  - id: UC_pwIXKXNm5KGhdEVzmY60A   # STONE MUSIC
     filter: group
     kpi: false
 
