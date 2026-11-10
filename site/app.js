@@ -78,8 +78,8 @@
   // ---------- 영상 카드 ----------
   const kstDay = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" });
   const ymd = (iso) => (iso ? kstDay.format(new Date(iso)).replaceAll("-", ".") : "");
-  // 업로드 24시간 이내 = NEW, 7일 이내는 'N시간 전/N일 전'
-  const NEW_HOURS = 24;
+  // 업로드 3일(72시간) 이내 = NEW, 7일 이내는 'N시간 전/N일 전'
+  const NEW_HOURS = 72;
   const ageHours = (iso) => (iso ? (Date.now() - Date.parse(iso)) / 3600000 : Infinity);
   const isNew = (v) => ageHours(v.published_at) <= NEW_HOURS;
   function when(iso) {
