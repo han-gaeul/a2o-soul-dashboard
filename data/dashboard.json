@@ -16,7 +16,8 @@
   "mv": "MV"
  },
  "debut_date": "2026-10-13",
- "fancam": [],
+ "events": [],
+ "fancams": [],
  "kpis": [
   {
    "delta": null,
@@ -29,6 +30,134 @@
    "label": "MV 총 조회수",
    "sub": "3편",
    "value": 4843616
+  },
+  {
+   "delta": null,
+   "label": "직캠 총 조회수",
+   "sub": "0개",
+   "value": 0
+  }
+ ],
+ "members": [
+  {
+   "fancam_count": 0,
+   "fancam_delta": null,
+   "fancam_views": 0,
+   "name": "MOON",
+   "nationality": "한국",
+   "top": null
+  },
+  {
+   "fancam_count": 0,
+   "fancam_delta": null,
+   "fancam_views": 0,
+   "name": "SORA",
+   "nationality": "일본",
+   "top": null
+  },
+  {
+   "fancam_count": 0,
+   "fancam_delta": null,
+   "fancam_views": 0,
+   "name": "SEOHA",
+   "nationality": "한국",
+   "top": null
+  },
+  {
+   "fancam_count": 0,
+   "fancam_delta": null,
+   "fancam_views": 0,
+   "name": "GAKU",
+   "nationality": "일본",
+   "top": null
+  },
+  {
+   "fancam_count": 0,
+   "fancam_delta": null,
+   "fancam_views": 0,
+   "name": "TEO",
+   "nationality": "중국",
+   "top": null
+  },
+  {
+   "fancam_count": 0,
+   "fancam_delta": null,
+   "fancam_views": 0,
+   "name": "JUNE",
+   "nationality": "중국",
+   "top": null
+  },
+  {
+   "fancam_count": 0,
+   "fancam_delta": null,
+   "fancam_views": 0,
+   "name": "LUCIEN",
+   "nationality": "한국·미국",
+   "top": null
+  },
+  {
+   "fancam_count": 0,
+   "fancam_delta": null,
+   "fancam_views": 0,
+   "name": "HANSUNG",
+   "nationality": "한국",
+   "top": null
+  },
+  {
+   "fancam_count": 0,
+   "fancam_delta": null,
+   "fancam_views": 0,
+   "name": "TAI",
+   "nationality": "중국",
+   "top": null
+  },
+  {
+   "fancam_count": 0,
+   "fancam_delta": null,
+   "fancam_views": 0,
+   "name": "SEE-ONE",
+   "nationality": "한국·일본",
+   "top": null
+  },
+  {
+   "fancam_count": 0,
+   "fancam_delta": null,
+   "fancam_views": 0,
+   "name": "SONO",
+   "nationality": "일본",
+   "top": null
+  },
+  {
+   "fancam_count": 0,
+   "fancam_delta": null,
+   "fancam_views": 0,
+   "name": "ALURE",
+   "nationality": "태국",
+   "top": null
+  },
+  {
+   "fancam_count": 0,
+   "fancam_delta": null,
+   "fancam_views": 0,
+   "name": "ZAI",
+   "nationality": "중국",
+   "top": null
+  },
+  {
+   "fancam_count": 0,
+   "fancam_delta": null,
+   "fancam_views": 0,
+   "name": "AYDEN",
+   "nationality": "중국",
+   "top": null
+  },
+  {
+   "fancam_count": 0,
+   "fancam_delta": null,
+   "fancam_views": 0,
+   "name": "ZET",
+   "nationality": "중국",
+   "top": null
   }
  ],
  "mvs": [
@@ -36,8 +165,8 @@
    "category": "mv",
    "channel": "A2O SOUL",
    "delta": null,
+   "forecast": null,
    "id": "IAURqrShEUQ",
-   "likes": 95222,
    "member": "",
    "points": [
     [
@@ -53,8 +182,8 @@
    "category": "mv",
    "channel": "A2O WORLD",
    "delta": null,
+   "forecast": null,
    "id": "JPJokqIoIJI",
-   "likes": 59159,
    "member": "",
    "points": [
     [
@@ -70,8 +199,8 @@
    "category": "mv",
    "channel": "A2O WORLD",
    "delta": null,
+   "forecast": null,
    "id": "B5Aa4gnnt9I",
-   "likes": 32472,
    "member": "",
    "points": [
     [
