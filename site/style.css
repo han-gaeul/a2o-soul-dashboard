@@ -107,3 +107,12 @@ dialog::backdrop { background: rgba(0, 0, 0, .5); }
 .see-all { font-size: 13px; font-weight: 600; color: var(--accent); }
 .dlg-sec + .dlg-sec { margin-top: 20px; }
 .dlg-sec h3 { font-size: 14px; margin: 0 0 10px; color: var(--muted); }
+
+/* 멤버 프로필 */
+.profile { font-size: 14px; line-height: 1.55; }
+.pf-facts { font-weight: 600; margin-bottom: 10px; }
+.pf-row { display: grid; grid-template-columns: 64px 1fr; gap: 8px; padding: 8px 0; border-top: 1px solid var(--line); }
+.pf-label { color: var(--muted); font-size: 13px; }
+.pf-row ul { margin: 0; padding-left: 18px; }
+.pf-src { color: var(--muted); font-size: 12px; margin-top: 8px; }
+.pf-src a { text-decoration: underline; }

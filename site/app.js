@@ -112,9 +112,23 @@
   const dlg = $("memberDialog");
   $("dlgClose").addEventListener("click", () => dlg.close());
   dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); }); // 바깥 클릭으로 닫기
+  function profile(m) {
+    const facts = [m.ko, m.position, m.birth_year ? `${m.birth_year}년생` : "", m.nationality].filter(Boolean).join(" · ");
+    const list = (label, items) => (items.length
+      ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, label), el("ul", {}, ...items.map((x) => el("li", {}, x))))
+      : null);
+    return el("section", { class: "dlg-sec profile" },
+      el("div", { class: "pf-facts" }, facts),
+      m.nicknames.length ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, "별명"), el("div", {}, m.nicknames.join(", "))) : null,
+      list("데뷔 전", m.career),
+      list("여담", m.notes),
+      el("div", { class: "pf-src" }, "출처: ",
+        ext(`https://namu.wiki/w/${encodeURIComponent(`${m.ko}(A2O SOUL)`)}`, "나무위키"), " 요약"));
+  }
+
   function openMember(m, focus) {
     $("dlgTitle").textContent = m.name;
-    const sections = [];
+    const sections = [profile(m)];
     for (const [key, label, list] of [["fancams", "직캠", m.fancams], ["predebut", "데뷔 전", m.predebut]]) {
       if (!list.length) continue;
       sections.push(el("section", { class: "dlg-sec", id: `dlg-${key}` },
@@ -137,18 +151,14 @@
     if (m.predebut.length) links.push(["predebut", `데뷔 전 ${m.predebut.length}`]);
     const body = [
       thumb,
-      el("div", { class: "n" }, m.name, el("span", { class: "c" }, m.nationality)),
+      el("div", { class: "n" }, m.name, el("span", { class: "c" }, m.position || m.nationality)),
       v ? el("div", { class: "t" }, v.title) : null,
       v ? el("div", { class: "s" }, `${ymd(v.published_at)} · 조회수 ${kr(v.views ?? 0)}`) : null,
-      links.length ? el("div", { class: "s more-link" }, links.map((l) => l[1]).join(" · ") + " 보기 ›") : null,
+      el("div", { class: "s more-link" }, ["프로필", ...links.map((l) => l[1])].join(" · ") + " 보기 ›"),
     ];
-    if (v) {
-      const card = el("button", { class: "member", type: "button" }, ...body);
-      card.addEventListener("click", () => openMember(m));
-      $("members").append(card);
-    } else {
-      $("members").append(el("div", { class: "member" }, ...body));
-    }
+    const card = el("button", { class: "member", type: "button" }, ...body);
+    card.addEventListener("click", () => openMember(m));
+    $("members").append(card);
   }
 
   // ---------- 전체 영상 ----------

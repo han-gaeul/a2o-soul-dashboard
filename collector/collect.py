@@ -449,7 +449,13 @@ def build(cfg):
         mine = [v for v in fancams if v["member"] == m["name"]]
         members.append({
             "name": m["name"],
+            "ko": m.get("ko", ""),
             "nationality": m.get("nationality", ""),
+            "birth_year": m.get("birth_year"),
+            "position": m.get("position") or "",
+            "nicknames": m.get("nicknames") or [],
+            "career": m.get("career") or [],
+            "notes": m.get("notes") or [],
             "fancam_count": len(mine),
             "fancam_views": sum(v["views"] or 0 for v in mine),
             "fancam_delta": sum(v["delta"] or 0 for v in mine) or None,
