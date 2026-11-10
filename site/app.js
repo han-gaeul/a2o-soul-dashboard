@@ -128,18 +128,23 @@
   const dlg = $("memberDialog");
   $("dlgClose").addEventListener("click", () => dlg.close());
   dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); }); // 바깥 클릭으로 닫기
+  // 인스타그램 공식 임베드 (instagram.com/p|reel/코드 형식만 허용)
+  function igEmbeds(urls) {
+    return (urls || []).map((u) => /instagram\.com\/(p|reel)\/([\w-]+)/.exec(u)).filter(Boolean)
+      .map(([, kind, code]) => el("iframe", {
+        class: "ig-embed", src: `https://www.instagram.com/${kind}/${code}/embed`, loading: "lazy",
+        title: "Instagram 게시물", allowtransparency: "true", scrolling: "no", referrerpolicy: "strict-origin-when-cross-origin",
+      }));
+  }
+
   function profile(m) {
     const facts = [m.ko, m.position, m.birth_year ? `${m.birth_year}년생` : "", m.nationality].filter(Boolean).join(" · ");
     const list = (label, items) => (items.length
       ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, label), el("ul", {}, ...items.map((x) => el("li", {}, x))))
       : null);
-    // 인스타그램 공식 임베드 (instagram.com/p|reel/코드 형식만 허용)
-    const embeds = (m.instagram_posts || []).map((u) => /instagram\.com\/(p|reel)\/([\w-]+)/.exec(u)).filter(Boolean)
-      .map(([, kind, code]) => el("iframe", {
-        class: "ig-embed", src: `https://www.instagram.com/${kind}/${code}/embed`, loading: "lazy",
-        title: "Instagram 게시물", allowtransparency: "true", scrolling: "no", referrerpolicy: "strict-origin-when-cross-origin",
-      }));
+    const embeds = igEmbeds(m.instagram_posts);
     return el("section", { class: "dlg-sec profile" },
+      m.photo ? el("img", { class: "pf-photo", src: m.photo, alt: m.name }) : null,
       embeds.length ? el("div", { class: "ig-row" }, ...embeds) : null,
       el("div", { class: "pf-facts" }, facts),
       m.nicknames.length ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, "별명"), el("div", {}, m.nicknames.join(", "))) : null,
@@ -167,9 +172,12 @@
   // 멤버 탭: 공식 채널 + 프로필 카드
   for (const l of data.group_links || []) $("groupLinks").append(ext(l.url, l.label, " ↗"));
   if (!(data.group_links || []).length) $("groupLinks").closest("section").remove();
+  const gp = igEmbeds(data.group_posts);
+  if (gp.length) $("groupPosts").append(...gp); else $("groupPostsSec").remove();
   for (const m of data.members) {
     const card = el("button", { class: "pcard", type: "button" },
-      el("div", { class: "avatar", "aria-hidden": "true" }, m.ko ? m.ko[0] : m.name[0]),
+      el("div", { class: "avatar", "aria-hidden": "true" },
+        m.photo ? el("img", { src: m.photo, alt: "", loading: "lazy" }) : (m.ko ? m.ko[0] : m.name[0])),
       el("div", { class: "pinfo" },
         el("div", { class: "n" }, m.name, el("span", { class: "c" }, m.ko)),
         el("div", { class: "s" }, [m.position, m.birth_year ? `${m.birth_year}년생` : "", m.nationality].filter(Boolean).join(" · ")),

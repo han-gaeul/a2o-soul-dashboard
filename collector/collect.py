@@ -53,6 +53,7 @@ def load_config():
 
     members_yml = read_yml("members.yml")
     cfg["group_links"] = members_yml.get("group_links") or []
+    cfg["group_posts"] = members_yml.get("group_posts") or []
     members = members_yml.get("members") or []
     cfg["members"] = members
     names = {m["name"] for m in members}
@@ -119,6 +120,14 @@ def is_short(title, duration_s):
     if duration_s is None:
         return False
     return duration_s <= 60 or (duration_s <= 180 and bool(re.search(r"#shorts?\b", title, re.I)))
+
+
+def member_photo(m):
+    """site/img/ 아래 실제로 있는 파일만 사진으로 사용 (외부 URL 불가)."""
+    rel = str(m.get("photo") or "").lstrip("/")
+    if not rel.startswith("img/") or ".." in rel:
+        return ""
+    return rel if (ROOT / "site" / rel).is_file() else ""
 
 
 def in_unit(member, video):
@@ -459,6 +468,7 @@ def build(cfg):
             "career": m.get("career") or [],
             "notes": m.get("notes") or [],
             "instagram_posts": [str(u) for u in (m.get("instagram_posts") or [])],
+            "photo": member_photo(m),
             "fancam_count": len(mine),
             "fancam_views": sum(v["views"] or 0 for v in mine),
             "fancam_delta": sum(v["delta"] or 0 for v in mine) or None,
@@ -491,6 +501,7 @@ def build(cfg):
         "mvs": mvs,
         "members": members,
         "group_links": cfg["group_links"],
+        "group_posts": [str(u) for u in cfg.get("group_posts") or []],
         "videos": [{k: v[k] for k in slim} for v in sorted(videos, key=lambda v: v["published_at"] or "", reverse=True)],
         "recent": [{k: v[k] for k in slim} for v in recent],
         "events": sorted((e for e in cfg["events"] if e["date"] >= today),
