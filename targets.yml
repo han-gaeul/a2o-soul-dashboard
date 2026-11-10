@@ -22,7 +22,7 @@ channels:
   - id: UCTQVIXvcHrR9jYoJ6qaBAow   # M2 (MPD직캠)
     filter: group
     kpi: false
-  - id: UCqJ3rYYs-n5blu6JxpciQjA   # Mnet K-POP (엠카운트다운)
+  - id: UCbD8EppRX3ZwJSou-TVo90A   # Mnet K-POP (엠카운트다운)
     filter: group
     kpi: false
   - id: UCeLPm9yH_a_QH8n6445G-Ow   # KBS Kpop (뮤직뱅크)
@@ -37,15 +37,10 @@ channels:
   - handle: ALLTHEKPOP             # ALL THE K-POP (쇼챔피언)
     filter: group
     kpi: false
-
-# 유튜브 검색 — 위 채널 말고 언론·방송사 등에 올라온 영상까지 찾기
-#   제목에 그룹명(A2O SOUL / 에이투오 소울)이 있고, 채널 구독자가 min_subscribers 이상인 영상만 등록 (팬 업로드 제외)
-#   검색은 호출당 100유닛이라 처음 한 번만 넓게 훑고, 이후엔 새 영상만 확인
-search:
-  queries: ["A2O SOUL", "에이투오 소울"]
-  min_subscribers: 100000
-  since: 2026-09-01
-  max_pages: 10
+  # 음원 유통사
+  - id: UC_pwIXKXNm5KGhdEVzmY60A   # STONE MUSIC
+    filter: group
+    kpi: false
 
 # 인스타그램 공식 계정 (IG_USER_ID / IG_ACCESS_TOKEN 시크릿이 있을 때만 수집)
 instagram:

@@ -48,7 +48,6 @@ def load_config():
     cfg["instagram"] = cfg.get("instagram") or []
     cfg["videos"] = cfg.get("videos") or []
     cfg["debut_date"] = str(cfg.get("debut_date") or "")
-    cfg["search"] = cfg.get("search") or {}
 
     members = read_yml("members.yml").get("members") or []
     cfg["members"] = members
@@ -193,42 +192,17 @@ def resolve_video(cfg, registry, vid, overrides):
 
 # ---------- 수집 ----------
 
-def search_videos(cfg, registry, channels, rescan):
-    """검색어별로 새 영상을 찾고, 제목에 그룹명이 있고 구독자 기준을 넘는 채널의 영상만 등록."""
-    sc = cfg["search"]
-    queries = sc.get("queries") or []
-    if not queries:
-        return
-    min_subs = int(sc.get("min_subscribers", 0))
-    pattern = re.compile(GROUP_PATTERN, re.I)
-    state = registry.setdefault("search_scan", {})
-    subs = registry.setdefault("channel_subs", {})  # 검색으로 만난 채널 구독자 수 캐시
-    if rescan:
-        state.clear()
-
-    candidates = []
-    for q in queries:
-        after = state.get(q)
-        after = (datetime.fromisoformat(after.replace("Z", "+00:00")) - timedelta(days=3)) if after \
-            else datetime.fromisoformat(f"{sc.get('since', '2024-01-01')}T00:00:00+00:00")
-        items = youtube.search(q, after.strftime("%Y-%m-%dT%H:%M:%SZ"), max_pages=int(sc.get("max_pages", 10)))
-        newest = max((i["published_at"] for i in items if i["published_at"]), default=None)
-        if newest and newest > state.get(q, ""):
-            state[q] = newest
-        print(f"[검색] '{q}': {len(items)}개 ({after:%Y-%m-%d} 이후)")
-        candidates += [i for i in items if i["id"] not in registry["videos"] and pattern.search(i["title"])]
-
-    unknown = {i["channel_id"] for i in candidates} - set(subs) - set(channels)
-    for cid, d in youtube.fetch_channels(unknown).items():
-        subs[cid] = d["subscribers"] or 0
-    for i in candidates:
-        if i["id"] in registry["videos"]:
-            continue
-        if i["channel_id"] not in channels and subs.get(i["channel_id"], 0) < min_subs:
-            continue
-        registry["videos"][i["id"]] = {"title": i["title"], "published_at": i["published_at"],
-                                       "channel_id": i["channel_id"], "channel_title": i["channel_title"], "source": "search"}
-        print(f"[검색] 새 영상: {i['channel_title']} · {i['title']}")
+def purge_unofficial(cfg, registry, history, channel_ids):
+    """등록 채널 밖의 영상(예전 검색 수집분 등)을 registry·history에서 제거."""
+    keep_ids = {v["id"] for v in cfg["videos"]}
+    drop = [vid for vid, reg in registry["videos"].items()
+            if vid not in keep_ids and reg.get("channel_id") not in channel_ids]
+    for vid in drop:
+        registry["videos"].pop(vid)
+        history.pop(f"yt:{vid}", None)
+    for k in ("search_scan", "channel_subs"):
+        registry.pop(k, None)
+    return len(drop)
 
 
 def collect(cfg, rescan=False):
@@ -303,8 +277,10 @@ def collect(cfg, rescan=False):
     for cid in set(channels) - set(registry["channels"]):
         print(f"[YT] 채널을 찾을 수 없음: {cid}")
 
-    # 유튜브 검색 — 등록 안 된 채널(언론·방송사 등)의 영상까지
-    search_videos(cfg, registry, channels, rescan)
+    # 등록된 공식 채널 영상과 targets.yml에 직접 적은 영상만 유지
+    removed = purge_unofficial(cfg, registry, history, set(channels))
+    if removed:
+        print(f"[정리] 등록 채널이 아닌 영상 {removed}개 삭제")
 
     # 영상 지표
     overrides = {v["id"]: v for v in cfg["videos"]}
@@ -411,10 +387,13 @@ def build(cfg):
         accounts.append({"name": f"인스타 팔로워 · @{u}", "points": pts})
 
     overrides = {v["id"]: v for v in cfg["videos"]}
+    tracked = {channel_id(c) for c in cfg["channels"]}
     videos = []
     for vid, reg in registry["videos"].items():
         ov = overrides.get(vid, {})
         if ov.get("active") is False or "title" not in reg:
+            continue
+        if vid not in overrides and reg.get("channel_id") not in tracked:  # 공식 채널 영상만
             continue
         cat, member = resolve_video(cfg, registry, vid, overrides)
         pts = points(f"yt:{vid}", "views")
