@@ -10,13 +10,19 @@
 # 프로필 (멤버 팝업에 표시)
 #   position, birth_year, nationality, nicknames, career(데뷔 전 경력), notes(여담)
 #   미성년 멤버가 많아 활동 관련 정보만 — 본명·학교·가족·거주지·신체정보·출처 없는 소문은 넣지 않기
+#   birthday: "MM-DD" → 프로필에 표시, 다가오는 일정에 생일 D-day 자동 (30일 전부터)
+#   signature: site/img/ 아래 서명 이미지 경로 (예: img/members/moon-sign.png)
+#   profile_history: 역대 프로필 사진 목록. 항목마다 photo(site/img/ 경로) 또는 instagram(게시물 URL) 중 하나
+#     예) profile_history:
+#           - { label: 데뷔 프로필 (2026.10), photo: img/members/moon-2026-10.jpg }
+#           - { label: "'Dancing in the Dark' 콘셉트", instagram: "https://www.instagram.com/p/XXXX/" }
 #   photo: site/img/members/ 에 올린 사진 파일 경로 (예: img/members/moon.jpg) → 멤버 카드 원형 아이콘·프로필에 표시
 #          사용 권한이 있는 이미지만. 없으면 이니셜 아이콘
 #   instagram_posts: 공식 계정(@a2o.soul 등) 인스타그램 게시물 URL 목록 → 프로필 팝업에 인스타그램 임베드로 표시
 #     예) instagram_posts: ["https://www.instagram.com/p/XXXXXXXXXXX/"]
 #     게시물 → ⋯ → 링크 복사로 얻은 주소. 원본이 삭제되면 임베드도 같이 사라짐
 #
-# 출처: 나무위키 각 멤버 문서와 'A2O Rookies' 인원 변천사 (2026-11-10 기준, 요약), kpopbio.com
+# 출처(생일 포함): 나무위키 각 멤버 문서와 'A2O Rookies' 인원 변천사 (2026-11-10 기준, 요약), kpopbio.com
 #       틀린 게 있으면 고쳐주세요
 # 그룹 공식 채널 (멤버 탭 상단에 표시). 멤버 개인 공식 SNS는 아직 없음
 group_links:
@@ -36,6 +42,7 @@ members:
     ko: 문
     nationality: 한국
     birth_year: 2007
+    birthday: "04-07"
     position: 보컬, 비주얼 센터
     career: [창원 TNS보컬댄스학원 출신, 비공개 연습생으로 데뷔]
     notes: [팀의 맏형으로 동생들을 잘 챙김, 소울메이트로 동갑 멤버 소라를 꼽음]
@@ -44,6 +51,7 @@ members:
     ko: 소라
     nationality: 일본
     birth_year: 2007
+    birthday: "07-30"
     position: 메인댄서
     career:
       - EXPG STUDIO 오사카 출신
@@ -57,6 +65,7 @@ members:
     ko: 서하
     nationality: 한국
     birth_year: 2008
+    birthday: "01-01"
     position: 메인보컬
     career: [경기소년소녀합창단 활동, 비공개 연습생으로 데뷔]
     notes: ["'SUPERSTAR' 고음 파트 담당", 데뷔 쇼케이스 영상 영어 내레이션, 무표정과 웃는 얼굴의 반전 매력]
@@ -65,6 +74,7 @@ members:
     ko: 가쿠
     nationality: 일본
     birth_year: 2009
+    birthday: "09-04"
     position: ""
     career: [URIZIP KPOP ACADEMY 출신, "A2O Rookies LTB(2024.10~) → HTB(2025.2~)", "HTB 'REVOLUTION', 'CHAMPAGNE' 참여"]
     notes: [해산물을 좋아함]
@@ -74,6 +84,7 @@ members:
     ko: 테오
     nationality: 중국
     birth_year: 2009
+    birthday: "07-30"
     position: 메인댄서
     nicknames: [공식 텐션왕]
     career: [중국 댄스 방송 출연, 다수 댄스 대회 수상, "A2O Rookies LTB(2024.10~) → HTB(2025.2~)"]
@@ -84,6 +95,7 @@ members:
     ko: 준
     nationality: 중국
     birth_year: 2009
+    birthday: "11-09"
     position: ""
     aliases: [JUNLIN, 쥔린]
     career: ["A2O Rookies HTB '쥔린(JUNLIN)' (2025.2~)"]
@@ -94,6 +106,7 @@ members:
     ko: 루시엔
     nationality: 한국·미국
     birth_year: 2010
+    birthday: "12-10"
     position: 랩, 댄스
     career: [AJS·REDSTAGE 아카데미 출신, 비공개 연습생으로 데뷔]
     notes: [팀에서 가장 차분한 성격, 네오 소울을 좋아함 (최애 아티스트 에리카 바두)]
@@ -102,6 +115,7 @@ members:
     ko: 한성
     nationality: 한국
     birth_year: 2010
+    birthday: "02-25"
     position: 메인보컬
     nicknames: [토마토]
     career: [POWERVOCAL Star Incubating Center 출신, 비공개 연습생으로 데뷔]
@@ -111,6 +125,7 @@ members:
     ko: 타이
     nationality: 중국
     birth_year: 2011
+    birthday: "08-09"
     position: ""
     career: [SM엔터테인먼트 아역 모델 선발대회 결선 진출, "영화 'The Marked Sheep'(2022) 조연", A2O Rookies LTB (2024.10~)]
     notes: [초등학생 때 밴드를 결성해 싱글 발매, 시티워크를 좋아함]
@@ -120,6 +135,7 @@ members:
     ko: 시원
     nationality: 한국·일본
     birth_year: 2011
+    birthday: "02-10"
     position: 랩, 댄스
     aliases: [SEEONE, SEE ONE]
     career: [키즈모델 활동, 댄스 보컬 아카데미 HIBEAT 출신, 전 JYP엔터테인먼트 연습생]
@@ -129,6 +145,7 @@ members:
     ko: 소노
     nationality: 일본
     birth_year: 2011
+    birthday: "11-05"
     position: 비주얼
     career: [A2O Rookies LTB (2025.8~)]
     notes: [팀의 분위기 메이커, 일본어·한국어·영어·중국어 4개 국어]
@@ -138,6 +155,7 @@ members:
     ko: 알루어
     nationality: 태국
     birth_year: 2011
+    birthday: "07-08"
     position: 보컬
     nicknames: [아기 명창]
     career:
@@ -150,6 +168,7 @@ members:
     ko: 자이
     nationality: 중국
     birth_year: 2012
+    birthday: "01-06"
     position: 올라운더 (보컬·댄스)
     nicknames: [두바이, 지아이]
     aliases: [JIAYI]
@@ -161,6 +180,7 @@ members:
     ko: 에이든
     nationality: 중국
     birth_year: 2012
+    birthday: "03-27"
     position: 보컬
     nicknames: [도입 요정]
     career: [A2O Rookies LTB (2024.10~), "솔로 'Love Is Gone' Zal-Dance 영상(2025.4)"]
@@ -171,6 +191,7 @@ members:
     ko: 제트
     nationality: 중국
     birth_year: 2012
+    birthday: "06-21"
     position: 댄스
     nicknames: [오케스트라 보이]
     aliases: [HANZE, 한저]

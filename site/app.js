@@ -58,7 +58,25 @@
     ));
   }
 
-  const events = (data.events || []).filter((e) => e.date >= todayKst).slice(0, 10);
+  function upcomingBirthdays(days = 30) {
+    const out = [];
+    const today = Date.parse(todayKst);
+    const year = +todayKst.slice(0, 4);
+    for (const m of data.members || []) {
+      if (!/^\d{2}-\d{2}$/.test(m.birthday || "")) continue;
+      for (const y of [year, year + 1]) {
+        const date = `${y}-${m.birthday}`;
+        const diff = Math.round((Date.parse(date) - today) / 86400000);
+        if (diff >= 0 && diff <= days) {
+          out.push({ date, type: "생일", title: `🎂 ${m.name} 생일${diff ? ` D-${diff}` : " D-DAY"}`, member: m.name });
+          break;
+        }
+      }
+    }
+    return out;
+  }
+  const events = [...(data.events || []).filter((e) => e.date >= todayKst), ...upcomingBirthdays()]
+    .sort((a, b) => (a.date + (a.time || "")).localeCompare(b.date + (b.time || ""))).slice(0, 10);
   if (events.length) {
     const wd = ["일", "월", "화", "수", "목", "금", "토"];
     for (const e of events) {
@@ -67,7 +85,14 @@
       const when = el("div", { class: "when" },
         isToday ? el("span", { class: "today" }, "오늘") : el("b", {}, `${d.getUTCMonth() + 1}.${d.getUTCDate()}`),
         ` (${wd[d.getUTCDay()]})`, e.time ? ` ${e.time}` : null);
-      const title = e.url ? ext(e.url, e.title) : el("span", {}, e.title);
+      let title;
+      if (e.member) {
+        title = el("button", { type: "button", class: "linklike" }, e.title);
+        const mem = data.members.find((x) => x.name === e.member);
+        title.addEventListener("click", () => openMember(mem));
+      } else {
+        title = e.url ? ext(e.url, e.title) : el("span", {}, e.title);
+      }
       title.classList.add("what");
       $("events").append(el("li", {}, when, el("div", {}, e.type ? el("span", { class: "chip" }, e.type) : null, title)));
     }
@@ -138,7 +163,8 @@
   }
 
   function profile(m) {
-    const facts = [m.position, m.birth_year ? `${m.birth_year}년생` : "", m.nationality].filter(Boolean).join(" · ");
+    const bday = /^\d{2}-\d{2}$/.test(m.birthday || "") ? `생일 ${+m.birthday.slice(0, 2)}월 ${+m.birthday.slice(3)}일` : "";
+    const facts = [m.position, m.birth_year ? `${m.birth_year}년생` : "", bday, m.nationality].filter(Boolean).join(" · ");
     const list = (label, items) => (items.length
       ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, label), el("ul", {}, ...items.map((x) => el("li", {}, x))))
       : null);
@@ -148,7 +174,13 @@
       el("div", { class: "pf-facts" }, facts),
       m.nicknames.length ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, "별명"), el("div", {}, m.nicknames.join(", "))) : null,
       list("데뷔 전", m.career),
-      list("여담", m.notes));
+      list("여담", m.notes),
+      m.signature ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, "서명"),
+        el("img", { class: "pf-sign", src: m.signature, alt: `${m.name} 서명`, loading: "lazy" })) : null,
+      (m.profile_history || []).length ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, "역대 프로필"),
+        el("div", { class: "pf-history" }, ...m.profile_history.map((h) => el("figure", {},
+          h.photo ? el("img", { src: h.photo, alt: h.label, loading: "lazy" }) : igEmbeds([h.instagram])[0],
+          h.label ? el("figcaption", {}, h.label) : null)))) : null);
   }
 
   const avatar = (m, cls = "avatar") => el("div", { class: cls, "aria-hidden": "true" },
