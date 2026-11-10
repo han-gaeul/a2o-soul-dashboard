@@ -38,15 +38,6 @@ channels:
     filter: group
     kpi: false
 
-# 유튜브 검색 — 위 채널 말고 언론·방송사 등에 올라온 영상까지 찾기
-#   제목에 그룹명(A2O SOUL / 에이투오 소울)이 있고, 채널 구독자가 min_subscribers 이상인 영상만 등록 (팬 업로드 제외)
-#   검색은 호출당 100유닛이라 처음 한 번만 넓게 훑고, 이후엔 새 영상만 확인
-search:
-  queries: ["A2O SOUL", "에이투오 소울"]
-  min_subscribers: 100000
-  since: 2026-09-01
-  max_pages: 10
-
 # 인스타그램 공식 계정 (IG_USER_ID / IG_ACCESS_TOKEN 시크릿이 있을 때만 수집)
 instagram:
   - a2o.soul
