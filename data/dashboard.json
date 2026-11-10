@@ -27,14 +27,14 @@
   {
    "delta": null,
    "label": "MV 총 조회수",
-   "sub": "10편",
-   "value": 5347131
+   "sub": "5편",
+   "value": 5155531
   },
   {
    "delta": null,
    "label": "직캠 총 조회수",
-   "sub": "59개",
-   "value": 2998034
+   "sub": "52개",
+   "value": 2484178
   }
  ],
  "members": [
@@ -303,9 +303,9 @@
    "nationality": "한국"
   },
   {
-   "fancam_count": 7,
+   "fancam_count": 6,
    "fancam_delta": null,
-   "fancam_views": 203149,
+   "fancam_views": 182087,
    "fancams": [
     {
      "channel": "ALL THE K-POP",
@@ -314,14 +314,6 @@
      "published_at": "2026-11-02T09:00:01Z",
      "title": "[쇼챔1분직캠] A2O SOUL TAI의 ＜SUPERSTAR＞♬ #A2OSOUL #TAI #SUPERSTAR",
      "views": 5006
-    },
-    {
-     "channel": "SBSKPOP ZOOM",
-     "delta": null,
-     "id": "Cu8XEunEvF4",
-     "published_at": "2026-10-27T09:30:25Z",
-     "title": "[안방1열 직캠4K] 에이투오 소울 타이 'SUPERSTAR' (A2O SOUL TAI FanCam) @SBS Inkigayo 261025",
-     "views": 21062
     },
     {
      "channel": "KBS Kpop",
@@ -368,9 +360,9 @@
    "nationality": "중국"
   },
   {
-   "fancam_count": 3,
+   "fancam_count": 2,
    "fancam_delta": null,
-   "fancam_views": 28266,
+   "fancam_views": 15715,
    "fancams": [
     {
      "channel": "ALL THE K-POP",
@@ -379,14 +371,6 @@
      "published_at": "2026-11-02T09:00:23Z",
      "title": "[쇼챔1분직캠] A2O SOUL SEE-ONE의 ＜SUPERSTAR＞♬ #A2OSOUL #SEE-ONE #SUPERSTAR",
      "views": 5178
-    },
-    {
-     "channel": "SBSKPOP ZOOM",
-     "delta": null,
-     "id": "S2M_Q0UBw3s",
-     "published_at": "2026-10-27T09:30:25Z",
-     "title": "[안방1열 직캠4K] 에이투오 소울 시원 'SUPERSTAR' (A2O SOUL SEE-ONE FanCam) @SBS Inkigayo 261025",
-     "views": 12551
     },
     {
      "channel": "ALL THE K-POP",
@@ -451,9 +435,9 @@
    "nationality": "태국"
   },
   {
-   "fancam_count": 4,
+   "fancam_count": 3,
    "fancam_delta": null,
-   "fancam_views": 153112,
+   "fancam_views": 114442,
    "fancams": [
     {
      "channel": "ALL THE K-POP",
@@ -462,14 +446,6 @@
      "published_at": "2026-10-30T09:00:32Z",
      "title": "[쇼챔1분직캠] A2O SOUL ZAI의 ＜SUPERSTAR＞♬ #A2OSOUL #ZAI #SUPERSTAR",
      "views": 20018
-    },
-    {
-     "channel": "SBSKPOP ZOOM",
-     "delta": null,
-     "id": "KJOdCWVMx4s",
-     "published_at": "2026-10-27T09:30:09Z",
-     "title": "[안방1열 직캠4K] 에이투오 소울 자이 'SUPERSTAR' (A2O SOUL ZAI FanCam) @SBS Inkigayo 261025",
-     "views": 38670
     },
     {
      "channel": "KBS Kpop",
@@ -492,9 +468,9 @@
    "nationality": "중국"
   },
   {
-   "fancam_count": 5,
+   "fancam_count": 3,
    "fancam_delta": null,
-   "fancam_views": 135275,
+   "fancam_views": 49478,
    "fancams": [
     {
      "channel": "ALL THE K-POP",
@@ -503,14 +479,6 @@
      "published_at": "2026-10-30T09:00:09Z",
      "title": "[쇼챔1분직캠] A2O SOUL AYDEN 의 ＜SUPERSTAR＞♬ #A2OSOUL #AYDEN  #SUPERSTAR",
      "views": 6815
-    },
-    {
-     "channel": "SBSKPOP ZOOM",
-     "delta": null,
-     "id": "wzmMCa4e_vs",
-     "published_at": "2026-10-27T09:30:19Z",
-     "title": "[안방1열 직캠4K] 에이투오 소울 에이든 'SUPERSTAR' (A2O SOUL AYDEN FanCam) @SBS Inkigayo 261025",
-     "views": 22975
     },
     {
      "channel": "M2",
@@ -527,14 +495,6 @@
      "published_at": "2026-10-22T07:58:24Z",
      "title": "[쇼챔직캠 4K] A2O SOUL AYDEN - SUPERSTAR | Show Champion | EP.615 | 261021",
      "views": 18358
-    },
-    {
-     "channel": "K-POPIT 케이팝잇",
-     "delta": null,
-     "id": "JJ9kBUeElQg",
-     "published_at": "2026-10-12T11:44:32Z",
-     "title": "A20 SOUL '에이든' 독무 직캠",
-     "views": 62822
     }
    ],
    "name": "AYDEN",
@@ -585,23 +545,6 @@
  "mvs": [
   {
    "category": "mv",
-   "channel": "サランピTV〈SaranpiTV〉",
-   "delta": null,
-   "forecast": null,
-   "id": "LF8yVoScp7o",
-   "member": "",
-   "points": [
-    [
-     "2026-11-10",
-     15275
-    ]
-   ],
-   "published_at": "2026-11-09T14:43:22Z",
-   "title": "大人は絶対ハマるから見て！！A2O SOUL 'Dancing in the Dark' Official Music Video感想会",
-   "views": 15275
-  },
-  {
-   "category": "mv",
    "channel": "STONE MUSIC",
    "delta": null,
    "forecast": null,
@@ -616,40 +559,6 @@
    "published_at": "2026-11-09T10:00:28Z",
    "title": "A2O SOUL - Dancing in the Dark Official Music Video",
    "views": 71216
-  },
-  {
-   "category": "mv",
-   "channel": "W & R",
-   "delta": null,
-   "forecast": null,
-   "id": "gld6NW1o1YI",
-   "member": "",
-   "points": [
-    [
-     "2026-11-10",
-     2539
-    ]
-   ],
-   "published_at": "2026-11-09T09:48:45Z",
-   "title": "A2O SOUL 'Dancing in the Dark' Official Music Video REACTION",
-   "views": 2539
-  },
-  {
-   "category": "mv",
-   "channel": "KJ AVELINO VLOGS",
-   "delta": null,
-   "forecast": null,
-   "id": "JntdyAU_Cgo",
-   "member": "",
-   "points": [
-    [
-     "2026-11-10",
-     11574
-    ]
-   ],
-   "published_at": "2026-11-09T09:35:57Z",
-   "title": "A2O SOUL 'Dancing in the Dark' Official Music Video | REACTION",
-   "views": 11574
   },
   {
    "category": "mv",
@@ -687,23 +596,6 @@
   },
   {
    "category": "mv",
-   "channel": "Micah's K-Spot",
-   "delta": null,
-   "forecast": null,
-   "id": "CpXLCbihjLE",
-   "member": "",
-   "points": [
-    [
-     "2026-11-10",
-     26746
-    ]
-   ],
-   "published_at": "2026-10-22T19:45:06Z",
-   "title": "A2O SOUL's 'Superstar' Is a Promising Step Forward! | MV Reaction",
-   "views": 26746
-  },
-  {
-   "category": "mv",
    "channel": "STONE MUSIC",
    "delta": null,
    "forecast": null,
@@ -718,23 +610,6 @@
    "published_at": "2026-10-20T03:00:27Z",
    "title": "A2O SOUL - SUPERSTAR Official Music Video",
    "views": 184582
-  },
-  {
-   "category": "mv",
-   "channel": "anthonytoo",
-   "delta": null,
-   "forecast": null,
-   "id": "WoEf4u-s2v8",
-   "member": "",
-   "points": [
-    [
-     "2026-11-10",
-     135466
-    ]
-   ],
-   "published_at": "2026-10-19T03:00:40Z",
-   "title": "A2O SOUL 'SUPERSTAR' Performance & Music Video + A2O LITE 'NEON' Official Video - REACTION",
-   "views": 135466
   },
   {
    "category": "mv",
@@ -756,46 +631,6 @@
  ],
  "recent": [
   {
-   "category": "content",
-   "channel": "KpopRandomcito",
-   "delta": null,
-   "id": "2ETVqvIZ1AE",
-   "member": "",
-   "published_at": "2026-11-09T19:00:02Z",
-   "title": "🇵🇪 A2O SOUL - SUPERSTAR #randomdance 24-10-26",
-   "views": 1968
-  },
-  {
-   "category": "mv",
-   "channel": "サランピTV〈SaranpiTV〉",
-   "delta": null,
-   "id": "LF8yVoScp7o",
-   "member": "",
-   "published_at": "2026-11-09T14:43:22Z",
-   "title": "大人は絶対ハマるから見て！！A2O SOUL 'Dancing in the Dark' Official Music Video感想会",
-   "views": 15275
-  },
-  {
-   "category": "content",
-   "channel": "나만 듣기 아까운 노래",
-   "delta": null,
-   "id": "cuzOfKIlAmQ",
-   "member": "",
-   "published_at": "2026-11-09T11:38:50Z",
-   "title": "드디어 풀린 수만옹 남돌 에투소 신곡🔥[A2O SOUL (에이투오 소울) - Dancing in the Dark]",
-   "views": 11284
-  },
-  {
-   "category": "content",
-   "channel": "Volkan Dağcı",
-   "delta": null,
-   "id": "jDXR-e5iFO8",
-   "member": "",
-   "published_at": "2026-11-09T11:25:33Z",
-   "title": "NCT DREAM 'Boogie Woogie' + CHAERYEONG “Lovesick” + A2O SOUL “Dancing in the Dark” + XLOV | REACTION",
-   "views": 3575
-  },
-  {
    "category": "mv",
    "channel": "STONE MUSIC",
    "delta": null,
@@ -817,26 +652,6 @@
   },
   {
    "category": "mv",
-   "channel": "W & R",
-   "delta": null,
-   "id": "gld6NW1o1YI",
-   "member": "",
-   "published_at": "2026-11-09T09:48:45Z",
-   "title": "A2O SOUL 'Dancing in the Dark' Official Music Video REACTION",
-   "views": 2539
-  },
-  {
-   "category": "mv",
-   "channel": "KJ AVELINO VLOGS",
-   "delta": null,
-   "id": "JntdyAU_Cgo",
-   "member": "",
-   "published_at": "2026-11-09T09:35:57Z",
-   "title": "A2O SOUL 'Dancing in the Dark' Official Music Video | REACTION",
-   "views": 11574
-  },
-  {
-   "category": "mv",
    "channel": "A2O WORLD",
    "delta": null,
    "id": "JPJokqIoIJI",
@@ -854,16 +669,6 @@
    "published_at": "2026-11-09T09:00:13Z",
    "title": "A2O SOUL DEBUT ALBUM [SUPERSTAR] OUT NOW",
    "views": 697532
-  },
-  {
-   "category": "content",
-   "channel": "TheKTwins",
-   "delta": null,
-   "id": "6MkM5yc8EuU",
-   "member": "",
-   "published_at": "2026-11-08T23:15:25Z",
-   "title": "A2O SOUL ‘Dancing in the Dark’ Teaser | THIS IS GOING TO BE AMAZING! | TWINS REACTION",
-   "views": 9930
   },
   {
    "category": "content",
@@ -874,54 +679,80 @@
    "published_at": "2026-11-08T09:00:09Z",
    "title": "A2O SOUL 'Dancing in the Dark' MV Teaser",
    "views": 228793
+  },
+  {
+   "category": "content",
+   "channel": "A2O WORLD",
+   "delta": null,
+   "id": "_UdD3EGVtHI",
+   "member": "",
+   "published_at": "2026-11-08T03:00:16Z",
+   "title": "A2O SOUL ‘Dancing in the Dark’ Teaser",
+   "views": 357313
+  },
+  {
+   "category": "mv",
+   "channel": "A2O WORLD",
+   "delta": null,
+   "id": "B5Aa4gnnt9I",
+   "member": "",
+   "published_at": "2026-11-05T15:00:28Z",
+   "title": "A2O SOUL 'SUPERSTAR' INFINITE Music Video",
+   "views": 655492
+  },
+  {
+   "category": "content",
+   "channel": "A2O SOUL",
+   "delta": null,
+   "id": "GfXhRyw4L8A",
+   "member": "",
+   "published_at": "2026-11-04T09:00:10Z",
+   "title": "A2O SOUL DEBUT ALBUM [SUPERSTAR] Highlight Medley",
+   "views": 92855
+  },
+  {
+   "category": "content",
+   "channel": "A2O SOUL",
+   "delta": null,
+   "id": "3km2rkEASWI",
+   "member": "",
+   "published_at": "2026-11-04T09:00:05Z",
+   "title": "A2O SOUL DEBUT ALBUM [SUPERSTAR] Highlight Medley",
+   "views": 269473
+  },
+  {
+   "category": "content",
+   "channel": "A2O SOUL",
+   "delta": null,
+   "id": "_ibsruGmOS0",
+   "member": "",
+   "published_at": "2026-11-03T05:00:39Z",
+   "title": "Music Bank BEHIND 💫 #A2O #A2OSOUL #SUPERSTAR",
+   "views": 98866
+  },
+  {
+   "category": "content",
+   "channel": "SBSKPOP X INKIGAYO",
+   "delta": null,
+   "id": "GucFEwW7-YI",
+   "member": "",
+   "published_at": "2026-11-02T07:00:32Z",
+   "title": "[안방1열 풀캠4K] 에이투오 소울 'SUPERSTAR' (A2O SOUL FullCam) @SBS Inkigayo 261101",
+   "views": 142185
+  },
+  {
+   "category": "content",
+   "channel": "A2O SOUL",
+   "delta": null,
+   "id": "q3UIafRZ-m0",
+   "member": "",
+   "published_at": "2026-11-01T10:30:25Z",
+   "title": "A2O SOUL 'SUPERSTAR' INFINITE CLIP 3",
+   "views": 37064
   }
  ],
  "updated_at": "2026-11-10T15:17+09:00",
  "videos": [
-  {
-   "category": "content",
-   "channel": "KpopRandomcito",
-   "delta": null,
-   "id": "2ETVqvIZ1AE",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-11-09T19:00:02Z",
-   "title": "🇵🇪 A2O SOUL - SUPERSTAR #randomdance 24-10-26",
-   "views": 1968
-  },
-  {
-   "category": "mv",
-   "channel": "サランピTV〈SaranpiTV〉",
-   "delta": null,
-   "id": "LF8yVoScp7o",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-11-09T14:43:22Z",
-   "title": "大人は絶対ハマるから見て！！A2O SOUL 'Dancing in the Dark' Official Music Video感想会",
-   "views": 15275
-  },
-  {
-   "category": "content",
-   "channel": "나만 듣기 아까운 노래",
-   "delta": null,
-   "id": "cuzOfKIlAmQ",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-11-09T11:38:50Z",
-   "title": "드디어 풀린 수만옹 남돌 에투소 신곡🔥[A2O SOUL (에이투오 소울) - Dancing in the Dark]",
-   "views": 11284
-  },
-  {
-   "category": "content",
-   "channel": "Volkan Dağcı",
-   "delta": null,
-   "id": "jDXR-e5iFO8",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-11-09T11:25:33Z",
-   "title": "NCT DREAM 'Boogie Woogie' + CHAERYEONG “Lovesick” + A2O SOUL “Dancing in the Dark” + XLOV | REACTION",
-   "views": 3575
-  },
   {
    "category": "mv",
    "channel": "STONE MUSIC",
@@ -946,28 +777,6 @@
   },
   {
    "category": "mv",
-   "channel": "W & R",
-   "delta": null,
-   "id": "gld6NW1o1YI",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-11-09T09:48:45Z",
-   "title": "A2O SOUL 'Dancing in the Dark' Official Music Video REACTION",
-   "views": 2539
-  },
-  {
-   "category": "mv",
-   "channel": "KJ AVELINO VLOGS",
-   "delta": null,
-   "id": "JntdyAU_Cgo",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-11-09T09:35:57Z",
-   "title": "A2O SOUL 'Dancing in the Dark' Official Music Video | REACTION",
-   "views": 11574
-  },
-  {
-   "category": "mv",
    "channel": "A2O WORLD",
    "delta": null,
    "id": "JPJokqIoIJI",
@@ -987,17 +796,6 @@
    "published_at": "2026-11-09T09:00:13Z",
    "title": "A2O SOUL DEBUT ALBUM [SUPERSTAR] OUT NOW",
    "views": 697532
-  },
-  {
-   "category": "content",
-   "channel": "TheKTwins",
-   "delta": null,
-   "id": "6MkM5yc8EuU",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-11-08T23:15:25Z",
-   "title": "A2O SOUL ‘Dancing in the Dark’ Teaser | THIS IS GOING TO BE AMAZING! | TWINS REACTION",
-   "views": 9930
   },
   {
    "category": "content",
@@ -1022,61 +820,6 @@
    "views": 357313
   },
   {
-   "category": "content",
-   "channel": "OhioAssassins",
-   "delta": null,
-   "id": "Y6UbDg9Yynk",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-11-07T20:09:53Z",
-   "title": "RAPPERS REACT TO A2O SOUL FOR THE FIRST TIME \"SUPERSTAR\" (SO SMOOTH!)",
-   "views": 9143
-  },
-  {
-   "category": "content",
-   "channel": "디스패치 / Dispatch",
-   "delta": null,
-   "id": "ztJosK-xP3Q",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-11-06T13:30:08Z",
-   "title": "A2O SOUL, how can anyone resist these cuties?!💕│A2O SOUL, 팬들 앞에선 한없이 스윗한 귀요미들🥹#a2osoul #a2o",
-   "views": 8490
-  },
-  {
-   "category": "content",
-   "channel": "디스패치 / Dispatch",
-   "delta": null,
-   "id": "VHPzDdMP1Vw",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-11-06T13:00:09Z",
-   "title": "A2O SOUL, rookies with fearless confidence!⚡│ A2O SOUL, 누구도 막을 수 없는 신인의 패기!💥#a2osoul #에이투오소울 #a2o",
-   "views": 8324
-  },
-  {
-   "category": "content",
-   "channel": "ᴇʟʏx.",
-   "delta": null,
-   "id": "8kjMumEdKPI",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-11-06T02:21:09Z",
-   "title": "our twins a2o soul & a2o lite #a2osoul #a2olite #superstar #neon #inkigayo",
-   "views": 978807
-  },
-  {
-   "category": "content",
-   "channel": "Sonnie",
-   "delta": null,
-   "id": "RHw4Kl1cF1w",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-11-05T16:46:52Z",
-   "title": "A2O SOUL CRITICADOS POR SER DEMASIDO FEOS + PIDEN COREOGRAFO DE A2O LITE HAGA BAILES PARA...",
-   "views": 15235
-  },
-  {
    "category": "mv",
    "channel": "A2O WORLD",
    "delta": null,
@@ -1086,17 +829,6 @@
    "published_at": "2026-11-05T15:00:28Z",
    "title": "A2O SOUL 'SUPERSTAR' INFINITE Music Video",
    "views": 655492
-  },
-  {
-   "category": "content",
-   "channel": "KBS WORLD Latino",
-   "delta": null,
-   "id": "ZG5oadCsJV4",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-11-04T12:30:05Z",
-   "title": "[1HR LOOP🔥] A2O SOUL - SUPERSTAR [Music Bank] | KBS WORLD TV 261030",
-   "views": 20537
   },
   {
    "category": "content",
@@ -1119,39 +851,6 @@
    "published_at": "2026-11-04T09:00:05Z",
    "title": "A2O SOUL DEBUT ALBUM [SUPERSTAR] Highlight Medley",
    "views": 269473
-  },
-  {
-   "category": "content",
-   "channel": "SBSKPOP ZOOM",
-   "delta": null,
-   "id": "HCDJe65FnRg",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-11-04T08:00:27Z",
-   "title": "[페이스캠4K] 에이투오 소울 문 'SUPERSTAR' (A2O SOUL MOON FaceCam) @SBS Inkigayo 261101",
-   "views": 18714
-  },
-  {
-   "category": "content",
-   "channel": "KBS WORLD TV",
-   "delta": null,
-   "id": "Q-QXep-22_M",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-11-03T12:00:17Z",
-   "title": "[🔊8D Bank] A2O SOUL (에이투오소울) - SUPERSTAR | (Includes Paid Promotion)",
-   "views": 22554
-  },
-  {
-   "category": "content",
-   "channel": "KBS WORLD Latino",
-   "delta": null,
-   "id": "yC00JcI5v1s",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-11-03T10:10:32Z",
-   "title": "A2O SOUL - SUPERSTAR [Music Bank] | KBS WORLD TV 261030",
-   "views": 31986
   },
   {
    "category": "fancam",
@@ -1207,17 +906,6 @@
    "published_at": "2026-11-03T05:00:39Z",
    "title": "Music Bank BEHIND 💫 #A2O #A2OSOUL #SUPERSTAR",
    "views": 98866
-  },
-  {
-   "category": "content",
-   "channel": "KOCOWA TV",
-   "delta": null,
-   "id": "TcyKtavEgRE",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-11-02T16:15:16Z",
-   "title": "A2O SOUL - SUPERSTAR | Inkigayo EP1330 | KOCOWA+",
-   "views": 11632
   },
   {
    "category": "fancam",
@@ -1286,17 +974,6 @@
    "views": 240497
   },
   {
-   "category": "content",
-   "channel": "KBS WORLD Latino",
-   "delta": null,
-   "id": "Nk5kGLhuW7Q",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-31T09:40:07Z",
-   "title": "[Ending fairy] A2O SOUL - SUPERSTAR #エーツーオー ソウル #에이투오소울 #SUPERSTAR #Shorts #MusicBank | KBS WORLD TV",
-   "views": 1333
-  },
-  {
    "category": "fancam",
    "channel": "ALL THE K-POP",
    "delta": null,
@@ -1341,17 +1018,6 @@
    "views": 10212
   },
   {
-   "category": "content",
-   "channel": "디스패치 / Dispatch",
-   "delta": null,
-   "id": "JHyZLADNE-4",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-31T03:30:06Z",
-   "title": "A2O SOUL is ready to make some noise⚡│ 에이투오 소울, 존재감 보여줄 준비 완료!🔥#a2osoul #에이투오소울 #a2o",
-   "views": 15877
-  },
-  {
    "category": "fancam",
    "channel": "KBS Kpop",
    "delta": null,
@@ -1375,28 +1041,6 @@
   },
   {
    "category": "content",
-   "channel": "KOCOWA TV",
-   "delta": null,
-   "id": "IcuQlPyfA50",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-30T17:00:26Z",
-   "title": "A2O SOUL - SUPERSTAR | Music Bank EP1311 | KOCOWA+",
-   "views": 13748
-  },
-  {
-   "category": "content",
-   "channel": "Akainote",
-   "delta": null,
-   "id": "94-XV1CI0x4",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-30T14:57:13Z",
-   "title": "SUPERSTAR - A2O, A2O SOUL | Dance cover #akainote",
-   "views": 17370
-  },
-  {
-   "category": "content",
    "channel": "KBS Kpop",
    "delta": null,
    "id": "M1KZ3YW-vJg",
@@ -1405,17 +1049,6 @@
    "published_at": "2026-10-30T12:38:09Z",
    "title": "[뮤뱅 스테디캠 4K] A2O LITE  & A2O SOUL 'Dance Break' 4k Bonus Ver. @뮤직뱅크(Music Bank) 261030",
    "views": 304717
-  },
-  {
-   "category": "content",
-   "channel": "KBS WORLD TV",
-   "delta": null,
-   "id": "LwIvL_X_5rU",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-30T11:30:03Z",
-   "title": "A2O SOUL エーツーオー ソウル 에이투오 소울 - SUPERSTAR [Music Bank] | KBS WORLD TV 261030",
-   "views": 74517
   },
   {
    "category": "content",
@@ -1462,17 +1095,6 @@
    "views": 28769
   },
   {
-   "category": "content",
-   "channel": "MBC WORLD",
-   "delta": null,
-   "id": "z71g-KjDRYU",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-30T09:00:16Z",
-   "title": "A2O SOUL - SUPERSTAR | Show! MusicCore | aired on MBC261024 #A2OSOUL",
-   "views": 42892
-  },
-  {
    "category": "fancam",
    "channel": "ALL THE K-POP",
    "delta": null,
@@ -1485,50 +1107,6 @@
   },
   {
    "category": "content",
-   "channel": "숏피디",
-   "delta": null,
-   "id": "twuwV8xKEiQ",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-30T03:00:32Z",
-   "title": "A2O SOUL 오케스트라 보이 12년생 제트",
-   "views": 28342
-  },
-  {
-   "category": "content",
-   "channel": "3vrblu",
-   "delta": null,
-   "id": "4sm93iCpibg",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-29T14:00:05Z",
-   "title": "A2O SOUL 'SUPERSTAR' Easy Lyrics",
-   "views": 30262
-  },
-  {
-   "category": "content",
-   "channel": "KBS WORLD TV",
-   "delta": null,
-   "id": "PT8_2Symc-k",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-28T13:30:35Z",
-   "title": "A2O SOUL - SUPERSTAR #エーツーオー ソウル #에이투오소울 #SUPERSTAR #Shorts #MusicBank | KBS WORLD TV",
-   "views": 51161
-  },
-  {
-   "category": "content",
-   "channel": "KBS WORLD Latino",
-   "delta": null,
-   "id": "pdnJiY-xlWo",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-28T11:30:10Z",
-   "title": "[1HR LOOP🔥] A2O SOUL - SUPERSTAR [Music Bank] | KBS WORLD TV 261023",
-   "views": 85274
-  },
-  {
-   "category": "content",
    "channel": "A2O SOUL",
    "delta": null,
    "id": "vlNZJRbPSSY",
@@ -1537,61 +1115,6 @@
    "published_at": "2026-10-28T09:00:21Z",
    "title": "A2O SOUL 'SUPERSTAR' INFINITE CLIP 2",
    "views": 39452
-  },
-  {
-   "category": "fancam",
-   "channel": "SBSKPOP ZOOM",
-   "delta": null,
-   "id": "Cu8XEunEvF4",
-   "member": "TAI",
-   "predebut": false,
-   "published_at": "2026-10-27T09:30:25Z",
-   "title": "[안방1열 직캠4K] 에이투오 소울 타이 'SUPERSTAR' (A2O SOUL TAI FanCam) @SBS Inkigayo 261025",
-   "views": 21062
-  },
-  {
-   "category": "fancam",
-   "channel": "SBSKPOP ZOOM",
-   "delta": null,
-   "id": "S2M_Q0UBw3s",
-   "member": "SEE-ONE",
-   "predebut": false,
-   "published_at": "2026-10-27T09:30:25Z",
-   "title": "[안방1열 직캠4K] 에이투오 소울 시원 'SUPERSTAR' (A2O SOUL SEE-ONE FanCam) @SBS Inkigayo 261025",
-   "views": 12551
-  },
-  {
-   "category": "fancam",
-   "channel": "SBSKPOP ZOOM",
-   "delta": null,
-   "id": "wzmMCa4e_vs",
-   "member": "AYDEN",
-   "predebut": false,
-   "published_at": "2026-10-27T09:30:19Z",
-   "title": "[안방1열 직캠4K] 에이투오 소울 에이든 'SUPERSTAR' (A2O SOUL AYDEN FanCam) @SBS Inkigayo 261025",
-   "views": 22975
-  },
-  {
-   "category": "fancam",
-   "channel": "SBSKPOP ZOOM",
-   "delta": null,
-   "id": "KJOdCWVMx4s",
-   "member": "ZAI",
-   "predebut": false,
-   "published_at": "2026-10-27T09:30:09Z",
-   "title": "[안방1열 직캠4K] 에이투오 소울 자이 'SUPERSTAR' (A2O SOUL ZAI FanCam) @SBS Inkigayo 261025",
-   "views": 38670
-  },
-  {
-   "category": "content",
-   "channel": "KBS WORLD TV",
-   "delta": null,
-   "id": "WiPUeJiPCHA",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-27T09:00:15Z",
-   "title": "[🔊8D Bank] A2O SOUL (에이투오소울) - SUPERSTAR | (Includes Paid Promotion)",
-   "views": 97918
   },
   {
    "category": "content",
@@ -1606,39 +1129,6 @@
   },
   {
    "category": "content",
-   "channel": "KBS WORLD TV",
-   "delta": null,
-   "id": "-3nmkE6P4z0",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-27T03:30:23Z",
-   "title": "A2O SOUL - SUPERSTAR #エーツーオー ソウル #에이투오소울 #SUPERSTAR #Shorts #MusicBank | KBS WORLD TV",
-   "views": 97083
-  },
-  {
-   "category": "content",
-   "channel": "TDS POP",
-   "delta": null,
-   "id": "1RxTr1q6ySo",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-27T02:39:40Z",
-   "title": "TDSPOP Reacts To A20 LITE 'NEON' Official Video + A2O SOUL 'SUPERSTAR'",
-   "views": 114573
-  },
-  {
-   "category": "content",
-   "channel": "KOCOWA TV",
-   "delta": null,
-   "id": "ph_z6DJr9wA",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-26T15:15:04Z",
-   "title": "A2O SOUL - SUPERSTAR | Inkigayo EP1329 | KOCOWA+",
-   "views": 77632
-  },
-  {
-   "category": "content",
    "channel": "A2O SOUL",
    "delta": null,
    "id": "rSdXwKp6HSw",
@@ -1647,17 +1137,6 @@
    "published_at": "2026-10-26T14:12:53Z",
    "title": "A2O SOUL을 소개합니다 💙",
    "views": 111508
-  },
-  {
-   "category": "content",
-   "channel": "Golden Disc",
-   "delta": null,
-   "id": "ikFLOdgEaNw",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-26T12:19:00Z",
-   "title": "최애 선점은 빠르면 빠를수록 좋다. A2O SOUL도 그렇다💕 가장 먼저 시선이 가는 사람이 있죠. 그 멤버가 바로 무의식적으로 끌리는 당신의 최애가 될 상👀#a2osoul",
-   "views": 27911
   },
   {
    "category": "content",
@@ -1683,17 +1162,6 @@
   },
   {
    "category": "content",
-   "channel": "KBS WORLD TV",
-   "delta": null,
-   "id": "-ilKVdYGSlQ",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-26T10:00:08Z",
-   "title": "A2O SOUL - SUPERSTAR #エーツーオー ソウル #에이투오소울 #SUPERSTAR #Shorts #MusicBank | KBS WORLD TV",
-   "views": 108459
-  },
-  {
-   "category": "content",
    "channel": "ALL THE K-POP",
    "delta": null,
    "id": "Pjt_5BzgxLY",
@@ -1702,50 +1170,6 @@
    "published_at": "2026-10-26T09:10:14Z",
    "title": "[덕질캡처용♥CLEAN] A2O SOUL - SUPERSTAR  l Show Champion l EP.615 l 261021",
    "views": 80437
-  },
-  {
-   "category": "content",
-   "channel": "아이돌 라디오 유니버스 IDOL RADIO UNIVERSE",
-   "delta": null,
-   "id": "U-i8otyMVYs",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-26T08:15:27Z",
-   "title": "[핫클립/SUB] 소울이들 수다 파티에 함께하실 분? 이것은 당신의 입덕 영상이 됩니다..💘 | A2O SOUL | 정오의 희망곡 김신영입니다",
-   "views": 70685
-  },
-  {
-   "category": "content",
-   "channel": "Mhz 므흐즈: MBC RADIO",
-   "delta": null,
-   "id": "QAN-N_1ihc4",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-26T08:06:04Z",
-   "title": "A2O SOUL 제트가 추천하는 훠궈 재료 #MBCRADIO #Mhz #므흐즈 #정오의희망곡김신영입니다 #A2OSOUL",
-   "views": 12542
-  },
-  {
-   "category": "content",
-   "channel": "Mhz 므흐즈: MBC RADIO",
-   "delta": null,
-   "id": "3AGA2AOUAa0",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-26T07:00:37Z",
-   "title": "A2O SOUL 일본 보이즈의 귀여운 비트박스 랩ㅋㅋㅋ #MBCRADIO #Mhz #므흐즈 #정오의희망곡김신영입니다 #A2O #A2OSOUL",
-   "views": 592
-  },
-  {
-   "category": "content",
-   "channel": "Mhz 므흐즈: MBC RADIO",
-   "delta": null,
-   "id": "0K_QNkB2YbA",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-26T07:00:36Z",
-   "title": "2007년생이 꺼려 하는... A2O SOUL 나이 #MBCRADIO #Mhz #므흐즈 #정오의희망곡김신영입니다 #A2O #A2OSOUL",
-   "views": 8397
   },
   {
    "category": "content",
@@ -1760,94 +1184,6 @@
   },
   {
    "category": "content",
-   "channel": "Mhz 므흐즈: MBC RADIO",
-   "delta": null,
-   "id": "CDuq7zreIiM",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-26T07:00:07Z",
-   "title": "벌써 알아보는 분이 많은 A2O SOUL 서하 #MBCRADIO #Mhz #므흐즈 #정오의희망곡김신영입니다 #A2O #A2OSOUL",
-   "views": 11053
-  },
-  {
-   "category": "content",
-   "channel": "Mhz 므흐즈: MBC RADIO",
-   "delta": null,
-   "id": "nYF9W63aP44",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-26T07:00:03Z",
-   "title": "되고 싶은 멤버 1위, A2O SOUL 알루어 #MBCRADIO #Mhz #므흐즈 #정오의희망곡김신영입니다 #A2O #A2OSOUL",
-   "views": 4620
-  },
-  {
-   "category": "content",
-   "channel": "Mhz 므흐즈: MBC RADIO",
-   "delta": null,
-   "id": "jPCRHaKs2nA",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-26T06:55:51Z",
-   "title": "10살 때부터 알고 지낸 A2O SOUL 제트&자이 #MBCRADIO #Mhz #므흐즈 #정오의희망곡김신영입니다 #A2O #A2OSOUL",
-   "views": 6411
-  },
-  {
-   "category": "content",
-   "channel": "Mhz 므흐즈: MBC RADIO",
-   "delta": null,
-   "id": "vTRFr0zNg4o",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-26T06:55:45Z",
-   "title": "A2O SOUL의 소울 푸드 = 샐러드......♥? #MBCRADIO #Mhz #므흐즈 #정오의희망곡김신영입니다 #A2O #A2OSOUL",
-   "views": 1242
-  },
-  {
-   "category": "content",
-   "channel": "Mhz 므흐즈: MBC RADIO",
-   "delta": null,
-   "id": "rW-gntlL0PM",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-26T06:55:43Z",
-   "title": "A2O SOUL에게 해 준 월드 스타 써니의 조언 #MBCRADIO #Mhz #므흐즈 #정오의희망곡김신영입니다 #A2O #A2OSOUL",
-   "views": 1283
-  },
-  {
-   "category": "content",
-   "channel": "Mhz 므흐즈: MBC RADIO",
-   "delta": null,
-   "id": "OzlFZs_7Ah4",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-26T05:25:16Z",
-   "title": "[FULL] 선생님을 모십니다👀 A2O SOUL과 함께하는 정희 라이브 (with 써니) | #MBCRADIO #정오의희망곡김신영입니다 #A2O | MBC 261026 방송",
-   "views": 59999
-  },
-  {
-   "category": "content",
-   "channel": "아이돌 라디오 유니버스 IDOL RADIO UNIVERSE",
-   "delta": null,
-   "id": "27lR9WMDGoc",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-26T05:11:58Z",
-   "title": "[FULL/SUB] 선생님을 모십니다👀 A2O SOUL과 함께하는 정희 라이브 (with 써니) | 정오의 희망곡 김신영입니다 | MBC 261026 방송",
-   "views": 54564
-  },
-  {
-   "category": "content",
-   "channel": "KBS WORLD TV",
-   "delta": null,
-   "id": "Az1FU-tPjSs",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-26T04:02:26Z",
-   "title": "(Interview) Interview with A2O LITE & A2O SOUL [Music Bank] | (Includes Paid Promotion)",
-   "views": 72931
-  },
-  {
-   "category": "content",
    "channel": "SBSKPOP X INKIGAYO",
    "delta": null,
    "id": "VMwmRgMowzw",
@@ -1856,28 +1192,6 @@
    "published_at": "2026-10-25T10:10:41Z",
    "title": "SUPERSTAR - A2O SOUL | SBS 261025 방송",
    "views": 324265
-  },
-  {
-   "category": "content",
-   "channel": "KOCOWA TV",
-   "delta": null,
-   "id": "f5DZVL6E-co",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-24T18:15:10Z",
-   "title": "A2O SOUL - SUPERSTAR | Music Core EP967 | KOCOWA+",
-   "views": 72750
-  },
-  {
-   "category": "content",
-   "channel": "KBS WORLD Latino",
-   "delta": null,
-   "id": "dgVqqeySekg",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-24T11:30:14Z",
-   "title": "[HOT DEBUT] A2O SOUL - SUPERSTAR [Music Bank] | KBS WORLD TV 261023",
-   "views": 50074
   },
   {
    "category": "content",
@@ -2002,28 +1316,6 @@
   },
   {
    "category": "content",
-   "channel": "KBS WORLD TV",
-   "delta": null,
-   "id": "neTzA7taGjs",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-23T12:30:34Z",
-   "title": "[HOT DEBUT] A2O SOUL エーツーオー ソウル 에이투오 소울 - SUPERSTAR [Music Bank] | KBS WORLD TV 261023",
-   "views": 120775
-  },
-  {
-   "category": "content",
-   "channel": "ZCAM",
-   "delta": null,
-   "id": "RxHW-qDbNlQ",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-23T11:59:30Z",
-   "title": "261023 에이투오 소울 A2O SOUL 뮤직뱅크 퇴근 musicbank 4K",
-   "views": 30068
-  },
-  {
-   "category": "content",
    "channel": "KBS Kpop",
    "delta": null,
    "id": "nZ036cnzySk",
@@ -2032,17 +1324,6 @@
    "published_at": "2026-10-23T09:03:09Z",
    "title": "SUPERSTAR - A2O SOUL [뮤직뱅크/Music Bank] | KBS 261023 방송",
    "views": 317905
-  },
-  {
-   "category": "content",
-   "channel": "ZCAM",
-   "delta": null,
-   "id": "JFzHzi2UxkU",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-23T04:14:35Z",
-   "title": "261023 에이투오 소울 A2O SOUL 뮤직뱅크 출근 단체인사 musicbank 4K",
-   "views": 79411
   },
   {
    "category": "fancam",
@@ -2054,28 +1335,6 @@
    "published_at": "2026-10-23T03:01:26Z",
    "title": "[입덕직캠] A2O SOUL 문 직캠 4K 'SUPERSTAR' (A2O SOUL MOON FanCam) | @MCOUNTDOWN_2026.10.22",
    "views": 48404
-  },
-  {
-   "category": "mv",
-   "channel": "Micah's K-Spot",
-   "delta": null,
-   "id": "CpXLCbihjLE",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-22T19:45:06Z",
-   "title": "A2O SOUL's 'Superstar' Is a Promising Step Forward! | MV Reaction",
-   "views": 26746
-  },
-  {
-   "category": "content",
-   "channel": "Domain Korea",
-   "delta": null,
-   "id": "p6b0CV-73qY",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-22T12:30:35Z",
-   "title": "Highnote A2O SOUL Bawa Fans Bernostalgia Ke Highnote Grup SM Era Lee Soo-man",
-   "views": 28850
   },
   {
    "category": "content",
@@ -2142,17 +1401,6 @@
    "published_at": "2026-10-22T10:19:03Z",
    "title": "A2O SOUL - SUPERSTAR #엠카운트다운 EP.950 | Mnet 261022 방송",
    "views": 316854
-  },
-  {
-   "category": "content",
-   "channel": "THE K-POP",
-   "delta": null,
-   "id": "GR0wz-I0Q3A",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-22T10:00:00Z",
-   "title": "A2O SOUL - SORA 'SUPERSTAR’ [에이투오소울-소라] [THE SHOW] 261020 방송 [FAN PICK CAM 4K]",
-   "views": 172389
   },
   {
    "category": "content",
@@ -2263,17 +1511,6 @@
    "published_at": "2026-10-22T09:32:39Z",
    "title": "[MPD직캠] A2O SOUL 문 직캠 4K 'SUPERSTAR' (A2O SOUL MOON FanCam) | @MCOUNTDOWN_2026.10.22",
    "views": 13569
-  },
-  {
-   "category": "content",
-   "channel": "THE K-POP",
-   "delta": null,
-   "id": "1_kWw0UgEWo",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-22T09:00:36Z",
-   "title": "SUPERSTAR – A2O SOUL [THE SHOW] 261020 방송",
-   "views": 79317
   },
   {
    "category": "content",
@@ -2452,61 +1689,6 @@
    "views": 90352
   },
   {
-   "category": "content",
-   "channel": "TJ노래방 공식 유튜브채널",
-   "delta": null,
-   "id": "udz36_mhMiw",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-22T06:55:33Z",
-   "title": "[TJ노래방] SUPERSTAR - A2O SOUL / TJ Karaoke",
-   "views": 4786
-  },
-  {
-   "category": "content",
-   "channel": "K-Wave Drama Hub",
-   "delta": null,
-   "id": "IZZPRh4Ogrg",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-22T06:00:00Z",
-   "title": "A2O Soul Nggak Mau Ikut Tren? #kpop",
-   "views": 45748
-  },
-  {
-   "category": "content",
-   "channel": "ARIRANG K-POP",
-   "delta": null,
-   "id": "esbj2PfAGh8",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-22T02:30:22Z",
-   "title": "[SHOW K-POP] 15명 칼군무가 보고싶다면? A2O SOUL 'SUPERSTAR'",
-   "views": 211543
-  },
-  {
-   "category": "content",
-   "channel": "ARIRANG K-POP",
-   "delta": null,
-   "id": "SaSog08O1ew",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-22T02:15:15Z",
-   "title": "[SHOW K-POP] A2O SOUL의 지휘만 따라 오케스트라 🎻",
-   "views": 99300
-  },
-  {
-   "category": "content",
-   "channel": "T HUBS 22",
-   "delta": null,
-   "id": "oyECg4acKT0",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-21T13:49:05Z",
-   "title": "First Time Reacting to A2O LITE 'NEON' & A2O SOUL 'SUPERSTAR' & A2O MAY SONGS",
-   "views": 30730
-  },
-  {
    "category": "fancam",
    "channel": "ALL THE K-POP",
    "delta": null,
@@ -2516,17 +1698,6 @@
    "published_at": "2026-10-21T13:04:38Z",
    "title": "[쇼챔직캠 4K] A2O SOUL - SUPERSTAR | Show Champion | EP.615 | 261021",
    "views": 68951
-  },
-  {
-   "category": "content",
-   "channel": "Lenny Len",
-   "delta": null,
-   "id": "e2GyxC2W2R4",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-21T12:00:08Z",
-   "title": "A2O SOUL & A2O LITE NEON & SUPERSTAR WELCOME TO SOULITE + ENHYPEN BAD FOR YOU + NCT WISH I SPY",
-   "views": 113403
   },
   {
    "category": "content",
@@ -2552,83 +1723,6 @@
   },
   {
    "category": "content",
-   "channel": "THE K-POP",
-   "delta": null,
-   "id": "rH_yyK415Bg",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-21T06:28:07Z",
-   "title": "A2O SOUL 에이든 무대 모아보기 #A2OSOUL #SUPERSTAR #에이든 #AYDEN @261020 [BEHIND THE SHOW]",
-   "views": 69024
-  },
-  {
-   "category": "content",
-   "channel": "Kess and Han Reacts",
-   "delta": null,
-   "id": "_k-2ew6VDSk",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-21T02:26:39Z",
-   "title": "COUPLE REACTS TO KATSEYE, tripleS, Hearts2Hearts, YUQI, & A2O Soul | Catch Up",
-   "views": 194416
-  },
-  {
-   "category": "content",
-   "channel": "De saint",
-   "delta": null,
-   "id": "2PJx4l6FgnM",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-20T19:00:12Z",
-   "title": "What Do You Think Of This A20 Soul Debut Song: A2O SOUL 'SUPERSTAR' #shorts #music #trend",
-   "views": 12798
-  },
-  {
-   "category": "content",
-   "channel": "THE K-POP",
-   "delta": null,
-   "id": "l4uLSofAkZU",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-20T17:01:41Z",
-   "title": "A2O SOUL 오케스트라 베이비🎻 #A2OSOUL #SUPERSTAR #제트 #ZET @261020 [BEHIND THE SHOW]",
-   "views": 206285
-  },
-  {
-   "category": "content",
-   "channel": "THE K-POP",
-   "delta": null,
-   "id": "2QPN0tFcv6c",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-20T14:15:21Z",
-   "title": "[FAN PICK CAM 4K] A2O SOUL - SORA 'SUPERSTAR’ [에이투오소울-소라] [THE SHOW] 261020 방송",
-   "views": 167901
-  },
-  {
-   "category": "fancam",
-   "channel": "THE K-POP",
-   "delta": null,
-   "id": "0RrTIGFMqaA",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-20T14:14:41Z",
-   "title": "[FAN CAM 4K] SUPERSTAR - A2O SOUL [THE SHOW]  261020 방송",
-   "views": 122795
-  },
-  {
-   "category": "content",
-   "channel": "THE K-POP",
-   "delta": null,
-   "id": "Q5jPwVNF7o0",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-20T11:51:15Z",
-   "title": "SUPERSTAR – A2O SOUL [THE SHOW] 261020 방송",
-   "views": 547684
-  },
-  {
-   "category": "content",
    "channel": "STONE MUSIC",
    "delta": null,
    "id": "xc9XoKdrC-Y",
@@ -2637,39 +1731,6 @@
    "published_at": "2026-10-20T07:07:07Z",
    "title": "A2O SOUL - SUPERSTAR Official Music Video｜#Shorts",
    "views": 9958
-  },
-  {
-   "category": "content",
-   "channel": "NewsInStar",
-   "delta": null,
-   "id": "61SgypIaixY",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-20T06:13:23Z",
-   "title": "A2O SOUL 한성(#HANSUNG) MBC라디오 ‘정오의 희망곡’ 출근길 #a2oSoul #a2o #shorts",
-   "views": 1598
-  },
-  {
-   "category": "content",
-   "channel": "K-Wave Drama Hub",
-   "delta": null,
-   "id": "H_X5OGkfcSc",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-20T05:00:35Z",
-   "title": "A2O Soul Boy Group 15 Member Dari Nerbagai Negara! #kpop",
-   "views": 39935
-  },
-  {
-   "category": "content",
-   "channel": "TheKTwins",
-   "delta": null,
-   "id": "fonq4tEupLo",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-20T04:30:24Z",
-   "title": "A2O SOUL 'SUPERSTAR' Official Performance Video | THIS CHANGED EVERYTHING..... | TWINS REACTION",
-   "views": 11229
   },
   {
    "category": "mv",
@@ -2692,215 +1753,6 @@
    "published_at": "2026-10-20T02:48:05Z",
    "title": "글로벌 취향 가득담긴 15명의 소년들 A2O SOUL!｜#Shorts",
    "views": 93268
-  },
-  {
-   "category": "content",
-   "channel": "K-POPIT 케이팝잇",
-   "delta": null,
-   "id": "k60yQTcoFvU",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-20T02:08:35Z",
-   "title": "이수만 신인남돌 'A20 SOUL' 멤버 나이",
-   "views": 448588
-  },
-  {
-   "category": "content",
-   "channel": "Kairo",
-   "delta": null,
-   "id": "sp4gH46u9yk",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-19T22:00:05Z",
-   "title": "where did they come from?!.. (A2O LITE 'NEON' & A2O SOUL 'SUPERSTAR' Reaction)",
-   "views": 143843
-  },
-  {
-   "category": "content",
-   "channel": "โอติ่ง • OH THINK! • 오팅",
-   "delta": null,
-   "id": "as111uVvYVM",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-19T16:07:50Z",
-   "title": "แนะนำเด็กไทย 🇹🇭 ALURE (อลัว) วง A2O SOUL น้องใหม่จาก A2O Entertainment | โอติ่ง",
-   "views": 27102
-  },
-  {
-   "category": "content",
-   "channel": "サランピTV〈SaranpiTV〉",
-   "delta": null,
-   "id": "PiQJ9Dfw3eE",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-19T14:53:15Z",
-   "title": "【A2O SOUL】梶原兄弟が話題！このビジュアルはぶっ刺さる！？絶対イスマンのお気に入りやろ！",
-   "views": 62366
-  },
-  {
-   "category": "content",
-   "channel": "iMBC연예",
-   "delta": null,
-   "id": "Qhod1YXaC58",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-19T13:59:43Z",
-   "title": "이름 부른다고 냉큼 대답하는 #서하😇 그냥 귀엽다.. 많이.. #A2OSOUL",
-   "views": 231496
-  },
-  {
-   "category": "content",
-   "channel": "PICKCON / 픽콘",
-   "delta": null,
-   "id": "_l3YUO5yUbo",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-19T11:39:30Z",
-   "title": "A2O SOUL 서하(SEOHA) 라디오 출근길 귀여운 신인 보고 가세요 #A2O #A2OSOUL #seoha",
-   "views": 36714
-  },
-  {
-   "category": "content",
-   "channel": "아이돌 라디오 유니버스 IDOL RADIO UNIVERSE",
-   "delta": null,
-   "id": "12As7zBmQmY",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-19T11:00:29Z",
-   "title": "A2O SOUL 그 파트 목소리 주인공 💗",
-   "views": 74243
-  },
-  {
-   "category": "content",
-   "channel": "아이돌 라디오 유니버스 IDOL RADIO UNIVERSE",
-   "delta": null,
-   "id": "Pxzc68xSAjE",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-19T08:30:03Z",
-   "title": "[핫클립/SUB] A2O SOUL 입덕 완료 🎉♥️ 말하는 갓기들 신기해 👀 | 정오의 희망곡 김신영입니다",
-   "views": 69243
-  },
-  {
-   "category": "content",
-   "channel": "아이돌 라디오 유니버스 IDOL RADIO UNIVERSE",
-   "delta": null,
-   "id": "PbpHyIQerX8",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-19T08:00:38Z",
-   "title": "[핫클립/SUB] 무려 15명?! 🫢 지금 주목해야 할 신인 A2O SOUL의 매력 대방출 💗 | 정오의 희망곡 김신영입니다",
-   "views": 196529
-  },
-  {
-   "category": "content",
-   "channel": "Mhz 므흐즈: MBC RADIO",
-   "delta": null,
-   "id": "O00C3cJaqVg",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-19T05:17:38Z",
-   "title": "[FULL] 선생님을 모십니다👀 A2O SOUL과 함께하는 정희 라이브 | #MBCRADIO #정오의희망곡김신영입니다 #A2OSOUL #써니 #A2O | MBC 261019 방송",
-   "views": 133286
-  },
-  {
-   "category": "content",
-   "channel": "iMBC연예",
-   "delta": null,
-   "id": "HfLLC4vmKGU",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-19T05:07:11Z",
-   "title": "A2O SOUL🌟 15명 멤버 중 내 최애는 누구?!🥰",
-   "views": 638629
-  },
-  {
-   "category": "content",
-   "channel": "아이돌 라디오 유니버스 IDOL RADIO UNIVERSE",
-   "delta": null,
-   "id": "DWmg5myx-9c",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-19T05:06:31Z",
-   "title": "[SUB/FULL] 라이브 온 에어🎙️ 스페셜DJ 써니 X A2O SOUL과 함께하는 정희 라이브 | 정오의 희망곡 김신영입니다 | MBC 261019 방송",
-   "views": 111633
-  },
-  {
-   "category": "content",
-   "channel": "WowKorea FAN",
-   "delta": null,
-   "id": "0HABRHXSifk",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-19T04:18:30Z",
-   "title": "[4K] A2O SOUL、今日もビジュアル最高…「ラジオに行ってきま〜す！」",
-   "views": 11792
-  },
-  {
-   "category": "content",
-   "channel": "PICKCON / 픽콘",
-   "delta": null,
-   "id": "6rnrznl64nY",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-19T04:03:06Z",
-   "title": "A2O SOUL, 우당탕탕 '떨리는 첫 라디오 출근길' | 타이·문·시원·에이든·가쿠·알루어·서하·소노·소라·준·테오·자이·제트·루시엔·한성",
-   "views": 65316
-  },
-  {
-   "category": "content",
-   "channel": "K-POPIT 케이팝잇",
-   "delta": null,
-   "id": "_oaS5wbBN2E",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-19T04:02:48Z",
-   "title": "에이투오 소울, MBC 라디오 출근길 | A20 SOUL Arriving at MBC Radio",
-   "views": 4068
-  },
-  {
-   "category": "content",
-   "channel": "디스패치 / Dispatch",
-   "delta": null,
-   "id": "ETPXGg6UQBQ",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-19T03:50:58Z",
-   "title": "에이투오 소울, \"첫 공식 포토타임🎥포인트안무 포즈⁉️너무 귀여워🤗\"ㅣA20 SOUL,\"First official photo time🎥Point Pose⁉️So Cute🤗\"[현장]",
-   "views": 22676
-  },
-  {
-   "category": "content",
-   "channel": "iMBC연예",
-   "delta": null,
-   "id": "19p0vPMLEIc",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-19T03:42:58Z",
-   "title": "[4K] A2O SOUL, 에투소 아기들의 신인 모먼트 넘 귀엽다~🤭💕 지금 입덕하세요!! | 에이투오 소울 '정오의 희망곡' 출근길",
-   "views": 60807
-  },
-  {
-   "category": "mv",
-   "channel": "anthonytoo",
-   "delta": null,
-   "id": "WoEf4u-s2v8",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-19T03:00:40Z",
-   "title": "A2O SOUL 'SUPERSTAR' Performance & Music Video + A2O LITE 'NEON' Official Video - REACTION",
-   "views": 135466
-  },
-  {
-   "category": "content",
-   "channel": "TheKTwins",
-   "delta": null,
-   "id": "Ie18HnbW69c",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-19T03:00:17Z",
-   "title": "A2O SOUL 'SUPERSTAR' Official Music Video | THEY CAN DO EVERYTHING! THE BEST DEBUT?!| TWINS REACTION",
-   "views": 10577
   },
   {
    "category": "content",
@@ -2934,17 +1786,6 @@
    "published_at": "2026-10-16T10:00:30Z",
    "title": "A2O SOUL 'SUPERSTAR' Official Music Video",
    "views": 3323509
-  },
-  {
-   "category": "content",
-   "channel": "루다의 댄스 연구소 Ruda's Dance Lab",
-   "delta": null,
-   "id": "yXU3NjRDSmk",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-15T13:00:11Z",
-   "title": "이수만의 높은 기준을 알 수 있다⎪A2O SOUL SUPERSTAR⎪안무분석",
-   "views": 171495
   },
   {
    "category": "content",
@@ -2989,17 +1830,6 @@
    "published_at": "2026-10-15T09:29:26Z",
    "title": "[MPD직캠] A2O SOUL 타이 직캠 4K 'SUPERSTAR' (A2O SOUL TAI FanCam) | @MCOUNTDOWN_2026.10.15",
    "views": 94787
-  },
-  {
-   "category": "content",
-   "channel": "나만 듣기 아까운 노래",
-   "delta": null,
-   "id": "uD3teE1uSkk",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-14T14:21:42Z",
-   "title": "봉인 풀린 수만옹이 근본 남돌 말아옴ㄷㄷ [A2O SOUL (에이투오 소울) - SUPERSTAR]",
-   "views": 6424
   },
   {
    "category": "content",
@@ -3091,17 +1921,6 @@
   },
   {
    "category": "content",
-   "channel": "나만 듣기 아까운 노래",
-   "delta": null,
-   "id": "JHjeTRTiTow",
-   "member": "",
-   "predebut": false,
-   "published_at": "2026-10-13T07:00:25Z",
-   "title": "봉인 풀린 수만옹이 근본 남돌 말아옴ㄷㄷ [A2O SOUL (에이투오 소울) - SUPERSTAR]",
-   "views": 349580
-  },
-  {
-   "category": "content",
    "channel": "A2O WORLD",
    "delta": null,
    "id": "D8CYC5P6Z8Y",
@@ -3110,116 +1929,6 @@
    "published_at": "2026-10-12T12:30:26Z",
    "title": "A2O SOUL 'SUPERSTAR' Official Performance Video",
    "views": 6426607
-  },
-  {
-   "category": "fancam",
-   "channel": "K-POPIT 케이팝잇",
-   "delta": null,
-   "id": "JJ9kBUeElQg",
-   "member": "AYDEN",
-   "predebut": true,
-   "published_at": "2026-10-12T11:44:32Z",
-   "title": "A20 SOUL '에이든' 독무 직캠",
-   "views": 62822
-  },
-  {
-   "category": "content",
-   "channel": "비하인드 BEHIND ",
-   "delta": null,
-   "id": "tQ4iMKvm6fE",
-   "member": "",
-   "predebut": true,
-   "published_at": "2026-10-12T11:35:46Z",
-   "title": "[LIVE] A2O SOUL (에이투오 소울), 'SUPERSTAR' LiveStage - DEBUT 무대 [비하인드][4K] #A2OSOUL #SUPERSTAR",
-   "views": 78330
-  },
-  {
-   "category": "content",
-   "channel": "PICKCON / 픽콘",
-   "delta": null,
-   "id": "cLKU7sY8QFQ",
-   "member": "",
-   "predebut": true,
-   "published_at": "2026-10-12T10:49:14Z",
-   "title": "[Debut Show] A2O LITE + A2O SOUL | Full  Performance",
-   "views": 2139238
-  },
-  {
-   "category": "content",
-   "channel": "Golden Disc",
-   "delta": null,
-   "id": "8e-yewuwENQ",
-   "member": "",
-   "predebut": true,
-   "published_at": "2026-10-12T09:43:34Z",
-   "title": "이수만 보석함 열렸다💎 여러분이 기다리던 A2O의 첫 남돌이 탄생했어요. 소울라이트 행성에서 온 신비로운 15명의 소년들 A2O SOUL",
-   "views": 188190
-  },
-  {
-   "category": "fancam",
-   "channel": "MTN STAR",
-   "delta": null,
-   "id": "bjr7eHOG8gI",
-   "member": "",
-   "predebut": true,
-   "published_at": "2026-10-12T09:11:46Z",
-   "title": "A2O SOUL, 한 번 들으면 계속 맴도는 후렴 🎶 [MTN 직캠]",
-   "views": 232981
-  },
-  {
-   "category": "content",
-   "channel": "K-Culture NOW by 연합뉴스",
-   "delta": null,
-   "id": "tv0wj6Syhtc",
-   "member": "",
-   "predebut": true,
-   "published_at": "2026-10-12T09:01:54Z",
-   "title": "[LIVE] A2O SOUL ‘SUPERSTAR’ Debut Showcase Stageㅣ에이투오 소울 선공개곡 ‘슈퍼스타’ 데뷔 쇼케이스 무대",
-   "views": 18812
-  },
-  {
-   "category": "content",
-   "channel": "MTN STAR",
-   "delta": null,
-   "id": "nfmj2sd7K-0",
-   "member": "",
-   "predebut": true,
-   "published_at": "2026-10-12T09:00:10Z",
-   "title": "[LIVE] A2O SOUL X A2O LITE, 'INTRO' 합동 퍼포먼스 🎤  WELCOME TO SOULITE 데뷔 무대 / MTN STAR",
-   "views": 87429
-  },
-  {
-   "category": "content",
-   "channel": "MTN STAR",
-   "delta": null,
-   "id": "L2sOX2torzo",
-   "member": "",
-   "predebut": true,
-   "published_at": "2026-10-12T09:00:07Z",
-   "title": "이수만, ‘A2O SOUL X A2O LITE’ 데뷔 쇼케이스 발표 풀영상 ㅣLee Soo Man / MTN STAR",
-   "views": 228615
-  },
-  {
-   "category": "content",
-   "channel": "K-POPIT 케이팝잇",
-   "delta": null,
-   "id": "1bS3qmeQ07o",
-   "member": "",
-   "predebut": true,
-   "published_at": "2026-10-12T08:59:07Z",
-   "title": "[LIVE] A2O SOUL 'SUPERSTAR' Showcase Stage",
-   "views": 190032
-  },
-  {
-   "category": "content",
-   "channel": "디스패치 / Dispatch",
-   "delta": null,
-   "id": "GL6-UkGXBa4",
-   "member": "",
-   "predebut": true,
-   "published_at": "2026-10-12T08:57:18Z",
-   "title": "에이투오 소울, \"‘이수만 프로듀싱’ A20 SOUL 데뷔 무대 🎵SUPERSTAR\" l A20 SOUL, \"Debut stage 🎵SUPERSTAR\" [K-POP]",
-   "views": 380610
   },
   {
    "category": "content",
