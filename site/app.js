@@ -112,15 +112,20 @@
 
   // ---------- 멤버·직캠 ----------
   for (const m of data.members) {
-    $("members").append(el("div", { class: "member" },
-      el("div", { class: "n" }, m.name),
-      el("div", { class: "c" }, m.nationality),
-      el("div", { class: "s" }, m.fancam_count ? `직캠 ${m.fancam_count}개 · ${kr(m.fancam_views)}회` : "직캠 집계 전",
-        m.fancam_delta ? " " : null, deltaSpan(m.fancam_delta)),
-      m.top ? ext(ytUrl(m.top.id), `▶ ${m.top.title}`) : null,
-    ));
-    const last = $("members").lastElementChild.querySelector("a");
-    if (last) last.classList.add("top");
+    const v = m.latest;
+    const thumb = v
+      ? el("img", { src: `https://i.ytimg.com/vi/${encodeURIComponent(v.id)}/mqdefault.jpg`, alt: "", loading: "lazy" })
+      : el("div", { class: "nothumb" }, "직캠 집계 전");
+    const body = [
+      thumb,
+      el("div", { class: "n" }, m.name, el("span", { class: "c" }, m.nationality)),
+      v ? el("div", { class: "t" }, v.title) : null,
+      v ? el("div", { class: "s" }, `${v.published_at ? v.published_at.slice(0, 10).replaceAll("-", ".") + " · " : ""}조회수 ${kr(v.views ?? 0)}`) : null,
+      m.fancam_count > 1 ? el("div", { class: "s" }, `직캠 ${m.fancam_count}개`) : null,
+    ];
+    $("members").append(v
+      ? el("a", { class: "member", href: ytUrl(v.id), target: "_blank", rel: "noopener" }, ...body)
+      : el("div", { class: "member" }, ...body));
   }
 
   $("fancamTable").append(table(
@@ -179,17 +184,6 @@
 
   drawers.overview = () => lineChart("accountsChart", data.accounts);
   drawers.mv = () => { lineChart("mvChart", data.mvs); dailyChart("mvDailyChart", data.mvs); };
-  drawers.members = () => {
-    const rows = data.members.filter((m) => m.fancam_count).sort((a, b) => b.fancam_views - a.fancam_views);
-    if (!rows.length) { $("fancamBox").replaceWith(empty("아직 수집된 직캠이 없어요")); return; }
-    $("fancamBox").style.height = `${60 + rows.length * 32}px`;
-    new Chart($("fancamChart"), {
-      type: "bar",
-      data: { labels: rows.map((r) => r.name), datasets: [{ data: rows.map((r) => r.fancam_views), backgroundColor: palette[0], borderRadius: 6 }] },
-      options: { indexAxis: "y", maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip },
-                 scales: { x: { ticks: { callback: fmt } } } },
-    });
-  };
 
   showTab();
 })();
