@@ -1,0 +1,68 @@
+name: Update dashboard
+
+on:
+  schedule:
+    - cron: "7 3,15 * * *"   # KST 12:07, 00:07
+  workflow_dispatch:          # Actions 탭에서 수동 실행
+  push:
+    branches: [main]
+    paths-ignore:
+      - "data/**"
+      - "README.md"
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      # push(코드·targets.yml 수정)일 때는 수집 없이 다시 빌드만
+      - name: Collect & build
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+        run: python collector/collect.py ${{ github.event_name == 'push' && '--build' || '' }}
+
+      - name: Commit data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data
+          if ! git diff --cached --quiet; then
+            git commit -m "data: $(TZ=Asia/Seoul date +'%Y-%m-%d %H:%M')"
+            git pull --rebase
+            git push
+          fi
+
+      - name: Prepare site
+        run: |
+          mkdir -p _site/data
+          cp -r site/. _site/
+          cp data/dashboard.json _site/data/
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deploy
+        uses: actions/deploy-pages@v4
