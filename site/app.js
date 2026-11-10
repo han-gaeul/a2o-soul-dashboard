@@ -80,7 +80,9 @@
   const ymd = (iso) => (iso ? kstDay.format(new Date(iso)).replaceAll("-", ".") : "");
   function videoCard(v, chipText, ...extra) {
     return el("a", { class: "video", href: ytUrl(v.id), target: "_blank", rel: "noopener" },
-      el("img", { src: `https://i.ytimg.com/vi/${encodeURIComponent(v.id)}/mqdefault.jpg`, alt: "", loading: "lazy" }),
+      el("div", { class: "thumb" },
+        el("img", { src: `https://i.ytimg.com/vi/${encodeURIComponent(v.id)}/mqdefault.jpg`, alt: "", loading: "lazy" }),
+        v.short ? el("span", { class: "badge" }, "쇼츠") : null),
       el("div", { class: "t" }, v.title),
       el("div", { class: "m" }, chipText ? el("span", { class: "chip" }, chipText) : null, ymd(v.published_at),
         v.channel ? ` · ${v.channel}` : null),
@@ -110,24 +112,35 @@
   const dlg = $("memberDialog");
   $("dlgClose").addEventListener("click", () => dlg.close());
   dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); }); // 바깥 클릭으로 닫기
-  function openMember(m) {
-    $("dlgTitle").textContent = `${m.name} 직캠 ${m.fancams.length}개`;
-    $("dlgList").replaceChildren(...m.fancams.map((v) => videoCard(v, null)));
+  function openMember(m, focus) {
+    $("dlgTitle").textContent = m.name;
+    const sections = [];
+    for (const [key, label, list] of [["fancams", "직캠", m.fancams], ["predebut", "데뷔 전", m.predebut]]) {
+      if (!list.length) continue;
+      sections.push(el("section", { class: "dlg-sec", id: `dlg-${key}` },
+        el("h3", {}, `${label} ${list.length}개`),
+        el("div", { class: "videos" }, ...list.map((v) => videoCard(v, null)))));
+    }
+    $("dlgBody").replaceChildren(...sections);
     dlg.showModal();
     dlg.scrollTop = 0;
+    if (focus) $(`dlg-${focus}`)?.scrollIntoView();
   }
 
   for (const m of data.members) {
-    const v = m.fancams[0]; // 최신순
+    const v = m.fancams[0] || m.predebut[0]; // 최신 직캠, 없으면 데뷔 전 영상
     const thumb = v
       ? el("img", { src: `https://i.ytimg.com/vi/${encodeURIComponent(v.id)}/mqdefault.jpg`, alt: "", loading: "lazy" })
       : el("div", { class: "nothumb" }, "직캠 집계 전");
+    const links = [];
+    if (m.fancams.length) links.push(["fancams", `직캠 ${m.fancams.length}`]);
+    if (m.predebut.length) links.push(["predebut", `데뷔 전 ${m.predebut.length}`]);
     const body = [
       thumb,
       el("div", { class: "n" }, m.name, el("span", { class: "c" }, m.nationality)),
       v ? el("div", { class: "t" }, v.title) : null,
       v ? el("div", { class: "s" }, `${ymd(v.published_at)} · 조회수 ${kr(v.views ?? 0)}`) : null,
-      v ? el("div", { class: "s more-link" }, `직캠 ${m.fancams.length}개 전체 보기 ›`) : null,
+      links.length ? el("div", { class: "s more-link" }, links.map((l) => l[1]).join(" · ") + " 보기 ›") : null,
     ];
     if (v) {
       const card = el("button", { class: "member", type: "button" }, ...body);
@@ -139,36 +152,52 @@
   }
 
   // ---------- 전체 영상 ----------
-  const FILTERS = [
+  const CATS = [
     ["all", "전체", () => true],
     ["mv", "MV", (v) => v.category === "mv"],
     ["fancam", "직캠", (v) => v.category === "fancam"],
     ["content", "콘텐츠", (v) => v.category === "content" && !v.predebut],
     ["predebut", "데뷔 전", (v) => v.predebut],
   ];
+  const FORMATS = [
+    ["all", "전체", () => true],
+    ["long", "롱폼", (v) => !v.short],
+    ["short", "쇼츠", (v) => v.short],
+  ];
   const PAGE = 24;
-  let curFilter = "all", shown = 0;
+  const cur = { cat: "all", fmt: "all" };
+  let shown = 0;
   const chipOf = (v) => (v.predebut ? "데뷔 전" : v.member || data.categories[v.category] || v.category);
+  const pick = (defs, key) => defs.find((d) => d[0] === key)[2];
+  const current = () => data.videos.filter((v) => pick(CATS, cur.cat)(v) && pick(FORMATS, cur.fmt)(v));
   function renderVideos(reset) {
-    const list = data.videos.filter(FILTERS.find((f) => f[0] === curFilter)[2]);
+    const list = current();
     if (reset) { $("allVideos").replaceChildren(); shown = 0; }
     $("allVideos").append(...list.slice(shown, shown + PAGE).map((v) => videoCard(v, chipOf(v))));
     shown = Math.min(shown + PAGE, list.length);
     $("more").hidden = shown >= list.length;
     if (!list.length) $("allVideos").append(empty("해당하는 영상이 없어요"));
   }
-  for (const [key, label, fn] of FILTERS) {
-    const n = data.videos.filter(fn).length;
-    const b = el("button", { type: "button", class: key === curFilter ? "on" : "" }, `${label} ${n}`);
-    b.addEventListener("click", () => {
-      curFilter = key;
-      $("filters").querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b));
-      renderVideos(true);
+  function filterRow(defs, slot, countFn) {
+    const row = el("div", { class: "filter-row" });
+    const buttons = defs.map(([key, label]) => {
+      const b = el("button", { type: "button", "data-key": key }, label);
+      b.addEventListener("click", () => { cur[slot] = key; refresh(); });
+      row.append(b);
+      return b;
     });
-    $("filters").append(b);
+    return { row, update: () => buttons.forEach((b) => {
+      const key = b.dataset.key;
+      b.classList.toggle("on", cur[slot] === key);
+      b.textContent = `${defs.find((d) => d[0] === key)[1]} ${countFn(key)}`;
+    }) };
   }
+  const catRow = filterRow(CATS, "cat", (k) => data.videos.filter((v) => pick(CATS, k)(v) && pick(FORMATS, cur.fmt)(v)).length);
+  const fmtRow = filterRow(FORMATS, "fmt", (k) => data.videos.filter((v) => pick(CATS, cur.cat)(v) && pick(FORMATS, k)(v)).length);
+  $("filters").append(catRow.row, fmtRow.row);
+  function refresh() { catRow.update(); fmtRow.update(); renderVideos(true); }
   $("more").addEventListener("click", () => renderVideos(false));
-  renderVideos(true);
+  refresh();
 
   // ---------- 차트 ----------
   const palette = ["#6c4cf5", "#f5734c", "#12a1a0", "#e0479e", "#d4a017", "#3b82f6", "#8b5cf6", "#22c55e"];
