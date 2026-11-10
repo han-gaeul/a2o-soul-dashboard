@@ -138,24 +138,25 @@
   }
 
   function profile(m) {
-    const facts = [m.ko, m.position, m.birth_year ? `${m.birth_year}년생` : "", m.nationality].filter(Boolean).join(" · ");
+    const facts = [m.position, m.birth_year ? `${m.birth_year}년생` : "", m.nationality].filter(Boolean).join(" · ");
     const list = (label, items) => (items.length
       ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, label), el("ul", {}, ...items.map((x) => el("li", {}, x))))
       : null);
     const embeds = igEmbeds(m.instagram_posts);
     return el("section", { class: "dlg-sec profile" },
-      m.photo ? el("img", { class: "pf-photo", src: m.photo, alt: m.name }) : null,
       embeds.length ? el("div", { class: "ig-row" }, ...embeds) : null,
       el("div", { class: "pf-facts" }, facts),
       m.nicknames.length ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, "별명"), el("div", {}, m.nicknames.join(", "))) : null,
       list("데뷔 전", m.career),
-      list("여담", m.notes),
-      el("div", { class: "pf-src" }, "출처: ",
-        ext(`https://namu.wiki/w/${encodeURIComponent(`${m.ko}(A2O SOUL)`)}`, "나무위키"), " 요약"));
+      list("여담", m.notes));
   }
 
+  const avatar = (m, cls = "avatar") => el("div", { class: cls, "aria-hidden": "true" },
+    m.photo ? el("img", { src: m.photo, alt: "", loading: "lazy" }) : (m.ko ? m.ko[0] : m.name[0]));
+
   function openMember(m, focus) {
-    $("dlgTitle").textContent = m.name;
+    $("dlgTitle").replaceChildren(avatar(m, "avatar dlg-avatar"), el("span", {}, m.name),
+      m.ko ? el("span", { class: "dlg-ko" }, m.ko) : null);
     const sections = [profile(m)];
     for (const [key, label, list] of [["fancams", "직캠", m.fancams], ["predebut", "데뷔 전", m.predebut]]) {
       if (!list.length) continue;
@@ -163,6 +164,9 @@
         el("h3", {}, `${label} ${list.length}개`),
         el("div", { class: "videos" }, ...list.map((v) => videoCard(v, null)))));
     }
+    // 출처는 맨 아래 작게
+    sections.push(el("div", { class: "pf-src" }, "프로필 출처 ",
+      ext(`https://namu.wiki/w/${encodeURIComponent(`${m.ko}(A2O SOUL)`)}`, "나무위키")));
     $("dlgBody").replaceChildren(...sections);
     dlg.showModal();
     dlg.scrollTop = 0;
@@ -176,8 +180,7 @@
   if (gp.length) $("groupPosts").append(...gp); else $("groupPostsSec").remove();
   for (const m of data.members) {
     const card = el("button", { class: "pcard", type: "button" },
-      el("div", { class: "avatar", "aria-hidden": "true" },
-        m.photo ? el("img", { src: m.photo, alt: "", loading: "lazy" }) : (m.ko ? m.ko[0] : m.name[0])),
+      avatar(m),
       el("div", { class: "pinfo" },
         el("div", { class: "n" }, m.name, el("span", { class: "c" }, m.ko)),
         el("div", { class: "s" }, [m.position, m.birth_year ? `${m.birth_year}년생` : "", m.nationality].filter(Boolean).join(" · ")),
