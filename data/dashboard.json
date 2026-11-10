@@ -28,20 +28,20 @@
    "delta": null,
    "label": "MV 총 조회수",
    "sub": "5편",
-   "value": 5155531
+   "value": 5160309
   },
   {
    "delta": null,
    "label": "직캠 총 조회수",
    "sub": "52개",
-   "value": 2484178
+   "value": 2484307
   }
  ],
  "members": [
   {
    "fancam_count": 5,
    "fancam_delta": null,
-   "fancam_views": 87408,
+   "fancam_views": 87412,
    "fancams": [
     {
      "channel": "ALL THE K-POP",
@@ -49,7 +49,7 @@
      "id": "pu4UUNbcZQQ",
      "published_at": "2026-11-03T09:00:07Z",
      "title": "[쇼챔1분직캠] A2O SOUL MOON의 ＜SUPERSTAR＞♬ #A2OSOUL #MOON #SUPERSTAR",
-     "views": 7503
+     "views": 7508
     },
     {
      "channel": "KBS Kpop",
@@ -73,7 +73,7 @@
      "id": "vtWUMd-F73o",
      "published_at": "2026-10-22T09:32:39Z",
      "title": "[MPD직캠] A2O SOUL 문 직캠 4K 'SUPERSTAR' (A2O SOUL MOON FanCam) | @MCOUNTDOWN_2026.10.22",
-     "views": 13569
+     "views": 13565
     },
     {
      "channel": "ALL THE K-POP",
@@ -81,7 +81,7 @@
      "id": "agqe-wPFRN8",
      "published_at": "2026-10-22T07:58:31Z",
      "title": "[쇼챔직캠 4K] A2O SOUL MOON - SUPERSTAR | Show Champion | EP.615 | 261021",
-     "views": 8231
+     "views": 8234
     }
    ],
    "name": "MOON",
@@ -90,7 +90,7 @@
   {
    "fancam_count": 3,
    "fancam_delta": null,
-   "fancam_views": 127492,
+   "fancam_views": 127503,
    "fancams": [
     {
      "channel": "ALL THE K-POP",
@@ -106,7 +106,7 @@
      "id": "7AbJ9HxM_ZY",
      "published_at": "2026-10-22T09:32:39Z",
      "title": "[MPD직캠] A2O SOUL 소라 직캠 4K 'SUPERSTAR' (A2O SOUL SORA FanCam) | @MCOUNTDOWN_2026.10.22",
-     "views": 85037
+     "views": 85045
     },
     {
      "channel": "ALL THE K-POP",
@@ -114,7 +114,7 @@
      "id": "B9U-KlRVMHw",
      "published_at": "2026-10-22T07:58:08Z",
      "title": "[쇼챔직캠 4K] A2O SOUL SORA - SUPERSTAR | Show Champion | EP.615 | 261021",
-     "views": 28852
+     "views": 28855
     }
    ],
    "name": "SORA",
@@ -123,7 +123,7 @@
   {
    "fancam_count": 4,
    "fancam_delta": null,
-   "fancam_views": 137603,
+   "fancam_views": 137615,
    "fancams": [
     {
      "channel": "ALL THE K-POP",
@@ -139,7 +139,7 @@
      "id": "06eFsw-4Rm8",
      "published_at": "2026-10-24T08:03:38Z",
      "title": "[#음중직캠] A2O SOUL SEOHA (에이투오 소울 서하) – SUPERSTAR FanCam | 쇼! 음악중심 | MBC261024",
-     "views": 44125
+     "views": 44127
     },
     {
      "channel": "M2",
@@ -147,7 +147,7 @@
      "id": "nvwZfXEszCM",
      "published_at": "2026-10-22T09:32:39Z",
      "title": "[MPD직캠] A2O SOUL 서하 직캠 4K 'SUPERSTAR' (A2O SOUL SEOHA FanCam) | @MCOUNTDOWN_2026.10.22",
-     "views": 55336
+     "views": 55346
     },
     {
      "channel": "ALL THE K-POP",
@@ -164,7 +164,7 @@
   {
    "fancam_count": 4,
    "fancam_delta": null,
-   "fancam_views": 102069,
+   "fancam_views": 102080,
    "fancams": [
     {
      "channel": "ALL THE K-POP",
@@ -188,7 +188,7 @@
      "id": "N50_f6b_ExE",
      "published_at": "2026-10-22T09:32:39Z",
      "title": "[MPD직캠] A2O SOUL 가쿠 직캠 4K 'SUPERSTAR' (A2O SOUL GAKU FanCam) | @MCOUNTDOWN_2026.10.22",
-     "views": 50360
+     "views": 50390
     },
     {
      "channel": "ALL THE K-POP",
@@ -196,7 +196,7 @@
      "id": "lt2XfAcqwX0",
      "published_at": "2026-10-22T07:58:12Z",
      "title": "[쇼챔직캠 4K] A2O SOUL GAKU - SUPERSTAR | Show Champion | EP.615 | 261021",
-     "views": 19293
+     "views": 19274
     }
    ],
    "name": "GAKU",
@@ -205,7 +205,7 @@
   {
    "fancam_count": 2,
    "fancam_delta": null,
-   "fancam_views": 19946,
+   "fancam_views": 19945,
    "fancams": [
     {
      "channel": "ALL THE K-POP",
@@ -213,7 +213,7 @@
      "id": "Y_LGgo_3-6Q",
      "published_at": "2026-11-02T09:00:04Z",
      "title": "[쇼챔1분직캠] A2O SOUL TEO의 ＜SUPERSTAR＞♬ #A2OSOUL #TEO #SUPERSTAR",
-     "views": 5404
+     "views": 5403
     },
     {
      "channel": "ALL THE K-POP",
@@ -230,7 +230,7 @@
   {
    "fancam_count": 2,
    "fancam_delta": null,
-   "fancam_views": 14429,
+   "fancam_views": 14416,
    "fancams": [
     {
      "channel": "ALL THE K-POP",
@@ -238,7 +238,7 @@
      "id": "Wwo6YOgXZGw",
      "published_at": "2026-11-03T09:00:24Z",
      "title": "[쇼챔1분직캠] A2O SOUL JUNE의 ＜SUPERSTAR＞♬ #A2OSOUL #JUNE #SUPERSTAR",
-     "views": 7929
+     "views": 7915
     },
     {
      "channel": "ALL THE K-POP",
@@ -246,7 +246,7 @@
      "id": "dLnY9xh4nSw",
      "published_at": "2026-10-22T07:58:34Z",
      "title": "[쇼챔직캠 4K] A2O SOUL JUNE - SUPERSTAR | Show Champion | EP.615 | 261021",
-     "views": 6500
+     "views": 6501
     }
    ],
    "name": "JUNE",
@@ -255,7 +255,7 @@
   {
    "fancam_count": 2,
    "fancam_delta": null,
-   "fancam_views": 18407,
+   "fancam_views": 18408,
    "fancams": [
     {
      "channel": "ALL THE K-POP",
@@ -271,7 +271,7 @@
      "id": "p4k1ZAdEgsA",
      "published_at": "2026-10-22T07:58:20Z",
      "title": "[쇼챔직캠 4K] A2O SOUL LUCIEN - SUPERSTAR | Show Champion | EP.615 | 261021",
-     "views": 12733
+     "views": 12734
     }
    ],
    "name": "LUCIEN",
@@ -280,7 +280,7 @@
   {
    "fancam_count": 2,
    "fancam_delta": null,
-   "fancam_views": 14024,
+   "fancam_views": 14084,
    "fancams": [
     {
      "channel": "ALL THE K-POP",
@@ -288,7 +288,7 @@
      "id": "CgMmPuvwo2A",
      "published_at": "2026-11-03T09:00:08Z",
      "title": "[쇼챔1분직캠] A2O SOUL HANSUNG의 ＜SUPERSTAR＞♬ #A2OSOUL #HANSUNG #SUPERSTAR",
-     "views": 4258
+     "views": 4272
     },
     {
      "channel": "ALL THE K-POP",
@@ -296,7 +296,7 @@
      "id": "TX-ZozSVob0",
      "published_at": "2026-10-22T07:58:22Z",
      "title": "[쇼챔직캠 4K] A2O SOUL HANSUNG - SUPERSTAR | Show Champion | EP.615 | 261021",
-     "views": 9766
+     "views": 9812
     }
    ],
    "name": "HANSUNG",
@@ -305,7 +305,7 @@
   {
    "fancam_count": 6,
    "fancam_delta": null,
-   "fancam_views": 182087,
+   "fancam_views": 182081,
    "fancams": [
     {
      "channel": "ALL THE K-POP",
@@ -321,7 +321,7 @@
      "id": "AN-XpuZwOuo",
      "published_at": "2026-10-24T01:11:15Z",
      "title": "[K-Fancam] A2O SOUL 타이 직캠 'SUPERSTAR' (A2O SOUL TAI Fancam) @뮤직뱅크(Music Bank) 261023",
-     "views": 16624
+     "views": 16623
     },
     {
      "channel": "M2",
@@ -345,7 +345,7 @@
      "id": "t7dxPRGU3Po",
      "published_at": "2026-10-22T07:58:24Z",
      "title": "[쇼챔직캠 4K] A2O SOUL TAI - SUPERSTAR | Show Champion | EP.615 | 261021",
-     "views": 13999
+     "views": 13994
     },
     {
      "channel": "M2",
@@ -387,7 +387,7 @@
   {
    "fancam_count": 2,
    "fancam_delta": null,
-   "fancam_views": 119121,
+   "fancam_views": 119120,
    "fancams": [
     {
      "channel": "ALL THE K-POP",
@@ -403,7 +403,7 @@
      "id": "cv6C5_p0F_o",
      "published_at": "2026-10-22T07:58:01Z",
      "title": "[쇼챔직캠 4K] A2O SOUL SONO - SUPERSTAR | Show Champion | EP.615 | 261021",
-     "views": 90352
+     "views": 90351
     }
    ],
    "name": "SONO",
@@ -412,7 +412,7 @@
   {
    "fancam_count": 2,
    "fancam_delta": null,
-   "fancam_views": 64016,
+   "fancam_views": 64022,
    "fancams": [
     {
      "channel": "ALL THE K-POP",
@@ -428,7 +428,7 @@
      "id": "cN8UIsynHBI",
      "published_at": "2026-10-22T07:58:27Z",
      "title": "[쇼챔직캠 4K] A2O SOUL ALURE - SUPERSTAR | Show Champion | EP.615 | 261021",
-     "views": 52250
+     "views": 52256
     }
    ],
    "name": "ALURE",
@@ -437,7 +437,7 @@
   {
    "fancam_count": 3,
    "fancam_delta": null,
-   "fancam_views": 114442,
+   "fancam_views": 114454,
    "fancams": [
     {
      "channel": "ALL THE K-POP",
@@ -453,7 +453,7 @@
      "id": "KAAU5xPZeeQ",
      "published_at": "2026-10-24T01:11:15Z",
      "title": "[K-Fancam] A2O SOUL 자이 직캠 'SUPERSTAR' (A2O SOUL ZAI Fancam) @뮤직뱅크(Music Bank) 261023",
-     "views": 56335
+     "views": 56340
     },
     {
      "channel": "ALL THE K-POP",
@@ -461,7 +461,7 @@
      "id": "YP8crgzIkvQ",
      "published_at": "2026-10-22T07:58:03Z",
      "title": "[쇼챔직캠 4K] A2O SOUL ZAI - SUPERSTAR | Show Champion | EP.615 | 261021",
-     "views": 38089
+     "views": 38096
     }
    ],
    "name": "ZAI",
@@ -503,7 +503,7 @@
   {
    "fancam_count": 4,
    "fancam_delta": null,
-   "fancam_views": 332845,
+   "fancam_views": 332858,
    "fancams": [
     {
      "channel": "ALL THE K-POP",
@@ -519,7 +519,7 @@
      "id": "cymmp-5yoHU",
      "published_at": "2026-10-24T08:03:53Z",
      "title": "[#음중직캠] A2O SOUL ZET (에이투오 소울 제트) – SUPERSTAR FanCam | 쇼! 음악중심 | MBC261024",
-     "views": 84874
+     "views": 84881
     },
     {
      "channel": "M2",
@@ -527,7 +527,7 @@
      "id": "9tBbS7QmheU",
      "published_at": "2026-10-22T09:32:39Z",
      "title": "[MPD직캠] A2O SOUL 제트 직캠 4K 'SUPERSTAR' (A2O SOUL ZET FanCam) | @MCOUNTDOWN_2026.10.22",
-     "views": 127067
+     "views": 127073
     },
     {
      "channel": "ALL THE K-POP",
@@ -553,12 +553,12 @@
    "points": [
     [
      "2026-11-10",
-     71216
+     71635
     ]
    ],
    "published_at": "2026-11-09T10:00:28Z",
    "title": "A2O SOUL - Dancing in the Dark Official Music Video",
-   "views": 71216
+   "views": 71635
   },
   {
    "category": "mv",
@@ -570,12 +570,12 @@
    "points": [
     [
      "2026-11-10",
-     920732
+     924597
     ]
    ],
    "published_at": "2026-11-09T09:00:16Z",
    "title": "A2O SOUL 'Dancing in the Dark' Official Music Video",
-   "views": 920732
+   "views": 924597
   },
   {
    "category": "mv",
@@ -587,12 +587,12 @@
    "points": [
     [
      "2026-11-10",
-     655492
+     655750
     ]
    ],
    "published_at": "2026-11-05T15:00:28Z",
    "title": "A2O SOUL 'SUPERSTAR' INFINITE Music Video",
-   "views": 655492
+   "views": 655750
   },
   {
    "category": "mv",
@@ -604,12 +604,12 @@
    "points": [
     [
      "2026-11-10",
-     184582
+     184588
     ]
    ],
    "published_at": "2026-10-20T03:00:27Z",
    "title": "A2O SOUL - SUPERSTAR Official Music Video",
-   "views": 184582
+   "views": 184588
   },
   {
    "category": "mv",
@@ -621,12 +621,12 @@
    "points": [
     [
      "2026-11-10",
-     3323509
+     3323739
     ]
    ],
    "published_at": "2026-10-16T10:00:30Z",
    "title": "A2O SOUL 'SUPERSTAR' Official Music Video",
-   "views": 3323509
+   "views": 3323739
   }
  ],
  "recent": [
@@ -638,7 +638,7 @@
    "member": "",
    "published_at": "2026-11-09T10:00:28Z",
    "title": "A2O SOUL - Dancing in the Dark Official Music Video",
-   "views": 71216
+   "views": 71635
   },
   {
    "category": "content",
@@ -648,7 +648,7 @@
    "member": "",
    "published_at": "2026-11-09T10:00:17Z",
    "title": "A2O SOUL 'Dancing in the Dark' Official Music Video｜#Shorts",
-   "views": 22759
+   "views": 22889
   },
   {
    "category": "mv",
@@ -658,7 +658,7 @@
    "member": "",
    "published_at": "2026-11-09T09:00:16Z",
    "title": "A2O SOUL 'Dancing in the Dark' Official Music Video",
-   "views": 920732
+   "views": 924597
   },
   {
    "category": "content",
@@ -668,7 +668,17 @@
    "member": "",
    "published_at": "2026-11-09T09:00:13Z",
    "title": "A2O SOUL DEBUT ALBUM [SUPERSTAR] OUT NOW",
-   "views": 697532
+   "views": 703781
+  },
+  {
+   "category": "content",
+   "channel": "STONE MUSIC",
+   "delta": null,
+   "id": "fuTiT7BbeIE",
+   "member": "",
+   "published_at": "2026-11-09T05:00:25Z",
+   "title": "2~3세대의 추억이 아닌 5세대의 새로운 뉴 신스웨이브의 등장, A2O SOUL!｜#Shorts",
+   "views": 13352
   },
   {
    "category": "content",
@@ -678,7 +688,7 @@
    "member": "",
    "published_at": "2026-11-08T09:00:09Z",
    "title": "A2O SOUL 'Dancing in the Dark' MV Teaser",
-   "views": 228793
+   "views": 228842
   },
   {
    "category": "content",
@@ -688,7 +698,7 @@
    "member": "",
    "published_at": "2026-11-08T03:00:16Z",
    "title": "A2O SOUL ‘Dancing in the Dark’ Teaser",
-   "views": 357313
+   "views": 357426
   },
   {
    "category": "mv",
@@ -698,7 +708,7 @@
    "member": "",
    "published_at": "2026-11-05T15:00:28Z",
    "title": "A2O SOUL 'SUPERSTAR' INFINITE Music Video",
-   "views": 655492
+   "views": 655750
   },
   {
    "category": "content",
@@ -708,7 +718,7 @@
    "member": "",
    "published_at": "2026-11-04T09:00:10Z",
    "title": "A2O SOUL DEBUT ALBUM [SUPERSTAR] Highlight Medley",
-   "views": 92855
+   "views": 92885
   },
   {
    "category": "content",
@@ -718,7 +728,7 @@
    "member": "",
    "published_at": "2026-11-04T09:00:05Z",
    "title": "A2O SOUL DEBUT ALBUM [SUPERSTAR] Highlight Medley",
-   "views": 269473
+   "views": 269539
   },
   {
    "category": "content",
@@ -728,7 +738,7 @@
    "member": "",
    "published_at": "2026-11-03T05:00:39Z",
    "title": "Music Bank BEHIND 💫 #A2O #A2OSOUL #SUPERSTAR",
-   "views": 98866
+   "views": 98931
   },
   {
    "category": "content",
@@ -738,20 +748,10 @@
    "member": "",
    "published_at": "2026-11-02T07:00:32Z",
    "title": "[안방1열 풀캠4K] 에이투오 소울 'SUPERSTAR' (A2O SOUL FullCam) @SBS Inkigayo 261101",
-   "views": 142185
-  },
-  {
-   "category": "content",
-   "channel": "A2O SOUL",
-   "delta": null,
-   "id": "q3UIafRZ-m0",
-   "member": "",
-   "published_at": "2026-11-01T10:30:25Z",
-   "title": "A2O SOUL 'SUPERSTAR' INFINITE CLIP 3",
-   "views": 37064
+   "views": 142218
   }
  ],
- "updated_at": "2026-11-10T15:17+09:00",
+ "updated_at": "2026-11-10T15:29+09:00",
  "videos": [
   {
    "category": "mv",
@@ -762,7 +762,7 @@
    "predebut": false,
    "published_at": "2026-11-09T10:00:28Z",
    "title": "A2O SOUL - Dancing in the Dark Official Music Video",
-   "views": 71216
+   "views": 71635
   },
   {
    "category": "content",
@@ -773,7 +773,7 @@
    "predebut": false,
    "published_at": "2026-11-09T10:00:17Z",
    "title": "A2O SOUL 'Dancing in the Dark' Official Music Video｜#Shorts",
-   "views": 22759
+   "views": 22889
   },
   {
    "category": "mv",
@@ -784,7 +784,7 @@
    "predebut": false,
    "published_at": "2026-11-09T09:00:16Z",
    "title": "A2O SOUL 'Dancing in the Dark' Official Music Video",
-   "views": 920732
+   "views": 924597
   },
   {
    "category": "content",
@@ -795,7 +795,18 @@
    "predebut": false,
    "published_at": "2026-11-09T09:00:13Z",
    "title": "A2O SOUL DEBUT ALBUM [SUPERSTAR] OUT NOW",
-   "views": 697532
+   "views": 703781
+  },
+  {
+   "category": "content",
+   "channel": "STONE MUSIC",
+   "delta": null,
+   "id": "fuTiT7BbeIE",
+   "member": "",
+   "predebut": false,
+   "published_at": "2026-11-09T05:00:25Z",
+   "title": "2~3세대의 추억이 아닌 5세대의 새로운 뉴 신스웨이브의 등장, A2O SOUL!｜#Shorts",
+   "views": 13352
   },
   {
    "category": "content",
@@ -806,7 +817,7 @@
    "predebut": false,
    "published_at": "2026-11-08T09:00:09Z",
    "title": "A2O SOUL 'Dancing in the Dark' MV Teaser",
-   "views": 228793
+   "views": 228842
   },
   {
    "category": "content",
@@ -817,7 +828,7 @@
    "predebut": false,
    "published_at": "2026-11-08T03:00:16Z",
    "title": "A2O SOUL ‘Dancing in the Dark’ Teaser",
-   "views": 357313
+   "views": 357426
   },
   {
    "category": "mv",
@@ -828,7 +839,7 @@
    "predebut": false,
    "published_at": "2026-11-05T15:00:28Z",
    "title": "A2O SOUL 'SUPERSTAR' INFINITE Music Video",
-   "views": 655492
+   "views": 655750
   },
   {
    "category": "content",
@@ -839,7 +850,7 @@
    "predebut": false,
    "published_at": "2026-11-04T09:00:10Z",
    "title": "A2O SOUL DEBUT ALBUM [SUPERSTAR] Highlight Medley",
-   "views": 92855
+   "views": 92885
   },
   {
    "category": "content",
@@ -850,7 +861,7 @@
    "predebut": false,
    "published_at": "2026-11-04T09:00:05Z",
    "title": "A2O SOUL DEBUT ALBUM [SUPERSTAR] Highlight Medley",
-   "views": 269473
+   "views": 269539
   },
   {
    "category": "fancam",
@@ -861,7 +872,7 @@
    "predebut": false,
    "published_at": "2026-11-03T09:00:24Z",
    "title": "[쇼챔1분직캠] A2O SOUL JUNE의 ＜SUPERSTAR＞♬ #A2OSOUL #JUNE #SUPERSTAR",
-   "views": 7929
+   "views": 7915
   },
   {
    "category": "fancam",
@@ -883,7 +894,7 @@
    "predebut": false,
    "published_at": "2026-11-03T09:00:08Z",
    "title": "[쇼챔1분직캠] A2O SOUL HANSUNG의 ＜SUPERSTAR＞♬ #A2OSOUL #HANSUNG #SUPERSTAR",
-   "views": 4258
+   "views": 4272
   },
   {
    "category": "fancam",
@@ -894,7 +905,7 @@
    "predebut": false,
    "published_at": "2026-11-03T09:00:07Z",
    "title": "[쇼챔1분직캠] A2O SOUL MOON의 ＜SUPERSTAR＞♬ #A2OSOUL #MOON #SUPERSTAR",
-   "views": 7503
+   "views": 7508
   },
   {
    "category": "content",
@@ -905,7 +916,7 @@
    "predebut": false,
    "published_at": "2026-11-03T05:00:39Z",
    "title": "Music Bank BEHIND 💫 #A2O #A2OSOUL #SUPERSTAR",
-   "views": 98866
+   "views": 98931
   },
   {
    "category": "fancam",
@@ -927,7 +938,7 @@
    "predebut": false,
    "published_at": "2026-11-02T09:00:04Z",
    "title": "[쇼챔1분직캠] A2O SOUL TEO의 ＜SUPERSTAR＞♬ #A2OSOUL #TEO #SUPERSTAR",
-   "views": 5404
+   "views": 5403
   },
   {
    "category": "fancam",
@@ -949,7 +960,7 @@
    "predebut": false,
    "published_at": "2026-11-02T07:00:32Z",
    "title": "[안방1열 풀캠4K] 에이투오 소울 'SUPERSTAR' (A2O SOUL FullCam) @SBS Inkigayo 261101",
-   "views": 142185
+   "views": 142218
   },
   {
    "category": "content",
@@ -960,7 +971,7 @@
    "predebut": false,
    "published_at": "2026-11-01T10:30:25Z",
    "title": "A2O SOUL 'SUPERSTAR' INFINITE CLIP 3",
-   "views": 37064
+   "views": 37071
   },
   {
    "category": "content",
@@ -971,7 +982,7 @@
    "predebut": false,
    "published_at": "2026-11-01T06:54:14Z",
    "title": "SUPERSTAR - A2O SOUL | SBS 261101 방송",
-   "views": 240497
+   "views": 240509
   },
   {
    "category": "fancam",
@@ -1026,7 +1037,7 @@
    "predebut": false,
    "published_at": "2026-10-31T01:03:05Z",
    "title": "[K-Choreo 8K] A2O LITE & A2O SOUL 직캠 'Dance Break' (A2O LITE & A2O SOUL Choreography) @MusicBank",
-   "views": 49007
+   "views": 48965
   },
   {
    "category": "fancam",
@@ -1048,7 +1059,7 @@
    "predebut": false,
    "published_at": "2026-10-30T12:38:09Z",
    "title": "[뮤뱅 스테디캠 4K] A2O LITE  & A2O SOUL 'Dance Break' 4k Bonus Ver. @뮤직뱅크(Music Bank) 261030",
-   "views": 304717
+   "views": 304732
   },
   {
    "category": "content",
@@ -1059,7 +1070,7 @@
    "predebut": false,
    "published_at": "2026-10-30T09:09:40Z",
    "title": "SUPERSTAR - A2O SOUL [뮤직뱅크/Music Bank] | KBS 261030 방송",
-   "views": 352013
+   "views": 352052
   },
   {
    "category": "fancam",
@@ -1114,7 +1125,7 @@
    "predebut": false,
    "published_at": "2026-10-28T09:00:21Z",
    "title": "A2O SOUL 'SUPERSTAR' INFINITE CLIP 2",
-   "views": 39452
+   "views": 39457
   },
   {
    "category": "content",
@@ -1125,7 +1136,7 @@
    "predebut": false,
    "published_at": "2026-10-27T09:00:12Z",
    "title": "A2O COSMIC EPIC : Welcome to SOULITE",
-   "views": 207352
+   "views": 207365
   },
   {
    "category": "content",
@@ -1136,7 +1147,7 @@
    "predebut": false,
    "published_at": "2026-10-26T14:12:53Z",
    "title": "A2O SOUL을 소개합니다 💙",
-   "views": 111508
+   "views": 111529
   },
   {
    "category": "content",
@@ -1147,7 +1158,7 @@
    "predebut": false,
    "published_at": "2026-10-26T10:58:09Z",
    "title": "쓰담쓰담 🫳",
-   "views": 124835
+   "views": 124849
   },
   {
    "category": "content",
@@ -1158,7 +1169,7 @@
    "predebut": false,
    "published_at": "2026-10-26T10:00:21Z",
    "title": "A2O SOUL 많이 사랑해주세요 🫶",
-   "views": 66998
+   "views": 67003
   },
   {
    "category": "content",
@@ -1191,7 +1202,7 @@
    "predebut": false,
    "published_at": "2026-10-25T10:10:41Z",
    "title": "SUPERSTAR - A2O SOUL | SBS 261025 방송",
-   "views": 324265
+   "views": 324285
   },
   {
    "category": "content",
@@ -1202,7 +1213,7 @@
    "predebut": false,
    "published_at": "2026-10-24T09:27:09Z",
    "title": "A2O SOUL 'SUPERSTAR' INFINITE CLIP 1",
-   "views": 36191
+   "views": 36198
   },
   {
    "category": "fancam",
@@ -1213,7 +1224,7 @@
    "predebut": false,
    "published_at": "2026-10-24T08:03:53Z",
    "title": "[#음중직캠] A2O SOUL ZET (에이투오 소울 제트) – SUPERSTAR FanCam | 쇼! 음악중심 | MBC261024",
-   "views": 84874
+   "views": 84881
   },
   {
    "category": "fancam",
@@ -1224,7 +1235,7 @@
    "predebut": false,
    "published_at": "2026-10-24T08:03:38Z",
    "title": "[#음중직캠] A2O SOUL SEOHA (에이투오 소울 서하) – SUPERSTAR FanCam | 쇼! 음악중심 | MBC261024",
-   "views": 44125
+   "views": 44127
   },
   {
    "category": "content",
@@ -1246,7 +1257,7 @@
    "predebut": false,
    "published_at": "2026-10-24T07:03:40Z",
    "title": "A2O SOUL (에이투오 소울) - SUPERSTAR | Show! MusicCore | MBC261024방송",
-   "views": 354108
+   "views": 354139
   },
   {
    "category": "content",
@@ -1257,7 +1268,7 @@
    "predebut": false,
    "published_at": "2026-10-24T06:30:35Z",
    "title": "(ENG)에이투오 라이트 & 에이투오 소울 (A2O LITE & A2O SOUL Interview) l @MusicBank KBS 261023",
-   "views": 508295
+   "views": 508360
   },
   {
    "category": "fancam",
@@ -1279,7 +1290,7 @@
    "predebut": false,
    "published_at": "2026-10-24T01:11:15Z",
    "title": "[K-Fancam] A2O SOUL 타이 직캠 'SUPERSTAR' (A2O SOUL TAI Fancam) @뮤직뱅크(Music Bank) 261023",
-   "views": 16624
+   "views": 16623
   },
   {
    "category": "fancam",
@@ -1290,7 +1301,7 @@
    "predebut": false,
    "published_at": "2026-10-24T01:11:15Z",
    "title": "[K-Fancam] A2O SOUL 자이 직캠 'SUPERSTAR' (A2O SOUL ZAI Fancam) @뮤직뱅크(Music Bank) 261023",
-   "views": 56335
+   "views": 56340
   },
   {
    "category": "fancam",
@@ -1312,7 +1323,7 @@
    "predebut": false,
    "published_at": "2026-10-24T01:01:05Z",
    "title": "[K-Choreo 8K] A2O SOUL 직캠 'SUPERSTAR' (A2O SOUL Choreography) @MusicBank 261023",
-   "views": 245446
+   "views": 245470
   },
   {
    "category": "content",
@@ -1323,7 +1334,7 @@
    "predebut": false,
    "published_at": "2026-10-23T09:03:09Z",
    "title": "SUPERSTAR - A2O SOUL [뮤직뱅크/Music Bank] | KBS 261023 방송",
-   "views": 317905
+   "views": 317917
   },
   {
    "category": "fancam",
@@ -1345,7 +1356,7 @@
    "predebut": false,
    "published_at": "2026-10-22T12:01:44Z",
    "title": "A2O SOUL 'SUPERSTAR' 릴댄 하이라이트 | 릴레이댄스",
-   "views": 637269
+   "views": 637342
   },
   {
    "category": "content",
@@ -1356,7 +1367,7 @@
    "predebut": false,
    "published_at": "2026-10-22T12:01:10Z",
    "title": "A2O SOUL 금발 걔 '자이' | 릴레이댄스",
-   "views": 156046
+   "views": 156053
   },
   {
    "category": "content",
@@ -1367,7 +1378,7 @@
    "predebut": false,
    "published_at": "2026-10-22T12:01:04Z",
    "title": "A2O SOUL 귀여움 대표 '제트' | 릴레이댄스",
-   "views": 224679
+   "views": 224706
   },
   {
    "category": "content",
@@ -1389,7 +1400,7 @@
    "predebut": false,
    "published_at": "2026-10-22T12:00:35Z",
    "title": "[릴레이댄스] A2O SOUL - SUPERSTAR (4K)",
-   "views": 431807
+   "views": 431863
   },
   {
    "category": "content",
@@ -1400,7 +1411,7 @@
    "predebut": false,
    "published_at": "2026-10-22T10:19:03Z",
    "title": "A2O SOUL - SUPERSTAR #엠카운트다운 EP.950 | Mnet 261022 방송",
-   "views": 316854
+   "views": 316868
   },
   {
    "category": "content",
@@ -1411,7 +1422,7 @@
    "predebut": false,
    "published_at": "2026-10-22T09:33:35Z",
    "title": "유영진이 성대로 낳은 아들 A2O SOUL 서하",
-   "views": 75220
+   "views": 75227
   },
   {
    "category": "fancam",
@@ -1444,7 +1455,7 @@
    "predebut": false,
    "published_at": "2026-10-22T09:32:39Z",
    "title": "[MPD직캠] A2O SOUL 소라 직캠 4K 'SUPERSTAR' (A2O SOUL SORA FanCam) | @MCOUNTDOWN_2026.10.22",
-   "views": 85037
+   "views": 85045
   },
   {
    "category": "fancam",
@@ -1455,7 +1466,7 @@
    "predebut": false,
    "published_at": "2026-10-22T09:32:39Z",
    "title": "[MPD직캠] A2O SOUL 제트 직캠 4K 'SUPERSTAR' (A2O SOUL ZET FanCam) | @MCOUNTDOWN_2026.10.22",
-   "views": 127067
+   "views": 127073
   },
   {
    "category": "fancam",
@@ -1488,7 +1499,7 @@
    "predebut": false,
    "published_at": "2026-10-22T09:32:39Z",
    "title": "[MPD직캠] A2O SOUL 가쿠 직캠 4K 'SUPERSTAR' (A2O SOUL GAKU FanCam) | @MCOUNTDOWN_2026.10.22",
-   "views": 50360
+   "views": 50390
   },
   {
    "category": "fancam",
@@ -1499,7 +1510,7 @@
    "predebut": false,
    "published_at": "2026-10-22T09:32:39Z",
    "title": "[MPD직캠] A2O SOUL 서하 직캠 4K 'SUPERSTAR' (A2O SOUL SEOHA FanCam) | @MCOUNTDOWN_2026.10.22",
-   "views": 55336
+   "views": 55346
   },
   {
    "category": "fancam",
@@ -1510,7 +1521,7 @@
    "predebut": false,
    "published_at": "2026-10-22T09:32:39Z",
    "title": "[MPD직캠] A2O SOUL 문 직캠 4K 'SUPERSTAR' (A2O SOUL MOON FanCam) | @MCOUNTDOWN_2026.10.22",
-   "views": 13569
+   "views": 13565
   },
   {
    "category": "content",
@@ -1521,7 +1532,7 @@
    "predebut": false,
    "published_at": "2026-10-22T09:00:06Z",
    "title": "[MC석 코너] A2O LITE & A2O SOUL 역대급 신인이 알고싶다 ‘A2O LITE & A2O SOUL’ 나!왔어✋🏻 #쇼챔피언 #NEON #SUPERSTAR",
-   "views": 13286
+   "views": 13284
   },
   {
    "category": "fancam",
@@ -1532,7 +1543,7 @@
    "predebut": false,
    "published_at": "2026-10-22T07:58:34Z",
    "title": "[쇼챔직캠 4K] A2O SOUL JUNE - SUPERSTAR | Show Champion | EP.615 | 261021",
-   "views": 6500
+   "views": 6501
   },
   {
    "category": "fancam",
@@ -1543,7 +1554,7 @@
    "predebut": false,
    "published_at": "2026-10-22T07:58:31Z",
    "title": "[쇼챔직캠 4K] A2O SOUL MOON - SUPERSTAR | Show Champion | EP.615 | 261021",
-   "views": 8231
+   "views": 8234
   },
   {
    "category": "fancam",
@@ -1576,7 +1587,7 @@
    "predebut": false,
    "published_at": "2026-10-22T07:58:27Z",
    "title": "[쇼챔직캠 4K] A2O SOUL ALURE - SUPERSTAR | Show Champion | EP.615 | 261021",
-   "views": 52250
+   "views": 52256
   },
   {
    "category": "fancam",
@@ -1598,7 +1609,7 @@
    "predebut": false,
    "published_at": "2026-10-22T07:58:24Z",
    "title": "[쇼챔직캠 4K] A2O SOUL TAI - SUPERSTAR | Show Champion | EP.615 | 261021",
-   "views": 13999
+   "views": 13994
   },
   {
    "category": "fancam",
@@ -1609,7 +1620,7 @@
    "predebut": false,
    "published_at": "2026-10-22T07:58:22Z",
    "title": "[쇼챔직캠 4K] A2O SOUL HANSUNG - SUPERSTAR | Show Champion | EP.615 | 261021",
-   "views": 9766
+   "views": 9812
   },
   {
    "category": "fancam",
@@ -1620,7 +1631,7 @@
    "predebut": false,
    "published_at": "2026-10-22T07:58:20Z",
    "title": "[쇼챔직캠 4K] A2O SOUL LUCIEN - SUPERSTAR | Show Champion | EP.615 | 261021",
-   "views": 12733
+   "views": 12734
   },
   {
    "category": "fancam",
@@ -1642,7 +1653,7 @@
    "predebut": false,
    "published_at": "2026-10-22T07:58:12Z",
    "title": "[쇼챔직캠 4K] A2O SOUL GAKU - SUPERSTAR | Show Champion | EP.615 | 261021",
-   "views": 19293
+   "views": 19274
   },
   {
    "category": "fancam",
@@ -1653,7 +1664,7 @@
    "predebut": false,
    "published_at": "2026-10-22T07:58:08Z",
    "title": "[쇼챔직캠 4K] A2O SOUL SORA - SUPERSTAR | Show Champion | EP.615 | 261021",
-   "views": 28852
+   "views": 28855
   },
   {
    "category": "fancam",
@@ -1675,7 +1686,7 @@
    "predebut": false,
    "published_at": "2026-10-22T07:58:03Z",
    "title": "[쇼챔직캠 4K] A2O SOUL ZAI - SUPERSTAR | Show Champion | EP.615 | 261021",
-   "views": 38089
+   "views": 38096
   },
   {
    "category": "fancam",
@@ -1686,7 +1697,7 @@
    "predebut": false,
    "published_at": "2026-10-22T07:58:01Z",
    "title": "[쇼챔직캠 4K] A2O SOUL SONO - SUPERSTAR | Show Champion | EP.615 | 261021",
-   "views": 90352
+   "views": 90351
   },
   {
    "category": "fancam",
@@ -1697,7 +1708,7 @@
    "predebut": false,
    "published_at": "2026-10-21T13:04:38Z",
    "title": "[쇼챔직캠 4K] A2O SOUL - SUPERSTAR | Show Champion | EP.615 | 261021",
-   "views": 68951
+   "views": 68953
   },
   {
    "category": "content",
@@ -1708,7 +1719,7 @@
    "predebut": false,
    "published_at": "2026-10-21T09:34:44Z",
    "title": "[HOT DEBUT] A2O SOUL - SUPERSTAR  l Show Champion l EP.615 l 261021",
-   "views": 521604
+   "views": 521616
   },
   {
    "category": "content",
@@ -1719,7 +1730,7 @@
    "predebut": false,
    "published_at": "2026-10-21T08:56:25Z",
    "title": "[MC석 코너] 친구같은 컴백 인터뷰! ‘A2O LITE & A2O SOUL’ 나!왔어✋🏻 l Show Champion l EP.615 l 261021",
-   "views": 204755
+   "views": 204774
   },
   {
    "category": "content",
@@ -1741,7 +1752,7 @@
    "predebut": false,
    "published_at": "2026-10-20T03:00:27Z",
    "title": "A2O SOUL - SUPERSTAR Official Music Video",
-   "views": 184582
+   "views": 184588
   },
   {
    "category": "content",
@@ -1752,7 +1763,7 @@
    "predebut": false,
    "published_at": "2026-10-20T02:48:05Z",
    "title": "글로벌 취향 가득담긴 15명의 소년들 A2O SOUL!｜#Shorts",
-   "views": 93268
+   "views": 93271
   },
   {
    "category": "content",
@@ -1763,7 +1774,7 @@
    "predebut": false,
    "published_at": "2026-10-18T12:00:06Z",
    "title": "A2O SOUL ’SUPERSTAR‘ Official Music Video🎬",
-   "views": 493231
+   "views": 493238
   },
   {
    "category": "content",
@@ -1774,7 +1785,18 @@
    "predebut": false,
    "published_at": "2026-10-17T09:00:23Z",
    "title": "A2O SOUL 'SUPERSTAR' Drone Ver.",
-   "views": 45624
+   "views": 45632
+  },
+  {
+   "category": "content",
+   "channel": "Mnet K-POP",
+   "delta": null,
+   "id": "PkwH8thNHCw",
+   "member": "",
+   "predebut": false,
+   "published_at": "2026-10-16T17:11:05Z",
+   "title": "소울 지휘만 따라 오케스트라 이부분진짜감동 #MCOUNTDOWN #엠카운트다운 #A2OSOUL",
+   "views": 2610
   },
   {
    "category": "mv",
@@ -1785,7 +1807,7 @@
    "predebut": false,
    "published_at": "2026-10-16T10:00:30Z",
    "title": "A2O SOUL 'SUPERSTAR' Official Music Video",
-   "views": 3323509
+   "views": 3323739
   },
   {
    "category": "content",
@@ -1796,7 +1818,7 @@
    "predebut": false,
    "published_at": "2026-10-15T09:48:04Z",
    "title": "'HOT DEBUT' A2O SOUL - SUPERSTAR #엠카운트다운 EP.949 | Mnet 261015 방송",
-   "views": 2166072
+   "views": 2166176
   },
   {
    "category": "content",
@@ -1818,7 +1840,7 @@
    "predebut": false,
    "published_at": "2026-10-15T09:29:30Z",
    "title": "[MPD직캠] A2O SOUL 직캠 8K 'SUPERSTAR' (A2O SOUL FanCam) | @MCOUNTDOWN_2026.10.15",
-   "views": 579124
+   "views": 579160
   },
   {
    "category": "fancam",
@@ -1840,7 +1862,7 @@
    "predebut": false,
    "published_at": "2026-10-14T13:43:51Z",
    "title": "A20 SOUL : Debut Show Backstage",
-   "views": 34307
+   "views": 34313
   },
   {
    "category": "content",
@@ -1851,7 +1873,18 @@
    "predebut": false,
    "published_at": "2026-10-14T06:00:25Z",
    "title": "A2O SOUL 'SUPERSTAR' OUT NOW",
-   "views": 69909
+   "views": 69921
+  },
+  {
+   "category": "content",
+   "channel": "STONE MUSIC",
+   "delta": null,
+   "id": "VfDeZwMO8to",
+   "member": "",
+   "predebut": false,
+   "published_at": "2026-10-14T06:00:00Z",
+   "title": "선공개 싱글부터 케이팝 팬들 휘어잡은 A2O SOUL 'SUPERSTAR'｜#Shorts",
+   "views": 68635
   },
   {
    "category": "content",
@@ -1862,7 +1895,7 @@
    "predebut": false,
    "published_at": "2026-10-13T13:36:46Z",
    "title": "A2O SOUL & A2O LITE - INTRO + NEON + SUPERSTAR (4K) | WELCOME TO SOULITE From A2O SOUL A2O LITE",
-   "views": 1017734
+   "views": 1017794
   },
   {
    "category": "content",
@@ -1873,7 +1906,7 @@
    "predebut": false,
    "published_at": "2026-10-13T09:55:52Z",
    "title": "A2O SOUL & A2O LITE Concept Trailer : The First Signal | WELCOME TO SOULITE From A2O SOUL A2O LITE",
-   "views": 225756
+   "views": 225764
   },
   {
    "category": "content",
@@ -1884,7 +1917,7 @@
    "predebut": false,
    "published_at": "2026-10-13T09:55:45Z",
    "title": "[최초공개] A2O SOUL - INTRO + SUPERSTAR (4K) | WELCOME TO SOULITE From A2O SOUL A2O LITE",
-   "views": 2124991
+   "views": 2125034
   },
   {
    "category": "content",
@@ -1895,7 +1928,7 @@
    "predebut": false,
    "published_at": "2026-10-13T09:55:16Z",
    "title": "[최초공개] A2O LITE - NEON (4K) | WELCOME TO SOULITE From A2O SOUL A2O LITE",
-   "views": 18133966
+   "views": 18135292
   },
   {
    "category": "content",
@@ -1906,7 +1939,18 @@
    "predebut": false,
    "published_at": "2026-10-13T09:55:10Z",
    "title": "A2O SOUL & A2O LITE - INTRO DANCE PERFORMANCE (4K) | WELCOME TO SOULITE From A2O SOUL A2O LITE",
-   "views": 458777
+   "views": 458792
+  },
+  {
+   "category": "content",
+   "channel": "STONE MUSIC",
+   "delta": null,
+   "id": "TPOh7woHYqo",
+   "member": "",
+   "predebut": false,
+   "published_at": "2026-10-13T09:23:51Z",
+   "title": "A2O SOUL 'SUPERSTAR' Official Video｜#Shorts",
+   "views": 137659
   },
   {
    "category": "content",
@@ -1917,7 +1961,7 @@
    "predebut": false,
    "published_at": "2026-10-13T09:00:13Z",
    "title": "A2O SOUL - SUPERSTAR Official Performance Video",
-   "views": 870146
+   "views": 870267
   },
   {
    "category": "content",
@@ -1928,7 +1972,7 @@
    "predebut": true,
    "published_at": "2026-10-12T12:30:26Z",
    "title": "A2O SOUL 'SUPERSTAR' Official Performance Video",
-   "views": 6426607
+   "views": 6427114
   },
   {
    "category": "content",
@@ -1994,7 +2038,7 @@
    "predebut": true,
    "published_at": "2026-10-08T11:41:40Z",
    "title": "A2O SOUL: Find the SOUL",
-   "views": 107603
+   "views": 107602
   },
   {
    "category": "content",
@@ -2027,7 +2071,7 @@
    "predebut": true,
    "published_at": "2025-09-19T10:00:44Z",
    "title": "A2O LTB DAVID, A2O LTG OA 'Summer Night' Zalpha Pop Official Video",
-   "views": 2968099
+   "views": 2968375
   },
   {
    "category": "content",
@@ -2049,7 +2093,7 @@
    "predebut": true,
    "published_at": "2025-06-11T07:00:07Z",
    "title": "A2O LTB HANZE 'Palette' Zal-Life Behind The Scenes",
-   "views": 9850
+   "views": 9853
   },
   {
    "category": "content",
@@ -2060,7 +2104,7 @@
    "predebut": true,
    "published_at": "2025-06-06T10:00:19Z",
    "title": "A2O LTB HANZE 'Palette' Zal-Dance Official Video",
-   "views": 22793
+   "views": 22796
   },
   {
    "category": "content",
@@ -2093,7 +2137,7 @@
    "predebut": true,
    "published_at": "2025-04-04T10:00:32Z",
    "title": "A2O HTB, A2O LTB 'CHAMPAGNE' Zal-Dance Official Video",
-   "views": 168731
+   "views": 168790
   },
   {
    "category": "content",
@@ -2104,7 +2148,7 @@
    "predebut": true,
    "published_at": "2025-03-29T10:00:58Z",
    "title": "A2O LTB JIAYI 'What's Up Danger' Zal-Life Behind The Scenes",
-   "views": 16863
+   "views": 16865
   },
   {
    "category": "content",
@@ -2115,7 +2159,7 @@
    "predebut": true,
    "published_at": "2025-03-28T10:00:00Z",
    "title": "A2O LTB JIAYI 'What's Up Danger' Zal-Dance Official Video",
-   "views": 27092
+   "views": 27098
   },
   {
    "category": "content",
@@ -2192,7 +2236,7 @@
    "predebut": true,
    "published_at": "2025-03-07T10:34:13Z",
    "title": "A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Dance Official Video",
-   "views": 23280
+   "views": 23299
   },
   {
    "category": "content",
@@ -2203,7 +2247,7 @@
    "predebut": true,
    "published_at": "2025-02-28T10:13:18Z",
    "title": "A2O LTB 'B.B.B' Zal-Dance Official Video",
-   "views": 28101
+   "views": 28103
   },
   {
    "category": "content",
@@ -2225,7 +2269,7 @@
    "predebut": true,
    "published_at": "2025-02-14T10:44:50Z",
    "title": "A2O HTB, A2O LTB ‘REVOLUTION’ Zal-Dance Official Video",
-   "views": 29440
+   "views": 29435
   },
   {
    "category": "content",
@@ -2236,7 +2280,7 @@
    "predebut": true,
    "published_at": "2025-02-10T04:24:16Z",
    "title": "A2O LTB, LTG ‘BAD & BOSSY’ Zal-Life Behind The Scenes",
-   "views": 28933
+   "views": 28935
   },
   {
    "category": "content",
@@ -2247,7 +2291,7 @@
    "predebut": true,
    "published_at": "2025-02-07T10:40:40Z",
    "title": "A2O LTB, A2O LTG ‘BAD & BOSSY’ Zal-Dance Official Video",
-   "views": 35168
+   "views": 35153
   },
   {
    "category": "content",
@@ -2269,7 +2313,7 @@
    "predebut": true,
    "published_at": "2025-01-04T21:06:21Z",
    "title": "A2O Rookies LTB JIAYI, LTG XILI 'GHOST TOWN' Zal-Dance Official Video",
-   "views": 52703
+   "views": 52710
   },
   {
    "category": "content",
@@ -2280,7 +2324,7 @@
    "predebut": true,
    "published_at": "2024-12-29T08:27:26Z",
    "title": "A2O Rookies LTB ‘BLACK MADONNA’ Zal-Life Behind The Scenes",
-   "views": 30771
+   "views": 30772
   },
   {
    "category": "content",
@@ -2291,7 +2335,7 @@
    "predebut": true,
    "published_at": "2024-12-27T08:46:02Z",
    "title": "A2O Rookie LTB JIAYI ‘Easy on me’ Zalpha Pop Official Video",
-   "views": 113095
+   "views": 113100
   },
   {
    "category": "content",
@@ -2302,7 +2346,7 @@
    "predebut": true,
    "published_at": "2024-12-18T08:11:08Z",
    "title": "A2O Rookies LTB ‘BLACK MADONNA’ Zal-Dance Official Video",
-   "views": 192567
+   "views": 192588
   },
   {
    "category": "content",
@@ -2313,7 +2357,7 @@
    "predebut": true,
    "published_at": "2024-12-10T20:23:09Z",
    "title": "A2O Rookies LTB 'CANDY' Zal-Life Behind The Scenes",
-   "views": 168550
+   "views": 168554
   },
   {
    "category": "content",
@@ -2324,7 +2368,7 @@
    "predebut": true,
    "published_at": "2024-11-22T11:08:27Z",
    "title": "A2O Rookies LTB ’CANDY‘ Zalpha Pop Official Video",
-   "views": 5491602
+   "views": 5491637
   }
  ]
 }
