@@ -1,3 +1,36 @@
+// ---------- 언어 ----------
+const LANGS = ["ko", "en", "ja", "zh"];
+const LOCALES = { ko: "ko-KR", en: "en-US", ja: "ja-JP", zh: "zh-CN" };
+const LANG = (() => {
+  try {
+    const saved = localStorage.getItem("lang");
+    if (LANGS.includes(saved)) return saved;
+  } catch (_) { /* 저장소 막힘 */ }
+  const nav = (navigator.language || "ko").slice(0, 2);
+  return LANGS.includes(nav) ? nav : "en";
+})();
+function t(key, vars = {}) {
+  const dict = window.I18N[LANG] || window.I18N.ko;
+  let s = dict[key] ?? window.I18N.ko[key] ?? key;
+  if (typeof s !== "string") return s;
+  for (const [k, v] of Object.entries(vars)) s = s.replaceAll(`{${k}}`, v);
+  return s;
+}
+document.documentElement.lang = LANG;
+document.querySelectorAll("[data-i18n]").forEach((n) => { n.textContent = t(n.dataset.i18n); });
+(function langSelect() {
+  const sel = document.getElementById("lang");
+  for (const l of LANGS) {
+    const o = document.createElement("option");
+    o.value = l; o.textContent = window.I18N[l].lang; o.selected = l === LANG;
+    sel.append(o);
+  }
+  sel.addEventListener("change", () => {
+    try { localStorage.setItem("lang", sel.value); } catch (_) { /* 무시 */ }
+    location.reload();
+  });
+})();
+
 // ---------- 앱 설치(PWA) ----------
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
@@ -22,8 +55,12 @@ if ("serviceWorker" in navigator) {
 })();
 
 (async function () {
-  const fmt = (v) => (v == null ? "–" : Number(v).toLocaleString("ko-KR"));
-  const kr = (n) => (n >= 1e8 ? `${+(n / 1e8).toFixed(2)}억` : n >= 1e4 ? `${+(n / 1e4).toFixed(1)}만` : fmt(n));
+  const locale = LOCALES[LANG];
+  const fmt = (v) => (v == null ? "–" : Number(v).toLocaleString(locale));
+  const compact = new Intl.NumberFormat(locale, { notation: "compact", maximumFractionDigits: 1 });
+  const kr = (n) => (LANG === "ko"
+    ? (n >= 1e8 ? `${+(n / 1e8).toFixed(2)}억` : n >= 1e4 ? `${+(n / 1e4).toFixed(1)}만` : fmt(n))
+    : compact.format(n));
   const $ = (id) => document.getElementById(id);
   const el = (tag, attrs = {}, ...children) => {
     const n = document.createElement(tag);
@@ -35,18 +72,26 @@ if ("serviceWorker" in navigator) {
   };
   const deltaSpan = (d) => (d ? el("span", { class: "delta" }, `+${fmt(d)}`) : null);
   const ytUrl = (id) => `https://www.youtube.com/watch?v=${encodeURIComponent(id)}`;
+  const thumbUrl = (id) => `https://i.ytimg.com/vi/${encodeURIComponent(id)}/mqdefault.jpg`;
   const ext = (href, ...children) => el("a", { href, target: "_blank", rel: "noopener" }, ...children);
   const empty = (msg) => el("div", { class: "empty" }, msg);
-  const todayKst = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" }).format(new Date()); // YYYY-MM-DD
+  const kstFmt = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" });
+  const todayKst = kstFmt.format(new Date()); // YYYY-MM-DD
+  const nat = (s) => (s || "").split("·").map((x) => (t("nat")[x] || x)).join("·");
+  const kstDate = (s) => new Date(`${s.replace(" ", "T")}${s.length > 10 ? ":00" : "T00:00:00"}+09:00`); // "YYYY-MM-DD[ HH:MM]" KST
 
   // ---------- 탭 ----------
-  const tabs = ["overview", "mv", "members", "fancams", "videos"];
+  const tabs = ["overview", "cheer", "mv", "members", "fancams", "videos", "guide"];
   const drawn = new Set();
   const drawers = {};
   function showTab() {
     const cur = tabs.includes(location.hash.slice(1)) ? location.hash.slice(1) : "overview";
     document.querySelectorAll("[data-tab]").forEach((s) => (s.hidden = s.dataset.tab !== cur));
-    document.querySelectorAll("#tabs a").forEach((a) => a.classList.toggle("on", a.getAttribute("href") === `#${cur}`));
+    document.querySelectorAll("#tabs a").forEach((a) => {
+      const on = a.getAttribute("href") === `#${cur}`;
+      a.classList.toggle("on", on);
+      if (on) a.scrollIntoView({ block: "nearest", inline: "nearest" });
+    });
     if (!drawn.has(cur) && drawers[cur] && window.Chart) { drawn.add(cur); drawers[cur](); }
   }
   window.addEventListener("hashchange", showTab);
@@ -60,24 +105,55 @@ if ("serviceWorker" in navigator) {
       if (r.ok) { data = await r.json(); break; }
     } catch (_) { /* 다음 경로 시도 */ }
   }
-  if (!data) { $("updated").textContent = "데이터를 불러오지 못했어요"; return; }
+  if (!data) { $("updated").textContent = t("load_fail"); return; }
 
   // ---------- 헤더 ----------
   if (data.debut_date) {
     const days = Math.round((Date.parse(todayKst) - Date.parse(data.debut_date)) / 86400000) + 1;
     $("dday").textContent = `D+${days}`;
-    $("debut").textContent = `데뷔 ${data.debut_date.replaceAll("-", ".")}`;
+    $("debut").textContent = t("debut", { d: data.debut_date.replaceAll("-", ".") });
   }
-  $("updated").textContent = data.updated_at
-    ? `마지막 수집: ${data.updated_at.slice(0, 16).replace("T", " ")} KST`
-    : "아직 수집 전";
+  $("updated").textContent = data.updated_at ? t("last", { t: data.updated_at.slice(0, 16).replace("T", " ") }) : t("not_yet");
+  if (data.feedback_url) { $("feedback").href = data.feedback_url; $("feedback").hidden = false; }
+
+  // ---------- 영상 카드 ----------
+  const ymd = (iso) => (iso ? kstFmt.format(new Date(iso)).replaceAll("-", ".") : "");
+  // 업로드 3일(72시간) 이내 = NEW, 7일 이내는 'N시간 전/N일 전'
+  const NEW_HOURS = 72;
+  const ageHours = (iso) => (iso ? (Date.now() - Date.parse(iso)) / 3600000 : Infinity);
+  const isNew = (v) => ageHours(v.published_at) <= NEW_HOURS;
+  function when(iso) {
+    const h = ageHours(iso);
+    if (h < 1) return t("just_now");
+    if (h < 24) return t("hours_ago", { n: Math.floor(h) });
+    if (h < 24 * 7) return t("days_ago", { n: Math.floor(h / 24) });
+    return ymd(iso);
+  }
+  const catLabel = (c) => t(`cat.${c}`);
+  function videoCard(v, chipText, ...extra) {
+    const fresh = isNew(v);
+    return el("a", { class: `video${fresh ? " is-new" : ""}`, href: ytUrl(v.id), target: "_blank", rel: "noopener" },
+      el("div", { class: "thumb" },
+        el("img", { src: thumbUrl(v.id), alt: "", loading: "lazy" }),
+        fresh ? el("span", { class: "new" }, "NEW") : null,
+        v.short ? el("span", { class: "badge" }, t("short")) : null),
+      el("div", { class: "t" }, v.title),
+      el("div", { class: "m" }, chipText ? el("span", { class: "chip" }, chipText) : null,
+        el("span", { title: ymd(v.published_at), class: fresh ? "when-new" : "" }, when(v.published_at)),
+        v.channel ? ` · ${v.channel}` : null),
+      el("div", { class: "m" }, t("views", { v: fmt(v.views) }), v.delta ? " · " : null, deltaSpan(v.delta)),
+      ...extra,
+    );
+  }
 
   // ---------- 한눈에 ----------
   for (const k of data.kpis) {
+    const sub = k.key === "mv_total" ? t("kpi.mv_count", { n: k.count })
+      : k.key === "fancam_total" ? t("kpi.fancam_count", { n: k.count }) : k.sub;
     $("kpis").append(el("div", { class: "card kpi" },
-      el("div", { class: "label" }, k.label),
+      el("div", { class: "label" }, k.key ? t(`kpi.${k.key}`) : k.label),
       el("div", { class: "value" }, fmt(k.value)),
-      el("div", { class: "sub" }, k.sub, k.delta ? " · " : null, deltaSpan(k.delta)),
+      el("div", { class: "sub" }, sub, k.delta ? " · " : null, deltaSpan(k.delta)),
     ));
   }
 
@@ -91,22 +167,29 @@ if ("serviceWorker" in navigator) {
         const date = `${y}-${m.birthday}`;
         const diff = Math.round((Date.parse(date) - today) / 86400000);
         if (diff >= 0 && diff <= days) {
-          out.push({ date, type: "생일", title: `🎂 ${m.name} 생일${diff ? ` D-${diff}` : " D-DAY"}`, member: m.name });
+          out.push({ date, type: t("ev.birthday"), title: t("birthday_ev", { name: m.name, dd: diff ? `D-${diff}` : "D-DAY" }), member: m.name });
           break;
         }
       }
     }
     return out;
   }
-  const events = [...(data.events || []).filter((e) => e.date >= todayKst), ...upcomingBirthdays()]
+  const voteEvents = (data.votes || []).map((v) => ({
+    date: v.end.slice(0, 10), time: v.end.slice(11), type: t("votes"),
+    title: `🗳 ${[v.show, v.title].filter(Boolean).join(" ")}`, url: v.url,
+  }));
+  const supportEvents = (data.supports || []).filter((x) => x.start >= todayKst).map((x) => ({
+    date: x.start, type: x.kind, title: `☕ ${[x.member, x.title].filter(Boolean).join(" ")}`, url: x.url,
+  }));
+  const events = [...(data.events || []).filter((e) => e.date >= todayKst), ...upcomingBirthdays(), ...voteEvents, ...supportEvents]
     .sort((a, b) => (a.date + (a.time || "")).localeCompare(b.date + (b.time || ""))).slice(0, 10);
   if (events.length) {
-    const wd = ["일", "월", "화", "수", "목", "금", "토"];
+    const wd = t("weekdays");
     for (const e of events) {
       const d = new Date(`${e.date}T00:00:00Z`);
       const isToday = e.date === todayKst;
-      const when = el("div", { class: "when" },
-        isToday ? el("span", { class: "today" }, "오늘") : el("b", {}, `${d.getUTCMonth() + 1}.${d.getUTCDate()}`),
+      const whenEl = el("div", { class: "when" },
+        isToday ? el("span", { class: "today" }, t("today")) : el("b", {}, `${d.getUTCMonth() + 1}.${d.getUTCDate()}`),
         ` (${wd[d.getUTCDay()]})`, e.time ? ` ${e.time}` : null);
       let title;
       if (e.member) {
@@ -117,62 +200,111 @@ if ("serviceWorker" in navigator) {
         title = e.url ? ext(e.url, e.title) : el("span", {}, e.title);
       }
       title.classList.add("what");
-      $("events").append(el("li", {}, when, el("div", {}, e.type ? el("span", { class: "chip" }, e.type) : null, title)));
+      $("events").append(el("li", {}, whenEl, el("div", {}, e.type ? el("span", { class: "chip" }, e.type) : null, title)));
     }
   } else {
-    $("eventsSection").remove();
-  }
-
-  // ---------- 영상 카드 ----------
-  const kstDay = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" });
-  const ymd = (iso) => (iso ? kstDay.format(new Date(iso)).replaceAll("-", ".") : "");
-  // 업로드 3일(72시간) 이내 = NEW, 7일 이내는 'N시간 전/N일 전'
-  const NEW_HOURS = 72;
-  const ageHours = (iso) => (iso ? (Date.now() - Date.parse(iso)) / 3600000 : Infinity);
-  const isNew = (v) => ageHours(v.published_at) <= NEW_HOURS;
-  function when(iso) {
-    const h = ageHours(iso);
-    if (h < 1) return "방금 전";
-    if (h < 24) return `${Math.floor(h)}시간 전`;
-    if (h < 24 * 7) return `${Math.floor(h / 24)}일 전`;
-    return ymd(iso);
-  }
-  function videoCard(v, chipText, ...extra) {
-    const fresh = isNew(v);
-    return el("a", { class: `video${fresh ? " is-new" : ""}`, href: ytUrl(v.id), target: "_blank", rel: "noopener" },
-      el("div", { class: "thumb" },
-        el("img", { src: `https://i.ytimg.com/vi/${encodeURIComponent(v.id)}/mqdefault.jpg`, alt: "", loading: "lazy" }),
-        fresh ? el("span", { class: "new" }, "NEW") : null,
-        v.short ? el("span", { class: "badge" }, "쇼츠") : null),
-      el("div", { class: "t" }, v.title),
-      el("div", { class: "m" }, chipText ? el("span", { class: "chip" }, chipText) : null,
-        el("span", { title: ymd(v.published_at), class: fresh ? "when-new" : "" }, when(v.published_at)),
-        v.channel ? ` · ${v.channel}` : null),
-      el("div", { class: "m" }, `조회수 ${fmt(v.views)}`, v.delta ? " · " : null, deltaSpan(v.delta)),
-      ...extra,
-    );
+    $("events").replaceWith(empty("–"));
   }
 
   const newCount = data.videos.filter(isNew).length;
   if (newCount) $("recentHead").append(el("span", { class: "new-count" }, `NEW ${newCount}`));
   if (data.recent.length) {
-    for (const v of data.recent) $("recent").append(videoCard(v, v.member || data.categories[v.category] || v.category));
+    for (const v of data.recent) $("recent").append(videoCard(v, v.member || catLabel(v.category)));
   } else {
-    $("recent").replaceWith(empty("아직 수집된 영상이 없어요"));
+    $("recent").replaceWith(empty(t("empty_videos")));
   }
+
+  // ---------- 응원 ----------
+  function duration(ms) {
+    const m = Math.max(0, Math.floor(ms / 60000));
+    if (m >= 1440) return t("dur_d", { n: Math.floor(m / 1440) }) + " " + t("dur_h", { n: Math.floor((m % 1440) / 60) });
+    if (m >= 60) return t("dur_h", { n: Math.floor(m / 60) }) + " " + t("dur_m", { n: m % 60 });
+    return t("dur_m", { n: m });
+  }
+  const votes = (data.votes || []).filter((v) => kstDate(v.end) > Date.now());
+  if (votes.length) {
+    for (const v of votes) {
+      const start = kstDate(v.start), end = kstDate(v.end);
+      const open = Date.now() >= start;
+      const urgent = open && end - Date.now() < 6 * 3600000;
+      $("votes").append(el("div", { class: `vote${urgent ? " urgent" : ""}` },
+        el("div", { class: "vote-top" },
+          el("span", { class: `chip ${open ? "chip-on" : ""}` }, open ? t("vote_now") : t("vote_soon")),
+          el("b", {}, [v.show, v.title].filter(Boolean).join(" · ")), v.app ? el("span", { class: "muted" }, ` · ${v.app}`) : null),
+        el("div", { class: "vote-time" }, open ? t("vote_ends", { t: duration(end - Date.now()) }) : t("vote_starts", { t: duration(start - Date.now()) }),
+          el("span", { class: "muted" }, ` · ${t("vote_end_at", { t: v.end.slice(5).replace("-", ".") })}`)),
+        v.url ? ext(v.url, t("vote_open")) : null));
+    }
+  } else {
+    $("votes").append(empty(t("no_votes")));
+  }
+
+  if ((data.streaming || []).length) {
+    for (const s of data.streaming) {
+      $("streaming").append(el("li", {},
+        el("div", {}, el("b", {}, s.title), s.note ? el("span", { class: "muted" }, ` · ${s.note}`) : null),
+        Object.keys(s.links).length ? el("div", { class: "links small" }, ...Object.entries(s.links).map(([k, u]) => ext(u, k))) : null));
+    }
+  } else {
+    $("streaming").closest("section").remove();
+  }
+
+  if ((data.charts || []).length) {
+    for (const c of data.charts) {
+      const last = c.ranks[c.ranks.length - 1];
+      const prev = c.ranks[c.ranks.length - 2];
+      const move = last && prev ? prev[1] - last[1] : 0;
+      const box = el("div", { class: "chart-row" },
+        el("div", { class: "chart-meta" },
+          el("b", {}, c.song), el("span", { class: "muted" }, ` · ${[c.service, c.type].filter(Boolean).join(" ")}`),
+          last ? el("span", { class: "rank" }, t("rank", { n: last[1] })) : null,
+          move ? el("span", { class: move > 0 ? "up" : "down" }, move > 0 ? ` ▲${move}` : ` ▼${-move}`) : null),
+        c.ranks.length > 1 ? el("div", { class: "chart-box small-chart" }, el("canvas", {})) : null);
+      $("charts").append(box);
+    }
+  } else {
+    $("charts").append(empty(t("no_charts")));
+  }
+
+  const supports = data.supports || [];
+  if (supports.length) {
+    for (const x of supports) {
+      const running = x.start <= todayKst;
+      $("supports").append(el("div", { class: "support" },
+        el("div", {}, el("span", { class: `chip ${running ? "chip-on" : ""}` }, x.kind || "-"),
+          el("b", {}, [x.member, x.title].filter(Boolean).join(" "))),
+        el("div", { class: "muted" }, `${x.start.slice(5).replace("-", ".")} ~ ${x.end.slice(5).replace("-", ".")}`,
+          x.place ? ` · ${x.place}` : "", x.host ? ` · ${t("host", { v: x.host })}` : ""),
+        x.url ? ext(x.url, "↗") : null));
+    }
+  } else {
+    $("supports").append(empty(t("no_supports")));
+  }
+
+  const icsUrl = new URL("data/calendar.ics", location.href).href;
+  const webcal = icsUrl.replace(/^https?:/, "webcal:");
+  $("calLinks").append(
+    el("a", { href: webcal }, t("cal_apple")),
+    ext(`https://calendar.google.com/calendar/render?cid=${encodeURIComponent(webcal)}`, t("cal_google")),
+  );
+  const copyBtn = el("button", { type: "button", class: "linkbtn" }, t("cal_copy"));
+  copyBtn.addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(icsUrl); copyBtn.textContent = t("copied"); } catch (_) { prompt("URL", icsUrl); }
+  });
+  $("calLinks").append(copyBtn);
 
   // ---------- MV ----------
   const goal = (f) => (f
-    ? el("div", { class: "m goal", title: "최근 7일 평균 증가량 기준 예상" }, "다음 목표 ", el("b", {}, kr(f.target)), ` · 약 ${f.days}일 (하루 +${kr(f.rate)})`)
-    : el("div", { class: "m goal" }, "다음 목표: 데이터 쌓는 중"));
+    ? el("div", { class: "m goal", title: t("goal_tip") }, t("goal", { target: kr(f.target), days: f.days, rate: kr(f.rate) }))
+    : el("div", { class: "m goal" }, t("goal_pending")));
   const mvs = [...data.mvs].sort((a, b) => (b.published_at || "").localeCompare(a.published_at || ""));
   if (mvs.length) {
     for (const v of mvs) $("mvList").append(videoCard(v, null, goal(v.forecast)));
   } else {
-    $("mvList").replaceWith(empty("등록된 MV가 없어요"));
+    $("mvList").replaceWith(empty(t("empty_mv")));
   }
 
-  // ---------- 멤버·직캠 ----------
+  // ---------- 멤버 ----------
   const dlg = $("memberDialog");
   $("dlgClose").addEventListener("click", () => dlg.close());
   dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); }); // 바깥 클릭으로 닫기
@@ -181,26 +313,33 @@ if ("serviceWorker" in navigator) {
     return (urls || []).map((u) => /instagram\.com\/(p|reel)\/([\w-]+)/.exec(u)).filter(Boolean)
       .map(([, kind, code]) => el("iframe", {
         class: "ig-embed", src: `https://www.instagram.com/${kind}/${code}/embed`, loading: "lazy",
-        title: "Instagram 게시물", allowtransparency: "true", scrolling: "no", referrerpolicy: "strict-origin-when-cross-origin",
+        title: "Instagram", allowtransparency: "true", scrolling: "no", referrerpolicy: "strict-origin-when-cross-origin",
       }));
   }
+  const bdayText = (m) => {
+    if (!/^\d{2}-\d{2}$/.test(m.birthday || "")) return "";
+    const mo = +m.birthday.slice(0, 2), d = +m.birthday.slice(3);
+    return t("bday", { m: mo, d, mon: (t("months") || [])[mo - 1] || mo });
+  };
+  const facts = (m, withBday) => [m.position, m.birth_year ? t("born", { y: m.birth_year }) : "",
+    withBday ? bdayText(m) : "", nat(m.nationality)].filter(Boolean).join(" · ");
 
   function profile(m) {
-    const bday = /^\d{2}-\d{2}$/.test(m.birthday || "") ? `생일 ${+m.birthday.slice(0, 2)}월 ${+m.birthday.slice(3)}일` : "";
-    const facts = [m.position, m.birth_year ? `${m.birth_year}년생` : "", bday, m.nationality].filter(Boolean).join(" · ");
     const list = (label, items) => (items.length
       ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, label), el("ul", {}, ...items.map((x) => el("li", {}, x))))
       : null);
     const embeds = igEmbeds(m.instagram_posts);
+    const tip = (data.guide?.tips || {})[m.name];
     return el("section", { class: "dlg-sec profile" },
       embeds.length ? el("div", { class: "ig-row" }, ...embeds) : null,
-      el("div", { class: "pf-facts" }, facts),
-      m.nicknames.length ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, "별명"), el("div", {}, m.nicknames.join(", "))) : null,
-      list("데뷔 전", m.career),
-      list("여담", m.notes),
-      m.signature ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, "서명"),
-        el("img", { class: "pf-sign", src: m.signature, alt: `${m.name} 서명`, loading: "lazy" })) : null,
-      (m.profile_history || []).length ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, "역대 프로필"),
+      el("div", { class: "pf-facts" }, facts(m, true)),
+      m.nicknames.length ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, t("nickname")), el("div", {}, m.nicknames.join(", "))) : null,
+      tip ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, "Tip"), el("div", {}, tip)) : null,
+      list(t("career"), m.career),
+      list(t("notes"), m.notes),
+      m.signature ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, t("signature")),
+        el("img", { class: "pf-sign", src: m.signature, alt: "", loading: "lazy" })) : null,
+      (m.profile_history || []).length ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, t("history")),
         el("div", { class: "pf-history" }, ...m.profile_history.map((h) => el("figure", {},
           h.photo ? el("img", { src: h.photo, alt: h.label, loading: "lazy" }) : igEmbeds([h.instagram])[0],
           h.label ? el("figcaption", {}, h.label) : null)))) : null);
@@ -213,90 +352,102 @@ if ("serviceWorker" in navigator) {
     $("dlgTitle").replaceChildren(avatar(m, "avatar dlg-avatar"), el("span", {}, m.name),
       m.ko ? el("span", { class: "dlg-ko" }, m.ko) : null);
     const sections = [profile(m)];
-    for (const [key, label, list] of [["fancams", "직캠", m.fancams], ["predebut", "데뷔 전", m.predebut]]) {
+    for (const [key, label, list] of [["fancams", "fancams_n", m.fancams], ["predebut", "predebut_n", m.predebut]]) {
       if (!list.length) continue;
       sections.push(el("section", { class: "dlg-sec", id: `dlg-${key}` },
-        el("h3", {}, `${label} ${list.length}개`),
+        el("h3", {}, t(label, { n: list.length })),
         el("div", { class: "videos" }, ...list.map((v) => videoCard(v, null)))));
     }
     // 출처는 맨 아래 작게
-    sections.push(el("div", { class: "pf-src" }, "프로필 출처 ",
-      ext(`https://namu.wiki/w/${encodeURIComponent(`${m.ko}(A2O SOUL)`)}`, "나무위키")));
+    sections.push(el("div", { class: "pf-src" }, t("source"),
+      ext(`https://namu.wiki/w/${encodeURIComponent(`${m.ko}(A2O SOUL)`)}`, "namu.wiki")));
     $("dlgBody").replaceChildren(...sections);
     dlg.showModal();
     dlg.scrollTop = 0;
     if (focus) $(`dlg-${focus}`)?.scrollIntoView();
   }
 
-  // 멤버 탭: 공식 채널 + 프로필 카드
   for (const l of data.group_links || []) $("groupLinks").append(ext(l.url, l.label, " ↗"));
   if (!(data.group_links || []).length) $("groupLinks").closest("section").remove();
   const gp = igEmbeds(data.group_posts);
   if (gp.length) $("groupPosts").append(...gp); else $("groupPostsSec").remove();
+  $("membersHead").textContent = t("members_n", { n: data.members.length });
   for (const m of data.members) {
     const card = el("button", { class: "pcard", type: "button" },
       avatar(m),
       el("div", { class: "pinfo" },
         el("div", { class: "n" }, m.name, el("span", { class: "c" }, m.ko)),
-        el("div", { class: "s" }, [m.position, m.birth_year ? `${m.birth_year}년생` : "", m.nationality].filter(Boolean).join(" · ")),
-        m.nicknames.length ? el("div", { class: "s" }, `별명 ${m.nicknames.join(", ")}`) : null,
-        el("div", { class: "s more-link" }, "프로필 보기 ›")));
+        el("div", { class: "s" }, facts(m, false)),
+        m.nicknames.length ? el("div", { class: "s" }, t("nick_line", { v: m.nicknames.join(", ") })) : null,
+        el("div", { class: "s more-link" }, t("profile_view"))));
     card.addEventListener("click", () => openMember(m));
     $("profiles").append(card);
   }
 
-  // 직캠 탭: 멤버별 최신 직캠
-  for (const m of data.members) {
+  // ---------- 직캠 / 입덕 가이드: 멤버별 최신 직캠 카드 ----------
+  function fancamCard(m) {
     const v = m.fancams[0] || m.predebut[0]; // 최신 직캠, 없으면 데뷔 전 영상
-    const thumb = v
-      ? el("img", { src: `https://i.ytimg.com/vi/${encodeURIComponent(v.id)}/mqdefault.jpg`, alt: "", loading: "lazy" })
-      : el("div", { class: "nothumb" }, "직캠 집계 전");
     const links = [];
-    if (m.fancams.length) links.push(["fancams", `직캠 ${m.fancams.length}`]);
-    if (m.predebut.length) links.push(["predebut", `데뷔 전 ${m.predebut.length}`]);
-    const body = [
-      thumb,
-      el("div", { class: "n" }, m.name, el("span", { class: "c" }, m.position || m.nationality)),
-      v ? el("div", { class: "t" }, v.title) : null,
-      v ? el("div", { class: "s" }, `${ymd(v.published_at)} · 조회수 ${kr(v.views ?? 0)}`) : null,
-      links.length ? el("div", { class: "s more-link" }, links.map((l) => l[1]).join(" · ") + " 보기 ›") : null,
-    ];
-    const card = el("button", { class: "member", type: "button" }, ...body);
+    if (m.fancams.length) links.push(["fancams", t("fancam_short", { n: m.fancams.length })]);
+    if (m.predebut.length) links.push(["predebut", t("predebut_short", { n: m.predebut.length })]);
+    const tip = (data.guide?.tips || {})[m.name];
+    const card = el("button", { class: "member", type: "button" },
+      v ? el("img", { src: thumbUrl(v.id), alt: "", loading: "lazy" }) : el("div", { class: "nothumb" }, t("fancam_pending")),
+      el("div", { class: "n" }, m.name, el("span", { class: "c" }, m.position || nat(m.nationality))),
+      tip ? el("div", { class: "s tip" }, tip) : (v ? el("div", { class: "t" }, v.title) : null),
+      v ? el("div", { class: "s" }, `${ymd(v.published_at)} · ${t("views", { v: kr(v.views ?? 0) })}`) : null,
+      links.length ? el("div", { class: "s more-link" }, links.map((l) => l[1]).join(" · ") + t("view")) : null);
     card.addEventListener("click", () => openMember(m, links[0]?.[0]));
-    $("members").append(card);
+    return card;
+  }
+  for (const m of data.members) $("members").append(fancamCard(m));
+  for (const m of data.members) $("guideMembers").append(fancamCard(m));
+
+  const course = data.guide?.course || [];
+  if (course.length) {
+    course.forEach((c, i) => $("course").append(el("li", {},
+      el("span", { class: "step" }, String(i + 1)),
+      el("div", { class: "course-card" }, c.note ? el("div", { class: "course-note" }, c.note) : null,
+        videoCard(c, c.member || catLabel(c.category))))));
+  } else {
+    $("course").closest("section").remove();
   }
 
-  // ---------- 전체 영상 ----------
+  // ---------- 영상 아카이브 ----------
   const CATS = [
-    ["all", "전체", () => true],
-    ["mv", "MV", (v) => v.category === "mv"],
-    ["fancam", "직캠", (v) => v.category === "fancam"],
-    ["content", "콘텐츠", (v) => v.category === "content" && !v.predebut],
-    ["predebut", "데뷔 전", (v) => v.predebut],
+    ["all", () => true],
+    ["mv", (v) => v.category === "mv"],
+    ["fancam", (v) => v.category === "fancam"],
+    ["stage", (v) => v.show && v.category !== "fancam"],
+    ["content", (v) => v.category === "content" && !v.predebut && !v.show],
+    ["predebut", (v) => v.predebut],
   ];
   const FORMATS = [
-    ["all", "전체", () => true],
-    ["long", "롱폼", (v) => !v.short],
-    ["short", "쇼츠", (v) => v.short],
+    ["all", () => true],
+    ["long", (v) => !v.short],
+    ["short", (v) => v.short],
   ];
   const PAGE = 24;
-  const cur = { cat: "all", fmt: "all" };
+  const cur = { cat: "all", fmt: "all", q: "", series: "", show: "" };
   let shown = 0;
-  const chipOf = (v) => (v.predebut ? "데뷔 전" : v.member || data.categories[v.category] || v.category);
-  const pick = (defs, key) => defs.find((d) => d[0] === key)[2];
-  const current = () => data.videos.filter((v) => pick(CATS, cur.cat)(v) && pick(FORMATS, cur.fmt)(v));
+  const chipOf = (v) => (v.predebut ? catLabel("predebut") : v.member || v.series || catLabel(v.category));
+  const pick = (defs, key) => defs.find((d) => d[0] === key)[1];
+  const norm = (s) => (s || "").toLowerCase().normalize("NFKC");
+  const base = (v) => (!cur.q || norm(v.title).includes(norm(cur.q)) || norm(v.member).includes(norm(cur.q)))
+    && (!cur.series || v.series === cur.series) && (!cur.show || v.show === cur.show);
+  const current = () => data.videos.filter((v) => base(v) && pick(CATS, cur.cat)(v) && pick(FORMATS, cur.fmt)(v));
   function renderVideos(reset) {
     const list = current();
     if (reset) { $("allVideos").replaceChildren(); shown = 0; }
     $("allVideos").append(...list.slice(shown, shown + PAGE).map((v) => videoCard(v, chipOf(v))));
     shown = Math.min(shown + PAGE, list.length);
     $("more").hidden = shown >= list.length;
-    if (!list.length) $("allVideos").append(empty("해당하는 영상이 없어요"));
+    if (!list.length) $("allVideos").append(empty(t("no_match")));
   }
-  function filterRow(defs, slot, countFn) {
+  function filterRow(defs, slot, prefix, countFn) {
     const row = el("div", { class: "filter-row" });
-    const buttons = defs.map(([key, label]) => {
-      const b = el("button", { type: "button", "data-key": key }, label);
+    const buttons = defs.map(([key]) => {
+      const b = el("button", { type: "button", "data-key": key });
       b.addEventListener("click", () => { cur[slot] = key; refresh(); });
       row.append(b);
       return b;
@@ -304,12 +455,23 @@ if ("serviceWorker" in navigator) {
     return { row, update: () => buttons.forEach((b) => {
       const key = b.dataset.key;
       b.classList.toggle("on", cur[slot] === key);
-      b.textContent = `${defs.find((d) => d[0] === key)[1]} ${countFn(key)}`;
+      b.textContent = `${t(`${prefix}.${key}`)} ${countFn(key)}`;
     }) };
   }
-  const catRow = filterRow(CATS, "cat", (k) => data.videos.filter((v) => pick(CATS, k)(v) && pick(FORMATS, cur.fmt)(v)).length);
-  const fmtRow = filterRow(FORMATS, "fmt", (k) => data.videos.filter((v) => pick(CATS, cur.cat)(v) && pick(FORMATS, k)(v)).length);
+  const catRow = filterRow(CATS, "cat", "cat", (k) => data.videos.filter((v) => base(v) && pick(CATS, k)(v) && pick(FORMATS, cur.fmt)(v)).length);
+  const fmtRow = filterRow(FORMATS, "fmt", "fmt", (k) => data.videos.filter((v) => base(v) && pick(CATS, cur.cat)(v) && pick(FORMATS, k)(v)).length);
   $("filters").append(catRow.row, fmtRow.row);
+  function fillSelect(sel, allLabel, values, slot) {
+    sel.append(el("option", { value: "" }, allLabel), ...values.map((x) => el("option", { value: x }, x)));
+    sel.addEventListener("change", () => { cur[slot] = sel.value; refresh(); });
+    if (!values.length) sel.hidden = true;
+  }
+  const uniq = (arr) => [...new Set(arr.filter(Boolean))];
+  fillSelect($("seriesSel"), t("series_all"), uniq(data.videos.map((v) => v.series)).sort(), "series");
+  fillSelect($("showSel"), t("show_all"), uniq(data.videos.map((v) => v.show)).sort(), "show");
+  $("search").placeholder = t("search");
+  let timer;
+  $("search").addEventListener("input", (e) => { clearTimeout(timer); timer = setTimeout(() => { cur.q = e.target.value.trim(); refresh(); }, 150); });
   function refresh() { catRow.update(); fmtRow.update(); renderVideos(true); }
   $("more").addEventListener("click", () => renderVideos(false));
   refresh();
@@ -327,7 +489,7 @@ if ("serviceWorker" in navigator) {
   function lineChart(id, seriesList) {
     const canvas = $(id);
     const labels = [...new Set(seriesList.flatMap((s) => s.points.map((p) => p[0])))].sort();
-    if (!labels.length) { canvas.parentElement.replaceWith(empty("아직 수집된 데이터가 없어요")); return; }
+    if (!labels.length) { canvas.parentElement.replaceWith(empty(t("empty_chart"))); return; }
     new Chart(canvas, {
       type: "line",
       data: {
@@ -352,7 +514,7 @@ if ("serviceWorker" in navigator) {
       return { name: s.title, out };
     });
     const labels = [...new Set(diffs.flatMap((d) => Object.keys(d.out)))].sort();
-    if (!labels.length) { canvas.parentElement.replaceWith(empty("이틀 이상 수집되면 표시돼요")); return; }
+    if (!labels.length) { canvas.parentElement.replaceWith(empty(t("empty_daily"))); return; }
     new Chart(canvas, {
       type: "bar",
       data: { labels, datasets: diffs.map((d, i) => ({ label: d.name, data: labels.map((l) => d.out[l] ?? null),
@@ -362,7 +524,22 @@ if ("serviceWorker" in navigator) {
     });
   }
 
+  function rankCharts() {
+    const canvases = [...$("charts").querySelectorAll("canvas")];
+    (data.charts || []).filter((c) => c.ranks.length > 1).forEach((c, i) => {
+      new Chart(canvases[i], {
+        type: "line",
+        data: { labels: c.ranks.map((r) => r[0].slice(5)),
+                datasets: [{ data: c.ranks.map((r) => r[1]), borderColor: palette[i % palette.length], backgroundColor: palette[i % palette.length], tension: 0.2, pointRadius: 2 }] },
+        options: { maintainAspectRatio: false, plugins: { legend: { display: false },
+                   tooltip: { callbacks: { label: (x) => t("rank", { n: x.parsed.y }) } } },
+                   scales: { y: { reverse: true, ticks: { precision: 0 } } } },
+      });
+    });
+  }
+
   drawers.overview = () => lineChart("accountsChart", data.accounts);
+  drawers.cheer = rankCharts;
   drawers.mv = () => { lineChart("mvChart", data.mvs); dailyChart("mvDailyChart", data.mvs); };
 
   showTab();

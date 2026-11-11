@@ -3,6 +3,9 @@
 
 debut_date: 2026-10-13
 
+# 사이트 하단 '의견 보내기' 버튼 링크 (구글 폼 응답 링크 등). 비우면 버튼 숨김
+feedback_url: ""
+
 # 유튜브 채널: 업로드 영상을 자동으로 찾아 등록 (데뷔 전 영상 포함)
 #   id 또는 handle 중 하나
 #   filter: 제목 필터. 비우면 전부 등록
@@ -10,6 +13,7 @@ debut_date: 2026-10-13
 #     group = 그룹명만                    — 음방 채널용 (다른 그룹 동명 멤버 방지)
 #     그 외 = 정규식
 #   kpi: 구독자 수를 대시보드 상단에 보여줄지
+#   show: 음방 채널 이름 → 전체 영상 탭 '무대별' 필터
 #   mv: true인 채널(공식 계정)에 올라온 MV만 MV로 집계, 유통사 등 다른 채널의 같은 MV는 콘텐츠로
 #   자동 분류: 제목에 직캠/FanCam/Focus → 직캠(멤버 이름 하나면 그 멤버로),
 #             60초 이하 → 콘텐츠(쇼츠), MV/M/V/Music Video → MV, 나머지 → 콘텐츠
@@ -25,25 +29,42 @@ channels:
   - id: UCTQVIXvcHrR9jYoJ6qaBAow   # M2 (MPD직캠)
     filter: group
     kpi: false
+    show: M2
   - id: UCbD8EppRX3ZwJSou-TVo90A   # Mnet K-POP (엠카운트다운)
     filter: group
     kpi: false
+    show: 엠카운트다운
   - id: UCeLPm9yH_a_QH8n6445G-Ow   # KBS Kpop (뮤직뱅크)
     filter: group
     kpi: false
+    show: 뮤직뱅크
   - id: UCe52oeb7Xv_KaJsEzcKXJJg   # MBCkpop (음악중심)
     filter: group
     kpi: false
+    show: 음악중심
   - id: UCS_hnpJLQTvBkqALgapi_4g   # SBSKPOP X INKIGAYO (인기가요)
     filter: group
     kpi: false
+    show: 인기가요
   - handle: ALLTHEKPOP             # ALL THE K-POP (쇼챔피언)
     filter: group
     kpi: false
+    show: 쇼챔피언
   # 음원 유통사
   - id: UC_pwIXKXNm5KGhdEVzmY60A   # STONE MUSIC
     filter: group
     kpi: false
+
+# 영상 시리즈 — 제목 정규식(대소문자 무시)으로 분류, 위에서부터 먼저 맞는 것 (전체 영상 탭 '시리즈' 필터)
+series:
+  - { name: 웰컴 투 소울라이트, pattern: "WELCOME TO SOULITE|Welcome to SOULITE" }
+  - { name: INFINITE CLIP, pattern: "INFINITE CLIP" }
+  - { name: 릴레이댄스, pattern: "릴레이댄스|릴댄" }
+  - { name: Zal-Dance, pattern: "Zal-Dance" }
+  - { name: Zal-Life, pattern: "Zal-Life" }
+  - { name: 인터뷰, pattern: "인터뷰|Interview|MC석" }
+  - { name: 비하인드, pattern: "BEHIND|Backstage|비하인드" }
+  - { name: 티저·트레일러, pattern: "Teaser|Trailer|티저|Highlight Medley|Find the SOUL|Coming to You" }
 
 # 인스타그램 공식 계정 (IG_USER_ID / IG_ACCESS_TOKEN 시크릿이 있을 때만 수집)
 instagram:

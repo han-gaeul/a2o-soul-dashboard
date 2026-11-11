@@ -1,0 +1,13 @@
+# 입덕 가이드 탭
+# course: 순서대로 보는 입문 영상 (영상 ID + 한 줄 설명)
+# tips: 멤버 구분 팁 (멤버 이름: 한 줄). 멤버 카드에 그 멤버 최신 직캠 썸네일이 같이 나와요.
+course:
+  - { id: IAURqrShEUQ, note: "데뷔곡 'SUPERSTAR' 뮤직비디오로 시작" }
+  - { id: D8CYC5P6Z8Y, note: "15명 군무를 한눈에 — 퍼포먼스 비디오" }
+  - { id: JPJokqIoIJI, note: "더블 타이틀 'Dancing in the Dark' 뮤직비디오" }
+  - { id: rSdXwKp6HSw, note: "멤버 소개 영상" }
+  - { id: M00ZYDPm5sE, note: "릴레이댄스로 멤버별 파트 확인" }
+  - { id: OgrQLaohmqE, note: "데뷔 쇼케이스 첫 무대" }
+tips: {}
+#   예) tips:
+#         ZAI: "SUPERSTAR 활동기 금발"

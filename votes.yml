@@ -1,0 +1,22 @@
+# 응원 탭 — 음방 투표·스밍 리스트
+# GitHub 웹에서 편집해 커밋하면 1~2분 뒤 반영돼요.
+
+# 투표: 진행 중·예정인 것만 표시되고, 마감되면 자동으로 숨겨져요. 캘린더 구독에도 마감 일정이 들어가요.
+#   start / end: "YYYY-MM-DD HH:MM" (KST)
+#   예)
+#   - show: 인기가요
+#     app: 아이돌챔프
+#     title: 사전투표
+#     start: "2026-11-12 18:00"
+#     end: "2026-11-14 23:59"
+#     url: https://...
+votes: []
+
+# 스밍 리스트: 위에서부터 순서대로 표시. links는 있는 것만
+streaming:
+  - title: SUPERSTAR
+    note: 데뷔 앨범 타이틀
+    links: {}          # 예) { 멜론: "https://...", 지니: "https://...", Spotify: "https://...", YouTube: "https://youtu.be/IAURqrShEUQ" }
+  - title: Dancing in the Dark
+    note: 더블 타이틀
+    links: {}

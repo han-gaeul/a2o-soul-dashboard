@@ -1,0 +1,16 @@
+# 응원 탭 — 생일 카페·서포트 정보
+# 진행 중·예정인 것만 표시되고 끝나면 자동으로 숨겨져요.
+#   kind: 생일카페 · 서포트 · 광고 · 기타
+#   member: members.yml 이름 (단체면 생략)
+#   start / end: YYYY-MM-DD
+#   place: 장소 (온라인이면 생략), host: 주최 계정명, url: 공지 링크
+# 예)
+#   - kind: 생일카페
+#     member: LUCIEN
+#     title: 루시엔 생일카페
+#     start: 2026-12-08
+#     end: 2026-12-10
+#     place: 서울 마포구 ○○카페
+#     host: "@lucien_cafe"
+#     url: https://x.com/...
+supports: []

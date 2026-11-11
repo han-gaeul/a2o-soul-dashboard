@@ -70,7 +70,7 @@ jobs:
         run: |
           mkdir -p _site/data
           cp -r site/. _site/
-          cp data/dashboard.json _site/data/
+          cp data/dashboard.json data/calendar.ics _site/data/
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
