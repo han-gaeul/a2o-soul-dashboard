@@ -19,8 +19,10 @@
   "fancam": "직캠",
   "mv": "MV"
  },
+ "charts": [],
  "debut_date": "2026-10-13",
  "events": [],
+ "feedback_url": "",
  "group_links": [
   {
    "label": "공식 홈페이지",
@@ -48,21 +50,121 @@
   }
  ],
  "group_posts": [],
+ "guide": {
+  "course": [
+   {
+    "category": "mv",
+    "channel": "A2O SOUL",
+    "delta": 24496,
+    "id": "IAURqrShEUQ",
+    "member": "",
+    "note": "데뷔곡 'SUPERSTAR' 뮤직비디오로 시작",
+    "predebut": false,
+    "published_at": "2026-10-16T10:00:30Z",
+    "series": "",
+    "short": false,
+    "show": "",
+    "title": "A2O SOUL 'SUPERSTAR' Official Music Video",
+    "views": 3354364
+   },
+   {
+    "category": "content",
+    "channel": "A2O WORLD",
+    "delta": 59735,
+    "id": "D8CYC5P6Z8Y",
+    "member": "",
+    "note": "15명 군무를 한눈에 — 퍼포먼스 비디오",
+    "predebut": true,
+    "published_at": "2026-10-12T12:30:26Z",
+    "series": "",
+    "short": false,
+    "show": "",
+    "title": "A2O SOUL 'SUPERSTAR' Official Performance Video",
+    "views": 6502586
+   },
+   {
+    "category": "mv",
+    "channel": "A2O WORLD",
+    "delta": 316818,
+    "id": "JPJokqIoIJI",
+    "member": "",
+    "note": "더블 타이틀 'Dancing in the Dark' 뮤직비디오",
+    "predebut": false,
+    "published_at": "2026-11-09T09:00:16Z",
+    "series": "",
+    "short": false,
+    "show": "",
+    "title": "A2O SOUL 'Dancing in the Dark' Official Music Video",
+    "views": 1340609
+   },
+   {
+    "category": "content",
+    "channel": "A2O SOUL",
+    "delta": 4405,
+    "id": "rSdXwKp6HSw",
+    "member": "",
+    "note": "멤버 소개 영상",
+    "predebut": false,
+    "published_at": "2026-10-26T14:12:53Z",
+    "series": "",
+    "short": false,
+    "show": "",
+    "title": "A2O SOUL을 소개합니다 💙",
+    "views": 116755
+   },
+   {
+    "category": "content",
+    "channel": "M2",
+    "delta": 12123,
+    "id": "M00ZYDPm5sE",
+    "member": "",
+    "note": "릴레이댄스로 멤버별 파트 확인",
+    "predebut": false,
+    "published_at": "2026-10-22T12:01:44Z",
+    "series": "릴레이댄스",
+    "short": true,
+    "show": "M2",
+    "title": "A2O SOUL 'SUPERSTAR' 릴댄 하이라이트 | 릴레이댄스",
+    "views": 651691
+   },
+   {
+    "category": "content",
+    "channel": "M2",
+    "delta": 3678,
+    "id": "OgrQLaohmqE",
+    "member": "",
+    "note": "데뷔 쇼케이스 첫 무대",
+    "predebut": false,
+    "published_at": "2026-10-13T09:55:45Z",
+    "series": "웰컴 투 소울라이트",
+    "short": false,
+    "show": "M2",
+    "title": "[최초공개] A2O SOUL - INTRO + SUPERSTAR (4K) | WELCOME TO SOULITE From A2O SOUL A2O LITE",
+    "views": 2129642
+   }
+  ],
+  "tips": {}
+ },
  "kpis": [
   {
    "delta": 2000,
+   "key": "yt_subs",
    "label": "유튜브 구독자",
    "sub": "A2O SOUL",
    "value": 144000
   },
   {
+   "count": 3,
    "delta": 364897,
+   "key": "mv_total",
    "label": "MV 총 조회수",
    "sub": "3편",
    "value": 5381115
   },
   {
+   "count": 52,
    "delta": 23128,
+   "key": "fancam_total",
    "label": "직캠 총 조회수",
    "sub": "52개",
    "value": 2512431
@@ -88,7 +190,9 @@
      "member": "MOON",
      "predebut": false,
      "published_at": "2026-11-03T09:00:07Z",
+     "series": "",
      "short": false,
+     "show": "쇼챔피언",
      "title": "[쇼챔1분직캠] A2O SOUL MOON의 ＜SUPERSTAR＞♬ #A2OSOUL #MOON #SUPERSTAR",
      "views": 7546
     },
@@ -100,7 +204,9 @@
      "member": "MOON",
      "predebut": false,
      "published_at": "2026-10-24T01:11:07Z",
+     "series": "",
      "short": false,
+     "show": "뮤직뱅크",
      "title": "[K-Fancam] A2O SOUL 문 직캠 'SUPERSTAR' (A2O SOUL MOON Fancam) @뮤직뱅크(Music Bank) 261023",
      "views": 9748
     },
@@ -112,7 +218,9 @@
      "member": "MOON",
      "predebut": false,
      "published_at": "2026-10-23T03:01:26Z",
+     "series": "",
      "short": false,
+     "show": "M2",
      "title": "[입덕직캠] A2O SOUL 문 직캠 4K 'SUPERSTAR' (A2O SOUL MOON FanCam) | @MCOUNTDOWN_2026.10.22",
      "views": 49324
     },
@@ -124,7 +232,9 @@
      "member": "MOON",
      "predebut": false,
      "published_at": "2026-10-22T09:32:39Z",
+     "series": "",
      "short": false,
+     "show": "M2",
      "title": "[MPD직캠] A2O SOUL 문 직캠 4K 'SUPERSTAR' (A2O SOUL MOON FanCam) | @MCOUNTDOWN_2026.10.22",
      "views": 13660
     },
@@ -136,7 +246,9 @@
      "member": "MOON",
      "predebut": false,
      "published_at": "2026-10-22T07:58:31Z",
+     "series": "",
      "short": false,
+     "show": "쇼챔피언",
      "title": "[쇼챔직캠 4K] A2O SOUL MOON - SUPERSTAR | Show Champion | EP.615 | 261021",
      "views": 8263
     }
@@ -178,7 +290,9 @@
      "member": "SORA",
      "predebut": false,
      "published_at": "2026-10-31T09:00:37Z",
+     "series": "",
      "short": false,
+     "show": "쇼챔피언",
      "title": "[쇼챔1분직캠] A2O SOUL SORA의 ＜SUPERSTAR＞♬ #A2OSOUL #SORA #SUPERSTAR",
      "views": 13682
     },
@@ -190,7 +304,9 @@
      "member": "SORA",
      "predebut": false,
      "published_at": "2026-10-22T09:32:39Z",
+     "series": "",
      "short": false,
+     "show": "M2",
      "title": "[MPD직캠] A2O SOUL 소라 직캠 4K 'SUPERSTAR' (A2O SOUL SORA FanCam) | @MCOUNTDOWN_2026.10.22",
      "views": 86852
     },
@@ -202,7 +318,9 @@
      "member": "SORA",
      "predebut": false,
      "published_at": "2026-10-22T07:58:08Z",
+     "series": "",
      "short": false,
+     "show": "쇼챔피언",
      "title": "[쇼챔직캠 4K] A2O SOUL SORA - SUPERSTAR | Show Champion | EP.615 | 261021",
      "views": 29174
     }
@@ -242,7 +360,9 @@
      "member": "SEOHA",
      "predebut": false,
      "published_at": "2026-10-31T09:00:20Z",
+     "series": "",
      "short": false,
+     "show": "쇼챔피언",
      "title": "[쇼챔1분직캠] A2O SOUL SEOHA의 ＜SUPERSTAR＞♬ #A2OSOUL #SEOHA #SUPERSTAR",
      "views": 13599
     },
@@ -254,7 +374,9 @@
      "member": "SEOHA",
      "predebut": false,
      "published_at": "2026-10-24T08:03:38Z",
+     "series": "",
      "short": false,
+     "show": "음악중심",
      "title": "[#음중직캠] A2O SOUL SEOHA (에이투오 소울 서하) – SUPERSTAR FanCam | 쇼! 음악중심 | MBC261024",
      "views": 44488
     },
@@ -266,7 +388,9 @@
      "member": "SEOHA",
      "predebut": false,
      "published_at": "2026-10-22T09:32:39Z",
+     "series": "",
      "short": false,
+     "show": "M2",
      "title": "[MPD직캠] A2O SOUL 서하 직캠 4K 'SUPERSTAR' (A2O SOUL SEOHA FanCam) | @MCOUNTDOWN_2026.10.22",
      "views": 56039
     },
@@ -278,7 +402,9 @@
      "member": "SEOHA",
      "predebut": false,
      "published_at": "2026-10-22T07:58:14Z",
+     "series": "",
      "short": false,
+     "show": "쇼챔피언",
      "title": "[쇼챔직캠 4K] A2O SOUL SEOHA - SUPERSTAR | Show Champion | EP.615 | 261021",
      "views": 24940
     }
@@ -319,7 +445,9 @@
      "member": "GAKU",
      "predebut": false,
      "published_at": "2026-10-31T09:00:11Z",
+     "series": "",
      "short": false,
+     "show": "쇼챔피언",
      "title": "[쇼챔1분직캠] A2O SOUL GAKU의 ＜SUPERSTAR＞♬ #A2OSOUL #GAKU #SUPERSTAR",
      "views": 10338
     },
@@ -331,7 +459,9 @@
      "member": "GAKU",
      "predebut": false,
      "published_at": "2026-10-24T01:11:34Z",
+     "series": "",
      "short": false,
+     "show": "뮤직뱅크",
      "title": "[K-Fancam] A2O SOUL 가쿠 직캠 'SUPERSTAR' (A2O SOUL GAKU Fancam) @뮤직뱅크(Music Bank) 261023",
      "views": 22350
     },
@@ -343,7 +473,9 @@
      "member": "GAKU",
      "predebut": false,
      "published_at": "2026-10-22T09:32:39Z",
+     "series": "",
      "short": false,
+     "show": "M2",
      "title": "[MPD직캠] A2O SOUL 가쿠 직캠 4K 'SUPERSTAR' (A2O SOUL GAKU FanCam) | @MCOUNTDOWN_2026.10.22",
      "views": 51250
     },
@@ -355,7 +487,9 @@
      "member": "GAKU",
      "predebut": false,
      "published_at": "2026-10-22T07:58:12Z",
+     "series": "",
      "short": false,
+     "show": "쇼챔피언",
      "title": "[쇼챔직캠 4K] A2O SOUL GAKU - SUPERSTAR | Show Champion | EP.615 | 261021",
      "views": 19393
     }
@@ -379,7 +513,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-04-08T17:15:07Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O HTB, A2O LTB 'CHAMPAGNE' Zal-Life Behind The Scenes",
      "views": 30023
     },
@@ -391,7 +527,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-04-04T10:00:32Z",
+     "series": "Zal-Dance",
      "short": false,
+     "show": "",
      "title": "A2O HTB, A2O LTB 'CHAMPAGNE' Zal-Dance Official Video",
      "views": 173994
     },
@@ -403,7 +541,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-03-12T06:00:12Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Life Behind The Scenes",
      "views": 11058
     },
@@ -415,7 +555,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-03-07T10:37:17Z",
+     "series": "Zal-Dance",
      "short": true,
+     "show": "",
      "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Dance Official Video",
      "views": 24932
     },
@@ -427,7 +569,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-02-16T07:04:26Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O HTB, A2O LTB ’REVOLUTION’ Zal-Life Behind The Scenes",
      "views": 22275
     },
@@ -439,7 +583,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-02-14T10:44:50Z",
+     "series": "Zal-Dance",
      "short": true,
+     "show": "",
      "title": "A2O HTB, A2O LTB ‘REVOLUTION’ Zal-Dance Official Video",
      "views": 29593
     },
@@ -451,7 +597,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-02-10T04:24:16Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O LTB, LTG ‘BAD & BOSSY’ Zal-Life Behind The Scenes",
      "views": 29157
     },
@@ -463,7 +611,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-02-07T10:40:40Z",
+     "series": "Zal-Dance",
      "short": true,
+     "show": "",
      "title": "A2O LTB, A2O LTG ‘BAD & BOSSY’ Zal-Dance Official Video",
      "views": 35310
     },
@@ -475,7 +625,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2024-12-29T08:27:26Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O Rookies LTB ‘BLACK MADONNA’ Zal-Life Behind The Scenes",
      "views": 30872
     },
@@ -487,7 +639,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2024-12-18T08:11:08Z",
+     "series": "Zal-Dance",
      "short": false,
+     "show": "",
      "title": "A2O Rookies LTB ‘BLACK MADONNA’ Zal-Dance Official Video",
      "views": 195057
     },
@@ -499,7 +653,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2024-12-10T20:23:09Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O Rookies LTB 'CANDY' Zal-Life Behind The Scenes",
      "views": 168694
     },
@@ -511,7 +667,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2024-11-22T11:08:27Z",
+     "series": "",
      "short": false,
+     "show": "",
      "title": "A2O Rookies LTB ’CANDY‘ Zalpha Pop Official Video",
      "views": 5498375
     }
@@ -539,7 +697,9 @@
      "member": "TEO",
      "predebut": false,
      "published_at": "2026-11-02T09:00:04Z",
+     "series": "",
      "short": false,
+     "show": "쇼챔피언",
      "title": "[쇼챔1분직캠] A2O SOUL TEO의 ＜SUPERSTAR＞♬ #A2OSOUL #TEO #SUPERSTAR",
      "views": 5420
     },
@@ -551,7 +711,9 @@
      "member": "TEO",
      "predebut": false,
      "published_at": "2026-10-22T07:58:08Z",
+     "series": "",
      "short": false,
+     "show": "쇼챔피언",
      "title": "[쇼챔직캠 4K] A2O SOUL TEO - SUPERSTAR | Show Champion | EP.615 | 261021",
      "views": 14713
     }
@@ -579,7 +741,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-04-08T17:15:07Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O HTB, A2O LTB 'CHAMPAGNE' Zal-Life Behind The Scenes",
      "views": 30023
     },
@@ -591,7 +755,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-04-04T10:00:32Z",
+     "series": "Zal-Dance",
      "short": false,
+     "show": "",
      "title": "A2O HTB, A2O LTB 'CHAMPAGNE' Zal-Dance Official Video",
      "views": 173994
     },
@@ -603,7 +769,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-03-12T06:00:12Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Life Behind The Scenes",
      "views": 11058
     },
@@ -615,7 +783,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-03-07T10:37:17Z",
+     "series": "Zal-Dance",
      "short": true,
+     "show": "",
      "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Dance Official Video",
      "views": 24932
     },
@@ -627,7 +797,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-02-16T07:04:26Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O HTB, A2O LTB ’REVOLUTION’ Zal-Life Behind The Scenes",
      "views": 22275
     },
@@ -639,7 +811,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-02-14T10:44:50Z",
+     "series": "Zal-Dance",
      "short": true,
+     "show": "",
      "title": "A2O HTB, A2O LTB ‘REVOLUTION’ Zal-Dance Official Video",
      "views": 29593
     },
@@ -651,7 +825,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-02-10T04:24:16Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O LTB, LTG ‘BAD & BOSSY’ Zal-Life Behind The Scenes",
      "views": 29157
     },
@@ -663,7 +839,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-02-07T10:40:40Z",
+     "series": "Zal-Dance",
      "short": true,
+     "show": "",
      "title": "A2O LTB, A2O LTG ‘BAD & BOSSY’ Zal-Dance Official Video",
      "views": 35310
     },
@@ -675,7 +853,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2024-12-29T08:27:26Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O Rookies LTB ‘BLACK MADONNA’ Zal-Life Behind The Scenes",
      "views": 30872
     },
@@ -687,7 +867,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2024-12-18T08:11:08Z",
+     "series": "Zal-Dance",
      "short": false,
+     "show": "",
      "title": "A2O Rookies LTB ‘BLACK MADONNA’ Zal-Dance Official Video",
      "views": 195057
     },
@@ -699,7 +881,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2024-12-10T20:23:09Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O Rookies LTB 'CANDY' Zal-Life Behind The Scenes",
      "views": 168694
     },
@@ -711,7 +895,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2024-11-22T11:08:27Z",
+     "series": "",
      "short": false,
+     "show": "",
      "title": "A2O Rookies LTB ’CANDY‘ Zalpha Pop Official Video",
      "views": 5498375
     }
@@ -737,7 +923,9 @@
      "member": "JUNE",
      "predebut": false,
      "published_at": "2026-11-03T09:00:24Z",
+     "series": "",
      "short": false,
+     "show": "쇼챔피언",
      "title": "[쇼챔1분직캠] A2O SOUL JUNE의 ＜SUPERSTAR＞♬ #A2OSOUL #JUNE #SUPERSTAR",
      "views": 8009
     },
@@ -749,7 +937,9 @@
      "member": "JUNE",
      "predebut": false,
      "published_at": "2026-10-22T07:58:34Z",
+     "series": "",
      "short": false,
+     "show": "쇼챔피언",
      "title": "[쇼챔직캠 4K] A2O SOUL JUNE - SUPERSTAR | Show Champion | EP.615 | 261021",
      "views": 6569
     }
@@ -774,7 +964,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-04-08T17:15:07Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O HTB, A2O LTB 'CHAMPAGNE' Zal-Life Behind The Scenes",
      "views": 30023
     },
@@ -786,7 +978,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-04-04T10:00:32Z",
+     "series": "Zal-Dance",
      "short": false,
+     "show": "",
      "title": "A2O HTB, A2O LTB 'CHAMPAGNE' Zal-Dance Official Video",
      "views": 173994
     },
@@ -798,7 +992,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-03-12T06:00:12Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Life Behind The Scenes",
      "views": 11058
     },
@@ -810,7 +1006,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-03-07T10:37:17Z",
+     "series": "Zal-Dance",
      "short": true,
+     "show": "",
      "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Dance Official Video",
      "views": 24932
     },
@@ -822,7 +1020,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-02-16T07:04:26Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O HTB, A2O LTB ’REVOLUTION’ Zal-Life Behind The Scenes",
      "views": 22275
     },
@@ -834,7 +1034,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-02-14T10:44:50Z",
+     "series": "Zal-Dance",
      "short": true,
+     "show": "",
      "title": "A2O HTB, A2O LTB ‘REVOLUTION’ Zal-Dance Official Video",
      "views": 29593
     }
@@ -861,7 +1063,9 @@
      "member": "LUCIEN",
      "predebut": false,
      "published_at": "2026-11-03T09:00:19Z",
+     "series": "",
      "short": false,
+     "show": "쇼챔피언",
      "title": "[쇼챔1분직캠] A2O SOUL LUCIEN의 ＜SUPERSTAR＞♬ #A2OSOUL #LUCIEN #SUPERSTAR",
      "views": 5771
     },
@@ -873,7 +1077,9 @@
      "member": "LUCIEN",
      "predebut": false,
      "published_at": "2026-10-22T07:58:20Z",
+     "series": "",
      "short": false,
+     "show": "쇼챔피언",
      "title": "[쇼챔직캠 4K] A2O SOUL LUCIEN - SUPERSTAR | Show Champion | EP.615 | 261021",
      "views": 12906
     }
@@ -912,7 +1118,9 @@
      "member": "HANSUNG",
      "predebut": false,
      "published_at": "2026-11-03T09:00:08Z",
+     "series": "",
      "short": false,
+     "show": "쇼챔피언",
      "title": "[쇼챔1분직캠] A2O SOUL HANSUNG의 ＜SUPERSTAR＞♬ #A2OSOUL #HANSUNG #SUPERSTAR",
      "views": 4385
     },
@@ -924,7 +1132,9 @@
      "member": "HANSUNG",
      "predebut": false,
      "published_at": "2026-10-22T07:58:22Z",
+     "series": "",
      "short": false,
+     "show": "쇼챔피언",
      "title": "[쇼챔직캠 4K] A2O SOUL HANSUNG - SUPERSTAR | Show Champion | EP.615 | 261021",
      "views": 10040
     }
@@ -966,7 +1176,9 @@
      "member": "TAI",
      "predebut": false,
      "published_at": "2026-11-02T09:00:01Z",
+     "series": "",
      "short": false,
+     "show": "쇼챔피언",
      "title": "[쇼챔1분직캠] A2O SOUL TAI의 ＜SUPERSTAR＞♬ #A2OSOUL #TAI #SUPERSTAR",
      "views": 5042
     },
@@ -978,7 +1190,9 @@
      "member": "TAI",
      "predebut": false,
      "published_at": "2026-10-24T01:11:15Z",
+     "series": "",
      "short": false,
+     "show": "뮤직뱅크",
      "title": "[K-Fancam] A2O SOUL 타이 직캠 'SUPERSTAR' (A2O SOUL TAI Fancam) @뮤직뱅크(Music Bank) 261023",
      "views": 16753
     },
@@ -990,7 +1204,9 @@
      "member": "TAI",
      "predebut": false,
      "published_at": "2026-10-22T09:33:29Z",
+     "series": "",
      "short": true,
+     "show": "M2",
      "title": "춤선이 남다른 A2O SOUL 타이 직캠",
      "views": 37326
     },
@@ -1002,7 +1218,9 @@
      "member": "TAI",
      "predebut": false,
      "published_at": "2026-10-22T09:32:39Z",
+     "series": "",
      "short": false,
+     "show": "M2",
      "title": "[MPD직캠] A2O SOUL 타이 직캠 4K 'SUPERSTAR' (A2O SOUL TAI FanCam) | @MCOUNTDOWN_2026.10.22",
      "views": 15096
     },
@@ -1014,7 +1232,9 @@
      "member": "TAI",
      "predebut": false,
      "published_at": "2026-10-22T07:58:24Z",
+     "series": "",
      "short": false,
+     "show": "쇼챔피언",
      "title": "[쇼챔직캠 4K] A2O SOUL TAI - SUPERSTAR | Show Champion | EP.615 | 261021",
      "views": 14149
     },
@@ -1026,7 +1246,9 @@
      "member": "TAI",
      "predebut": false,
      "published_at": "2026-10-15T09:29:26Z",
+     "series": "",
      "short": false,
+     "show": "M2",
      "title": "[MPD직캠] A2O SOUL 타이 직캠 4K 'SUPERSTAR' (A2O SOUL TAI FanCam) | @MCOUNTDOWN_2026.10.15",
      "views": 95430
     }
@@ -1051,7 +1273,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-04-08T17:15:07Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O HTB, A2O LTB 'CHAMPAGNE' Zal-Life Behind The Scenes",
      "views": 30023
     },
@@ -1063,7 +1287,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-04-04T10:00:32Z",
+     "series": "Zal-Dance",
      "short": false,
+     "show": "",
      "title": "A2O HTB, A2O LTB 'CHAMPAGNE' Zal-Dance Official Video",
      "views": 173994
     },
@@ -1075,7 +1301,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-03-21T11:02:07Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O LTB 'DRIVE’ Zal-Life Behind The Scenes",
      "views": 13680
     },
@@ -1087,7 +1315,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-03-14T11:19:35Z",
+     "series": "Zal-Dance",
      "short": true,
+     "show": "",
      "title": "A2O LTB 'DRIVE’ Zal-Dance Official Video",
      "views": 31296
     },
@@ -1099,7 +1329,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-03-12T06:00:24Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Life Behind The Scenes",
      "views": 13423
     },
@@ -1111,7 +1343,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-03-12T06:00:12Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Life Behind The Scenes",
      "views": 11058
     },
@@ -1123,7 +1357,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-03-12T04:00:18Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O LTB 'B.B.B' Zal-Life Behind The Scenes",
      "views": 88081
     },
@@ -1135,7 +1371,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-03-07T10:37:17Z",
+     "series": "Zal-Dance",
      "short": true,
+     "show": "",
      "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Dance Official Video",
      "views": 24932
     },
@@ -1147,7 +1385,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-03-07T10:34:13Z",
+     "series": "Zal-Dance",
      "short": true,
+     "show": "",
      "title": "A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Dance Official Video",
      "views": 23406
     },
@@ -1159,7 +1399,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-02-28T10:13:18Z",
+     "series": "Zal-Dance",
      "short": true,
+     "show": "",
      "title": "A2O LTB 'B.B.B' Zal-Dance Official Video",
      "views": 28245
     },
@@ -1171,7 +1413,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-02-16T07:04:26Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O HTB, A2O LTB ’REVOLUTION’ Zal-Life Behind The Scenes",
      "views": 22275
     },
@@ -1183,7 +1427,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-02-14T10:44:50Z",
+     "series": "Zal-Dance",
      "short": true,
+     "show": "",
      "title": "A2O HTB, A2O LTB ‘REVOLUTION’ Zal-Dance Official Video",
      "views": 29593
     },
@@ -1195,7 +1441,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-02-10T04:24:16Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O LTB, LTG ‘BAD & BOSSY’ Zal-Life Behind The Scenes",
      "views": 29157
     },
@@ -1207,7 +1455,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-02-07T10:40:40Z",
+     "series": "Zal-Dance",
      "short": true,
+     "show": "",
      "title": "A2O LTB, A2O LTG ‘BAD & BOSSY’ Zal-Dance Official Video",
      "views": 35310
     },
@@ -1219,7 +1469,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2024-12-29T08:27:26Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O Rookies LTB ‘BLACK MADONNA’ Zal-Life Behind The Scenes",
      "views": 30872
     },
@@ -1231,7 +1483,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2024-12-18T08:11:08Z",
+     "series": "Zal-Dance",
      "short": false,
+     "show": "",
      "title": "A2O Rookies LTB ‘BLACK MADONNA’ Zal-Dance Official Video",
      "views": 195057
     },
@@ -1243,7 +1497,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2024-12-10T20:23:09Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O Rookies LTB 'CANDY' Zal-Life Behind The Scenes",
      "views": 168694
     },
@@ -1255,7 +1511,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2024-11-22T11:08:27Z",
+     "series": "",
      "short": false,
+     "show": "",
      "title": "A2O Rookies LTB ’CANDY‘ Zalpha Pop Official Video",
      "views": 5498375
     }
@@ -1283,7 +1541,9 @@
      "member": "SEE-ONE",
      "predebut": false,
      "published_at": "2026-11-02T09:00:23Z",
+     "series": "",
      "short": false,
+     "show": "쇼챔피언",
      "title": "[쇼챔1분직캠] A2O SOUL SEE-ONE의 ＜SUPERSTAR＞♬ #A2OSOUL #SEE-ONE #SUPERSTAR",
      "views": 5258
     },
@@ -1295,7 +1555,9 @@
      "member": "SEE-ONE",
      "predebut": false,
      "published_at": "2026-10-22T07:58:27Z",
+     "series": "",
      "short": false,
+     "show": "쇼챔피언",
      "title": "[쇼챔직캠 4K] A2O SOUL SEE-ONE - SUPERSTAR | Show Champion | EP.615 | 261021",
      "views": 10649
     }
@@ -1332,7 +1594,9 @@
      "member": "SONO",
      "predebut": false,
      "published_at": "2026-10-30T09:00:24Z",
+     "series": "",
      "short": false,
+     "show": "쇼챔피언",
      "title": "[쇼챔1분직캠] A2O SOUL SONO의 ＜SUPERSTAR＞♬ #A2OSOUL #SONO #SUPERSTAR",
      "views": 29127
     },
@@ -1344,7 +1608,9 @@
      "member": "SONO",
      "predebut": false,
      "published_at": "2026-10-22T07:58:01Z",
+     "series": "",
      "short": false,
+     "show": "쇼챔피언",
      "title": "[쇼챔직캠 4K] A2O SOUL SONO - SUPERSTAR | Show Champion | EP.615 | 261021",
      "views": 91269
     }
@@ -1384,7 +1650,9 @@
      "member": "ALURE",
      "predebut": false,
      "published_at": "2026-10-31T09:00:24Z",
+     "series": "",
      "short": false,
+     "show": "쇼챔피언",
      "title": "[쇼챔1분직캠] A2O SOUL ALURE의 ＜SUPERSTAR＞♬ #A2OSOUL #ALURE #SUPERSTAR",
      "views": 11854
     },
@@ -1396,7 +1664,9 @@
      "member": "ALURE",
      "predebut": false,
      "published_at": "2026-10-22T07:58:27Z",
+     "series": "",
      "short": false,
+     "show": "쇼챔피언",
      "title": "[쇼챔직캠 4K] A2O SOUL ALURE - SUPERSTAR | Show Champion | EP.615 | 261021",
      "views": 52909
     }
@@ -1437,7 +1707,9 @@
      "member": "ZAI",
      "predebut": false,
      "published_at": "2026-10-30T09:00:32Z",
+     "series": "",
      "short": false,
+     "show": "쇼챔피언",
      "title": "[쇼챔1분직캠] A2O SOUL ZAI의 ＜SUPERSTAR＞♬ #A2OSOUL #ZAI #SUPERSTAR",
      "views": 20614
     },
@@ -1449,7 +1721,9 @@
      "member": "ZAI",
      "predebut": false,
      "published_at": "2026-10-24T01:11:15Z",
+     "series": "",
      "short": false,
+     "show": "뮤직뱅크",
      "title": "[K-Fancam] A2O SOUL 자이 직캠 'SUPERSTAR' (A2O SOUL ZAI Fancam) @뮤직뱅크(Music Bank) 261023",
      "views": 56885
     },
@@ -1461,7 +1735,9 @@
      "member": "ZAI",
      "predebut": false,
      "published_at": "2026-10-22T07:58:03Z",
+     "series": "",
      "short": false,
+     "show": "쇼챔피언",
      "title": "[쇼챔직캠 4K] A2O SOUL ZAI - SUPERSTAR | Show Champion | EP.615 | 261021",
      "views": 38407
     }
@@ -1489,7 +1765,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-04-08T17:15:07Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O HTB, A2O LTB 'CHAMPAGNE' Zal-Life Behind The Scenes",
      "views": 30023
     },
@@ -1501,7 +1779,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-04-04T10:00:32Z",
+     "series": "Zal-Dance",
      "short": false,
+     "show": "",
      "title": "A2O HTB, A2O LTB 'CHAMPAGNE' Zal-Dance Official Video",
      "views": 173994
     },
@@ -1513,7 +1793,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-03-29T10:00:58Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O LTB JIAYI 'What's Up Danger' Zal-Life Behind The Scenes",
      "views": 16941
     },
@@ -1525,7 +1807,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-03-28T10:00:00Z",
+     "series": "Zal-Dance",
      "short": false,
+     "show": "",
      "title": "A2O LTB JIAYI 'What's Up Danger' Zal-Dance Official Video",
      "views": 27249
     },
@@ -1537,7 +1821,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-03-21T11:02:07Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O LTB 'DRIVE’ Zal-Life Behind The Scenes",
      "views": 13680
     },
@@ -1549,7 +1835,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-03-14T11:19:35Z",
+     "series": "Zal-Dance",
      "short": true,
+     "show": "",
      "title": "A2O LTB 'DRIVE’ Zal-Dance Official Video",
      "views": 31296
     },
@@ -1561,7 +1849,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-03-12T06:00:24Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Life Behind The Scenes",
      "views": 13423
     },
@@ -1573,7 +1863,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-03-12T06:00:12Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Life Behind The Scenes",
      "views": 11058
     },
@@ -1585,7 +1877,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-03-12T04:00:18Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O LTB 'B.B.B' Zal-Life Behind The Scenes",
      "views": 88081
     },
@@ -1597,7 +1891,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-03-07T10:37:17Z",
+     "series": "Zal-Dance",
      "short": true,
+     "show": "",
      "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Dance Official Video",
      "views": 24932
     },
@@ -1609,7 +1905,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-03-07T10:34:13Z",
+     "series": "Zal-Dance",
      "short": true,
+     "show": "",
      "title": "A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Dance Official Video",
      "views": 23406
     },
@@ -1621,7 +1919,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-02-28T10:13:18Z",
+     "series": "Zal-Dance",
      "short": true,
+     "show": "",
      "title": "A2O LTB 'B.B.B' Zal-Dance Official Video",
      "views": 28245
     },
@@ -1633,7 +1933,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-02-16T07:04:26Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O HTB, A2O LTB ’REVOLUTION’ Zal-Life Behind The Scenes",
      "views": 22275
     },
@@ -1645,7 +1947,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-02-14T10:44:50Z",
+     "series": "Zal-Dance",
      "short": true,
+     "show": "",
      "title": "A2O HTB, A2O LTB ‘REVOLUTION’ Zal-Dance Official Video",
      "views": 29593
     },
@@ -1657,7 +1961,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-02-10T04:24:16Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O LTB, LTG ‘BAD & BOSSY’ Zal-Life Behind The Scenes",
      "views": 29157
     },
@@ -1669,7 +1975,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-02-07T10:40:40Z",
+     "series": "Zal-Dance",
      "short": true,
+     "show": "",
      "title": "A2O LTB, A2O LTG ‘BAD & BOSSY’ Zal-Dance Official Video",
      "views": 35310
     },
@@ -1681,7 +1989,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-01-11T08:38:28Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O Rookies LTB JIAYI, LTG XILI ‘GHOST TOWN’ Zal-Life Behind The Scenes",
      "views": 26871
     },
@@ -1693,7 +2003,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-01-04T21:06:21Z",
+     "series": "Zal-Dance",
      "short": false,
+     "show": "",
      "title": "A2O Rookies LTB JIAYI, LTG XILI 'GHOST TOWN' Zal-Dance Official Video",
      "views": 53190
     },
@@ -1705,7 +2017,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2024-12-29T08:27:26Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O Rookies LTB ‘BLACK MADONNA’ Zal-Life Behind The Scenes",
      "views": 30872
     },
@@ -1717,7 +2031,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2024-12-27T08:46:02Z",
+     "series": "",
      "short": false,
+     "show": "",
      "title": "A2O Rookie LTB JIAYI ‘Easy on me’ Zalpha Pop Official Video",
      "views": 113959
     },
@@ -1729,7 +2045,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2024-12-18T08:11:08Z",
+     "series": "Zal-Dance",
      "short": false,
+     "show": "",
      "title": "A2O Rookies LTB ‘BLACK MADONNA’ Zal-Dance Official Video",
      "views": 195057
     },
@@ -1741,7 +2059,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2024-12-10T20:23:09Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O Rookies LTB 'CANDY' Zal-Life Behind The Scenes",
      "views": 168694
     },
@@ -1753,7 +2073,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2024-11-22T11:08:27Z",
+     "series": "",
      "short": false,
+     "show": "",
      "title": "A2O Rookies LTB ’CANDY‘ Zalpha Pop Official Video",
      "views": 5498375
     }
@@ -1780,7 +2102,9 @@
      "member": "AYDEN",
      "predebut": false,
      "published_at": "2026-10-30T09:00:09Z",
+     "series": "",
      "short": false,
+     "show": "쇼챔피언",
      "title": "[쇼챔1분직캠] A2O SOUL AYDEN 의 ＜SUPERSTAR＞♬ #A2OSOUL #AYDEN  #SUPERSTAR",
      "views": 6858
     },
@@ -1792,7 +2116,9 @@
      "member": "AYDEN",
      "predebut": false,
      "published_at": "2026-10-22T09:32:39Z",
+     "series": "",
      "short": false,
+     "show": "M2",
      "title": "[MPD직캠] A2O SOUL 에이든 직캠 4K 'SUPERSTAR' (A2O SOUL AYDEN FanCam) | @MCOUNTDOWN_2026.10.22",
      "views": 24536
     },
@@ -1804,7 +2130,9 @@
      "member": "AYDEN",
      "predebut": false,
      "published_at": "2026-10-22T07:58:24Z",
+     "series": "",
      "short": false,
+     "show": "쇼챔피언",
      "title": "[쇼챔직캠 4K] A2O SOUL AYDEN - SUPERSTAR | Show Champion | EP.615 | 261021",
      "views": 18461
     }
@@ -1831,7 +2159,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-06-27T10:30:32Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O LTB AYDEN 'Love Is Gone' Zal-Life Behind The Scenes",
      "views": 10591
     },
@@ -1843,7 +2173,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-04-11T10:01:34Z",
+     "series": "Zal-Dance",
      "short": false,
+     "show": "",
      "title": "A2O LTB AYDEN ’Love Is Gone’ Zal-Dance Official Video",
      "views": 59154
     },
@@ -1855,7 +2187,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-04-08T17:15:07Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O HTB, A2O LTB 'CHAMPAGNE' Zal-Life Behind The Scenes",
      "views": 30023
     },
@@ -1867,7 +2201,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-04-04T10:00:32Z",
+     "series": "Zal-Dance",
      "short": false,
+     "show": "",
      "title": "A2O HTB, A2O LTB 'CHAMPAGNE' Zal-Dance Official Video",
      "views": 173994
     },
@@ -1879,7 +2215,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-03-21T11:02:07Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O LTB 'DRIVE’ Zal-Life Behind The Scenes",
      "views": 13680
     },
@@ -1891,7 +2229,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-03-14T11:19:35Z",
+     "series": "Zal-Dance",
      "short": true,
+     "show": "",
      "title": "A2O LTB 'DRIVE’ Zal-Dance Official Video",
      "views": 31296
     },
@@ -1903,7 +2243,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-03-12T06:00:24Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Life Behind The Scenes",
      "views": 13423
     },
@@ -1915,7 +2257,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-03-12T06:00:12Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Life Behind The Scenes",
      "views": 11058
     },
@@ -1927,7 +2271,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-03-12T04:00:18Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O LTB 'B.B.B' Zal-Life Behind The Scenes",
      "views": 88081
     },
@@ -1939,7 +2285,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-03-07T10:37:17Z",
+     "series": "Zal-Dance",
      "short": true,
+     "show": "",
      "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Dance Official Video",
      "views": 24932
     },
@@ -1951,7 +2299,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-03-07T10:34:13Z",
+     "series": "Zal-Dance",
      "short": true,
+     "show": "",
      "title": "A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Dance Official Video",
      "views": 23406
     },
@@ -1963,7 +2313,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-02-28T10:13:18Z",
+     "series": "Zal-Dance",
      "short": true,
+     "show": "",
      "title": "A2O LTB 'B.B.B' Zal-Dance Official Video",
      "views": 28245
     },
@@ -1975,7 +2327,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-02-16T07:04:26Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O HTB, A2O LTB ’REVOLUTION’ Zal-Life Behind The Scenes",
      "views": 22275
     },
@@ -1987,7 +2341,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-02-14T10:44:50Z",
+     "series": "Zal-Dance",
      "short": true,
+     "show": "",
      "title": "A2O HTB, A2O LTB ‘REVOLUTION’ Zal-Dance Official Video",
      "views": 29593
     },
@@ -1999,7 +2355,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-02-10T04:24:16Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O LTB, LTG ‘BAD & BOSSY’ Zal-Life Behind The Scenes",
      "views": 29157
     },
@@ -2011,7 +2369,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-02-07T10:40:40Z",
+     "series": "Zal-Dance",
      "short": true,
+     "show": "",
      "title": "A2O LTB, A2O LTG ‘BAD & BOSSY’ Zal-Dance Official Video",
      "views": 35310
     },
@@ -2023,7 +2383,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2024-12-29T08:27:26Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O Rookies LTB ‘BLACK MADONNA’ Zal-Life Behind The Scenes",
      "views": 30872
     },
@@ -2035,7 +2397,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2024-12-18T08:11:08Z",
+     "series": "Zal-Dance",
      "short": false,
+     "show": "",
      "title": "A2O Rookies LTB ‘BLACK MADONNA’ Zal-Dance Official Video",
      "views": 195057
     },
@@ -2047,7 +2411,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2024-12-10T20:23:09Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O Rookies LTB 'CANDY' Zal-Life Behind The Scenes",
      "views": 168694
     },
@@ -2059,7 +2425,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2024-11-22T11:08:27Z",
+     "series": "",
      "short": false,
+     "show": "",
      "title": "A2O Rookies LTB ’CANDY‘ Zalpha Pop Official Video",
      "views": 5498375
     }
@@ -2086,7 +2454,9 @@
      "member": "ZET",
      "predebut": false,
      "published_at": "2026-10-30T09:00:27Z",
+     "series": "",
      "short": false,
+     "show": "쇼챔피언",
      "title": "[쇼챔1분직캠] A2O SOUL ZET의 ＜SUPERSTAR＞♬ #A2OSOUL #ZET #SUPERSTAR",
      "views": 22083
     },
@@ -2098,7 +2468,9 @@
      "member": "ZET",
      "predebut": false,
      "published_at": "2026-10-24T08:03:53Z",
+     "series": "",
      "short": false,
+     "show": "음악중심",
      "title": "[#음중직캠] A2O SOUL ZET (에이투오 소울 제트) – SUPERSTAR FanCam | 쇼! 음악중심 | MBC261024",
      "views": 85963
     },
@@ -2110,7 +2482,9 @@
      "member": "ZET",
      "predebut": false,
      "published_at": "2026-10-22T09:32:39Z",
+     "series": "",
      "short": false,
+     "show": "M2",
      "title": "[MPD직캠] A2O SOUL 제트 직캠 4K 'SUPERSTAR' (A2O SOUL ZET FanCam) | @MCOUNTDOWN_2026.10.22",
      "views": 128295
     },
@@ -2122,7 +2496,9 @@
      "member": "ZET",
      "predebut": false,
      "published_at": "2026-10-22T07:58:28Z",
+     "series": "",
      "short": false,
+     "show": "쇼챔피언",
      "title": "[쇼챔직캠 4K] A2O SOUL ZET - SUPERSTAR | Show Champion | EP.615 | 261021",
      "views": 100139
     }
@@ -2150,7 +2526,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-06-11T07:00:07Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O LTB HANZE 'Palette' Zal-Life Behind The Scenes",
      "views": 9892
     },
@@ -2162,7 +2540,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-06-06T10:00:19Z",
+     "series": "Zal-Dance",
      "short": false,
+     "show": "",
      "title": "A2O LTB HANZE 'Palette' Zal-Dance Official Video",
      "views": 22919
     },
@@ -2174,7 +2554,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-04-08T17:15:07Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O HTB, A2O LTB 'CHAMPAGNE' Zal-Life Behind The Scenes",
      "views": 30023
     },
@@ -2186,7 +2568,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-04-04T10:00:32Z",
+     "series": "Zal-Dance",
      "short": false,
+     "show": "",
      "title": "A2O HTB, A2O LTB 'CHAMPAGNE' Zal-Dance Official Video",
      "views": 173994
     },
@@ -2198,7 +2582,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-03-21T11:02:07Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O LTB 'DRIVE’ Zal-Life Behind The Scenes",
      "views": 13680
     },
@@ -2210,7 +2596,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-03-14T11:19:35Z",
+     "series": "Zal-Dance",
      "short": true,
+     "show": "",
      "title": "A2O LTB 'DRIVE’ Zal-Dance Official Video",
      "views": 31296
     },
@@ -2222,7 +2610,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-03-12T06:00:24Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Life Behind The Scenes",
      "views": 13423
     },
@@ -2234,7 +2624,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-03-12T06:00:12Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Life Behind The Scenes",
      "views": 11058
     },
@@ -2246,7 +2638,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-03-12T04:00:18Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O LTB 'B.B.B' Zal-Life Behind The Scenes",
      "views": 88081
     },
@@ -2258,7 +2652,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-03-07T10:37:17Z",
+     "series": "Zal-Dance",
      "short": true,
+     "show": "",
      "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Dance Official Video",
      "views": 24932
     },
@@ -2270,7 +2666,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-03-07T10:34:13Z",
+     "series": "Zal-Dance",
      "short": true,
+     "show": "",
      "title": "A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Dance Official Video",
      "views": 23406
     },
@@ -2282,7 +2680,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-02-28T10:13:18Z",
+     "series": "Zal-Dance",
      "short": true,
+     "show": "",
      "title": "A2O LTB 'B.B.B' Zal-Dance Official Video",
      "views": 28245
     },
@@ -2294,7 +2694,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-02-16T07:04:26Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O HTB, A2O LTB ’REVOLUTION’ Zal-Life Behind The Scenes",
      "views": 22275
     },
@@ -2306,7 +2708,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-02-14T10:44:50Z",
+     "series": "Zal-Dance",
      "short": true,
+     "show": "",
      "title": "A2O HTB, A2O LTB ‘REVOLUTION’ Zal-Dance Official Video",
      "views": 29593
     },
@@ -2318,7 +2722,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-02-10T04:24:16Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O LTB, LTG ‘BAD & BOSSY’ Zal-Life Behind The Scenes",
      "views": 29157
     },
@@ -2330,7 +2736,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2025-02-07T10:40:40Z",
+     "series": "Zal-Dance",
      "short": true,
+     "show": "",
      "title": "A2O LTB, A2O LTG ‘BAD & BOSSY’ Zal-Dance Official Video",
      "views": 35310
     },
@@ -2342,7 +2750,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2024-12-29T08:27:26Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O Rookies LTB ‘BLACK MADONNA’ Zal-Life Behind The Scenes",
      "views": 30872
     },
@@ -2354,7 +2764,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2024-12-18T08:11:08Z",
+     "series": "Zal-Dance",
      "short": false,
+     "show": "",
      "title": "A2O Rookies LTB ‘BLACK MADONNA’ Zal-Dance Official Video",
      "views": 195057
     },
@@ -2366,7 +2778,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2024-12-10T20:23:09Z",
+     "series": "Zal-Life",
      "short": false,
+     "show": "",
      "title": "A2O Rookies LTB 'CANDY' Zal-Life Behind The Scenes",
      "views": 168694
     },
@@ -2378,7 +2792,9 @@
      "member": "",
      "predebut": true,
      "published_at": "2024-11-22T11:08:27Z",
+     "series": "",
      "short": false,
+     "show": "",
      "title": "A2O Rookies LTB ’CANDY‘ Zalpha Pop Official Video",
      "views": 5498375
     }
@@ -2412,7 +2828,9 @@
    ],
    "predebut": false,
    "published_at": "2026-11-09T09:00:16Z",
+   "series": "",
    "short": false,
+   "show": "",
    "title": "A2O SOUL 'Dancing in the Dark' Official Music Video",
    "views": 1340609
   },
@@ -2440,7 +2858,9 @@
    ],
    "predebut": false,
    "published_at": "2026-11-05T15:00:28Z",
+   "series": "",
    "short": false,
+   "show": "",
    "title": "A2O SOUL 'SUPERSTAR' INFINITE Music Video",
    "views": 686142
   },
@@ -2468,7 +2888,9 @@
    ],
    "predebut": false,
    "published_at": "2026-10-16T10:00:30Z",
+   "series": "",
    "short": false,
+   "show": "",
    "title": "A2O SOUL 'SUPERSTAR' Official Music Video",
    "views": 3354364
   }
@@ -2482,7 +2904,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-11-10T08:30:01Z",
+   "series": "",
    "short": true,
+   "show": "",
    "title": "익숙하면서도 새로운 감성의 케이팝을 보여주는 A2O SOUL!｜#Shorts",
    "views": 6719
   },
@@ -2494,7 +2918,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-11-10T07:00:20Z",
+   "series": "",
    "short": true,
+   "show": "",
    "title": "심장이 뛰는 그 멜로디의 등장 A2O SOUL 'Dancing in the Dark'｜#Shorts",
    "views": 9512
   },
@@ -2506,7 +2932,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-11-09T10:00:28Z",
+   "series": "",
    "short": false,
+   "show": "",
    "title": "A2O SOUL - Dancing in the Dark Official Music Video",
    "views": 113677
   },
@@ -2518,7 +2946,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-11-09T10:00:17Z",
+   "series": "",
    "short": true,
+   "show": "",
    "title": "A2O SOUL 'Dancing in the Dark' Official Music Video｜#Shorts",
    "views": 40899
   },
@@ -2530,7 +2960,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-11-09T09:00:16Z",
+   "series": "",
    "short": false,
+   "show": "",
    "title": "A2O SOUL 'Dancing in the Dark' Official Music Video",
    "views": 1340609
   },
@@ -2542,7 +2974,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-11-09T09:00:13Z",
+   "series": "",
    "short": true,
+   "show": "",
    "title": "A2O SOUL DEBUT ALBUM [SUPERSTAR] OUT NOW",
    "views": 971889
   },
@@ -2554,7 +2988,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-11-09T05:00:25Z",
+   "series": "",
    "short": true,
+   "show": "",
    "title": "2~3세대의 추억이 아닌 5세대의 새로운 뉴 신스웨이브의 등장, A2O SOUL!｜#Shorts",
    "views": 14426
   },
@@ -2566,7 +3002,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-11-08T09:00:09Z",
+   "series": "티저·트레일러",
    "short": true,
+   "show": "",
    "title": "A2O SOUL 'Dancing in the Dark' MV Teaser",
    "views": 234212
   },
@@ -2578,7 +3016,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-11-08T03:00:16Z",
+   "series": "티저·트레일러",
    "short": false,
+   "show": "",
    "title": "A2O SOUL ‘Dancing in the Dark’ Teaser",
    "views": 365094
   },
@@ -2590,7 +3030,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-11-05T15:00:28Z",
+   "series": "",
    "short": false,
+   "show": "",
    "title": "A2O SOUL 'SUPERSTAR' INFINITE Music Video",
    "views": 686142
   },
@@ -2602,7 +3044,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-11-04T09:00:10Z",
+   "series": "티저·트레일러",
    "short": false,
+   "show": "",
    "title": "A2O SOUL DEBUT ALBUM [SUPERSTAR] Highlight Medley",
    "views": 95499
   },
@@ -2614,11 +3058,26 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-11-04T09:00:05Z",
+   "series": "티저·트레일러",
    "short": false,
+   "show": "",
    "title": "A2O SOUL DEBUT ALBUM [SUPERSTAR] Highlight Medley",
    "views": 274503
   }
  ],
+ "streaming": [
+  {
+   "links": {},
+   "note": "데뷔 앨범 타이틀",
+   "title": "SUPERSTAR"
+  },
+  {
+   "links": {},
+   "note": "더블 타이틀",
+   "title": "Dancing in the Dark"
+  }
+ ],
+ "supports": [],
  "updated_at": "2026-11-11T06:16+09:00",
  "videos": [
   {
@@ -2629,7 +3088,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-11-10T08:30:01Z",
+   "series": "",
    "short": true,
+   "show": "",
    "title": "익숙하면서도 새로운 감성의 케이팝을 보여주는 A2O SOUL!｜#Shorts",
    "views": 6719
   },
@@ -2641,7 +3102,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-11-10T07:00:20Z",
+   "series": "",
    "short": true,
+   "show": "",
    "title": "심장이 뛰는 그 멜로디의 등장 A2O SOUL 'Dancing in the Dark'｜#Shorts",
    "views": 9512
   },
@@ -2653,7 +3116,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-11-09T10:00:28Z",
+   "series": "",
    "short": false,
+   "show": "",
    "title": "A2O SOUL - Dancing in the Dark Official Music Video",
    "views": 113677
   },
@@ -2665,7 +3130,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-11-09T10:00:17Z",
+   "series": "",
    "short": true,
+   "show": "",
    "title": "A2O SOUL 'Dancing in the Dark' Official Music Video｜#Shorts",
    "views": 40899
   },
@@ -2677,7 +3144,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-11-09T09:00:16Z",
+   "series": "",
    "short": false,
+   "show": "",
    "title": "A2O SOUL 'Dancing in the Dark' Official Music Video",
    "views": 1340609
   },
@@ -2689,7 +3158,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-11-09T09:00:13Z",
+   "series": "",
    "short": true,
+   "show": "",
    "title": "A2O SOUL DEBUT ALBUM [SUPERSTAR] OUT NOW",
    "views": 971889
   },
@@ -2701,7 +3172,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-11-09T05:00:25Z",
+   "series": "",
    "short": true,
+   "show": "",
    "title": "2~3세대의 추억이 아닌 5세대의 새로운 뉴 신스웨이브의 등장, A2O SOUL!｜#Shorts",
    "views": 14426
   },
@@ -2713,7 +3186,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-11-08T09:00:09Z",
+   "series": "티저·트레일러",
    "short": true,
+   "show": "",
    "title": "A2O SOUL 'Dancing in the Dark' MV Teaser",
    "views": 234212
   },
@@ -2725,7 +3200,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-11-08T03:00:16Z",
+   "series": "티저·트레일러",
    "short": false,
+   "show": "",
    "title": "A2O SOUL ‘Dancing in the Dark’ Teaser",
    "views": 365094
   },
@@ -2737,7 +3214,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-11-05T15:00:28Z",
+   "series": "",
    "short": false,
+   "show": "",
    "title": "A2O SOUL 'SUPERSTAR' INFINITE Music Video",
    "views": 686142
   },
@@ -2749,7 +3228,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-11-04T09:00:10Z",
+   "series": "티저·트레일러",
    "short": false,
+   "show": "",
    "title": "A2O SOUL DEBUT ALBUM [SUPERSTAR] Highlight Medley",
    "views": 95499
   },
@@ -2761,7 +3242,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-11-04T09:00:05Z",
+   "series": "티저·트레일러",
    "short": false,
+   "show": "",
    "title": "A2O SOUL DEBUT ALBUM [SUPERSTAR] Highlight Medley",
    "views": 274503
   },
@@ -2773,7 +3256,9 @@
    "member": "JUNE",
    "predebut": false,
    "published_at": "2026-11-03T09:00:24Z",
+   "series": "",
    "short": false,
+   "show": "쇼챔피언",
    "title": "[쇼챔1분직캠] A2O SOUL JUNE의 ＜SUPERSTAR＞♬ #A2OSOUL #JUNE #SUPERSTAR",
    "views": 8009
   },
@@ -2785,7 +3270,9 @@
    "member": "LUCIEN",
    "predebut": false,
    "published_at": "2026-11-03T09:00:19Z",
+   "series": "",
    "short": false,
+   "show": "쇼챔피언",
    "title": "[쇼챔1분직캠] A2O SOUL LUCIEN의 ＜SUPERSTAR＞♬ #A2OSOUL #LUCIEN #SUPERSTAR",
    "views": 5771
   },
@@ -2797,7 +3284,9 @@
    "member": "HANSUNG",
    "predebut": false,
    "published_at": "2026-11-03T09:00:08Z",
+   "series": "",
    "short": false,
+   "show": "쇼챔피언",
    "title": "[쇼챔1분직캠] A2O SOUL HANSUNG의 ＜SUPERSTAR＞♬ #A2OSOUL #HANSUNG #SUPERSTAR",
    "views": 4385
   },
@@ -2809,7 +3298,9 @@
    "member": "MOON",
    "predebut": false,
    "published_at": "2026-11-03T09:00:07Z",
+   "series": "",
    "short": false,
+   "show": "쇼챔피언",
    "title": "[쇼챔1분직캠] A2O SOUL MOON의 ＜SUPERSTAR＞♬ #A2OSOUL #MOON #SUPERSTAR",
    "views": 7546
   },
@@ -2821,7 +3312,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-11-03T05:00:39Z",
+   "series": "비하인드",
    "short": true,
+   "show": "",
    "title": "Music Bank BEHIND 💫 #A2O #A2OSOUL #SUPERSTAR",
    "views": 102815
   },
@@ -2833,7 +3326,9 @@
    "member": "SEE-ONE",
    "predebut": false,
    "published_at": "2026-11-02T09:00:23Z",
+   "series": "",
    "short": false,
+   "show": "쇼챔피언",
    "title": "[쇼챔1분직캠] A2O SOUL SEE-ONE의 ＜SUPERSTAR＞♬ #A2OSOUL #SEE-ONE #SUPERSTAR",
    "views": 5258
   },
@@ -2845,7 +3340,9 @@
    "member": "TEO",
    "predebut": false,
    "published_at": "2026-11-02T09:00:04Z",
+   "series": "",
    "short": false,
+   "show": "쇼챔피언",
    "title": "[쇼챔1분직캠] A2O SOUL TEO의 ＜SUPERSTAR＞♬ #A2OSOUL #TEO #SUPERSTAR",
    "views": 5420
   },
@@ -2857,7 +3354,9 @@
    "member": "TAI",
    "predebut": false,
    "published_at": "2026-11-02T09:00:01Z",
+   "series": "",
    "short": false,
+   "show": "쇼챔피언",
    "title": "[쇼챔1분직캠] A2O SOUL TAI의 ＜SUPERSTAR＞♬ #A2OSOUL #TAI #SUPERSTAR",
    "views": 5042
   },
@@ -2869,7 +3368,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-11-02T07:00:32Z",
+   "series": "",
    "short": false,
+   "show": "인기가요",
    "title": "[안방1열 풀캠4K] 에이투오 소울 'SUPERSTAR' (A2O SOUL FullCam) @SBS Inkigayo 261101",
    "views": 145953
   },
@@ -2881,7 +3382,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-11-01T10:30:25Z",
+   "series": "INFINITE CLIP",
    "short": true,
+   "show": "",
    "title": "A2O SOUL 'SUPERSTAR' INFINITE CLIP 3",
    "views": 37806
   },
@@ -2893,7 +3396,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-11-01T06:54:14Z",
+   "series": "",
    "short": false,
+   "show": "인기가요",
    "title": "SUPERSTAR - A2O SOUL | SBS 261101 방송",
    "views": 242721
   },
@@ -2905,7 +3410,9 @@
    "member": "SORA",
    "predebut": false,
    "published_at": "2026-10-31T09:00:37Z",
+   "series": "",
    "short": false,
+   "show": "쇼챔피언",
    "title": "[쇼챔1분직캠] A2O SOUL SORA의 ＜SUPERSTAR＞♬ #A2OSOUL #SORA #SUPERSTAR",
    "views": 13682
   },
@@ -2917,7 +3424,9 @@
    "member": "ALURE",
    "predebut": false,
    "published_at": "2026-10-31T09:00:24Z",
+   "series": "",
    "short": false,
+   "show": "쇼챔피언",
    "title": "[쇼챔1분직캠] A2O SOUL ALURE의 ＜SUPERSTAR＞♬ #A2OSOUL #ALURE #SUPERSTAR",
    "views": 11854
   },
@@ -2929,7 +3438,9 @@
    "member": "SEOHA",
    "predebut": false,
    "published_at": "2026-10-31T09:00:20Z",
+   "series": "",
    "short": false,
+   "show": "쇼챔피언",
    "title": "[쇼챔1분직캠] A2O SOUL SEOHA의 ＜SUPERSTAR＞♬ #A2OSOUL #SEOHA #SUPERSTAR",
    "views": 13599
   },
@@ -2941,7 +3452,9 @@
    "member": "GAKU",
    "predebut": false,
    "published_at": "2026-10-31T09:00:11Z",
+   "series": "",
    "short": false,
+   "show": "쇼챔피언",
    "title": "[쇼챔1분직캠] A2O SOUL GAKU의 ＜SUPERSTAR＞♬ #A2OSOUL #GAKU #SUPERSTAR",
    "views": 10338
   },
@@ -2953,7 +3466,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-31T01:03:05Z",
+   "series": "",
    "short": true,
+   "show": "뮤직뱅크",
    "title": "[K-Choreo 8K] A2O LITE & A2O SOUL 직캠 'Dance Break' (A2O LITE & A2O SOUL Choreography) @MusicBank",
    "views": 49457
   },
@@ -2965,7 +3480,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-31T01:02:10Z",
+   "series": "",
    "short": false,
+   "show": "뮤직뱅크",
    "title": "[K-Choreo 8K] A2O SOUL 직캠 'SUPERSTAR' (A2O SOUL Choreography) @MusicBank 261030",
    "views": 71008
   },
@@ -2977,7 +3494,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-30T12:38:09Z",
+   "series": "",
    "short": false,
+   "show": "뮤직뱅크",
    "title": "[뮤뱅 스테디캠 4K] A2O LITE  & A2O SOUL 'Dance Break' 4k Bonus Ver. @뮤직뱅크(Music Bank) 261030",
    "views": 307672
   },
@@ -2989,7 +3508,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-30T09:09:40Z",
+   "series": "",
    "short": false,
+   "show": "뮤직뱅크",
    "title": "SUPERSTAR - A2O SOUL [뮤직뱅크/Music Bank] | KBS 261030 방송",
    "views": 354218
   },
@@ -3001,7 +3522,9 @@
    "member": "ZAI",
    "predebut": false,
    "published_at": "2026-10-30T09:00:32Z",
+   "series": "",
    "short": false,
+   "show": "쇼챔피언",
    "title": "[쇼챔1분직캠] A2O SOUL ZAI의 ＜SUPERSTAR＞♬ #A2OSOUL #ZAI #SUPERSTAR",
    "views": 20614
   },
@@ -3013,7 +3536,9 @@
    "member": "ZET",
    "predebut": false,
    "published_at": "2026-10-30T09:00:27Z",
+   "series": "",
    "short": false,
+   "show": "쇼챔피언",
    "title": "[쇼챔1분직캠] A2O SOUL ZET의 ＜SUPERSTAR＞♬ #A2OSOUL #ZET #SUPERSTAR",
    "views": 22083
   },
@@ -3025,7 +3550,9 @@
    "member": "SONO",
    "predebut": false,
    "published_at": "2026-10-30T09:00:24Z",
+   "series": "",
    "short": false,
+   "show": "쇼챔피언",
    "title": "[쇼챔1분직캠] A2O SOUL SONO의 ＜SUPERSTAR＞♬ #A2OSOUL #SONO #SUPERSTAR",
    "views": 29127
   },
@@ -3037,7 +3564,9 @@
    "member": "AYDEN",
    "predebut": false,
    "published_at": "2026-10-30T09:00:09Z",
+   "series": "",
    "short": false,
+   "show": "쇼챔피언",
    "title": "[쇼챔1분직캠] A2O SOUL AYDEN 의 ＜SUPERSTAR＞♬ #A2OSOUL #AYDEN  #SUPERSTAR",
    "views": 6858
   },
@@ -3049,7 +3578,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-28T09:00:21Z",
+   "series": "INFINITE CLIP",
    "short": true,
+   "show": "",
    "title": "A2O SOUL 'SUPERSTAR' INFINITE CLIP 2",
    "views": 40030
   },
@@ -3061,7 +3592,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-27T09:00:12Z",
+   "series": "웰컴 투 소울라이트",
    "short": false,
+   "show": "",
    "title": "A2O COSMIC EPIC : Welcome to SOULITE",
    "views": 208183
   },
@@ -3073,7 +3606,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-26T14:12:53Z",
+   "series": "",
    "short": false,
+   "show": "",
    "title": "A2O SOUL을 소개합니다 💙",
    "views": 116755
   },
@@ -3085,7 +3620,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-26T10:58:09Z",
+   "series": "",
    "short": true,
+   "show": "",
    "title": "쓰담쓰담 🫳",
    "views": 127525
   },
@@ -3097,7 +3634,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-26T10:00:21Z",
+   "series": "",
    "short": true,
+   "show": "",
    "title": "A2O SOUL 많이 사랑해주세요 🫶",
    "views": 68516
   },
@@ -3109,7 +3648,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-26T09:10:14Z",
+   "series": "",
    "short": false,
+   "show": "쇼챔피언",
    "title": "[덕질캡처용♥CLEAN] A2O SOUL - SUPERSTAR  l Show Champion l EP.615 l 261021",
    "views": 80701
   },
@@ -3121,7 +3662,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-26T07:00:16Z",
+   "series": "",
    "short": false,
+   "show": "인기가요",
    "title": "[안방1열 풀캠4K] 에이투오 소울 'SUPERSTAR' (A2O SOUL FullCam) @SBS Inkigayo 261025",
    "views": 76062
   },
@@ -3133,7 +3676,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-25T10:10:41Z",
+   "series": "",
    "short": false,
+   "show": "인기가요",
    "title": "SUPERSTAR - A2O SOUL | SBS 261025 방송",
    "views": 329319
   },
@@ -3145,7 +3690,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-24T09:27:09Z",
+   "series": "INFINITE CLIP",
    "short": true,
+   "show": "",
    "title": "A2O SOUL 'SUPERSTAR' INFINITE CLIP 1",
    "views": 36648
   },
@@ -3157,7 +3704,9 @@
    "member": "ZET",
    "predebut": false,
    "published_at": "2026-10-24T08:03:53Z",
+   "series": "",
    "short": false,
+   "show": "음악중심",
    "title": "[#음중직캠] A2O SOUL ZET (에이투오 소울 제트) – SUPERSTAR FanCam | 쇼! 음악중심 | MBC261024",
    "views": 85963
   },
@@ -3169,7 +3718,9 @@
    "member": "SEOHA",
    "predebut": false,
    "published_at": "2026-10-24T08:03:38Z",
+   "series": "",
    "short": false,
+   "show": "음악중심",
    "title": "[#음중직캠] A2O SOUL SEOHA (에이투오 소울 서하) – SUPERSTAR FanCam | 쇼! 음악중심 | MBC261024",
    "views": 44488
   },
@@ -3181,7 +3732,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-24T08:03:25Z",
+   "series": "",
    "short": false,
+   "show": "음악중심",
    "title": "[#음중풀캠8K] A2O SOUL (에이투오 소울) – SUPERSTAR FullCam | 쇼! 음악중심 | MBC261024",
    "views": 51356
   },
@@ -3193,7 +3746,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-24T07:03:40Z",
+   "series": "",
    "short": false,
+   "show": "음악중심",
    "title": "A2O SOUL (에이투오 소울) - SUPERSTAR | Show! MusicCore | MBC261024방송",
    "views": 358670
   },
@@ -3205,7 +3760,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-24T06:30:35Z",
+   "series": "인터뷰",
    "short": false,
+   "show": "뮤직뱅크",
    "title": "(ENG)에이투오 라이트 & 에이투오 소울 (A2O LITE & A2O SOUL Interview) l @MusicBank KBS 261023",
    "views": 514341
   },
@@ -3217,7 +3774,9 @@
    "member": "GAKU",
    "predebut": false,
    "published_at": "2026-10-24T01:11:34Z",
+   "series": "",
    "short": false,
+   "show": "뮤직뱅크",
    "title": "[K-Fancam] A2O SOUL 가쿠 직캠 'SUPERSTAR' (A2O SOUL GAKU Fancam) @뮤직뱅크(Music Bank) 261023",
    "views": 22350
   },
@@ -3229,7 +3788,9 @@
    "member": "TAI",
    "predebut": false,
    "published_at": "2026-10-24T01:11:15Z",
+   "series": "",
    "short": false,
+   "show": "뮤직뱅크",
    "title": "[K-Fancam] A2O SOUL 타이 직캠 'SUPERSTAR' (A2O SOUL TAI Fancam) @뮤직뱅크(Music Bank) 261023",
    "views": 16753
   },
@@ -3241,7 +3802,9 @@
    "member": "ZAI",
    "predebut": false,
    "published_at": "2026-10-24T01:11:15Z",
+   "series": "",
    "short": false,
+   "show": "뮤직뱅크",
    "title": "[K-Fancam] A2O SOUL 자이 직캠 'SUPERSTAR' (A2O SOUL ZAI Fancam) @뮤직뱅크(Music Bank) 261023",
    "views": 56885
   },
@@ -3253,7 +3816,9 @@
    "member": "MOON",
    "predebut": false,
    "published_at": "2026-10-24T01:11:07Z",
+   "series": "",
    "short": false,
+   "show": "뮤직뱅크",
    "title": "[K-Fancam] A2O SOUL 문 직캠 'SUPERSTAR' (A2O SOUL MOON Fancam) @뮤직뱅크(Music Bank) 261023",
    "views": 9748
   },
@@ -3265,7 +3830,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-24T01:01:05Z",
+   "series": "",
    "short": false,
+   "show": "뮤직뱅크",
    "title": "[K-Choreo 8K] A2O SOUL 직캠 'SUPERSTAR' (A2O SOUL Choreography) @MusicBank 261023",
    "views": 250178
   },
@@ -3277,7 +3844,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-23T09:03:09Z",
+   "series": "",
    "short": false,
+   "show": "뮤직뱅크",
    "title": "SUPERSTAR - A2O SOUL [뮤직뱅크/Music Bank] | KBS 261023 방송",
    "views": 319614
   },
@@ -3289,7 +3858,9 @@
    "member": "MOON",
    "predebut": false,
    "published_at": "2026-10-23T03:01:26Z",
+   "series": "",
    "short": false,
+   "show": "M2",
    "title": "[입덕직캠] A2O SOUL 문 직캠 4K 'SUPERSTAR' (A2O SOUL MOON FanCam) | @MCOUNTDOWN_2026.10.22",
    "views": 49324
   },
@@ -3301,7 +3872,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-22T12:01:44Z",
+   "series": "릴레이댄스",
    "short": true,
+   "show": "M2",
    "title": "A2O SOUL 'SUPERSTAR' 릴댄 하이라이트 | 릴레이댄스",
    "views": 651691
   },
@@ -3313,7 +3886,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-22T12:01:10Z",
+   "series": "릴레이댄스",
    "short": true,
+   "show": "M2",
    "title": "A2O SOUL 금발 걔 '자이' | 릴레이댄스",
    "views": 158025
   },
@@ -3325,7 +3900,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-22T12:01:04Z",
+   "series": "릴레이댄스",
    "short": true,
+   "show": "M2",
    "title": "A2O SOUL 귀여움 대표 '제트' | 릴레이댄스",
    "views": 227457
   },
@@ -3337,7 +3914,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-22T12:01:02Z",
+   "series": "릴레이댄스",
    "short": true,
+   "show": "M2",
    "title": "교복 입은 A2O SOUL '문' 너무 좋은 느낌을 준다 | 릴레이댄스",
    "views": 91896
   },
@@ -3349,7 +3928,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-22T12:00:35Z",
+   "series": "릴레이댄스",
    "short": false,
+   "show": "M2",
    "title": "[릴레이댄스] A2O SOUL - SUPERSTAR (4K)",
    "views": 438355
   },
@@ -3361,7 +3942,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-22T10:19:03Z",
+   "series": "",
    "short": false,
+   "show": "엠카운트다운",
    "title": "A2O SOUL - SUPERSTAR #엠카운트다운 EP.950 | Mnet 261022 방송",
    "views": 318204
   },
@@ -3373,7 +3956,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-22T09:33:35Z",
+   "series": "",
    "short": true,
+   "show": "M2",
    "title": "유영진이 성대로 낳은 아들 A2O SOUL 서하",
    "views": 75831
   },
@@ -3385,7 +3970,9 @@
    "member": "TAI",
    "predebut": false,
    "published_at": "2026-10-22T09:33:29Z",
+   "series": "",
    "short": true,
+   "show": "M2",
    "title": "춤선이 남다른 A2O SOUL 타이 직캠",
    "views": 37326
   },
@@ -3397,7 +3984,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-22T09:33:09Z",
+   "series": "",
    "short": false,
+   "show": "M2",
    "title": "[MPD직캠] A2O SOUL 직캠 8K 'SUPERSTAR' (A2O SOUL FanCam) | @MCOUNTDOWN_2026.10.22",
    "views": 72431
   },
@@ -3409,7 +3998,9 @@
    "member": "SORA",
    "predebut": false,
    "published_at": "2026-10-22T09:32:39Z",
+   "series": "",
    "short": false,
+   "show": "M2",
    "title": "[MPD직캠] A2O SOUL 소라 직캠 4K 'SUPERSTAR' (A2O SOUL SORA FanCam) | @MCOUNTDOWN_2026.10.22",
    "views": 86852
   },
@@ -3421,7 +4012,9 @@
    "member": "ZET",
    "predebut": false,
    "published_at": "2026-10-22T09:32:39Z",
+   "series": "",
    "short": false,
+   "show": "M2",
    "title": "[MPD직캠] A2O SOUL 제트 직캠 4K 'SUPERSTAR' (A2O SOUL ZET FanCam) | @MCOUNTDOWN_2026.10.22",
    "views": 128295
   },
@@ -3433,7 +4026,9 @@
    "member": "TAI",
    "predebut": false,
    "published_at": "2026-10-22T09:32:39Z",
+   "series": "",
    "short": false,
+   "show": "M2",
    "title": "[MPD직캠] A2O SOUL 타이 직캠 4K 'SUPERSTAR' (A2O SOUL TAI FanCam) | @MCOUNTDOWN_2026.10.22",
    "views": 15096
   },
@@ -3445,7 +4040,9 @@
    "member": "AYDEN",
    "predebut": false,
    "published_at": "2026-10-22T09:32:39Z",
+   "series": "",
    "short": false,
+   "show": "M2",
    "title": "[MPD직캠] A2O SOUL 에이든 직캠 4K 'SUPERSTAR' (A2O SOUL AYDEN FanCam) | @MCOUNTDOWN_2026.10.22",
    "views": 24536
   },
@@ -3457,7 +4054,9 @@
    "member": "GAKU",
    "predebut": false,
    "published_at": "2026-10-22T09:32:39Z",
+   "series": "",
    "short": false,
+   "show": "M2",
    "title": "[MPD직캠] A2O SOUL 가쿠 직캠 4K 'SUPERSTAR' (A2O SOUL GAKU FanCam) | @MCOUNTDOWN_2026.10.22",
    "views": 51250
   },
@@ -3469,7 +4068,9 @@
    "member": "SEOHA",
    "predebut": false,
    "published_at": "2026-10-22T09:32:39Z",
+   "series": "",
    "short": false,
+   "show": "M2",
    "title": "[MPD직캠] A2O SOUL 서하 직캠 4K 'SUPERSTAR' (A2O SOUL SEOHA FanCam) | @MCOUNTDOWN_2026.10.22",
    "views": 56039
   },
@@ -3481,7 +4082,9 @@
    "member": "MOON",
    "predebut": false,
    "published_at": "2026-10-22T09:32:39Z",
+   "series": "",
    "short": false,
+   "show": "M2",
    "title": "[MPD직캠] A2O SOUL 문 직캠 4K 'SUPERSTAR' (A2O SOUL MOON FanCam) | @MCOUNTDOWN_2026.10.22",
    "views": 13660
   },
@@ -3493,7 +4096,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-22T09:00:06Z",
+   "series": "인터뷰",
    "short": false,
+   "show": "쇼챔피언",
    "title": "[MC석 코너] A2O LITE & A2O SOUL 역대급 신인이 알고싶다 ‘A2O LITE & A2O SOUL’ 나!왔어✋🏻 #쇼챔피언 #NEON #SUPERSTAR",
    "views": 13293
   },
@@ -3505,7 +4110,9 @@
    "member": "JUNE",
    "predebut": false,
    "published_at": "2026-10-22T07:58:34Z",
+   "series": "",
    "short": false,
+   "show": "쇼챔피언",
    "title": "[쇼챔직캠 4K] A2O SOUL JUNE - SUPERSTAR | Show Champion | EP.615 | 261021",
    "views": 6569
   },
@@ -3517,7 +4124,9 @@
    "member": "MOON",
    "predebut": false,
    "published_at": "2026-10-22T07:58:31Z",
+   "series": "",
    "short": false,
+   "show": "쇼챔피언",
    "title": "[쇼챔직캠 4K] A2O SOUL MOON - SUPERSTAR | Show Champion | EP.615 | 261021",
    "views": 8263
   },
@@ -3529,7 +4138,9 @@
    "member": "ZET",
    "predebut": false,
    "published_at": "2026-10-22T07:58:28Z",
+   "series": "",
    "short": false,
+   "show": "쇼챔피언",
    "title": "[쇼챔직캠 4K] A2O SOUL ZET - SUPERSTAR | Show Champion | EP.615 | 261021",
    "views": 100139
   },
@@ -3541,7 +4152,9 @@
    "member": "SEE-ONE",
    "predebut": false,
    "published_at": "2026-10-22T07:58:27Z",
+   "series": "",
    "short": false,
+   "show": "쇼챔피언",
    "title": "[쇼챔직캠 4K] A2O SOUL SEE-ONE - SUPERSTAR | Show Champion | EP.615 | 261021",
    "views": 10649
   },
@@ -3553,7 +4166,9 @@
    "member": "ALURE",
    "predebut": false,
    "published_at": "2026-10-22T07:58:27Z",
+   "series": "",
    "short": false,
+   "show": "쇼챔피언",
    "title": "[쇼챔직캠 4K] A2O SOUL ALURE - SUPERSTAR | Show Champion | EP.615 | 261021",
    "views": 52909
   },
@@ -3565,7 +4180,9 @@
    "member": "AYDEN",
    "predebut": false,
    "published_at": "2026-10-22T07:58:24Z",
+   "series": "",
    "short": false,
+   "show": "쇼챔피언",
    "title": "[쇼챔직캠 4K] A2O SOUL AYDEN - SUPERSTAR | Show Champion | EP.615 | 261021",
    "views": 18461
   },
@@ -3577,7 +4194,9 @@
    "member": "TAI",
    "predebut": false,
    "published_at": "2026-10-22T07:58:24Z",
+   "series": "",
    "short": false,
+   "show": "쇼챔피언",
    "title": "[쇼챔직캠 4K] A2O SOUL TAI - SUPERSTAR | Show Champion | EP.615 | 261021",
    "views": 14149
   },
@@ -3589,7 +4208,9 @@
    "member": "HANSUNG",
    "predebut": false,
    "published_at": "2026-10-22T07:58:22Z",
+   "series": "",
    "short": false,
+   "show": "쇼챔피언",
    "title": "[쇼챔직캠 4K] A2O SOUL HANSUNG - SUPERSTAR | Show Champion | EP.615 | 261021",
    "views": 10040
   },
@@ -3601,7 +4222,9 @@
    "member": "LUCIEN",
    "predebut": false,
    "published_at": "2026-10-22T07:58:20Z",
+   "series": "",
    "short": false,
+   "show": "쇼챔피언",
    "title": "[쇼챔직캠 4K] A2O SOUL LUCIEN - SUPERSTAR | Show Champion | EP.615 | 261021",
    "views": 12906
   },
@@ -3613,7 +4236,9 @@
    "member": "SEOHA",
    "predebut": false,
    "published_at": "2026-10-22T07:58:14Z",
+   "series": "",
    "short": false,
+   "show": "쇼챔피언",
    "title": "[쇼챔직캠 4K] A2O SOUL SEOHA - SUPERSTAR | Show Champion | EP.615 | 261021",
    "views": 24940
   },
@@ -3625,7 +4250,9 @@
    "member": "GAKU",
    "predebut": false,
    "published_at": "2026-10-22T07:58:12Z",
+   "series": "",
    "short": false,
+   "show": "쇼챔피언",
    "title": "[쇼챔직캠 4K] A2O SOUL GAKU - SUPERSTAR | Show Champion | EP.615 | 261021",
    "views": 19393
   },
@@ -3637,7 +4264,9 @@
    "member": "SORA",
    "predebut": false,
    "published_at": "2026-10-22T07:58:08Z",
+   "series": "",
    "short": false,
+   "show": "쇼챔피언",
    "title": "[쇼챔직캠 4K] A2O SOUL SORA - SUPERSTAR | Show Champion | EP.615 | 261021",
    "views": 29174
   },
@@ -3649,7 +4278,9 @@
    "member": "TEO",
    "predebut": false,
    "published_at": "2026-10-22T07:58:08Z",
+   "series": "",
    "short": false,
+   "show": "쇼챔피언",
    "title": "[쇼챔직캠 4K] A2O SOUL TEO - SUPERSTAR | Show Champion | EP.615 | 261021",
    "views": 14713
   },
@@ -3661,7 +4292,9 @@
    "member": "ZAI",
    "predebut": false,
    "published_at": "2026-10-22T07:58:03Z",
+   "series": "",
    "short": false,
+   "show": "쇼챔피언",
    "title": "[쇼챔직캠 4K] A2O SOUL ZAI - SUPERSTAR | Show Champion | EP.615 | 261021",
    "views": 38407
   },
@@ -3673,7 +4306,9 @@
    "member": "SONO",
    "predebut": false,
    "published_at": "2026-10-22T07:58:01Z",
+   "series": "",
    "short": false,
+   "show": "쇼챔피언",
    "title": "[쇼챔직캠 4K] A2O SOUL SONO - SUPERSTAR | Show Champion | EP.615 | 261021",
    "views": 91269
   },
@@ -3685,7 +4320,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-21T13:04:38Z",
+   "series": "",
    "short": false,
+   "show": "쇼챔피언",
    "title": "[쇼챔직캠 4K] A2O SOUL - SUPERSTAR | Show Champion | EP.615 | 261021",
    "views": 69075
   },
@@ -3697,7 +4334,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-21T09:34:44Z",
+   "series": "",
    "short": false,
+   "show": "쇼챔피언",
    "title": "[HOT DEBUT] A2O SOUL - SUPERSTAR  l Show Champion l EP.615 l 261021",
    "views": 523185
   },
@@ -3709,7 +4348,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-21T08:56:25Z",
+   "series": "인터뷰",
    "short": false,
+   "show": "쇼챔피언",
    "title": "[MC석 코너] 친구같은 컴백 인터뷰! ‘A2O LITE & A2O SOUL’ 나!왔어✋🏻 l Show Champion l EP.615 l 261021",
    "views": 205434
   },
@@ -3721,7 +4362,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-20T07:07:07Z",
+   "series": "",
    "short": true,
+   "show": "",
    "title": "A2O SOUL - SUPERSTAR Official Music Video｜#Shorts",
    "views": 10033
   },
@@ -3733,7 +4376,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-20T03:00:27Z",
+   "series": "",
    "short": false,
+   "show": "",
    "title": "A2O SOUL - SUPERSTAR Official Music Video",
    "views": 185652
   },
@@ -3745,7 +4390,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-20T02:48:05Z",
+   "series": "",
    "short": true,
+   "show": "",
    "title": "글로벌 취향 가득담긴 15명의 소년들 A2O SOUL!｜#Shorts",
    "views": 94187
   },
@@ -3757,7 +4404,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-18T12:00:06Z",
+   "series": "",
    "short": true,
+   "show": "",
    "title": "A2O SOUL ’SUPERSTAR‘ Official Music Video🎬",
    "views": 493930
   },
@@ -3769,7 +4418,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-17T09:00:23Z",
+   "series": "",
    "short": false,
+   "show": "",
    "title": "A2O SOUL 'SUPERSTAR' Drone Ver.",
    "views": 46537
   },
@@ -3781,7 +4432,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-16T17:11:05Z",
+   "series": "",
    "short": false,
+   "show": "엠카운트다운",
    "title": "소울 지휘만 따라 오케스트라 이부분진짜감동 #MCOUNTDOWN #엠카운트다운 #A2OSOUL",
    "views": 2633
   },
@@ -3793,7 +4446,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-16T10:00:30Z",
+   "series": "",
    "short": false,
+   "show": "",
    "title": "A2O SOUL 'SUPERSTAR' Official Music Video",
    "views": 3354364
   },
@@ -3805,7 +4460,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-15T09:48:04Z",
+   "series": "",
    "short": false,
+   "show": "엠카운트다운",
    "title": "'HOT DEBUT' A2O SOUL - SUPERSTAR #엠카운트다운 EP.949 | Mnet 261015 방송",
    "views": 2179946
   },
@@ -3817,7 +4474,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-15T09:29:45Z",
+   "series": "",
    "short": true,
+   "show": "M2",
    "title": "도입부터 시선 사로잡는 A2O SOUL 타이",
    "views": 140210
   },
@@ -3829,7 +4488,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-15T09:29:30Z",
+   "series": "",
    "short": false,
+   "show": "M2",
    "title": "[MPD직캠] A2O SOUL 직캠 8K 'SUPERSTAR' (A2O SOUL FanCam) | @MCOUNTDOWN_2026.10.15",
    "views": 584720
   },
@@ -3841,7 +4502,9 @@
    "member": "TAI",
    "predebut": false,
    "published_at": "2026-10-15T09:29:26Z",
+   "series": "",
    "short": false,
+   "show": "M2",
    "title": "[MPD직캠] A2O SOUL 타이 직캠 4K 'SUPERSTAR' (A2O SOUL TAI FanCam) | @MCOUNTDOWN_2026.10.15",
    "views": 95430
   },
@@ -3853,7 +4516,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-14T13:43:51Z",
+   "series": "비하인드",
    "short": false,
+   "show": "",
    "title": "A20 SOUL : Debut Show Backstage",
    "views": 34716
   },
@@ -3865,7 +4530,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-14T06:00:25Z",
+   "series": "",
    "short": true,
+   "show": "",
    "title": "A2O SOUL 'SUPERSTAR' OUT NOW",
    "views": 71045
   },
@@ -3877,7 +4544,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-14T06:00:00Z",
+   "series": "",
    "short": true,
+   "show": "",
    "title": "선공개 싱글부터 케이팝 팬들 휘어잡은 A2O SOUL 'SUPERSTAR'｜#Shorts",
    "views": 68774
   },
@@ -3889,7 +4558,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-13T13:36:46Z",
+   "series": "웰컴 투 소울라이트",
    "short": false,
+   "show": "M2",
    "title": "A2O SOUL & A2O LITE - INTRO + NEON + SUPERSTAR (4K) | WELCOME TO SOULITE From A2O SOUL A2O LITE",
    "views": 1022782
   },
@@ -3901,7 +4572,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-13T09:55:52Z",
+   "series": "웰컴 투 소울라이트",
    "short": false,
+   "show": "M2",
    "title": "A2O SOUL & A2O LITE Concept Trailer : The First Signal | WELCOME TO SOULITE From A2O SOUL A2O LITE",
    "views": 226950
   },
@@ -3913,7 +4586,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-13T09:55:45Z",
+   "series": "웰컴 투 소울라이트",
    "short": false,
+   "show": "M2",
    "title": "[최초공개] A2O SOUL - INTRO + SUPERSTAR (4K) | WELCOME TO SOULITE From A2O SOUL A2O LITE",
    "views": 2129642
   },
@@ -3925,7 +4600,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-13T09:55:16Z",
+   "series": "웰컴 투 소울라이트",
    "short": false,
+   "show": "M2",
    "title": "[최초공개] A2O LITE - NEON (4K) | WELCOME TO SOULITE From A2O SOUL A2O LITE",
    "views": 18323460
   },
@@ -3937,7 +4614,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-13T09:55:10Z",
+   "series": "웰컴 투 소울라이트",
    "short": false,
+   "show": "M2",
    "title": "A2O SOUL & A2O LITE - INTRO DANCE PERFORMANCE (4K) | WELCOME TO SOULITE From A2O SOUL A2O LITE",
    "views": 462048
   },
@@ -3949,7 +4628,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-13T09:23:51Z",
+   "series": "",
    "short": true,
+   "show": "",
    "title": "A2O SOUL 'SUPERSTAR' Official Video｜#Shorts",
    "views": 139731
   },
@@ -3961,7 +4642,9 @@
    "member": "",
    "predebut": false,
    "published_at": "2026-10-13T09:00:13Z",
+   "series": "",
    "short": false,
+   "show": "",
    "title": "A2O SOUL - SUPERSTAR Official Performance Video",
    "views": 884441
   },
@@ -3973,7 +4656,9 @@
    "member": "",
    "predebut": true,
    "published_at": "2026-10-12T12:30:26Z",
+   "series": "",
    "short": false,
+   "show": "",
    "title": "A2O SOUL 'SUPERSTAR' Official Performance Video",
    "views": 6502586
   },
@@ -3985,7 +4670,9 @@
    "member": "",
    "predebut": true,
    "published_at": "2026-10-12T08:56:59Z",
+   "series": "웰컴 투 소울라이트",
    "short": false,
+   "show": "M2",
    "title": "[LIVE🔴] WELCOME TO SOULITE From A2O SOUL A2O LITE",
    "views": 430945
   },
@@ -3997,7 +4684,9 @@
    "member": "",
    "predebut": true,
    "published_at": "2026-10-09T04:19:10Z",
+   "series": "티저·트레일러",
    "short": true,
+   "show": "",
    "title": "A2O SOUL: Coming to You",
    "views": 413979
   },
@@ -4009,7 +4698,9 @@
    "member": "",
    "predebut": true,
    "published_at": "2026-10-09T04:19:08Z",
+   "series": "",
    "short": true,
+   "show": "",
    "title": "A2O SOUL: SUPERSTAR",
    "views": 363732
   },
@@ -4021,7 +4712,9 @@
    "member": "",
    "predebut": true,
    "published_at": "2026-10-09T04:19:05Z",
+   "series": "티저·트레일러",
    "short": true,
+   "show": "",
    "title": "A2O SOUL: Find the SOUL",
    "views": 201626
   },
@@ -4033,7 +4726,9 @@
    "member": "",
    "predebut": true,
    "published_at": "2026-10-09T03:00:07Z",
+   "series": "웰컴 투 소울라이트",
    "short": true,
+   "show": "M2",
    "title": "(Teaser) [WELCOME TO SOULITE From A2O SOUL A2O LITE]",
    "views": 53717
   },
@@ -4045,7 +4740,9 @@
    "member": "",
    "predebut": true,
    "published_at": "2026-10-08T11:41:40Z",
+   "series": "티저·트레일러",
    "short": true,
+   "show": "",
    "title": "A2O SOUL: Find the SOUL",
    "views": 108053
   },
@@ -4057,7 +4754,9 @@
    "member": "",
    "predebut": true,
    "published_at": "2026-10-08T10:16:34Z",
+   "series": "티저·트레일러",
    "short": true,
+   "show": "",
    "title": "A2O SOUL: Coming to You",
    "views": 89903
   },
@@ -4069,7 +4768,9 @@
    "member": "",
    "predebut": true,
    "published_at": "2026-10-08T10:16:30Z",
+   "series": "",
    "short": true,
+   "show": "",
    "title": "A2O SOUL: SUPERSTAR",
    "views": 57310
   },
@@ -4081,7 +4782,9 @@
    "member": "",
    "predebut": true,
    "published_at": "2025-09-19T10:00:44Z",
+   "series": "",
    "short": false,
+   "show": "",
    "title": "A2O LTB DAVID, A2O LTG OA 'Summer Night' Zalpha Pop Official Video",
    "views": 2986726
   },
@@ -4093,7 +4796,9 @@
    "member": "",
    "predebut": true,
    "published_at": "2025-06-27T10:30:32Z",
+   "series": "Zal-Life",
    "short": false,
+   "show": "",
    "title": "A2O LTB AYDEN 'Love Is Gone' Zal-Life Behind The Scenes",
    "views": 10591
   },
@@ -4105,7 +4810,9 @@
    "member": "",
    "predebut": true,
    "published_at": "2025-06-11T07:00:07Z",
+   "series": "Zal-Life",
    "short": false,
+   "show": "",
    "title": "A2O LTB HANZE 'Palette' Zal-Life Behind The Scenes",
    "views": 9892
   },
@@ -4117,7 +4824,9 @@
    "member": "",
    "predebut": true,
    "published_at": "2025-06-06T10:00:19Z",
+   "series": "Zal-Dance",
    "short": false,
+   "show": "",
    "title": "A2O LTB HANZE 'Palette' Zal-Dance Official Video",
    "views": 22919
   },
@@ -4129,7 +4838,9 @@
    "member": "",
    "predebut": true,
    "published_at": "2025-04-11T10:01:34Z",
+   "series": "Zal-Dance",
    "short": false,
+   "show": "",
    "title": "A2O LTB AYDEN ’Love Is Gone’ Zal-Dance Official Video",
    "views": 59154
   },
@@ -4141,7 +4852,9 @@
    "member": "",
    "predebut": true,
    "published_at": "2025-04-08T17:15:07Z",
+   "series": "Zal-Life",
    "short": false,
+   "show": "",
    "title": "A2O HTB, A2O LTB 'CHAMPAGNE' Zal-Life Behind The Scenes",
    "views": 30023
   },
@@ -4153,7 +4866,9 @@
    "member": "",
    "predebut": true,
    "published_at": "2025-04-04T10:00:32Z",
+   "series": "Zal-Dance",
    "short": false,
+   "show": "",
    "title": "A2O HTB, A2O LTB 'CHAMPAGNE' Zal-Dance Official Video",
    "views": 173994
   },
@@ -4165,7 +4880,9 @@
    "member": "",
    "predebut": true,
    "published_at": "2025-03-29T10:00:58Z",
+   "series": "Zal-Life",
    "short": false,
+   "show": "",
    "title": "A2O LTB JIAYI 'What's Up Danger' Zal-Life Behind The Scenes",
    "views": 16941
   },
@@ -4177,7 +4894,9 @@
    "member": "",
    "predebut": true,
    "published_at": "2025-03-28T10:00:00Z",
+   "series": "Zal-Dance",
    "short": false,
+   "show": "",
    "title": "A2O LTB JIAYI 'What's Up Danger' Zal-Dance Official Video",
    "views": 27249
   },
@@ -4189,7 +4908,9 @@
    "member": "",
    "predebut": true,
    "published_at": "2025-03-21T11:02:07Z",
+   "series": "Zal-Life",
    "short": false,
+   "show": "",
    "title": "A2O LTB 'DRIVE’ Zal-Life Behind The Scenes",
    "views": 13680
   },
@@ -4201,7 +4922,9 @@
    "member": "",
    "predebut": true,
    "published_at": "2025-03-14T11:19:35Z",
+   "series": "Zal-Dance",
    "short": true,
+   "show": "",
    "title": "A2O LTB 'DRIVE’ Zal-Dance Official Video",
    "views": 31296
   },
@@ -4213,7 +4936,9 @@
    "member": "",
    "predebut": true,
    "published_at": "2025-03-12T06:00:24Z",
+   "series": "Zal-Life",
    "short": false,
+   "show": "",
    "title": "A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Life Behind The Scenes",
    "views": 13423
   },
@@ -4225,7 +4950,9 @@
    "member": "",
    "predebut": true,
    "published_at": "2025-03-12T06:00:12Z",
+   "series": "Zal-Life",
    "short": false,
+   "show": "",
    "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Life Behind The Scenes",
    "views": 11058
   },
@@ -4237,7 +4964,9 @@
    "member": "",
    "predebut": true,
    "published_at": "2025-03-12T04:00:18Z",
+   "series": "Zal-Life",
    "short": false,
+   "show": "",
    "title": "A2O LTB 'B.B.B' Zal-Life Behind The Scenes",
    "views": 88081
   },
@@ -4249,7 +4978,9 @@
    "member": "",
    "predebut": true,
    "published_at": "2025-03-07T10:37:17Z",
+   "series": "Zal-Dance",
    "short": true,
+   "show": "",
    "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Dance Official Video",
    "views": 24932
   },
@@ -4261,7 +4992,9 @@
    "member": "",
    "predebut": true,
    "published_at": "2025-03-07T10:34:13Z",
+   "series": "Zal-Dance",
    "short": true,
+   "show": "",
    "title": "A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Dance Official Video",
    "views": 23406
   },
@@ -4273,7 +5006,9 @@
    "member": "",
    "predebut": true,
    "published_at": "2025-02-28T10:13:18Z",
+   "series": "Zal-Dance",
    "short": true,
+   "show": "",
    "title": "A2O LTB 'B.B.B' Zal-Dance Official Video",
    "views": 28245
   },
@@ -4285,7 +5020,9 @@
    "member": "",
    "predebut": true,
    "published_at": "2025-02-16T07:04:26Z",
+   "series": "Zal-Life",
    "short": false,
+   "show": "",
    "title": "A2O HTB, A2O LTB ’REVOLUTION’ Zal-Life Behind The Scenes",
    "views": 22275
   },
@@ -4297,7 +5034,9 @@
    "member": "",
    "predebut": true,
    "published_at": "2025-02-14T10:44:50Z",
+   "series": "Zal-Dance",
    "short": true,
+   "show": "",
    "title": "A2O HTB, A2O LTB ‘REVOLUTION’ Zal-Dance Official Video",
    "views": 29593
   },
@@ -4309,7 +5048,9 @@
    "member": "",
    "predebut": true,
    "published_at": "2025-02-10T04:24:16Z",
+   "series": "Zal-Life",
    "short": false,
+   "show": "",
    "title": "A2O LTB, LTG ‘BAD & BOSSY’ Zal-Life Behind The Scenes",
    "views": 29157
   },
@@ -4321,7 +5062,9 @@
    "member": "",
    "predebut": true,
    "published_at": "2025-02-07T10:40:40Z",
+   "series": "Zal-Dance",
    "short": true,
+   "show": "",
    "title": "A2O LTB, A2O LTG ‘BAD & BOSSY’ Zal-Dance Official Video",
    "views": 35310
   },
@@ -4333,7 +5076,9 @@
    "member": "",
    "predebut": true,
    "published_at": "2025-01-11T08:38:28Z",
+   "series": "Zal-Life",
    "short": false,
+   "show": "",
    "title": "A2O Rookies LTB JIAYI, LTG XILI ‘GHOST TOWN’ Zal-Life Behind The Scenes",
    "views": 26871
   },
@@ -4345,7 +5090,9 @@
    "member": "",
    "predebut": true,
    "published_at": "2025-01-04T21:06:21Z",
+   "series": "Zal-Dance",
    "short": false,
+   "show": "",
    "title": "A2O Rookies LTB JIAYI, LTG XILI 'GHOST TOWN' Zal-Dance Official Video",
    "views": 53190
   },
@@ -4357,7 +5104,9 @@
    "member": "",
    "predebut": true,
    "published_at": "2024-12-29T08:27:26Z",
+   "series": "Zal-Life",
    "short": false,
+   "show": "",
    "title": "A2O Rookies LTB ‘BLACK MADONNA’ Zal-Life Behind The Scenes",
    "views": 30872
   },
@@ -4369,7 +5118,9 @@
    "member": "",
    "predebut": true,
    "published_at": "2024-12-27T08:46:02Z",
+   "series": "",
    "short": false,
+   "show": "",
    "title": "A2O Rookie LTB JIAYI ‘Easy on me’ Zalpha Pop Official Video",
    "views": 113959
   },
@@ -4381,7 +5132,9 @@
    "member": "",
    "predebut": true,
    "published_at": "2024-12-18T08:11:08Z",
+   "series": "Zal-Dance",
    "short": false,
+   "show": "",
    "title": "A2O Rookies LTB ‘BLACK MADONNA’ Zal-Dance Official Video",
    "views": 195057
   },
@@ -4393,7 +5146,9 @@
    "member": "",
    "predebut": true,
    "published_at": "2024-12-10T20:23:09Z",
+   "series": "Zal-Life",
    "short": false,
+   "show": "",
    "title": "A2O Rookies LTB 'CANDY' Zal-Life Behind The Scenes",
    "views": 168694
   },
@@ -4405,9 +5160,12 @@
    "member": "",
    "predebut": true,
    "published_at": "2024-11-22T11:08:27Z",
+   "series": "",
    "short": false,
+   "show": "",
    "title": "A2O Rookies LTB ’CANDY‘ Zalpha Pop Official Video",
    "views": 5498375
   }
- ]
+ ],
+ "votes": []
 }
