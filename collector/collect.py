@@ -76,7 +76,41 @@ def load_config():
         if e.get("time") is not None:
             e["time"] = str(e["time"])
     cfg["events"] = events
+
+    cfg["series"] = [(str(x["name"]), re.compile(str(x["pattern"]), re.I)) for x in cfg.get("series") or []]
+    load_fan_files(cfg)
     return cfg
+
+
+def _dt(value, what):
+    """'YYYY-MM-DD HH:MM' 또는 'YYYY-MM-DD' → 정규화 문자열."""
+    v = str(value or "").strip()
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}( \d{2}:\d{2})?", v):
+        sys.exit(f"{what}: 날짜는 'YYYY-MM-DD' 또는 'YYYY-MM-DD HH:MM' 형식이어야 해요: {value!r}")
+    return v
+
+
+def load_fan_files(cfg):
+    """응원 탭(votes/charts/support)과 입덕 가이드(guide) 설정."""
+    votes = read_yml("votes.yml")
+    cfg["votes"] = []
+    for v in votes.get("votes") or []:
+        cfg["votes"].append({**v, "start": _dt(v.get("start") or v.get("end"), "votes.yml start"),
+                             "end": _dt(v.get("end"), "votes.yml end")})
+    cfg["streaming"] = [{"title": str(x.get("title", "")), "note": str(x.get("note") or ""),
+                         "links": {str(k): str(u) for k, u in (x.get("links") or {}).items() if u}}
+                        for x in votes.get("streaming") or []]
+    cfg["charts"] = [{"song": str(c.get("song", "")), "service": str(c.get("service", "")), "type": str(c.get("type") or ""),
+                      "ranks": sorted((str(d), int(r)) for d, r in (c.get("ranks") or {}).items())}
+                     for c in read_yml("charts.yml").get("charts") or []]
+    cfg["supports"] = []
+    for x in read_yml("support.yml").get("supports") or []:
+        cfg["supports"].append({**{k: str(v) for k, v in x.items() if v is not None},
+                                "start": _dt(x.get("start"), "support.yml start"),
+                                "end": _dt(x.get("end") or x.get("start"), "support.yml end")})
+    guide = read_yml("guide.yml")
+    cfg["guide"] = {"course": [{"id": str(c["id"]), "note": str(c.get("note") or "")} for c in guide.get("course") or []],
+                    "tips": {str(k).upper(): str(v) for k, v in (guide.get("tips") or {}).items()}}
 
 
 def member_pattern(m):
@@ -404,6 +438,67 @@ def forecast(pts, window_days=7):
     return {"rate": round(rate), "target": target, "days": math.ceil((target - last_v) / rate)}
 
 
+def now_kst_str():
+    return datetime.now(KST).strftime("%Y-%m-%d %H:%M")
+
+
+def _ics_escape(t):
+    return str(t).replace("\\", "\\\\").replace(";", "\\;").replace(",", "\\,").replace("\n", "\\n")
+
+
+def write_calendar(cfg):
+    """일정·생일·투표 마감·서포트를 iCal(.ics)로 → 휴대폰 캘린더 구독용."""
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//A2O SOUL Tracker//KO", "CALSCALE:GREGORIAN",
+             "METHOD:PUBLISH", "X-WR-CALNAME:A2O SOUL", "X-WR-TIMEZONE:Asia/Seoul", "REFRESH-INTERVAL;VALUE=DURATION:PT6H",
+             "BEGIN:VTIMEZONE", "TZID:Asia/Seoul", "BEGIN:STANDARD", "DTSTART:19700101T000000",
+             "TZOFFSETFROM:+0900", "TZOFFSETTO:+0900", "TZNAME:KST", "END:STANDARD", "END:VTIMEZONE"]
+
+    def event(uid, summary, start, end=None, all_day=False, rrule=None, url=None, desc=None):
+        lines.extend(["BEGIN:VEVENT", f"UID:{uid}@a2o-soul-tracker", f"DTSTAMP:{stamp}"])
+        if all_day:
+            lines.append(f"DTSTART;VALUE=DATE:{start.replace('-', '')}")
+            nxt = (date.fromisoformat(end or start) + timedelta(days=1)).isoformat()
+            lines.append(f"DTEND;VALUE=DATE:{nxt.replace('-', '')}")
+        else:
+            fmt = lambda v: v.replace("-", "").replace(" ", "T").replace(":", "") + "00"
+            lines.append(f"DTSTART;TZID=Asia/Seoul:{fmt(start)}")
+            lines.append(f"DTEND;TZID=Asia/Seoul:{fmt(end or start)}")
+        lines.append(f"SUMMARY:{_ics_escape(summary)}")
+        if rrule:
+            lines.append(f"RRULE:{rrule}")
+        if url:
+            lines.append(f"URL:{url}")
+        if desc:
+            lines.append(f"DESCRIPTION:{_ics_escape(desc)}")
+        lines.append("END:VEVENT")
+
+    for i, e in enumerate(cfg["events"]):
+        label = f"[{e['type']}] " if e.get("type") else ""
+        if e.get("time") and re.fullmatch(r"\d{2}:\d{2}", e["time"]):
+            st = f"{e['date']} {e['time']}"
+            en = (datetime.strptime(st, "%Y-%m-%d %H:%M") + timedelta(hours=1)).strftime("%Y-%m-%d %H:%M")
+            event(f"event-{e['date']}-{i}", label + e["title"], st, en, url=e.get("url"))
+        else:
+            event(f"event-{e['date']}-{i}", label + e["title"], e["date"], all_day=True, url=e.get("url"))
+    for m in cfg["members"]:
+        bd = str(m.get("birthday") or "")
+        if re.fullmatch(r"\d{2}-\d{2}", bd):
+            year = cfg["debut_date"][:4] or "2026"
+            event(f"birthday-{m['name']}", f"🎂 {m['name']} 생일", f"{year}-{bd}", all_day=True, rrule="FREQ=YEARLY")
+    for i, v in enumerate(cfg["votes"]):
+        end = v["end"] if " " in v["end"] else v["end"] + " 23:59"
+        event(f"vote-{i}-{end}", f"🗳 {v.get('show', '')} {v.get('title', '투표')} 마감".strip(), end, url=v.get("url"),
+              desc=f"앱: {v['app']}" if v.get("app") else None)
+    for i, x in enumerate(cfg["supports"]):
+        who = f"{x['member']} " if x.get("member") else ""
+        event(f"support-{i}-{x['start']}", f"☕ {who}{x.get('kind', '')} {x.get('title', '')}".strip(),
+              x["start"][:10], x["end"][:10], all_day=True, url=x.get("url"), desc=x.get("place"))
+    lines.append("END:VCALENDAR")
+    # 75바이트 줄 접기는 생략해도 주요 캘린더 앱에서 정상 동작
+    (DATA / "calendar.ics").write_text("\r\n".join(lines) + "\r\n", "utf-8")
+
+
 def build(cfg):
     registry = load_json("registry.json", {"videos": {}, "channels": {}, "instagram": {}, "handles": {}})
     history = load_json("history.json", {})
@@ -428,18 +523,19 @@ def build(cfg):
         pts = points(f"ch:{cid}", "subscribers")
         value, delta = last_delta(pts)
         name = registry["channels"].get(cid, {}).get("title", cid)
-        kpis.append({"label": "유튜브 구독자", "sub": name, "value": value, "delta": delta})
+        kpis.append({"key": "yt_subs", "label": "유튜브 구독자", "sub": name, "value": value, "delta": delta})
         accounts.append({"name": f"유튜브 구독자 · {name}", "points": pts})
     for u in cfg["instagram"]:
         pts = points(f"ig:{u}", "followers")
         if not pts:
             continue
         value, delta = last_delta(pts)
-        kpis.append({"label": "인스타 팔로워", "sub": f"@{u}", "value": value, "delta": delta})
+        kpis.append({"key": "ig_followers", "label": "인스타 팔로워", "sub": f"@{u}", "value": value, "delta": delta})
         accounts.append({"name": f"인스타 팔로워 · @{u}", "points": pts})
 
     overrides = {v["id"]: v for v in cfg["videos"]}
     tracked = {channel_id(c) for c in cfg["channels"]}
+    shows = {channel_id(c): str(c["show"]) for c in cfg["channels"] if c.get("show")}
     videos = []
     for vid, reg in registry["videos"].items():
         ov = overrides.get(vid, {})
@@ -463,9 +559,12 @@ def build(cfg):
             "short": is_short(reg["title"], reg.get("duration_s")),
             "predebut": bool(cfg["debut_date"] and kst_date(reg.get("published_at")) < cfg["debut_date"]),
             "members": detect_members(cfg, reg["title"]),
+            "series": next((name for name, pat in cfg["series"] if pat.search(reg["title"])), ""),
+            "show": shows.get(reg.get("channel_id"), ""),
         })
 
-    slim = ("id", "title", "category", "member", "published_at", "channel", "views", "delta", "short", "predebut")
+    slim = ("id", "title", "category", "member", "published_at", "channel", "views", "delta", "short", "predebut",
+            "series", "show")
 
     mvs = sorted((v for v in videos if v["category"] == "mv"), key=lambda v: v["published_at"] or "", reverse=True)
     for v in mvs:
@@ -499,16 +598,17 @@ def build(cfg):
         })
 
     kpis.append({
-        "label": "MV 총 조회수", "sub": f"{len(mvs)}편",
+        "key": "mv_total", "count": len(mvs), "label": "MV 총 조회수", "sub": f"{len(mvs)}편",
         "value": sum(v["views"] or 0 for v in mvs),
         "delta": sum(v["delta"] or 0 for v in mvs) or None,
     })
     kpis.append({
-        "label": "직캠 총 조회수", "sub": f"{len(fancams)}개",
+        "key": "fancam_total", "count": len(fancams), "label": "직캠 총 조회수", "sub": f"{len(fancams)}개",
         "value": sum(v["views"] or 0 for v in fancams),
         "delta": sum(v["delta"] or 0 for v in fancams) or None,
     })
 
+    by_id = {v["id"]: v for v in videos}
     recent = sorted((v for v in videos if v["category"] != "fancam"),
                     key=lambda v: v["published_at"] or "", reverse=True)[:12]
     today = datetime.now(KST).date().isoformat()
@@ -527,8 +627,17 @@ def build(cfg):
         "events": sorted((e for e in cfg["events"] if e["date"] >= today),
                          key=lambda e: (e["date"], e.get("time") or "")),
         "categories": CATEGORIES,
+        "feedback_url": str(cfg.get("feedback_url") or ""),
+        "votes": [v for v in cfg["votes"] if v["end"] >= now_kst_str()],
+        "streaming": cfg["streaming"],
+        "charts": cfg["charts"],
+        "supports": sorted((x for x in cfg["supports"] if x["end"] >= today), key=lambda x: x["start"]),
+        "guide": {"course": [{**c, **{k: by_id[c["id"]][k] for k in slim}}
+                             for c in cfg["guide"]["course"] if c["id"] in by_id],
+                  "tips": cfg["guide"]["tips"]},
     }
     save_json("dashboard.json", dashboard)
+    write_calendar(cfg)
     print(f"dashboard.json 생성: 영상 {len(videos)}개 (MV {len(mvs)}, 직캠 {len(fancams)}), 일정 {len(dashboard['events'])}개")
 
 

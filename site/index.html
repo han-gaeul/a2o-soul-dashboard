@@ -12,7 +12,7 @@
 <link rel="icon" href="icons/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <title>A2O SOUL Tracker</title>
-<meta name="description" content="A2O SOUL 유튜브 지표·직캠·일정을 매일 모아 보여주는 비공식 팬메이드 대시보드">
+<meta name="description" content="A2O SOUL 영상·직캠·멤버·일정·투표를 모아 보는 비공식 팬메이드 사이트">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
@@ -25,17 +25,22 @@
       <div class="meta" id="debut"></div>
     </div>
     <div class="head-right">
-      <button class="install" id="installBtn" type="button" hidden>앱 설치</button>
-      <div class="meta" id="updated">불러오는 중…</div>
+      <div class="head-actions">
+        <select class="lang" id="lang" aria-label="Language"></select>
+        <button class="install" id="installBtn" type="button" hidden data-i18n="install">앱 설치</button>
+      </div>
+      <div class="meta" id="updated" data-i18n="loading">불러오는 중…</div>
     </div>
   </header>
 
   <nav class="tabs" id="tabs">
-    <a href="#overview" class="on">한눈에</a>
-    <a href="#mv">MV</a>
-    <a href="#members">멤버</a>
-    <a href="#fancams">직캠</a>
-    <a href="#videos">전체 영상</a>
+    <a href="#overview" class="on" data-i18n="tab.overview">한눈에</a>
+    <a href="#cheer" data-i18n="tab.cheer">응원</a>
+    <a href="#mv" data-i18n="tab.mv">MV</a>
+    <a href="#members" data-i18n="tab.members">멤버</a>
+    <a href="#fancams" data-i18n="tab.fancams">직캠</a>
+    <a href="#videos" data-i18n="tab.videos">영상</a>
+    <a href="#guide" data-i18n="tab.guide">입덕</a>
   </nav>
 
   <!-- 한눈에 -->
@@ -43,49 +48,74 @@
     <div class="grid" id="kpis"></div>
 
     <section class="card" id="eventsSection">
-      <h2>다가오는 일정</h2>
+      <div class="sec-head"><h2 data-i18n="upcoming">다가오는 일정</h2><a href="#cheer" class="see-all" data-i18n="calendar">캘린더 구독</a></div>
       <ul class="events" id="events"></ul>
     </section>
 
     <section class="card">
-      <div class="sec-head"><h2 id="recentHead">최신 영상</h2><a href="#videos" class="see-all">전체 보기 ›</a></div>
+      <div class="sec-head"><h2 id="recentHead"><span data-i18n="recent">최신 영상</span></h2><a href="#videos" class="see-all" data-i18n="see_all">전체 보기 ›</a></div>
       <div class="videos" id="recent"></div>
     </section>
 
     <section class="card">
-      <h2>구독자 · 팔로워 추이</h2>
+      <h2 data-i18n="accounts">구독자 · 팔로워 추이</h2>
       <div class="chart-box"><canvas id="accountsChart"></canvas></div>
+    </section>
+  </div>
+
+  <!-- 응원: 투표·스밍·차트·서포트·캘린더 -->
+  <div data-tab="cheer" hidden>
+    <section class="card">
+      <h2 data-i18n="votes">투표</h2>
+      <div class="votes" id="votes"></div>
+    </section>
+    <section class="card">
+      <h2 data-i18n="streaming">스밍 리스트</h2>
+      <ol class="stream" id="streaming"></ol>
+    </section>
+    <section class="card">
+      <h2 data-i18n="charts">음원 차트</h2>
+      <div id="charts"></div>
+    </section>
+    <section class="card">
+      <h2 data-i18n="supports">생일 카페 · 서포트</h2>
+      <div class="supports" id="supports"></div>
+    </section>
+    <section class="card" id="calendarSec">
+      <h2 data-i18n="calendar">캘린더 구독</h2>
+      <p class="note" data-i18n="calendar_desc"></p>
+      <div class="links" id="calLinks"></div>
     </section>
   </div>
 
   <!-- MV -->
   <div data-tab="mv" hidden>
     <section class="card">
-      <h2>뮤직비디오</h2>
+      <h2 data-i18n="mv">뮤직비디오</h2>
       <div class="videos" id="mvList"></div>
     </section>
     <section class="card">
-      <h2>MV 누적 조회수</h2>
+      <h2 data-i18n="mv_cum">MV 누적 조회수</h2>
       <div class="chart-box"><canvas id="mvChart"></canvas></div>
     </section>
     <section class="card">
-      <h2>MV 일일 증가량</h2>
+      <h2 data-i18n="mv_daily">MV 일일 증가량</h2>
       <div class="chart-box"><canvas id="mvDailyChart"></canvas></div>
     </section>
   </div>
 
-  <!-- 멤버·직캠 -->
+  <!-- 멤버 -->
   <div data-tab="members" hidden>
     <section class="card">
-      <h2>공식 채널</h2>
+      <h2 data-i18n="channels">공식 채널</h2>
       <div class="links" id="groupLinks"></div>
     </section>
     <section class="card" id="groupPostsSec">
-      <h2>공식 게시물</h2>
+      <h2 data-i18n="posts">공식 게시물</h2>
       <div class="ig-row" id="groupPosts"></div>
     </section>
     <section class="card">
-      <h2>멤버 15명</h2>
+      <h2 id="membersHead"></h2>
       <div class="profiles" id="profiles"></div>
     </section>
   </div>
@@ -93,33 +123,52 @@
   <!-- 직캠 -->
   <div data-tab="fancams" hidden>
     <section class="card">
-      <h2>멤버별 최신 직캠</h2>
+      <h2 data-i18n="latest_fancams">멤버별 최신 직캠</h2>
       <div class="members" id="members"></div>
     </section>
   </div>
 
-  <!-- 전체 영상 -->
+  <!-- 영상 아카이브 -->
   <div data-tab="videos" hidden>
     <section class="card">
+      <div class="archive-tools">
+        <input type="search" id="search" class="search" autocomplete="off">
+        <select id="seriesSel" class="sel"></select>
+        <select id="showSel" class="sel"></select>
+      </div>
       <div class="filters" id="filters"></div>
       <div class="videos" id="allVideos"></div>
-      <button class="more" id="more" hidden>더 보기</button>
+      <button class="more" id="more" hidden data-i18n="more">더 보기</button>
+    </section>
+  </div>
+
+  <!-- 입덕 가이드 -->
+  <div data-tab="guide" hidden>
+    <section class="card">
+      <h2 data-i18n="guide_course">입문 코스</h2>
+      <ol class="course" id="course"></ol>
+    </section>
+    <section class="card">
+      <h2 data-i18n="guide_members">멤버 구분하기</h2>
+      <p class="note" data-i18n="guide_members_desc"></p>
+      <div class="members" id="guideMembers"></div>
     </section>
   </div>
 
   <footer>
-    비공식 팬메이드 사이트로, A2O엔터테인먼트와 관련이 없습니다.<br>
-    데이터 출처: YouTube Data API · 하루 2회(KST 0시, 12시경) 갱신 · 증감은 직전 수집일 대비 · MV 다음 목표는 최근 7일 평균 증가량 기준 예상<br>
-    멤버 프로필은 나무위키(CC BY-NC-SA 2.0 KR) 문서를 요약했으며 활동 관련 정보만 담았습니다
+    <a id="feedback" class="feedback" target="_blank" rel="noopener" hidden data-i18n="feedback">의견 보내기</a>
+    <div data-i18n="footer1"></div>
+    <div data-i18n="footer2"></div>
+    <div data-i18n="footer3"></div>
   </footer>
 </div>
 
 <dialog id="installHelp">
-  <div class="dlg-head"><h2>홈 화면에 추가</h2><button class="dlg-close" id="installHelpClose" aria-label="닫기">✕</button></div>
+  <div class="dlg-head"><h2 data-i18n="ios_title">홈 화면에 추가</h2><button class="dlg-close" id="installHelpClose" aria-label="닫기">✕</button></div>
   <ol class="install-steps">
-    <li>Safari 아래쪽 <b>공유</b> 버튼(□↑)을 누르세요</li>
-    <li><b>홈 화면에 추가</b>를 누르세요</li>
-    <li>홈 화면의 <b>SOUL Tracker</b> 아이콘으로 앱처럼 열려요</li>
+    <li data-i18n="ios1"></li>
+    <li data-i18n="ios2"></li>
+    <li data-i18n="ios3"></li>
   </ol>
 </dialog>
 
@@ -132,6 +181,7 @@
 </dialog>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="i18n.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

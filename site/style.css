@@ -177,3 +177,52 @@ dialog::backdrop { background: rgba(0, 0, 0, .5); }
   body { -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; overscroll-behavior-y: contain; }
   .tabs { top: env(safe-area-inset-top, 0); }
 }
+
+/* 언어 */
+.head-actions { display: flex; gap: 6px; align-items: center; }
+.lang { border: 1px solid var(--line); background: var(--card); color: var(--text); border-radius: 999px;
+        padding: 5px 8px; font: inherit; font-size: 12px; }
+.muted { color: var(--muted); font-weight: 400; }
+
+/* 응원 */
+.votes, .supports { display: grid; gap: 10px; }
+.vote, .support { border: 1px solid var(--line); border-radius: 12px; padding: 12px; display: grid; gap: 4px; font-size: 14px; }
+.vote.urgent { border-color: #ef3b5d; }
+.vote.urgent .vote-time { color: #ef3b5d; font-weight: 700; }
+.vote a, .support a { color: var(--accent); font-weight: 600; font-size: 13px; justify-self: start; }
+.vote-time { font-size: 13px; }
+.chip-on { background: var(--accent); color: #fff; }
+.stream { margin: 0; padding-left: 20px; display: grid; gap: 10px; font-size: 14px; }
+.links.small a { padding: 3px 10px; font-size: 12px; }
+.chart-row { padding: 10px 0; border-bottom: 1px solid var(--line); }
+.chart-row:last-child { border-bottom: 0; }
+.chart-meta { font-size: 14px; }
+.chart-meta .rank { margin-left: 8px; font-weight: 800; color: var(--accent); }
+.up { color: var(--up); font-weight: 700; font-size: 12px; }
+.down { color: #ef3b5d; font-weight: 700; font-size: 12px; }
+.small-chart { height: 140px; margin-top: 6px; }
+.linkbtn { border: 1px solid var(--line); background: var(--card); color: var(--text); border-radius: 999px;
+           padding: 6px 12px; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; }
+
+/* 영상 아카이브 */
+.archive-tools { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+.search { flex: 1 1 200px; min-width: 0; border: 1px solid var(--line); background: var(--card); color: var(--text);
+          border-radius: 999px; padding: 8px 14px; font: inherit; font-size: 14px; }
+.sel { border: 1px solid var(--line); background: var(--card); color: var(--text); border-radius: 999px;
+       padding: 8px 10px; font: inherit; font-size: 13px; max-width: 48%; }
+
+/* 입덕 가이드 */
+.course { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); }
+.course li { position: relative; }
+.course .step { position: absolute; z-index: 1; left: -6px; top: -6px; width: 24px; height: 24px; border-radius: 50%;
+                background: var(--accent); color: #fff; font-size: 12px; font-weight: 800; display: grid; place-items: center; }
+.course-note { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+.member .tip { color: var(--text); }
+
+/* 푸터 */
+footer > div + div { margin-top: 2px; }
+.feedback { display: inline-block; margin-bottom: 10px; border: 1px solid var(--accent); color: var(--accent);
+            border-radius: 999px; padding: 6px 14px; font-weight: 700; }
+[hidden] { display: none !important; }
+header .head-right { margin-left: auto; }
+.course-note { padding-left: 24px; min-height: 20px; }

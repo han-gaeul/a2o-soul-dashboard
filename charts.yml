@@ -1,0 +1,10 @@
+# 응원 탭 — 음원 차트 순위 추이
+# 멜론·지니 등은 공개 API가 없고 자동 수집이 약관상 막혀 있어서, 순위를 직접 적으면 그래프로 보여줘요.
+#   song: 곡명 / service: 멜론·지니·벅스·FLO·Spotify 등 / type: 일간·주간·TOP100 등
+#   ranks: { "YYYY-MM-DD": 순위 }  — 순위권 밖이면 생략
+# 예)
+#   - song: SUPERSTAR
+#     service: 멜론
+#     type: 일간
+#     ranks: { "2026-11-10": 82, "2026-11-11": 74 }
+charts: []

@@ -5,7 +5,7 @@
 const VERSION = "v1";
 const SHELL = `shell-${VERSION}`;
 const RUNTIME = "runtime";
-const SHELL_FILES = ["./", "index.html", "style.css", "app.js", "manifest.webmanifest",
+const SHELL_FILES = ["./", "index.html", "style.css", "i18n.js", "app.js", "manifest.webmanifest",
   "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png"];
 const MAX_RUNTIME = 300;
 
