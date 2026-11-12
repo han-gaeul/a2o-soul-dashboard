@@ -1,0 +1,32 @@
+# 입덕 탭 '세계관'·'앨범', 응원 탭 '티켓·굿즈' — GitHub 웹에서 고칠 수 있어요.
+
+# 세계관 (문단마다 한 줄)
+lore:
+  - "15명의 소년은 모든 것이 갖춰진 행성 SOULITE(소울라이트)에서 왔어요."
+  - "그런데도 무언가 비어 있다고 느낀 이들은, 사람을 살아 있게 하는 감정과 에너지 — 기쁨·사랑·설렘·열정, 곧 '소울(SOUL)'을 찾아 지구로 떠나요."
+  - "데뷔 앨범 'SUPERSTAR'가 그 이야기의 첫 번째 챕터. 그룹은 자신들의 음악을 'NEW SYNTHWAVE'라고 불러요."
+
+# 앨범 (최신순). versions: 앨범 버전(포토북·디지팩 등), links: 구매·감상 링크 { 이름: URL }
+albums:
+  - title: SUPERSTAR
+    type: 데뷔 미니앨범
+    date: 2026-11-09
+    time: "18:00"
+    tracks:
+      - Superstar (타이틀)
+      - Dancing in the Dark (타이틀)
+      - While We're Young
+      - Very First Love
+      - Moonlight Shadow
+    versions: []
+    links: {}   # 예) { 멜론: "https://...", 공식 스토어: "https://..." }
+  - title: SUPERSTAR
+    type: 선공개 싱글
+    date: 2026-10-13
+    tracks: [SUPERSTAR]
+    versions: []
+    links: {}
+
+# 티켓·굿즈 공식 판매처 (응원 탭) { label, url, note }
+#   예) - { label: 공식 스토어, url: "https://...", note: "앨범·응원봉" }
+shops: []

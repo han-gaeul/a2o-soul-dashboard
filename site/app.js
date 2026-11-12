@@ -249,6 +249,30 @@ if ("serviceWorker" in navigator) {
     $("streaming").closest("section").remove();
   }
 
+  const howto = data.howto || {};
+  if ((howto.voting || []).length || (howto.streaming || []).length) {
+    if ((howto.voting || []).length) {
+      const box = el("details", { class: "howto", open: "" }, el("summary", {}, t("howto_voting")));
+      for (const v of howto.voting) {
+        box.append(el("div", { class: "howto-show" },
+          el("div", {}, el("b", {}, v.show), v.when ? el("span", { class: "muted" }, ` · ${v.when}`) : null),
+          el("div", { class: "howto-apps" },
+            v.pre ? el("span", {}, el("span", { class: "chip" }, t("howto_pre")), ` ${v.pre}`) : null,
+            v.live ? el("span", {}, el("span", { class: "chip chip-on" }, t("howto_live")), ` ${v.live}`) : null),
+          v.note ? el("div", { class: "muted small" }, v.note) : null,
+          v.url ? ext(v.url, "↗ link") : null));
+      }
+      $("howto").append(box);
+    }
+    for (const g of howto.streaming || []) {
+      $("howto").append(el("details", { class: "howto" }, el("summary", {}, g.title),
+        el("ol", { class: "howto-steps" }, ...g.steps.map((x) => el("li", {}, x)))));
+    }
+    if (howto.checked) $("howtoChecked").textContent = t("howto_checked", { d: howto.checked.replaceAll("-", ".") });
+  } else {
+    $("howtoSec").remove();
+  }
+
   if ((data.charts || []).length) {
     for (const c of data.charts) {
       const last = c.ranks[c.ranks.length - 1];
@@ -267,7 +291,10 @@ if ("serviceWorker" in navigator) {
   }
 
   const notices = data.notices || [];
-  if (notices.length) {
+  const shops = data.info?.shops || [];
+  for (const x of shops) $("shops").append(ext(x.url, x.label, x.note ? el("span", { class: "muted" }, ` · ${x.note}`) : null));
+  if (!shops.length) $("shops").remove();
+  if (notices.length || shops.length) {
     for (const x of notices) {
       const when = [x.date ? x.date.slice(5).replace("-", ".") : "", x.time || "",
         x.end_date && x.end_date !== x.date ? `~ ${x.end_date.slice(5).replace("-", ".")}` : ""].filter(Boolean).join(" ");
@@ -278,6 +305,46 @@ if ("serviceWorker" in navigator) {
     }
   } else {
     $("noticesSec").remove();
+  }
+
+  // ---------- 공식 인스타 피드 ----------
+  const igPost = (x, withMembers = true) => {
+    const iso = x.at ? kstDate(x.at).toISOString() : null;
+    return el("a", { class: "ig-post", href: x.url, target: "_blank", rel: "noopener" },
+      el("div", { class: "ig-meta" }, ageHours(iso) <= NEW_HOURS ? el("span", { class: "chip chip-on" }, "NEW") : null,
+        el("span", { class: "muted" }, iso ? when(iso) : ""),
+        x.likes != null ? el("span", { class: "muted" }, `♥ ${fmt(x.likes)}`) : null,
+        x.comments != null ? el("span", { class: "muted" }, `💬 ${fmt(x.comments)}`) : null),
+      el("div", { class: "ig-text" }, (x.text || "") + (x.more ? "…" : "")),
+      withMembers && (x.members || []).length ? el("div", { class: "ig-members" }, ...x.members.map((n) => el("span", { class: "chip" }, n))) : null);
+  };
+  const feed = data.ig_feed || [];
+  if (feed.length) {
+    feed.slice(0, 5).forEach((x) => $("igFeed").append(igPost(x)));
+    if (feed.length > 5) {
+      $("igMore").hidden = false;
+      $("igMore").onclick = () => { feed.slice(5).forEach((x) => $("igFeed").append(igPost(x))); $("igMore").remove(); };
+    }
+  } else {
+    $("igFeedSec").remove();
+  }
+  if (!(data.engagement || []).length) $("engagementSec").remove();
+
+  // ---------- 세계관·앨범 (입덕 탭) ----------
+  const info = data.info || {};
+  if ((info.lore || []).length) for (const p of info.lore) $("lore").append(el("p", {}, p));
+  else $("loreSec").remove();
+  if ((info.albums || []).length) {
+    for (const a of info.albums) {
+      $("albums").append(el("div", { class: "album" },
+        el("div", {}, el("b", {}, a.title), a.type ? el("span", { class: "muted" }, ` · ${a.type}`) : null),
+        a.date ? el("div", { class: "muted small" }, [a.date.replaceAll("-", "."), a.time].filter(Boolean).join(" ") + " KST") : null,
+        a.tracks.length ? el("ol", { class: "tracks" }, ...a.tracks.map((x) => el("li", {}, x))) : null,
+        a.versions.length ? el("div", { class: "small" }, el("span", { class: "chip" }, t("album_versions")), a.versions.join(" · ")) : null,
+        Object.keys(a.links).length ? el("div", { class: "links small" }, ...Object.entries(a.links).map(([k, u]) => ext(u, k))) : null));
+    }
+  } else {
+    $("albumsSec").remove();
   }
 
   const supports = data.supports || [];
@@ -371,6 +438,11 @@ if ("serviceWorker" in navigator) {
       sections.push(el("section", { class: "dlg-sec", id: `dlg-${key}` },
         el("h3", {}, t(label, { n: list.length })),
         el("div", { class: "videos" }, ...list.map((v) => videoCard(v, null)))));
+    }
+    if ((m.ig_mentions || []).length) {
+      sections.push(el("section", { class: "dlg-sec", id: "dlg-ig" },
+        el("h3", {}, t("ig_mentions", { n: m.ig_mentions.length })),
+        el("div", { class: "ig-feed" }, ...m.ig_mentions.map((x) => igPost(x, false)))));
     }
     // 출처는 맨 아래 작게
     sections.push(el("div", { class: "pf-src" }, t("source"),
@@ -512,11 +584,14 @@ if ("serviceWorker" in navigator) {
           const m = Object.fromEntries(s.points);
           const c = palette[i % palette.length];
           return { label: s.name ?? s.title, data: labels.map((l) => m[l] ?? null), spanGaps: true,
-                   borderColor: c, backgroundColor: c, tension: 0.25, pointRadius: 2 };
+                   borderColor: c, backgroundColor: c, tension: 0.25, pointRadius: 2, yAxisID: s.axis || "y" };
         }),
       },
       options: { maintainAspectRatio: false, interaction: { mode: "index", intersect: false },
-                 scales: { y: { ticks: { callback: fmt } } }, plugins: { tooltip } },
+                 scales: { y: { ticks: { callback: fmt } },
+                           ...(seriesList.some((s) => s.axis === "y1")
+                             ? { y1: { position: "right", grid: { drawOnChartArea: false }, ticks: { callback: fmt } } } : {}) },
+                 plugins: { tooltip } },
     });
   }
 
@@ -552,7 +627,10 @@ if ("serviceWorker" in navigator) {
     });
   }
 
-  drawers.overview = () => lineChart("accountsChart", data.accounts);
+  drawers.overview = () => {
+    lineChart("accountsChart", data.accounts);
+    if ((data.engagement || []).length) lineChart("engagementChart", data.engagement);
+  };
   drawers.cheer = rankCharts;
   drawers.mv = () => { lineChart("mvChart", data.mvs); dailyChart("mvDailyChart", data.mvs); };
 

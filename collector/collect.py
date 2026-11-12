@@ -112,6 +112,23 @@ def load_fan_files(cfg):
         cfg["supports"].append({**{k: str(v) for k, v in x.items() if v is not None},
                                 "start": _dt(x.get("start"), "support.yml start"),
                                 "end": _dt(x.get("end") or x.get("start"), "support.yml end")})
+    howto = read_yml("howto.yml")
+    keep = ("show", "when", "pre", "live", "note", "url")
+    cfg["howto"] = {"checked": str(howto.get("checked") or ""),
+                    "voting": [{k: str(v[k]) for k in keep if v.get(k)} for v in howto.get("voting") or [] if v.get("show")],
+                    "streaming": [{"title": str(s["title"]), "steps": [str(x) for x in s.get("steps") or []]}
+                                  for s in howto.get("streaming") or [] if s.get("title")]}
+    info = read_yml("info.yml")
+    cfg["info"] = {
+        "lore": [str(x) for x in info.get("lore") or []],
+        "albums": [{"title": str(a["title"]), "type": str(a.get("type") or ""), "date": str(a.get("date") or ""),
+                    "time": str(a.get("time") or ""), "tracks": [str(x) for x in a.get("tracks") or []],
+                    "versions": [str(x) for x in a.get("versions") or []],
+                    "links": {str(k): str(v) for k, v in (a.get("links") or {}).items() if str(v).startswith("https://")}}
+                   for a in info.get("albums") or [] if a.get("title")],
+        "shops": [{"label": str(x["label"]), "url": str(x["url"]), "note": str(x.get("note") or "")}
+                  for x in info.get("shops") or [] if x.get("label") and str(x.get("url", "")).startswith("https://")],
+    }
     guide = read_yml("guide.yml")
     cfg["guide"] = {"course": [{"id": str(c["id"]), "note": str(c.get("note") or "")} for c in guide.get("course") or []],
                     "tips": {str(k).upper(): str(v) for k, v in (guide.get("tips") or {}).items()}}
@@ -472,6 +489,18 @@ def collect(cfg, rescan=False):
             except Exception as e:  # noqa: BLE001
                 print(f"[공지] IG {username} 게시물 조회 실패: {e}")
                 continue
+            # 피드·멤버 언급용 최근 게시물 (이미지는 저장하지 않음 — 본문·링크·반응 수만)
+            registry.setdefault("ig_posts", {})[username] = [
+                {"id": m["id"], "caption": (m.get("caption") or "")[:1000], "timestamp": m.get("timestamp"),
+                 "permalink": m.get("permalink"), "likes": m.get("like_count"), "comments": m.get("comments_count")}
+                for m in media]
+            recent = media[:10]
+            likes = [m["like_count"] for m in recent if m.get("like_count") is not None]
+            comments = [m["comments_count"] for m in recent if m.get("comments_count") is not None]
+            if likes:
+                record(f"ig:{username}", "avg_likes", round(sum(likes) / len(likes)))
+            if comments:
+                record(f"ig:{username}", "avg_comments", round(sum(comments) / len(comments)))
             announce.run(media, store, today, kst_datetime, extract, limit)
     if xposts.enabled():
         xstate = store.setdefault("x", {})
@@ -628,6 +657,24 @@ def build(cfg):
         value, delta = last_delta(pts)
         kpis.append({"key": "ig_followers", "label": "인스타 팔로워", "sub": f"@{u}", "value": value, "delta": delta})
         accounts.append({"name": f"인스타 팔로워 · @{u}", "points": pts})
+    engagement = []
+    for u in cfg["instagram"]:
+        for metric, label, axis in (("avg_likes", "평균 좋아요", "y"), ("avg_comments", "평균 댓글", "y1")):
+            pts = points(f"ig:{u}", metric)
+            if pts:
+                engagement.append({"name": f"{label} · @{u}", "points": pts, "axis": axis})
+
+    # 공식 인스타 피드 (최신순) + 멤버 언급
+    ig_feed = []
+    for u, posts in (registry.get("ig_posts") or {}).items():
+        if u not in cfg["instagram"]:
+            continue
+        for m in posts:
+            text = (m.get("caption") or "").strip()
+            ig_feed.append({"account": u, "at": kst_datetime(m.get("timestamp")), "text": text[:300],
+                            "more": len(text) > 300, "url": m.get("permalink"), "likes": m.get("likes"),
+                            "comments": m.get("comments"), "members": detect_members(cfg, text)})
+    ig_feed.sort(key=lambda x: x["at"], reverse=True)
 
     overrides = {v["id"]: v for v in cfg["videos"]}
     tracked = {channel_id(c) for c in cfg["channels"]}
@@ -680,6 +727,7 @@ def build(cfg):
             "career": m.get("career") or [],
             "notes": m.get("notes") or [],
             "instagram_posts": [str(u) for u in (m.get("instagram_posts") or [])],
+            "ig_mentions": [{k: x[k] for k in ("at", "text", "more", "url")} for x in ig_feed if m["name"] in x["members"]][:10],
             "photo": local_img(m.get("photo")),
             "signature": local_img(m.get("signature")),
             "birthday": str(m.get("birthday") or ""),
@@ -721,6 +769,8 @@ def build(cfg):
         "debut_date": cfg["debut_date"],
         "kpis": kpis,
         "accounts": accounts,
+        "engagement": engagement,
+        "ig_feed": ig_feed[:20],
         "mvs": mvs,
         "members": members,
         "group_links": cfg["group_links"],
@@ -735,6 +785,8 @@ def build(cfg):
         "streaming": cfg["streaming"],
         "charts": cfg["charts"],
         "supports": sorted((x for x in cfg["supports"] if x["end"] >= today), key=lambda x: x["start"]),
+        "howto": cfg["howto"],
+        "info": cfg["info"],
         "guide": {"course": [{**c, **{k: by_id[c["id"]][k] for k in slim}}
                              for c in cfg["guide"]["course"] if c["id"] in by_id],
                   "tips": cfg["guide"]["tips"]},
