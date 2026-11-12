@@ -22,6 +22,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import announce  # noqa: E402
 import instagram  # noqa: E402
 import notify  # noqa: E402
+import rules  # noqa: E402
+import xposts  # noqa: E402
 import youtube  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -47,6 +49,7 @@ def load_config():
     cfg = read_yml("targets.yml")
     cfg["channels"] = cfg.get("channels") or []
     cfg["instagram"] = cfg.get("instagram") or []
+    cfg["x"] = [str(u).lstrip("@") for u in (cfg.get("x") or [])]
     cfg["videos"] = cfg.get("videos") or []
     cfg["debut_date"] = str(cfg.get("debut_date") or "")
     # MV로 인정하는 채널 (mv: true). 그 밖의 채널에 올라온 MV는 콘텐츠로
@@ -256,16 +259,20 @@ def auto_items(today):
     """announcements.json → (자동 반영 일정, 공지 정보, 확인 필요 목록)."""
     store = load_json("announcements.json", {})
     events, notices, pending = [], [], []
+    seen_ev, seen_pend = set(), set()
     for pid, post in sorted(store.get("posts", {}).items(), key=lambda kv: kv[1].get("timestamp") or "", reverse=True):
         posted = kst_datetime(post.get("timestamp"))[:10]
         for i in post.get("items", []):
             row = {**i, "post": post.get("permalink"), "posted": posted, "label": announce.KINDS.get(i["kind"], "기타")}
             future = (i.get("end_date") or i.get("date") or "9999") >= today
             if i["confidence"] < announce.AUTO_CONFIDENCE:
-                if future and posted >= (date.fromisoformat(today) - timedelta(days=30)).isoformat():
+                key = (i.get("date"), i["title"])
+                if future and key not in seen_pend and posted >= (date.fromisoformat(today) - timedelta(days=30)).isoformat():
+                    seen_pend.add(key)
                     pending.append(row)
                 continue
-            if i.get("date") and i["date"] >= today:
+            if i.get("date") and i["date"] >= today and (i["date"], i["title"]) not in seen_ev:
+                seen_ev.add((i["date"], i["title"]))
                 events.append({"date": i["date"], "time": i.get("time"), "type": row["label"], "title": i["title"],
                                "url": i.get("url") or post.get("permalink"), "auto": True})
             if i["kind"] in ("ticket", "merch", "release", "concert", "fanmeeting", "event") and future:
@@ -453,19 +460,36 @@ def collect(cfg, rescan=False):
     else:
         print("[IG] 토큰 없음 — 건너뜀")
 
-    # 공식 인스타 공지 → AI 정리
-    if instagram.enabled() and announce.enabled():
-        store = load_json("announcements.json", {})
+    # 공식 공지(인스타·X) → 일정 후보. ANTHROPIC_API_KEY 있으면 AI, 없으면 규칙(rules.py)
+    store = load_json("announcements.json", {})
+    use_ai = announce.enabled()
+    extract, limit = (None, 15) if use_ai else (rules.extract, 100)
+    print(f"[공지] 추출 방식: {'AI' if use_ai else '규칙'}")
+    if instagram.enabled():
         for username in cfg["instagram"]:
             try:
                 media = instagram.fetch_media(username)
             except Exception as e:  # noqa: BLE001
-                print(f"[공지] {username} 게시물 조회 실패: {e}")
+                print(f"[공지] IG {username} 게시물 조회 실패: {e}")
                 continue
-            announce.run(media, store, today, kst_datetime)
-        save_json("announcements.json", store)
-    else:
-        print("[공지] IG 토큰 또는 ANTHROPIC_API_KEY 없음 — 건너뜀")
+            announce.run(media, store, today, kst_datetime, extract, limit)
+    if xposts.enabled():
+        xstate = store.setdefault("x", {})
+        for username in cfg["x"]:
+            st = xstate.setdefault(username, {})
+            try:
+                st.setdefault("id", xposts.user_id(username))
+                posts = xposts.fetch_posts(st["id"], username, since_id=st.get("since_id"))
+            except Exception as e:  # noqa: BLE001
+                print(f"[공지] X @{username} 조회 실패: {e}")
+                continue
+            print(f"[공지] X @{username} 새 글 {len(posts)}개")
+            if posts:
+                st["since_id"] = max(posts, key=lambda p: int(p["tweet_id"]))["tweet_id"]
+                announce.run(posts, store, today, kst_datetime, extract, limit)
+    elif cfg["x"]:
+        print("[공지] X_BEARER_TOKEN 없음 — X 건너뜀")
+    save_json("announcements.json", store)
 
     registry["collected_at"] = now.isoformat(timespec="minutes")
     save_json("registry.json", registry)
@@ -509,7 +533,7 @@ def write_pending(pending):
     if not pending:
         path.unlink(missing_ok=True)
         return
-    lines = ["AI가 공식 인스타 공지에서 뽑았지만 확신이 낮아 사이트에 바로 넣지 않은 항목이에요.",
+    lines = ["공식 인스타·X 공지에서 자동으로 뽑았지만 확신이 낮아 사이트에 바로 넣지 않은 항목이에요.",
              "맞으면 `schedule.yml`(일정)이나 `targets.yml` 등에 옮겨 적고, 아니면 무시하세요. 다음 수집 때 이 이슈가 갱신돼요.", "",
              "| 종류 | 내용 | 날짜 | 장소 | 확신 | 원문 |", "|---|---|---|---|---|---|"]
     for p in pending:

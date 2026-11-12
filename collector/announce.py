@@ -80,20 +80,22 @@ def clean(i):
     }
 
 
-def run(media, store, today, kst_of):
-    """media: instagram.fetch_media 결과, store: data/announcements.json 내용(갱신됨). 새로 처리한 개수 반환."""
+def run(media, store, today, kst_of, extract=None, limit=15):
+    """media: [{id, caption, timestamp, permalink}], store: data/announcements.json 내용(갱신됨).
+    extract: 본문 → 항목 함수 (기본 AI). 새로 처리한 개수 반환."""
+    extract = extract or _extract
     processed = store.setdefault("posts", {})
     new = [m for m in media if m.get("id") not in processed and (m.get("caption") or "").strip()]
-    for m in new[:15]:  # 한 번에 최대 15개 (첫 실행 비용 제한)
+    for m in new[:limit]:  # AI는 한 번에 최대 15개 (첫 실행 비용 제한)
         posted = kst_of(m.get("timestamp"))
         try:
-            items = _extract(m["caption"], posted, today)
+            items = extract(m["caption"], posted, today)
         except Exception as e:  # noqa: BLE001
             print(f"[공지] {m['id']} 추출 실패: {type(e).__name__} {e}")
             continue
         processed[m["id"]] = {"timestamp": m.get("timestamp"), "permalink": m.get("permalink"),
                               "excerpt": (m.get("caption") or "")[:140], "items": [i for i in items if i["title"]]}
-        print(f"[공지] {posted} 항목 {len(items)}개: " + ", ".join(i["title"] for i in items))
+        print(f"[공지] {m['id']} {posted} 항목 {len(items)}개: " + ", ".join(i["title"] for i in items))
     for m in media:  # 캡션 없는 게시물도 처리한 걸로 기록해 매번 다시 보지 않게
         processed.setdefault(m["id"], {"timestamp": m.get("timestamp"), "permalink": m.get("permalink"), "excerpt": "", "items": []})
-    return len(new[:15])
+    return len(new[:limit])

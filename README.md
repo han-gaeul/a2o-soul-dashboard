@@ -36,10 +36,12 @@ GitHub Actions가 수집하고 GitHub Pages로 배포합니다. 서버 없음.
 ## 자동 수집
 
 - **공식 유튜브**: 영상·조회수, 예정된 라이브·프리미어 시작 시각 → 다가오는 일정
-- **공식 인스타(@a2o.soul)**: 새 게시물 본문을 AI(Claude)가 읽어 음방·발매·팬미팅·티켓·굿즈 일정을 정리
-  - 확신도 80% 이상 → 사이트·캘린더에 자동 반영 (응원 탭 '공식 공지', 다가오는 일정)
-  - 그 미만 → GitHub 이슈 **'자동 수집 확인 필요'**에 모아서 알려줌. 맞으면 `schedule.yml`에 옮겨 적기
-- 필요한 시크릿: `IG_USER_ID`, `IG_ACCESS_TOKEN`(만료 없는 페이지 토큰), `ANTHROPIC_API_KEY`
+- **공식 인스타(@a2o.soul)·공식 X**: 새 게시물 본문에서 음방·발매·팬미팅·티켓·굿즈 일정을 뽑아 정리
+  - 기본은 규칙 방식: 음방 이름 + 날짜가 같은 줄에 있으면 자동 반영, 애매하면 확인 필요로
+  - `ANTHROPIC_API_KEY`가 있으면 AI(Claude)가 읽어서 정리 (확신도 80% 이상 자동 반영)
+  - 자동 반영 → 사이트·캘린더 '다가오는 일정'(응원 탭 '공식 공지'), 그 밖 → GitHub 이슈 **'자동 수집 확인 필요'**. 맞으면 `schedule.yml`에 옮겨 적기
+- 필요한 시크릿: 인스타 `IG_USER_ID`, `IG_ACCESS_TOKEN`(만료 없는 페이지 토큰) / X `X_BEARER_TOKEN` + `targets.yml`의 `x:`에 핸들 / AI `ANTHROPIC_API_KEY`(선택)
+- X는 읽은 게시물 수만큼 과금돼요. 처음엔 최근 20개, 이후엔 새 글만 읽어요(답글·리트윗 제외)
 - 투표 일정·음원 차트는 공식 계정에 안 올라오거나 자동 수집이 막혀 있어서 직접 입력
 
 ## 관리하는 파일
@@ -117,6 +119,9 @@ collector/collect.py     수집·알림·집계 (--build: 집계만)
 collector/youtube.py     YouTube Data API
 collector/notify.py      디스코드·텔레그램 알림
 collector/instagram.py   Instagram Business Discovery
+collector/xposts.py      X API v2 (공식 계정 게시물)
+collector/rules.py       공지 본문 → 일정 후보 (규칙)
+collector/announce.py    공지 본문 → 일정 후보 (AI, 선택)
 data/                    registry.json, history.json, dashboard.json (Actions가 커밋)
 site/                    정적 대시보드
 .github/workflows/       수집·배포 워크플로

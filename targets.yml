@@ -70,6 +70,9 @@ series:
 instagram:
   - a2o.soul
 
+# 공식 X 계정 (@ 없이). 음방 공지 등을 읽어 일정 후보로 정리 — X_BEARER_TOKEN 필요(사용량 과금)
+x: []
+
 # 영상 개별 설정 — 다른 채널 영상 추가, 자동 분류 덮어쓰기
 #   category: mv | fancam | content
 #   member: members.yml의 이름
