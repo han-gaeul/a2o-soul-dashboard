@@ -34,6 +34,7 @@
  },
  "charts": [],
  "debut_date": "2026-10-13",
+ "engagement": [],
  "events": [],
  "feedback_url": "",
  "group_links": [
@@ -162,6 +163,113 @@
   ],
   "tips": {}
  },
+ "howto": {
+  "checked": "2026-11-12",
+  "streaming": [
+   {
+    "steps": [
+     "해당 사이트 스트리밍 이용권으로 로그인한 상태에서 재생",
+     "음소거·볼륨 0 말고 작게라도 소리 켜기",
+     "한 곡 반복보다 다른 곡을 섞은 재생목록으로 (응원 탭 스밍 리스트 참고)",
+     "여러 기기에서 같은 계정으로 동시에 돌리지 않기"
+    ],
+    "title": "음원 사이트 (멜론·지니·벅스·FLO·바이브)"
+   },
+   {
+    "steps": [
+     "로그인한 상태에서 MV를 끝까지 보기",
+     "같은 MV만 연속 반복하지 말고 다른 영상(무대·직캠)을 사이에 섞기",
+     "좋아요·댓글·공유도 함께",
+     "재생목록은 공식 채널 영상 위주로"
+    ],
+    "title": "유튜브 뮤직비디오 조회수"
+   },
+   {
+    "steps": [
+     "투표 기간은 응원 탭 '투표'에서 확인 (마감 임박하면 빨갛게 표시)",
+     "대부분 앱 미션·광고로 투표권을 모으니 미리 모아 두기",
+     "투표 앱·방식이 자주 바뀌니 공식 공지도 같이 확인"
+    ],
+    "title": "음방 투표 공통"
+   }
+  ],
+  "voting": [
+   {
+    "live": "빅크(BIGC)",
+    "note": "생방송 중 앱 실시간 투표 배너",
+    "pre": "빅크(BIGC)",
+    "show": "더쇼",
+    "when": "화 18:00 · SBS Life"
+   },
+   {
+    "note": "앱 미션·광고로 모은 재화로 투표",
+    "pre": "아이돌챔프(IDOLCHAMP)",
+    "show": "쇼챔피언",
+    "when": "수 · MBC M"
+   },
+   {
+    "live": "엠넷플러스(Mnet Plus)",
+    "note": "생방송 중 앱 실시간 투표 배너",
+    "pre": "엠넷플러스(Mnet Plus)",
+    "show": "엠카운트다운",
+    "when": "목 18:00 · Mnet"
+   },
+   {
+    "pre": "팬캐스트(FANCAST)",
+    "show": "뮤직뱅크",
+    "when": "금 17:15 · KBS2"
+   },
+   {
+    "pre": "뮤니버스(MUNIVERSE) · 뮤빗(MUBEAT, 글로벌)",
+    "show": "음악중심",
+    "when": "토 · MBC"
+   },
+   {
+    "live": "하이어(HIGHER)",
+    "note": "생방송 투표는 계정당 최대 5표",
+    "pre": "링크(LiNC)",
+    "show": "인기가요",
+    "when": "일 15:20 · SBS"
+   }
+  ]
+ },
+ "ig_feed": [],
+ "info": {
+  "albums": [
+   {
+    "date": "2026-11-09",
+    "links": {},
+    "time": "18:00",
+    "title": "SUPERSTAR",
+    "tracks": [
+     "Superstar (타이틀)",
+     "Dancing in the Dark (타이틀)",
+     "While We're Young",
+     "Very First Love",
+     "Moonlight Shadow"
+    ],
+    "type": "데뷔 미니앨범",
+    "versions": []
+   },
+   {
+    "date": "2026-10-13",
+    "links": {},
+    "time": "",
+    "title": "SUPERSTAR",
+    "tracks": [
+     "SUPERSTAR"
+    ],
+    "type": "선공개 싱글",
+    "versions": []
+   }
+  ],
+  "lore": [
+   "15명의 소년은 모든 것이 갖춰진 행성 SOULITE(소울라이트)에서 왔어요.",
+   "그런데도 무언가 비어 있다고 느낀 이들은, 사람을 살아 있게 하는 감정과 에너지 — 기쁨·사랑·설렘·열정, 곧 '소울(SOUL)'을 찾아 지구로 떠나요.",
+   "데뷔 앨범 'SUPERSTAR'가 그 이야기의 첫 번째 챕터. 그룹은 자신들의 음악을 'NEW SYNTHWAVE'라고 불러요."
+  ],
+  "shops": []
+ },
  "kpis": [
   {
    "delta": 3000,
@@ -277,6 +385,7 @@
      "views": 8325
     }
    ],
+   "ig_mentions": [],
    "instagram_posts": [],
    "ko": "문",
    "name": "MOON",
@@ -349,6 +458,7 @@
      "views": 29786
     }
    ],
+   "ig_mentions": [],
    "instagram_posts": [],
    "ko": "소라",
    "name": "SORA",
@@ -433,6 +543,7 @@
      "views": 25340
     }
    ],
+   "ig_mentions": [],
    "instagram_posts": [],
    "ko": "서하",
    "name": "SEOHA",
@@ -518,6 +629,7 @@
      "views": 19528
     }
    ],
+   "ig_mentions": [],
    "instagram_posts": [],
    "ko": "가쿠",
    "name": "GAKU",
@@ -742,6 +854,7 @@
      "views": 15092
     }
    ],
+   "ig_mentions": [],
    "instagram_posts": [],
    "ko": "테오",
    "name": "TEO",
@@ -968,6 +1081,7 @@
      "views": 6679
     }
    ],
+   "ig_mentions": [],
    "instagram_posts": [],
    "ko": "준",
    "name": "JUNE",
@@ -1108,6 +1222,7 @@
      "views": 13262
     }
    ],
+   "ig_mentions": [],
    "instagram_posts": [],
    "ko": "루시엔",
    "name": "LUCIEN",
@@ -1163,6 +1278,7 @@
      "views": 10400
     }
    ],
+   "ig_mentions": [],
    "instagram_posts": [],
    "ko": "한성",
    "name": "HANSUNG",
@@ -1277,6 +1393,7 @@
      "views": 96935
     }
    ],
+   "ig_mentions": [],
    "instagram_posts": [],
    "ko": "타이",
    "name": "TAI",
@@ -1586,6 +1703,7 @@
      "views": 10853
     }
    ],
+   "ig_mentions": [],
    "instagram_posts": [],
    "ko": "시원",
    "name": "SEE-ONE",
@@ -1639,6 +1757,7 @@
      "views": 92771
     }
    ],
+   "ig_mentions": [],
    "instagram_posts": [],
    "ko": "소노",
    "name": "SONO",
@@ -1695,6 +1814,7 @@
      "views": 54088
     }
    ],
+   "ig_mentions": [],
    "instagram_posts": [],
    "ko": "알루어",
    "name": "ALURE",
@@ -1766,6 +1886,7 @@
      "views": 39020
     }
    ],
+   "ig_mentions": [],
    "instagram_posts": [],
    "ko": "자이",
    "name": "ZAI",
@@ -2161,6 +2282,7 @@
      "views": 18719
     }
    ],
+   "ig_mentions": [],
    "instagram_posts": [],
    "ko": "에이든",
    "name": "AYDEN",
@@ -2527,6 +2649,7 @@
      "views": 101544
     }
    ],
+   "ig_mentions": [],
    "instagram_posts": [],
    "ko": "제트",
    "name": "ZET",
