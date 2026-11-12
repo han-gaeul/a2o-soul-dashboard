@@ -28,6 +28,7 @@
 group_links:
   - { label: 공식 홈페이지, url: "https://a2osoul.world" }
   - { label: 인스타그램 @a2o.soul, url: "https://www.instagram.com/a2o.soul" }
+  - { label: X @A2O_SOUL, url: "https://x.com/A2O_SOUL" }
   - { label: 유튜브 A2O SOUL, url: "https://www.youtube.com/@A2OSOUL" }
   - { label: 유튜브 A2O WORLD, url: "https://www.youtube.com/@A2OWORLD" }
   - { label: 플러스챗, url: "https://artist.mnetplus.world/main/stg/a2osoul" }
