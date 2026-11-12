@@ -252,3 +252,31 @@ header .head-right { margin-left: auto; }
 .ig-meta { display: flex; gap: 8px; align-items: center; font-size: 12px; }
 .ig-text { font-size: 14px; line-height: 1.5; white-space: pre-line; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
 .ig-members { display: flex; flex-wrap: wrap; gap: 4px; }
+
+/* 봤어요 */
+.seen-btn { position: absolute; right: 6px; top: 6px; width: 26px; height: 26px; border-radius: 50%; border: 0;
+  background: rgba(0,0,0,.45); color: rgba(255,255,255,.75); font-size: 13px; font-weight: 800; cursor: pointer; }
+.video.seen .seen-btn { background: var(--accent); color: #fff; }
+.video.seen img { opacity: .55; }
+.unseen-btn.on { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+/* 최애 */
+.bias .sec-head { gap: 8px; }
+.bias .sel { max-width: 50%; }
+.bias-bd { font-weight: 700; margin: 4px 0 10px; }
+.bias-ig { margin-top: 10px; }
+.bias-btn { margin-left: auto; margin-right: 8px; border: 1px solid var(--line); background: none; border-radius: 999px;
+  padding: 6px 10px; font-size: 13px; font-weight: 700; color: var(--muted); cursor: pointer; white-space: nowrap; }
+.bias-btn.on { color: var(--accent); border-color: var(--accent); }
+
+/* 음방 회차 */
+.ep > summary { font-weight: 400; }
+.ep .videos { padding: 0 12px 12px; }
+
+/* 기록 */
+.timeline { list-style: none; margin: 0; padding: 0 0 0 14px; border-left: 2px solid var(--line); display: grid; gap: 12px; }
+.timeline li { position: relative; font-size: 14px; display: grid; gap: 2px; }
+.timeline li::before { content: ""; position: absolute; left: -21px; top: 4px; width: 10px; height: 10px; border-radius: 50%; background: var(--line); }
+.timeline .tl-record::before, .timeline .tl-debut::before { background: var(--accent); }
+.timeline .tl-date { font-size: 12px; color: var(--muted); }
+.timeline a { color: inherit; font-weight: 600; }

@@ -126,6 +126,8 @@ def load_fan_files(cfg):
                     "versions": [str(x) for x in a.get("versions") or []],
                     "links": {str(k): str(v) for k, v in (a.get("links") or {}).items() if str(v).startswith("https://")}}
                    for a in info.get("albums") or [] if a.get("title")],
+        "records": [{"date": str(x["date"]), "title": str(x["title"]), "url": str(x.get("url") or "")}
+                    for x in info.get("records") or [] if x.get("date") and x.get("title")],
         "shops": [{"label": str(x["label"]), "url": str(x["url"]), "note": str(x.get("note") or "")}
                   for x in info.get("shops") or [] if x.get("label") and str(x.get("url", "")).startswith("https://")],
     }
@@ -228,6 +230,97 @@ def classify(cfg, title, duration_s):
     if "M/V" in t or re.search(r"\bMV\b", t) or "MUSIC VIDEO" in t:
         return "mv", ""
     return "content", ""
+
+
+
+# ---------- 응원법·음방 회차·기록 ----------
+
+FANCHANT = re.compile(r"fan\s?chant|응원법", re.I)
+SHOW_WEEKDAY = {"더쇼": 1, "쇼챔피언": 2, "엠카운트다운": 3, "뮤직뱅크": 4, "음악중심": 5, "인기가요": 6}
+
+
+def song_of(title):
+    m = re.search(r"['‘’\"“”＜<]([^'‘’\"“”＞>]{2,40})['‘’\"“”＞>]", title)
+    return m.group(1).strip() if m else ""
+
+
+def broadcast_date(title):
+    """제목 속 방송일: 2026.10.15 / _2026.10.15 / 261021 (YYMMDD)."""
+    m = re.search(r"(20\d\d)[./-](\d{1,2})[./-](\d{1,2})", title)
+    if m:
+        y, mo, d = map(int, m.groups())
+    else:
+        m = re.search(r"(?<!\d)(2\d)(0[1-9]|1[0-2])([0-3]\d)(?!\d)", title)
+        if not m:
+            return None
+        y, mo, d = 2000 + int(m.group(1)), int(m.group(2)), int(m.group(3))
+    try:
+        return date(y, mo, d).isoformat()
+    except ValueError:
+        return None
+
+
+def build_episodes(videos, slim):
+    """음방 회차별 무대·직캠: (방송, 방송일)로 묶음. 제목에 방송일이 있는 영상만 (쇼츠·1분직캠 등은 제외)."""
+    eps = {}
+    for v in videos:
+        show = v["show"]
+        if show == "M2" and re.search(r"MCOUNTDOWN|엠카", v["title"], re.I):
+            show = "엠카운트다운"
+        if show not in SHOW_WEEKDAY or v["short"]:
+            continue
+        d = broadcast_date(v["title"])
+        if not d:
+            continue
+        ep = eps.setdefault((show, d), {"show": show, "date": d, "ep": "", "videos": []})
+        m = re.search(r"EP\.?\s?(\d+)", v["title"], re.I)
+        if m and not ep["ep"]:
+            ep["ep"] = m.group(1)
+        ep["videos"].append(v)
+    out = []
+    for ep in sorted(eps.values(), key=lambda e: e["date"], reverse=True):
+        # 무대(풀캠 포함) 먼저, 단체 직캠, 멤버 직캠 순
+        ep["videos"].sort(key=lambda v: (v["category"] == "fancam", bool(v["member"]), v["member"], v["published_at"] or ""))
+        out.append({**ep, "videos": [{k: v[k] for k in slim} for v in ep["videos"]]})
+    return out
+
+
+def build_timeline(cfg, videos, episodes, subs=()):
+    """기록: 데뷔·발매·첫 음방(자동) + 조회수·구독자 돌파(수집 기록 기준) + info.yml records(직접 입력)."""
+    items = []
+    if cfg["debut_date"]:
+        items.append({"date": cfg["debut_date"], "kind": "debut", "title": "데뷔"})
+    for a in cfg["info"]["albums"]:
+        if a["date"]:
+            items.append({"date": a["date"], "kind": "release", "title": f"{a['type']} '{a['title']}' 발매".strip()})
+    firsts = {}
+    for ep in episodes:
+        firsts[ep["show"]] = min(firsts.get(ep["show"], ep["date"]), ep["date"])
+    for show, d in firsts.items():
+        items.append({"date": d, "kind": "show", "title": f"첫 {show} 무대"})
+    ms = view_milestones()
+    for v in videos:
+        if v["category"] != "mv":
+            continue
+        pts = v["points"]
+        for (_, a), (d, b) in zip(pts, pts[1:]):
+            for m in ms:
+                if a < m <= b and m >= 1_000_000:
+                    items.append({"date": d, "kind": "views", "title": f"{song_of(v['title']) or 'MV'} MV {kr_num(m)}뷰 돌파",
+                                  "url": f"https://youtu.be/{v['id']}"})
+    for pts in subs:
+        for (_, a), (d, b) in zip(pts, pts[1:]):
+            m = crossed(a, b, subscriber_milestones())
+            if m:
+                items.append({"date": d, "kind": "subs", "title": f"유튜브 구독자 {kr_num(m)} 돌파"})
+    for x in cfg["info"]["records"]:
+        items.append({"date": x["date"], "kind": "record", "title": x["title"], "url": x["url"]})
+    seen, out = set(), []
+    for it in sorted(items, key=lambda x: x["date"], reverse=True):
+        if (it["date"], it["title"]) not in seen:
+            seen.add((it["date"], it["title"]))
+            out.append(it)
+    return out
 
 
 # ---------- 돌파 기준 ----------
@@ -695,6 +788,10 @@ def build(cfg):
 
     slim = ("id", "title", "category", "member", "published_at", "channel", "views", "delta", "short", "predebut",
             "series", "show")
+    for v in videos:
+        v["fanchant"] = bool(FANCHANT.search(v["title"]))
+    episodes = build_episodes(videos, slim)
+    timeline = build_timeline(cfg, videos, episodes, [pts for a in accounts if a['name'].startswith('유튜브') for pts in [a['points']]])
 
     mvs = sorted((v for v in videos if v["category"] == "mv"), key=lambda v: v["published_at"] or "", reverse=True)
     for v in mvs:
@@ -763,6 +860,10 @@ def build(cfg):
         "group_posts": [str(u) for u in cfg.get("group_posts") or []],
         "videos": [{k: v[k] for k in slim} for v in sorted(videos, key=lambda v: v["published_at"] or "", reverse=True)],
         "recent": [{k: v[k] for k in slim} for v in recent],
+        "fanchants": [{**{k: v[k] for k in slim}, "song": song_of(v["title"])}
+                      for v in sorted(videos, key=lambda v: v["published_at"] or "", reverse=True) if v["fanchant"]],
+        "episodes": episodes,
+        "timeline": timeline,
         "events": all_events,
         "notices": notices,
         "categories": CATEGORIES,
