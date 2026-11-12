@@ -328,7 +328,6 @@ if ("serviceWorker" in navigator) {
   } else {
     $("igFeedSec").remove();
   }
-  if (!(data.engagement || []).length) $("engagementSec").remove();
 
   // ---------- 세계관·앨범 (입덕 탭) ----------
   const info = data.info || {};
@@ -584,14 +583,11 @@ if ("serviceWorker" in navigator) {
           const m = Object.fromEntries(s.points);
           const c = palette[i % palette.length];
           return { label: s.name ?? s.title, data: labels.map((l) => m[l] ?? null), spanGaps: true,
-                   borderColor: c, backgroundColor: c, tension: 0.25, pointRadius: 2, yAxisID: s.axis || "y" };
+                   borderColor: c, backgroundColor: c, tension: 0.25, pointRadius: 2 };
         }),
       },
       options: { maintainAspectRatio: false, interaction: { mode: "index", intersect: false },
-                 scales: { y: { ticks: { callback: fmt } },
-                           ...(seriesList.some((s) => s.axis === "y1")
-                             ? { y1: { position: "right", grid: { drawOnChartArea: false }, ticks: { callback: fmt } } } : {}) },
-                 plugins: { tooltip } },
+                 scales: { y: { ticks: { callback: fmt } } }, plugins: { tooltip } },
     });
   }
 
@@ -627,10 +623,7 @@ if ("serviceWorker" in navigator) {
     });
   }
 
-  drawers.overview = () => {
-    lineChart("accountsChart", data.accounts);
-    if ((data.engagement || []).length) lineChart("engagementChart", data.engagement);
-  };
+  drawers.overview = () => lineChart("accountsChart", data.accounts);
   drawers.cheer = rankCharts;
   drawers.mv = () => { lineChart("mvChart", data.mvs); dailyChart("mvDailyChart", data.mvs); };
 

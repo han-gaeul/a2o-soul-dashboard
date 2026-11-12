@@ -494,13 +494,6 @@ def collect(cfg, rescan=False):
                 {"id": m["id"], "caption": (m.get("caption") or "")[:1000], "timestamp": m.get("timestamp"),
                  "permalink": m.get("permalink"), "likes": m.get("like_count"), "comments": m.get("comments_count")}
                 for m in media]
-            recent = media[:10]
-            likes = [m["like_count"] for m in recent if m.get("like_count") is not None]
-            comments = [m["comments_count"] for m in recent if m.get("comments_count") is not None]
-            if likes:
-                record(f"ig:{username}", "avg_likes", round(sum(likes) / len(likes)))
-            if comments:
-                record(f"ig:{username}", "avg_comments", round(sum(comments) / len(comments)))
             announce.run(media, store, today, kst_datetime, extract, limit)
     if xposts.enabled():
         xstate = store.setdefault("x", {})
@@ -657,12 +650,6 @@ def build(cfg):
         value, delta = last_delta(pts)
         kpis.append({"key": "ig_followers", "label": "인스타 팔로워", "sub": f"@{u}", "value": value, "delta": delta})
         accounts.append({"name": f"인스타 팔로워 · @{u}", "points": pts})
-    engagement = []
-    for u in cfg["instagram"]:
-        for metric, label, axis in (("avg_likes", "평균 좋아요", "y"), ("avg_comments", "평균 댓글", "y1")):
-            pts = points(f"ig:{u}", metric)
-            if pts:
-                engagement.append({"name": f"{label} · @{u}", "points": pts, "axis": axis})
 
     # 공식 인스타 피드 (최신순) + 멤버 언급
     ig_feed = []
@@ -769,7 +756,6 @@ def build(cfg):
         "debut_date": cfg["debut_date"],
         "kpis": kpis,
         "accounts": accounts,
-        "engagement": engagement,
         "ig_feed": ig_feed[:20],
         "mvs": mvs,
         "members": members,
