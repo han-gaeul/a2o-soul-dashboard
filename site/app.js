@@ -266,6 +266,20 @@ if ("serviceWorker" in navigator) {
     $("charts").append(empty(t("no_charts")));
   }
 
+  const notices = data.notices || [];
+  if (notices.length) {
+    for (const x of notices) {
+      const when = [x.date ? x.date.slice(5).replace("-", ".") : "", x.time || "",
+        x.end_date && x.end_date !== x.date ? `~ ${x.end_date.slice(5).replace("-", ".")}` : ""].filter(Boolean).join(" ");
+      $("notices").append(el("div", { class: "support" },
+        el("div", {}, el("span", { class: "chip" }, x.label), el("b", {}, x.title)),
+        when || x.place ? el("div", { class: "muted" }, [when, x.place].filter(Boolean).join(" · ")) : null,
+        el("div", { class: "links small" }, x.url ? ext(x.url, "↗ link") : null, x.post ? ext(x.post, `${t("from_notice")} ↗`) : null)));
+    }
+  } else {
+    $("noticesSec").remove();
+  }
+
   const supports = data.supports || [];
   if (supports.length) {
     for (const x of supports) {
