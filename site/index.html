@@ -13,6 +13,16 @@
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <title>A2O SOUL Tracker</title>
 <meta name="description" content="A2O SOUL 영상·직캠·멤버·일정·투표를 모아 보는 비공식 팬메이드 사이트">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SOUL Tracker">
+<meta property="og:title" content="A2O SOUL Tracker">
+<meta property="og:description" content="A2O SOUL 영상·직캠·음방 무대·일정·투표를 한눈에 — 비공식 팬메이드">
+<meta property="og:url" content="https://han-gaeul.github.io/a2o-soul-dashboard/">
+<meta property="og:image" content="https://han-gaeul.github.io/a2o-soul-dashboard/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
@@ -45,6 +55,7 @@
 
   <!-- 한눈에 -->
   <div data-tab="overview">
+    <section class="card bias" id="bias"></section>
     <div class="grid" id="kpis"></div>
 
     <section class="card" id="eventsSection">
@@ -68,11 +79,6 @@
       <div class="chart-box"><canvas id="accountsChart"></canvas></div>
     </section>
 
-    <section class="card" id="engagementSec">
-      <h2 data-i18n="engagement">인스타 반응 추이</h2>
-      <p class="note small" data-i18n="engagement_desc"></p>
-      <div class="chart-box"><canvas id="engagementChart"></canvas></div>
-    </section>
   </div>
 
   <!-- 응원: 투표·스밍·차트·서포트·캘린더 -->
@@ -89,6 +95,10 @@
     <section class="card">
       <h2 data-i18n="streaming">스밍 리스트</h2>
       <ol class="stream" id="streaming"></ol>
+    </section>
+    <section class="card" id="fanchantSec">
+      <h2 data-i18n="fanchants">응원법</h2>
+      <div class="videos" id="fanchants"></div>
     </section>
     <section class="card" id="howtoSec">
       <h2 data-i18n="howto">스밍·투표 방법</h2>
@@ -152,6 +162,11 @@
 
   <!-- 영상 아카이브 -->
   <div data-tab="videos" hidden>
+    <section class="card" id="episodesSec">
+      <h2 data-i18n="episodes">음방 회차별 무대</h2>
+      <p class="note small" data-i18n="episodes_desc"></p>
+      <div id="episodes"></div>
+    </section>
     <section class="card">
       <div class="archive-tools">
         <input type="search" id="search" class="search" autocomplete="off">
@@ -177,6 +192,10 @@
     <section class="card" id="albumsSec">
       <h2 data-i18n="albums">앨범</h2>
       <div class="albums" id="albums"></div>
+    </section>
+    <section class="card" id="timelineSec">
+      <h2 data-i18n="timeline">기록</h2>
+      <ol class="timeline" id="timeline"></ol>
     </section>
     <section class="card">
       <h2 data-i18n="guide_members">멤버 구분하기</h2>

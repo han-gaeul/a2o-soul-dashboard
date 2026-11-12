@@ -27,6 +27,10 @@ albums:
     versions: []
     links: {}
 
+# 기록 (입덕 탭 '기록') — 1위 등 직접 입력. 데뷔·발매·첫 음방·조회수/구독자 돌파는 자동
+#   예) - { date: 2026-11-20, title: "엠카운트다운 첫 1위", url: "https://..." }
+records: []
+
 # 티켓·굿즈 공식 판매처 (응원 탭) { label, url, note }
 #   예) - { label: 공식 스토어, url: "https://...", note: "앨범·응원봉" }
 shops: []

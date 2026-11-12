@@ -1,6 +1,11 @@
 // ---------- 언어 ----------
-const LANGS = ["ko", "en", "ja", "zh"];
-const LOCALES = { ko: "ko-KR", en: "en-US", ja: "ja-JP", zh: "zh-CN" };
+const LANGS = ["ko", "en", "ja", "zh", "es", "id"];
+const LOCALES = { ko: "ko-KR", en: "en-US", ja: "ja-JP", zh: "zh-CN", es: "es-ES", id: "id-ID" };
+// 기기별 설정(최애·본 영상) — 막혀 있어도 사이트는 그대로 동작
+const pref = {
+  get(k, d) { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch (_) { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (_) { /* 무시 */ } },
+};
 const LANG = (() => {
   try {
     const saved = localStorage.getItem("lang");
@@ -130,13 +135,25 @@ if ("serviceWorker" in navigator) {
     return ymd(iso);
   }
   const catLabel = (c) => t(`cat.${c}`);
+  // '봤어요': 카드를 눌러 영상을 열면 자동 체크, ✓ 버튼으로 직접 켜고 끄기
+  const seen = new Set(pref.get("seen", []));
+  const saveSeen = () => pref.set("seen", [...seen].slice(-3000));
+  function setSeen(id, on) {
+    if (on) seen.add(id); else seen.delete(id);
+    saveSeen();
+    document.querySelectorAll(`.video[data-id="${CSS.escape(id)}"]`).forEach((c) => c.classList.toggle("seen", on));
+  }
   function videoCard(v, chipText, ...extra) {
     const fresh = isNew(v);
-    return el("a", { class: `video${fresh ? " is-new" : ""}`, href: ytUrl(v.id), target: "_blank", rel: "noopener" },
+    const check = el("button", { class: "seen-btn", type: "button", "aria-label": t("seen") }, "✓");
+    check.addEventListener("click", (e) => { e.preventDefault(); e.stopPropagation(); setSeen(v.id, !seen.has(v.id)); });
+    const card = el("a", { class: `video${fresh ? " is-new" : ""}${seen.has(v.id) ? " seen" : ""}`, "data-id": v.id,
+                           href: ytUrl(v.id), target: "_blank", rel: "noopener" },
       el("div", { class: "thumb" },
         el("img", { src: thumbUrl(v.id), alt: "", loading: "lazy" }),
         fresh ? el("span", { class: "new" }, "NEW") : null,
-        v.short ? el("span", { class: "badge" }, t("short")) : null),
+        v.short ? el("span", { class: "badge" }, t("short")) : null,
+        check),
       el("div", { class: "t" }, v.title),
       el("div", { class: "m" }, chipText ? el("span", { class: "chip" }, chipText) : null,
         el("span", { title: ymd(v.published_at), class: fresh ? "when-new" : "" }, when(v.published_at)),
@@ -144,6 +161,8 @@ if ("serviceWorker" in navigator) {
       el("div", { class: "m" }, t("views", { v: fmt(v.views) }), v.delta ? " · " : null, deltaSpan(v.delta)),
       ...extra,
     );
+    card.addEventListener("click", () => setSeen(v.id, true));
+    return card;
   }
 
   // ---------- 한눈에 ----------
@@ -328,7 +347,6 @@ if ("serviceWorker" in navigator) {
   } else {
     $("igFeedSec").remove();
   }
-  if (!(data.engagement || []).length) $("engagementSec").remove();
 
   // ---------- 세계관·앨범 (입덕 탭) ----------
   const info = data.info || {};
@@ -430,8 +448,15 @@ if ("serviceWorker" in navigator) {
     m.photo ? el("img", { src: m.photo, alt: "", loading: "lazy" }) : (m.ko ? m.ko[0] : m.name[0]));
 
   function openMember(m, focus) {
+    const star = el("button", { class: `bias-btn${bias === m.name ? " on" : ""}`, type: "button" },
+      bias === m.name ? `★ ${t("bias_on")}` : `☆ ${t("bias_set")}`);
+    star.addEventListener("click", () => {
+      setBias(bias === m.name ? "" : m.name);
+      star.classList.toggle("on", bias === m.name);
+      star.textContent = bias === m.name ? `★ ${t("bias_on")}` : `☆ ${t("bias_set")}`;
+    });
     $("dlgTitle").replaceChildren(avatar(m, "avatar dlg-avatar"), el("span", {}, m.name),
-      m.ko ? el("span", { class: "dlg-ko" }, m.ko) : null);
+      m.ko ? el("span", { class: "dlg-ko" }, m.ko) : null, star);
     const sections = [profile(m)];
     for (const [key, label, list] of [["fancams", "fancams_n", m.fancams], ["predebut", "predebut_n", m.predebut]]) {
       if (!list.length) continue;
@@ -514,13 +539,13 @@ if ("serviceWorker" in navigator) {
     ["short", (v) => v.short],
   ];
   const PAGE = 24;
-  const cur = { cat: "all", fmt: "all", q: "", series: "", show: "" };
+  const cur = { cat: "all", fmt: "all", q: "", series: "", show: "", unseen: false };
   let shown = 0;
   const chipOf = (v) => (v.predebut ? catLabel("predebut") : v.member || v.series || catLabel(v.category));
   const pick = (defs, key) => defs.find((d) => d[0] === key)[1];
   const norm = (s) => (s || "").toLowerCase().normalize("NFKC");
   const base = (v) => (!cur.q || norm(v.title).includes(norm(cur.q)) || norm(v.member).includes(norm(cur.q)))
-    && (!cur.series || v.series === cur.series) && (!cur.show || v.show === cur.show);
+    && (!cur.series || v.series === cur.series) && (!cur.show || v.show === cur.show) && (!cur.unseen || !seen.has(v.id));
   const current = () => data.videos.filter((v) => base(v) && pick(CATS, cur.cat)(v) && pick(FORMATS, cur.fmt)(v));
   function renderVideos(reset) {
     const list = current();
@@ -546,6 +571,9 @@ if ("serviceWorker" in navigator) {
   }
   const catRow = filterRow(CATS, "cat", "cat", (k) => data.videos.filter((v) => base(v) && pick(CATS, k)(v) && pick(FORMATS, cur.fmt)(v)).length);
   const fmtRow = filterRow(FORMATS, "fmt", "fmt", (k) => data.videos.filter((v) => base(v) && pick(CATS, cur.cat)(v) && pick(FORMATS, k)(v)).length);
+  const unseenBtn = el("button", { type: "button", class: "unseen-btn" });
+  unseenBtn.addEventListener("click", () => { cur.unseen = !cur.unseen; refresh(); });
+  fmtRow.row.append(unseenBtn);
   $("filters").append(catRow.row, fmtRow.row);
   function fillSelect(sel, allLabel, values, slot) {
     sel.append(el("option", { value: "" }, allLabel), ...values.map((x) => el("option", { value: x }, x)));
@@ -558,9 +586,84 @@ if ("serviceWorker" in navigator) {
   $("search").placeholder = t("search");
   let timer;
   $("search").addEventListener("input", (e) => { clearTimeout(timer); timer = setTimeout(() => { cur.q = e.target.value.trim(); refresh(); }, 150); });
-  function refresh() { catRow.update(); fmtRow.update(); renderVideos(true); }
+  function refresh() {
+    catRow.update(); fmtRow.update();
+    unseenBtn.classList.toggle("on", cur.unseen);
+    unseenBtn.textContent = `${t("unseen_only")} ${data.videos.filter((v) => !seen.has(v.id)).length}`;
+    renderVideos(true);
+  }
   $("more").addEventListener("click", () => renderVideos(false));
   refresh();
+
+  // ---------- 응원법 (응원 탭) ----------
+  const chants = data.fanchants || [];
+  if (chants.length) $("fanchants").append(...chants.map((v) => videoCard(v, v.song || null)));
+  else $("fanchantSec").remove();
+
+  // ---------- 음방 회차별 무대 (영상 탭) ----------
+  const eps = data.episodes || [];
+  if (eps.length) {
+    const wd = t("weekdays");
+    for (const ep of eps) {
+      const day = wd[new Date(`${ep.date}T12:00:00Z`).getUTCDay()];
+      const grid = el("div", { class: "videos" });
+      const box = el("details", { class: "howto ep" },
+        el("summary", {}, el("span", {}, el("b", {}, `${ep.date.slice(5).replace("-", ".")} (${day}) ${ep.show}`),
+          el("span", { class: "muted" }, ` · ${ep.ep ? `EP.${ep.ep} · ` : ""}${t("videos_n", { n: ep.videos.length })}`))),
+        grid);
+      // 펼칠 때 카드 만들기 (썸네일을 한꺼번에 불러오지 않게)
+      box.addEventListener("toggle", () => {
+        if (box.open && !grid.childElementCount) grid.append(...ep.videos.map((v) => videoCard(v, v.member || (v.category === "fancam" ? catLabel("fancam") : catLabel("stage")))));
+      });
+      $("episodes").append(box);
+    }
+  } else {
+    $("episodesSec").remove();
+  }
+
+  // ---------- 기록 (입덕 탭) ----------
+  const tl = data.timeline || [];
+  if (tl.length) {
+    for (const x of tl) {
+      $("timeline").append(el("li", { class: `tl-${x.kind}` },
+        el("span", { class: "tl-date" }, x.date.replaceAll("-", ".")),
+        x.url ? ext(x.url, x.title) : el("span", {}, x.title)));
+    }
+  } else {
+    $("timelineSec").remove();
+  }
+
+  // ---------- 최애 (한눈에 맨 위) ----------
+  let bias = pref.get("bias", "");
+  function renderBias() {
+    const m = data.members.find((x) => x.name === bias);
+    const sel = el("select", { class: "sel", "aria-label": t("bias_pick") },
+      el("option", { value: "" }, t("bias_pick")),
+      ...data.members.map((x) => el("option", { value: x.name, ...(x.name === bias ? { selected: "" } : {}) }, x.ko ? `${x.name} · ${x.ko}` : x.name)));
+    sel.addEventListener("change", () => setBias(sel.value));
+    const head = el("div", { class: "sec-head" }, el("h2", {}, m ? t("bias_title", { name: m.name }) : t("bias_pick")), sel);
+    const body = [];
+    if (m) {
+      const bd = upcomingBirthdays(30).find((b) => b.member === m.name);
+      if (bd) body.push(el("div", { class: "bias-bd" }, bd.title));
+      const vids = [...m.fancams].slice(0, 4);
+      if (vids.length) body.push(el("div", { class: "videos" }, ...vids.map((v) => videoCard(v, v.show || catLabel(v.category)))));
+      else body.push(empty(t("fancam_pending")));
+      if ((m.ig_mentions || []).length) body.push(el("div", { class: "ig-feed bias-ig" }, ...m.ig_mentions.slice(0, 2).map((x) => igPost(x, false))));
+      const more = el("button", { class: "more", type: "button" }, t("profile_view"));
+      more.addEventListener("click", () => openMember(m));
+      body.push(more);
+    } else {
+      body.push(el("p", { class: "note small" }, t("bias_desc")));
+    }
+    $("bias").replaceChildren(head, ...body);
+  }
+  function setBias(name) {
+    bias = name;
+    pref.set("bias", name);
+    renderBias();
+  }
+  renderBias();
 
   // ---------- 차트 ----------
   const palette = ["#6c4cf5", "#f5734c", "#12a1a0", "#e0479e", "#d4a017", "#3b82f6", "#8b5cf6", "#22c55e"];
@@ -584,14 +687,11 @@ if ("serviceWorker" in navigator) {
           const m = Object.fromEntries(s.points);
           const c = palette[i % palette.length];
           return { label: s.name ?? s.title, data: labels.map((l) => m[l] ?? null), spanGaps: true,
-                   borderColor: c, backgroundColor: c, tension: 0.25, pointRadius: 2, yAxisID: s.axis || "y" };
+                   borderColor: c, backgroundColor: c, tension: 0.25, pointRadius: 2 };
         }),
       },
       options: { maintainAspectRatio: false, interaction: { mode: "index", intersect: false },
-                 scales: { y: { ticks: { callback: fmt } },
-                           ...(seriesList.some((s) => s.axis === "y1")
-                             ? { y1: { position: "right", grid: { drawOnChartArea: false }, ticks: { callback: fmt } } } : {}) },
-                 plugins: { tooltip } },
+                 scales: { y: { ticks: { callback: fmt } } }, plugins: { tooltip } },
     });
   }
 
@@ -627,10 +727,7 @@ if ("serviceWorker" in navigator) {
     });
   }
 
-  drawers.overview = () => {
-    lineChart("accountsChart", data.accounts);
-    if ((data.engagement || []).length) lineChart("engagementChart", data.engagement);
-  };
+  drawers.overview = () => lineChart("accountsChart", data.accounts);
   drawers.cheer = rankCharts;
   drawers.mv = () => { lineChart("mvChart", data.mvs); dailyChart("mvDailyChart", data.mvs); };
 
