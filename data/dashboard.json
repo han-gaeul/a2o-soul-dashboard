@@ -22,7 +22,7 @@
    "points": [
     [
      "2026-11-12",
-     166411
+     166415
     ]
    ]
   }
@@ -72,7 +72,7 @@
    {
     "category": "mv",
     "channel": "A2O SOUL",
-    "delta": 34514,
+    "delta": 34521,
     "id": "IAURqrShEUQ",
     "member": "",
     "note": "데뷔곡 'SUPERSTAR' 뮤직비디오로 시작",
@@ -82,12 +82,12 @@
     "short": false,
     "show": "",
     "title": "A2O SOUL 'SUPERSTAR' Official Music Video",
-    "views": 3410385
+    "views": 3410392
    },
    {
     "category": "content",
     "channel": "A2O WORLD",
-    "delta": 92742,
+    "delta": 92761,
     "id": "D8CYC5P6Z8Y",
     "member": "",
     "note": "15명 군무를 한눈에 — 퍼포먼스 비디오",
@@ -97,12 +97,12 @@
     "short": false,
     "show": "",
     "title": "A2O SOUL 'SUPERSTAR' Official Performance Video",
-    "views": 6653509
+    "views": 6653528
    },
    {
     "category": "mv",
     "channel": "A2O WORLD",
-    "delta": 329717,
+    "delta": 329972,
     "id": "JPJokqIoIJI",
     "member": "",
     "note": "더블 타이틀 'Dancing in the Dark' 뮤직비디오",
@@ -112,7 +112,7 @@
     "short": false,
     "show": "",
     "title": "A2O SOUL 'Dancing in the Dark' Official Music Video",
-    "views": 1895925
+    "views": 1896180
    },
    {
     "category": "content",
@@ -132,7 +132,7 @@
    {
     "category": "content",
     "channel": "M2",
-    "delta": 10172,
+    "delta": 10176,
     "id": "M00ZYDPm5sE",
     "member": "",
     "note": "릴레이댄스로 멤버별 파트 확인",
@@ -142,7 +142,7 @@
     "short": true,
     "show": "M2",
     "title": "A2O SOUL 'SUPERSTAR' 릴댄 하이라이트 | 릴레이댄스",
-    "views": 667913
+    "views": 667917
    },
    {
     "category": "content",
@@ -175,23 +175,23 @@
    "key": "ig_followers",
    "label": "인스타 팔로워",
    "sub": "@a2o.soul",
-   "value": 166411
+   "value": 166415
   },
   {
    "count": 3,
-   "delta": 390420,
+   "delta": 390688,
    "key": "mv_total",
    "label": "MV 총 조회수",
    "sub": "3편",
-   "value": 6037856
+   "value": 6038124
   },
   {
    "count": 52,
-   "delta": 33769,
+   "delta": 33901,
    "key": "fancam_total",
    "label": "직캠 총 조회수",
    "sub": "52개",
-   "value": 2563937
+   "value": 2564069
   }
  ],
  "members": [
@@ -203,13 +203,13 @@
     "비공개 연습생으로 데뷔"
    ],
    "fancam_count": 5,
-   "fancam_delta": 1149,
-   "fancam_views": 90448,
+   "fancam_delta": 1139,
+   "fancam_views": 90438,
    "fancams": [
     {
      "category": "fancam",
      "channel": "ALL THE K-POP",
-     "delta": 38,
+     "delta": 37,
      "id": "pu4UUNbcZQQ",
      "member": "MOON",
      "predebut": false,
@@ -218,12 +218,12 @@
      "short": false,
      "show": "쇼챔피언",
      "title": "[쇼챔1분직캠] A2O SOUL MOON의 ＜SUPERSTAR＞♬ #A2OSOUL #MOON #SUPERSTAR",
-     "views": 7593
+     "views": 7592
     },
     {
      "category": "fancam",
      "channel": "KBS Kpop",
-     "delta": 69,
+     "delta": 61,
      "id": "LJL0NWLIda4",
      "member": "MOON",
      "predebut": false,
@@ -232,7 +232,7 @@
      "short": false,
      "show": "뮤직뱅크",
      "title": "[K-Fancam] A2O SOUL 문 직캠 'SUPERSTAR' (A2O SOUL MOON Fancam) @뮤직뱅크(Music Bank) 261023",
-     "views": 9848
+     "views": 9840
     },
     {
      "category": "fancam",
@@ -265,7 +265,7 @@
     {
      "category": "fancam",
      "channel": "ALL THE K-POP",
-     "delta": 31,
+     "delta": 30,
      "id": "agqe-wPFRN8",
      "member": "MOON",
      "predebut": false,
@@ -274,7 +274,7 @@
      "short": false,
      "show": "쇼챔피언",
      "title": "[쇼챔직캠 4K] A2O SOUL MOON - SUPERSTAR | Show Champion | EP.615 | 261021",
-     "views": 8326
+     "views": 8325
     }
    ],
    "instagram_posts": [],
@@ -303,13 +303,13 @@
     "비공개 연습생으로 데뷔"
    ],
    "fancam_count": 3,
-   "fancam_delta": 2577,
-   "fancam_views": 133649,
+   "fancam_delta": 2602,
+   "fancam_views": 133674,
    "fancams": [
     {
      "category": "fancam",
      "channel": "ALL THE K-POP",
-     "delta": 58,
+     "delta": 67,
      "id": "owmmt5V9Pes",
      "member": "SORA",
      "predebut": false,
@@ -318,7 +318,7 @@
      "short": false,
      "show": "쇼챔피언",
      "title": "[쇼챔1분직캠] A2O SOUL SORA의 ＜SUPERSTAR＞♬ #A2OSOUL #SORA #SUPERSTAR",
-     "views": 13774
+     "views": 13783
     },
     {
      "category": "fancam",
@@ -337,7 +337,7 @@
     {
      "category": "fancam",
      "channel": "ALL THE K-POP",
-     "delta": 371,
+     "delta": 387,
      "id": "B9U-KlRVMHw",
      "member": "SORA",
      "predebut": false,
@@ -346,7 +346,7 @@
      "short": false,
      "show": "쇼챔피언",
      "title": "[쇼챔직캠 4K] A2O SOUL SORA - SUPERSTAR | Show Champion | EP.615 | 261021",
-     "views": 29770
+     "views": 29786
     }
    ],
    "instagram_posts": [],
@@ -373,13 +373,13 @@
     "비공개 연습생으로 데뷔"
    ],
    "fancam_count": 4,
-   "fancam_delta": 1769,
-   "fancam_views": 141804,
+   "fancam_delta": 1846,
+   "fancam_views": 141881,
    "fancams": [
     {
      "category": "fancam",
      "channel": "ALL THE K-POP",
-     "delta": 248,
+     "delta": 247,
      "id": "EA9OnuTq7BA",
      "member": "SEOHA",
      "predebut": false,
@@ -388,12 +388,12 @@
      "short": false,
      "show": "쇼챔피언",
      "title": "[쇼챔1분직캠] A2O SOUL SEOHA의 ＜SUPERSTAR＞♬ #A2OSOUL #SEOHA #SUPERSTAR",
-     "views": 13914
+     "views": 13913
     },
     {
      "category": "fancam",
      "channel": "MBCkpop",
-     "delta": 391,
+     "delta": 469,
      "id": "06eFsw-4Rm8",
      "member": "SEOHA",
      "predebut": false,
@@ -402,7 +402,7 @@
      "short": false,
      "show": "음악중심",
      "title": "[#음중직캠] A2O SOUL SEOHA (에이투오 소울 서하) – SUPERSTAR FanCam | 쇼! 음악중심 | MBC261024",
-     "views": 45165
+     "views": 45243
     },
     {
      "category": "fancam",
@@ -458,13 +458,13 @@
     "HTB 'REVOLUTION', 'CHAMPAGNE' 참여"
    ],
    "fancam_count": 4,
-   "fancam_delta": 1350,
-   "fancam_views": 105480,
+   "fancam_delta": 1353,
+   "fancam_views": 105483,
    "fancams": [
     {
      "category": "fancam",
      "channel": "ALL THE K-POP",
-     "delta": 153,
+     "delta": 159,
      "id": "BlkB-JbTuyc",
      "member": "GAKU",
      "predebut": false,
@@ -473,12 +473,12 @@
      "short": false,
      "show": "쇼챔피언",
      "title": "[쇼챔1분직캠] A2O SOUL GAKU의 ＜SUPERSTAR＞♬ #A2OSOUL #GAKU #SUPERSTAR",
-     "views": 10551
+     "views": 10557
     },
     {
      "category": "fancam",
      "channel": "KBS Kpop",
-     "delta": 174,
+     "delta": 176,
      "id": "UHFMgZtwmOc",
      "member": "GAKU",
      "predebut": false,
@@ -487,7 +487,7 @@
      "short": false,
      "show": "뮤직뱅크",
      "title": "[K-Fancam] A2O SOUL 가쿠 직캠 'SUPERSTAR' (A2O SOUL GAKU Fancam) @뮤직뱅크(Music Bank) 261023",
-     "views": 22646
+     "views": 22648
     },
     {
      "category": "fancam",
@@ -506,7 +506,7 @@
     {
      "category": "fancam",
      "channel": "ALL THE K-POP",
-     "delta": 89,
+     "delta": 84,
      "id": "lt2XfAcqwX0",
      "member": "GAKU",
      "predebut": false,
@@ -515,7 +515,7 @@
      "short": false,
      "show": "쇼챔피언",
      "title": "[쇼챔직캠 4K] A2O SOUL GAKU - SUPERSTAR | Show Champion | EP.615 | 261021",
-     "views": 19533
+     "views": 19528
     }
    ],
    "instagram_posts": [],
@@ -560,7 +560,7 @@
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 95,
+     "delta": 93,
      "id": "JxSbLS12gLo",
      "member": "",
      "predebut": true,
@@ -569,12 +569,12 @@
      "short": false,
      "show": "",
      "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Life Behind The Scenes",
-     "views": 11195
+     "views": 11193
     },
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 91,
+     "delta": 95,
      "id": "X50b7DmPIuA",
      "member": "",
      "predebut": true,
@@ -583,12 +583,12 @@
      "short": true,
      "show": "",
      "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Dance Official Video",
-     "views": 25067
+     "views": 25071
     },
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 319,
+     "delta": 323,
      "id": "G_NJdu0dYrk",
      "member": "",
      "predebut": true,
@@ -597,12 +597,12 @@
      "short": false,
      "show": "",
      "title": "A2O HTB, A2O LTB ’REVOLUTION’ Zal-Life Behind The Scenes",
-     "views": 22736
+     "views": 22740
     },
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 191,
+     "delta": 201,
      "id": "0mE2leFm_D0",
      "member": "",
      "predebut": true,
@@ -611,7 +611,7 @@
      "short": true,
      "show": "",
      "title": "A2O HTB, A2O LTB ‘REVOLUTION’ Zal-Dance Official Video",
-     "views": 29848
+     "views": 29858
     },
     {
      "category": "content",
@@ -686,7 +686,7 @@
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 7010,
+     "delta": 7013,
      "id": "E10wtRjr3TI",
      "member": "",
      "predebut": true,
@@ -695,7 +695,7 @@
      "short": false,
      "show": "",
      "title": "A2O Rookies LTB ’CANDY‘ Zalpha Pop Official Video",
-     "views": 5509605
+     "views": 5509608
     }
    ],
    "profile_history": [],
@@ -710,8 +710,8 @@
     "A2O Rookies LTB(2024.10~) → HTB(2025.2~)"
    ],
    "fancam_count": 2,
-   "fancam_delta": 259,
-   "fancam_views": 20538,
+   "fancam_delta": 265,
+   "fancam_views": 20544,
    "fancams": [
     {
      "category": "fancam",
@@ -730,7 +730,7 @@
     {
      "category": "fancam",
      "channel": "ALL THE K-POP",
-     "delta": 237,
+     "delta": 243,
      "id": "d3zwZtXk7Co",
      "member": "TEO",
      "predebut": false,
@@ -739,7 +739,7 @@
      "short": false,
      "show": "쇼챔피언",
      "title": "[쇼챔직캠 4K] A2O SOUL TEO - SUPERSTAR | Show Champion | EP.615 | 261021",
-     "views": 15086
+     "views": 15092
     }
    ],
    "instagram_posts": [],
@@ -788,7 +788,7 @@
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 95,
+     "delta": 93,
      "id": "JxSbLS12gLo",
      "member": "",
      "predebut": true,
@@ -797,12 +797,12 @@
      "short": false,
      "show": "",
      "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Life Behind The Scenes",
-     "views": 11195
+     "views": 11193
     },
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 91,
+     "delta": 95,
      "id": "X50b7DmPIuA",
      "member": "",
      "predebut": true,
@@ -811,12 +811,12 @@
      "short": true,
      "show": "",
      "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Dance Official Video",
-     "views": 25067
+     "views": 25071
     },
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 319,
+     "delta": 323,
      "id": "G_NJdu0dYrk",
      "member": "",
      "predebut": true,
@@ -825,12 +825,12 @@
      "short": false,
      "show": "",
      "title": "A2O HTB, A2O LTB ’REVOLUTION’ Zal-Life Behind The Scenes",
-     "views": 22736
+     "views": 22740
     },
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 191,
+     "delta": 201,
      "id": "0mE2leFm_D0",
      "member": "",
      "predebut": true,
@@ -839,7 +839,7 @@
      "short": true,
      "show": "",
      "title": "A2O HTB, A2O LTB ‘REVOLUTION’ Zal-Dance Official Video",
-     "views": 29848
+     "views": 29858
     },
     {
      "category": "content",
@@ -914,7 +914,7 @@
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 7010,
+     "delta": 7013,
      "id": "E10wtRjr3TI",
      "member": "",
      "predebut": true,
@@ -923,7 +923,7 @@
      "short": false,
      "show": "",
      "title": "A2O Rookies LTB ’CANDY‘ Zalpha Pop Official Video",
-     "views": 5509605
+     "views": 5509608
     }
    ],
    "profile_history": [],
@@ -936,8 +936,8 @@
     "A2O Rookies HTB '쥔린(JUNLIN)' (2025.2~)"
    ],
    "fancam_count": 2,
-   "fancam_delta": 179,
-   "fancam_views": 14823,
+   "fancam_delta": 170,
+   "fancam_views": 14814,
    "fancams": [
     {
      "category": "fancam",
@@ -956,7 +956,7 @@
     {
      "category": "fancam",
      "channel": "ALL THE K-POP",
-     "delta": 89,
+     "delta": 80,
      "id": "dLnY9xh4nSw",
      "member": "JUNE",
      "predebut": false,
@@ -965,7 +965,7 @@
      "short": false,
      "show": "쇼챔피언",
      "title": "[쇼챔직캠 4K] A2O SOUL JUNE - SUPERSTAR | Show Champion | EP.615 | 261021",
-     "views": 6688
+     "views": 6679
     }
    ],
    "instagram_posts": [],
@@ -1011,7 +1011,7 @@
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 95,
+     "delta": 93,
      "id": "JxSbLS12gLo",
      "member": "",
      "predebut": true,
@@ -1020,12 +1020,12 @@
      "short": false,
      "show": "",
      "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Life Behind The Scenes",
-     "views": 11195
+     "views": 11193
     },
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 91,
+     "delta": 95,
      "id": "X50b7DmPIuA",
      "member": "",
      "predebut": true,
@@ -1034,12 +1034,12 @@
      "short": true,
      "show": "",
      "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Dance Official Video",
-     "views": 25067
+     "views": 25071
     },
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 319,
+     "delta": 323,
      "id": "G_NJdu0dYrk",
      "member": "",
      "predebut": true,
@@ -1048,12 +1048,12 @@
      "short": false,
      "show": "",
      "title": "A2O HTB, A2O LTB ’REVOLUTION’ Zal-Life Behind The Scenes",
-     "views": 22736
+     "views": 22740
     },
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 191,
+     "delta": 201,
      "id": "0mE2leFm_D0",
      "member": "",
      "predebut": true,
@@ -1062,7 +1062,7 @@
      "short": true,
      "show": "",
      "title": "A2O HTB, A2O LTB ‘REVOLUTION’ Zal-Dance Official Video",
-     "views": 29848
+     "views": 29858
     }
    ],
    "profile_history": [],
@@ -1076,8 +1076,8 @@
     "비공개 연습생으로 데뷔"
    ],
    "fancam_count": 2,
-   "fancam_delta": 264,
-   "fancam_views": 19150,
+   "fancam_delta": 286,
+   "fancam_views": 19172,
    "fancams": [
     {
      "category": "fancam",
@@ -1096,7 +1096,7 @@
     {
      "category": "fancam",
      "channel": "ALL THE K-POP",
-     "delta": 181,
+     "delta": 203,
      "id": "p4k1ZAdEgsA",
      "member": "LUCIEN",
      "predebut": false,
@@ -1105,7 +1105,7 @@
      "short": false,
      "show": "쇼챔피언",
      "title": "[쇼챔직캠 4K] A2O SOUL LUCIEN - SUPERSTAR | Show Champion | EP.615 | 261021",
-     "views": 13240
+     "views": 13262
     }
    ],
    "instagram_posts": [],
@@ -1131,8 +1131,8 @@
     "비공개 연습생으로 데뷔"
    ],
    "fancam_count": 2,
-   "fancam_delta": 312,
-   "fancam_views": 14922,
+   "fancam_delta": 334,
+   "fancam_views": 14944,
    "fancams": [
     {
      "category": "fancam",
@@ -1151,7 +1151,7 @@
     {
      "category": "fancam",
      "channel": "ALL THE K-POP",
-     "delta": 213,
+     "delta": 235,
      "id": "TX-ZozSVob0",
      "member": "HANSUNG",
      "predebut": false,
@@ -1160,7 +1160,7 @@
      "short": false,
      "show": "쇼챔피언",
      "title": "[쇼챔직캠 4K] A2O SOUL HANSUNG - SUPERSTAR | Show Champion | EP.615 | 261021",
-     "views": 10378
+     "views": 10400
     }
    ],
    "instagram_posts": [],
@@ -1189,8 +1189,8 @@
     "A2O Rookies LTB (2024.10~)"
    ],
    "fancam_count": 6,
-   "fancam_delta": 2291,
-   "fancam_views": 187117,
+   "fancam_delta": 2278,
+   "fancam_views": 187104,
    "fancams": [
     {
      "category": "fancam",
@@ -1223,7 +1223,7 @@
     {
      "category": "fancam",
      "channel": "M2",
-     "delta": 581,
+     "delta": 558,
      "id": "9JTI7tqGMdQ",
      "member": "TAI",
      "predebut": false,
@@ -1232,7 +1232,7 @@
      "short": true,
      "show": "M2",
      "title": "춤선이 남다른 A2O SOUL 타이 직캠",
-     "views": 38221
+     "views": 38198
     },
     {
      "category": "fancam",
@@ -1251,7 +1251,7 @@
     {
      "category": "fancam",
      "channel": "ALL THE K-POP",
-     "delta": 172,
+     "delta": 182,
      "id": "t7dxPRGU3Po",
      "member": "TAI",
      "predebut": false,
@@ -1260,7 +1260,7 @@
      "short": false,
      "show": "쇼챔피언",
      "title": "[쇼챔직캠 4K] A2O SOUL TAI - SUPERSTAR | Show Champion | EP.615 | 261021",
-     "views": 14433
+     "views": 14443
     },
     {
      "category": "fancam",
@@ -1348,7 +1348,7 @@
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 146,
+     "delta": 141,
      "id": "ipC7jgqrvvs",
      "member": "",
      "predebut": true,
@@ -1357,12 +1357,12 @@
      "short": false,
      "show": "",
      "title": "A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Life Behind The Scenes",
-     "views": 13618
+     "views": 13613
     },
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 95,
+     "delta": 93,
      "id": "JxSbLS12gLo",
      "member": "",
      "predebut": true,
@@ -1371,7 +1371,7 @@
      "short": false,
      "show": "",
      "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Life Behind The Scenes",
-     "views": 11195
+     "views": 11193
     },
     {
      "category": "content",
@@ -1390,7 +1390,7 @@
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 91,
+     "delta": 95,
      "id": "X50b7DmPIuA",
      "member": "",
      "predebut": true,
@@ -1399,12 +1399,12 @@
      "short": true,
      "show": "",
      "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Dance Official Video",
-     "views": 25067
+     "views": 25071
     },
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 185,
+     "delta": 175,
      "id": "NhTvivHrowA",
      "member": "",
      "predebut": true,
@@ -1413,12 +1413,12 @@
      "short": true,
      "show": "",
      "title": "A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Dance Official Video",
-     "views": 23688
+     "views": 23678
     },
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 156,
+     "delta": 134,
      "id": "W4r0FeBcFdQ",
      "member": "",
      "predebut": true,
@@ -1427,12 +1427,12 @@
      "short": true,
      "show": "",
      "title": "A2O LTB 'B.B.B' Zal-Dance Official Video",
-     "views": 28487
+     "views": 28465
     },
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 319,
+     "delta": 323,
      "id": "G_NJdu0dYrk",
      "member": "",
      "predebut": true,
@@ -1441,12 +1441,12 @@
      "short": false,
      "show": "",
      "title": "A2O HTB, A2O LTB ’REVOLUTION’ Zal-Life Behind The Scenes",
-     "views": 22736
+     "views": 22740
     },
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 191,
+     "delta": 201,
      "id": "0mE2leFm_D0",
      "member": "",
      "predebut": true,
@@ -1455,7 +1455,7 @@
      "short": true,
      "show": "",
      "title": "A2O HTB, A2O LTB ‘REVOLUTION’ Zal-Dance Official Video",
-     "views": 29848
+     "views": 29858
     },
     {
      "category": "content",
@@ -1530,7 +1530,7 @@
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 7010,
+     "delta": 7013,
      "id": "E10wtRjr3TI",
      "member": "",
      "predebut": true,
@@ -1539,7 +1539,7 @@
      "short": false,
      "show": "",
      "title": "A2O Rookies LTB ’CANDY‘ Zalpha Pop Official Video",
-     "views": 5509605
+     "views": 5509608
     }
    ],
    "profile_history": [],
@@ -1554,13 +1554,13 @@
     "전 JYP엔터테인먼트 연습생"
    ],
    "fancam_count": 2,
-   "fancam_delta": 196,
-   "fancam_views": 16218,
+   "fancam_delta": 200,
+   "fancam_views": 16222,
    "fancams": [
     {
      "category": "fancam",
      "channel": "ALL THE K-POP",
-     "delta": 74,
+     "delta": 77,
      "id": "UCJPmP_Q3tY",
      "member": "SEE-ONE",
      "predebut": false,
@@ -1569,12 +1569,12 @@
      "short": false,
      "show": "쇼챔피언",
      "title": "[쇼챔1분직캠] A2O SOUL SEE-ONE의 ＜SUPERSTAR＞♬ #A2OSOUL #SEE-ONE #SUPERSTAR",
-     "views": 5366
+     "views": 5369
     },
     {
      "category": "fancam",
      "channel": "ALL THE K-POP",
-     "delta": 122,
+     "delta": 123,
      "id": "Aya4oPdU-FI",
      "member": "SEE-ONE",
      "predebut": false,
@@ -1583,7 +1583,7 @@
      "short": false,
      "show": "쇼챔피언",
      "title": "[쇼챔직캠 4K] A2O SOUL SEE-ONE - SUPERSTAR | Show Champion | EP.615 | 261021",
-     "views": 10852
+     "views": 10853
     }
    ],
    "instagram_posts": [],
@@ -1663,13 +1663,13 @@
     "비공개 연습생으로 데뷔"
    ],
    "fancam_count": 2,
-   "fancam_delta": 896,
-   "fancam_views": 66104,
+   "fancam_delta": 882,
+   "fancam_views": 66090,
    "fancams": [
     {
      "category": "fancam",
      "channel": "ALL THE K-POP",
-     "delta": 125,
+     "delta": 111,
      "id": "X-SgenK4cmo",
      "member": "ALURE",
      "predebut": false,
@@ -1678,7 +1678,7 @@
      "short": false,
      "show": "쇼챔피언",
      "title": "[쇼챔1분직캠] A2O SOUL ALURE의 ＜SUPERSTAR＞♬ #A2OSOUL #ALURE #SUPERSTAR",
-     "views": 12016
+     "views": 12002
     },
     {
      "category": "fancam",
@@ -1720,13 +1720,13 @@
     "제트와 같은 댄스 스튜디오 출신으로 약 4년간 함께 연습"
    ],
    "fancam_count": 3,
-   "fancam_delta": 1804,
-   "fancam_views": 118592,
+   "fancam_delta": 1818,
+   "fancam_views": 118606,
    "fancams": [
     {
      "category": "fancam",
      "channel": "ALL THE K-POP",
-     "delta": 599,
+     "delta": 598,
      "id": "Sw0lnPvfmgU",
      "member": "ZAI",
      "predebut": false,
@@ -1735,12 +1735,12 @@
      "short": false,
      "show": "쇼챔피언",
      "title": "[쇼챔1분직캠] A2O SOUL ZAI의 ＜SUPERSTAR＞♬ #A2OSOUL #ZAI #SUPERSTAR",
-     "views": 21673
+     "views": 21672
     },
     {
      "category": "fancam",
      "channel": "KBS Kpop",
-     "delta": 793,
+     "delta": 795,
      "id": "KAAU5xPZeeQ",
      "member": "ZAI",
      "predebut": false,
@@ -1749,12 +1749,12 @@
      "short": false,
      "show": "뮤직뱅크",
      "title": "[K-Fancam] A2O SOUL 자이 직캠 'SUPERSTAR' (A2O SOUL ZAI Fancam) @뮤직뱅크(Music Bank) 261023",
-     "views": 57912
+     "views": 57914
     },
     {
      "category": "fancam",
      "channel": "ALL THE K-POP",
-     "delta": 412,
+     "delta": 425,
      "id": "YP8crgzIkvQ",
      "member": "ZAI",
      "predebut": false,
@@ -1763,7 +1763,7 @@
      "short": false,
      "show": "쇼챔피언",
      "title": "[쇼챔직캠 4K] A2O SOUL ZAI - SUPERSTAR | Show Champion | EP.615 | 261021",
-     "views": 39007
+     "views": 39020
     }
    ],
    "instagram_posts": [],
@@ -1868,7 +1868,7 @@
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 146,
+     "delta": 141,
      "id": "ipC7jgqrvvs",
      "member": "",
      "predebut": true,
@@ -1877,12 +1877,12 @@
      "short": false,
      "show": "",
      "title": "A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Life Behind The Scenes",
-     "views": 13618
+     "views": 13613
     },
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 95,
+     "delta": 93,
      "id": "JxSbLS12gLo",
      "member": "",
      "predebut": true,
@@ -1891,7 +1891,7 @@
      "short": false,
      "show": "",
      "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Life Behind The Scenes",
-     "views": 11195
+     "views": 11193
     },
     {
      "category": "content",
@@ -1910,7 +1910,7 @@
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 91,
+     "delta": 95,
      "id": "X50b7DmPIuA",
      "member": "",
      "predebut": true,
@@ -1919,12 +1919,12 @@
      "short": true,
      "show": "",
      "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Dance Official Video",
-     "views": 25067
+     "views": 25071
     },
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 185,
+     "delta": 175,
      "id": "NhTvivHrowA",
      "member": "",
      "predebut": true,
@@ -1933,12 +1933,12 @@
      "short": true,
      "show": "",
      "title": "A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Dance Official Video",
-     "views": 23688
+     "views": 23678
     },
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 156,
+     "delta": 134,
      "id": "W4r0FeBcFdQ",
      "member": "",
      "predebut": true,
@@ -1947,12 +1947,12 @@
      "short": true,
      "show": "",
      "title": "A2O LTB 'B.B.B' Zal-Dance Official Video",
-     "views": 28487
+     "views": 28465
     },
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 319,
+     "delta": 323,
      "id": "G_NJdu0dYrk",
      "member": "",
      "predebut": true,
@@ -1961,12 +1961,12 @@
      "short": false,
      "show": "",
      "title": "A2O HTB, A2O LTB ’REVOLUTION’ Zal-Life Behind The Scenes",
-     "views": 22736
+     "views": 22740
     },
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 191,
+     "delta": 201,
      "id": "0mE2leFm_D0",
      "member": "",
      "predebut": true,
@@ -1975,7 +1975,7 @@
      "short": true,
      "show": "",
      "title": "A2O HTB, A2O LTB ‘REVOLUTION’ Zal-Dance Official Video",
-     "views": 29848
+     "views": 29858
     },
     {
      "category": "content",
@@ -2092,7 +2092,7 @@
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 7010,
+     "delta": 7013,
      "id": "E10wtRjr3TI",
      "member": "",
      "predebut": true,
@@ -2101,7 +2101,7 @@
      "short": false,
      "show": "",
      "title": "A2O Rookies LTB ’CANDY‘ Zalpha Pop Official Video",
-     "views": 5509605
+     "views": 5509608
     }
    ],
    "profile_history": [],
@@ -2115,13 +2115,13 @@
     "솔로 'Love Is Gone' Zal-Dance 영상(2025.4)"
    ],
    "fancam_count": 3,
-   "fancam_delta": 541,
-   "fancam_views": 50627,
+   "fancam_delta": 544,
+   "fancam_views": 50630,
    "fancams": [
     {
      "category": "fancam",
      "channel": "ALL THE K-POP",
-     "delta": 34,
+     "delta": 37,
      "id": "a7oVexH5CCY",
      "member": "AYDEN",
      "predebut": false,
@@ -2130,7 +2130,7 @@
      "short": false,
      "show": "쇼챔피언",
      "title": "[쇼챔1분직캠] A2O SOUL AYDEN 의 ＜SUPERSTAR＞♬ #A2OSOUL #AYDEN  #SUPERSTAR",
-     "views": 6913
+     "views": 6916
     },
     {
      "category": "fancam",
@@ -2178,7 +2178,7 @@
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 64,
+     "delta": 65,
      "id": "I8did80uv_Y",
      "member": "",
      "predebut": true,
@@ -2187,7 +2187,7 @@
      "short": false,
      "show": "",
      "title": "A2O LTB AYDEN 'Love Is Gone' Zal-Life Behind The Scenes",
-     "views": 10671
+     "views": 10672
     },
     {
      "category": "content",
@@ -2262,7 +2262,7 @@
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 146,
+     "delta": 141,
      "id": "ipC7jgqrvvs",
      "member": "",
      "predebut": true,
@@ -2271,12 +2271,12 @@
      "short": false,
      "show": "",
      "title": "A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Life Behind The Scenes",
-     "views": 13618
+     "views": 13613
     },
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 95,
+     "delta": 93,
      "id": "JxSbLS12gLo",
      "member": "",
      "predebut": true,
@@ -2285,7 +2285,7 @@
      "short": false,
      "show": "",
      "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Life Behind The Scenes",
-     "views": 11195
+     "views": 11193
     },
     {
      "category": "content",
@@ -2304,7 +2304,7 @@
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 91,
+     "delta": 95,
      "id": "X50b7DmPIuA",
      "member": "",
      "predebut": true,
@@ -2313,12 +2313,12 @@
      "short": true,
      "show": "",
      "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Dance Official Video",
-     "views": 25067
+     "views": 25071
     },
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 185,
+     "delta": 175,
      "id": "NhTvivHrowA",
      "member": "",
      "predebut": true,
@@ -2327,12 +2327,12 @@
      "short": true,
      "show": "",
      "title": "A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Dance Official Video",
-     "views": 23688
+     "views": 23678
     },
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 156,
+     "delta": 134,
      "id": "W4r0FeBcFdQ",
      "member": "",
      "predebut": true,
@@ -2341,12 +2341,12 @@
      "short": true,
      "show": "",
      "title": "A2O LTB 'B.B.B' Zal-Dance Official Video",
-     "views": 28487
+     "views": 28465
     },
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 319,
+     "delta": 323,
      "id": "G_NJdu0dYrk",
      "member": "",
      "predebut": true,
@@ -2355,12 +2355,12 @@
      "short": false,
      "show": "",
      "title": "A2O HTB, A2O LTB ’REVOLUTION’ Zal-Life Behind The Scenes",
-     "views": 22736
+     "views": 22740
     },
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 191,
+     "delta": 201,
      "id": "0mE2leFm_D0",
      "member": "",
      "predebut": true,
@@ -2369,7 +2369,7 @@
      "short": true,
      "show": "",
      "title": "A2O HTB, A2O LTB ‘REVOLUTION’ Zal-Dance Official Video",
-     "views": 29848
+     "views": 29858
     },
     {
      "category": "content",
@@ -2444,7 +2444,7 @@
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 7010,
+     "delta": 7013,
      "id": "E10wtRjr3TI",
      "member": "",
      "predebut": true,
@@ -2453,7 +2453,7 @@
      "short": false,
      "show": "",
      "title": "A2O Rookies LTB ’CANDY‘ Zalpha Pop Official Video",
-     "views": 5509605
+     "views": 5509608
     }
    ],
    "profile_history": [],
@@ -2467,8 +2467,8 @@
     "솔로 'Palette' Zal-Dance 영상(2025.6)"
    ],
    "fancam_count": 4,
-   "fancam_delta": 4168,
-   "fancam_views": 342914,
+   "fancam_delta": 4170,
+   "fancam_views": 342916,
    "fancams": [
     {
      "category": "fancam",
@@ -2487,7 +2487,7 @@
     {
      "category": "fancam",
      "channel": "MBCkpop",
-     "delta": 1398,
+     "delta": 1400,
      "id": "cymmp-5yoHU",
      "member": "ZET",
      "predebut": false,
@@ -2496,7 +2496,7 @@
      "short": false,
      "show": "음악중심",
      "title": "[#음중직캠] A2O SOUL ZET (에이투오 소울 제트) – SUPERSTAR FanCam | 쇼! 음악중심 | MBC261024",
-     "views": 88105
+     "views": 88107
     },
     {
      "category": "fancam",
@@ -2545,7 +2545,7 @@
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 94,
+     "delta": 102,
      "id": "3Mbs7Jakbko",
      "member": "",
      "predebut": true,
@@ -2554,7 +2554,7 @@
      "short": false,
      "show": "",
      "title": "A2O LTB HANZE 'Palette' Zal-Life Behind The Scenes",
-     "views": 10018
+     "views": 10026
     },
     {
      "category": "content",
@@ -2629,7 +2629,7 @@
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 146,
+     "delta": 141,
      "id": "ipC7jgqrvvs",
      "member": "",
      "predebut": true,
@@ -2638,12 +2638,12 @@
      "short": false,
      "show": "",
      "title": "A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Life Behind The Scenes",
-     "views": 13618
+     "views": 13613
     },
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 95,
+     "delta": 93,
      "id": "JxSbLS12gLo",
      "member": "",
      "predebut": true,
@@ -2652,7 +2652,7 @@
      "short": false,
      "show": "",
      "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Life Behind The Scenes",
-     "views": 11195
+     "views": 11193
     },
     {
      "category": "content",
@@ -2671,7 +2671,7 @@
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 91,
+     "delta": 95,
      "id": "X50b7DmPIuA",
      "member": "",
      "predebut": true,
@@ -2680,12 +2680,12 @@
      "short": true,
      "show": "",
      "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Dance Official Video",
-     "views": 25067
+     "views": 25071
     },
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 185,
+     "delta": 175,
      "id": "NhTvivHrowA",
      "member": "",
      "predebut": true,
@@ -2694,12 +2694,12 @@
      "short": true,
      "show": "",
      "title": "A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Dance Official Video",
-     "views": 23688
+     "views": 23678
     },
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 156,
+     "delta": 134,
      "id": "W4r0FeBcFdQ",
      "member": "",
      "predebut": true,
@@ -2708,12 +2708,12 @@
      "short": true,
      "show": "",
      "title": "A2O LTB 'B.B.B' Zal-Dance Official Video",
-     "views": 28487
+     "views": 28465
     },
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 319,
+     "delta": 323,
      "id": "G_NJdu0dYrk",
      "member": "",
      "predebut": true,
@@ -2722,12 +2722,12 @@
      "short": false,
      "show": "",
      "title": "A2O HTB, A2O LTB ’REVOLUTION’ Zal-Life Behind The Scenes",
-     "views": 22736
+     "views": 22740
     },
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 191,
+     "delta": 201,
      "id": "0mE2leFm_D0",
      "member": "",
      "predebut": true,
@@ -2736,7 +2736,7 @@
      "short": true,
      "show": "",
      "title": "A2O HTB, A2O LTB ‘REVOLUTION’ Zal-Dance Official Video",
-     "views": 29848
+     "views": 29858
     },
     {
      "category": "content",
@@ -2811,7 +2811,7 @@
     {
      "category": "content",
      "channel": "A2O WORLD",
-     "delta": 7010,
+     "delta": 7013,
      "id": "E10wtRjr3TI",
      "member": "",
      "predebut": true,
@@ -2820,7 +2820,7 @@
      "short": false,
      "show": "",
      "title": "A2O Rookies LTB ’CANDY‘ Zalpha Pop Official Video",
-     "views": 5509605
+     "views": 5509608
     }
    ],
    "profile_history": [],
@@ -2831,10 +2831,10 @@
   {
    "category": "mv",
    "channel": "A2O WORLD",
-   "delta": 329717,
+   "delta": 329972,
    "forecast": {
     "days": 1,
-    "rate": 436067,
+    "rate": 436194,
     "target": 2000000
    },
    "id": "JPJokqIoIJI",
@@ -2851,7 +2851,7 @@
     ],
     [
      "2026-11-12",
-     1895925
+     1896180
     ]
    ],
    "predebut": false,
@@ -2860,15 +2860,15 @@
    "short": false,
    "show": "",
    "title": "A2O SOUL 'Dancing in the Dark' Official Music Video",
-   "views": 1895925
+   "views": 1896180
   },
   {
    "category": "mv",
    "channel": "A2O WORLD",
-   "delta": 26189,
+   "delta": 26195,
    "forecast": {
     "days": 8,
-    "rate": 34494,
+    "rate": 34496,
     "target": 1000000
    },
    "id": "B5Aa4gnnt9I",
@@ -2885,7 +2885,7 @@
     ],
     [
      "2026-11-12",
-     731546
+     731552
     ]
    ],
    "predebut": false,
@@ -2894,15 +2894,15 @@
    "short": false,
    "show": "",
    "title": "A2O SOUL 'SUPERSTAR' INFINITE Music Video",
-   "views": 731546
+   "views": 731552
   },
   {
    "category": "mv",
    "channel": "A2O SOUL",
-   "delta": 34514,
+   "delta": 34521,
    "forecast": {
     "days": 15,
-    "rate": 40258,
+    "rate": 40262,
     "target": 4000000
    },
    "id": "IAURqrShEUQ",
@@ -2919,7 +2919,7 @@
     ],
     [
      "2026-11-12",
-     3410385
+     3410392
     ]
    ],
    "predebut": false,
@@ -2928,7 +2928,7 @@
    "short": false,
    "show": "",
    "title": "A2O SOUL 'SUPERSTAR' Official Music Video",
-   "views": 3410385
+   "views": 3410392
   }
  ],
  "notices": [],
@@ -2945,7 +2945,7 @@
    "short": false,
    "show": "",
    "title": "A2O SOUL 'Dancing in the Dark' Fanchant Guide",
-   "views": 90439
+   "views": 90452
   },
   {
    "category": "content",
@@ -2964,7 +2964,7 @@
   {
    "category": "content",
    "channel": "STONE MUSIC",
-   "delta": 9162,
+   "delta": 9166,
    "id": "9-pA58tDeag",
    "member": "",
    "predebut": false,
@@ -2973,7 +2973,7 @@
    "short": true,
    "show": "",
    "title": "심장이 뛰는 그 멜로디의 등장 A2O SOUL 'Dancing in the Dark'｜#Shorts",
-   "views": 24897
+   "views": 24901
   },
   {
    "category": "content",
@@ -3006,7 +3006,7 @@
   {
    "category": "mv",
    "channel": "A2O WORLD",
-   "delta": 329717,
+   "delta": 329972,
    "id": "JPJokqIoIJI",
    "member": "",
    "predebut": false,
@@ -3015,12 +3015,12 @@
    "short": false,
    "show": "",
    "title": "A2O SOUL 'Dancing in the Dark' Official Music Video",
-   "views": 1895925
+   "views": 1896180
   },
   {
    "category": "content",
    "channel": "A2O WORLD",
-   "delta": 521983,
+   "delta": 522026,
    "id": "kTOrPmbYJbw",
    "member": "",
    "predebut": false,
@@ -3029,7 +3029,7 @@
    "short": true,
    "show": "",
    "title": "A2O SOUL DEBUT ALBUM [SUPERSTAR] OUT NOW",
-   "views": 1786575
+   "views": 1786618
   },
   {
    "category": "content",
@@ -3076,7 +3076,7 @@
   {
    "category": "mv",
    "channel": "A2O WORLD",
-   "delta": 26189,
+   "delta": 26195,
    "id": "B5Aa4gnnt9I",
    "member": "",
    "predebut": false,
@@ -3085,7 +3085,7 @@
    "short": false,
    "show": "",
    "title": "A2O SOUL 'SUPERSTAR' INFINITE Music Video",
-   "views": 731546
+   "views": 731552
   },
   {
    "category": "content",
@@ -3115,7 +3115,7 @@
   }
  ],
  "supports": [],
- "updated_at": "2026-11-12T16:42+09:00",
+ "updated_at": "2026-11-12T16:44+09:00",
  "videos": [
   {
    "category": "content",
@@ -3129,7 +3129,7 @@
    "short": false,
    "show": "",
    "title": "A2O SOUL 'Dancing in the Dark' Fanchant Guide",
-   "views": 90439
+   "views": 90452
   },
   {
    "category": "content",
@@ -3148,7 +3148,7 @@
   {
    "category": "content",
    "channel": "STONE MUSIC",
-   "delta": 9162,
+   "delta": 9166,
    "id": "9-pA58tDeag",
    "member": "",
    "predebut": false,
@@ -3157,7 +3157,7 @@
    "short": true,
    "show": "",
    "title": "심장이 뛰는 그 멜로디의 등장 A2O SOUL 'Dancing in the Dark'｜#Shorts",
-   "views": 24897
+   "views": 24901
   },
   {
    "category": "content",
@@ -3190,7 +3190,7 @@
   {
    "category": "mv",
    "channel": "A2O WORLD",
-   "delta": 329717,
+   "delta": 329972,
    "id": "JPJokqIoIJI",
    "member": "",
    "predebut": false,
@@ -3199,12 +3199,12 @@
    "short": false,
    "show": "",
    "title": "A2O SOUL 'Dancing in the Dark' Official Music Video",
-   "views": 1895925
+   "views": 1896180
   },
   {
    "category": "content",
    "channel": "A2O WORLD",
-   "delta": 521983,
+   "delta": 522026,
    "id": "kTOrPmbYJbw",
    "member": "",
    "predebut": false,
@@ -3213,7 +3213,7 @@
    "short": true,
    "show": "",
    "title": "A2O SOUL DEBUT ALBUM [SUPERSTAR] OUT NOW",
-   "views": 1786575
+   "views": 1786618
   },
   {
    "category": "content",
@@ -3260,7 +3260,7 @@
   {
    "category": "mv",
    "channel": "A2O WORLD",
-   "delta": 26189,
+   "delta": 26195,
    "id": "B5Aa4gnnt9I",
    "member": "",
    "predebut": false,
@@ -3269,7 +3269,7 @@
    "short": false,
    "show": "",
    "title": "A2O SOUL 'SUPERSTAR' INFINITE Music Video",
-   "views": 731546
+   "views": 731552
   },
   {
    "category": "content",
@@ -3288,7 +3288,7 @@
   {
    "category": "content",
    "channel": "A2O SOUL",
-   "delta": 2841,
+   "delta": 2842,
    "id": "3km2rkEASWI",
    "member": "",
    "predebut": false,
@@ -3297,7 +3297,7 @@
    "short": false,
    "show": "",
    "title": "A2O SOUL DEBUT ALBUM [SUPERSTAR] Highlight Medley",
-   "views": 279674
+   "views": 279675
   },
   {
    "category": "fancam",
@@ -3344,7 +3344,7 @@
   {
    "category": "fancam",
    "channel": "ALL THE K-POP",
-   "delta": 38,
+   "delta": 37,
    "id": "pu4UUNbcZQQ",
    "member": "MOON",
    "predebut": false,
@@ -3353,7 +3353,7 @@
    "short": false,
    "show": "쇼챔피언",
    "title": "[쇼챔1분직캠] A2O SOUL MOON의 ＜SUPERSTAR＞♬ #A2OSOUL #MOON #SUPERSTAR",
-   "views": 7593
+   "views": 7592
   },
   {
    "category": "content",
@@ -3372,7 +3372,7 @@
   {
    "category": "fancam",
    "channel": "ALL THE K-POP",
-   "delta": 74,
+   "delta": 77,
    "id": "UCJPmP_Q3tY",
    "member": "SEE-ONE",
    "predebut": false,
@@ -3381,7 +3381,7 @@
    "short": false,
    "show": "쇼챔피언",
    "title": "[쇼챔1분직캠] A2O SOUL SEE-ONE의 ＜SUPERSTAR＞♬ #A2OSOUL #SEE-ONE #SUPERSTAR",
-   "views": 5366
+   "views": 5369
   },
   {
    "category": "fancam",
@@ -3456,7 +3456,7 @@
   {
    "category": "fancam",
    "channel": "ALL THE K-POP",
-   "delta": 58,
+   "delta": 67,
    "id": "owmmt5V9Pes",
    "member": "SORA",
    "predebut": false,
@@ -3465,12 +3465,12 @@
    "short": false,
    "show": "쇼챔피언",
    "title": "[쇼챔1분직캠] A2O SOUL SORA의 ＜SUPERSTAR＞♬ #A2OSOUL #SORA #SUPERSTAR",
-   "views": 13774
+   "views": 13783
   },
   {
    "category": "fancam",
    "channel": "ALL THE K-POP",
-   "delta": 125,
+   "delta": 111,
    "id": "X-SgenK4cmo",
    "member": "ALURE",
    "predebut": false,
@@ -3479,12 +3479,12 @@
    "short": false,
    "show": "쇼챔피언",
    "title": "[쇼챔1분직캠] A2O SOUL ALURE의 ＜SUPERSTAR＞♬ #A2OSOUL #ALURE #SUPERSTAR",
-   "views": 12016
+   "views": 12002
   },
   {
    "category": "fancam",
    "channel": "ALL THE K-POP",
-   "delta": 248,
+   "delta": 247,
    "id": "EA9OnuTq7BA",
    "member": "SEOHA",
    "predebut": false,
@@ -3493,12 +3493,12 @@
    "short": false,
    "show": "쇼챔피언",
    "title": "[쇼챔1분직캠] A2O SOUL SEOHA의 ＜SUPERSTAR＞♬ #A2OSOUL #SEOHA #SUPERSTAR",
-   "views": 13914
+   "views": 13913
   },
   {
    "category": "fancam",
    "channel": "ALL THE K-POP",
-   "delta": 153,
+   "delta": 159,
    "id": "BlkB-JbTuyc",
    "member": "GAKU",
    "predebut": false,
@@ -3507,7 +3507,7 @@
    "short": false,
    "show": "쇼챔피언",
    "title": "[쇼챔1분직캠] A2O SOUL GAKU의 ＜SUPERSTAR＞♬ #A2OSOUL #GAKU #SUPERSTAR",
-   "views": 10551
+   "views": 10557
   },
   {
    "category": "fancam",
@@ -3540,7 +3540,7 @@
   {
    "category": "content",
    "channel": "KBS Kpop",
-   "delta": 2717,
+   "delta": 2719,
    "id": "M1KZ3YW-vJg",
    "member": "",
    "predebut": false,
@@ -3549,7 +3549,7 @@
    "short": false,
    "show": "뮤직뱅크",
    "title": "[뮤뱅 스테디캠 4K] A2O LITE  & A2O SOUL 'Dance Break' 4k Bonus Ver. @뮤직뱅크(Music Bank) 261030",
-   "views": 311893
+   "views": 311895
   },
   {
    "category": "content",
@@ -3568,7 +3568,7 @@
   {
    "category": "fancam",
    "channel": "ALL THE K-POP",
-   "delta": 599,
+   "delta": 598,
    "id": "Sw0lnPvfmgU",
    "member": "ZAI",
    "predebut": false,
@@ -3577,7 +3577,7 @@
    "short": false,
    "show": "쇼챔피언",
    "title": "[쇼챔1분직캠] A2O SOUL ZAI의 ＜SUPERSTAR＞♬ #A2OSOUL #ZAI #SUPERSTAR",
-   "views": 21673
+   "views": 21672
   },
   {
    "category": "fancam",
@@ -3610,7 +3610,7 @@
   {
    "category": "fancam",
    "channel": "ALL THE K-POP",
-   "delta": 34,
+   "delta": 37,
    "id": "a7oVexH5CCY",
    "member": "AYDEN",
    "predebut": false,
@@ -3619,7 +3619,7 @@
    "short": false,
    "show": "쇼챔피언",
    "title": "[쇼챔1분직캠] A2O SOUL AYDEN 의 ＜SUPERSTAR＞♬ #A2OSOUL #AYDEN  #SUPERSTAR",
-   "views": 6913
+   "views": 6916
   },
   {
    "category": "content",
@@ -3680,7 +3680,7 @@
   {
    "category": "content",
    "channel": "A2O SOUL",
-   "delta": 1562,
+   "delta": 1563,
    "id": "2Vujac7u9vY",
    "member": "",
    "predebut": false,
@@ -3689,12 +3689,12 @@
    "short": true,
    "show": "",
    "title": "A2O SOUL 많이 사랑해주세요 🫶",
-   "views": 70829
+   "views": 70830
   },
   {
    "category": "content",
    "channel": "ALL THE K-POP",
-   "delta": 275,
+   "delta": 300,
    "id": "Pjt_5BzgxLY",
    "member": "",
    "predebut": false,
@@ -3703,12 +3703,12 @@
    "short": false,
    "show": "쇼챔피언",
    "title": "[덕질캡처용♥CLEAN] A2O SOUL - SUPERSTAR  l Show Champion l EP.615 l 261021",
-   "views": 81104
+   "views": 81129
   },
   {
    "category": "content",
    "channel": "SBSKPOP X INKIGAYO",
-   "delta": 608,
+   "delta": 529,
    "id": "uUSrsEbXs4Q",
    "member": "",
    "predebut": false,
@@ -3717,7 +3717,7 @@
    "short": false,
    "show": "인기가요",
    "title": "[안방1열 풀캠4K] 에이투오 소울 'SUPERSTAR' (A2O SOUL FullCam) @SBS Inkigayo 261025",
-   "views": 76958
+   "views": 76879
   },
   {
    "category": "content",
@@ -3736,7 +3736,7 @@
   {
    "category": "content",
    "channel": "A2O SOUL",
-   "delta": 596,
+   "delta": 595,
    "id": "B8SwogjVQ_0",
    "member": "",
    "predebut": false,
@@ -3745,12 +3745,12 @@
    "short": true,
    "show": "",
    "title": "A2O SOUL 'SUPERSTAR' INFINITE CLIP 1",
-   "views": 37472
+   "views": 37471
   },
   {
    "category": "fancam",
    "channel": "MBCkpop",
-   "delta": 1398,
+   "delta": 1400,
    "id": "cymmp-5yoHU",
    "member": "ZET",
    "predebut": false,
@@ -3759,12 +3759,12 @@
    "short": false,
    "show": "음악중심",
    "title": "[#음중직캠] A2O SOUL ZET (에이투오 소울 제트) – SUPERSTAR FanCam | 쇼! 음악중심 | MBC261024",
-   "views": 88105
+   "views": 88107
   },
   {
    "category": "fancam",
    "channel": "MBCkpop",
-   "delta": 391,
+   "delta": 469,
    "id": "06eFsw-4Rm8",
    "member": "SEOHA",
    "predebut": false,
@@ -3773,7 +3773,7 @@
    "short": false,
    "show": "음악중심",
    "title": "[#음중직캠] A2O SOUL SEOHA (에이투오 소울 서하) – SUPERSTAR FanCam | 쇼! 음악중심 | MBC261024",
-   "views": 45165
+   "views": 45243
   },
   {
    "category": "content",
@@ -3792,7 +3792,7 @@
   {
    "category": "content",
    "channel": "MBCkpop",
-   "delta": 4993,
+   "delta": 4995,
    "id": "S5EdafQAD58",
    "member": "",
    "predebut": false,
@@ -3801,7 +3801,7 @@
    "short": false,
    "show": "음악중심",
    "title": "A2O SOUL (에이투오 소울) - SUPERSTAR | Show! MusicCore | MBC261024방송",
-   "views": 366370
+   "views": 366372
   },
   {
    "category": "content",
@@ -3820,7 +3820,7 @@
   {
    "category": "fancam",
    "channel": "KBS Kpop",
-   "delta": 174,
+   "delta": 176,
    "id": "UHFMgZtwmOc",
    "member": "GAKU",
    "predebut": false,
@@ -3829,7 +3829,7 @@
    "short": false,
    "show": "뮤직뱅크",
    "title": "[K-Fancam] A2O SOUL 가쿠 직캠 'SUPERSTAR' (A2O SOUL GAKU Fancam) @뮤직뱅크(Music Bank) 261023",
-   "views": 22646
+   "views": 22648
   },
   {
    "category": "fancam",
@@ -3848,7 +3848,7 @@
   {
    "category": "fancam",
    "channel": "KBS Kpop",
-   "delta": 793,
+   "delta": 795,
    "id": "KAAU5xPZeeQ",
    "member": "ZAI",
    "predebut": false,
@@ -3857,12 +3857,12 @@
    "short": false,
    "show": "뮤직뱅크",
    "title": "[K-Fancam] A2O SOUL 자이 직캠 'SUPERSTAR' (A2O SOUL ZAI Fancam) @뮤직뱅크(Music Bank) 261023",
-   "views": 57912
+   "views": 57914
   },
   {
    "category": "fancam",
    "channel": "KBS Kpop",
-   "delta": 69,
+   "delta": 61,
    "id": "LJL0NWLIda4",
    "member": "MOON",
    "predebut": false,
@@ -3871,7 +3871,7 @@
    "short": false,
    "show": "뮤직뱅크",
    "title": "[K-Fancam] A2O SOUL 문 직캠 'SUPERSTAR' (A2O SOUL MOON Fancam) @뮤직뱅크(Music Bank) 261023",
-   "views": 9848
+   "views": 9840
   },
   {
    "category": "fancam",
@@ -3918,7 +3918,7 @@
   {
    "category": "content",
    "channel": "M2",
-   "delta": 10172,
+   "delta": 10176,
    "id": "M00ZYDPm5sE",
    "member": "",
    "predebut": false,
@@ -3927,7 +3927,7 @@
    "short": true,
    "show": "M2",
    "title": "A2O SOUL 'SUPERSTAR' 릴댄 하이라이트 | 릴레이댄스",
-   "views": 667913
+   "views": 667917
   },
   {
    "category": "content",
@@ -4002,7 +4002,7 @@
   {
    "category": "content",
    "channel": "M2",
-   "delta": 565,
+   "delta": 638,
    "id": "hViB0mOseAo",
    "member": "",
    "predebut": false,
@@ -4011,12 +4011,12 @@
    "short": true,
    "show": "M2",
    "title": "유영진이 성대로 낳은 아들 A2O SOUL 서하",
-   "views": 76727
+   "views": 76800
   },
   {
    "category": "fancam",
    "channel": "M2",
-   "delta": 581,
+   "delta": 558,
    "id": "9JTI7tqGMdQ",
    "member": "TAI",
    "predebut": false,
@@ -4025,7 +4025,7 @@
    "short": true,
    "show": "M2",
    "title": "춤선이 남다른 A2O SOUL 타이 직캠",
-   "views": 38221
+   "views": 38198
   },
   {
    "category": "fancam",
@@ -4156,7 +4156,7 @@
   {
    "category": "fancam",
    "channel": "ALL THE K-POP",
-   "delta": 89,
+   "delta": 80,
    "id": "dLnY9xh4nSw",
    "member": "JUNE",
    "predebut": false,
@@ -4165,12 +4165,12 @@
    "short": false,
    "show": "쇼챔피언",
    "title": "[쇼챔직캠 4K] A2O SOUL JUNE - SUPERSTAR | Show Champion | EP.615 | 261021",
-   "views": 6688
+   "views": 6679
   },
   {
    "category": "fancam",
    "channel": "ALL THE K-POP",
-   "delta": 31,
+   "delta": 30,
    "id": "agqe-wPFRN8",
    "member": "MOON",
    "predebut": false,
@@ -4179,7 +4179,7 @@
    "short": false,
    "show": "쇼챔피언",
    "title": "[쇼챔직캠 4K] A2O SOUL MOON - SUPERSTAR | Show Champion | EP.615 | 261021",
-   "views": 8326
+   "views": 8325
   },
   {
    "category": "fancam",
@@ -4198,7 +4198,7 @@
   {
    "category": "fancam",
    "channel": "ALL THE K-POP",
-   "delta": 122,
+   "delta": 123,
    "id": "Aya4oPdU-FI",
    "member": "SEE-ONE",
    "predebut": false,
@@ -4207,7 +4207,7 @@
    "short": false,
    "show": "쇼챔피언",
    "title": "[쇼챔직캠 4K] A2O SOUL SEE-ONE - SUPERSTAR | Show Champion | EP.615 | 261021",
-   "views": 10852
+   "views": 10853
   },
   {
    "category": "fancam",
@@ -4240,7 +4240,7 @@
   {
    "category": "fancam",
    "channel": "ALL THE K-POP",
-   "delta": 172,
+   "delta": 182,
    "id": "t7dxPRGU3Po",
    "member": "TAI",
    "predebut": false,
@@ -4249,12 +4249,12 @@
    "short": false,
    "show": "쇼챔피언",
    "title": "[쇼챔직캠 4K] A2O SOUL TAI - SUPERSTAR | Show Champion | EP.615 | 261021",
-   "views": 14433
+   "views": 14443
   },
   {
    "category": "fancam",
    "channel": "ALL THE K-POP",
-   "delta": 213,
+   "delta": 235,
    "id": "TX-ZozSVob0",
    "member": "HANSUNG",
    "predebut": false,
@@ -4263,12 +4263,12 @@
    "short": false,
    "show": "쇼챔피언",
    "title": "[쇼챔직캠 4K] A2O SOUL HANSUNG - SUPERSTAR | Show Champion | EP.615 | 261021",
-   "views": 10378
+   "views": 10400
   },
   {
    "category": "fancam",
    "channel": "ALL THE K-POP",
-   "delta": 181,
+   "delta": 203,
    "id": "p4k1ZAdEgsA",
    "member": "LUCIEN",
    "predebut": false,
@@ -4277,7 +4277,7 @@
    "short": false,
    "show": "쇼챔피언",
    "title": "[쇼챔직캠 4K] A2O SOUL LUCIEN - SUPERSTAR | Show Champion | EP.615 | 261021",
-   "views": 13240
+   "views": 13262
   },
   {
    "category": "fancam",
@@ -4296,7 +4296,7 @@
   {
    "category": "fancam",
    "channel": "ALL THE K-POP",
-   "delta": 89,
+   "delta": 84,
    "id": "lt2XfAcqwX0",
    "member": "GAKU",
    "predebut": false,
@@ -4305,12 +4305,12 @@
    "short": false,
    "show": "쇼챔피언",
    "title": "[쇼챔직캠 4K] A2O SOUL GAKU - SUPERSTAR | Show Champion | EP.615 | 261021",
-   "views": 19533
+   "views": 19528
   },
   {
    "category": "fancam",
    "channel": "ALL THE K-POP",
-   "delta": 371,
+   "delta": 387,
    "id": "B9U-KlRVMHw",
    "member": "SORA",
    "predebut": false,
@@ -4319,12 +4319,12 @@
    "short": false,
    "show": "쇼챔피언",
    "title": "[쇼챔직캠 4K] A2O SOUL SORA - SUPERSTAR | Show Champion | EP.615 | 261021",
-   "views": 29770
+   "views": 29786
   },
   {
    "category": "fancam",
    "channel": "ALL THE K-POP",
-   "delta": 237,
+   "delta": 243,
    "id": "d3zwZtXk7Co",
    "member": "TEO",
    "predebut": false,
@@ -4333,12 +4333,12 @@
    "short": false,
    "show": "쇼챔피언",
    "title": "[쇼챔직캠 4K] A2O SOUL TEO - SUPERSTAR | Show Champion | EP.615 | 261021",
-   "views": 15086
+   "views": 15092
   },
   {
    "category": "fancam",
    "channel": "ALL THE K-POP",
-   "delta": 412,
+   "delta": 425,
    "id": "YP8crgzIkvQ",
    "member": "ZAI",
    "predebut": false,
@@ -4347,7 +4347,7 @@
    "short": false,
    "show": "쇼챔피언",
    "title": "[쇼챔직캠 4K] A2O SOUL ZAI - SUPERSTAR | Show Champion | EP.615 | 261021",
-   "views": 39007
+   "views": 39020
   },
   {
    "category": "fancam",
@@ -4436,7 +4436,7 @@
   {
    "category": "content",
    "channel": "STONE MUSIC",
-   "delta": 878,
+   "delta": 951,
    "id": "6Wb6oTMnMfY",
    "member": "",
    "predebut": false,
@@ -4445,7 +4445,7 @@
    "short": true,
    "show": "",
    "title": "글로벌 취향 가득담긴 15명의 소년들 A2O SOUL!｜#Shorts",
-   "views": 95543
+   "views": 95616
   },
   {
    "category": "content",
@@ -4492,7 +4492,7 @@
   {
    "category": "mv",
    "channel": "A2O SOUL",
-   "delta": 34514,
+   "delta": 34521,
    "id": "IAURqrShEUQ",
    "member": "",
    "predebut": false,
@@ -4501,12 +4501,12 @@
    "short": false,
    "show": "",
    "title": "A2O SOUL 'SUPERSTAR' Official Music Video",
-   "views": 3410385
+   "views": 3410392
   },
   {
    "category": "content",
    "channel": "Mnet K-POP",
-   "delta": 15850,
+   "delta": 15854,
    "id": "8CBIZKw6qGc",
    "member": "",
    "predebut": false,
@@ -4515,7 +4515,7 @@
    "short": false,
    "show": "엠카운트다운",
    "title": "'HOT DEBUT' A2O SOUL - SUPERSTAR #엠카운트다운 EP.949 | Mnet 261015 방송",
-   "views": 2204763
+   "views": 2204767
   },
   {
    "category": "content",
@@ -4590,7 +4590,7 @@
   {
    "category": "content",
    "channel": "STONE MUSIC",
-   "delta": 213,
+   "delta": 214,
    "id": "VfDeZwMO8to",
    "member": "",
    "predebut": false,
@@ -4599,7 +4599,7 @@
    "short": true,
    "show": "",
    "title": "선공개 싱글부터 케이팝 팬들 휘어잡은 A2O SOUL 'SUPERSTAR'｜#Shorts",
-   "views": 69090
+   "views": 69091
   },
   {
    "category": "content",
@@ -4702,7 +4702,7 @@
   {
    "category": "content",
    "channel": "A2O WORLD",
-   "delta": 92742,
+   "delta": 92761,
    "id": "D8CYC5P6Z8Y",
    "member": "",
    "predebut": true,
@@ -4711,12 +4711,12 @@
    "short": false,
    "show": "",
    "title": "A2O SOUL 'SUPERSTAR' Official Performance Video",
-   "views": 6653509
+   "views": 6653528
   },
   {
    "category": "content",
    "channel": "M2",
-   "delta": 344,
+   "delta": 349,
    "id": "YDMc1qolerg",
    "member": "",
    "predebut": true,
@@ -4725,7 +4725,7 @@
    "short": false,
    "show": "M2",
    "title": "[LIVE🔴] WELCOME TO SOULITE From A2O SOUL A2O LITE",
-   "views": 431475
+   "views": 431480
   },
   {
    "category": "content",
@@ -4842,7 +4842,7 @@
   {
    "category": "content",
    "channel": "A2O WORLD",
-   "delta": 64,
+   "delta": 65,
    "id": "I8did80uv_Y",
    "member": "",
    "predebut": true,
@@ -4851,12 +4851,12 @@
    "short": false,
    "show": "",
    "title": "A2O LTB AYDEN 'Love Is Gone' Zal-Life Behind The Scenes",
-   "views": 10671
+   "views": 10672
   },
   {
    "category": "content",
    "channel": "A2O WORLD",
-   "delta": 94,
+   "delta": 102,
    "id": "3Mbs7Jakbko",
    "member": "",
    "predebut": true,
@@ -4865,7 +4865,7 @@
    "short": false,
    "show": "",
    "title": "A2O LTB HANZE 'Palette' Zal-Life Behind The Scenes",
-   "views": 10018
+   "views": 10026
   },
   {
    "category": "content",
@@ -4982,7 +4982,7 @@
   {
    "category": "content",
    "channel": "A2O WORLD",
-   "delta": 146,
+   "delta": 141,
    "id": "ipC7jgqrvvs",
    "member": "",
    "predebut": true,
@@ -4991,12 +4991,12 @@
    "short": false,
    "show": "",
    "title": "A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Life Behind The Scenes",
-   "views": 13618
+   "views": 13613
   },
   {
    "category": "content",
    "channel": "A2O WORLD",
-   "delta": 95,
+   "delta": 93,
    "id": "JxSbLS12gLo",
    "member": "",
    "predebut": true,
@@ -5005,7 +5005,7 @@
    "short": false,
    "show": "",
    "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Life Behind The Scenes",
-   "views": 11195
+   "views": 11193
   },
   {
    "category": "content",
@@ -5024,7 +5024,7 @@
   {
    "category": "content",
    "channel": "A2O WORLD",
-   "delta": 91,
+   "delta": 95,
    "id": "X50b7DmPIuA",
    "member": "",
    "predebut": true,
@@ -5033,12 +5033,12 @@
    "short": true,
    "show": "",
    "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Dance Official Video",
-   "views": 25067
+   "views": 25071
   },
   {
    "category": "content",
    "channel": "A2O WORLD",
-   "delta": 185,
+   "delta": 175,
    "id": "NhTvivHrowA",
    "member": "",
    "predebut": true,
@@ -5047,12 +5047,12 @@
    "short": true,
    "show": "",
    "title": "A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Dance Official Video",
-   "views": 23688
+   "views": 23678
   },
   {
    "category": "content",
    "channel": "A2O WORLD",
-   "delta": 156,
+   "delta": 134,
    "id": "W4r0FeBcFdQ",
    "member": "",
    "predebut": true,
@@ -5061,12 +5061,12 @@
    "short": true,
    "show": "",
    "title": "A2O LTB 'B.B.B' Zal-Dance Official Video",
-   "views": 28487
+   "views": 28465
   },
   {
    "category": "content",
    "channel": "A2O WORLD",
-   "delta": 319,
+   "delta": 323,
    "id": "G_NJdu0dYrk",
    "member": "",
    "predebut": true,
@@ -5075,12 +5075,12 @@
    "short": false,
    "show": "",
    "title": "A2O HTB, A2O LTB ’REVOLUTION’ Zal-Life Behind The Scenes",
-   "views": 22736
+   "views": 22740
   },
   {
    "category": "content",
    "channel": "A2O WORLD",
-   "delta": 191,
+   "delta": 201,
    "id": "0mE2leFm_D0",
    "member": "",
    "predebut": true,
@@ -5089,7 +5089,7 @@
    "short": true,
    "show": "",
    "title": "A2O HTB, A2O LTB ‘REVOLUTION’ Zal-Dance Official Video",
-   "views": 29848
+   "views": 29858
   },
   {
    "category": "content",
@@ -5206,7 +5206,7 @@
   {
    "category": "content",
    "channel": "A2O WORLD",
-   "delta": 7010,
+   "delta": 7013,
    "id": "E10wtRjr3TI",
    "member": "",
    "predebut": true,
@@ -5215,7 +5215,7 @@
    "short": false,
    "show": "",
    "title": "A2O Rookies LTB ’CANDY‘ Zalpha Pop Official Video",
-   "views": 5509605
+   "views": 5509608
   }
  ],
  "votes": []
