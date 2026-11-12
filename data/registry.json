@@ -31,7 +31,7 @@
    "title": "Mnet K-POP"
   }
  },
- "collected_at": "2026-11-12T06:51+09:00",
+ "collected_at": "2026-11-12T15:52+09:00",
  "handles": {
   "ALLTHEKPOP": "UCPde4guD9yFBRzkxk2PatoA"
  },
@@ -41,8 +41,8 @@
   "UCPde4guD9yFBRzkxk2PatoA": "2026-11-11T13:05:31Z",
   "UCS_hnpJLQTvBkqALgapi_4g": "2026-11-11T09:00:32Z",
   "UCTQVIXvcHrR9jYoJ6qaBAow": "2026-11-11T08:01:24Z",
-  "UC_pwIXKXNm5KGhdEVzmY60A": "2026-11-11T10:30:19Z",
-  "UCbD8EppRX3ZwJSou-TVo90A": "2026-11-11T12:16:23Z",
+  "UC_pwIXKXNm5KGhdEVzmY60A": "2026-11-12T04:00:03Z",
+  "UCbD8EppRX3ZwJSou-TVo90A": "2026-11-12T05:07:59Z",
   "UCe52oeb7Xv_KaJsEzcKXJJg": "2026-11-11T10:00:18Z",
   "UCeLPm9yH_a_QH8n6445G-Ow": "2026-11-11T12:00:11Z",
   "UCn-SYb1TUz-1itK_uz4imUA": "2026-11-09T09:00:16Z",
@@ -65,91 +65,117 @@
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 156,
+   "live_status": "none",
    "published_at": "2026-10-27T09:00:12Z",
+   "scheduled_start": null,
    "title": "A2O COSMIC EPIC : Welcome to SOULITE"
   },
   "-RDE0vNwUGk": {
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 221,
+   "live_status": "none",
    "published_at": "2025-03-21T11:02:07Z",
+   "scheduled_start": null,
    "title": "A2O LTB 'DRIVE’ Zal-Life Behind The Scenes"
   },
   "-hzX9JO9hsY": {
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 125,
+   "live_status": "none",
    "published_at": "2025-03-28T10:00:00Z",
+   "scheduled_start": null,
    "title": "A2O LTB JIAYI 'What's Up Danger' Zal-Dance Official Video"
   },
   "06eFsw-4Rm8": {
    "channel_id": "UCe52oeb7Xv_KaJsEzcKXJJg",
    "channel_title": "MBCkpop",
    "duration_s": 271,
+   "live_status": "none",
    "published_at": "2026-10-24T08:03:38Z",
+   "scheduled_start": null,
    "title": "[#음중직캠] A2O SOUL SEOHA (에이투오 소울 서하) – SUPERSTAR FanCam | 쇼! 음악중심 | MBC261024"
   },
   "0AR_RTwr5x8": {
    "channel_id": "UCTQVIXvcHrR9jYoJ6qaBAow",
    "channel_title": "M2",
    "duration_s": 269,
+   "live_status": "none",
    "published_at": "2026-10-15T09:29:26Z",
+   "scheduled_start": null,
    "title": "[MPD직캠] A2O SOUL 타이 직캠 4K 'SUPERSTAR' (A2O SOUL TAI FanCam) | @MCOUNTDOWN_2026.10.15"
   },
   "0FzFWZXNBDM": {
    "channel_id": "UCPde4guD9yFBRzkxk2PatoA",
    "channel_title": "ALL THE K-POP",
    "duration_s": 272,
+   "live_status": "none",
    "published_at": "2026-10-21T09:34:44Z",
+   "scheduled_start": null,
    "title": "[HOT DEBUT] A2O SOUL - SUPERSTAR  l Show Champion l EP.615 l 261021"
   },
   "0mE2leFm_D0": {
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 42,
+   "live_status": "none",
    "published_at": "2025-02-14T10:44:50Z",
+   "scheduled_start": null,
    "title": "A2O HTB, A2O LTB ‘REVOLUTION’ Zal-Dance Official Video"
   },
   "1J1hov1GboI": {
    "channel_id": "UCPde4guD9yFBRzkxk2PatoA",
    "channel_title": "ALL THE K-POP",
    "duration_s": 130,
+   "live_status": "none",
    "published_at": "2026-10-30T09:00:27Z",
+   "scheduled_start": null,
    "title": "[쇼챔1분직캠] A2O SOUL ZET의 ＜SUPERSTAR＞♬ #A2OSOUL #ZET #SUPERSTAR"
   },
   "23dgxvhaxnw": {
    "channel_id": "UCAdLPETtxpZeRVqsq_QTneA",
    "channel_title": "A2O SOUL",
    "duration_s": 211,
+   "live_status": "none",
    "published_at": "2026-11-11T13:33:34Z",
+   "scheduled_start": null,
    "title": "A2O SOUL 'Dancing in the Dark' Fanchant Guide"
   },
   "2Vujac7u9vY": {
    "channel_id": "UCAdLPETtxpZeRVqsq_QTneA",
    "channel_title": "A2O SOUL",
    "duration_s": 14,
+   "live_status": "none",
    "published_at": "2026-10-26T10:00:21Z",
+   "scheduled_start": null,
    "title": "A2O SOUL 많이 사랑해주세요 🫶"
   },
   "2kervlM-g-I": {
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 258,
+   "live_status": "none",
    "published_at": "2025-04-08T17:15:07Z",
+   "scheduled_start": null,
    "title": "A2O HTB, A2O LTB 'CHAMPAGNE' Zal-Life Behind The Scenes"
   },
   "2s7NjfR0ph4": {
    "channel_id": "UCPde4guD9yFBRzkxk2PatoA",
    "channel_title": "ALL THE K-POP",
    "duration_s": 307,
+   "live_status": "none",
    "published_at": "2026-10-21T13:04:38Z",
+   "scheduled_start": null,
    "title": "[쇼챔직캠 4K] A2O SOUL - SUPERSTAR | Show Champion | EP.615 | 261021"
   },
   "2vy2XVp8UaQ": {
    "channel_id": "UC_pwIXKXNm5KGhdEVzmY60A",
    "channel_title": "STONE MUSIC",
    "duration_s": 253,
+   "live_status": "none",
    "published_at": "2026-10-13T09:00:13Z",
+   "scheduled_start": null,
    "source": "search",
    "title": "A2O SOUL - SUPERSTAR Official Performance Video"
   },
@@ -157,35 +183,45 @@
    "channel_id": "UCPde4guD9yFBRzkxk2PatoA",
    "channel_title": "ALL THE K-POP",
    "duration_s": 265,
+   "live_status": "none",
    "published_at": "2026-10-22T07:58:28Z",
+   "scheduled_start": null,
    "title": "[쇼챔직캠 4K] A2O SOUL ZET - SUPERSTAR | Show Champion | EP.615 | 261021"
   },
   "3Mbs7Jakbko": {
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 145,
+   "live_status": "none",
    "published_at": "2025-06-11T07:00:07Z",
+   "scheduled_start": null,
    "title": "A2O LTB HANZE 'Palette' Zal-Life Behind The Scenes"
   },
   "3km2rkEASWI": {
    "channel_id": "UCAdLPETtxpZeRVqsq_QTneA",
    "channel_title": "A2O SOUL",
    "duration_s": 92,
+   "live_status": "none",
    "published_at": "2026-11-04T09:00:05Z",
+   "scheduled_start": null,
    "title": "A2O SOUL DEBUT ALBUM [SUPERSTAR] Highlight Medley"
   },
   "4LSlCfqF7Sc": {
    "channel_id": "UCTQVIXvcHrR9jYoJ6qaBAow",
    "channel_title": "M2",
    "duration_s": 1070,
+   "live_status": "none",
    "published_at": "2026-10-13T13:36:46Z",
+   "scheduled_start": "2026-10-13T13:36:24Z",
    "title": "A2O SOUL & A2O LITE - INTRO + NEON + SUPERSTAR (4K) | WELCOME TO SOULITE From A2O SOUL A2O LITE"
   },
   "6Wb6oTMnMfY": {
    "channel_id": "UC_pwIXKXNm5KGhdEVzmY60A",
    "channel_title": "STONE MUSIC",
    "duration_s": 58,
+   "live_status": "none",
    "published_at": "2026-10-20T02:48:05Z",
+   "scheduled_start": null,
    "source": "search",
    "title": "글로벌 취향 가득담긴 15명의 소년들 A2O SOUL!｜#Shorts"
   },
@@ -193,21 +229,27 @@
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 39,
+   "live_status": "none",
    "published_at": "2025-02-07T10:40:40Z",
+   "scheduled_start": null,
    "title": "A2O LTB, A2O LTG ‘BAD & BOSSY’ Zal-Dance Official Video"
   },
   "7AbJ9HxM_ZY": {
    "channel_id": "UCTQVIXvcHrR9jYoJ6qaBAow",
    "channel_title": "M2",
    "duration_s": 266,
+   "live_status": "none",
    "published_at": "2026-10-22T09:32:39Z",
+   "scheduled_start": null,
    "title": "[MPD직캠] A2O SOUL 소라 직캠 4K 'SUPERSTAR' (A2O SOUL SORA FanCam) | @MCOUNTDOWN_2026.10.22"
   },
   "7x3beEhQ_pg": {
    "channel_id": "UC_pwIXKXNm5KGhdEVzmY60A",
    "channel_title": "STONE MUSIC",
    "duration_s": 185,
+   "live_status": "none",
    "published_at": "2026-11-09T10:00:28Z",
+   "scheduled_start": null,
    "source": "search",
    "title": "A2O SOUL - Dancing in the Dark Official Music Video"
   },
@@ -215,7 +257,9 @@
    "channel_id": "UCbD8EppRX3ZwJSou-TVo90A",
    "channel_title": "Mnet K-POP",
    "duration_s": 325,
+   "live_status": "none",
    "published_at": "2026-10-15T09:48:04Z",
+   "scheduled_start": null,
    "source": "search",
    "title": "'HOT DEBUT' A2O SOUL - SUPERSTAR #엠카운트다운 EP.949 | Mnet 261015 방송"
   },
@@ -223,63 +267,81 @@
    "channel_id": "UCTQVIXvcHrR9jYoJ6qaBAow",
    "channel_title": "M2",
    "duration_s": 276,
+   "live_status": "none",
    "published_at": "2026-10-22T12:00:35Z",
+   "scheduled_start": null,
    "title": "[릴레이댄스] A2O SOUL - SUPERSTAR (4K)"
   },
   "9-pA58tDeag": {
    "channel_id": "UC_pwIXKXNm5KGhdEVzmY60A",
    "channel_title": "STONE MUSIC",
    "duration_s": 60,
+   "live_status": "none",
    "published_at": "2026-11-10T07:00:20Z",
+   "scheduled_start": null,
    "title": "심장이 뛰는 그 멜로디의 등장 A2O SOUL 'Dancing in the Dark'｜#Shorts"
   },
   "93j1fDGi_-8": {
    "channel_id": "UCTQVIXvcHrR9jYoJ6qaBAow",
    "channel_title": "M2",
    "duration_s": 243,
+   "live_status": "none",
    "published_at": "2026-10-13T09:55:16Z",
+   "scheduled_start": null,
    "title": "[최초공개] A2O LITE - NEON (4K) | WELCOME TO SOULITE From A2O SOUL A2O LITE"
   },
   "9JTI7tqGMdQ": {
    "channel_id": "UCTQVIXvcHrR9jYoJ6qaBAow",
    "channel_title": "M2",
    "duration_s": 53,
+   "live_status": "none",
    "published_at": "2026-10-22T09:33:29Z",
+   "scheduled_start": null,
    "title": "춤선이 남다른 A2O SOUL 타이 직캠"
   },
   "9dzmijFqAsY": {
    "channel_id": "UCTQVIXvcHrR9jYoJ6qaBAow",
    "channel_title": "M2",
    "duration_s": 42,
+   "live_status": "none",
    "published_at": "2026-10-15T09:29:45Z",
+   "scheduled_start": null,
    "title": "도입부터 시선 사로잡는 A2O SOUL 타이"
   },
   "9tBbS7QmheU": {
    "channel_id": "UCTQVIXvcHrR9jYoJ6qaBAow",
    "channel_title": "M2",
    "duration_s": 266,
+   "live_status": "none",
    "published_at": "2026-10-22T09:32:39Z",
+   "scheduled_start": null,
    "title": "[MPD직캠] A2O SOUL 제트 직캠 4K 'SUPERSTAR' (A2O SOUL ZET FanCam) | @MCOUNTDOWN_2026.10.22"
   },
   "ADbEcqGZ-pI": {
    "channel_id": "UCeLPm9yH_a_QH8n6445G-Ow",
    "channel_title": "KBS Kpop",
    "duration_s": 249,
+   "live_status": "none",
    "published_at": "2026-10-30T09:09:40Z",
+   "scheduled_start": null,
    "title": "SUPERSTAR - A2O SOUL [뮤직뱅크/Music Bank] | KBS 261030 방송"
   },
   "AN-XpuZwOuo": {
    "channel_id": "UCeLPm9yH_a_QH8n6445G-Ow",
    "channel_title": "KBS Kpop",
    "duration_s": 274,
+   "live_status": "none",
    "published_at": "2026-10-24T01:11:15Z",
+   "scheduled_start": null,
    "title": "[K-Fancam] A2O SOUL 타이 직캠 'SUPERSTAR' (A2O SOUL TAI Fancam) @뮤직뱅크(Music Bank) 261023"
   },
   "AVAriLoBQhs": {
    "channel_id": "UCbD8EppRX3ZwJSou-TVo90A",
    "channel_title": "Mnet K-POP",
    "duration_s": 266,
+   "live_status": "none",
    "published_at": "2026-10-22T10:19:03Z",
+   "scheduled_start": null,
    "source": "search",
    "title": "A2O SOUL - SUPERSTAR #엠카운트다운 EP.950 | Mnet 261022 방송"
   },
@@ -287,616 +349,792 @@
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 117,
+   "live_status": "none",
    "published_at": "2025-06-06T10:00:19Z",
+   "scheduled_start": null,
    "title": "A2O LTB HANZE 'Palette' Zal-Dance Official Video"
   },
   "AsVNSWi_RRE": {
    "channel_id": "UCTQVIXvcHrR9jYoJ6qaBAow",
    "channel_title": "M2",
    "duration_s": 272,
+   "live_status": "none",
    "published_at": "2026-10-22T09:32:39Z",
+   "scheduled_start": null,
    "title": "[MPD직캠] A2O SOUL 타이 직캠 4K 'SUPERSTAR' (A2O SOUL TAI FanCam) | @MCOUNTDOWN_2026.10.22"
   },
   "Aya4oPdU-FI": {
    "channel_id": "UCPde4guD9yFBRzkxk2PatoA",
    "channel_title": "ALL THE K-POP",
    "duration_s": 264,
+   "live_status": "none",
    "published_at": "2026-10-22T07:58:27Z",
+   "scheduled_start": null,
    "title": "[쇼챔직캠 4K] A2O SOUL SEE-ONE - SUPERSTAR | Show Champion | EP.615 | 261021"
   },
   "B5Aa4gnnt9I": {
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 274,
+   "live_status": "none",
    "published_at": "2026-11-05T15:00:28Z",
+   "scheduled_start": null,
    "title": "A2O SOUL 'SUPERSTAR' INFINITE Music Video"
   },
   "B80MppdUZw8": {
    "channel_id": "UCTQVIXvcHrR9jYoJ6qaBAow",
    "channel_title": "M2",
    "duration_s": 291,
+   "live_status": "none",
    "published_at": "2026-10-13T09:55:52Z",
+   "scheduled_start": null,
    "title": "A2O SOUL & A2O LITE Concept Trailer : The First Signal | WELCOME TO SOULITE From A2O SOUL A2O LITE"
   },
   "B8SwogjVQ_0": {
    "channel_id": "UCAdLPETtxpZeRVqsq_QTneA",
    "channel_title": "A2O SOUL",
    "duration_s": 32,
+   "live_status": "none",
    "published_at": "2026-10-24T09:27:09Z",
+   "scheduled_start": null,
    "title": "A2O SOUL 'SUPERSTAR' INFINITE CLIP 1"
   },
   "B9U-KlRVMHw": {
    "channel_id": "UCPde4guD9yFBRzkxk2PatoA",
    "channel_title": "ALL THE K-POP",
    "duration_s": 264,
+   "live_status": "none",
    "published_at": "2026-10-22T07:58:08Z",
+   "scheduled_start": null,
    "title": "[쇼챔직캠 4K] A2O SOUL SORA - SUPERSTAR | Show Champion | EP.615 | 261021"
   },
   "BlkB-JbTuyc": {
    "channel_id": "UCPde4guD9yFBRzkxk2PatoA",
    "channel_title": "ALL THE K-POP",
    "duration_s": 114,
+   "live_status": "none",
    "published_at": "2026-10-31T09:00:11Z",
+   "scheduled_start": null,
    "title": "[쇼챔1분직캠] A2O SOUL GAKU의 ＜SUPERSTAR＞♬ #A2OSOUL #GAKU #SUPERSTAR"
   },
   "CgMmPuvwo2A": {
    "channel_id": "UCPde4guD9yFBRzkxk2PatoA",
    "channel_title": "ALL THE K-POP",
    "duration_s": 78,
+   "live_status": "none",
    "published_at": "2026-11-03T09:00:08Z",
+   "scheduled_start": null,
    "title": "[쇼챔1분직캠] A2O SOUL HANSUNG의 ＜SUPERSTAR＞♬ #A2OSOUL #HANSUNG #SUPERSTAR"
   },
   "D8CYC5P6Z8Y": {
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 253,
+   "live_status": "none",
    "published_at": "2026-10-12T12:30:26Z",
+   "scheduled_start": null,
    "title": "A2O SOUL 'SUPERSTAR' Official Performance Video"
   },
   "E10wtRjr3TI": {
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 240,
+   "live_status": "none",
    "published_at": "2024-11-22T11:08:27Z",
+   "scheduled_start": null,
    "title": "A2O Rookies LTB ’CANDY‘ Zalpha Pop Official Video"
   },
   "EA9OnuTq7BA": {
    "channel_id": "UCPde4guD9yFBRzkxk2PatoA",
    "channel_title": "ALL THE K-POP",
    "duration_s": 122,
+   "live_status": "none",
    "published_at": "2026-10-31T09:00:20Z",
+   "scheduled_start": null,
    "title": "[쇼챔1분직캠] A2O SOUL SEOHA의 ＜SUPERSTAR＞♬ #A2OSOUL #SEOHA #SUPERSTAR"
   },
   "ElujfWGSlOk": {
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 21,
+   "live_status": "none",
    "published_at": "2026-10-08T10:16:34Z",
+   "scheduled_start": null,
    "title": "A2O SOUL: Coming to You"
   },
   "EurgnVhnpvQ": {
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 229,
+   "live_status": "none",
    "published_at": "2025-03-12T04:00:18Z",
+   "scheduled_start": null,
    "title": "A2O LTB 'B.B.B' Zal-Life Behind The Scenes"
   },
   "FqIKJJteUNI": {
    "channel_id": "UCPde4guD9yFBRzkxk2PatoA",
    "channel_title": "ALL THE K-POP",
    "duration_s": 264,
+   "live_status": "none",
    "published_at": "2026-10-22T07:58:24Z",
+   "scheduled_start": null,
    "title": "[쇼챔직캠 4K] A2O SOUL AYDEN - SUPERSTAR | Show Champion | EP.615 | 261021"
   },
   "G_NJdu0dYrk": {
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 202,
+   "live_status": "none",
    "published_at": "2025-02-16T07:04:26Z",
+   "scheduled_start": null,
    "title": "A2O HTB, A2O LTB ’REVOLUTION’ Zal-Life Behind The Scenes"
   },
   "GfXhRyw4L8A": {
    "channel_id": "UCAdLPETtxpZeRVqsq_QTneA",
    "channel_title": "A2O SOUL",
    "duration_s": 92,
+   "live_status": "none",
    "published_at": "2026-11-04T09:00:10Z",
+   "scheduled_start": null,
    "title": "A2O SOUL DEBUT ALBUM [SUPERSTAR] Highlight Medley"
   },
   "GkRi4aV90gQ": {
    "channel_id": "UCAdLPETtxpZeRVqsq_QTneA",
    "channel_title": "A2O SOUL",
    "duration_s": 18,
+   "live_status": "none",
    "published_at": "2026-10-14T06:00:25Z",
+   "scheduled_start": null,
    "title": "A2O SOUL 'SUPERSTAR' OUT NOW"
   },
   "GucFEwW7-YI": {
    "channel_id": "UCS_hnpJLQTvBkqALgapi_4g",
    "channel_title": "SBSKPOP X INKIGAYO",
    "duration_s": 264,
+   "live_status": "none",
    "published_at": "2026-11-02T07:00:32Z",
+   "scheduled_start": null,
    "title": "[안방1열 풀캠4K] 에이투오 소울 'SUPERSTAR' (A2O SOUL FullCam) @SBS Inkigayo 261101"
   },
   "I8did80uv_Y": {
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 169,
+   "live_status": "none",
    "published_at": "2025-06-27T10:30:32Z",
+   "scheduled_start": null,
    "title": "A2O LTB AYDEN 'Love Is Gone' Zal-Life Behind The Scenes"
   },
   "IAURqrShEUQ": {
    "channel_id": "UCAdLPETtxpZeRVqsq_QTneA",
    "channel_title": "A2O SOUL",
    "duration_s": 257,
+   "live_status": "none",
    "published_at": "2026-10-16T10:00:30Z",
+   "scheduled_start": null,
    "title": "A2O SOUL 'SUPERSTAR' Official Music Video"
   },
   "IbEYMWKcv5w": {
    "channel_id": "UCTQVIXvcHrR9jYoJ6qaBAow",
    "channel_title": "M2",
    "duration_s": 266,
+   "live_status": "none",
    "published_at": "2026-10-22T09:32:39Z",
+   "scheduled_start": null,
    "title": "[MPD직캠] A2O SOUL 에이든 직캠 4K 'SUPERSTAR' (A2O SOUL AYDEN FanCam) | @MCOUNTDOWN_2026.10.22"
   },
   "JPJokqIoIJI": {
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 184,
+   "live_status": "none",
    "published_at": "2026-11-09T09:00:16Z",
+   "scheduled_start": null,
    "title": "A2O SOUL 'Dancing in the Dark' Official Music Video"
   },
   "JxSbLS12gLo": {
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 138,
+   "live_status": "none",
    "published_at": "2025-03-12T06:00:12Z",
+   "scheduled_start": null,
    "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Life Behind The Scenes"
   },
   "KAAU5xPZeeQ": {
    "channel_id": "UCeLPm9yH_a_QH8n6445G-Ow",
    "channel_title": "KBS Kpop",
    "duration_s": 274,
+   "live_status": "none",
    "published_at": "2026-10-24T01:11:15Z",
+   "scheduled_start": null,
    "title": "[K-Fancam] A2O SOUL 자이 직캠 'SUPERSTAR' (A2O SOUL ZAI Fancam) @뮤직뱅크(Music Bank) 261023"
   },
   "KSYWzg5rMvk": {
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 28,
+   "live_status": "none",
    "published_at": "2026-10-08T10:16:30Z",
+   "scheduled_start": null,
    "title": "A2O SOUL: SUPERSTAR"
   },
   "LJL0NWLIda4": {
    "channel_id": "UCeLPm9yH_a_QH8n6445G-Ow",
    "channel_title": "KBS Kpop",
    "duration_s": 274,
+   "live_status": "none",
    "published_at": "2026-10-24T01:11:07Z",
+   "scheduled_start": null,
    "title": "[K-Fancam] A2O SOUL 문 직캠 'SUPERSTAR' (A2O SOUL MOON Fancam) @뮤직뱅크(Music Bank) 261023"
   },
   "LnCsqVsf4XI": {
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 139,
+   "live_status": "none",
    "published_at": "2025-04-04T10:00:32Z",
+   "scheduled_start": null,
    "title": "A2O HTB, A2O LTB 'CHAMPAGNE' Zal-Dance Official Video"
   },
   "LzLC65VGbMs": {
    "channel_id": "UCAdLPETtxpZeRVqsq_QTneA",
    "channel_title": "A2O SOUL",
    "duration_s": 62,
+   "live_status": "none",
    "published_at": "2026-10-14T13:43:51Z",
+   "scheduled_start": null,
    "title": "A20 SOUL : Debut Show Backstage"
   },
   "M00ZYDPm5sE": {
    "channel_id": "UCTQVIXvcHrR9jYoJ6qaBAow",
    "channel_title": "M2",
    "duration_s": 44,
+   "live_status": "none",
    "published_at": "2026-10-22T12:01:44Z",
+   "scheduled_start": null,
    "title": "A2O SOUL 'SUPERSTAR' 릴댄 하이라이트 | 릴레이댄스"
   },
   "M1KZ3YW-vJg": {
    "channel_id": "UCeLPm9yH_a_QH8n6445G-Ow",
    "channel_title": "KBS Kpop",
    "duration_s": 63,
+   "live_status": "none",
    "published_at": "2026-10-30T12:38:09Z",
+   "scheduled_start": null,
    "title": "[뮤뱅 스테디캠 4K] A2O LITE  & A2O SOUL 'Dance Break' 4k Bonus Ver. @뮤직뱅크(Music Bank) 261030"
   },
   "MmuU2he4yaU": {
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 105,
+   "live_status": "none",
    "published_at": "2025-09-19T10:00:44Z",
+   "scheduled_start": null,
    "title": "A2O LTB DAVID, A2O LTG OA 'Summer Night' Zalpha Pop Official Video"
   },
   "Movn2wk6t7o": {
    "channel_id": "UCAdLPETtxpZeRVqsq_QTneA",
    "channel_title": "A2O SOUL",
    "duration_s": 21,
+   "live_status": "none",
    "published_at": "2026-10-18T12:00:06Z",
+   "scheduled_start": null,
    "title": "A2O SOUL ’SUPERSTAR‘ Official Music Video🎬"
   },
   "N50_f6b_ExE": {
    "channel_id": "UCTQVIXvcHrR9jYoJ6qaBAow",
    "channel_title": "M2",
    "duration_s": 272,
+   "live_status": "none",
    "published_at": "2026-10-22T09:32:39Z",
+   "scheduled_start": null,
    "title": "[MPD직캠] A2O SOUL 가쿠 직캠 4K 'SUPERSTAR' (A2O SOUL GAKU FanCam) | @MCOUNTDOWN_2026.10.22"
   },
   "NhTvivHrowA": {
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 46,
+   "live_status": "none",
    "published_at": "2025-03-07T10:34:13Z",
+   "scheduled_start": null,
    "title": "A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Dance Official Video"
   },
   "NovH0EbLQM8": {
    "channel_id": "UCTQVIXvcHrR9jYoJ6qaBAow",
    "channel_title": "M2",
    "duration_s": 273,
+   "live_status": "none",
    "published_at": "2026-10-23T03:01:26Z",
+   "scheduled_start": null,
    "title": "[입덕직캠] A2O SOUL 문 직캠 4K 'SUPERSTAR' (A2O SOUL MOON FanCam) | @MCOUNTDOWN_2026.10.22"
   },
   "OgrQLaohmqE": {
    "channel_id": "UCTQVIXvcHrR9jYoJ6qaBAow",
    "channel_title": "M2",
    "duration_s": 318,
+   "live_status": "none",
    "published_at": "2026-10-13T09:55:45Z",
+   "scheduled_start": null,
    "title": "[최초공개] A2O SOUL - INTRO + SUPERSTAR (4K) | WELCOME TO SOULITE From A2O SOUL A2O LITE"
   },
   "P9pgu_glLr4": {
    "channel_id": "UCTQVIXvcHrR9jYoJ6qaBAow",
    "channel_title": "M2",
    "duration_s": 267,
+   "live_status": "none",
    "published_at": "2026-10-22T09:33:09Z",
+   "scheduled_start": null,
    "title": "[MPD직캠] A2O SOUL 직캠 8K 'SUPERSTAR' (A2O SOUL FanCam) | @MCOUNTDOWN_2026.10.22"
   },
   "Pjt_5BzgxLY": {
    "channel_id": "UCPde4guD9yFBRzkxk2PatoA",
    "channel_title": "ALL THE K-POP",
    "duration_s": 272,
+   "live_status": "none",
    "published_at": "2026-10-26T09:10:14Z",
+   "scheduled_start": null,
    "title": "[덕질캡처용♥CLEAN] A2O SOUL - SUPERSTAR  l Show Champion l EP.615 l 261021"
   },
   "PkwH8thNHCw": {
    "channel_id": "UCbD8EppRX3ZwJSou-TVo90A",
    "channel_title": "Mnet K-POP",
    "duration_s": 96,
+   "live_status": "none",
    "published_at": "2026-10-16T17:11:05Z",
+   "scheduled_start": null,
    "title": "소울 지휘만 따라 오케스트라 이부분진짜감동 #MCOUNTDOWN #엠카운트다운 #A2OSOUL"
   },
   "R1gMAH-IYVA": {
    "channel_id": "UCPde4guD9yFBRzkxk2PatoA",
    "channel_title": "ALL THE K-POP",
    "duration_s": 264,
+   "live_status": "none",
    "published_at": "2026-10-22T07:58:14Z",
+   "scheduled_start": null,
    "title": "[쇼챔직캠 4K] A2O SOUL SEOHA - SUPERSTAR | Show Champion | EP.615 | 261021"
   },
   "RpofrdmbNZU": {
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 46,
+   "live_status": "none",
    "published_at": "2025-03-14T11:19:35Z",
+   "scheduled_start": null,
    "title": "A2O LTB 'DRIVE’ Zal-Dance Official Video"
   },
   "S5EdafQAD58": {
    "channel_id": "UCe52oeb7Xv_KaJsEzcKXJJg",
    "channel_title": "MBCkpop",
    "duration_s": 253,
+   "live_status": "none",
    "published_at": "2026-10-24T07:03:40Z",
+   "scheduled_start": null,
    "title": "A2O SOUL (에이투오 소울) - SUPERSTAR | Show! MusicCore | MBC261024방송"
   },
   "S5U7XkJf8IE": {
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 19,
+   "live_status": "none",
    "published_at": "2026-11-08T09:00:09Z",
+   "scheduled_start": null,
    "title": "A2O SOUL 'Dancing in the Dark' MV Teaser"
   },
   "Sw0lnPvfmgU": {
    "channel_id": "UCPde4guD9yFBRzkxk2PatoA",
    "channel_title": "ALL THE K-POP",
    "duration_s": 144,
+   "live_status": "none",
    "published_at": "2026-10-30T09:00:32Z",
+   "scheduled_start": null,
    "title": "[쇼챔1분직캠] A2O SOUL ZAI의 ＜SUPERSTAR＞♬ #A2OSOUL #ZAI #SUPERSTAR"
   },
   "TKTw9svVqEo": {
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 123,
+   "live_status": "none",
    "published_at": "2025-01-04T21:06:21Z",
+   "scheduled_start": null,
    "title": "A2O Rookies LTB JIAYI, LTG XILI 'GHOST TOWN' Zal-Dance Official Video"
   },
   "TPOh7woHYqo": {
    "channel_id": "UC_pwIXKXNm5KGhdEVzmY60A",
    "channel_title": "STONE MUSIC",
    "duration_s": 60,
+   "live_status": "none",
    "published_at": "2026-10-13T09:23:51Z",
+   "scheduled_start": null,
    "title": "A2O SOUL 'SUPERSTAR' Official Video｜#Shorts"
   },
   "TX-ZozSVob0": {
    "channel_id": "UCPde4guD9yFBRzkxk2PatoA",
    "channel_title": "ALL THE K-POP",
    "duration_s": 264,
+   "live_status": "none",
    "published_at": "2026-10-22T07:58:22Z",
+   "scheduled_start": null,
    "title": "[쇼챔직캠 4K] A2O SOUL HANSUNG - SUPERSTAR | Show Champion | EP.615 | 261021"
   },
   "UCJPmP_Q3tY": {
    "channel_id": "UCPde4guD9yFBRzkxk2PatoA",
    "channel_title": "ALL THE K-POP",
    "duration_s": 62,
+   "live_status": "none",
    "published_at": "2026-11-02T09:00:23Z",
+   "scheduled_start": null,
    "title": "[쇼챔1분직캠] A2O SOUL SEE-ONE의 ＜SUPERSTAR＞♬ #A2OSOUL #SEE-ONE #SUPERSTAR"
   },
   "UHFMgZtwmOc": {
    "channel_id": "UCeLPm9yH_a_QH8n6445G-Ow",
    "channel_title": "KBS Kpop",
    "duration_s": 274,
+   "live_status": "none",
    "published_at": "2026-10-24T01:11:34Z",
+   "scheduled_start": null,
    "title": "[K-Fancam] A2O SOUL 가쿠 직캠 'SUPERSTAR' (A2O SOUL GAKU Fancam) @뮤직뱅크(Music Bank) 261023"
   },
   "VMwmRgMowzw": {
    "channel_id": "UCS_hnpJLQTvBkqALgapi_4g",
    "channel_title": "SBSKPOP X INKIGAYO",
    "duration_s": 257,
+   "live_status": "none",
    "published_at": "2026-10-25T10:10:41Z",
+   "scheduled_start": null,
    "title": "SUPERSTAR - A2O SOUL | SBS 261025 방송"
   },
   "VXXK-J1OJkA": {
    "channel_id": "UCAdLPETtxpZeRVqsq_QTneA",
    "channel_title": "A2O SOUL",
    "duration_s": 21,
+   "live_status": "none",
    "published_at": "2026-10-09T04:19:10Z",
+   "scheduled_start": null,
    "title": "A2O SOUL: Coming to You"
   },
   "VfDeZwMO8to": {
    "channel_id": "UC_pwIXKXNm5KGhdEVzmY60A",
    "channel_title": "STONE MUSIC",
    "duration_s": 53,
+   "live_status": "none",
    "published_at": "2026-10-14T06:00:00Z",
+   "scheduled_start": null,
    "title": "선공개 싱글부터 케이팝 팬들 휘어잡은 A2O SOUL 'SUPERSTAR'｜#Shorts"
   },
   "W4r0FeBcFdQ": {
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 38,
+   "live_status": "none",
    "published_at": "2025-02-28T10:13:18Z",
+   "scheduled_start": null,
    "title": "A2O LTB 'B.B.B' Zal-Dance Official Video"
   },
   "Wwo6YOgXZGw": {
    "channel_id": "UCPde4guD9yFBRzkxk2PatoA",
    "channel_title": "ALL THE K-POP",
    "duration_s": 91,
+   "live_status": "none",
    "published_at": "2026-11-03T09:00:24Z",
+   "scheduled_start": null,
    "title": "[쇼챔1분직캠] A2O SOUL JUNE의 ＜SUPERSTAR＞♬ #A2OSOUL #JUNE #SUPERSTAR"
   },
   "X-SgenK4cmo": {
    "channel_id": "UCPde4guD9yFBRzkxk2PatoA",
    "channel_title": "ALL THE K-POP",
    "duration_s": 116,
+   "live_status": "none",
    "published_at": "2026-10-31T09:00:24Z",
+   "scheduled_start": null,
    "title": "[쇼챔1분직캠] A2O SOUL ALURE의 ＜SUPERSTAR＞♬ #A2OSOUL #ALURE #SUPERSTAR"
   },
   "X50b7DmPIuA": {
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 46,
+   "live_status": "none",
    "published_at": "2025-03-07T10:37:17Z",
+   "scheduled_start": null,
    "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Dance Official Video"
   },
   "X5C40RxMSy8": {
    "channel_id": "UCPde4guD9yFBRzkxk2PatoA",
    "channel_title": "ALL THE K-POP",
    "duration_s": 277,
+   "live_status": "none",
    "published_at": "2026-10-21T08:56:25Z",
+   "scheduled_start": null,
    "title": "[MC석 코너] 친구같은 컴백 인터뷰! ‘A2O LITE & A2O SOUL’ 나!왔어✋🏻 l Show Champion l EP.615 l 261021"
   },
   "XTzyyADWjkQ": {
    "channel_id": "UCPde4guD9yFBRzkxk2PatoA",
    "channel_title": "ALL THE K-POP",
    "duration_s": 70,
+   "live_status": "none",
    "published_at": "2026-10-22T09:00:06Z",
+   "scheduled_start": null,
    "title": "[MC석 코너] A2O LITE & A2O SOUL 역대급 신인이 알고싶다 ‘A2O LITE & A2O SOUL’ 나!왔어✋🏻 #쇼챔피언 #NEON #SUPERSTAR"
   },
   "XWOudyF2X_Q": {
    "channel_id": "UCeLPm9yH_a_QH8n6445G-Ow",
    "channel_title": "KBS Kpop",
    "duration_s": 274,
+   "live_status": "none",
    "published_at": "2026-10-24T01:01:05Z",
+   "scheduled_start": null,
    "title": "[K-Choreo 8K] A2O SOUL 직캠 'SUPERSTAR' (A2O SOUL Choreography) @MusicBank 261023"
   },
   "XfNOp-Vr4fk": {
    "channel_id": "UCeLPm9yH_a_QH8n6445G-Ow",
    "channel_title": "KBS Kpop",
    "duration_s": 273,
+   "live_status": "none",
    "published_at": "2026-10-31T01:02:10Z",
+   "scheduled_start": null,
    "title": "[K-Choreo 8K] A2O SOUL 직캠 'SUPERSTAR' (A2O SOUL Choreography) @MusicBank 261030"
   },
   "YDMc1qolerg": {
    "channel_id": "UCTQVIXvcHrR9jYoJ6qaBAow",
    "channel_title": "M2",
    "duration_s": 2701,
+   "live_status": "none",
    "published_at": "2026-10-12T08:56:59Z",
+   "scheduled_start": "2026-10-12T08:00:00Z",
    "title": "[LIVE🔴] WELCOME TO SOULITE From A2O SOUL A2O LITE"
   },
   "YP8crgzIkvQ": {
    "channel_id": "UCPde4guD9yFBRzkxk2PatoA",
    "channel_title": "ALL THE K-POP",
    "duration_s": 258,
+   "live_status": "none",
    "published_at": "2026-10-22T07:58:03Z",
+   "scheduled_start": null,
    "title": "[쇼챔직캠 4K] A2O SOUL ZAI - SUPERSTAR | Show Champion | EP.615 | 261021"
   },
   "Y_LGgo_3-6Q": {
    "channel_id": "UCPde4guD9yFBRzkxk2PatoA",
    "channel_title": "ALL THE K-POP",
    "duration_s": 136,
+   "live_status": "none",
    "published_at": "2026-11-02T09:00:04Z",
+   "scheduled_start": null,
    "title": "[쇼챔1분직캠] A2O SOUL TEO의 ＜SUPERSTAR＞♬ #A2OSOUL #TEO #SUPERSTAR"
   },
   "_CtOsOQxSd0": {
    "channel_id": "UCTQVIXvcHrR9jYoJ6qaBAow",
    "channel_title": "M2",
    "duration_s": 28,
+   "live_status": "none",
    "published_at": "2026-10-22T12:01:10Z",
+   "scheduled_start": null,
    "title": "A2O SOUL 금발 걔 '자이' | 릴레이댄스"
   },
   "_UdD3EGVtHI": {
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 106,
+   "live_status": "none",
    "published_at": "2026-11-08T03:00:16Z",
+   "scheduled_start": null,
    "title": "A2O SOUL ‘Dancing in the Dark’ Teaser"
   },
   "_ibsruGmOS0": {
    "channel_id": "UCAdLPETtxpZeRVqsq_QTneA",
    "channel_title": "A2O SOUL",
    "duration_s": 36,
+   "live_status": "none",
    "published_at": "2026-11-03T05:00:39Z",
+   "scheduled_start": null,
    "title": "Music Bank BEHIND 💫 #A2O #A2OSOUL #SUPERSTAR"
   },
   "_tcc0mXXIy4": {
    "channel_id": "UCTQVIXvcHrR9jYoJ6qaBAow",
    "channel_title": "M2",
    "duration_s": 35,
+   "live_status": "none",
    "published_at": "2026-10-22T12:01:04Z",
+   "scheduled_start": null,
    "title": "A2O SOUL 귀여움 대표 '제트' | 릴레이댄스"
   },
   "a7oVexH5CCY": {
    "channel_id": "UCPde4guD9yFBRzkxk2PatoA",
    "channel_title": "ALL THE K-POP",
    "duration_s": 115,
+   "live_status": "none",
    "published_at": "2026-10-30T09:00:09Z",
+   "scheduled_start": null,
    "title": "[쇼챔1분직캠] A2O SOUL AYDEN 의 ＜SUPERSTAR＞♬ #A2OSOUL #AYDEN  #SUPERSTAR"
   },
   "agqe-wPFRN8": {
    "channel_id": "UCPde4guD9yFBRzkxk2PatoA",
    "channel_title": "ALL THE K-POP",
    "duration_s": 264,
+   "live_status": "none",
    "published_at": "2026-10-22T07:58:31Z",
+   "scheduled_start": null,
    "title": "[쇼챔직캠 4K] A2O SOUL MOON - SUPERSTAR | Show Champion | EP.615 | 261021"
   },
   "c-cQ_h5Ntc8": {
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 188,
+   "live_status": "none",
    "published_at": "2024-12-27T08:46:02Z",
+   "scheduled_start": null,
    "title": "A2O Rookie LTB JIAYI ‘Easy on me’ Zalpha Pop Official Video"
   },
   "cN8UIsynHBI": {
    "channel_id": "UCPde4guD9yFBRzkxk2PatoA",
    "channel_title": "ALL THE K-POP",
    "duration_s": 264,
+   "live_status": "none",
    "published_at": "2026-10-22T07:58:27Z",
+   "scheduled_start": null,
    "title": "[쇼챔직캠 4K] A2O SOUL ALURE - SUPERSTAR | Show Champion | EP.615 | 261021"
   },
   "cRIlgvejJLs": {
    "channel_id": "UCAdLPETtxpZeRVqsq_QTneA",
    "channel_title": "A2O SOUL",
    "duration_s": 63,
+   "live_status": "none",
    "published_at": "2026-10-17T09:00:23Z",
+   "scheduled_start": null,
    "title": "A2O SOUL 'SUPERSTAR' Drone Ver."
   },
   "cv6C5_p0F_o": {
    "channel_id": "UCPde4guD9yFBRzkxk2PatoA",
    "channel_title": "ALL THE K-POP",
    "duration_s": 264,
+   "live_status": "none",
    "published_at": "2026-10-22T07:58:01Z",
+   "scheduled_start": null,
    "title": "[쇼챔직캠 4K] A2O SOUL SONO - SUPERSTAR | Show Champion | EP.615 | 261021"
   },
   "cymmp-5yoHU": {
    "channel_id": "UCe52oeb7Xv_KaJsEzcKXJJg",
    "channel_title": "MBCkpop",
    "duration_s": 253,
+   "live_status": "none",
    "published_at": "2026-10-24T08:03:53Z",
+   "scheduled_start": null,
    "title": "[#음중직캠] A2O SOUL ZET (에이투오 소울 제트) – SUPERSTAR FanCam | 쇼! 음악중심 | MBC261024"
   },
   "d3zwZtXk7Co": {
    "channel_id": "UCPde4guD9yFBRzkxk2PatoA",
    "channel_title": "ALL THE K-POP",
    "duration_s": 264,
+   "live_status": "none",
    "published_at": "2026-10-22T07:58:08Z",
+   "scheduled_start": null,
    "title": "[쇼챔직캠 4K] A2O SOUL TEO - SUPERSTAR | Show Champion | EP.615 | 261021"
   },
   "dLnY9xh4nSw": {
    "channel_id": "UCPde4guD9yFBRzkxk2PatoA",
    "channel_title": "ALL THE K-POP",
    "duration_s": 264,
+   "live_status": "none",
    "published_at": "2026-10-22T07:58:34Z",
+   "scheduled_start": null,
    "title": "[쇼챔직캠 4K] A2O SOUL JUNE - SUPERSTAR | Show Champion | EP.615 | 261021"
   },
   "dPHcj2caPgg": {
    "channel_id": "UCe52oeb7Xv_KaJsEzcKXJJg",
    "channel_title": "MBCkpop",
    "duration_s": 272,
+   "live_status": "none",
    "published_at": "2026-10-24T08:03:25Z",
+   "scheduled_start": null,
    "title": "[#음중풀캠8K] A2O SOUL (에이투오 소울) – SUPERSTAR FullCam | 쇼! 음악중심 | MBC261024"
   },
   "dV_c20fNYmI": {
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 221,
+   "live_status": "none",
    "published_at": "2025-01-11T08:38:28Z",
+   "scheduled_start": null,
    "title": "A2O Rookies LTB JIAYI, LTG XILI ‘GHOST TOWN’ Zal-Life Behind The Scenes"
   },
   "fSeummulVNI": {
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 107,
+   "live_status": "none",
    "published_at": "2024-12-10T20:23:09Z",
+   "scheduled_start": null,
    "title": "A2O Rookies LTB 'CANDY' Zal-Life Behind The Scenes"
   },
   "f_mFr5Gb8Tk": {
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 23,
+   "live_status": "none",
    "published_at": "2026-10-08T11:41:40Z",
+   "scheduled_start": null,
    "title": "A2O SOUL: Find the SOUL"
   },
   "fnWnGDCTesg": {
    "channel_id": "UCeLPm9yH_a_QH8n6445G-Ow",
    "channel_title": "KBS Kpop",
    "duration_s": 60,
+   "live_status": "none",
    "published_at": "2026-10-31T01:03:05Z",
+   "scheduled_start": null,
    "title": "[K-Choreo 8K] A2O LITE & A2O SOUL 직캠 'Dance Break' (A2O LITE & A2O SOUL Choreography) @MusicBank"
   },
   "fuTiT7BbeIE": {
    "channel_id": "UC_pwIXKXNm5KGhdEVzmY60A",
    "channel_title": "STONE MUSIC",
    "duration_s": 36,
+   "live_status": "none",
    "published_at": "2026-11-09T05:00:25Z",
+   "scheduled_start": null,
    "title": "2~3세대의 추억이 아닌 5세대의 새로운 뉴 신스웨이브의 등장, A2O SOUL!｜#Shorts"
   },
   "gE0x0sP3a7A": {
    "channel_id": "UCeLPm9yH_a_QH8n6445G-Ow",
    "channel_title": "KBS Kpop",
    "duration_s": 277,
+   "live_status": "none",
    "published_at": "2026-10-24T06:30:35Z",
+   "scheduled_start": null,
    "title": "(ENG)에이투오 라이트 & 에이투오 소울 (A2O LITE & A2O SOUL Interview) l @MusicBank KBS 261023"
   },
   "gXo-MWQ-Ujs": {
    "channel_id": "UCTQVIXvcHrR9jYoJ6qaBAow",
    "channel_title": "M2",
    "duration_s": 267,
+   "live_status": "none",
    "published_at": "2026-10-15T09:29:30Z",
+   "scheduled_start": null,
    "title": "[MPD직캠] A2O SOUL 직캠 8K 'SUPERSTAR' (A2O SOUL FanCam) | @MCOUNTDOWN_2026.10.15"
   },
   "hViB0mOseAo": {
    "channel_id": "UCTQVIXvcHrR9jYoJ6qaBAow",
    "channel_title": "M2",
    "duration_s": 32,
+   "live_status": "none",
    "published_at": "2026-10-22T09:33:35Z",
+   "scheduled_start": null,
    "title": "유영진이 성대로 낳은 아들 A2O SOUL 서하"
   },
   "hXOmejPxZRE": {
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 190,
+   "live_status": "none",
    "published_at": "2025-02-10T04:24:16Z",
+   "scheduled_start": null,
    "title": "A2O LTB, LTG ‘BAD & BOSSY’ Zal-Life Behind The Scenes"
   },
   "i9qbO0rVZMc": {
    "channel_id": "UC_pwIXKXNm5KGhdEVzmY60A",
    "channel_title": "STONE MUSIC",
    "duration_s": 60,
+   "live_status": "none",
    "published_at": "2026-11-09T10:00:17Z",
+   "scheduled_start": null,
    "source": "search",
    "title": "A2O SOUL 'Dancing in the Dark' Official Music Video｜#Shorts"
   },
@@ -904,35 +1142,45 @@
    "channel_id": "UCTQVIXvcHrR9jYoJ6qaBAow",
    "channel_title": "M2",
    "duration_s": 219,
+   "live_status": "none",
    "published_at": "2026-10-13T09:55:10Z",
+   "scheduled_start": null,
    "title": "A2O SOUL & A2O LITE - INTRO DANCE PERFORMANCE (4K) | WELCOME TO SOULITE From A2O SOUL A2O LITE"
   },
   "ipC7jgqrvvs": {
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 177,
+   "live_status": "none",
    "published_at": "2025-03-12T06:00:24Z",
+   "scheduled_start": null,
    "title": "A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Life Behind The Scenes"
   },
   "jYLVV3_RwQE": {
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 126,
+   "live_status": "none",
    "published_at": "2024-12-18T08:11:08Z",
+   "scheduled_start": null,
    "title": "A2O Rookies LTB ‘BLACK MADONNA’ Zal-Dance Official Video"
   },
   "kTOrPmbYJbw": {
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 18,
+   "live_status": "none",
    "published_at": "2026-11-09T09:00:13Z",
+   "scheduled_start": null,
    "title": "A2O SOUL DEBUT ALBUM [SUPERSTAR] OUT NOW"
   },
   "kqVKReG8iZI": {
    "channel_id": "UC_pwIXKXNm5KGhdEVzmY60A",
    "channel_title": "STONE MUSIC",
    "duration_s": 257,
+   "live_status": "none",
    "published_at": "2026-10-20T03:00:27Z",
+   "scheduled_start": null,
    "source": "search",
    "title": "A2O SOUL - SUPERSTAR Official Music Video"
   },
@@ -940,175 +1188,225 @@
    "channel_id": "UCPde4guD9yFBRzkxk2PatoA",
    "channel_title": "ALL THE K-POP",
    "duration_s": 264,
+   "live_status": "none",
    "published_at": "2026-10-22T07:58:12Z",
+   "scheduled_start": null,
    "title": "[쇼챔직캠 4K] A2O SOUL GAKU - SUPERSTAR | Show Champion | EP.615 | 261021"
   },
   "mObA7gFj4yM": {
    "channel_id": "UCAdLPETtxpZeRVqsq_QTneA",
    "channel_title": "A2O SOUL",
    "duration_s": 28,
+   "live_status": "none",
    "published_at": "2026-10-09T04:19:08Z",
+   "scheduled_start": null,
    "title": "A2O SOUL: SUPERSTAR"
   },
   "n5TGM8aecPQ": {
    "channel_id": "UCTQVIXvcHrR9jYoJ6qaBAow",
    "channel_title": "M2",
    "duration_s": 25,
+   "live_status": "none",
    "published_at": "2026-10-22T12:01:02Z",
+   "scheduled_start": null,
    "title": "교복 입은 A2O SOUL '문' 너무 좋은 느낌을 준다 | 릴레이댄스"
   },
   "nZ036cnzySk": {
    "channel_id": "UCeLPm9yH_a_QH8n6445G-Ow",
    "channel_title": "KBS Kpop",
    "duration_s": 261,
+   "live_status": "none",
    "published_at": "2026-10-23T09:03:09Z",
+   "scheduled_start": null,
    "title": "SUPERSTAR - A2O SOUL [뮤직뱅크/Music Bank] | KBS 261023 방송"
   },
   "nvwZfXEszCM": {
    "channel_id": "UCTQVIXvcHrR9jYoJ6qaBAow",
    "channel_title": "M2",
    "duration_s": 266,
+   "live_status": "none",
    "published_at": "2026-10-22T09:32:39Z",
+   "scheduled_start": null,
    "title": "[MPD직캠] A2O SOUL 서하 직캠 4K 'SUPERSTAR' (A2O SOUL SEOHA FanCam) | @MCOUNTDOWN_2026.10.22"
   },
   "owmmt5V9Pes": {
    "channel_id": "UCPde4guD9yFBRzkxk2PatoA",
    "channel_title": "ALL THE K-POP",
    "duration_s": 119,
+   "live_status": "none",
    "published_at": "2026-10-31T09:00:37Z",
+   "scheduled_start": null,
    "title": "[쇼챔1분직캠] A2O SOUL SORA의 ＜SUPERSTAR＞♬ #A2OSOUL #SORA #SUPERSTAR"
   },
   "p4k1ZAdEgsA": {
    "channel_id": "UCPde4guD9yFBRzkxk2PatoA",
    "channel_title": "ALL THE K-POP",
    "duration_s": 264,
+   "live_status": "none",
    "published_at": "2026-10-22T07:58:20Z",
+   "scheduled_start": null,
    "title": "[쇼챔직캠 4K] A2O SOUL LUCIEN - SUPERSTAR | Show Champion | EP.615 | 261021"
   },
   "p7W25dzLL5E": {
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 136,
+   "live_status": "none",
    "published_at": "2024-12-29T08:27:26Z",
+   "scheduled_start": null,
    "title": "A2O Rookies LTB ‘BLACK MADONNA’ Zal-Life Behind The Scenes"
   },
   "pu4UUNbcZQQ": {
    "channel_id": "UCPde4guD9yFBRzkxk2PatoA",
    "channel_title": "ALL THE K-POP",
    "duration_s": 91,
+   "live_status": "none",
    "published_at": "2026-11-03T09:00:07Z",
+   "scheduled_start": null,
    "title": "[쇼챔1분직캠] A2O SOUL MOON의 ＜SUPERSTAR＞♬ #A2OSOUL #MOON #SUPERSTAR"
   },
   "q3UIafRZ-m0": {
    "channel_id": "UCAdLPETtxpZeRVqsq_QTneA",
    "channel_title": "A2O SOUL",
    "duration_s": 24,
+   "live_status": "none",
    "published_at": "2026-11-01T10:30:25Z",
+   "scheduled_start": null,
    "title": "A2O SOUL 'SUPERSTAR' INFINITE CLIP 3"
   },
   "rSdXwKp6HSw": {
    "channel_id": "UCAdLPETtxpZeRVqsq_QTneA",
    "channel_title": "A2O SOUL",
    "duration_s": 63,
+   "live_status": "none",
    "published_at": "2026-10-26T14:12:53Z",
+   "scheduled_start": null,
    "title": "A2O SOUL을 소개합니다 💙"
   },
   "rcePBa5rk4U": {
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 208,
+   "live_status": "none",
    "published_at": "2025-03-29T10:00:58Z",
+   "scheduled_start": null,
    "title": "A2O LTB JIAYI 'What's Up Danger' Zal-Life Behind The Scenes"
   },
   "t7dxPRGU3Po": {
    "channel_id": "UCPde4guD9yFBRzkxk2PatoA",
    "channel_title": "ALL THE K-POP",
    "duration_s": 264,
+   "live_status": "none",
    "published_at": "2026-10-22T07:58:24Z",
+   "scheduled_start": null,
    "title": "[쇼챔직캠 4K] A2O SOUL TAI - SUPERSTAR | Show Champion | EP.615 | 261021"
   },
   "tGbarK9H2lg": {
    "channel_id": "UCPde4guD9yFBRzkxk2PatoA",
    "channel_title": "ALL THE K-POP",
    "duration_s": 168,
+   "live_status": "none",
    "published_at": "2026-11-02T09:00:01Z",
+   "scheduled_start": null,
    "title": "[쇼챔1분직캠] A2O SOUL TAI의 ＜SUPERSTAR＞♬ #A2OSOUL #TAI #SUPERSTAR"
   },
   "tQ3w2DyebAk": {
    "channel_id": "UCTQVIXvcHrR9jYoJ6qaBAow",
    "channel_title": "M2",
    "duration_s": 38,
+   "live_status": "none",
    "published_at": "2026-10-09T03:00:07Z",
+   "scheduled_start": null,
    "title": "(Teaser) [WELCOME TO SOULITE From A2O SOUL A2O LITE]"
   },
   "tYNBl8--3w4": {
    "channel_id": "UCPde4guD9yFBRzkxk2PatoA",
    "channel_title": "ALL THE K-POP",
    "duration_s": 75,
+   "live_status": "none",
    "published_at": "2026-11-03T09:00:19Z",
+   "scheduled_start": null,
    "title": "[쇼챔1분직캠] A2O SOUL LUCIEN의 ＜SUPERSTAR＞♬ #A2OSOUL #LUCIEN #SUPERSTAR"
   },
   "uUSrsEbXs4Q": {
    "channel_id": "UCS_hnpJLQTvBkqALgapi_4g",
    "channel_title": "SBSKPOP X INKIGAYO",
    "duration_s": 261,
+   "live_status": "none",
    "published_at": "2026-10-26T07:00:16Z",
+   "scheduled_start": null,
    "title": "[안방1열 풀캠4K] 에이투오 소울 'SUPERSTAR' (A2O SOUL FullCam) @SBS Inkigayo 261025"
   },
   "uswh3wwuWAk": {
    "channel_id": "UCn-SYb1TUz-1itK_uz4imUA",
    "channel_title": "A2O WORLD",
    "duration_s": 159,
+   "live_status": "none",
    "published_at": "2025-04-11T10:01:34Z",
+   "scheduled_start": null,
    "title": "A2O LTB AYDEN ’Love Is Gone’ Zal-Dance Official Video"
   },
   "vczAnqhEla0": {
    "channel_id": "UC_pwIXKXNm5KGhdEVzmY60A",
    "channel_title": "STONE MUSIC",
    "duration_s": 59,
+   "live_status": "none",
    "published_at": "2026-11-10T08:30:01Z",
+   "scheduled_start": null,
    "title": "익숙하면서도 새로운 감성의 케이팝을 보여주는 A2O SOUL!｜#Shorts"
   },
   "vlNZJRbPSSY": {
    "channel_id": "UCAdLPETtxpZeRVqsq_QTneA",
    "channel_title": "A2O SOUL",
    "duration_s": 33,
+   "live_status": "none",
    "published_at": "2026-10-28T09:00:21Z",
+   "scheduled_start": null,
    "title": "A2O SOUL 'SUPERSTAR' INFINITE CLIP 2"
   },
   "vtWUMd-F73o": {
    "channel_id": "UCTQVIXvcHrR9jYoJ6qaBAow",
    "channel_title": "M2",
    "duration_s": 272,
+   "live_status": "none",
    "published_at": "2026-10-22T09:32:39Z",
+   "scheduled_start": null,
    "title": "[MPD직캠] A2O SOUL 문 직캠 4K 'SUPERSTAR' (A2O SOUL MOON FanCam) | @MCOUNTDOWN_2026.10.22"
   },
   "vyFY4UYDcDc": {
    "channel_id": "UCAdLPETtxpZeRVqsq_QTneA",
    "channel_title": "A2O SOUL",
    "duration_s": 29,
+   "live_status": "none",
    "published_at": "2026-10-26T10:58:09Z",
+   "scheduled_start": null,
    "title": "쓰담쓰담 🫳"
   },
   "w1xKFGl4Zwo": {
    "channel_id": "UCPde4guD9yFBRzkxk2PatoA",
    "channel_title": "ALL THE K-POP",
    "duration_s": 71,
+   "live_status": "none",
    "published_at": "2026-10-30T09:00:24Z",
+   "scheduled_start": null,
    "title": "[쇼챔1분직캠] A2O SOUL SONO의 ＜SUPERSTAR＞♬ #A2OSOUL #SONO #SUPERSTAR"
   },
   "xLCPlXA3QMw": {
    "channel_id": "UCS_hnpJLQTvBkqALgapi_4g",
    "channel_title": "SBSKPOP X INKIGAYO",
    "duration_s": 251,
+   "live_status": "none",
    "published_at": "2026-11-01T06:54:14Z",
+   "scheduled_start": null,
    "title": "SUPERSTAR - A2O SOUL | SBS 261101 방송"
   },
   "xc9XoKdrC-Y": {
    "channel_id": "UC_pwIXKXNm5KGhdEVzmY60A",
    "channel_title": "STONE MUSIC",
    "duration_s": 60,
+   "live_status": "none",
    "published_at": "2026-10-20T07:07:07Z",
+   "scheduled_start": null,
    "source": "search",
    "title": "A2O SOUL - SUPERSTAR Official Music Video｜#Shorts"
   },
@@ -1116,7 +1414,9 @@
    "channel_id": "UCAdLPETtxpZeRVqsq_QTneA",
    "channel_title": "A2O SOUL",
    "duration_s": 23,
+   "live_status": "none",
    "published_at": "2026-10-09T04:19:05Z",
+   "scheduled_start": null,
    "title": "A2O SOUL: Find the SOUL"
   }
  }
