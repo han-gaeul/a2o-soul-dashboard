@@ -19,6 +19,7 @@ from pathlib import Path
 import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import announce  # noqa: E402
 import instagram  # noqa: E402
 import notify  # noqa: E402
 import youtube  # noqa: E402
@@ -244,6 +245,47 @@ def kr_num(n):
 
 # ---------- 공통 ----------
 
+def kst_datetime(iso):
+    """ISO(UTC) → 'YYYY-MM-DD HH:MM' (KST)."""
+    if not iso:
+        return ""
+    return datetime.fromisoformat(iso.replace("Z", "+00:00").replace("+0000", "+00:00")).astimezone(KST).strftime("%Y-%m-%d %H:%M")
+
+
+def auto_items(today):
+    """announcements.json → (자동 반영 일정, 공지 정보, 확인 필요 목록)."""
+    store = load_json("announcements.json", {})
+    events, notices, pending = [], [], []
+    for pid, post in sorted(store.get("posts", {}).items(), key=lambda kv: kv[1].get("timestamp") or "", reverse=True):
+        posted = kst_datetime(post.get("timestamp"))[:10]
+        for i in post.get("items", []):
+            row = {**i, "post": post.get("permalink"), "posted": posted, "label": announce.KINDS.get(i["kind"], "기타")}
+            future = (i.get("end_date") or i.get("date") or "9999") >= today
+            if i["confidence"] < announce.AUTO_CONFIDENCE:
+                if future and posted >= (date.fromisoformat(today) - timedelta(days=30)).isoformat():
+                    pending.append(row)
+                continue
+            if i.get("date") and i["date"] >= today:
+                events.append({"date": i["date"], "time": i.get("time"), "type": row["label"], "title": i["title"],
+                               "url": i.get("url") or post.get("permalink"), "auto": True})
+            if i["kind"] in ("ticket", "merch", "release", "concert", "fanmeeting", "event") and future:
+                notices.append(row)
+    return events, notices[:20], pending
+
+
+def youtube_upcoming(registry, today):
+    """예정된 유튜브 라이브·프리미어 → 일정."""
+    out = []
+    for vid, reg in registry.get("videos", {}).items():
+        if reg.get("live_status") != "upcoming" or not reg.get("scheduled_start"):
+            continue
+        when = kst_datetime(reg["scheduled_start"])
+        if when[:10] >= today:
+            out.append({"date": when[:10], "time": when[11:], "type": "라이브", "title": reg.get("title", ""),
+                        "url": f"https://www.youtube.com/watch?v={vid}", "auto": True})
+    return out
+
+
 def kst_date(iso):
     """ISO(UTC) → KST 날짜 문자열. 없으면 빈 문자열."""
     if not iso:
@@ -377,7 +419,8 @@ def collect(cfg, rescan=False):
     found = youtube.fetch_videos(sorted(ids))
     for vid, d in found.items():
         reg = registry["videos"].setdefault(vid, {})
-        reg.update({k: d[k] for k in ("title", "published_at", "channel_id", "channel_title", "duration_s")})
+        reg.update({k: d[k] for k in ("title", "published_at", "channel_id", "channel_title", "duration_s",
+                                      "live_status", "scheduled_start")})
         prev = record(f"yt:{vid}", "views", d["views"])
         for metric in ("likes", "comments"):
             record(f"yt:{vid}", metric, d[metric])
@@ -409,6 +452,20 @@ def collect(cfg, rescan=False):
             record(f"ig:{username}", "media_count", d["media_count"])
     else:
         print("[IG] 토큰 없음 — 건너뜀")
+
+    # 공식 인스타 공지 → AI 정리
+    if instagram.enabled() and announce.enabled():
+        store = load_json("announcements.json", {})
+        for username in cfg["instagram"]:
+            try:
+                media = instagram.fetch_media(username)
+            except Exception as e:  # noqa: BLE001
+                print(f"[공지] {username} 게시물 조회 실패: {e}")
+                continue
+            announce.run(media, store, today, kst_datetime)
+        save_json("announcements.json", store)
+    else:
+        print("[공지] IG 토큰 또는 ANTHROPIC_API_KEY 없음 — 건너뜀")
 
     registry["collected_at"] = now.isoformat(timespec="minutes")
     save_json("registry.json", registry)
@@ -446,7 +503,22 @@ def _ics_escape(t):
     return str(t).replace("\\", "\\\\").replace(";", "\\;").replace(",", "\\,").replace("\n", "\\n")
 
 
-def write_calendar(cfg):
+def write_pending(pending):
+    """확신도 낮은 자동 추출 항목 → data/pending.md (워크플로가 GitHub 이슈로 올림)."""
+    path = DATA / "pending.md"
+    if not pending:
+        path.unlink(missing_ok=True)
+        return
+    lines = ["AI가 공식 인스타 공지에서 뽑았지만 확신이 낮아 사이트에 바로 넣지 않은 항목이에요.",
+             "맞으면 `schedule.yml`(일정)이나 `targets.yml` 등에 옮겨 적고, 아니면 무시하세요. 다음 수집 때 이 이슈가 갱신돼요.", "",
+             "| 종류 | 내용 | 날짜 | 장소 | 확신 | 원문 |", "|---|---|---|---|---|---|"]
+    for p in pending:
+        when = " ".join(x for x in [p.get("date") or "", p.get("time") or ""] if x) or "-"
+        lines.append(f"| {p['label']} | {p['title']} | {when} | {p.get('place') or '-'} | {p['confidence']:.0%} | [게시물]({p.get('post')}) |")
+    path.write_text("\n".join(lines) + "\n", "utf-8")
+
+
+def write_calendar(cfg, extra_events=()):
     """일정·생일·투표 마감·서포트를 iCal(.ics)로 → 휴대폰 캘린더 구독용."""
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//A2O SOUL Tracker//KO", "CALSCALE:GREGORIAN",
@@ -473,7 +545,7 @@ def write_calendar(cfg):
             lines.append(f"DESCRIPTION:{_ics_escape(desc)}")
         lines.append("END:VEVENT")
 
-    for i, e in enumerate(cfg["events"]):
+    for i, e in enumerate(list(cfg["events"]) + list(extra_events)):
         label = f"[{e['type']}] " if e.get("type") else ""
         if e.get("time") and re.fullmatch(r"\d{2}:\d{2}", e["time"]):
             st = f"{e['date']} {e['time']}"
@@ -609,6 +681,13 @@ def build(cfg):
     })
 
     by_id = {v["id"]: v for v in videos}
+    today = datetime.now(KST).date().isoformat()
+    auto_events, notices, pending = auto_items(today)
+    seen = {(e["date"], e["title"]) for e in cfg["events"]}
+    all_events = sorted([e for e in cfg["events"] if e["date"] >= today]
+                        + [e for e in auto_events + youtube_upcoming(registry, today) if (e["date"], e["title"]) not in seen],
+                        key=lambda e: (e["date"], e.get("time") or ""))
+    write_pending(pending)
     recent = sorted((v for v in videos if v["category"] != "fancam"),
                     key=lambda v: v["published_at"] or "", reverse=True)[:12]
     today = datetime.now(KST).date().isoformat()
@@ -624,8 +703,8 @@ def build(cfg):
         "group_posts": [str(u) for u in cfg.get("group_posts") or []],
         "videos": [{k: v[k] for k in slim} for v in sorted(videos, key=lambda v: v["published_at"] or "", reverse=True)],
         "recent": [{k: v[k] for k in slim} for v in recent],
-        "events": sorted((e for e in cfg["events"] if e["date"] >= today),
-                         key=lambda e: (e["date"], e.get("time") or "")),
+        "events": all_events,
+        "notices": notices,
         "categories": CATEGORIES,
         "feedback_url": str(cfg.get("feedback_url") or ""),
         "votes": [v for v in cfg["votes"] if v["end"] >= now_kst_str()],
@@ -637,7 +716,7 @@ def build(cfg):
                   "tips": cfg["guide"]["tips"]},
     }
     save_json("dashboard.json", dashboard)
-    write_calendar(cfg)
+    write_calendar(cfg, [e for e in all_events if e.get("auto")])
     print(f"dashboard.json 생성: 영상 {len(videos)}개 (MV {len(mvs)}, 직캠 {len(fancams)}), 일정 {len(dashboard['events'])}개")
 
 

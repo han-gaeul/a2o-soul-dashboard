@@ -2,6 +2,7 @@
 // {n}, {d} 같은 자리표시자는 app.js에서 값으로 바뀌어요.
 window.I18N = {
   ko: {
+    notices: "공식 공지 (티켓·굿즈·발매)", from_notice: "공식 공지",
     lang: "한국어",
     "tab.overview": "한눈에", "tab.cheer": "응원", "tab.mv": "MV", "tab.members": "멤버", "tab.fancams": "직캠",
     "tab.videos": "영상", "tab.guide": "입덕",
@@ -37,6 +38,7 @@ window.I18N = {
     nat: {},
   },
   en: {
+    notices: "Official notices (tickets · merch · releases)", from_notice: "Official notice",
     lang: "English",
     "tab.overview": "Home", "tab.cheer": "Support", "tab.mv": "MV", "tab.members": "Members", "tab.fancams": "Fancams",
     "tab.videos": "Videos", "tab.guide": "Start here",
@@ -73,6 +75,7 @@ window.I18N = {
     nat: { "한국": "Korea", "일본": "Japan", "중국": "China", "태국": "Thailand", "미국": "USA" },
   },
   ja: {
+    notices: "公式のお知らせ（チケット・グッズ・リリース）", from_notice: "公式のお知らせ",
     lang: "日本語",
     "tab.overview": "ホーム", "tab.cheer": "応援", "tab.mv": "MV", "tab.members": "メンバー", "tab.fancams": "推しカメラ",
     "tab.videos": "動画", "tab.guide": "入門",
@@ -108,6 +111,7 @@ window.I18N = {
     nat: { "한국": "韓国", "일본": "日本", "중국": "中国", "태국": "タイ", "미국": "アメリカ" },
   },
   zh: {
+    notices: "官方公告（门票·周边·发行）", from_notice: "官方公告",
     lang: "中文",
     "tab.overview": "首页", "tab.cheer": "应援", "tab.mv": "MV", "tab.members": "成员", "tab.fancams": "直拍",
     "tab.videos": "视频", "tab.guide": "入坑",

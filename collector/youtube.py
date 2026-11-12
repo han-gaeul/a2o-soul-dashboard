@@ -82,7 +82,7 @@ def fetch_videos(ids):
     """{id: {title, published_at, channel_id, channel_title, duration_s, views, likes, comments}}"""
     out = {}
     for chunk in _chunks(ids):
-        body = _get("videos", {"part": "snippet,statistics,contentDetails", "id": ",".join(chunk)})
+        body = _get("videos", {"part": "snippet,statistics,contentDetails,liveStreamingDetails", "id": ",".join(chunk)})
         for it in body.get("items", []):
             sn, s = it["snippet"], it.get("statistics", {})
             out[it["id"]] = {
@@ -94,6 +94,9 @@ def fetch_videos(ids):
                 "views": int(s.get("viewCount", 0)),
                 "likes": int(s["likeCount"]) if "likeCount" in s else None,
                 "comments": int(s["commentCount"]) if "commentCount" in s else None,
+                # 예정된 라이브·프리미어: live_status == "upcoming", scheduled_start = 시작 예정 시각(UTC)
+                "live_status": sn.get("liveBroadcastContent", "none"),
+                "scheduled_start": it.get("liveStreamingDetails", {}).get("scheduledStartTime"),
             }
     return out
 
