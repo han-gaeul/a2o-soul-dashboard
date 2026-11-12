@@ -31,11 +31,15 @@
    "title": "Mnet K-POP"
   }
  },
- "collected_at": "2026-11-12T16:07+09:00",
+ "collected_at": "2026-11-12T16:10+09:00",
  "handles": {
   "ALLTHEKPOP": "UCPde4guD9yFBRzkxk2PatoA"
  },
- "instagram": {},
+ "instagram": {
+  "a2o.soul": {
+   "name": "A2O SOUL"
+  }
+ },
  "scan": {
   "UCAdLPETtxpZeRVqsq_QTneA": "2026-11-11T13:33:34Z",
   "UCPde4guD9yFBRzkxk2PatoA": "2026-11-11T13:05:31Z",
