@@ -19,11 +19,12 @@ def fetch_account(username):
 
 
 def fetch_media(username, limit=25):
-    """공개 계정의 최근 게시물 [{id, caption, timestamp, permalink, media_type}] (최신순)."""
+    """공개 계정의 최근 게시물 [{id, caption, timestamp, permalink, media_type, like_count, comments_count}] (최신순).
+    좋아요 수를 숨긴 게시물은 like_count가 없어요."""
     ver = os.environ.get("GRAPH_API_VERSION", "v21.0")
     url = f"https://graph.facebook.com/{ver}/{os.environ['IG_USER_ID']}"
     fields = (f"business_discovery.username({username})"
-              f"{{media.limit({int(limit)}){{id,caption,timestamp,permalink,media_type}}}}")
+              f"{{media.limit({int(limit)}){{id,caption,timestamp,permalink,media_type,like_count,comments_count}}}}")
     r = requests.get(url, params={"fields": fields, "access_token": os.environ["IG_ACCESS_TOKEN"]}, timeout=30)
     r.raise_for_status()
     return r.json()["business_discovery"].get("media", {}).get("data", [])
