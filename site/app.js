@@ -343,7 +343,7 @@ if ("serviceWorker" in navigator) {
 
   const notices = data.notices || [];
   const shops = data.info?.shops || [];
-  for (const x of shops) $("shops").append(ext(x.url, x.label, x.note ? el("span", { class: "muted" }, ` · ${tc(x.note)}`) : null));
+  for (const x of shops) $("shops").append(ext(x.url, tc(x.label), x.note ? el("span", { class: "muted" }, ` · ${tc(x.note)}`) : null));
   if (!shops.length) $("shops").remove();
   if (notices.length || shops.length) {
     for (const x of notices) {
@@ -475,7 +475,7 @@ if ("serviceWorker" in navigator) {
       m.signature ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, t("signature")),
         el("img", { class: "pf-sign", src: m.signature, alt: "", loading: "lazy" })) : null,
       (m.profile_history || []).length ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, t("history")),
-        el("div", { class: "pf-history" }, ...m.profile_history.map((h) => el("figure", {},
+        el("div", { class: "pf-history", tabindex: "0" }, ...m.profile_history.map((h) => el("figure", {},
           h.photo ? el("img", { src: h.photo, alt: h.label, loading: "lazy" }) : igEmbeds([h.instagram])[0],
           h.label ? el("figcaption", {}, h.label) : null)))) : null);
   }
@@ -566,7 +566,7 @@ if ("serviceWorker" in navigator) {
     const tip = (data.guide?.tips || {})[m.name];
     const card = el("button", { class: "member", type: "button" },
       v ? el("img", { src: thumbUrl(v.id), alt: "", loading: "lazy" }) : el("div", { class: "nothumb" }, t("fancam_pending")),
-      el("div", { class: "n" }, m.name, el("span", { class: "c" }, m.position || nat(m.nationality))),
+      el("div", { class: "n" }, m.name, el("span", { class: "c" }, tc(m.position) || nat(m.nationality))),
       tip ? el("div", { class: "s tip" }, tip) : (v ? el("div", { class: "t" }, v.title) : null),
       v ? el("div", { class: "s" }, `${ymd(v.published_at)} · ${t("views", { v: kr(v.views ?? 0) })}`) : null,
       links.length ? el("div", { class: "s more-link" }, links.map((l) => l[1]).join(" · ") + t("view")) : null);
@@ -646,6 +646,7 @@ if ("serviceWorker" in navigator) {
   fmtRow.row.append(unseenBtn);
   $("filters").append(catRow.row, fmtRow.row);
   function fillSelect(sel, allLabel, values, slot) {
+    sel.setAttribute("aria-label", allLabel);
     sel.append(el("option", { value: "" }, allLabel), ...values.map((x) => el("option", { value: x }, tc(x))));
     sel.addEventListener("change", () => { cur[slot] = sel.value; refresh(); });
     if (!values.length) sel.hidden = true;
@@ -715,7 +716,7 @@ if ("serviceWorker" in navigator) {
     const embed = (id) => `https://www.youtube-nocookie.com/embed/${id}?playsinline=1&rel=0&modestbranding=1&autoplay=1&mute=1`;
     const want = [0, 1].map((i) => { const k = cams.findIndex((v) => v.member === pre[i]); return k >= 0 ? k : i; });
     const slots = [0, 1].map((i) => {
-      const sel = el("select", { class: "sel" }, ...cams.map((v, j) => el("option", { value: j, ...(j === want[i] ? { selected: "" } : {}) }, v.member)));
+      const sel = el("select", { class: "sel", "aria-label": `${t("cmp_open")} ${i + 1}` }, ...cams.map((v, j) => el("option", { value: j, ...(j === want[i] ? { selected: "" } : {}) }, v.member)));
       const frame = el("div", { class: "cmp-frame" });
       const load = () => {
         const v = cams[+sel.value];
@@ -739,6 +740,7 @@ if ("serviceWorker" in navigator) {
     .filter((x) => x.cams.length >= 2);
   if (cmpEps.length) {
     const wd2 = t("weekdays");
+    $("cmpEp").setAttribute("aria-label", t("cmp_pick"));
     $("cmpEp").append(el("option", { value: "" }, t("cmp_pick")), ...cmpEps.map((x, i) => el("option", { value: i },
       `${x.ep.date.slice(5).replace("-", ".")} (${wd2[new Date(`${x.ep.date}T12:00:00Z`).getUTCDay()]}) ${tc(x.ep.show)} · ${t("fancams_n", { n: x.cams.length })}`)));
     $("cmpEp").addEventListener("change", (e) => {

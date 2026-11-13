@@ -1,10 +1,12 @@
 :root {
   --bg: #f6f6f9; --card: #ffffff; --text: #16161d; --muted: #6b6b7b;
-  --line: #e6e6ee; --accent: #6c4cf5; --up: #12a150; --chip: #efeafe;
+  --line: #e6e6ee; --accent: #6c4cf5; --up: #0b7a3b; --chip: #efeafe;
+  --chip-fg: #5534d6; --hot: #c81e43; --hot-bg: #d61f45; --accent-bg: #6c4cf5;
 }
 @media (prefers-color-scheme: dark) {
   :root { --bg: #0e0e14; --card: #17171f; --text: #ececf3; --muted: #9a9aab;
-          --line: #2a2a36; --accent: #a08bff; --up: #3ddc84; --chip: #262040; }
+          --line: #2a2a36; --accent: #a08bff; --up: #3ddc84; --chip: #262040;
+          --chip-fg: #a08bff; --hot: #ff6b85; --hot-bg: #d61f45; --accent-bg: #6c4cf5; }
 }
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--bg); color: var(--text);
@@ -40,14 +42,14 @@ td a:hover { color: var(--accent); }
 .video .m { font-size: 12px; color: var(--muted); margin-top: 4px; }
 .video:hover .t { color: var(--accent); }
 .chip { display: inline-block; font-size: 11px; font-weight: 600; padding: 1px 6px; border-radius: 6px;
-        background: var(--chip); color: var(--accent); margin-right: 4px; }
+        background: var(--chip); color: var(--chip-fg); margin-right: 4px; }
 .tabs { display: flex; gap: 6px; margin: 0 0 16px; position: sticky; top: 0; z-index: 5;
         background: var(--bg); padding: 8px 0; overflow-x: auto; scrollbar-width: none; }
 .tabs::-webkit-scrollbar { display: none; }
 .tabs a { white-space: nowrap; flex: none; }
 .tabs a { padding: 8px 14px; border-radius: 999px; font-size: 14px; font-weight: 600; color: var(--muted);
           border: 1px solid var(--line); background: var(--card); }
-.tabs a.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+.tabs a.on { background: var(--accent-bg); border-color: var(--accent-bg); color: #fff; }
 [data-tab] > section:first-child, [data-tab] > .grid:first-child { margin-top: 0; }
 .table-wrap { overflow-x: auto; }
 td:first-child, th:first-child { padding-left: 0; white-space: nowrap; }
@@ -99,7 +101,7 @@ dialog::backdrop { background: rgba(0, 0, 0, .5); }
 .filters button { border: 1px solid var(--line); background: var(--card); color: var(--muted); border-radius: 999px;
                   padding: 6px 12px; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; }
 .era-row button { border: 1px solid var(--line); background: var(--card); color: var(--muted); border-radius: 999px; padding: 6px 12px; font-size: 13px; font-weight: 600; cursor: pointer; }
-.era-row button.on, .filters button.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+.era-row button.on, .filters button.on { background: var(--accent-bg); border-color: var(--accent-bg); color: #fff; }
 .more { display: block; margin: 16px auto 0; border: 1px solid var(--line); background: var(--card); color: var(--text);
         border-radius: 999px; padding: 8px 20px; font: inherit; font-size: 14px; cursor: pointer; }
 
@@ -142,10 +144,10 @@ dialog::backdrop { background: rgba(0, 0, 0, .5); }
 
 /* 새 영상 */
 .thumb .new { position: absolute; left: 6px; top: 6px; font-size: 11px; font-weight: 800; letter-spacing: .03em;
-              color: #fff; background: #ef3b5d; padding: 2px 7px; border-radius: 6px; }
-.video.is-new img { box-shadow: 0 0 0 2px #ef3b5d; }
-.when-new { color: #ef3b5d; font-weight: 700; }
-.new-count { margin-left: 8px; font-size: 12px; font-weight: 800; color: #fff; background: #ef3b5d;
+              color: #fff; background: var(--hot-bg); padding: 2px 7px; border-radius: 6px; }
+.video.is-new img { box-shadow: 0 0 0 2px var(--hot-bg); }
+.when-new { color: var(--hot); font-weight: 700; }
+.new-count { margin-left: 8px; font-size: 12px; font-weight: 800; color: #fff; background: var(--hot-bg);
              padding: 2px 8px; border-radius: 999px; vertical-align: 2px; }
 
 /* 인스타그램 임베드 */
@@ -164,7 +166,7 @@ dialog::backdrop { background: rgba(0, 0, 0, .5); }
 
 /* 앱(PWA) */
 .head-right { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
-.install { border: 0; background: var(--accent); color: #fff; font: inherit; font-size: 13px; font-weight: 700;
+.install { border: 0; background: var(--accent-bg); color: #fff; font: inherit; font-size: 13px; font-weight: 700;
            padding: 6px 12px; border-radius: 999px; cursor: pointer; }
 .install-steps { margin: 0; padding-left: 20px; line-height: 1.9; font-size: 14px; }
 #installHelp { width: min(420px, calc(100vw - 32px)); }
@@ -188,11 +190,11 @@ dialog::backdrop { background: rgba(0, 0, 0, .5); }
 /* 응원 */
 .votes, .supports { display: grid; gap: 10px; }
 .vote, .support { border: 1px solid var(--line); border-radius: 12px; padding: 12px; display: grid; gap: 4px; font-size: 14px; }
-.vote.urgent { border-color: #ef3b5d; }
-.vote.urgent .vote-time { color: #ef3b5d; font-weight: 700; }
+.vote.urgent { border-color: var(--hot); }
+.vote.urgent .vote-time { color: var(--hot); font-weight: 700; }
 .vote a, .support a { color: var(--accent); font-weight: 600; font-size: 13px; justify-self: start; }
 .vote-time { font-size: 13px; }
-.chip-on { background: var(--accent); color: #fff; }
+.chip-on { background: var(--accent-bg); color: #fff; }
 .stream { margin: 0; padding-left: 20px; display: grid; gap: 10px; font-size: 14px; }
 .links.small a { padding: 3px 10px; font-size: 12px; }
 .chart-row { padding: 10px 0; border-bottom: 1px solid var(--line); }
@@ -200,7 +202,7 @@ dialog::backdrop { background: rgba(0, 0, 0, .5); }
 .chart-meta { font-size: 14px; }
 .chart-meta .rank { margin-left: 8px; font-weight: 800; color: var(--accent); }
 .up { color: var(--up); font-weight: 700; font-size: 12px; }
-.down { color: #ef3b5d; font-weight: 700; font-size: 12px; }
+.down { color: var(--hot); font-weight: 700; font-size: 12px; }
 .small-chart { height: 140px; margin-top: 6px; }
 .linkbtn { border: 1px solid var(--line); background: var(--card); color: var(--text); border-radius: 999px;
            padding: 6px 12px; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; }
@@ -216,7 +218,7 @@ dialog::backdrop { background: rgba(0, 0, 0, .5); }
 .course { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); }
 .course li { position: relative; }
 .course .step { position: absolute; z-index: 1; left: -6px; top: -6px; width: 24px; height: 24px; border-radius: 50%;
-                background: var(--accent); color: #fff; font-size: 12px; font-weight: 800; display: grid; place-items: center; }
+                background: var(--accent-bg); color: #fff; font-size: 12px; font-weight: 800; display: grid; place-items: center; }
 .course-note { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
 .member .tip { color: var(--text); }
 
@@ -257,9 +259,9 @@ header .head-right { margin-left: auto; }
 /* 봤어요 */
 .seen-btn { position: absolute; right: 6px; top: 6px; width: 26px; height: 26px; border-radius: 50%; border: 0;
   background: rgba(0,0,0,.45); color: rgba(255,255,255,.75); font-size: 13px; font-weight: 800; cursor: pointer; }
-.video.seen .seen-btn { background: var(--accent); color: #fff; }
+.video.seen .seen-btn { background: var(--accent-bg); color: #fff; }
 .video.seen img { opacity: .55; }
-.unseen-btn.on { background: var(--accent); color: #fff; border-color: var(--accent); }
+.unseen-btn.on { background: var(--accent-bg); color: #fff; border-color: var(--accent); }
 
 /* 최애 */
 .bias .sec-head { gap: 8px; }
@@ -278,7 +280,7 @@ header .head-right { margin-left: auto; }
 .timeline { list-style: none; margin: 0; padding: 0 0 0 14px; border-left: 2px solid var(--line); display: grid; gap: 12px; }
 .timeline li { position: relative; font-size: 14px; display: grid; gap: 2px; }
 .timeline li::before { content: ""; position: absolute; left: -21px; top: 4px; width: 10px; height: 10px; border-radius: 50%; background: var(--line); }
-.timeline .tl-record::before, .timeline .tl-debut::before { background: var(--accent); }
+.timeline .tl-record::before, .timeline .tl-debut::before { background: var(--accent-bg); }
 .timeline .tl-date { font-size: 12px; color: var(--muted); }
 .timeline a { color: inherit; font-weight: 600; }
 
