@@ -2,6 +2,8 @@
 // {n}, {d} 같은 자리표시자는 app.js에서 값으로 바뀌어요.
 window.I18N = {
   ko: {
+    tour: "사이트 사용법", tour_tip: "👋 처음이세요? 30초 사용법", tour_never: "다시 안 보기",
+    tour_items: [["⭐", "최애 고르기", "한눈에 탭 맨 위에서 멤버를 고르면 직캠·소식이 최애 먼저 보여요", "overview"], ["📅", "일정", "음방·사녹·생일·기념일을 달력으로. 날짜를 누르면 그날 일정이 나와요", "overview"], ["🗳️", "응원", "진행 중인 투표·사녹 신청·스밍 리스트·응원법. 캘린더를 구독하면 폰 달력에 자동으로 들어가요", "cheer"], ["🎥", "직캠", "멤버별 최신 직캠, 같은 무대의 두 멤버 나란히 보기", "fancams"], ["📺", "영상", "음방 회차별 무대와 데뷔 전 영상 모아보기", "videos"], ["🔰", "입덕", "처음이라면 여기부터 — 입문 코스·세계관·멤버 구분·퀴즈", "guide"], ["↗", "공유", "멤버·무대 화면의 ↗ 버튼으로 링크를 보낼 수 있어요", ""], ["📱", "앱처럼 쓰기", "위쪽 '앱 설치' 버튼 (아이폰 사파리: 공유 → 홈 화면에 추가)", ""], ["💬", "의견 보내기", "틀린 정보나 바라는 기능은 맨 아래 버튼으로 알려 주세요", ""]],
     notices: "티켓·굿즈·공식 공지", from_notice: "공식 공지",
     lang: "한국어",
     "tab.overview": "한눈에", "tab.cheer": "응원", "tab.mv": "MV", "tab.members": "멤버", "tab.fancams": "직캠",
@@ -57,6 +59,8 @@ window.I18N = {
     nat: {},
   },
   en: {
+    tour: "How to use", tour_tip: "👋 New here? 30-second guide", tour_never: "Don't show again",
+    tour_items: [["⭐", "Pick your bias", "Choose a member at the top of Home to see their fancams and news first", "overview"], ["📅", "Schedule", "Music shows, pre-recordings, birthdays and anniversaries on a calendar. Tap a date to see that day", "overview"], ["🗳️", "Support", "Ongoing votes, pre-recording sign-ups, streaming list and fanchants. Subscribe to add events to your phone calendar", "cheer"], ["🎥", "Fancams", "Latest fancams by member, and two members side by side on the same stage", "fancams"], ["📺", "Videos", "Music show stages by episode, plus pre-debut videos", "videos"], ["🔰", "Start here", "New fan? Begin here — intro course, lore, telling members apart, quiz", "guide"], ["↗", "Share", "Use the ↗ button on a member or stage to send a link", ""], ["📱", "Use it like an app", "Tap 'Install' at the top (iPhone Safari: Share → Add to Home Screen)", ""], ["💬", "Send feedback", "Wrong info or a feature idea? Use the button at the bottom", ""]],
     notices: "Tickets · merch · notices", from_notice: "Official notice",
     lang: "English",
     "tab.overview": "Home", "tab.cheer": "Support", "tab.mv": "MV", "tab.members": "Members", "tab.fancams": "Fancams",
@@ -113,6 +117,8 @@ window.I18N = {
     nat: { "한국": "Korea", "일본": "Japan", "중국": "China", "태국": "Thailand", "미국": "USA" },
   },
   ja: {
+    tour: "使い方", tour_tip: "👋 はじめての方へ 30秒ガイド", tour_never: "今後表示しない",
+    tour_items: [["⭐", "推しを選ぶ", "ホーム上部でメンバーを選ぶと、推しの直カム・ニュースが先に表示されます", "overview"], ["📅", "スケジュール", "音楽番組・事前収録・誕生日・記念日をカレンダーで。日付をタップするとその日の予定", "overview"], ["🗳️", "応援", "開催中の投票・事前収録の応募・ストリーミングリスト・掛け声。カレンダー登録でスマホに自動追加", "cheer"], ["🎥", "直カム", "メンバー別の最新直カム、同じステージの2人を並べて見る", "fancams"], ["📺", "動画", "音楽番組の回ごとのステージとデビュー前の動画", "videos"], ["🔰", "入門", "はじめてならここから — 入門コース・世界観・メンバーの見分け方・クイズ", "guide"], ["↗", "共有", "メンバーやステージ画面の ↗ ボタンでリンクを送れます", ""], ["📱", "アプリのように使う", "上の「アプリ追加」ボタン（iPhone Safari：共有 → ホーム画面に追加）", ""], ["💬", "ご意見", "情報の誤りや欲しい機能は一番下のボタンから", ""]],
     notices: "公式のお知らせ（チケット・グッズ・リリース）", from_notice: "公式のお知らせ",
     lang: "日本語",
     "tab.overview": "ホーム", "tab.cheer": "応援", "tab.mv": "MV", "tab.members": "メンバー", "tab.fancams": "推しカメラ",
@@ -168,6 +174,8 @@ window.I18N = {
     nat: { "한국": "韓国", "일본": "日本", "중국": "中国", "태국": "タイ", "미국": "アメリカ" },
   },
   zh: {
+    tour: "使用方法", tour_tip: "👋 第一次来？30 秒指南", tour_never: "不再显示",
+    tour_items: [["⭐", "选择本命", "在首页顶部选择成员，本命的直拍和消息会优先显示", "overview"], ["📅", "日程", "打歌、预录、生日、纪念日一览日历。点击日期查看当天日程", "overview"], ["🗳️", "应援", "进行中的投票、预录报名、打榜歌单、应援口号。订阅日历即可自动加入手机日历", "cheer"], ["🎥", "直拍", "各成员最新直拍，同一舞台两位成员并排看", "fancams"], ["📺", "视频", "按期数整理的打歌舞台和出道前视频", "videos"], ["🔰", "入坑", "新粉从这里开始 — 入门路线、世界观、认人、测验", "guide"], ["↗", "分享", "在成员或舞台页面点 ↗ 按钮发送链接", ""], ["📱", "像 App 一样使用", "点击顶部「安装」（iPhone Safari：分享 → 添加到主屏幕）", ""], ["💬", "提交意见", "信息有误或想要的功能，请用页面底部的按钮告诉我们", ""]],
     notices: "官方公告（门票·周边·发行）", from_notice: "官方公告",
     lang: "中文",
     "tab.overview": "首页", "tab.cheer": "应援", "tab.mv": "MV", "tab.members": "成员", "tab.fancams": "直拍",
@@ -223,6 +231,8 @@ window.I18N = {
     nat: { "한국": "韩国", "일본": "日本", "중국": "中国", "태국": "泰国", "미국": "美国" },
   },
   es: {
+    tour: "Cómo usar", tour_tip: "👋 ¿Primera vez? Guía de 30 segundos", tour_never: "No volver a mostrar",
+    tour_items: [["⭐", "Elige a tu bias", "Elige un miembro arriba en Inicio para ver primero sus fancams y noticias", "overview"], ["📅", "Agenda", "Programas musicales, pregrabaciones, cumpleaños y aniversarios en un calendario. Toca una fecha para ver ese día", "overview"], ["🗳️", "Apoyo", "Votaciones en curso, inscripciones a pregrabaciones, lista de streaming y fanchants. Suscríbete para añadirlo al calendario del móvil", "cheer"], ["🎥", "Fancams", "Fancams recientes por miembro y dos miembros lado a lado en el mismo escenario", "fancams"], ["📺", "Videos", "Escenarios de programas musicales por episodio y videos pre-debut", "videos"], ["🔰", "Empieza aquí", "¿Fan nuevo? Empieza aquí: curso de inicio, lore, cómo distinguir a los miembros y quiz", "guide"], ["↗", "Compartir", "Usa el botón ↗ en un miembro o escenario para enviar el enlace", ""], ["📱", "Úsalo como app", "Toca 'Instalar' arriba (iPhone Safari: Compartir → Añadir a pantalla de inicio)", ""], ["💬", "Enviar comentarios", "¿Información incorrecta o una idea? Usa el botón de abajo", ""]],
     notices: "Entradas · merch · avisos", from_notice: "Aviso oficial",
     lang: "Español",
     "tab.overview": "Inicio", "tab.cheer": "Apoyo", "tab.mv": "MV", "tab.members": "Miembros", "tab.fancams": "Fancams",
@@ -279,6 +289,8 @@ window.I18N = {
     nat: { "한국": "Corea", "일본": "Japón", "중국": "China", "태국": "Tailandia", "미국": "EE. UU." },
   },
   id: {
+    tour: "Cara pakai", tour_tip: "👋 Baru di sini? Panduan 30 detik", tour_never: "Jangan tampilkan lagi",
+    tour_items: [["⭐", "Pilih bias", "Pilih member di bagian atas Beranda agar fancam dan beritanya muncul duluan", "overview"], ["📅", "Jadwal", "Acara musik, pra-rekaman, ulang tahun dan anniversary di kalender. Ketuk tanggal untuk melihat jadwal hari itu", "overview"], ["🗳️", "Dukungan", "Voting yang berjalan, pendaftaran pra-rekaman, daftar streaming dan fanchant. Langganan kalender agar otomatis masuk ke HP", "cheer"], ["🎥", "Fancam", "Fancam terbaru per member, dan dua member berdampingan di panggung yang sama", "fancams"], ["📺", "Video", "Panggung acara musik per episode dan video pra-debut", "videos"], ["🔰", "Mulai di sini", "Fans baru? Mulai dari sini — kursus pengenalan, lore, membedakan member, kuis", "guide"], ["↗", "Bagikan", "Pakai tombol ↗ di halaman member atau panggung untuk mengirim tautan", ""], ["📱", "Pakai seperti aplikasi", "Ketuk 'Pasang' di atas (iPhone Safari: Bagikan → Tambah ke Layar Utama)", ""], ["💬", "Kirim masukan", "Info salah atau ide fitur? Pakai tombol di bagian bawah", ""]],
     notices: "Tiket · merch · pengumuman", from_notice: "Pengumuman resmi",
     lang: "Bahasa Indonesia",
     "tab.overview": "Beranda", "tab.cheer": "Dukung", "tab.mv": "MV", "tab.members": "Member", "tab.fancams": "Fancam",
@@ -335,6 +347,8 @@ window.I18N = {
     nat: { "한국": "Korea", "일본": "Jepang", "중국": "Tiongkok", "태국": "Thailand", "미국": "AS" },
   },
   th: {
+    tour: "วิธีใช้", tour_tip: "👋 มาครั้งแรก? คู่มือ 30 วินาที", tour_never: "ไม่ต้องแสดงอีก",
+    tour_items: [["⭐", "เลือกเมนของคุณ", "เลือกเมมเบอร์ที่ด้านบนของหน้าหลัก แฟนแคมและข่าวของเมนจะขึ้นก่อน", "overview"], ["📅", "ตารางงาน", "รายการเพลง พรีเรคคอร์ด วันเกิด และวันครบรอบในปฏิทิน แตะวันที่เพื่อดูตารางวันนั้น", "overview"], ["🗳️", "ซัพพอร์ต", "โหวตที่เปิดอยู่ สมัครพรีเรคคอร์ด ลิสต์สตรีมมิ่ง และแฟนแชนท์ สมัครปฏิทินเพื่อให้เข้าปฏิทินในมือถืออัตโนมัติ", "cheer"], ["🎥", "แฟนแคม", "แฟนแคมล่าสุดของแต่ละเมมเบอร์ และดูสองเมมเบอร์เทียบกันบนเวทีเดียวกัน", "fancams"], ["📺", "วิดีโอ", "เวทีรายการเพลงแยกตามตอน และวิดีโอก่อนเดบิวต์", "videos"], ["🔰", "เริ่มที่นี่", "แฟนใหม่เริ่มที่นี่ — คอร์สเริ่มต้น เวิลด์วิว วิธีจำเมมเบอร์ และควิซ", "guide"], ["↗", "แชร์", "ใช้ปุ่ม ↗ ในหน้าเมมเบอร์หรือเวทีเพื่อส่งลิงก์", ""], ["📱", "ใช้เหมือนแอป", "แตะ 'ติดตั้ง' ด้านบน (iPhone Safari: แชร์ → เพิ่มไปยังหน้าจอโฮม)", ""], ["💬", "ส่งความคิดเห็น", "ข้อมูลผิดหรืออยากได้ฟีเจอร์ บอกได้ที่ปุ่มด้านล่างสุด", ""]],
     notices: "บัตร · สินค้า · ประกาศ", from_notice: "ประกาศทางการ",
     lang: "ภาษาไทย",
     "tab.overview": "หน้าแรก", "tab.cheer": "ซัพพอร์ต", "tab.mv": "MV", "tab.members": "เมมเบอร์", "tab.fancams": "แฟนแคม",

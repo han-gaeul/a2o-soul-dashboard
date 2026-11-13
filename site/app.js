@@ -1101,6 +1101,26 @@ if ("serviceWorker" in navigator) {
     $("strip").hidden = false;
   }
 
+  // ---------- 사이트 사용법: 입덕 탭 섹션 + 첫 방문 안내 + 하단 버튼 ----------
+  const tourItems = (dlg) => (t("tour_items") || []).map(([ico, title, desc, tab]) => {
+    const body = [el("span", { class: "tour-ico", "aria-hidden": "true" }, ico), el("b", {}, title), el("span", {}, desc)];
+    if (!tab) return el("li", {}, el("div", { class: "tour-item" }, ...body));
+    const a = el("a", { class: "tour-item", href: `#${tab}` }, ...body);
+    a.addEventListener("click", () => { if (dlg) dlg.close(); setTimeout(() => window.scrollTo({ top: 0 }), 0); });
+    return el("li", {}, a);
+  });
+  $("tourList").replaceChildren(...tourItems(null));
+  const tourDlg = $("tourDlg");
+  const openTour = () => { $("tourDlgList").replaceChildren(...tourItems(tourDlg)); tourDlg.showModal(); };
+  const hideTip = () => { $("tourTip").hidden = true; pref.set("tourSeen", true); };
+  $("tourClose").onclick = () => tourDlg.close();
+  $("tourNever").onclick = () => { hideTip(); tourDlg.close(); };
+  tourDlg.addEventListener("click", (e) => { if (e.target === tourDlg) tourDlg.close(); });
+  $("tourOpen").onclick = openTour;
+  $("tourX").onclick = hideTip;
+  $("tourFoot").onclick = openTour;
+  if (!pref.get("tourSeen", false)) $("tourTip").hidden = false;
+
   // ---------- 포토카드 (입덕 탭): site/img/photocards/버전_이름.webp ----------
   const pcs = data.photocards || [];
   if (pcs.length) {
