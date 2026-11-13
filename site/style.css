@@ -341,3 +341,6 @@ header .head-right { margin-left: auto; }
 .toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 1000;
   background: #111; color: #fff; padding: 10px 16px; border-radius: 999px; font-size: 14px; font-weight: 600; }
 @media (max-width: 480px) { #dlgTitle .share-l { display: none; } }
+.dlg-ko { white-space: nowrap; }
+#dlgTitle { min-width: 0; }
+@media (max-width: 480px) { #dlgTitle .bias-l { display: none; } }

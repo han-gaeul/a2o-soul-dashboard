@@ -113,6 +113,8 @@ def load_fan_files(cfg):
         cfg["supports"].append({**{k: str(v) for k, v in x.items() if v is not None},
                                 "start": _dt(x.get("start"), "support.yml start"),
                                 "end": _dt(x.get("end") or x.get("start"), "support.yml end")})
+    tr = read_yml("translations.yml") or {}
+    cfg["tr"] = {str(k): {str(l): str(x) for l, x in (v or {}).items() if x} for k, v in tr.items() if isinstance(v, dict)}
     howto = read_yml("howto.yml")
     keep = ("show", "when", "pre", "live", "note", "url")
     cfg["howto"] = {"checked": str(howto.get("checked") or ""),
@@ -363,8 +365,10 @@ def anniversaries(debut):
     if not debut:
         return []
     d0 = date.fromisoformat(debut)
-    out = [{"date": (d0 + timedelta(days=n - 1)).isoformat(), "title": f"🎉 데뷔 {n}일"} for n in range(100, 1001, 100)]
-    out += [{"date": d0.replace(year=d0.year + y).isoformat(), "title": f"🎉 데뷔 {y}주년"} for y in range(1, 6)]
+    out = [{"date": (d0 + timedelta(days=n - 1)).isoformat(), "title": f"🎉 데뷔 {n}일", "key": "anniv_days", "n": n}
+           for n in range(100, 1001, 100)]
+    out += [{"date": d0.replace(year=d0.year + y).isoformat(), "title": f"🎉 데뷔 {y}주년", "key": "anniv_years", "n": y}
+            for y in range(1, 6)]
     return [{**a, "type": "기념일", "auto": True, "anniv": True} for a in sorted(out, key=lambda a: a["date"])]
 
 
@@ -372,15 +376,16 @@ def build_timeline(cfg, videos, episodes, subs=()):
     """기록: 데뷔·발매·첫 음방(자동) + 조회수·구독자 돌파(수집 기록 기준) + info.yml records(직접 입력)."""
     items = []
     if cfg["debut_date"]:
-        items.append({"date": cfg["debut_date"], "kind": "debut", "title": "데뷔"})
+        items.append({"date": cfg["debut_date"], "kind": "debut", "title": "데뷔", "key": "tl_debut"})
     for a in cfg["info"]["albums"]:
         if a["date"]:
-            items.append({"date": a["date"], "kind": "release", "title": f"{a['type']} '{a['title']}' 발매".strip()})
+            items.append({"date": a["date"], "kind": "release", "title": f"{a['type']} '{a['title']}' 발매".strip(),
+                          "key": "tl_release", "type": a["type"], "name": a["title"]})
     firsts = {}
     for ep in episodes:
         firsts[ep["show"]] = min(firsts.get(ep["show"], ep["date"]), ep["date"])
     for show, d in firsts.items():
-        items.append({"date": d, "kind": "show", "title": f"첫 {show} 무대"})
+        items.append({"date": d, "kind": "show", "title": f"첫 {show} 무대", "key": "tl_first_show", "show": show})
     ms = view_milestones()
     for v in videos:
         if v["category"] != "mv":
@@ -390,16 +395,16 @@ def build_timeline(cfg, videos, episodes, subs=()):
             for m in ms:
                 if a < m <= b and m >= 1_000_000:
                     items.append({"date": d, "kind": "views", "title": f"{song_of(v['title']) or 'MV'} MV {kr_num(m)}뷰 돌파",
-                                  "url": f"https://youtu.be/{v['id']}"})
+                                  "url": f"https://youtu.be/{v['id']}", "key": "tl_views", "name": song_of(v["title"]) or "MV", "n": m})
     today = datetime.now(KST).date().isoformat()
     for a in anniversaries(cfg["debut_date"]):
         if a["date"] <= today:
-            items.append({"date": a["date"], "kind": "anniv", "title": a["title"]})
+            items.append({"date": a["date"], "kind": "anniv", "title": a["title"], "key": a["key"], "n": a["n"]})
     for pts in subs:
         for (_, a), (d, b) in zip(pts, pts[1:]):
             m = crossed(a, b, subscriber_milestones())
             if m:
-                items.append({"date": d, "kind": "subs", "title": f"유튜브 구독자 {kr_num(m)} 돌파"})
+                items.append({"date": d, "kind": "subs", "title": f"유튜브 구독자 {kr_num(m)} 돌파", "key": "tl_subs", "n": m})
     for x in cfg["info"]["records"]:
         items.append({"date": x["date"], "kind": "record", "title": x["title"], "url": x["url"]})
     seen, out = set(), []
@@ -970,6 +975,7 @@ def build(cfg):
         "charts": cfg["charts"],
         "supports": sorted((x for x in cfg["supports"] if x["end"] >= today), key=lambda x: x["start"]),
         "howto": cfg["howto"],
+        "tr": cfg["tr"],
         "info": cfg["info"],
         "guide": {"course": [{**c, **{k: by_id[c["id"]][k] for k in slim}}
                              for c in cfg["guide"]["course"] if c["id"] in by_id],
