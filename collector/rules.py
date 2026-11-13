@@ -6,7 +6,7 @@
 import re
 from datetime import date, timedelta
 
-RULES_VERSION = 2  # 규칙을 바꾸면 올리기 → 다음 수집 때 최근 공지를 다시 읽어 일정을 새로 뽑음
+RULES_VERSION = 3  # 규칙을 바꾸면 올리기 → 다음 수집 때 최근 공지를 다시 읽어 일정을 새로 뽑음
 
 SHOWS = [
     ("더쇼", r"더\s?쇼(?!\s?챔)|THE\s?SHOW"),
@@ -118,6 +118,70 @@ def _item(kind, title, d, tm, conf, url=None):
             "place": None, "url": url, "confidence": conf}
 
 
+
+# ---------- 투표 공지 ----------
+VOTE = re.compile(r"투표|VOTE|VOTING", re.I)
+VOTE_APPS = [
+    ("빅크(BIGC)", r"빅크|BIGC"), ("아이돌챔프(IDOLCHAMP)", r"아이돌\s?챔프|IDOL\s?CHAMP|최애돌"),
+    ("엠넷플러스(Mnet Plus)", r"엠넷\s?플러스|MNET\s?PLUS|mnetplus"), ("팬캐스트(FANCAST)", r"팬캐스트|FANCAST"),
+    ("뮤니버스(MUNIVERSE)", r"뮤니버스|MUNIVERSE"), ("뮤빗(MUBEAT)", r"뮤빗|MUBEAT"), ("링크(LiNC)", r"\bLiNC\b|링크\s?앱"),
+    ("하이어(HIGHER)", r"하이어|HIGHER"), ("유픽(U+PICK)", r"유픽|U\+?\s?PICK"), ("스타플래닛(STARPLANET)", r"스타플래닛|STAR\s?PLANET"),
+    ("팬앤스타(FAN N STAR)", r"팬앤스타|FAN\s?N\s?STAR"), ("아이돌플러스(IDOLPLUS)", r"아이돌\s?플러스|IDOL\s?PLUS"),
+]
+VOTE_APPS_RE = [(n, re.compile(p, re.I)) for n, p in VOTE_APPS]
+URL = re.compile(r"https?://[^\s)\]]+")
+SKIP_URL = re.compile(r"//(x\.com|twitter\.com|t\.co|www\.instagram\.com|instagram\.com|youtu\.be|www\.youtube\.com|youtube\.com|vm\.tiktok\.com|www\.tiktok\.com)/", re.I)
+
+
+def _when(text, pday, base=None):
+    """'2026년 11월 14일 (토) 12:00' / '11/14 12:00' / '16일 23:59' → (date, 'HH:MM' or None)."""
+    ds = _dates(text, pday)
+    d = ds[0] if ds else None
+    if d is None and base:
+        m = re.search(r"(?<!\d)(\d{1,2})\s*일", text)
+        if m:
+            d = _mk(base.year, base.month, m.group(1))
+        elif _time(text):
+            d = base
+    return d, _time(text)
+
+
+def vote_items(caption, pday):
+    """투표 안내 → [{kind: vote, title, show, app, start, end, url, confidence}]"""
+    if not VOTE.search(caption) or PRE_REC.search(caption):
+        return []
+    lines = [ln.strip() for ln in caption.splitlines() if ln.strip()]
+    urls = [u for u in URL.findall(caption) if not SKIP_URL.search(u)]
+    url = next((u for ln in lines if re.search(r"투표|vote|링크|link", ln, re.I) for u in URL.findall(ln) if u in urls), urls[0] if urls else None)
+    show = next((n for n, rx in SHOW_RE if rx.search(caption)), "")
+    app = next((n for n, rx in VOTE_APPS_RE if rx.search(caption)), "")
+    kind = "사전투표" if re.search(r"사전\s?투표|PRE-?VOT", caption, re.I) else \
+        "생방송 투표" if re.search(r"실시간|생방송|LIVE\s?VOT", caption, re.I) else "투표"
+    start = end = None
+    for ln in lines:
+        if "~" in ln and (_dates(ln, pday) or _time(ln)):
+            left, right = ln.split("~", 1)
+            sd, st = _when(left, pday)
+            ed, et = _when(right, pday, base=sd)
+            if sd or ed:
+                start = (sd or pday, st or "00:00")
+                end = (ed or sd, et or "23:59")
+                break
+    if not end:
+        for ln in lines:
+            if re.search(r"마감|까지|END|DEADLINE", ln, re.I) and _dates(ln, pday):
+                ed, et = _when(ln, pday)
+                end, start = (ed, et or "23:59"), (pday, "00:00")
+                break
+    title = " ".join(x for x in [show, kind] if x) if show else \
+        next((re.sub(r"^\[[^\]]*\]\s*", "", ln) for ln in lines if re.search(r"[가-힣A-Za-z]{2}", re.sub(r"^\[[^\]]*\]", "", ln))), kind)[:60]
+    conf = 0.9 if end and url else 0.6
+    fmt = lambda x: f"{x[0].isoformat()} {x[1]}" if x and x[0] else None
+    return [{"kind": "vote", "title": title, "show": show, "app": app, "date": end[0].isoformat() if end else None,
+             "time": end[1] if end else None, "end_date": None, "place": None, "url": url,
+             "start": fmt(start), "end": fmt(end), "confidence": conf}]
+
+
 def _next_weekday(d, wd):
     return d + timedelta(days=(wd - d.weekday()) % 7)
 
@@ -131,6 +195,11 @@ def extract(caption, posted, today):
         return []
     lines = [ln for ln in caption.splitlines() if ln.strip()]
     shows_all = [name for name, rx in SHOW_RE if rx.search(caption)]
+
+    # 0) 투표 안내 (기간·투표 링크)
+    votes = vote_items(caption, pday)
+    if votes:
+        return votes
 
     # 1) 사전녹화 안내: '261115 SBS 인기가요 사전녹화 참여' → 녹화일 기준 그 주 방송일에 출연
     #    (신청 기간·인원 체크 시간은 방송 시각이 아니라서 무시)
