@@ -56,6 +56,10 @@
   <!-- 한눈에 -->
   <div data-tab="overview">
     <section class="card bias" id="bias"></section>
+    <section class="card" id="pickSec">
+      <div class="sec-head"><h2 data-i18n="pick_title">🎲 오늘의 직캠</h2><button class="more pick-btn" id="pickBtn" type="button" data-i18n="pick_again">다른 거</button></div>
+      <div class="videos" id="pick"></div>
+    </section>
     <div class="grid" id="kpis"></div>
 
     <section class="card" id="eventsSection">
@@ -196,6 +200,10 @@
     <section class="card" id="timelineSec">
       <h2 data-i18n="timeline">기록</h2>
       <ol class="timeline" id="timeline"></ol>
+    </section>
+    <section class="card" id="quizSec">
+      <div class="sec-head"><h2 data-i18n="quiz">멤버 맞히기 퀴즈</h2><span class="muted small" id="quizScore"></span></div>
+      <div id="quiz"></div>
     </section>
     <section class="card">
       <h2 data-i18n="guide_members">멤버 구분하기</h2>

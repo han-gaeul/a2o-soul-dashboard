@@ -633,6 +633,71 @@ if ("serviceWorker" in navigator) {
     $("timelineSec").remove();
   }
 
+  // ---------- 오늘의 직캠 (안 본 직캠 우선) ----------
+  const allFancams = data.members.flatMap((m) => m.fancams);
+  function pickFancam() {
+    const pool = allFancams.filter((v) => !seen.has(v.id));
+    const from = pool.length ? pool : allFancams;
+    const v = from[Math.floor(Math.random() * from.length)];
+    $("pick").replaceChildren(videoCard(v, v.member || catLabel("fancam")));
+  }
+  if (allFancams.length) { pickFancam(); $("pickBtn").addEventListener("click", pickFancam); }
+  else $("pickSec").remove();
+
+  // ---------- 멤버 맞히기 퀴즈 (입덕 탭) ----------
+  // 썸네일 대신 영상 중간 장면(hq1~3)을 써서 제목 글씨로 답이 보이지 않게
+  const quizPool = allFancams.filter((v) => v.member);
+  const quizMembers = [...new Set(quizPool.map((v) => v.member))];
+  if (quizPool.length >= 4 && quizMembers.length >= 4) {
+    const ROUND = 10;
+    let q = 0, score = 0;
+    const best = () => pref.get("quizBest", 0);
+    const shuffle = (a) => a.map((x) => [Math.random(), x]).sort((x, y) => x[0] - y[0]).map((x) => x[1]);
+    const showScore = () => { $("quizScore").textContent = t("quiz_score", { q: Math.min(q + 1, ROUND), n: ROUND, s: score, b: best() }); };
+    function ask() {
+      if (q >= ROUND) return finish();
+      showScore();
+      const v = quizPool[Math.floor(Math.random() * quizPool.length)];
+      const opts = shuffle([v.member, ...shuffle(quizMembers.filter((n) => n !== v.member)).slice(0, 3)]);
+      const frame = Math.floor(Math.random() * 3) + 1;
+      const img = el("img", { class: "quiz-img", src: `https://i.ytimg.com/vi/${v.id}/hq${frame}.jpg`, alt: "" });
+      img.addEventListener("error", () => { img.src = thumbUrl(v.id); }, { once: true });
+      const result = el("div", { class: "quiz-result" });
+      const btns = opts.map((n) => {
+        const mem = data.members.find((x) => x.name === n);
+        const b = el("button", { class: "quiz-opt", type: "button" }, n, mem?.ko ? el("span", { class: "muted" }, ` ${mem.ko}`) : null);
+        b.addEventListener("click", () => {
+          btns.forEach((x) => { x.disabled = true; });
+          const ok = n === v.member;
+          if (ok) score++;
+          b.classList.add(ok ? "ok" : "no");
+          btns[opts.indexOf(v.member)].classList.add("ok");
+          const next = el("button", { class: "more", type: "button" }, q + 1 >= ROUND ? t("quiz_done") : t("quiz_next"));
+          next.addEventListener("click", () => { q++; ask(); });
+          result.replaceChildren(el("b", {}, ok ? t("quiz_ok") : t("quiz_no", { name: v.member })),
+            ext(ytUrl(v.id), t("quiz_watch")), next);
+          showScore();
+        });
+        return b;
+      });
+      $("quiz").replaceChildren(el("div", { class: "quiz-frame" }, img), el("div", { class: "quiz-opts" }, ...btns), result);
+    }
+    function finish() {
+      if (score > best()) pref.set("quizBest", score);
+      const again = el("button", { class: "more", type: "button" }, t("quiz_again"));
+      again.addEventListener("click", () => { q = 0; score = 0; ask(); });
+      $("quizScore").textContent = "";
+      $("quiz").replaceChildren(el("div", { class: "quiz-end" },
+        el("div", { class: "quiz-big" }, `${score} / ${ROUND}`),
+        el("div", { class: "muted" }, t("quiz_best", { b: best() })), again));
+    }
+    const start = el("button", { class: "more", type: "button" }, t("quiz_start"));
+    start.addEventListener("click", ask);
+    $("quiz").append(el("p", { class: "note small" }, t("quiz_desc")), start);
+  } else {
+    $("quizSec").remove();
+  }
+
   // ---------- 최애 (한눈에 맨 위) ----------
   let bias = pref.get("bias", "");
   function renderBias() {
