@@ -3,7 +3,7 @@
 A2O SOUL 영상·직캠·일정·투표·멤버 정보를 1시간마다 모아 보여주는 비공식 팬메이드 사이트(앱처럼 설치 가능).
 GitHub Actions가 수집하고 GitHub Pages로 배포합니다. 서버 없음.
 
-**사이트**: https://han-gaeul.github.io/a2o-soul-dashboard/
+**사이트**: https://a2osoul-tracker.com/
 
 ## 기능
 
