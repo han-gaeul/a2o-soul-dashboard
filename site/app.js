@@ -228,9 +228,24 @@ if ("serviceWorker" in navigator) {
     }
     return out;
   }
+  // 달력 칸에 들어갈 짧은 이름 (음방은 팬들이 부르는 줄임말)
+  const SHORT_KO = { 뮤직뱅크: "뮤뱅", 인기가요: "인가", 음악중심: "음중", 엠카운트다운: "엠카", 쇼챔피언: "쇼챔", 더쇼: "더쇼",
+    "SHOW K-POP": "쇼K팝", "케이팝업 차트쇼": "케팝업" };
+  const SHORT_EN = { 뮤직뱅크: "MBank", 인기가요: "Inki", 음악중심: "MCore", 엠카운트다운: "MCD", 쇼챔피언: "SChamp", 더쇼: "TheShow",
+    "SHOW K-POP": "SKPop", "케이팝업 차트쇼": "KPopUp" };
+  const short = (show) => (!show ? "" : LANG === "ko" ? SHORT_KO[show] || show : SHORT_EN[show] || tc(show));
+  const shortOf = (e) => {
+    if (e.short) return e.short;
+    if (e.member) return e.member;
+    if (e.key === "anniv_days") return `D+${e.n}`;
+    if (e.key === "anniv_years") return `${e.n}${LANG === "ko" ? "주년" : "y"}`;
+    const m = /^(.+) 출연$/.exec(e.title || "");
+    if (m) return short(m[1]);
+    return tx(e).replace(/^[^\p{L}\p{N}]+/u, "").slice(0, 8);
+  };
   const voteEvents = (data.votes || []).map((v) => ({
     date: v.end.slice(0, 10), time: v.end.slice(11), type: t("votes"),
-    title: `🗳 ${[tc(v.show), tc(v.title)].filter(Boolean).join(" ")}`, url: v.url,
+    title: `🗳 ${[tc(v.show), tc(v.title)].filter(Boolean).join(" ")}`, url: v.url, short: short(v.show) || t("votes"),
   }));
   const supportEvents = (data.supports || []).filter((x) => x.start >= todayKst).map((x) => ({
     date: x.start, type: x.kind, title: `☕ ${[x.member, x.title].filter(Boolean).join(" ")}`, url: x.url,
@@ -243,7 +258,7 @@ if ("serviceWorker" in navigator) {
   for (const v of data.howto?.voting || []) { const m = /(\d{1,2}:\d{2})/.exec(v.when || ""); if (m) showTime[v.show] = m[1]; }
   const prerecEvents = (data.prerecs || []).map((v) => ({
     date: v.start.slice(0, 10), time: v.start.slice(11), type: t("prerec"),
-    title: `📝 ${t("prerec_title", { show: tc(v.show) })}`, url: v.url || v.source,
+    title: `📝 ${t("prerec_title", { show: tc(v.show) })}`, url: v.url || v.source, short: `${short(v.show)}✍`,
   }));
   const allEvents = [...(data.events || []).filter((e) => e.date >= todayKst), ...upcomingBirthdays(), ...voteEvents, ...supportEvents, ...prerecEvents]
     .map((e) => {
@@ -254,6 +269,7 @@ if ("serviceWorker" in navigator) {
   // 달력에 넣을 생일은 보는 달 기준으로 (목록은 30일 이내만)
   const birthdaysIn = (y, mo) => (data.members || []).filter((m) => (m.birthday || "").startsWith(String(mo).padStart(2, "0") + "-"))
     .map((m) => ({ date: `${y}-${m.birthday}`, type: t("ev.birthday"), title: `🎂 ${t("ev.birthday")} · ${m.name}`, member: m.name, group: "anniv" }));
+
   const EV_GROUPS = [["all", "ev_all"], ["show", "ev_show_g"], ["anniv", "ev_anniv_g"], ["etc", "ev_etc_g"]];
   let evGroup = pref.get("evGroup", "all");
   let evView = pref.get("evView", "cal");
@@ -317,10 +333,11 @@ if ("serviceWorker" in navigator) {
       const iso = `${calY}-${String(calM).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
       const list = byDay[iso] || [];
       const groups = [...new Set(list.map((e) => e.group))];
-      const cell = el("button", { type: "button", class: `cal-cell${iso === todayKst ? " today" : ""}${iso === calSel ? " sel" : ""}${iso < todayKst ? " past" : ""}`,
+      const cell = el("button", { type: "button", class: `cal-cell${iso === todayKst ? " is-today" : ""}${iso === calSel ? " is-sel" : ""}${iso < todayKst ? " past" : ""}`,
         "aria-label": `${iso} ${list.length}` },
         el("span", { class: "cal-d" }, String(d)),
-        el("span", { class: "cal-dots" }, ...groups.map((g) => el("i", { class: `dot dot-${g}` }))));
+        el("span", { class: "cal-evs" }, ...list.slice(0, 2).map((e) => el("span", { class: `cal-ev ev-${e.group}` }, shortOf(e))),
+          list.length > 2 ? el("span", { class: "cal-more" }, `+${list.length - 2}`) : null));
       cell.addEventListener("click", () => { calSel = iso; renderCal(); });
       grid.append(cell);
     }
