@@ -417,10 +417,8 @@ header .head-right { margin-left: auto; }
 #pcTabs button.on { background: var(--accent-bg); border-color: var(--accent-bg); color: #fff; }
 .pc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 10px; }
 .pc { margin: 0; display: grid; gap: 4px; font-size: 12px; font-weight: 700; text-align: center; }
-#pclBox h3 { margin: 14px 0 8px; font-size: 15px; }
-#pcGrid + #pclBox { border-top: 1px solid var(--line); margin-top: 14px; }
-.pcl-img { display: block; margin-top: 8px; }
-.pcl-img img { display: block; width: 100%; height: auto; border-radius: 10px; background: var(--line); }
+.pc-mem { margin: 8px 0 12px; }
+.pc-mem button { padding: 4px 10px; font-size: 12px; }
 .pc img { width: 100%; aspect-ratio: 55 / 85; object-fit: cover; border-radius: 8px; background: var(--line); }
 
 /* 달력 칸 안 일정 이름 */
