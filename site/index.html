@@ -159,6 +159,11 @@
 
   <!-- 직캠 -->
   <div data-tab="fancams" hidden>
+    <section class="card" id="cmpSec">
+      <h2 data-i18n="cmp_open">직캠 나란히 보기</h2>
+      <p class="note small" data-i18n="cmp_pick_desc"></p>
+      <select id="cmpEp" class="sel cmp-ep"></select>
+    </section>
     <section class="card">
       <h2 data-i18n="latest_fancams">멤버별 최신 직캠</h2>
       <div class="members" id="members"></div>
@@ -182,6 +187,7 @@
         <input type="search" id="search" class="search" autocomplete="off">
         <select id="seriesSel" class="sel"></select>
         <select id="showSel" class="sel"></select>
+        <select id="eraSel" class="sel"></select>
       </div>
       <div class="filters" id="filters"></div>
       <div class="videos" id="allVideos"></div>

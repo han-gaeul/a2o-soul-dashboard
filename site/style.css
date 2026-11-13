@@ -329,3 +329,4 @@ header .head-right { margin-left: auto; }
 .bday-card img { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; }
 .bday-t { font-size: 18px; font-weight: 800; }
 .arc-body .videos, .ep .videos { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+#cmpEp.sel { width: 100%; max-width: none; }

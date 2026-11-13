@@ -300,6 +300,38 @@ def broadcast_date(title):
         return None
 
 
+
+def other_group_only(title):
+    """'[최초공개] A2O LITE - NEON | WELCOME TO SOULITE From A2O SOUL A2O LITE' 처럼
+    앞부분(출연자)에 A2O LITE만 있고 A2O SOUL은 없는 영상 (뒤의 행사 이름에만 SOUL이 들어간 경우)."""
+    head = re.split(r"\s[|l]\s", title)[0]
+    return bool(re.search(r"A2O\s*LITE|에이투오\s*라이트", head, re.I)) and not re.search(r"A2O\s*SOUL|에이투오\s*소울", head, re.I)
+
+
+def era_list(cfg):
+    """활동 = info.yml 앨범의 활동곡(focus), 발매일 순."""
+    out = []
+    for a in cfg["info"]["albums"]:
+        for f in a.get("focus") or []:
+            if a["date"]:
+                out.append((a["date"], f))
+    return sorted(out)
+
+
+def era_of(eras, v):
+    """제목에 활동곡 이름이 있으면 그 활동, 없으면 올라온 날짜 기준 그때 활동."""
+    title = v["title"].lower()
+    for _, name in reversed(eras):
+        if name.lower() in title:
+            return name
+    d = kst_date(v.get("published_at"))
+    cur = ""
+    for start, name in eras:
+        if d >= start:
+            cur = name
+    return cur
+
+
 def build_episodes(videos, slim):
     """음방 회차별 무대·직캠: (방송, 방송일)로 묶음. 제목에 방송일이 있는 영상만 (쇼츠·1분직캠 등은 제외)."""
     eps = {}
@@ -821,6 +853,8 @@ def build(cfg):
             continue
         if vid not in overrides and reg.get("channel_id") not in tracked:  # 공식 채널 영상만
             continue
+        if vid not in overrides and other_group_only(reg["title"]):  # 합동 무대 채널의 A2O LITE 단독 영상
+            continue
         cat, member = resolve_video(cfg, registry, vid, overrides)
         pts = points(f"yt:{vid}", "views")
         value, delta = last_delta(pts)
@@ -842,9 +876,11 @@ def build(cfg):
         })
 
     slim = ("id", "title", "category", "member", "published_at", "channel", "views", "delta", "short", "predebut",
-            "series", "show")
+            "series", "show", "era")
+    eras = era_list(cfg)
     for v in videos:
         v["fanchant"] = bool(FANCHANT.search(v["title"]))
+        v["era"] = "" if v["predebut"] else era_of(eras, v)
     episodes = build_episodes(videos, slim)
     timeline = build_timeline(cfg, videos, episodes, [pts for a in accounts if a['name'].startswith('유튜브') for pts in [a['points']]])
 
