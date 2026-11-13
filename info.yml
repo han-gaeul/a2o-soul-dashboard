@@ -48,3 +48,12 @@ shops:
   - { label: Mnet Plus Merch (A2O), url: "https://mnetplusmerch.com/product/list.html?cate_no=374", note: "앨범·팬사인회·영상통화 이벤트 (11/13 기준 품절)" }
   - { label: 메이크스타, url: "https://www.makestar.com/product/21531", note: "예약 특전 포토카드 이벤트" }
   - { label: 뮤직플랜트, url: "https://www.musicplant.co.kr/", note: "예약 특전 셀카 포토카드" }
+
+# 포카 리스트 이미지 (site/img/pclists/앨범_대상.webp) — 대상이 멤버 이름이면 멤버별, 아니면 단체 리스트
+#   팬 계정이 만든 템플릿은 '수정·자르기·출처 삭제 금지'라 원본 그대로 올리고 출처를 꼭 적어요
+pclist_credit: { label: "@soultemplates", url: "https://x.com/soultemplates" }
+pclist_labels:
+  CARABINER: CARABINER Ver. 포카
+  BROADCAST-SUPERSTAR: SUPERSTAR 방송 포카
+  BROADCAST-DITD: Dancing in the Dark 방송 포카
+  OLIVEYOUNG: 올리브영 럭키드로우
