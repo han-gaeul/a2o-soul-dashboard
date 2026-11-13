@@ -347,3 +347,12 @@ header .head-right { margin-left: auto; }
 #dlgTitle { min-width: 0; }
 @media (max-width: 480px) { #dlgTitle .bias-l { display: none; } }
 .versions { margin: 4px 0 0; padding-left: 18px; }
+
+/* 일정 구분 */
+.ev-tabs { margin-bottom: 8px; }
+.ev-tabs button { border: 1px solid var(--line); background: var(--card); color: var(--muted); border-radius: 999px;
+  padding: 5px 10px; font: inherit; font-size: 12px; font-weight: 600; cursor: pointer; }
+.ev-tabs button.on { background: var(--accent-bg); border-color: var(--accent-bg); color: #fff; }
+.events li.ev-show { box-shadow: inset 3px 0 0 var(--accent); padding-left: 10px; }
+.events li.ev-anniv { box-shadow: inset 3px 0 0 #e8a33d; padding-left: 10px; }
+.events li.ev-etc { box-shadow: inset 3px 0 0 var(--line); padding-left: 10px; }
