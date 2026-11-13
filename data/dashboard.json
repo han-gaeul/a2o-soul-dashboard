@@ -1260,12 +1260,15 @@
   "albums": [
    {
     "date": "2026-11-09",
+    "focus": [
+     "Dancing in the Dark"
+    ],
     "links": {},
     "time": "18:00",
     "title": "SUPERSTAR",
     "tracks": [
-     "Superstar (타이틀)",
-     "Dancing in the Dark (타이틀)",
+     "Superstar",
+     "Dancing in the Dark",
      "While We're Young",
      "Very First Love",
      "Moonlight Shadow"
@@ -1275,6 +1278,9 @@
    },
    {
     "date": "2026-10-13",
+    "focus": [
+     "SUPERSTAR"
+    ],
     "links": {},
     "time": "",
     "title": "SUPERSTAR",
@@ -1290,6 +1296,10 @@
    "그런데도 무언가 비어 있다고 느낀 이들은, 사람을 살아 있게 하는 감정과 에너지 — 기쁨·사랑·설렘·열정, 곧 '소울(SOUL)'을 찾아 지구로 떠나요.",
    "데뷔 앨범 'SUPERSTAR'가 그 이야기의 첫 번째 챕터. 그룹은 자신들의 음악을 'NEW SYNTHWAVE'라고 불러요."
   ],
+  "photo_labels": {
+   "댄인닼": "Dancing in the Dark",
+   "슈퍼스타": "SUPERSTAR"
+  },
   "records": [],
   "shops": []
  },
@@ -1425,11 +1435,20 @@
     "팀의 맏형으로 동생들을 잘 챙김",
     "소울메이트로 동갑 멤버 소라를 꼽음"
    ],
-   "photo": "",
+   "photo": "img/members/댄인닼_문.webp",
    "position": "보컬, 비주얼 센터",
    "predebut": [],
-   "profile_history": [],
-   "signature": ""
+   "profile_history": [
+    {
+     "label": "Dancing in the Dark",
+     "photo": "img/members/댄인닼_문.webp"
+    },
+    {
+     "label": "SUPERSTAR",
+     "photo": "img/members/슈퍼스타_문.webp"
+    }
+   ],
+   "signature": "img/members/서명_문.svg"
   },
   {
    "birth_year": 2007,
@@ -1499,11 +1518,20 @@
     "표정·제스처를 살린 무대 퍼포먼스",
     "비트박스가 특기"
    ],
-   "photo": "",
+   "photo": "img/members/댄인닼_소라.webp",
    "position": "메인댄서",
    "predebut": [],
-   "profile_history": [],
-   "signature": ""
+   "profile_history": [
+    {
+     "label": "Dancing in the Dark",
+     "photo": "img/members/댄인닼_소라.webp"
+    },
+    {
+     "label": "SUPERSTAR",
+     "photo": "img/members/슈퍼스타_소라.webp"
+    }
+   ],
+   "signature": "img/members/서명_소라.svg"
   },
   {
    "birth_year": 2008,
@@ -1591,11 +1619,20 @@
     "데뷔 쇼케이스 영상 영어 내레이션",
     "무표정과 웃는 얼굴의 반전 매력"
    ],
-   "photo": "",
+   "photo": "img/members/댄인닼_서하.webp",
    "position": "메인보컬",
    "predebut": [],
-   "profile_history": [],
-   "signature": ""
+   "profile_history": [
+    {
+     "label": "Dancing in the Dark",
+     "photo": "img/members/댄인닼_서하.webp"
+    },
+    {
+     "label": "SUPERSTAR",
+     "photo": "img/members/슈퍼스타_서하.webp"
+    }
+   ],
+   "signature": "img/members/서명_서하.svg"
   },
   {
    "birth_year": 2009,
@@ -1682,7 +1719,7 @@
    "notes": [
     "해산물을 좋아함"
    ],
-   "photo": "",
+   "photo": "img/members/댄인닼_가쿠.webp",
    "position": "",
    "predebut": [
     {
@@ -1854,8 +1891,17 @@
      "views": 5519429
     }
    ],
-   "profile_history": [],
-   "signature": ""
+   "profile_history": [
+    {
+     "label": "Dancing in the Dark",
+     "photo": "img/members/댄인닼_가쿠.webp"
+    },
+    {
+     "label": "SUPERSTAR",
+     "photo": "img/members/슈퍼스타_가쿠.webp"
+    }
+   ],
+   "signature": "img/members/서명_가쿠.svg"
   },
   {
    "birth_year": 2009,
@@ -1911,7 +1957,7 @@
     "팀에서 흥이 가장 많은 멤버",
     "소울푸드는 짜장면"
    ],
-   "photo": "",
+   "photo": "img/members/댄인닼_테오.webp",
    "position": "메인댄서",
    "predebut": [
     {
@@ -2083,8 +2129,17 @@
      "views": 5519429
     }
    ],
-   "profile_history": [],
-   "signature": ""
+   "profile_history": [
+    {
+     "label": "Dancing in the Dark",
+     "photo": "img/members/댄인닼_테오.webp"
+    },
+    {
+     "label": "SUPERSTAR",
+     "photo": "img/members/슈퍼스타_테오.webp"
+    }
+   ],
+   "signature": "img/members/서명_테오.svg"
   },
   {
    "birth_year": 2009,
@@ -2154,7 +2209,7 @@
     "빈티지 옷을 직접 리폼해서 입음",
     "축구·농구를 좋아하는 운동파"
    ],
-   "photo": "",
+   "photo": "img/members/댄인닼_준.webp",
    "position": "",
    "predebut": [
     {
@@ -2242,8 +2297,17 @@
      "views": 30109
     }
    ],
-   "profile_history": [],
-   "signature": ""
+   "profile_history": [
+    {
+     "label": "Dancing in the Dark",
+     "photo": "img/members/댄인닼_준.webp"
+    },
+    {
+     "label": "SUPERSTAR",
+     "photo": "img/members/슈퍼스타_준.webp"
+    }
+   ],
+   "signature": "img/members/서명_준.svg"
   },
   {
    "birth_year": 2010,
@@ -2302,11 +2366,20 @@
     "팀에서 가장 차분한 성격",
     "네오 소울을 좋아함 (최애 아티스트 에리카 바두)"
    ],
-   "photo": "",
+   "photo": "img/members/댄인닼_루시엔.webp",
    "position": "랩, 댄스",
    "predebut": [],
-   "profile_history": [],
-   "signature": ""
+   "profile_history": [
+    {
+     "label": "Dancing in the Dark",
+     "photo": "img/members/댄인닼_루시엔.webp"
+    },
+    {
+     "label": "SUPERSTAR",
+     "photo": "img/members/슈퍼스타_루시엔.webp"
+    }
+   ],
+   "signature": "img/members/서명_루시엔.svg"
   },
   {
    "birth_year": 2010,
@@ -2360,11 +2433,20 @@
     "파워풀한 음색",
     "발라드를 좋아함 (최애곡 EXO 'For Life')"
    ],
-   "photo": "",
+   "photo": "img/members/댄인닼_한성.webp",
    "position": "메인보컬",
    "predebut": [],
-   "profile_history": [],
-   "signature": ""
+   "profile_history": [
+    {
+     "label": "Dancing in the Dark",
+     "photo": "img/members/댄인닼_한성.webp"
+    },
+    {
+     "label": "SUPERSTAR",
+     "photo": "img/members/슈퍼스타_한성.webp"
+    }
+   ],
+   "signature": "img/members/서명_한성.svg"
   },
   {
    "birth_year": 2011,
@@ -2480,7 +2562,7 @@
     "초등학생 때 밴드를 결성해 싱글 발매",
     "시티워크를 좋아함"
    ],
-   "photo": "",
+   "photo": "img/members/댄인닼_타이.webp",
    "position": "",
    "predebut": [
     {
@@ -2736,8 +2818,17 @@
      "views": 5519429
     }
    ],
-   "profile_history": [],
-   "signature": ""
+   "profile_history": [
+    {
+     "label": "Dancing in the Dark",
+     "photo": "img/members/댄인닼_타이.webp"
+    },
+    {
+     "label": "SUPERSTAR",
+     "photo": "img/members/슈퍼스타_타이.webp"
+    }
+   ],
+   "signature": "img/members/서명_타이.svg"
   },
   {
    "birth_year": 2011,
@@ -2796,11 +2887,20 @@
    "notes": [
     "매력 포인트는 '동굴 보이스' 저음"
    ],
-   "photo": "",
+   "photo": "img/members/댄인닼_시원.webp",
    "position": "랩, 댄스",
    "predebut": [],
-   "profile_history": [],
-   "signature": ""
+   "profile_history": [
+    {
+     "label": "Dancing in the Dark",
+     "photo": "img/members/댄인닼_시원.webp"
+    },
+    {
+     "label": "SUPERSTAR",
+     "photo": "img/members/슈퍼스타_시원.webp"
+    }
+   ],
+   "signature": "img/members/서명_시원.svg"
   },
   {
    "birth_year": 2011,
@@ -2858,11 +2958,20 @@
     "팀의 분위기 메이커",
     "일본어·한국어·영어·중국어 4개 국어"
    ],
-   "photo": "",
+   "photo": "img/members/댄인닼_소노.webp",
    "position": "비주얼",
    "predebut": [],
-   "profile_history": [],
-   "signature": ""
+   "profile_history": [
+    {
+     "label": "Dancing in the Dark",
+     "photo": "img/members/댄인닼_소노.webp"
+    },
+    {
+     "label": "SUPERSTAR",
+     "photo": "img/members/슈퍼스타_소노.webp"
+    }
+   ],
+   "signature": "img/members/서명_소노.svg"
   },
   {
    "birth_year": 2011,
@@ -2917,11 +3026,20 @@
     "보컬로 입사해 짧은 기간에 댄스 실력을 크게 끌어올림",
     "팝·R&B를 좋아함"
    ],
-   "photo": "",
+   "photo": "img/members/댄인닼_알루어.webp",
    "position": "보컬",
    "predebut": [],
-   "profile_history": [],
-   "signature": ""
+   "profile_history": [
+    {
+     "label": "Dancing in the Dark",
+     "photo": "img/members/댄인닼_알루어.webp"
+    },
+    {
+     "label": "SUPERSTAR",
+     "photo": "img/members/슈퍼스타_알루어.webp"
+    }
+   ],
+   "signature": "img/members/서명_알루어.svg"
   },
   {
    "birth_year": 2012,
@@ -2990,7 +3108,7 @@
     "스스로를 '황금 올라운더'로 소개",
     "가볍고 정확한 춤선"
    ],
-   "photo": "",
+   "photo": "img/members/댄인닼_자이.webp",
    "position": "올라운더 (보컬·댄스)",
    "predebut": [
     {
@@ -3316,8 +3434,17 @@
      "views": 5519429
     }
    ],
-   "profile_history": [],
-   "signature": ""
+   "profile_history": [
+    {
+     "label": "Dancing in the Dark",
+     "photo": "img/members/댄인닼_자이.webp"
+    },
+    {
+     "label": "SUPERSTAR",
+     "photo": "img/members/슈퍼스타_자이.webp"
+    }
+   ],
+   "signature": "img/members/서명_자이.svg"
   },
   {
    "birth_year": 2012,
@@ -3385,7 +3512,7 @@
     "'SUPERSTAR' 1·2절 도입부 담당",
     "사진 촬영을 좋아해 레트로 감성용 구형 휴대폰을 따로 씀"
    ],
-   "photo": "",
+   "photo": "img/members/댄인닼_에이든.webp",
    "position": "보컬",
    "predebut": [
     {
@@ -3669,8 +3796,17 @@
      "views": 5519429
     }
    ],
-   "profile_history": [],
-   "signature": ""
+   "profile_history": [
+    {
+     "label": "Dancing in the Dark",
+     "photo": "img/members/댄인닼_에이든.webp"
+    },
+    {
+     "label": "SUPERSTAR",
+     "photo": "img/members/슈퍼스타_에이든.webp"
+    }
+   ],
+   "signature": "img/members/서명_에이든.svg"
   },
   {
    "birth_year": 2012,
@@ -3753,7 +3889,7 @@
     "자주 쓰는 말은 \"Lit!\"",
     "소울메이트로 맏형 문을 꼽음"
    ],
-   "photo": "",
+   "photo": "img/members/댄인닼_제트.webp",
    "position": "댄스",
    "predebut": [
     {
@@ -4037,8 +4173,17 @@
      "views": 5519429
     }
    ],
-   "profile_history": [],
-   "signature": ""
+   "profile_history": [
+    {
+     "label": "Dancing in the Dark",
+     "photo": "img/members/댄인닼_제트.webp"
+    },
+    {
+     "label": "SUPERSTAR",
+     "photo": "img/members/슈퍼스타_제트.webp"
+    }
+   ],
+   "signature": "img/members/서명_제트.svg"
   }
  ],
  "mvs": [
