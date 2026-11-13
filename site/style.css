@@ -251,8 +251,18 @@ header .head-right { margin-left: auto; }
 
 /* 공식 인스타 피드 */
 .ig-feed { display: grid; gap: 8px; }
+.feed-split { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+.feed-col { min-width: 0; padding: 0 12px; }
+.feed-col:first-child { padding-left: 0; }
+.feed-col:last-child { padding-right: 0; }
+.feed-col + .feed-col { border-left: 1px solid var(--line); }
+.feed-col:only-child { grid-column: 1 / -1; padding: 0; }
+.feed-col h3 { display: flex; align-items: center; gap: 6px; margin: 0 0 8px; font-size: 14px; }
+.feed-col .ig-meta .src { display: none; }
+.feed-col .ig-post { padding: 10px; }
+.feed-col .ig-text { overflow-wrap: anywhere; }
 .ig-post { display: grid; gap: 6px; border: 1px solid var(--line); border-radius: 12px; padding: 12px; color: inherit; text-decoration: none; }
-.ig-meta { display: flex; gap: 8px; align-items: center; font-size: 12px; }
+.ig-meta { display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: center; font-size: 12px; }
 .ig-text { font-size: 14px; line-height: 1.5; white-space: pre-line; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
 .ig-members { display: flex; flex-wrap: wrap; gap: 4px; }
 

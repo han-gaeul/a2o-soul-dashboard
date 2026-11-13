@@ -995,7 +995,8 @@ def build(cfg):
                         for y in kept)
         if not dup:
             kept.append(x)
-    ig_feed = kept
+    feed_all = ig_feed  # 화면은 인스타 | X 두 칸이라 칸마다 따로 (같은 글이 양쪽에 있어도 OK)
+    ig_feed = kept      # 멤버 언급은 중복 없이
 
     overrides = {v["id"]: v for v in cfg["videos"]}
     tracked = {channel_id(c) for c in cfg["channels"]}
@@ -1109,7 +1110,7 @@ def build(cfg):
         "debut_date": cfg["debut_date"],
         "kpis": kpis,
         "accounts": accounts,
-        "ig_feed": ig_feed[:20],
+        "ig_feed": [x for x in feed_all if x["account"] != "x"][:15] + [x for x in feed_all if x["account"] == "x"][:15],
         "mvs": mvs,
         "members": members,
         "group_links": cfg["group_links"],
