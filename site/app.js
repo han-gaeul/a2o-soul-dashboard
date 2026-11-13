@@ -230,16 +230,36 @@ if ("serviceWorker" in navigator) {
   }
   const voteEvents = (data.votes || []).map((v) => ({
     date: v.end.slice(0, 10), time: v.end.slice(11), type: t("votes"),
-    title: `🗳 ${[v.show, v.title].filter(Boolean).join(" ")}`, url: v.url,
+    title: `🗳 ${[tc(v.show), tc(v.title)].filter(Boolean).join(" ")}`, url: v.url,
   }));
   const supportEvents = (data.supports || []).filter((x) => x.start >= todayKst).map((x) => ({
     date: x.start, type: x.kind, title: `☕ ${[x.member, x.title].filter(Boolean).join(" ")}`, url: x.url,
   }));
-  const events = [...(data.events || []).filter((e) => e.date >= todayKst), ...upcomingBirthdays(), ...voteEvents, ...supportEvents]
-    .sort((a, b) => (a.date + (a.time || "")).localeCompare(b.date + (b.time || ""))).slice(0, 10);
-  if (events.length) {
+  // 일정 구분: 방송(음방·라이브) / 기념일(생일·데뷔 기념일) / 기타(투표 마감·서포트·발매 등)
+  const groupOf = (e) => (e.member || e.anniv || e.type === "기념일" ? "anniv"
+    : ["음방", "라이브"].includes(e.type) || /출연$/.test(e.title || "") ? "show" : "etc");
+  // 시간이 없는 음방 일정은 투표 가이드의 방송 시간(예: '금 17:15 · KBS2')으로 채우기
+  const showTime = {};
+  for (const v of data.howto?.voting || []) { const m = /(\d{1,2}:\d{2})/.exec(v.when || ""); if (m) showTime[v.show] = m[1]; }
+  const allEvents = [...(data.events || []).filter((e) => e.date >= todayKst), ...upcomingBirthdays(), ...voteEvents, ...supportEvents]
+    .map((e) => {
+      const show = /^(.+) 출연$/.exec(e.title || "")?.[1];
+      return { ...e, group: groupOf(e), time: e.time || (show && showTime[show]) || e.time };
+    })
+    .sort((a, b) => (a.date + (a.time || "")).localeCompare(b.date + (b.time || "")));
+  const EV_GROUPS = [["all", "ev_all"], ["show", "ev_show_g"], ["anniv", "ev_anniv_g"], ["etc", "ev_etc_g"]];
+  let evGroup = pref.get("evGroup", "all");
+  const evTabs = el("div", { class: "filter-row ev-tabs" });
+  function renderEvents() {
+    const list = allEvents.filter((e) => evGroup === "all" || e.group === evGroup).slice(0, 10);
+    evTabs.replaceChildren(...EV_GROUPS.filter(([k]) => k === "all" || allEvents.some((e) => e.group === k)).map(([k, label]) => {
+      const n = k === "all" ? allEvents.length : allEvents.filter((e) => e.group === k).length;
+      const b = el("button", { type: "button", class: k === evGroup ? "on" : "" }, `${t(label)} ${n}`);
+      b.addEventListener("click", () => { evGroup = k; pref.set("evGroup", k); renderEvents(); });
+      return b;
+    }));
     const wd = t("weekdays");
-    for (const e of events) {
+    $("events").replaceChildren(...(list.length ? list.map((e) => {
       const d = new Date(`${e.date}T00:00:00Z`);
       const isToday = e.date === todayKst;
       const whenEl = el("div", { class: "when" },
@@ -254,8 +274,13 @@ if ("serviceWorker" in navigator) {
         title = e.url ? ext(e.url, tx(e)) : el("span", {}, tx(e));
       }
       title.classList.add("what");
-      $("events").append(el("li", {}, whenEl, el("div", {}, e.type ? el("span", { class: "chip" }, tc(e.type)) : null, title)));
-    }
+      return el("li", { class: `ev-${e.group}` }, whenEl, el("div", {}, e.type ? el("span", { class: "chip" }, tc(e.type)) : null, title));
+    }) : [el("li", { class: "empty" }, "–")]));
+  }
+  if (allEvents.length) {
+    if (evGroup !== "all" && !allEvents.some((e) => e.group === evGroup)) evGroup = "all";
+    $("events").before(evTabs);
+    renderEvents();
   } else {
     $("events").replaceWith(empty("–"));
   }
