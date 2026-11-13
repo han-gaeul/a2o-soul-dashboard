@@ -230,12 +230,12 @@ if ("serviceWorker" in navigator) {
   }
   // 달력 칸에 들어갈 짧은 이름 (음방은 팬들이 부르는 줄임말)
   const SHORT_KO = { 뮤직뱅크: "뮤뱅", 인기가요: "인가", 음악중심: "음중", 엠카운트다운: "엠카", 쇼챔피언: "쇼챔", 더쇼: "더쇼",
-    "SHOW K-POP": "쇼K팝", "케이팝업 차트쇼": "케팝업" };
+    "SHOW K-POP": "쇼K팝", "케이팝업 차트쇼": "케팝업", "KBS 가요대축제": "가요대축제", "SBS 가요대전": "가요대전" };
   const SHORT_EN = { 뮤직뱅크: "MBank", 인기가요: "Inki", 음악중심: "MCore", 엠카운트다운: "MCD", 쇼챔피언: "SChamp", 더쇼: "TheShow",
-    "SHOW K-POP": "SKPop", "케이팝업 차트쇼": "KPopUp" };
+    "SHOW K-POP": "SKPop", "케이팝업 차트쇼": "KPopUp", "KBS 가요대축제": "KBS SF", "SBS 가요대전": "SBS GD" };
   const short = (show) => (!show ? "" : LANG === "ko" ? SHORT_KO[show] || show : SHORT_EN[show] || tc(show));
   const shortOf = (e) => {
-    if (e.short) return e.short;
+    if (e.short) return tc(e.short);
     if (e.member) return e.member;
     if (e.key === "anniv_days") return `D+${e.n}`;
     if (e.key === "anniv_years") return `${e.n}${LANG === "ko" ? "주년" : "y"}`;
@@ -1182,6 +1182,12 @@ if ("serviceWorker" in navigator) {
   }
   const tooltip = { callbacks: { label: (c) => `${c.dataset.label ?? ""}${c.dataset.label ? ": " : ""}${fmt(c.parsed.y ?? c.parsed.x)}` } };
 
+  // 가로축 날짜는 짧게 (2026-11-14 → 11/14), 툴팁엔 전체 날짜
+  const xDate = { ticks: { maxRotation: 0, autoSkip: true, autoSkipPadding: 8, callback(v) {
+    const l = String(this.getLabelForValue(v));
+    return /^\d{4}-\d{2}-\d{2}$/.test(l) ? `${+l.slice(5, 7)}/${+l.slice(8, 10)}` : l;
+  } } };
+
   function lineChart(id, seriesList) {
     const canvas = $(id);
     const labels = [...new Set(seriesList.flatMap((s) => s.points.map((p) => p[0])))].sort();
@@ -1198,7 +1204,7 @@ if ("serviceWorker" in navigator) {
         }),
       },
       options: { maintainAspectRatio: false, interaction: { mode: "index", intersect: false },
-                 scales: { y: { ticks: { callback: fmt } } }, plugins: { tooltip } },
+                 scales: { x: xDate, y: { ticks: { callback: fmt } } }, plugins: { tooltip } },
     });
   }
 
@@ -1216,7 +1222,7 @@ if ("serviceWorker" in navigator) {
       data: { labels, datasets: diffs.map((d, i) => ({ label: d.name, data: labels.map((l) => d.out[l] ?? null),
                                                          backgroundColor: palette[i % palette.length], borderRadius: 4 })) },
       options: { maintainAspectRatio: false, interaction: { mode: "index", intersect: false },
-                 scales: { x: { stacked: true }, y: { stacked: true, ticks: { callback: fmt } } }, plugins: { tooltip } },
+                 scales: { x: { ...xDate, stacked: true }, y: { stacked: true, ticks: { callback: fmt } } }, plugins: { tooltip } },
     });
   }
 

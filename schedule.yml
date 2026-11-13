@@ -8,4 +8,15 @@
 #     type: 음방
 #     title: 뮤직뱅크 출연
 #     url: https://...
-events: []
+events:
+  # 팬사인회·영통 (팬 계정 정리 기준 — 공식 공지 링크가 생기면 url에 넣기)
+  - { date: 2026-11-14, time: "19:30", type: 행사, title: Musicart 팬사인회, short: 팬싸 }
+  - { date: 2026-11-15, time: "18:00", type: 행사, title: Mnet Plus 영상통화 팬사인회, short: 영통 }
+  - { date: 2026-11-15, time: "20:00", type: 행사, title: Mnet Plus 팬사인회, short: 팬싸 }
+  - { date: 2026-11-18, time: "19:00", type: 행사, title: Makestar 영상통화 팬사인회, short: 영통 }
+  - { date: 2026-11-20, time: "20:00", type: 행사, title: Makestar 팬사인회, short: 팬싸 }
+  - { date: 2026-11-21, time: "18:30", type: 행사, title: Withmuu 영상통화 팬사인회, short: 영통 }
+  - { date: 2026-11-21, time: "20:30", type: 행사, title: Withmuu 팬사인회, short: 팬싸 }
+  # 연말 무대
+  - { date: 2026-12-18, type: 음방, title: KBS 가요대축제 출연 }
+  - { date: 2026-12-25, type: 음방, title: SBS 가요대전 출연 }
