@@ -84,6 +84,21 @@ jobs:
             gh issue close "$NUM" --comment "확인할 항목이 없어서 닫아요."
           fi
 
+      # 손봐야 할 데이터(멤버 못 찾은 직캠, 멈춘 채널, 번역 빠짐 등) → '수집 점검' 이슈 하나로 계속 갱신
+      - name: Health issue
+        if: github.event_name != 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TITLE="수집 점검"
+          NUM=$(gh issue list --state open --search "$TITLE in:title" --json number,title --jq '[.[] | select(.title == "수집 점검")][0].number')
+          if [ -s data/health.md ]; then
+            if [ -n "$NUM" ]; then gh issue edit "$NUM" --body-file data/health.md
+            else gh issue create --title "$TITLE" --body-file data/health.md; fi
+          elif [ -n "$NUM" ]; then
+            gh issue close "$NUM" --comment "손볼 항목이 없어서 닫아요."
+          fi
+
       - name: Prepare site
         run: |
           mkdir -p _site/data

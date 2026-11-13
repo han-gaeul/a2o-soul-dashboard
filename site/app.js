@@ -83,14 +83,24 @@ if ("serviceWorker" in navigator) {
   const kstFmt = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" });
   const todayKst = kstFmt.format(new Date()); // YYYY-MM-DD
   const nat = (s) => (s || "").split("·").map((x) => (t("nat")[x] || x)).join("·");
+  // 내용 번역 (translations.yml): 한국어 원문 그대로 키, 없으면 원문
+  let TR = {};
+  const tc = (s) => (LANG === "ko" || !s ? s : TR[s]?.[LANG] || s);
+  // 자동으로 만든 문구(기록·기념일)는 언어별 틀로
+  const tx = (x) => (x.key ? t(x.key, { n: x.key.startsWith("anniv") ? x.n : fmt(x.n), show: tc(x.show), type: tc(x.type), name: x.name })
+    : tc(x.title));
   const kstDate = (s) => new Date(`${s.replace(" ", "T")}${s.length > 10 ? ":00" : "T00:00:00"}+09:00`); // "YYYY-MM-DD[ HH:MM]" KST
 
   // ---------- 탭 ----------
   const tabs = ["overview", "cheer", "mv", "members", "fancams", "videos", "guide"];
   const drawn = new Set();
   const drawers = {};
+  // 공유 링크: #member/MOON → 멤버 탭, #ep/날짜/방송 → 영상 탭, #cmp/날짜/방송/A/B → 직캠 탭
+  const ROUTE_TAB = { member: "members", ep: "videos", cmp: "fancams" };
+  const route = () => decodeURIComponent(location.hash.slice(1)).split("/");
   function showTab() {
-    const cur = tabs.includes(location.hash.slice(1)) ? location.hash.slice(1) : "overview";
+    const [head] = route();
+    const cur = tabs.includes(head) ? head : ROUTE_TAB[head] || "overview";
     document.querySelectorAll("[data-tab]").forEach((s) => (s.hidden = s.dataset.tab !== cur));
     document.querySelectorAll("#tabs a").forEach((a) => {
       const on = a.getAttribute("href") === `#${cur}`;
@@ -99,7 +109,27 @@ if ("serviceWorker" in navigator) {
     });
     if (!drawn.has(cur) && drawers[cur] && window.Chart) { drawn.add(cur); drawers[cur](); }
   }
-  window.addEventListener("hashchange", showTab);
+  window.addEventListener("hashchange", () => { showTab(); openRoute(); });
+  let openRoute = () => {};
+  const SITE = location.href.split("#")[0];
+  const shareLink = (hash) => `${SITE}#${hash.split("/").map(encodeURIComponent).join("/")}`;
+  function toast(msg) {
+    const n = el("div", { class: "toast" }, msg);
+    (document.querySelector("dialog[open]") || document.body).append(n); // 열린 창 위에 보이게
+    setTimeout(() => n.remove(), 1800);
+  }
+  async function share(hash, title) {
+    const url = shareLink(hash);
+    try {
+      if (navigator.share) { await navigator.share({ title, url }); return; }
+    } catch (e) { if (e.name === "AbortError") return; }
+    try { await navigator.clipboard.writeText(url); toast(t("link_copied")); } catch (_) { prompt(t("link_copy"), url); }
+  }
+  const shareBtn = (fn) => {
+    const b = el("button", { class: "share-btn", type: "button", "aria-label": t("share") }, "↗", el("span", { class: "share-l" }, ` ${t("share")}`));
+    b.addEventListener("click", (e) => { e.preventDefault(); e.stopPropagation(); fn(); });
+    return b;
+  };
 
   // ---------- 데이터 ----------
   // 배포 시에는 ./data, 로컬 미리보기(레포 루트에서 서버 실행)에서는 ../data
@@ -111,6 +141,7 @@ if ("serviceWorker" in navigator) {
     } catch (_) { /* 다음 경로 시도 */ }
   }
   if (!data) { $("updated").textContent = t("load_fail"); return; }
+  TR = data.tr || {};
 
   // ---------- 헤더 ----------
   if (data.debut_date) {
@@ -216,10 +247,10 @@ if ("serviceWorker" in navigator) {
         const mem = data.members.find((x) => x.name === e.member);
         title.addEventListener("click", () => openMember(mem));
       } else {
-        title = e.url ? ext(e.url, e.title) : el("span", {}, e.title);
+        title = e.url ? ext(e.url, tx(e)) : el("span", {}, tx(e));
       }
       title.classList.add("what");
-      $("events").append(el("li", {}, whenEl, el("div", {}, e.type ? el("span", { class: "chip" }, e.type) : null, title)));
+      $("events").append(el("li", {}, whenEl, el("div", {}, e.type ? el("span", { class: "chip" }, tc(e.type)) : null, title)));
     }
   } else {
     $("events").replaceWith(empty("–"));
@@ -274,18 +305,18 @@ if ("serviceWorker" in navigator) {
       const box = el("details", { class: "howto", open: "" }, el("summary", {}, t("howto_voting")));
       for (const v of howto.voting) {
         box.append(el("div", { class: "howto-show" },
-          el("div", {}, el("b", {}, v.show), v.when ? el("span", { class: "muted" }, ` · ${v.when}`) : null),
+          el("div", {}, el("b", {}, tc(v.show)), v.when ? el("span", { class: "muted" }, ` · ${tc(v.when)}`) : null),
           el("div", { class: "howto-apps" },
-            v.pre ? el("span", {}, el("span", { class: "chip" }, t("howto_pre")), ` ${v.pre}`) : null,
-            v.live ? el("span", {}, el("span", { class: "chip chip-on" }, t("howto_live")), ` ${v.live}`) : null),
-          v.note ? el("div", { class: "muted small" }, v.note) : null,
+            v.pre ? el("span", {}, el("span", { class: "chip" }, t("howto_pre")), ` ${tc(v.pre)}`) : null,
+            v.live ? el("span", {}, el("span", { class: "chip chip-on" }, t("howto_live")), ` ${tc(v.live)}`) : null),
+          v.note ? el("div", { class: "muted small" }, tc(v.note)) : null,
           v.url ? ext(v.url, "↗ link") : null));
       }
       $("howto").append(box);
     }
     for (const g of howto.streaming || []) {
-      $("howto").append(el("details", { class: "howto" }, el("summary", {}, g.title),
-        el("ol", { class: "howto-steps" }, ...g.steps.map((x) => el("li", {}, x)))));
+      $("howto").append(el("details", { class: "howto" }, el("summary", {}, tc(g.title)),
+        el("ol", { class: "howto-steps" }, ...g.steps.map((x) => el("li", {}, tc(x))))));
     }
     if (howto.checked) $("howtoChecked").textContent = t("howto_checked", { d: howto.checked.replaceAll("-", ".") });
   } else {
@@ -350,12 +381,12 @@ if ("serviceWorker" in navigator) {
 
   // ---------- 세계관·앨범 (입덕 탭) ----------
   const info = data.info || {};
-  if ((info.lore || []).length) for (const p of info.lore) $("lore").append(el("p", {}, p));
+  if ((info.lore || []).length) for (const p of info.lore) $("lore").append(el("p", {}, tc(p)));
   else $("loreSec").remove();
   if ((info.albums || []).length) {
     for (const a of info.albums) {
       $("albums").append(el("div", { class: "album" },
-        el("div", {}, el("b", {}, a.title), a.type ? el("span", { class: "muted" }, ` · ${a.type}`) : null),
+        el("div", {}, el("b", {}, a.title), a.type ? el("span", { class: "muted" }, ` · ${tc(a.type)}`) : null),
         a.date ? el("div", { class: "muted small" }, [a.date.replaceAll("-", "."), a.time].filter(Boolean).join(" ") + " KST") : null,
         a.tracks.length ? el("ol", { class: "tracks" }, ...a.tracks.map((x) => el("li", {}, x,
           (a.focus || []).some((f) => f.toLowerCase() === x.toLowerCase()) ? el("span", { class: "chip chip-on focus" }, t("focus_track")) : null))) : null,
@@ -407,6 +438,7 @@ if ("serviceWorker" in navigator) {
   // ---------- 멤버 ----------
   const dlg = $("memberDialog");
   $("dlgClose").addEventListener("click", () => dlg.close());
+  dlg.addEventListener("close", () => { if (route()[0] === "member") history.replaceState(null, "", "#members"); });
   dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); }); // 바깥 클릭으로 닫기
   // 인스타그램 공식 임베드 (instagram.com/p|reel/코드 형식만 허용)
   function igEmbeds(urls) {
@@ -421,7 +453,7 @@ if ("serviceWorker" in navigator) {
     const mo = +m.birthday.slice(0, 2), d = +m.birthday.slice(3);
     return t("bday", { m: mo, d, mon: (t("months") || [])[mo - 1] || mo });
   };
-  const facts = (m, withBday) => [m.position, m.birth_year ? t("born", { y: m.birth_year }) : "",
+  const facts = (m, withBday) => [tc(m.position), m.birth_year ? t("born", { y: m.birth_year }) : "",
     withBday ? bdayText(m) : "", nat(m.nationality)].filter(Boolean).join(" · ");
 
   function profile(m) {
@@ -433,10 +465,10 @@ if ("serviceWorker" in navigator) {
     return el("section", { class: "dlg-sec profile" },
       embeds.length ? el("div", { class: "ig-row" }, ...embeds) : null,
       el("div", { class: "pf-facts" }, facts(m, true)),
-      m.nicknames.length ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, t("nickname")), el("div", {}, m.nicknames.join(", "))) : null,
+      m.nicknames.length ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, t("nickname")), el("div", {}, m.nicknames.map(tc).join(", "))) : null,
       tip ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, "Tip"), el("div", {}, tip)) : null,
-      list(t("career"), m.career),
-      list(t("notes"), m.notes),
+      list(t("career"), m.career.map(tc)),
+      list(t("notes"), m.notes.map(tc)),
       m.signature ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, t("signature")),
         el("img", { class: "pf-sign", src: m.signature, alt: "", loading: "lazy" })) : null,
       (m.profile_history || []).length ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, t("history")),
@@ -449,15 +481,18 @@ if ("serviceWorker" in navigator) {
     m.photo ? el("img", { src: m.photo, alt: "", loading: "lazy" }) : (m.ko ? m.ko[0] : m.name[0]));
 
   function openMember(m, focus) {
-    const star = el("button", { class: `bias-btn${bias === m.name ? " on" : ""}`, type: "button" },
-      bias === m.name ? `★ ${t("bias_on")}` : `☆ ${t("bias_set")}`);
-    star.addEventListener("click", () => {
-      setBias(bias === m.name ? "" : m.name);
-      star.classList.toggle("on", bias === m.name);
-      star.textContent = bias === m.name ? `★ ${t("bias_on")}` : `☆ ${t("bias_set")}`;
-    });
+    const star = el("button", { class: "bias-btn", type: "button" });
+    const paintStar = () => {
+      const on = bias === m.name;
+      star.classList.toggle("on", on);
+      star.setAttribute("aria-label", on ? t("bias_on") : t("bias_set"));
+      star.replaceChildren(on ? "★" : "☆", el("span", { class: "bias-l" }, ` ${on ? t("bias_on") : t("bias_set")}`));
+    };
+    paintStar();
+    star.addEventListener("click", () => { setBias(bias === m.name ? "" : m.name); paintStar(); });
     $("dlgTitle").replaceChildren(avatar(m, "avatar dlg-avatar"), el("span", {}, m.name),
-      m.ko ? el("span", { class: "dlg-ko" }, m.ko) : null, star);
+      m.ko ? el("span", { class: "dlg-ko" }, m.ko) : null, star,
+      shareBtn(() => share(`member/${m.name}`, `A2O SOUL ${m.name}`)));
     const sections = [profile(m)];
     for (const [key, label, list] of [["fancams", "fancams_n", m.fancams], ["predebut", "predebut_n", m.predebut]]) {
       if (!list.length) continue;
@@ -474,12 +509,13 @@ if ("serviceWorker" in navigator) {
     sections.push(el("div", { class: "pf-src" }, t("source"),
       ext(`https://namu.wiki/w/${encodeURIComponent(`${m.ko}(A2O SOUL)`)}`, "namu.wiki")));
     $("dlgBody").replaceChildren(...sections);
+    if (route()[0] !== "member" || route()[1] !== m.name) history.replaceState(null, "", `#member/${encodeURIComponent(m.name)}`);
     dlg.showModal();
     dlg.scrollTop = 0;
     if (focus) $(`dlg-${focus}`)?.scrollIntoView();
   }
 
-  for (const l of data.group_links || []) $("groupLinks").append(ext(l.url, l.label, " ↗"));
+  for (const l of data.group_links || []) $("groupLinks").append(ext(l.url, tc(l.label), " ↗"));
   if (!(data.group_links || []).length) $("groupLinks").closest("section").remove();
   const gp = igEmbeds(data.group_posts);
   if (gp.length) $("groupPosts").append(...gp); else $("groupPostsSec").remove();
@@ -512,7 +548,7 @@ if ("serviceWorker" in navigator) {
       el("div", { class: "pinfo" },
         el("div", { class: "n" }, m.name, el("span", { class: "c" }, m.ko)),
         el("div", { class: "s" }, facts(m, false)),
-        m.nicknames.length ? el("div", { class: "s" }, t("nick_line", { v: m.nicknames.join(", ") })) : null,
+        m.nicknames.length ? el("div", { class: "s" }, t("nick_line", { v: m.nicknames.map(tc).join(", ") })) : null,
         el("div", { class: "s more-link" }, t("profile_view"))));
     card.addEventListener("click", () => openMember(m));
     $("profiles").append(card);
@@ -599,7 +635,7 @@ if ("serviceWorker" in navigator) {
   fmtRow.row.append(unseenBtn);
   $("filters").append(catRow.row, fmtRow.row);
   function fillSelect(sel, allLabel, values, slot) {
-    sel.append(el("option", { value: "" }, allLabel), ...values.map((x) => el("option", { value: x }, x)));
+    sel.append(el("option", { value: "" }, allLabel), ...values.map((x) => el("option", { value: x }, tc(x))));
     sel.addEventListener("change", () => { cur[slot] = sel.value; refresh(); });
     if (!values.length) sel.hidden = true;
   }
@@ -632,13 +668,14 @@ if ("serviceWorker" in navigator) {
     for (const ep of eps) {
       const day = wd[new Date(`${ep.date}T12:00:00Z`).getUTCDay()];
       const grid = el("div", { class: "videos" });
-      const box = el("details", { class: "howto ep" },
-        el("summary", {}, el("span", {}, el("b", {}, `${ep.date.slice(5).replace("-", ".")} (${day}) ${ep.show}`),
+      const box = el("details", { class: "howto ep", id: `ep-${ep.date}-${ep.show}` },
+        el("summary", {}, el("span", {}, el("b", {}, `${ep.date.slice(5).replace("-", ".")} (${day}) ${tc(ep.show)}`),
           el("span", { class: "muted" }, ` · ${ep.ep ? `EP.${ep.ep} · ` : ""}${t("videos_n", { n: ep.videos.length })}`))),
         grid);
       // 펼칠 때 카드 만들기 (썸네일을 한꺼번에 불러오지 않게)
       box.addEventListener("toggle", () => {
         if (!box.open || grid.childElementCount) return;
+        box.insertBefore(el("div", { class: "ep-tools" }, shareBtn(() => share(`ep/${ep.date}/${ep.show}`, `A2O SOUL ${ep.date} ${ep.show}`))), grid);
         const cams = ep.videos.filter((v) => v.category === "fancam" && v.member);
         if (cams.length >= 2) {
           const btn = el("button", { class: "more cmp-open", type: "button" }, `▶▶ ${t("cmp_open")}`);
@@ -656,12 +693,18 @@ if ("serviceWorker" in navigator) {
   // ---------- 직캠 나란히 보기 ----------
   const cmpDlg = $("compareDialog");
   $("cmpClose").addEventListener("click", () => cmpDlg.close());
-  cmpDlg.addEventListener("close", () => $("cmpBody").replaceChildren()); // 닫으면 재생 멈춤
-  function openCompare(ep, cams) {
-    $("cmpTitle").textContent = `${ep.date.slice(5).replace("-", ".")} ${ep.show}`;
+  cmpDlg.addEventListener("close", () => {
+    $("cmpBody").replaceChildren(); // 닫으면 재생 멈춤
+    if (route()[0] === "cmp") history.replaceState(null, "", "#fancams");
+  });
+  function openCompare(ep, cams, pre = []) {
+    $("cmpTitle").replaceChildren(`${ep.date.slice(5).replace("-", ".")} ${tc(ep.show)}`,
+      shareBtn(() => share(`cmp/${ep.date}/${ep.show}/${cams[+slots[0].sel.value].member}/${cams[+slots[1].sel.value].member}`,
+        `A2O SOUL ${ep.show} ${cams[+slots[0].sel.value].member} vs ${cams[+slots[1].sel.value].member}`)));
     const embed = (id) => `https://www.youtube-nocookie.com/embed/${id}?playsinline=1&rel=0&modestbranding=1&autoplay=1&mute=1`;
+    const want = [0, 1].map((i) => { const k = cams.findIndex((v) => v.member === pre[i]); return k >= 0 ? k : i; });
     const slots = [0, 1].map((i) => {
-      const sel = el("select", { class: "sel" }, ...cams.map((v, j) => el("option", { value: j, ...(j === i ? { selected: "" } : {}) }, v.member)));
+      const sel = el("select", { class: "sel" }, ...cams.map((v, j) => el("option", { value: j, ...(j === want[i] ? { selected: "" } : {}) }, v.member)));
       const frame = el("div", { class: "cmp-frame" });
       const load = () => {
         const v = cams[+sel.value];
@@ -686,7 +729,7 @@ if ("serviceWorker" in navigator) {
   if (cmpEps.length) {
     const wd2 = t("weekdays");
     $("cmpEp").append(el("option", { value: "" }, t("cmp_pick")), ...cmpEps.map((x, i) => el("option", { value: i },
-      `${x.ep.date.slice(5).replace("-", ".")} (${wd2[new Date(`${x.ep.date}T12:00:00Z`).getUTCDay()]}) ${x.ep.show} · ${t("fancams_n", { n: x.cams.length })}`)));
+      `${x.ep.date.slice(5).replace("-", ".")} (${wd2[new Date(`${x.ep.date}T12:00:00Z`).getUTCDay()]}) ${tc(x.ep.show)} · ${t("fancams_n", { n: x.cams.length })}`)));
     $("cmpEp").addEventListener("change", (e) => {
       if (e.target.value === "") return;
       const x = cmpEps[+e.target.value];
@@ -746,7 +789,7 @@ if ("serviceWorker" in navigator) {
     for (const x of tl) {
       $("timeline").append(el("li", { class: `tl-${x.kind}` },
         el("span", { class: "tl-date" }, x.date.replaceAll("-", ".")),
-        x.url ? ext(x.url, x.title) : el("span", {}, x.title)));
+        x.url ? ext(x.url, tx(x)) : el("span", {}, tx(x))));
     }
   } else {
     $("timelineSec").remove();
@@ -853,7 +896,7 @@ if ("serviceWorker" in navigator) {
       const bd = upcomingBirthdays(30).find((b) => b.member === m.name);
       if (bd) body.push(el("div", { class: "bias-bd" }, bd.title));
       const vids = [...m.fancams].slice(0, 4);
-      if (vids.length) body.push(el("div", { class: "videos" }, ...vids.map((v) => videoCard(v, v.show || catLabel(v.category)))));
+      if (vids.length) body.push(el("div", { class: "videos" }, ...vids.map((v) => videoCard(v, tc(v.show) || catLabel(v.category)))));
       else body.push(empty(t("fancam_pending")));
       if ((m.ig_mentions || []).length) body.push(el("div", { class: "ig-feed bias-ig" }, ...m.ig_mentions.slice(0, 2).map((x) => igPost(x, false))));
       const more = el("button", { class: "more", type: "button" }, t("profile_view"));
@@ -937,5 +980,19 @@ if ("serviceWorker" in navigator) {
   drawers.cheer = rankCharts;
   drawers.mv = () => { lineChart("mvChart", data.mvs); dailyChart("mvDailyChart", data.mvs); };
 
+  openRoute = () => {
+    const [head, a, b, c, d] = route();
+    if (head === "member") {
+      const m = data.members.find((x) => x.name.toLowerCase() === (a || "").toLowerCase() || x.ko === a);
+      if (m && !dlg.open) openMember(m);
+    } else if (head === "ep") {
+      const box = document.getElementById(`ep-${a}-${b}`);
+      if (box) { box.open = true; setTimeout(() => box.scrollIntoView({ block: "start" }), 50); }
+    } else if (head === "cmp") {
+      const x = cmpEps.find((e) => e.ep.date === a && e.ep.show === b);
+      if (x && !cmpDlg.open) openCompare(x.ep, x.cams, [c, d]);
+    }
+  };
   showTab();
+  openRoute();
 })();

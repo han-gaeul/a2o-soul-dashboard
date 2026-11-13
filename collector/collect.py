@@ -113,6 +113,8 @@ def load_fan_files(cfg):
         cfg["supports"].append({**{k: str(v) for k, v in x.items() if v is not None},
                                 "start": _dt(x.get("start"), "support.yml start"),
                                 "end": _dt(x.get("end") or x.get("start"), "support.yml end")})
+    tr = read_yml("translations.yml") or {}
+    cfg["tr"] = {str(k): {str(l): str(x) for l, x in (v or {}).items() if x} for k, v in tr.items() if isinstance(v, dict)}
     howto = read_yml("howto.yml")
     keep = ("show", "when", "pre", "live", "note", "url")
     cfg["howto"] = {"checked": str(howto.get("checked") or ""),
@@ -363,8 +365,10 @@ def anniversaries(debut):
     if not debut:
         return []
     d0 = date.fromisoformat(debut)
-    out = [{"date": (d0 + timedelta(days=n - 1)).isoformat(), "title": f"🎉 데뷔 {n}일"} for n in range(100, 1001, 100)]
-    out += [{"date": d0.replace(year=d0.year + y).isoformat(), "title": f"🎉 데뷔 {y}주년"} for y in range(1, 6)]
+    out = [{"date": (d0 + timedelta(days=n - 1)).isoformat(), "title": f"🎉 데뷔 {n}일", "key": "anniv_days", "n": n}
+           for n in range(100, 1001, 100)]
+    out += [{"date": d0.replace(year=d0.year + y).isoformat(), "title": f"🎉 데뷔 {y}주년", "key": "anniv_years", "n": y}
+            for y in range(1, 6)]
     return [{**a, "type": "기념일", "auto": True, "anniv": True} for a in sorted(out, key=lambda a: a["date"])]
 
 
@@ -372,15 +376,16 @@ def build_timeline(cfg, videos, episodes, subs=()):
     """기록: 데뷔·발매·첫 음방(자동) + 조회수·구독자 돌파(수집 기록 기준) + info.yml records(직접 입력)."""
     items = []
     if cfg["debut_date"]:
-        items.append({"date": cfg["debut_date"], "kind": "debut", "title": "데뷔"})
+        items.append({"date": cfg["debut_date"], "kind": "debut", "title": "데뷔", "key": "tl_debut"})
     for a in cfg["info"]["albums"]:
         if a["date"]:
-            items.append({"date": a["date"], "kind": "release", "title": f"{a['type']} '{a['title']}' 발매".strip()})
+            items.append({"date": a["date"], "kind": "release", "title": f"{a['type']} '{a['title']}' 발매".strip(),
+                          "key": "tl_release", "type": a["type"], "name": a["title"]})
     firsts = {}
     for ep in episodes:
         firsts[ep["show"]] = min(firsts.get(ep["show"], ep["date"]), ep["date"])
     for show, d in firsts.items():
-        items.append({"date": d, "kind": "show", "title": f"첫 {show} 무대"})
+        items.append({"date": d, "kind": "show", "title": f"첫 {show} 무대", "key": "tl_first_show", "show": show})
     ms = view_milestones()
     for v in videos:
         if v["category"] != "mv":
@@ -390,16 +395,16 @@ def build_timeline(cfg, videos, episodes, subs=()):
             for m in ms:
                 if a < m <= b and m >= 1_000_000:
                     items.append({"date": d, "kind": "views", "title": f"{song_of(v['title']) or 'MV'} MV {kr_num(m)}뷰 돌파",
-                                  "url": f"https://youtu.be/{v['id']}"})
+                                  "url": f"https://youtu.be/{v['id']}", "key": "tl_views", "name": song_of(v["title"]) or "MV", "n": m})
     today = datetime.now(KST).date().isoformat()
     for a in anniversaries(cfg["debut_date"]):
         if a["date"] <= today:
-            items.append({"date": a["date"], "kind": "anniv", "title": a["title"]})
+            items.append({"date": a["date"], "kind": "anniv", "title": a["title"], "key": a["key"], "n": a["n"]})
     for pts in subs:
         for (_, a), (d, b) in zip(pts, pts[1:]):
             m = crossed(a, b, subscriber_milestones())
             if m:
-                items.append({"date": d, "kind": "subs", "title": f"유튜브 구독자 {kr_num(m)} 돌파"})
+                items.append({"date": d, "kind": "subs", "title": f"유튜브 구독자 {kr_num(m)} 돌파", "key": "tl_subs", "n": m})
     for x in cfg["info"]["records"]:
         items.append({"date": x["date"], "kind": "record", "title": x["title"], "url": x["url"]})
     seen, out = set(), []
@@ -744,6 +749,63 @@ def write_pending(pending):
     path.write_text("\n".join(lines) + "\n", "utf-8")
 
 
+def write_health(cfg, videos, members, today, official=()):
+    """수집 점검 → data/health.md (워크플로가 '수집 점검' 이슈로 올림). 문제가 없으면 파일 삭제."""
+    secs = []
+    known = {m["name"] for m in cfg["members"]}
+    # 1) 멤버를 못 찾았거나 여러 명이 잡힌 개인 직캠
+    odd = []
+    for v in videos:
+        if v["category"] != "fancam" or v["member"]:
+            continue
+        guess = re.search(r"A2O SOUL\s+([A-Z][A-Z\-]{1,15})\s+(?:FanCam|Fancam|직캠)|A2O SOUL\s+([가-힣]{1,4})\s+직캠", v["title"])
+        name = guess and (guess.group(1) or guess.group(2))
+        if (name and name.upper() not in known and name not in ("직캠",)) or len(v["members"]) > 1:
+            odd.append(f"- [{v['title']}](https://youtu.be/{v['id']}) — 잡힌 멤버: {', '.join(v['members']) or '없음'}")
+    if odd:
+        secs.append(("멤버를 못 찾은 직캠", "`members.yml`의 `aliases`에 표기를 추가하거나 `targets.yml` `videos:`에서 직접 지정", odd))
+    # 2) 공식 채널 업로드가 2주 넘게 없음
+    stale = []
+    for label, cid in official:
+        last = max((kst_date(v["published_at"]) for v in videos if v.get("channel_id") == cid and v.get("published_at")), default="")
+        if last and (date.fromisoformat(today) - date.fromisoformat(last)).days > 14:
+            stale.append(f"- {label}: 마지막 영상 {last}")
+    if stale:
+        secs.append(("2주 넘게 새 영상이 없는 공식 채널", "채널 ID가 바뀌었거나 수집이 막혔는지 확인", stale))
+    # 3) 사진·서명 없는 멤버
+    no_photo = [m["name"] for m in members if not m.get("photo")]
+    no_sign = [m["name"] for m in members if not m.get("signature")]
+    if no_photo or no_sign:
+        rows = ([f"- 사진 없음: {', '.join(no_photo)}"] if no_photo else []) + ([f"- 서명 없음: {', '.join(no_sign)}"] if no_sign else [])
+        secs.append(("사진·서명이 없는 멤버", "`site/img/members/`에 `라벨_이름` 형식으로 올리기", rows))
+    # 4) 번역이 빠진 문구
+    tr = cfg.get("tr") or {}
+    texts = [x.get("label", "") for x in cfg["group_links"]]
+    for m in cfg["members"]:
+        texts += [str(m.get("position") or "")] + [str(x) for k in ("nicknames", "career", "notes") for x in m.get(k) or []]
+    texts += cfg["info"]["lore"] + [a["type"] for a in cfg["info"]["albums"]]
+    for v in cfg["howto"]["voting"]:
+        texts += [v.get(k, "") for k in ("when", "pre", "live", "note")]
+    for g in cfg["howto"]["streaming"]:
+        texts += [g["title"]] + g["steps"]
+    missing = sorted({x for x in texts if x and re.search(r"[가-힣]", x) and set(tr.get(x, {})) < {"en", "ja", "zh", "es", "id"}})
+    if missing:
+        secs.append(("번역이 없는 문구", "`translations.yml`에 원문 그대로 추가 (en·ja·zh·es·id)", [f"- {x}" for x in missing]))
+    # 5) 투표 가이드가 오래됨
+    checked = cfg["howto"].get("checked") or ""
+    if checked and (date.fromisoformat(today) - date.fromisoformat(checked[:10])).days > 60:
+        secs.append(("투표 가이드 점검", "`howto.yml` 음방 투표 앱이 맞는지 확인하고 `checked` 날짜 바꾸기", [f"- 마지막 확인 {checked}"]))
+
+    path = DATA / "health.md"
+    if not secs:
+        path.unlink(missing_ok=True)
+        return
+    lines = ["사이트 데이터에서 손봐야 할 것들을 모아 둔 이슈예요. 수집할 때마다 갱신되고, 다 해결되면 자동으로 닫혀요.", ""]
+    for title, how, rows in secs:
+        lines += [f"### {title} ({len(rows)})", f"_{how}_", "", *rows[:30], *(["- …"] if len(rows) > 30 else []), ""]
+    path.write_text("\n".join(lines), "utf-8")
+
+
 def write_calendar(cfg, extra_events=()):
     """일정·생일·투표 마감·서포트를 iCal(.ics)로 → 휴대폰 캘린더 구독용."""
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
@@ -865,6 +927,7 @@ def build(cfg):
             "member": member,
             "published_at": reg.get("published_at"),
             "channel": reg.get("channel_title") or registry["channels"].get(reg.get("channel_id"), {}).get("title", ""),
+            "channel_id": reg.get("channel_id"),
             "views": value,
             "delta": delta,
             "points": pts,
@@ -970,6 +1033,7 @@ def build(cfg):
         "charts": cfg["charts"],
         "supports": sorted((x for x in cfg["supports"] if x["end"] >= today), key=lambda x: x["start"]),
         "howto": cfg["howto"],
+        "tr": cfg["tr"],
         "info": cfg["info"],
         "guide": {"course": [{**c, **{k: by_id[c["id"]][k] for k in slim}}
                              for c in cfg["guide"]["course"] if c["id"] in by_id],
@@ -977,6 +1041,9 @@ def build(cfg):
     }
     save_json("dashboard.json", dashboard)
     write_calendar(cfg, [e for e in all_events if e.get("auto") and not e.get("anniv")] + annivs)
+    official = [(registry["channels"].get(channel_id(c), {}).get("title") or channel_id(c), channel_id(c))
+                for c in cfg["channels"] if (c.get("kpi") or c.get("mv")) and channel_id(c)]
+    write_health(cfg, videos, members, today, official)
     print(f"dashboard.json 생성: 영상 {len(videos)}개 (MV {len(mvs)}, 직캠 {len(fancams)}), 일정 {len(dashboard['events'])}개")
 
 
