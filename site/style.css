@@ -384,3 +384,16 @@ header .head-right { margin-left: auto; }
 .src { font-size: 10px; font-weight: 800; padding: 1px 5px; border-radius: 4px; color: #fff; }
 .src-ig { background: #c13584; } .src-x { background: #111; }
 @media (prefers-color-scheme: dark) { .src-x { background: #444; } }
+
+/* 달력 작게: 칸 높이 고정, PC에선 폭 제한 */
+.cal-head { margin: 0 0 4px; }
+.cal-head b { font-size: 14px; }
+.cal-nav { width: 28px; height: 28px; font-size: 16px; }
+.cal-head, .cal-grid { max-width: 420px; margin-left: auto; margin-right: auto; }
+.cal-grid { gap: 0; }
+.cal-wd { padding: 2px 0; font-size: 10px; }
+.cal-cell { aspect-ratio: auto; height: 34px; padding-top: 3px; gap: 1px; border-radius: 8px; }
+.cal-d { font-size: 12px; line-height: 18px; }
+.cal-cell.today .cal-d { padding: 0 5px; }
+.dot { width: 5px; height: 5px; }
+.cal-sub { margin: 6px 0 0; }
