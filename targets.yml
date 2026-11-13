@@ -74,6 +74,11 @@ instagram:
 x:
   - A2O_SOUL
 
+# 판매처 X 계정 — 이 계정들 글 중 'A2O SOUL + 팬사인회/영통'만 검색해서 일정에 자동 반영
+#   handle: X 아이디(@ 없이), name: 사이트에 보일 이름 (schedule.yml 제목과 같게 쓰면 중복 없이 합쳐짐)
+x_vendors: []
+#  - { handle: 아이디, name: Withmuu }
+
 # 영상 개별 설정 — 다른 채널 영상 추가, 자동 분류 덮어쓰기
 #   category: mv | fancam | content
 #   member: members.yml의 이름

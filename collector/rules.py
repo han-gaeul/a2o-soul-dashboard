@@ -6,7 +6,7 @@
 import re
 from datetime import date, timedelta
 
-RULES_VERSION = 4  # 규칙을 바꾸면 올리기 → 다음 수집 때 최근 공지를 다시 읽어 일정을 새로 뽑음
+RULES_VERSION = 5  # 규칙을 바꾸면 올리기 → 다음 수집 때 최근 공지를 다시 읽어 일정을 새로 뽑음
 
 SHOWS = [
     ("더쇼", r"더\s?쇼(?!\s?챔)|THE\s?SHOW"),
@@ -279,3 +279,46 @@ def extract(caption, posted, today):
                     items.append(_item(kind, head[:60] or kind, future[0], _time(caption), 0.6))
                 break
     return items
+
+
+# ---------- 판매처 팬사인회·영상통화 공지 (Mnet Plus·Makestar·Withmuu·Musicart 등) ----------
+FANSIGN = re.compile(r"팬\s?사인|사인회|영상\s?통화|영통|FAN\s?SIGN|VIDEO\s?CALL", re.I)
+VIDEO = re.compile(r"영상\s?통화|영통|VIDEO\s?CALL", re.I)
+WHEN_LINE = re.compile(r"일시|일정|날짜|DATE|SCHEDULE|日時", re.I)
+NOT_WHEN = re.compile(r"응모|구매|판매|접수|당첨|발표|결제|주문|기간|PERIOD|PURCHASE|ANNOUNCE|WINNER|APPLY|ENTRY", re.I)
+
+
+def fansign_items(caption, posted, vendor):
+    """'[EVENT] A2O SOUL ... 영상통화 팬사인회 / 행사 일시: 2026년 11월 21일 (토) 18:30' → 행사 일정.
+    일시 줄을 못 찾으면 확신 낮음('확인 필요' 이슈)."""
+    caption = caption or ""
+    if not FANSIGN.search(caption) or not re.search(r"A2O\s?SOUL|에이투오\s?소울|A2OSOUL", caption, re.I):
+        return []
+    try:
+        pday = date.fromisoformat(posted[:10])
+    except ValueError:
+        return []
+    video = bool(VIDEO.search(caption))
+    title = f"{vendor} {'영상통화 팬사인회' if video else '팬사인회'}".strip()
+    short = "영통" if video else "팬싸"
+    urls = [u for u in URL.findall(caption) if not SKIP_URL.search(u)]
+    url = urls[0] if urls else None
+    lines = [ln.strip() for ln in caption.splitlines() if ln.strip()]
+    items, seen = [], set()
+    for ln in lines:
+        if not WHEN_LINE.search(ln) or NOT_WHEN.search(ln):
+            continue
+        d, tm = _when(ln.split("~")[0], pday)
+        if d and d >= pday and d not in seen:
+            seen.add(d)
+            items.append({**_item("event", title, d, tm, 0.85 if tm else 0.8, url), "short": short})
+    if items:
+        return items
+    # 일시 줄이 없으면: 신청·발표 줄이 아닌 곳의 날짜를 '확인 필요'로
+    for ln in lines:
+        if NOT_WHEN.search(ln):
+            continue
+        ds = [x for x in _dates(ln, pday) if x >= pday]
+        if ds:
+            return [{**_item("event", title, ds[0], _time(ln), 0.6, url), "short": short}]
+    return []
