@@ -241,7 +241,11 @@ if ("serviceWorker" in navigator) {
   // 시간이 없는 음방 일정은 투표 가이드의 방송 시간(예: '금 17:15 · KBS2')으로 채우기
   const showTime = {};
   for (const v of data.howto?.voting || []) { const m = /(\d{1,2}:\d{2})/.exec(v.when || ""); if (m) showTime[v.show] = m[1]; }
-  const allEvents = [...(data.events || []).filter((e) => e.date >= todayKst), ...upcomingBirthdays(), ...voteEvents, ...supportEvents]
+  const prerecEvents = (data.prerecs || []).map((v) => ({
+    date: v.start.slice(0, 10), time: v.start.slice(11), type: t("prerec"),
+    title: `📝 ${t("prerec_title", { show: tc(v.show) })}`, url: v.url || v.source,
+  }));
+  const allEvents = [...(data.events || []).filter((e) => e.date >= todayKst), ...upcomingBirthdays(), ...voteEvents, ...supportEvents, ...prerecEvents]
     .map((e) => {
       const show = /^(.+) 출연$/.exec(e.title || "")?.[1];
       return { ...e, group: groupOf(e), time: e.time || (show && showTime[show]) || e.time };
@@ -360,6 +364,26 @@ if ("serviceWorker" in navigator) {
     if (m >= 60) return t("dur_h", { n: Math.floor(m / 60) }) + " " + t("dur_m", { n: m % 60 });
     return t("dur_m", { n: m });
   }
+  const prerecs = (data.prerecs || []).filter((v) => kstDate(v.end) > Date.now());
+  if (prerecs.length) {
+    for (const v of prerecs) {
+      const start = kstDate(v.start), end = kstDate(v.end);
+      const open = Date.now() >= start;
+      const urgent = !open && start - Date.now() < 3 * 3600000;
+      $("prerecs").append(el("div", { class: `vote${open || urgent ? " urgent" : ""}` },
+        el("div", { class: "vote-top" },
+          el("span", { class: `chip ${open ? "chip-on" : ""}` }, open ? t("vote_now") : t("vote_soon")),
+          el("b", {}, t("prerec_title", { show: tc(v.show) })),
+          v.record ? el("span", { class: "muted" }, ` · ${t("prerec_rec", { d: v.record.slice(5).replace("-", ".") })}`) : null),
+        el("div", { class: "vote-time" }, open ? t("vote_ends", { t: duration(end - Date.now()) }) : t("vote_starts", { t: duration(start - Date.now()) }),
+          el("span", { class: "muted" }, ` · ${v.start.slice(5).replace("-", ".")} ~ ${v.end.slice(11)}`)),
+        el("div", { class: "vote-links" }, v.url ? ext(v.url, t("prerec_go")) : null,
+          v.source ? ext(v.source, t("from_notice"), " ↗") : null)));
+    }
+  } else {
+    $("prerecSec").remove();
+  }
+
   const votes = (data.votes || []).filter((v) => kstDate(v.end) > Date.now());
   if (votes.length) {
     for (const v of votes) {
@@ -452,7 +476,8 @@ if ("serviceWorker" in navigator) {
   const igPost = (x, withMembers = true) => {
     const iso = x.at ? kstDate(x.at).toISOString() : null;
     return el("a", { class: "ig-post", href: x.url, target: "_blank", rel: "noopener" },
-      el("div", { class: "ig-meta" }, ageHours(iso) <= NEW_HOURS ? el("span", { class: "chip chip-on" }, "NEW") : null,
+      el("div", { class: "ig-meta" }, el("span", { class: `src src-${x.account === "x" ? "x" : "ig"}` }, x.account === "x" ? "X" : "IG"),
+        ageHours(iso) <= NEW_HOURS ? el("span", { class: "chip chip-on" }, "NEW") : null,
         el("span", { class: "muted" }, iso ? when(iso) : ""),
         x.likes != null ? el("span", { class: "muted" }, `♥ ${fmt(x.likes)}`) : null,
         x.comments != null ? el("span", { class: "muted" }, `💬 ${fmt(x.comments)}`) : null),

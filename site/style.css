@@ -381,3 +381,6 @@ header .head-right { margin-left: auto; }
 .cal .events { margin-top: 4px; }
 #eventsSection .sec-head { gap: 10px; }
 #eventsSection .sec-head .see-all { white-space: nowrap; }
+.src { font-size: 10px; font-weight: 800; padding: 1px 5px; border-radius: 4px; color: #fff; }
+.src-ig { background: #c13584; } .src-x { background: #111; }
+@media (prefers-color-scheme: dark) { .src-x { background: #444; } }

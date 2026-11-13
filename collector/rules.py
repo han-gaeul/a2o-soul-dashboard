@@ -6,7 +6,7 @@
 import re
 from datetime import date, timedelta
 
-RULES_VERSION = 3  # 규칙을 바꾸면 올리기 → 다음 수집 때 최근 공지를 다시 읽어 일정을 새로 뽑음
+RULES_VERSION = 4  # 규칙을 바꾸면 올리기 → 다음 수집 때 최근 공지를 다시 읽어 일정을 새로 뽑음
 
 SHOWS = [
     ("더쇼", r"더\s?쇼(?!\s?챔)|THE\s?SHOW"),
@@ -215,6 +215,20 @@ def extract(caption, posted, today):
                 items.append(_item("music_show", f"{name} 출연", _next_weekday(rec, SHOW_WEEKDAY[name]), None, 0.85))
             else:
                 items.append(_item("music_show", f"{name} 출연", rec, None, 0.8))
+            # 사녹 신청: '신청 기간 : 2026년 11월 13일 (금) PM 9:10 ~ PM 9:20' + 신청 링크
+            for ln in lines:
+                if re.search(r"신청|응모|APPLY", ln, re.I) and "~" in ln:
+                    left, right = ln.split("~", 1)
+                    sd, st = _when(left, pday)
+                    ed, et = _when(right, pday, base=sd)
+                    if sd and st:
+                        url = next((u for x in lines if re.search(r"신청|링크|LINK", x, re.I) for u in URL.findall(x)
+                                    if not SKIP_URL.search(u)), None)
+                        items.append({"kind": "prerec", "title": f"{name} 사전녹화 신청", "show": name, "date": rec.isoformat(),
+                                      "time": None, "end_date": None, "place": None, "url": url,
+                                      "start": f"{sd.isoformat()} {st}", "end": f"{(ed or sd).isoformat()} {et or st}",
+                                      "confidence": 0.9 if url else 0.6})
+                    break
         return items if head or items else []
 
     # 2) 방송 직전·당일 안내: '잠시 후, 5시 10분 뮤직뱅크에 출연합니다'

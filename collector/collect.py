@@ -474,7 +474,7 @@ def kst_datetime(iso):
 def auto_items(today):
     """announcements.json → (자동 반영 일정, 공지 정보, 확인 필요 목록)."""
     store = load_json("announcements.json", {})
-    events, notices, pending, votes = [], [], [], []
+    events, notices, pending, votes, prerecs = [], [], [], [], []
     seen_ev, seen_pend, seen_vote = set(), set(), set()
     for pid, post in sorted(store.get("posts", {}).items(), key=lambda kv: kv[1].get("timestamp") or "", reverse=True):
         posted = kst_datetime(post.get("timestamp"))[:10]
@@ -486,6 +486,11 @@ def auto_items(today):
                 if future and key not in seen_pend and posted >= (date.fromisoformat(today) - timedelta(days=30)).isoformat():
                     seen_pend.add(key)
                     pending.append(row)
+                continue
+            if i["kind"] == "prerec":  # 사전녹화 신청 (신청 시간·링크)
+                if i.get("end") and i["end"] >= now_kst_str() and i["confidence"] >= announce.AUTO_CONFIDENCE:
+                    prerecs.append({"show": i.get("show") or "", "record": i.get("date"), "start": i["start"], "end": i["end"],
+                                    "url": i.get("url"), "source": post.get("permalink")})
                 continue
             if i["kind"] == "vote":  # 투표: 응원 탭 투표 카드·캘린더로 (기간·링크)
                 if i.get("end") and i["end"] >= now_kst_str() and (i["end"], i["title"]) not in seen_vote:
@@ -500,7 +505,8 @@ def auto_items(today):
                                "url": i.get("url") or post.get("permalink"), "auto": True})
             if i["kind"] in ("ticket", "merch", "release", "concert", "fanmeeting", "event") and future:
                 notices.append(row)
-    return events, notices[:20], pending, votes
+    prerecs.sort(key=lambda x: x["start"])
+    return events, notices[:20], pending, votes, prerecs
 
 
 def youtube_upcoming(registry, today):
@@ -943,7 +949,28 @@ def build(cfg):
             ig_feed.append({"account": u, "at": kst_datetime(m.get("timestamp")), "text": text[:300],
                             "more": len(text) > 300, "url": m.get("permalink"), "likes": m.get("likes"),
                             "comments": m.get("comments"), "members": detect_members(cfg, text)})
+    for pid, post in (load_json("announcements.json", {}).get("posts") or {}).items():
+        if not pid.startswith("x:") or not post.get("caption"):
+            continue
+        text = re.sub(r"\s*https://t\.co/\S+", "", post["caption"]).strip()
+        ig_feed.append({"account": "x", "at": kst_datetime(post.get("timestamp")), "text": text[:300], "more": len(text) > 300,
+                        "url": post.get("permalink"), "likes": None, "comments": None, "members": detect_members(cfg, text)})
     ig_feed.sort(key=lambda x: x["at"], reverse=True)
+    # 같은 글을 인스타·X에 같이 올린 경우 하나만 (첫 문장이 같고 3시간 안)
+    def first_line(t):
+        for ln in t.splitlines():
+            ln = re.sub(r"^\[[^\]]*\]\s*", "", ln).strip()
+            if re.search(r"[가-힣A-Za-z]{2}", ln) and not ln.startswith("#"):
+                return re.sub(r"\W+", "", ln.lower())[:40]
+        return ""
+    kept = []
+    for x in ig_feed:
+        k = first_line(x["text"])
+        dup = k and any(first_line(y["text"]) == k and abs((datetime.fromisoformat(y["at"]) - datetime.fromisoformat(x["at"])).total_seconds()) < 3 * 3600
+                        for y in kept)
+        if not dup:
+            kept.append(x)
+    ig_feed = kept
 
     overrides = {v["id"]: v for v in cfg["videos"]}
     tracked = {channel_id(c) for c in cfg["channels"]}
@@ -1035,7 +1062,7 @@ def build(cfg):
 
     by_id = {v["id"]: v for v in videos}
     today = datetime.now(KST).date().isoformat()
-    auto_events, notices, pending, auto_votes = auto_items(today)
+    auto_events, notices, pending, auto_votes, prerecs = auto_items(today)
     have = {(v["end"], v.get("show", ""), v.get("title", "")) for v in cfg["votes"]}
     have_app = {(v["end"][:10], v.get("app", "")) for v in cfg["votes"] if v.get("app")}
     cfg["votes"] += [v for v in auto_votes if (v["end"], v["show"], v["title"]) not in have
@@ -1073,6 +1100,7 @@ def build(cfg):
         "categories": CATEGORIES,
         "feedback_url": str(cfg.get("feedback_url") or ""),
         "votes": [v for v in cfg["votes"] if v["end"] >= now_kst_str()],
+        "prerecs": prerecs,
         "streaming": cfg["streaming"],
         "charts": cfg["charts"],
         "supports": sorted((x for x in cfg["supports"] if x["end"] >= today), key=lambda x: x["start"]),
