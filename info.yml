@@ -6,15 +6,16 @@ lore:
   - "그런데도 무언가 비어 있다고 느낀 이들은, 사람을 살아 있게 하는 감정과 에너지 — 기쁨·사랑·설렘·열정, 곧 '소울(SOUL)'을 찾아 지구로 떠나요."
   - "데뷔 앨범 'SUPERSTAR'가 그 이야기의 첫 번째 챕터. 그룹은 자신들의 음악을 'NEW SYNTHWAVE'라고 불러요."
 
-# 앨범 (최신순). versions: 앨범 버전(포토북·디지팩 등), links: 구매·감상 링크 { 이름: URL }
+# 앨범 (최신순). focus: 활동곡, versions: 앨범 버전(포토북·디지팩 등), links: 구매·감상 링크 { 이름: URL }
 albums:
   - title: SUPERSTAR
     type: 데뷔 미니앨범
     date: 2026-11-09
     time: "18:00"
+    focus: [Dancing in the Dark]
     tracks:
-      - Superstar (타이틀)
-      - Dancing in the Dark (타이틀)
+      - Superstar
+      - Dancing in the Dark
       - While We're Young
       - Very First Love
       - Moonlight Shadow
@@ -23,9 +24,15 @@ albums:
   - title: SUPERSTAR
     type: 선공개 싱글
     date: 2026-10-13
+    focus: [SUPERSTAR]
     tracks: [SUPERSTAR]
     versions: []
     links: {}
+
+# 멤버 사진 파일 라벨 → 화면에 보일 이름 (site/img/members/댄인닼_문.webp → 'Dancing in the Dark')
+photo_labels:
+  댄인닼: Dancing in the Dark
+  슈퍼스타: SUPERSTAR
 
 # 기록 (입덕 탭 '기록') — 1위 등 직접 입력. 데뷔·발매·첫 음방·조회수/구독자 돌파는 자동
 #   예) - { date: 2026-11-20, title: "엠카운트다운 첫 1위", url: "https://..." }

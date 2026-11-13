@@ -12,6 +12,7 @@ import argparse
 import json
 import math
 import re
+import unicodedata
 import sys
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
@@ -123,9 +124,11 @@ def load_fan_files(cfg):
         "lore": [str(x) for x in info.get("lore") or []],
         "albums": [{"title": str(a["title"]), "type": str(a.get("type") or ""), "date": str(a.get("date") or ""),
                     "time": str(a.get("time") or ""), "tracks": [str(x) for x in a.get("tracks") or []],
+                    "focus": [str(x) for x in a.get("focus") or []],
                     "versions": [str(x) for x in a.get("versions") or []],
                     "links": {str(k): str(v) for k, v in (a.get("links") or {}).items() if str(v).startswith("https://")}}
                    for a in info.get("albums") or [] if a.get("title")],
+        "photo_labels": {str(k): str(v) for k, v in (info.get("photo_labels") or {}).items()},
         "records": [{"date": str(x["date"]), "title": str(x["title"]), "url": str(x.get("url") or "")}
                     for x in info.get("records") or [] if x.get("date") and x.get("title")],
         "shops": [{"label": str(x["label"]), "url": str(x["url"]), "note": str(x.get("note") or "")}
@@ -190,24 +193,38 @@ def local_img(path):
 IMG_EXT = (".jpg", ".jpeg", ".png", ".webp")
 
 
+SIGN_LABELS = {"서명", "사인", "sign", "signature"}
+
+
 def auto_photos(m):
-    """site/img/members/ 에 멤버 이름으로 올린 파일 자동 연결 (members.yml 안 고쳐도 됨).
-    moon.jpg / 문.jpg → 대표 사진, moon-2.jpg · moon_데뷔.jpg 처럼 이름 뒤에 - 나 _ 붙은 것 → 추가 사진."""
+    """site/img/members/ 에 멤버 이름이 들어간 파일 자동 연결 (members.yml 안 고쳐도 됨).
+    파일 이름을 _ 나 - 로 나눈 조각 중 하나가 멤버 이름(영문·한글)이면 그 멤버 사진.
+      문.jpg / moon.jpg      → 대표 사진
+      서명_문.svg             → 서명
+      슈퍼스타_문.webp 등      → 추가 사진(역대 프로필·퀴즈), 나머지 조각이 라벨. 대표 사진이 없으면 첫 번째가 대표
+    (맥에서 올린 한글 파일명은 자모가 분리돼 있어서 NFC로 맞춰서 비교)"""
     folder = ROOT / "site" / "img" / "members"
     if not folder.is_dir():
-        return "", []
-    keys = {m["name"].lower(), str(m.get("ko") or "").lower()} - {""}
-    main, extra = "", []
-    for f in sorted(folder.iterdir()):
-        if f.suffix.lower() not in IMG_EXT:
+        return {"photo": "", "signature": "", "extra": []}
+    keys = {unicodedata.normalize("NFC", k).lower() for k in (m["name"], str(m.get("ko") or "")) if k}
+    out = {"photo": "", "signature": "", "extra": []}
+    for f in sorted(folder.iterdir(), key=lambda f: unicodedata.normalize("NFC", f.name)):
+        if f.suffix.lower() not in IMG_EXT + (".svg",):
             continue
-        stem = f.stem.lower()
+        parts = [x for x in re.split(r"[_\-]", unicodedata.normalize("NFC", f.stem).lower()) if x]
+        if not keys & set(parts):
+            continue
         rel = f"img/members/{f.name}"
-        if stem in keys:
-            main = main or rel
-        elif any(stem.startswith(k + "-") or stem.startswith(k + "_") for k in keys):
-            extra.append(rel)
-    return main, extra
+        label = " ".join(x for x in parts if x not in keys)
+        if label in SIGN_LABELS:
+            out["signature"] = out["signature"] or rel
+        elif not label and f.suffix.lower() != ".svg":
+            out["photo"] = out["photo"] or rel
+        elif f.suffix.lower() != ".svg":
+            out["extra"].append({"label": label, "photo": rel})
+    if not out["photo"] and out["extra"]:
+        out["photo"] = out["extra"][0]["photo"]
+    return out
 
 
 IG_POST = re.compile(r"^https://(www\.)?instagram\.com/(p|reel)/[\w-]+/?")
@@ -839,6 +856,7 @@ def build(cfg):
     members = []
     for m in cfg["members"]:
         mine = [v for v in fancams if v["member"] == m["name"]]
+        auto = auto_photos(m)
         members.append({
             "name": m["name"],
             "ko": m.get("ko", ""),
@@ -850,11 +868,12 @@ def build(cfg):
             "notes": m.get("notes") or [],
             "instagram_posts": [str(u) for u in (m.get("instagram_posts") or [])],
             "ig_mentions": [{k: x[k] for k in ("at", "text", "more", "url")} for x in ig_feed if m["name"] in x["members"]][:10],
-            "photo": local_img(m.get("photo")) or auto_photos(m)[0],
-            "signature": local_img(m.get("signature")),
+            "photo": local_img(m.get("photo")) or auto["photo"],
+            "signature": local_img(m.get("signature")) or auto["signature"],
             "birthday": str(m.get("birthday") or ""),
-            "profile_history": profile_history(m) + [{"label": "", "photo": x} for x in auto_photos(m)[1]
-                                                     if x not in {h.get("photo") for h in profile_history(m)}],
+            "profile_history": profile_history(m) + [{**x, "label": cfg["info"]["photo_labels"].get(x["label"], x["label"])}
+                                                     for x in auto["extra"]
+                                                     if x["photo"] not in {h.get("photo") for h in profile_history(m)}],
             "fancam_count": len(mine),
             "fancam_views": sum(v["views"] or 0 for v in mine),
             "fancam_delta": sum(v["delta"] or 0 for v in mine) or None,
