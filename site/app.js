@@ -78,7 +78,8 @@ if ("serviceWorker" in navigator) {
   const deltaSpan = (d) => (d ? el("span", { class: "delta" }, `+${fmt(d)}`) : null);
   const ytUrl = (id) => `https://www.youtube.com/watch?v=${encodeURIComponent(id)}`;
   const thumbUrl = (id) => `https://i.ytimg.com/vi/${encodeURIComponent(id)}/mqdefault.jpg`;
-  const ext = (href, ...children) => el("a", { href, target: "_blank", rel: "noopener" }, ...children);
+  // 외부 링크는 http(s)만 (yml에 잘못된 주소가 들어가도 javascript: 등은 막기)
+  const ext = (href, ...children) => el("a", { href: /^https?:\/\//i.test(href || "") ? href : "#", target: "_blank", rel: "noopener" }, ...children);
   const empty = (msg) => el("div", { class: "empty" }, msg);
   const kstFmt = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" });
   const todayKst = kstFmt.format(new Date()); // YYYY-MM-DD
