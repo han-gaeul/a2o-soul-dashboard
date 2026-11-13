@@ -647,7 +647,7 @@ if ("serviceWorker" in navigator) {
   // ---------- 멤버 맞히기 퀴즈 (입덕 탭) ----------
   // 멤버 사진(members.yml photo·profile_history)이 4명 이상 있으면 사진 퀴즈,
   // 없으면 직캠 장면 퀴즈 (썸네일은 이름 글씨가 있어서 영상 장면 사용, 화질 좋은 것부터 시도)
-  const photoQs = data.members.flatMap((m) => [m.photo, ...(m.profile_history || []).map((h) => h.photo)]
+  const photoQs = data.members.flatMap((m) => [...new Set([m.photo, ...(m.profile_history || []).map((h) => h.photo)])]
     .filter(Boolean).map((src) => ({ member: m.name, photo: src })));
   const photoMode = new Set(photoQs.map((x) => x.member)).size >= 4;
   const quizPool = photoMode ? photoQs : allFancams.filter((v) => v.member).map((v) => ({ member: v.member, video: v }));
