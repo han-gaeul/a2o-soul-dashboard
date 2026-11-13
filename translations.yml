@@ -1219,3 +1219,7 @@ SHOW K-POP:
   es: K-POP UP CHART SHOW
   id: K-POP UP CHART SHOW
   th: K-POP UP CHART SHOW
+"CARABINER Ver. 포카": { en: "CARABINER Ver. PCs", ja: "CARABINER Ver. トレカ", zh: "CARABINER Ver. 小卡", es: "Photocards CARABINER Ver.", id: "PC CARABINER Ver.", th: "การ์ด CARABINER Ver." }
+"SUPERSTAR 방송 포카": { en: "SUPERSTAR broadcast PCs", ja: "SUPERSTAR 放送トレカ", zh: "SUPERSTAR 打歌小卡", es: "Photocards de shows (SUPERSTAR)", id: "PC siaran SUPERSTAR", th: "การ์ดรายการเพลง SUPERSTAR" }
+"Dancing in the Dark 방송 포카": { en: "Dancing in the Dark broadcast PCs", ja: "Dancing in the Dark 放送トレカ", zh: "Dancing in the Dark 打歌小卡", es: "Photocards de shows (Dancing in the Dark)", id: "PC siaran Dancing in the Dark", th: "การ์ดรายการเพลง Dancing in the Dark" }
+"올리브영 럭키드로우": { en: "Olive Young lucky draw", ja: "OLIVE YOUNG ラッキードロー", zh: "Olive Young 幸运抽奖", es: "Sorteo Olive Young", id: "Lucky draw Olive Young", th: "ลัคกี้ดรอว์ Olive Young" }

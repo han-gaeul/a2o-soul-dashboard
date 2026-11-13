@@ -647,6 +647,15 @@ if ("serviceWorker" in navigator) {
         el("h3", {}, t(label, { n: list.length })),
         el("div", { class: "videos" }, ...list.map((v) => videoCard(v, null)))));
     }
+    const myPcl = ((data.info || {}).pclists || []).filter((x) => x.member === m.name);
+    if (myPcl.length) {
+      const cr = (data.info || {}).pclist_credit || {};
+      sections.push(el("section", { class: "dlg-sec", id: "dlg-pcl" },
+        el("h3", {}, t("pclist")),
+        ...myPcl.map((x) => el("a", { class: "pcl-img", href: x.src, target: "_blank", rel: "noopener" },
+          el("img", { src: x.src, alt: `${x.album} ${m.name} — ${t("pclist")}`, loading: "lazy", decoding: "async" }))),
+        cr.url ? el("p", { class: "pf-src" }, t("pclist_by"), " ", ext(cr.url, cr.label || cr.url)) : null));
+    }
     if ((m.ig_mentions || []).length) {
       sections.push(el("section", { class: "dlg-sec", id: "dlg-ig" },
         el("h3", {}, t("ig_mentions", { n: m.ig_mentions.length })),
@@ -1107,8 +1116,37 @@ if ("serviceWorker" in navigator) {
     };
     drawPc();
   } else {
-    $("pcSec").remove();
+    $("pcTabs").remove();
+    $("pcGrid").remove();
   }
+
+  // ---------- 포카 리스트: 팬 계정 템플릿 — 원본 그대로(자르기·수정 없이) + 출처 ----------
+  const pcl = (data.info || {}).pclists || [];
+  const pclCredit = (data.info || {}).pclist_credit || {};
+  const pclName = (x) => x.member || tc(x.label);
+  const creditLine = () => pclCredit.url
+    ? el("p", { class: "pf-src" }, t("pclist_by"), " ", ext(pclCredit.url, pclCredit.label || pclCredit.url))
+    : null;
+  if (pcl.length) {
+    let pclSel = pcl.find((x) => x.member && x.member === bias) || pcl.find((x) => !x.member) || pcl[0];
+    const drawPcl = () => {
+      const groups = pcl.filter((x) => !x.member);
+      const mems = pcl.filter((x) => x.member).sort((a, b) => (a.member === bias ? -1 : b.member === bias ? 1 : 0));
+      $("pclTabs").replaceChildren(...[...groups, ...mems].map((x) => {
+        const b = el("button", { type: "button", class: x === pclSel ? "on" : "" }, pclName(x));
+        b.addEventListener("click", () => { pclSel = x; drawPcl(); });
+        return b;
+      }));
+      $("pclLink").href = pclSel.src;
+      $("pclImg").src = pclSel.src;
+      $("pclImg").alt = `${pclSel.album} ${pclName(pclSel)} — ${t("pclist")}`;
+      $("pclCredit").replaceWith(Object.assign(creditLine() || el("p"), { id: "pclCredit" }));
+    };
+    drawPcl();
+  } else {
+    $("pclBox").remove();
+  }
+  if (!pcs.length && !pcl.length) $("pcSec").remove();
 
   // ---------- 차트 ----------
   const palette = ["#6c4cf5", "#f5734c", "#12a1a0", "#e0479e", "#d4a017", "#3b82f6", "#8b5cf6", "#22c55e"];
