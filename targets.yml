@@ -4,7 +4,7 @@
 debut_date: 2026-10-13
 
 # 사이트 하단 '의견 보내기' 버튼 링크 (구글 폼 응답 링크 등). 비우면 버튼 숨김
-feedback_url: ""
+feedback_url: "https://docs.google.com/forms/d/e/1FAIpQLSf6AiaTcOE6EUweWYeOUyMpUUgS6CGLwwYTEDbbgDCgIt8xyg/viewform"
 
 # 유튜브 채널: 업로드 영상을 자동으로 찾아 등록 (데뷔 전 영상 포함)
 #   id 또는 handle 중 하나
