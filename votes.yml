@@ -10,13 +10,19 @@
 #     start: "2026-11-12 18:00"
 #     end: "2026-11-14 23:59"
 #     url: https://...
-votes: []
+votes:
+  - show: 유픽
+    app: 유픽(U+PICK)
+    title: "11월 이달의 픽 · 루키 남자 (제트·서하 후보)"
+    start: "2026-11-01 00:00"
+    end: "2026-11-20 23:59"   # 마감 시각은 기사에 없어서 날짜 끝으로 — 앱에서 확인
+    note: 부문 1위는 코엑스 미디어타워 전광판 광고
 
 # 스밍 리스트: 위에서부터 순서대로 표시. links는 있는 것만
 streaming:
-  - title: SUPERSTAR
-    note: 데뷔 앨범 타이틀
-    links: {}          # 예) { 멜론: "https://...", 지니: "https://...", Spotify: "https://...", YouTube: "https://youtu.be/IAURqrShEUQ" }
   - title: Dancing in the Dark
-    note: 더블 타이틀
-    links: {}
+    note: 지금 활동곡 (데뷔 미니앨범 더블 타이틀)
+    links: { MV: "https://youtu.be/JPJokqIoIJI" }   # 예) 멜론: "https://...", Spotify: "https://..."
+  - title: SUPERSTAR
+    note: 선공개 싱글·데뷔 활동곡
+    links: { MV: "https://youtu.be/IAURqrShEUQ", "INFINITE MV": "https://youtu.be/B5Aa4gnnt9I" }
