@@ -245,6 +245,19 @@
      "time": null,
      "title": "인기가요 출연",
      "url": null
+    },
+    {
+     "confidence": 0.9,
+     "date": "2026-11-15",
+     "end": "2026-11-13 10:00",
+     "end_date": null,
+     "kind": "prerec",
+     "place": null,
+     "show": "인기가요",
+     "start": "2026-11-13 09:30",
+     "time": null,
+     "title": "인기가요 사전녹화 신청",
+     "url": "https://artist.mnetplus.world/main/stg/a2osoul/surveys/6af5a831cf6f420480ba70b7"
     }
    ],
    "permalink": "https://x.com/A2O_SOUL/status/2120846973586817456",
@@ -338,6 +351,19 @@
      "time": null,
      "title": "SHOW K-POP 출연",
      "url": null
+    },
+    {
+     "confidence": 0.9,
+     "date": "2026-11-16",
+     "end": "2026-11-13 21:10",
+     "end_date": null,
+     "kind": "prerec",
+     "place": null,
+     "show": "SHOW K-POP",
+     "start": "2026-11-13 21:00",
+     "time": null,
+     "title": "SHOW K-POP 사전녹화 신청",
+     "url": "https://artist.mnetplus.world/main/stg/a2osoul/surveys/6af6db5d27f0386b83f4ba0e"
     }
    ],
    "permalink": "https://x.com/A2O_SOUL/status/2121176770087207099",
@@ -356,6 +382,19 @@
      "time": null,
      "title": "더쇼 출연",
      "url": null
+    },
+    {
+     "confidence": 0.9,
+     "date": "2026-11-17",
+     "end": "2026-11-13 21:20",
+     "end_date": null,
+     "kind": "prerec",
+     "place": null,
+     "show": "더쇼",
+     "start": "2026-11-13 21:10",
+     "time": null,
+     "title": "더쇼 사전녹화 신청",
+     "url": "https://artist.mnetplus.world/main/stg/a2osoul/surveys/6af6db9327f0386b83f4ba13"
     }
    ],
    "permalink": "https://x.com/A2O_SOUL/status/2121176980028899663",
@@ -374,6 +413,19 @@
      "time": null,
      "title": "케이팝업 차트쇼 출연",
      "url": null
+    },
+    {
+     "confidence": 0.9,
+     "date": "2026-11-18",
+     "end": "2026-11-13 21:30",
+     "end_date": null,
+     "kind": "prerec",
+     "place": null,
+     "show": "케이팝업 차트쇼",
+     "start": "2026-11-13 21:20",
+     "time": null,
+     "title": "케이팝업 차트쇼 사전녹화 신청",
+     "url": "https://artist.mnetplus.world/main/stg/a2osoul/surveys/6af6dbb227f0386b83f4ba18"
     }
    ],
    "permalink": "https://x.com/A2O_SOUL/status/2121177298196168939",
@@ -408,7 +460,7 @@
    "timestamp": "2026-11-13T12:29:26.000Z"
   }
  },
- "rules_version": 3,
+ "rules_version": 4,
  "x": {
   "A2O_SOUL": {
    "id": "1986498790229262336",
