@@ -515,10 +515,14 @@ if ("serviceWorker" in navigator) {
   };
   const feed = data.ig_feed || [];
   if (feed.length) {
-    feed.slice(0, 5).forEach((x) => $("igFeed").append(igPost(x)));
-    if (feed.length > 5) {
+    // 인스타 | X 두 칸 (각 칸에선 출처 배지 생략)
+    const cols = [["igFeed", "igCol", feed.filter((x) => x.account !== "x")], ["xFeed", "xCol", feed.filter((x) => x.account === "x")]];
+    const draw = (n) => cols.forEach(([id, , list]) => $(id).replaceChildren(...list.slice(0, n).map((x) => igPost(x))));
+    cols.forEach(([, col, list]) => { if (!list.length) $(col).remove(); });
+    draw(5);
+    if (cols.some(([, , list]) => list.length > 5)) {
       $("igMore").hidden = false;
-      $("igMore").onclick = () => { feed.slice(5).forEach((x) => $("igFeed").append(igPost(x))); $("igMore").remove(); };
+      $("igMore").onclick = () => { draw(99); $("igMore").remove(); };
     }
   } else {
     $("igFeedSec").remove();
