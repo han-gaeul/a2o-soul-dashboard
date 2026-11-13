@@ -19,15 +19,19 @@ albums:
       - While We're Young
       - Very First Love
       - Moonlight Shadow
-    versions: []
-    links: {}   # 예) { 멜론: "https://...", 공식 스토어: "https://..." }
+    note: 실물 앨범 2026-11-10 출시
+    versions:
+      - "SOUL Ver. — 포토북 68p, CD-R, 가사지, 페이퍼 모빌, 포토카드 3장(15종 중 랜덤)"
+      - "CONSTELLATION Ver. — SOUL Ver.와 같은 구성"
+      - "CARABINER Ver."
+    links: { MV Dancing in the Dark: "https://youtu.be/JPJokqIoIJI", Mnet Plus Merch: "https://mnetplusmerch.com/product/list.html?cate_no=374" }
   - title: SUPERSTAR
     type: 선공개 싱글
     date: 2026-10-13
     focus: [SUPERSTAR]
     tracks: [SUPERSTAR]
     versions: []
-    links: {}
+    links: { MV: "https://youtu.be/IAURqrShEUQ" }
 
 # 멤버 사진 파일 라벨 → 화면에 보일 이름 (site/img/members/댄인닼_문.webp → 'Dancing in the Dark')
 photo_labels:
@@ -40,4 +44,7 @@ records: []
 
 # 티켓·굿즈 공식 판매처 (응원 탭) { label, url, note }
 #   예) - { label: 공식 스토어, url: "https://...", note: "앨범·응원봉" }
-shops: []
+shops:
+  - { label: Mnet Plus Merch (A2O), url: "https://mnetplusmerch.com/product/list.html?cate_no=374", note: "앨범·팬사인회·영상통화 이벤트 (11/13 기준 품절)" }
+  - { label: 메이크스타, url: "https://www.makestar.com/product/21531", note: "예약 특전 포토카드 이벤트" }
+  - { label: 뮤직플랜트, url: "https://www.musicplant.co.kr/", note: "예약 특전 셀카 포토카드" }

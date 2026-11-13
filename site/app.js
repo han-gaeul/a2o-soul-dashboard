@@ -1,6 +1,6 @@
 // ---------- 언어 ----------
-const LANGS = ["ko", "en", "ja", "zh", "es", "id"];
-const LOCALES = { ko: "ko-KR", en: "en-US", ja: "ja-JP", zh: "zh-CN", es: "es-ES", id: "id-ID" };
+const LANGS = ["ko", "en", "ja", "zh", "es", "id", "th"];
+const LOCALES = { ko: "ko-KR", en: "en-US", ja: "ja-JP", zh: "zh-CN", es: "es-ES", id: "id-ID", th: "th-TH" };
 // 기기별 설정(최애·본 영상) — 막혀 있어도 사이트는 그대로 동작
 const pref = {
   get(k, d) { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch (_) { return d; } },
@@ -280,9 +280,10 @@ if ("serviceWorker" in navigator) {
       $("votes").append(el("div", { class: `vote${urgent ? " urgent" : ""}` },
         el("div", { class: "vote-top" },
           el("span", { class: `chip ${open ? "chip-on" : ""}` }, open ? t("vote_now") : t("vote_soon")),
-          el("b", {}, [v.show, v.title].filter(Boolean).join(" · ")), v.app ? el("span", { class: "muted" }, ` · ${v.app}`) : null),
+          el("b", {}, [tc(v.show), tc(v.title)].filter(Boolean).join(" · ")), v.app ? el("span", { class: "muted" }, ` · ${tc(v.app)}`) : null),
         el("div", { class: "vote-time" }, open ? t("vote_ends", { t: duration(end - Date.now()) }) : t("vote_starts", { t: duration(start - Date.now()) }),
           el("span", { class: "muted" }, ` · ${t("vote_end_at", { t: v.end.slice(5).replace("-", ".") })}`)),
+        v.note ? el("div", { class: "muted small" }, tc(v.note)) : null,
         v.url ? ext(v.url, t("vote_open")) : null));
     }
   } else {
@@ -292,7 +293,7 @@ if ("serviceWorker" in navigator) {
   if ((data.streaming || []).length) {
     for (const s of data.streaming) {
       $("streaming").append(el("li", {},
-        el("div", {}, el("b", {}, s.title), s.note ? el("span", { class: "muted" }, ` · ${s.note}`) : null),
+        el("div", {}, el("b", {}, s.title), s.note ? el("span", { class: "muted" }, ` · ${tc(s.note)}`) : null),
         Object.keys(s.links).length ? el("div", { class: "links small" }, ...Object.entries(s.links).map(([k, u]) => ext(u, k))) : null));
     }
   } else {
@@ -342,7 +343,7 @@ if ("serviceWorker" in navigator) {
 
   const notices = data.notices || [];
   const shops = data.info?.shops || [];
-  for (const x of shops) $("shops").append(ext(x.url, x.label, x.note ? el("span", { class: "muted" }, ` · ${x.note}`) : null));
+  for (const x of shops) $("shops").append(ext(x.url, x.label, x.note ? el("span", { class: "muted" }, ` · ${tc(x.note)}`) : null));
   if (!shops.length) $("shops").remove();
   if (notices.length || shops.length) {
     for (const x of notices) {
@@ -390,7 +391,9 @@ if ("serviceWorker" in navigator) {
         a.date ? el("div", { class: "muted small" }, [a.date.replaceAll("-", "."), a.time].filter(Boolean).join(" ") + " KST") : null,
         a.tracks.length ? el("ol", { class: "tracks" }, ...a.tracks.map((x) => el("li", {}, x,
           (a.focus || []).some((f) => f.toLowerCase() === x.toLowerCase()) ? el("span", { class: "chip chip-on focus" }, t("focus_track")) : null))) : null,
-        a.versions.length ? el("div", { class: "small" }, el("span", { class: "chip" }, t("album_versions")), a.versions.join(" · ")) : null,
+        a.note ? el("div", { class: "muted small" }, tc(a.note)) : null,
+        a.versions.length ? el("div", { class: "small" }, el("span", { class: "chip" }, t("album_versions")),
+          el("ul", { class: "versions" }, ...a.versions.map((x) => el("li", {}, tc(x))))) : null,
         Object.keys(a.links).length ? el("div", { class: "links small" }, ...Object.entries(a.links).map(([k, u]) => ext(u, k))) : null));
     }
   } else {
@@ -573,11 +576,19 @@ if ("serviceWorker" in navigator) {
   for (const m of data.members) $("members").append(fancamCard(m));
   for (const m of data.members) $("guideMembers").append(fancamCard(m));
 
+  // 처음 오셨나요? (첫 번째 카드만 펼쳐 둠)
+  const beg = data.guide?.beginner || [];
+  if (beg.length) {
+    beg.forEach((b, i) => $("beginner").append(el("details", { class: "howto", ...(i === 0 ? { open: "" } : {}) },
+      el("summary", {}, tc(b.title)), el("ol", { class: "howto-steps" }, ...b.items.map((x) => el("li", {}, tc(x)))))));
+  } else {
+    $("beginnerSec").remove();
+  }
   const course = data.guide?.course || [];
   if (course.length) {
     course.forEach((c, i) => $("course").append(el("li", {},
       el("span", { class: "step" }, String(i + 1)),
-      el("div", { class: "course-card" }, c.note ? el("div", { class: "course-note" }, c.note) : null,
+      el("div", { class: "course-card" }, c.note ? el("div", { class: "course-note" }, tc(c.note)) : null,
         videoCard(c, c.member || catLabel(c.category))))));
   } else {
     $("course").closest("section").remove();

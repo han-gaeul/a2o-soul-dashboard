@@ -127,6 +127,7 @@ def load_fan_files(cfg):
         "albums": [{"title": str(a["title"]), "type": str(a.get("type") or ""), "date": str(a.get("date") or ""),
                     "time": str(a.get("time") or ""), "tracks": [str(x) for x in a.get("tracks") or []],
                     "focus": [str(x) for x in a.get("focus") or []],
+                    "note": str(a.get("note") or ""),
                     "versions": [str(x) for x in a.get("versions") or []],
                     "links": {str(k): str(v) for k, v in (a.get("links") or {}).items() if str(v).startswith("https://")}}
                    for a in info.get("albums") or [] if a.get("title")],
@@ -138,7 +139,9 @@ def load_fan_files(cfg):
     }
     guide = read_yml("guide.yml")
     cfg["guide"] = {"course": [{"id": str(c["id"]), "note": str(c.get("note") or "")} for c in guide.get("course") or []],
-                    "tips": {str(k).upper(): str(v) for k, v in (guide.get("tips") or {}).items()}}
+                    "tips": {str(k).upper(): str(v) for k, v in (guide.get("tips") or {}).items()},
+                    "beginner": [{"title": str(b["title"]), "items": [str(x) for x in b.get("items") or []]}
+                                 for b in guide.get("beginner") or [] if b.get("title")]}
 
 
 def member_pattern(m):
@@ -788,9 +791,12 @@ def write_health(cfg, videos, members, today, official=()):
         texts += [v.get(k, "") for k in ("when", "pre", "live", "note")]
     for g in cfg["howto"]["streaming"]:
         texts += [g["title"]] + g["steps"]
-    missing = sorted({x for x in texts if x and re.search(r"[가-힣]", x) and set(tr.get(x, {})) < {"en", "ja", "zh", "es", "id"}})
+    for b in cfg["guide"]["beginner"]:
+        texts += [b["title"]] + b["items"]
+    texts += [c["note"] for c in cfg["guide"]["course"]]
+    missing = sorted({x for x in texts if x and re.search(r"[가-힣]", x) and set(tr.get(x, {})) < {"en", "ja", "zh", "es", "id", "th"}})
     if missing:
-        secs.append(("번역이 없는 문구", "`translations.yml`에 원문 그대로 추가 (en·ja·zh·es·id)", [f"- {x}" for x in missing]))
+        secs.append(("번역이 없는 문구", "`translations.yml`에 원문 그대로 추가 (en·ja·zh·es·id·th)", [f"- {x}" for x in missing]))
     # 5) 투표 가이드가 오래됨
     checked = cfg["howto"].get("checked") or ""
     if checked and (date.fromisoformat(today) - date.fromisoformat(checked[:10])).days > 60:
@@ -1037,7 +1043,7 @@ def build(cfg):
         "info": cfg["info"],
         "guide": {"course": [{**c, **{k: by_id[c["id"]][k] for k in slim}}
                              for c in cfg["guide"]["course"] if c["id"] in by_id],
-                  "tips": cfg["guide"]["tips"]},
+                  "tips": cfg["guide"]["tips"], "beginner": cfg["guide"]["beginner"]},
     }
     save_json("dashboard.json", dashboard)
     write_calendar(cfg, [e for e in all_events if e.get("auto") and not e.get("anniv")] + annivs)

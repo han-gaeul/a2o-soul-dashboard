@@ -1,777 +1,1193 @@
 # 내용 번역 — 한국어 원문(왼쪽, 글자 그대로) → 언어별 번역.
 # 원문(members.yml·info.yml·howto.yml 등)을 고치면 여기 왼쪽도 똑같이 고쳐야 번역이 나와요. 없으면 한국어로 보여요.
-# 번역 봉사자분들이 고쳐 주셔도 돼요. en 영어 · ja 일본어 · zh 중국어 · es 스페인어 · id 인도네시아어
+# 번역 봉사자분들이 고쳐 주셔도 돼요. en 영어 · ja 일본어 · zh 중국어 · es 스페인어 · id 인도네시아어 · th 태국어
 공식 홈페이지:
   en: Official website
   ja: 公式サイト
   zh: 官方网站
   es: Sitio oficial
   id: Situs resmi
+  th: เว็บไซต์ทางการ
 인스타그램 @a2o.soul:
   en: Instagram @a2o.soul
   ja: Instagram @a2o.soul
   zh: Instagram @a2o.soul
   es: Instagram @a2o.soul
   id: Instagram @a2o.soul
+  th: Instagram @a2o.soul
 유튜브 A2O SOUL:
   en: YouTube A2O SOUL
   ja: YouTube A2O SOUL
   zh: YouTube A2O SOUL
   es: YouTube A2O SOUL
   id: YouTube A2O SOUL
+  th: YouTube A2O SOUL
 유튜브 A2O WORLD:
   en: YouTube A2O WORLD
   ja: YouTube A2O WORLD
   zh: YouTube A2O WORLD
   es: YouTube A2O WORLD
   id: YouTube A2O WORLD
+  th: YouTube A2O WORLD
 플러스챗:
   en: PLUS CHAT
   ja: PLUS CHAT
   zh: PLUS CHAT
   es: PLUS CHAT
   id: PLUS CHAT
+  th: PLUS CHAT
 A2O엔터테인먼트 아티스트 페이지:
   en: A2O Entertainment artist page
   ja: A2O Entertainment アーティストページ
   zh: A2O Entertainment 艺人页面
   es: Página de artista de A2O Entertainment
   id: Halaman artis A2O Entertainment
+  th: หน้าศิลปิน A2O Entertainment
 더쇼:
   en: THE SHOW
   ja: THE SHOW
   zh: THE SHOW
   es: THE SHOW
   id: THE SHOW
+  th: THE SHOW
 쇼챔피언:
   en: Show Champion
   ja: SHOW CHAMPION
   zh: Show Champion
   es: Show Champion
   id: Show Champion
+  th: Show Champion
 엠카운트다운:
   en: M COUNTDOWN
   ja: M COUNTDOWN
   zh: M COUNTDOWN
   es: M COUNTDOWN
   id: M COUNTDOWN
+  th: M COUNTDOWN
 뮤직뱅크:
   en: Music Bank
   ja: ミュージックバンク
   zh: 音乐银行
   es: Music Bank
   id: Music Bank
+  th: Music Bank
 음악중심:
   en: Show! Music Core
   ja: SHOW! 音楽中心
   zh: Show! 音乐中心
   es: Show! Music Core
   id: Show! Music Core
+  th: Show! Music Core
 인기가요:
   en: Inkigayo
   ja: 人気歌謡
   zh: 人气歌谣
   es: Inkigayo
   id: Inkigayo
+  th: Inkigayo
 음방:
   en: Music show
   ja: 音楽番組
   zh: 打歌节目
   es: Programa musical
   id: Acara musik
+  th: รายการเพลง
 라이브:
   en: Live
   ja: ライブ
   zh: 直播
   es: En vivo
   id: Live
+  th: ไลฟ์
 발매:
   en: Release
   ja: リリース
   zh: 发行
   es: Lanzamiento
   id: Rilis
+  th: ปล่อยผลงาน
 행사:
   en: Event
   ja: イベント
   zh: 活动
   es: Evento
   id: Acara
+  th: อีเวนต์
 기타:
   en: Other
   ja: その他
   zh: 其他
   es: Otro
   id: Lainnya
+  th: อื่นๆ
 기념일:
   en: Anniversary
   ja: 記念日
   zh: 纪念日
   es: Aniversario
   id: Hari jadi
+  th: วันครบรอบ
 데뷔 미니앨범:
   en: Debut mini album
   ja: デビューミニアルバム
   zh: 出道迷你专辑
   es: Mini álbum debut
   id: Mini album debut
+  th: มินิอัลบั้มเดบิวต์
 선공개 싱글:
   en: Pre-release single
   ja: 先行シングル
   zh: 先行单曲
   es: Sencillo de prelanzamiento
   id: Single pra-rilis
+  th: ซิงเกิลปล่อยล่วงหน้า
 보컬, 비주얼 센터:
   en: Vocal, visual center
   ja: ボーカル、ビジュアルセンター
   zh: 主唱、颜值担当·C位
   es: Voz, centro visual
   id: Vokal, visual center
+  th: ร้อง, วิชวลเซ็นเตอร์
 메인댄서:
   en: Main dancer
   ja: メインダンサー
   zh: 主舞
   es: Bailarín principal
   id: Main dancer
+  th: เมนแดนเซอร์
 메인보컬:
   en: Main vocal
   ja: メインボーカル
   zh: 主唱
   es: Vocalista principal
   id: Main vocal
+  th: เมนโวคอล
 랩, 댄스:
   en: Rap, dance
   ja: ラップ、ダンス
   zh: 说唱、舞蹈
   es: Rap, baile
   id: Rap, dance
+  th: แร็ป, แดนซ์
 비주얼:
   en: Visual
   ja: ビジュアル
   zh: 颜值担当
   es: Visual
   id: Visual
+  th: วิชวล
 보컬:
   en: Vocal
   ja: ボーカル
   zh: 主唱
   es: Voz
   id: Vokal
+  th: ร้อง
 올라운더 (보컬·댄스):
   en: All-rounder (vocal & dance)
   ja: オールラウンダー（ボーカル・ダンス）
   zh: 全能型（声乐·舞蹈）
   es: Todoterreno (voz y baile)
   id: All-rounder (vokal & dance)
+  th: ออลราวด์เดอร์ (ร้อง·เต้น)
 댄스:
   en: Dance
   ja: ダンス
   zh: 舞蹈
   es: Baile
   id: Dance
+  th: แดนซ์
 공식 텐션왕:
   en: Official hype king
   ja: 公式テンション王
   zh: 官方气氛王
   es: Rey oficial de la energía
   id: Raja semangat resmi
+  th: ราชาเทนชันประจำวง
 토마토:
   en: Tomato
   ja: トマト
   zh: 番茄
   es: Tomate
   id: Tomat
+  th: มะเขือเทศ
 아기 명창:
   en: Baby vocal master
   ja: ちびっこ名唱
   zh: 小歌王
   es: Pequeño gran cantante
   id: Penyanyi cilik andal
+  th: นักร้องเสียงทองตัวน้อย
 두바이:
   en: Dubai
   ja: ドバイ
   zh: 迪拜
   es: Dubái
   id: Dubai
+  th: ดูไบ
 지아이:
   en: Jiayi
   ja: ジアイ
   zh: 佳艺
   es: Jiayi
   id: Jiayi
+  th: เจียอี้
 도입 요정:
   en: Intro fairy
   ja: 導入の妖精
   zh: 开场小精灵
   es: Hada de las intros
   id: Peri pembuka
+  th: นางฟ้าท่อนเปิด
 오케스트라 보이:
   en: Orchestra boy
   ja: オーケストラボーイ
   zh: 管弦乐男孩
   es: Chico orquesta
   id: Orchestra boy
+  th: ออร์เคสตราบอย
 창원 TNS보컬댄스학원 출신:
   en: Trained at TNS Vocal & Dance Academy, Changwon
   ja: 昌原TNSボーカルダンス学院出身
   zh: 出身昌原TNS声乐舞蹈学院
   es: Formado en TNS Vocal & Dance Academy (Changwon)
   id: Lulusan TNS Vocal & Dance Academy, Changwon
+  th: เคยฝึกที่ TNS Vocal & Dance Academy ชางวอน
 비공개 연습생으로 데뷔:
   en: Debuted as a hidden trainee
   ja: 非公開練習生としてデビュー
   zh: 以未公开练习生身份出道
   es: Debutó como trainee no revelado
   id: Debut sebagai trainee yang dirahasiakan
+  th: เดบิวต์ในฐานะเทรนนีที่ไม่เปิดเผยตัว
 EXPG STUDIO 오사카 출신:
   en: Trained at EXPG STUDIO Osaka
   ja: EXPG STUDIO大阪出身
   zh: 出身EXPG STUDIO大阪
   es: Formado en EXPG STUDIO Osaka
   id: Lulusan EXPG STUDIO Osaka
+  th: เคยฝึกที่ EXPG STUDIO โอซาก้า
 키즈·틴즈 댄스 배틀 'THE FUTURE' 키즈 부문 준우승 2회, 그랜드 챔피언 대회 키즈 부문 우승:
   en: 'Kids/teens dance battle ''THE FUTURE'': kids runner-up twice, kids winner at the grand championship'
   ja: キッズ・ティーンズダンスバトル『THE FUTURE』キッズ部門準優勝2回、グランドチャンピオン大会キッズ部門優勝
   zh: 少儿舞蹈对决《THE FUTURE》少儿组两次亚军、总冠军赛少儿组冠军
   es: 'Batalla de baile ''THE FUTURE'': dos veces subcampeón infantil y campeón infantil del gran campeonato'
   id: 'Battle dance ''THE FUTURE'': 2x runner-up kategori anak, juara kategori anak di grand championship'
+  th: 'แบทเทิลแดนซ์เด็ก ''THE FUTURE'': รองชนะเลิศรุ่นเด็ก 2 ครั้ง และชนะเลิศรุ่นเด็กในรายการแกรนด์แชมเปียน'
 일본 오디션 'iCON Z' 남성 부문 참가:
   en: Competed in the boys' division of Japanese audition 'iCON Z'
   ja: 日本のオーディション『iCON Z』男性部門に参加
   zh: 参加日本选秀《iCON Z》男子组
   es: Participó en la división masculina de la audición japonesa 'iCON Z'
   id: Ikut audisi Jepang 'iCON Z' divisi pria
+  th: เข้าร่วมออดิชันญี่ปุ่น 'iCON Z' ประเภทชาย
 댄스 학원 원데이 클래스 진행:
   en: Taught one-day classes at a dance academy
   ja: ダンス教室でワンデークラスを担当
   zh: 在舞蹈学院开设一日课程
   es: Dio clases de un día en una academia de baile
   id: Mengajar kelas satu hari di akademi dance
+  th: สอนคลาสวันเดียวที่สถาบันเต้น
 경기소년소녀합창단 활동:
   en: Member of the Gyeonggi Boys & Girls Choir
   ja: 京畿少年少女合唱団で活動
   zh: 京畿少年少女合唱团成员
   es: Miembro del coro infantil de Gyeonggi
   id: Anggota Paduan Suara Anak Gyeonggi
+  th: เคยอยู่คณะนักร้องประสานเสียงเยาวชนคยองกี
 URIZIP KPOP ACADEMY 출신:
   en: Trained at URIZIP KPOP ACADEMY
   ja: URIZIP KPOP ACADEMY出身
   zh: 出身URIZIP KPOP ACADEMY
   es: Formado en URIZIP KPOP ACADEMY
   id: Lulusan URIZIP KPOP ACADEMY
+  th: เคยฝึกที่ URIZIP KPOP ACADEMY
 A2O Rookies LTB(2024.10~) → HTB(2025.2~):
   en: A2O Rookies LTB (Oct 2024–) → HTB (Feb 2025–)
   ja: A2O Rookies LTB（2024.10〜）→ HTB（2025.2〜）
   zh: A2O Rookies LTB（2024.10起）→ HTB（2025.2起）
   es: A2O Rookies LTB (oct. 2024–) → HTB (feb. 2025–)
   id: A2O Rookies LTB (Okt 2024–) → HTB (Feb 2025–)
+  th: A2O Rookies LTB (ต.ค. 2024–) → HTB (ก.พ. 2025–)
 HTB 'REVOLUTION', 'CHAMPAGNE' 참여:
   en: Featured in HTB's 'REVOLUTION' and 'CHAMPAGNE'
   ja: HTB『REVOLUTION』『CHAMPAGNE』に参加
   zh: 参与HTB《REVOLUTION》《CHAMPAGNE》
   es: Participó en 'REVOLUTION' y 'CHAMPAGNE' de HTB
   id: Ikut di 'REVOLUTION' dan 'CHAMPAGNE' HTB
+  th: ร่วมใน 'REVOLUTION' และ 'CHAMPAGNE' ของ HTB
 중국 댄스 방송 출연:
   en: Appeared on Chinese dance shows
   ja: 中国のダンス番組に出演
   zh: 参加中国舞蹈节目
   es: Apareció en programas de baile en China
   id: Tampil di acara dance Tiongkok
+  th: เคยออกรายการเต้นในจีน
 다수 댄스 대회 수상:
   en: Won multiple dance competitions
   ja: 多数のダンス大会で受賞
   zh: 多次获得舞蹈比赛奖项
   es: Ganó varias competencias de baile
   id: Menang di banyak kompetisi dance
+  th: ชนะการแข่งขันเต้นหลายรายการ
 A2O Rookies HTB '쥔린(JUNLIN)' (2025.2~):
   en: A2O Rookies HTB as 'JUNLIN' (Feb 2025–)
   ja: A2O Rookies HTB『JUNLIN』（2025.2〜）
   zh: A2O Rookies HTB「俊霖（JUNLIN）」（2025.2起）
   es: A2O Rookies HTB como 'JUNLIN' (feb. 2025–)
   id: A2O Rookies HTB sebagai 'JUNLIN' (Feb 2025–)
+  th: A2O Rookies HTB ในชื่อ 'JUNLIN' (ก.พ. 2025–)
 AJS·REDSTAGE 아카데미 출신:
   en: Trained at AJS and REDSTAGE academies
   ja: AJS・REDSTAGEアカデミー出身
   zh: 出身AJS·REDSTAGE学院
   es: Formado en las academias AJS y REDSTAGE
   id: Lulusan akademi AJS dan REDSTAGE
+  th: เคยฝึกที่สถาบัน AJS และ REDSTAGE
 POWERVOCAL Star Incubating Center 출신:
   en: Trained at POWERVOCAL Star Incubating Center
   ja: POWERVOCAL Star Incubating Center出身
   zh: 出身POWERVOCAL Star Incubating Center
   es: Formado en POWERVOCAL Star Incubating Center
   id: Lulusan POWERVOCAL Star Incubating Center
+  th: เคยฝึกที่ POWERVOCAL Star Incubating Center
 SM엔터테인먼트 아역 모델 선발대회 결선 진출:
   en: Finalist in SM Entertainment's child model contest
   ja: SMエンターテインメント子役モデル選抜大会で決選進出
   zh: 入围SM娱乐儿童模特选拔赛决赛
   es: Finalista del concurso de modelos infantiles de SM Entertainment
   id: Finalis kontes model cilik SM Entertainment
+  th: ผ่านเข้ารอบชิงการคัดเลือกนายแบบเด็กของ SM Entertainment
 영화 'The Marked Sheep'(2022) 조연:
   en: Supporting role in the film 'The Marked Sheep' (2022)
   ja: 映画『The Marked Sheep』（2022）助演
   zh: 电影《The Marked Sheep》（2022）配角
   es: Papel secundario en la película 'The Marked Sheep' (2022)
   id: Pemeran pendukung film 'The Marked Sheep' (2022)
+  th: นักแสดงสมทบในภาพยนตร์ 'The Marked Sheep' (2022)
 A2O Rookies LTB (2024.10~):
   en: A2O Rookies LTB (Oct 2024–)
   ja: A2O Rookies LTB（2024.10〜）
   zh: A2O Rookies LTB（2024.10起）
   es: A2O Rookies LTB (oct. 2024–)
   id: A2O Rookies LTB (Okt 2024–)
+  th: A2O Rookies LTB (ต.ค. 2024–)
 키즈모델 활동:
   en: Worked as a kids' model
   ja: キッズモデルとして活動
   zh: 曾任儿童模特
   es: Trabajó como modelo infantil
   id: Pernah jadi model cilik
+  th: เคยเป็นนายแบบเด็ก
 댄스 보컬 아카데미 HIBEAT 출신:
   en: Trained at dance & vocal academy HIBEAT
   ja: ダンス・ボーカルアカデミーHIBEAT出身
   zh: 出身舞蹈声乐学院HIBEAT
   es: Formado en la academia de baile y voz HIBEAT
   id: Lulusan akademi dance & vokal HIBEAT
+  th: เคยฝึกที่สถาบันเต้นและร้อง HIBEAT
 전 JYP엔터테인먼트 연습생:
   en: Former JYP Entertainment trainee
   ja: 元JYPエンターテインメント練習生
   zh: 前JYP娱乐练习生
   es: Ex-trainee de JYP Entertainment
   id: Mantan trainee JYP Entertainment
+  th: อดีตเทรนนี JYP Entertainment
 A2O Rookies LTB (2025.8~):
   en: A2O Rookies LTB (Aug 2025–)
   ja: A2O Rookies LTB（2025.8〜）
   zh: A2O Rookies LTB（2025.8起）
   es: A2O Rookies LTB (ago. 2025–)
   id: A2O Rookies LTB (Agu 2025–)
+  th: A2O Rookies LTB (ส.ค. 2025–)
 태국어 더빙 아역 성우 — 디즈니 '엔칸토' 안토니오, '피노키오'(2022) 피노키오 등:
   en: Child voice actor for Thai dubs — Antonio in Disney's 'Encanto', Pinocchio in 'Pinocchio' (2022) and more
   ja: タイ語吹き替えの子役声優 — ディズニー『ミラベルと魔法だらけの家』アントニオ、『ピノキオ』（2022）ピノキオなど
   zh: 泰语配音童星——迪士尼《魔法满屋》安东尼奥、《木偶奇遇记》（2022）匹诺曹等
   es: Actor de doblaje infantil en tailandés — Antonio en 'Encanto' de Disney, Pinocho en 'Pinocho' (2022) y más
   id: Pengisi suara cilik dubbing Thailand — Antonio di 'Encanto' Disney, Pinokio di 'Pinocchio' (2022), dll.
+  th: นักพากย์เด็กพากย์ไทย — อันโตนิโอใน 'Encanto' ของดิสนีย์, พินอคคิโอใน 'Pinocchio' (2022) และอื่นๆ
 태국 One31 시트콤 'Ban Saran Land'(2018) 출연:
   en: Appeared in the Thai One31 sitcom 'Ban Saran Land' (2018)
   ja: タイOne31のシットコム『Ban Saran Land』（2018）に出演
   zh: 出演泰国One31情景喜剧《Ban Saran Land》（2018）
   es: Apareció en la comedia tailandesa de One31 'Ban Saran Land' (2018)
   id: Tampil di sitkom One31 Thailand 'Ban Saran Land' (2018)
+  th: แสดงซิทคอม 'บ้านสราญแลนด์' (2018) ช่อง One31
 A2O Rookies LTB 'JIAYI' (2024.10~):
   en: A2O Rookies LTB as 'JIAYI' (Oct 2024–)
   ja: A2O Rookies LTB『JIAYI』（2024.10〜）
   zh: A2O Rookies LTB「佳艺（JIAYI）」（2024.10起）
   es: A2O Rookies LTB como 'JIAYI' (oct. 2024–)
   id: A2O Rookies LTB sebagai 'JIAYI' (Okt 2024–)
+  th: A2O Rookies LTB ในชื่อ 'JIAYI' (ต.ค. 2024–)
 제트와 같은 댄스 스튜디오 출신으로 약 4년간 함께 연습:
   en: From the same dance studio as ZET — trained together for about 4 years
   ja: ZETと同じダンススタジオ出身で約4年間一緒に練習
   zh: 与ZET出身同一舞蹈工作室，一起练习约4年
   es: Viene del mismo estudio de baile que ZET; entrenaron juntos unos 4 años
   id: Satu studio dance dengan ZET, berlatih bersama sekitar 4 tahun
+  th: มาจากสตูดิโอเต้นเดียวกับ ZET ฝึกด้วยกันราว 4 ปี
 A2O Rookies LTB '한저(HANZE)' (2024.10~):
   en: A2O Rookies LTB as 'HANZE' (Oct 2024–)
   ja: A2O Rookies LTB『HANZE』（2024.10〜）
   zh: A2O Rookies LTB「瀚泽（HANZE）」（2024.10起）
   es: A2O Rookies LTB como 'HANZE' (oct. 2024–)
   id: A2O Rookies LTB sebagai 'HANZE' (Okt 2024–)
+  th: A2O Rookies LTB ในชื่อ 'HANZE' (ต.ค. 2024–)
 솔로 'Love Is Gone' Zal-Dance 영상(2025.4):
   en: Solo 'Love Is Gone' Zal-Dance video (Apr 2025)
   ja: ソロ『Love Is Gone』Zal-Dance映像（2025.4）
   zh: 个人《Love Is Gone》Zal-Dance视频（2025.4）
   es: Video solista 'Love Is Gone' Zal-Dance (abr. 2025)
   id: Video solo 'Love Is Gone' Zal-Dance (Apr 2025)
+  th: คลิปโซโล 'Love Is Gone' Zal-Dance (เม.ย. 2025)
 솔로 'Palette' Zal-Dance 영상(2025.6):
   en: Solo 'Palette' Zal-Dance video (Jun 2025)
   ja: ソロ『Palette』Zal-Dance映像（2025.6）
   zh: 个人《Palette》Zal-Dance视频（2025.6）
   es: Video solista 'Palette' Zal-Dance (jun. 2025)
   id: Video solo 'Palette' Zal-Dance (Jun 2025)
+  th: คลิปโซโล 'Palette' Zal-Dance (มิ.ย. 2025)
 팀의 맏형으로 동생들을 잘 챙김:
   en: The eldest, who looks after the younger members
   ja: グループ最年長で弟たちの面倒をよく見る
   zh: 团内大哥，很会照顾弟弟们
   es: El mayor del grupo, siempre cuida de los menores
   id: Member tertua yang selalu menjaga adik-adiknya
+  th: พี่ใหญ่ของวงที่คอยดูแลน้องๆ
 소울메이트로 동갑 멤버 소라를 꼽음:
   en: Calls same-age member SORA his soulmate
   ja: ソウルメイトに同い年のSORAを挙げた
   zh: 称同龄成员SORA为灵魂伴侣
   es: Considera a SORA, de su misma edad, su alma gemela
   id: Menyebut SORA yang seumuran sebagai soulmate-nya
+  th: บอกว่าเพื่อนร่วมรุ่น SORA คือโซลเมต
 여러 장르를 소화하는 스트리트댄스 기본기:
   en: Solid street-dance basics across many genres
   ja: 多彩なジャンルをこなすストリートダンスの基礎力
   zh: 扎实的街舞基本功，驾驭多种风格
   es: Base sólida de street dance en muchos estilos
   id: Dasar street dance yang kuat di berbagai genre
+  th: พื้นฐานสตรีทแดนซ์แน่นหลายแนว
 표정·제스처를 살린 무대 퍼포먼스:
   en: Expressive stage presence through facial expressions and gestures
   ja: 表情やジェスチャーを生かしたステージパフォーマンス
   zh: 善用表情与手势的舞台表现
   es: Presencia escénica expresiva con gestos y caras
   id: Performa panggung ekspresif lewat ekspresi dan gestur
+  th: การแสดงบนเวทีที่ใช้สีหน้าและท่าทางได้ดี
 비트박스가 특기:
   en: Beatboxing is his specialty
   ja: 特技はビートボックス
   zh: 特长是Beatbox
   es: Su especialidad es el beatbox
   id: Keahliannya beatbox
+  th: ความสามารถพิเศษคือบีตบ็อกซ์
 '''SUPERSTAR'' 고음 파트 담당':
   en: Sings the high notes in 'SUPERSTAR'
   ja: 『SUPERSTAR』の高音パート担当
   zh: 负责《SUPERSTAR》高音部分
   es: Canta las notas altas de 'SUPERSTAR'
   id: Bagian nada tinggi di 'SUPERSTAR'
+  th: ร้องท่อนเสียงสูงใน 'SUPERSTAR'
 데뷔 쇼케이스 영상 영어 내레이션:
   en: English narration in the debut showcase video
   ja: デビューショーケース映像の英語ナレーション
   zh: 出道Showcase视频英语旁白
   es: Narración en inglés del video del showcase debut
   id: Narasi bahasa Inggris di video showcase debut
+  th: บรรยายภาษาอังกฤษในวิดีโอโชว์เคสเดบิวต์
 무표정과 웃는 얼굴의 반전 매력:
   en: Charming contrast between his poker face and his smile
   ja: 無表情と笑顔のギャップが魅力
   zh: 面无表情与笑脸的反差魅力
   es: Encanto del contraste entre su cara seria y su sonrisa
   id: Pesona kontras antara wajah datar dan senyumnya
+  th: เสน่ห์ความต่างระหว่างหน้านิ่งกับรอยยิ้ม
 해산물을 좋아함:
   en: Loves seafood
   ja: 海鮮が好き
   zh: 喜欢海鲜
   es: Le encanta el marisco
   id: Suka seafood
+  th: ชอบอาหารทะเล
 댄스 브레이크 센터:
   en: Center of the dance break
   ja: ダンスブレイクのセンター
   zh: 舞蹈Break C位
   es: Centro del dance break
   id: Center di dance break
+  th: เซ็นเตอร์ช่วงแดนซ์เบรก
 팀에서 흥이 가장 많은 멤버:
   en: The most upbeat member of the team
   ja: グループで一番ノリがいいメンバー
   zh: 团内最有活力的成员
   es: El miembro más animado del grupo
   id: Member paling heboh di tim
+  th: สมาชิกที่สนุกสนานที่สุดในวง
 소울푸드는 짜장면:
   en: His soul food is jjajangmyeon
   ja: ソウルフードはジャージャー麺
   zh: 灵魂食物是炸酱面
   es: Su comida favorita es el jjajangmyeon
   id: Soul food-nya jjajangmyeon
+  th: อาหารจานโปรดคือจาจังมยอน
 빈티지 옷을 직접 리폼해서 입음:
   en: Remakes vintage clothes himself
   ja: 古着を自分でリメイクして着る
   zh: 会亲手改造古着来穿
   es: Él mismo transforma ropa vintage
   id: Me-reform sendiri baju vintage
+  th: รีฟอร์มเสื้อผ้าวินเทจใส่เอง
 축구·농구를 좋아하는 운동파:
   en: Sporty — loves soccer and basketball
   ja: サッカー・バスケが好きなスポーツ派
   zh: 运动派，喜欢足球和篮球
   es: 'Deportista: le encantan el fútbol y el baloncesto'
   id: Suka olahraga — sepak bola dan basket
+  th: สายกีฬา ชอบฟุตบอลและบาสเกตบอล
 팀에서 가장 차분한 성격:
   en: The calmest personality on the team
   ja: グループで一番落ち着いた性格
   zh: 团内性格最沉稳
   es: La personalidad más tranquila del grupo
   id: Kepribadian paling tenang di tim
+  th: นิสัยสุขุมที่สุดในวง
 네오 소울을 좋아함 (최애 아티스트 에리카 바두):
   en: 'Loves neo soul (favorite artist: Erykah Badu)'
   ja: ネオソウルが好き（推しアーティストはエリカ・バドゥ）
   zh: 喜欢新灵魂乐（最爱歌手Erykah Badu）
   es: 'Le encanta el neo soul (artista favorita: Erykah Badu)'
   id: 'Suka neo soul (artis favorit: Erykah Badu)'
+  th: 'ชอบนีโอโซล (ศิลปินคนโปรด: Erykah Badu)'
 파워풀한 음색:
   en: Powerful vocal tone
   ja: パワフルな歌声
   zh: 有力量的音色
   es: Timbre potente
   id: Warna suara yang powerful
+  th: น้ำเสียงทรงพลัง
 발라드를 좋아함 (최애곡 EXO 'For Life'):
   en: 'Loves ballads (favorite song: EXO ''For Life'')'
   ja: バラードが好き（好きな曲はEXO『For Life』）
   zh: 喜欢抒情歌（最爱歌曲EXO《For Life》）
   es: 'Le encantan las baladas (canción favorita: EXO ''For Life'')'
   id: 'Suka balada (lagu favorit: EXO ''For Life'')'
+  th: 'ชอบเพลงบัลลาด (เพลงโปรด: EXO ''For Life'')'
 초등학생 때 밴드를 결성해 싱글 발매:
   en: Formed a band in elementary school and released a single
   ja: 小学生のときにバンドを結成しシングルをリリース
   zh: 小学时组过乐队并发行单曲
   es: Formó una banda en primaria y lanzó un sencillo
   id: Membentuk band saat SD dan merilis single
+  th: ตั้งวงดนตรีตอนประถมและปล่อยซิงเกิล
 시티워크를 좋아함:
   en: Loves city walks
   ja: 街歩きが好き
   zh: 喜欢City Walk
   es: Le encanta pasear por la ciudad
   id: Suka jalan-jalan keliling kota
+  th: ชอบเดินเที่ยวในเมือง
 매력 포인트는 '동굴 보이스' 저음:
   en: His charm point is his deep 'cave voice'
   ja: チャームポイントは「洞窟ボイス」の低音
   zh: 魅力点是“洞穴音”低音
   es: 'Su encanto: su voz grave tipo ''cueva'''
   id: Daya tariknya suara bass 'cave voice'
+  th: จุดเด่นคือเสียงทุ้มต่ำแบบ 'เสียงถ้ำ'
 팀의 분위기 메이커:
   en: The team's mood maker
   ja: グループのムードメーカー
   zh: 团内气氛担当
   es: El que anima el ambiente del grupo
   id: Mood maker tim
+  th: มู้ดเมกเกอร์ของวง
 일본어·한국어·영어·중국어 4개 국어:
   en: 'Speaks 4 languages: Japanese, Korean, English and Chinese'
   ja: 日本語・韓国語・英語・中国語の4か国語
   zh: 会日语、韩语、英语、中文四种语言
   es: 'Habla 4 idiomas: japonés, coreano, inglés y chino'
   id: 'Menguasai 4 bahasa: Jepang, Korea, Inggris, Mandarin'
+  th: 'พูดได้ 4 ภาษา: ญี่ปุ่น เกาหลี อังกฤษ จีน'
 보컬로 입사해 짧은 기간에 댄스 실력을 크게 끌어올림:
   en: Joined as a vocalist and quickly leveled up his dancing
   ja: ボーカルとして入社し、短期間でダンス力を大きく伸ばした
   zh: 以声乐身份加入，短时间内舞蹈实力大幅提升
   es: Entró como vocalista y mejoró mucho su baile en poco tiempo
   id: Masuk sebagai vokalis dan cepat meningkatkan kemampuan dance
+  th: เข้ามาในฐานะนักร้อง แล้วพัฒนาการเต้นได้เร็วมาก
 팝·R&B를 좋아함:
   en: Loves pop and R&B
   ja: ポップ・R&Bが好き
   zh: 喜欢流行和R&B
   es: Le encantan el pop y el R&B
   id: Suka pop dan R&B
+  th: ชอบป็อปและอาร์แอนด์บี
 스스로를 '황금 올라운더'로 소개:
   en: Introduces himself as the 'golden all-rounder'
   ja: 自らを「黄金オールラウンダー」と紹介
   zh: 自称“黄金全能型”
   es: Se presenta como el 'todoterreno dorado'
   id: Menyebut dirinya 'golden all-rounder'
+  th: แนะนำตัวว่าเป็น 'ออลราวด์เดอร์สีทอง'
 가볍고 정확한 춤선:
   en: Light, precise dance lines
   ja: 軽やかで正確なダンスライン
   zh: 轻盈精准的舞蹈线条
   es: Líneas de baile ligeras y precisas
   id: Garis dance ringan dan presisi
+  th: ท่าเต้นเบาและแม่นยำ
 '''SUPERSTAR'' 1·2절 도입부 담당':
   en: Opens the 1st and 2nd verses of 'SUPERSTAR'
   ja: 『SUPERSTAR』1・2番の導入パート担当
   zh: 负责《SUPERSTAR》第一、二段开头
   es: Abre la 1.ª y 2.ª estrofa de 'SUPERSTAR'
   id: Pembuka verse 1 & 2 di 'SUPERSTAR'
+  th: ร้องท่อนเปิดเวิร์สที่ 1 และ 2 ของ 'SUPERSTAR'
 사진 촬영을 좋아해 레트로 감성용 구형 휴대폰을 따로 씀:
   en: Loves taking photos — keeps an old phone just for retro-style shots
   ja: 写真好きでレトロな雰囲気用に古いスマホを別に使う
   zh: 喜欢拍照，专门用旧手机拍复古感照片
   es: 'Le encanta la fotografía: usa un móvil viejo para fotos retro'
   id: Suka foto — pakai HP lama khusus untuk nuansa retro
+  th: ชอบถ่ายรูป มีมือถือรุ่นเก่าไว้ถ่ายฟีลเรโทรโดยเฉพาะ
 시원시원한 큰 춤선:
   en: Big, bold dance lines
   ja: のびのびとした大きなダンスライン
   zh: 大开大合的舞蹈线条
   es: Líneas de baile amplias y enérgicas
   id: Garis dance besar dan lepas
+  th: ท่าเต้นใหญ่ เต็มที่
 자주 쓰는 말은 "Lit!":
   en: His catchphrase is "Lit!"
   ja: 口癖は「Lit!」
   zh: 口头禅是“Lit!”
   es: Su muletilla es "Lit!"
   id: Kata andalannya "Lit!"
+  th: คำติดปากคือ "Lit!"
 소울메이트로 맏형 문을 꼽음:
   en: Calls eldest member MOON his soulmate
   ja: ソウルメイトに最年長のMOONを挙げた
   zh: 称大哥MOON为灵魂伴侣
   es: Considera a MOON, el mayor, su alma gemela
   id: Menyebut MOON, member tertua, sebagai soulmate-nya
+  th: บอกว่าพี่ใหญ่ MOON คือโซลเมต
 15명의 소년은 모든 것이 갖춰진 행성 SOULITE(소울라이트)에서 왔어요.:
   en: The 15 boys come from SOULITE, a planet where everything is provided.
   ja: 15人の少年は、すべてがそろった惑星SOULITE（ソウルライト）からやって来ました。
   zh: 15位少年来自应有尽有的星球SOULITE。
   es: Los 15 chicos vienen de SOULITE, un planeta donde no falta nada.
   id: 15 pemuda ini berasal dari SOULITE, planet yang serba lengkap.
+  th: เด็กหนุ่มทั้ง 15 คนมาจาก SOULITE ดาวที่มีทุกอย่างพร้อมสรรพ
 그런데도 무언가 비어 있다고 느낀 이들은, 사람을 살아 있게 하는 감정과 에너지 — 기쁨·사랑·설렘·열정, 곧 '소울(SOUL)'을 찾아 지구로 떠나요.:
   en: 'Still feeling something missing, they set off for Earth to find the emotions and energy that make people feel alive — joy, love, excitement and passion: ''SOUL''.'
   ja: それでも何かが足りないと感じた彼らは、人を生き生きとさせる感情とエネルギー——喜び・愛・ときめき・情熱、つまり「SOUL」を探しに地球へ旅立ちます。
   zh: 即便如此仍觉得缺了点什么的他们，为了寻找让人鲜活的情感与能量——喜悦、爱、心动、热情，也就是“SOUL”，出发前往地球。
   es: 'Aun así sentían que algo faltaba, así que viajan a la Tierra en busca de las emociones y la energía que hacen sentir vivas a las personas —alegría, amor, emoción y pasión—: el ''SOUL''.'
   id: 'Merasa ada yang kosong, mereka pergi ke Bumi untuk mencari emosi dan energi yang membuat manusia hidup — bahagia, cinta, debar, gairah: ''SOUL''.'
+  th: แต่ก็ยังรู้สึกว่าขาดบางอย่าง พวกเขาจึงออกเดินทางมายังโลกเพื่อตามหาอารมณ์และพลังที่ทำให้คนรู้สึกมีชีวิต — ความสุข ความรัก ความตื่นเต้น และความหลงใหล นั่นคือ 'SOUL'
 데뷔 앨범 'SUPERSTAR'가 그 이야기의 첫 번째 챕터. 그룹은 자신들의 음악을 'NEW SYNTHWAVE'라고 불러요.:
   en: The debut album 'SUPERSTAR' is the first chapter of that story. The group calls its music 'NEW SYNTHWAVE'.
   ja: デビューアルバム『SUPERSTAR』がその物語の第1章。グループは自分たちの音楽を「NEW SYNTHWAVE」と呼んでいます。
   zh: 出道专辑《SUPERSTAR》是这个故事的第一章。他们把自己的音乐称为“NEW SYNTHWAVE”。
   es: El álbum debut 'SUPERSTAR' es el primer capítulo de esa historia. El grupo llama a su música 'NEW SYNTHWAVE'.
   id: Album debut 'SUPERSTAR' adalah bab pertama cerita itu. Grup ini menyebut musik mereka 'NEW SYNTHWAVE'.
+  th: อัลบั้มเดบิวต์ 'SUPERSTAR' คือบทแรกของเรื่องราวนี้ และวงเรียกดนตรีของตัวเองว่า 'NEW SYNTHWAVE'
 화 18:00 · SBS Life:
   en: Tue 18:00 · SBS Life
   ja: 火 18:00 · SBS Life
   zh: 周二 18:00 · SBS Life
   es: Mar 18:00 · SBS Life
   id: Sel 18:00 · SBS Life
+  th: อ. 18:00 · SBS Life
 수 · MBC M:
   en: Wed · MBC M
   ja: 水 · MBC M
   zh: 周三 · MBC M
   es: Mié · MBC M
   id: Rab · MBC M
+  th: พ. · MBC M
 목 18:00 · Mnet:
   en: Thu 18:00 · Mnet
   ja: 木 18:00 · Mnet
   zh: 周四 18:00 · Mnet
   es: Jue 18:00 · Mnet
   id: Kam 18:00 · Mnet
+  th: พฤ. 18:00 · Mnet
 금 17:15 · KBS2:
   en: Fri 17:15 · KBS2
   ja: 金 17:15 · KBS2
   zh: 周五 17:15 · KBS2
   es: Vie 17:15 · KBS2
   id: Jum 17:15 · KBS2
+  th: ศ. 17:15 · KBS2
 토 · MBC:
   en: Sat · MBC
   ja: 土 · MBC
   zh: 周六 · MBC
   es: Sáb · MBC
   id: Sab · MBC
+  th: ส. · MBC
 일 15:20 · SBS:
   en: Sun 15:20 · SBS
   ja: 日 15:20 · SBS
   zh: 周日 15:20 · SBS
   es: Dom 15:20 · SBS
   id: Min 15:20 · SBS
+  th: อา. 15:20 · SBS
 빅크(BIGC):
   en: BIGC
   ja: BIGC
   zh: BIGC
   es: BIGC
   id: BIGC
+  th: BIGC
 아이돌챔프(IDOLCHAMP):
   en: IDOLCHAMP
   ja: IDOLCHAMP
   zh: IDOLCHAMP
   es: IDOLCHAMP
   id: IDOLCHAMP
+  th: IDOLCHAMP
 엠넷플러스(Mnet Plus):
   en: Mnet Plus
   ja: Mnet Plus
   zh: Mnet Plus
   es: Mnet Plus
   id: Mnet Plus
+  th: Mnet Plus
 팬캐스트(FANCAST):
   en: FANCAST
   ja: FANCAST
   zh: FANCAST
   es: FANCAST
   id: FANCAST
+  th: FANCAST
 뮤니버스(MUNIVERSE) · 뮤빗(MUBEAT, 글로벌):
   en: MUNIVERSE · MUBEAT (global)
   ja: MUNIVERSE · MUBEAT（グローバル）
   zh: MUNIVERSE · MUBEAT（全球）
   es: MUNIVERSE · MUBEAT (global)
   id: MUNIVERSE · MUBEAT (global)
+  th: MUNIVERSE · MUBEAT (โกลบอล)
 링크(LiNC):
   en: LiNC
   ja: LiNC
   zh: LiNC
   es: LiNC
   id: LiNC
+  th: LiNC
 하이어(HIGHER):
   en: HIGHER
   ja: HIGHER
   zh: HIGHER
   es: HIGHER
   id: HIGHER
+  th: HIGHER
 생방송 중 앱 실시간 투표 배너:
   en: Live voting banner in the app during the broadcast
   ja: 生放送中にアプリのリアルタイム投票バナー
   zh: 直播期间App内实时投票横幅
   es: Banner de votación en vivo en la app durante la emisión
   id: Banner voting live di aplikasi saat siaran
+  th: แบนเนอร์โหวตสดในแอประหว่างออกอากาศ
 앱 미션·광고로 모은 재화로 투표:
   en: Vote with in-app currency earned from missions and ads
   ja: アプリのミッション・広告で集めたポイントで投票
   zh: 用App任务·广告获得的道具投票
   es: Vota con la moneda que ganas en misiones y anuncios
   id: Vote pakai poin dari misi dan iklan di aplikasi
+  th: โหวตด้วยแต้มที่ได้จากภารกิจและโฆษณาในแอป
 생방송 투표는 계정당 최대 5표:
   en: 'Live voting: up to 5 votes per account'
   ja: 生放送投票は1アカウント最大5票
   zh: 直播投票每个账号最多5票
   es: 'Votación en vivo: hasta 5 votos por cuenta'
   id: 'Voting live: maks. 5 suara per akun'
+  th: 'โหวตสด: สูงสุด 5 โหวตต่อบัญชี'
 음원 사이트 (멜론·지니·벅스·FLO·바이브):
   en: Music sites (Melon, Genie, Bugs, FLO, VIBE)
   ja: 音源サイト（Melon・Genie・Bugs・FLO・VIBE）
   zh: 音源网站（Melon·Genie·Bugs·FLO·VIBE）
   es: Sitios de música (Melon, Genie, Bugs, FLO, VIBE)
   id: Situs musik (Melon, Genie, Bugs, FLO, VIBE)
+  th: เว็บเพลง (Melon, Genie, Bugs, FLO, VIBE)
 해당 사이트 스트리밍 이용권으로 로그인한 상태에서 재생:
   en: Play while logged in with a streaming pass for that site
   ja: そのサイトのストリーミング利用券でログインした状態で再生
   zh: 使用该网站的流媒体会员登录后播放
   es: Reproduce con sesión iniciada y un pase de streaming de ese sitio
   id: Putar sambil login dengan paket streaming situs itu
+  th: เล่นขณะล็อกอินด้วยแพ็กเกจสตรีมของเว็บนั้น
 음소거·볼륨 0 말고 작게라도 소리 켜기:
   en: Don't mute or set volume to 0 — keep the sound on, even low
   ja: ミュートや音量0にせず、小さくても音を出す
   zh: 不要静音或音量调0，小声也要开着
   es: 'No silencies ni pongas el volumen a 0: déjalo bajo pero encendido'
   id: Jangan mute atau volume 0 — nyalakan walau pelan
+  th: อย่าปิดเสียงหรือตั้งเสียงเป็น 0 — เปิดไว้แม้จะเบา
 한 곡 반복보다 다른 곡을 섞은 재생목록으로 (응원 탭 스밍 리스트 참고):
   en: Use a playlist mixed with other songs instead of repeating one track (see the streaming list in the Support tab)
   ja: 1曲リピートより他の曲を混ぜたプレイリストで（応援タブのストリーミングリスト参照）
   zh: 比起单曲循环，用混合其他歌曲的歌单（参考应援页的打榜歌单）
   es: Usa una lista con otras canciones en vez de repetir una (mira la lista de streaming en Apoyo)
   id: Pakai playlist campuran, bukan ulang satu lagu (lihat daftar streaming di tab Dukung)
+  th: ใช้เพลย์ลิสต์ที่สลับกับเพลงอื่น แทนการวนเพลงเดียว (ดูเพลย์ลิสต์สตรีมในแท็บซัพพอร์ต)
 여러 기기에서 같은 계정으로 동시에 돌리지 않기:
   en: Don't stream on multiple devices with the same account at once
   ja: 同じアカウントで複数の端末から同時に再生しない
   zh: 不要用同一账号在多台设备同时播放
   es: No uses la misma cuenta en varios dispositivos a la vez
   id: Jangan streaming di banyak perangkat dengan akun yang sama sekaligus
+  th: อย่าสตรีมหลายเครื่องด้วยบัญชีเดียวพร้อมกัน
 유튜브 뮤직비디오 조회수:
   en: YouTube MV views
   ja: YouTube MV再生回数
   zh: YouTube MV播放量
   es: Vistas del MV en YouTube
   id: Penayangan MV YouTube
+  th: ยอดวิว MV บน YouTube
 로그인한 상태에서 MV를 끝까지 보기:
   en: Watch the MV to the end while logged in
   ja: ログインした状態でMVを最後まで見る
   zh: 登录状态下完整观看MV
   es: Mira el MV completo con sesión iniciada
   id: Tonton MV sampai habis sambil login
+  th: ล็อกอินแล้วดู MV จนจบ
 같은 MV만 연속 반복하지 말고 다른 영상(무대·직캠)을 사이에 섞기:
   en: Don't loop the same MV — mix in other videos (stages, fancams)
   ja: 同じMVだけを連続リピートせず、他の動画（ステージ・直カム）を挟む
   zh: 不要只循环同一MV，中间穿插其他视频（舞台·直拍）
   es: 'No repitas solo el mismo MV: intercala otros videos (presentaciones, fancams)'
   id: Jangan ulang MV yang sama terus — selingi video lain (panggung, fancam)
+  th: อย่าวน MV เดิมซ้ำๆ — สลับกับคลิปอื่น (เวที, แฟนแคม)
 좋아요·댓글·공유도 함께:
   en: Like, comment and share too
   ja: いいね・コメント・共有も一緒に
   zh: 也要点赞·评论·分享
   es: Dale me gusta, comenta y comparte
   id: Jangan lupa like, komen, dan share
+  th: กดไลก์ คอมเมนต์ และแชร์ด้วย
 재생목록은 공식 채널 영상 위주로:
   en: Build playlists mainly from official channel videos
   ja: プレイリストは公式チャンネルの動画中心で
   zh: 歌单以官方频道视频为主
   es: Arma listas sobre todo con videos de canales oficiales
   id: Playlist utamakan video dari kanal resmi
+  th: ทำเพลย์ลิสต์จากคลิปช่องทางการเป็นหลัก
 음방 투표 공통:
   en: Music show voting basics
   ja: 音楽番組投票の共通ポイント
   zh: 打歌节目投票通用
   es: 'Votaciones de programas musicales: lo básico'
   id: Dasar voting acara musik
+  th: พื้นฐานการโหวตรายการเพลง
 투표 기간은 응원 탭 '투표'에서 확인 (마감 임박하면 빨갛게 표시):
   en: Check voting periods under 'Votes' in the Support tab (shown in red when closing soon)
   ja: 投票期間は応援タブの「投票」で確認（締切間近は赤で表示）
   zh: 投票时间在应援页“投票”中查看（即将截止时显示为红色）
   es: Consulta los plazos en 'Votaciones' de la pestaña Apoyo (en rojo si cierran pronto)
   id: Cek periode voting di 'Voting' tab Dukung (merah jika hampir berakhir)
+  th: ดูช่วงเวลาโหวตที่ 'โหวต' ในแท็บซัพพอร์ต (ใกล้ปิดจะเป็นสีแดง)
 대부분 앱 미션·광고로 투표권을 모으니 미리 모아 두기:
   en: Most apps give votes through missions and ads — collect them in advance
   ja: 多くはアプリのミッション・広告で投票権を集めるので事前に貯めておく
   zh: 大多数App通过任务·广告获得投票券，记得提前攒
   es: 'La mayoría de apps dan votos por misiones y anuncios: acumúlalos antes'
   id: Kebanyakan aplikasi kasih vote lewat misi dan iklan — kumpulkan dari awal
+  th: แอปส่วนใหญ่ให้สิทธิ์โหวตจากภารกิจและโฆษณา — สะสมไว้ล่วงหน้า
 투표 앱·방식이 자주 바뀌니 공식 공지도 같이 확인:
   en: Voting apps and rules change often — check official notices too
   ja: 投票アプリや方式はよく変わるので公式告知も確認
   zh: 投票App和规则常有变化，请同时查看官方公告
   es: 'Las apps y reglas cambian a menudo: revisa también los avisos oficiales'
   id: Aplikasi dan aturan voting sering berubah — cek juga pengumuman resmi
+  th: แอปและกติกาโหวตเปลี่ยนบ่อย — ตรวจประกาศทางการด้วย
+유픽:
+  en: U+PICK
+  ja: U+PICK
+  zh: U+PICK
+  es: U+PICK
+  id: U+PICK
+  th: U+PICK
+유픽(U+PICK):
+  en: U+PICK app
+  ja: U+PICKアプリ
+  zh: U+PICK App
+  es: App U+PICK
+  id: Aplikasi U+PICK
+  th: แอป U+PICK
+11월 이달의 픽 · 루키 남자 (제트·서하 후보):
+  en: November Pick of the Month · Rookie Male (ZET & SEOHA nominated)
+  ja: 11月の今月のピック · ルーキー男性部門（ZET・SEOHAノミネート）
+  zh: 11月本月之选 · 新人男子组（ZET·SEOHA入围）
+  es: Pick del mes de noviembre · Novato masculino (nominados ZET y SEOHA)
+  id: Pick of the Month November · Rookie Pria (nominasi ZET & SEOHA)
+  th: Pick of the Month พฤศจิกายน · รุกกี้ชาย (ZET & SEOHA เข้าชิง)
+부문 1위는 코엑스 미디어타워 전광판 광고:
+  en: The category winner gets a billboard ad on the COEX Media Tower
+  ja: 部門1位はCOEXメディアタワーの大型ビジョン広告
+  zh: 组别第一名可获COEX媒体塔大屏广告
+  es: El ganador obtiene un anuncio en la pantalla gigante de COEX Media Tower
+  id: Pemenang kategori dapat iklan di billboard COEX Media Tower
+  th: ผู้ชนะประเภทได้ป้ายโฆษณาบนจอ COEX Media Tower
+지금 활동곡 (데뷔 미니앨범 더블 타이틀):
+  en: Current promo track (double title of the debut mini album)
+  ja: 現在の活動曲（デビューミニアルバムのダブルタイトル）
+  zh: 当前主打（出道迷你专辑双主打）
+  es: Sencillo promocional actual (doble título del mini álbum debut)
+  id: Lagu promosi saat ini (double title mini album debut)
+  th: เพลงโปรโมตตอนนี้ (ดับเบิลไตเติลของมินิอัลบั้มเดบิวต์)
+선공개 싱글·데뷔 활동곡:
+  en: Pre-release single · debut promo track
+  ja: 先行シングル・デビュー活動曲
+  zh: 先行单曲·出道主打
+  es: Sencillo de prelanzamiento · sencillo promocional del debut
+  id: Single pra-rilis · lagu promosi debut
+  th: ซิงเกิลปล่อยล่วงหน้า · เพลงโปรโมตช่วงเดบิวต์
+실물 앨범 2026-11-10 출시:
+  en: Physical album released Nov 10, 2026
+  ja: CDは2026年11月10日発売
+  zh: 实体专辑于2026年11月10日发行
+  es: Álbum físico a la venta el 10 de noviembre de 2026
+  id: Album fisik rilis 10 November 2026
+  th: อัลบั้มแบบแผ่นวางจำหน่าย 10 พ.ย. 2026
+SOUL Ver. — 포토북 68p, CD-R, 가사지, 페이퍼 모빌, 포토카드 3장(15종 중 랜덤):
+  en: SOUL Ver. — 68-page photobook, CD-R, lyric sheet, paper mobile, 3 photocards (random of 15)
+  ja: SOUL Ver. — フォトブック68p、CD-R、歌詞カード、ペーパーモビール、フォトカード3枚（15種からランダム）
+  zh: SOUL Ver. — 写真书68页、CD-R、歌词纸、纸质挂饰、小卡3张（15款随机）
+  es: SOUL Ver. — fotolibro de 68 págs., CD-R, hoja de letras, móvil de papel, 3 photocards (al azar de 15)
+  id: SOUL Ver. — photobook 68 hlm, CD-R, lirik, paper mobile, 3 photocard (acak dari 15)
+  th: SOUL Ver. — โฟโต้บุ๊ก 68 หน้า, CD-R, ใบเนื้อเพลง, โมบายกระดาษ, โฟโต้การ์ด 3 ใบ (สุ่มจาก 15 แบบ)
+CONSTELLATION Ver. — SOUL Ver.와 같은 구성:
+  en: CONSTELLATION Ver. — same contents as SOUL Ver.
+  ja: CONSTELLATION Ver. — SOUL Ver.と同じ構成
+  zh: CONSTELLATION Ver. — 与SOUL Ver.相同
+  es: CONSTELLATION Ver. — mismo contenido que SOUL Ver.
+  id: CONSTELLATION Ver. — isi sama dengan SOUL Ver.
+  th: CONSTELLATION Ver. — ส่วนประกอบเหมือน SOUL Ver.
+앨범·팬사인회·영상통화 이벤트 (11/13 기준 품절):
+  en: Albums, fansign & video call events (sold out as of Nov 13)
+  ja: アルバム・サイン会・ビデオ通話イベント（11/13時点で完売）
+  zh: 专辑·签售·视频通话活动（截至11/13已售罄）
+  es: Álbumes, fansign y videollamadas (agotado al 13/11)
+  id: Album, fansign & video call (habis per 13/11)
+  th: อัลบั้ม, แฟนไซน์ และวิดีโอคอล (ขายหมด ณ 13 พ.ย.)
+예약 특전 포토카드 이벤트:
+  en: Pre-order photocard event
+  ja: 予約特典フォトカードイベント
+  zh: 预购特典小卡活动
+  es: Evento de photocard de preventa
+  id: Event photocard pre-order
+  th: อีเวนต์โฟโต้การ์ดพรีออเดอร์
+예약 특전 셀카 포토카드:
+  en: Pre-order selfie photocard
+  ja: 予約特典セルカフォトカード
+  zh: 预购特典自拍小卡
+  es: Photocard selfie de preventa
+  id: Photocard selfie pre-order
+  th: โฟโต้การ์ดเซลฟี่พรีออเดอร์
+'''SUPERSTAR''와 ''Dancing in the Dark'' 뮤직비디오 보기 (아래 입문 코스)':
+  en: Watch the 'SUPERSTAR' and 'Dancing in the Dark' MVs (beginner route below)
+  ja: 『SUPERSTAR』と『Dancing in the Dark』のMVを見る（下の入門コース）
+  zh: 观看《SUPERSTAR》和《Dancing in the Dark》MV（下方入门路线）
+  es: Mira los MV de 'SUPERSTAR' y 'Dancing in the Dark' (ruta de abajo)
+  id: Tonton MV 'SUPERSTAR' dan 'Dancing in the Dark' (rute di bawah)
+  th: ดู MV 'SUPERSTAR' และ 'Dancing in the Dark' (คอร์สเริ่มต้นด้านล่าง)
+멤버 탭에서 15명 사진·프로필 훑어보기:
+  en: Browse the 15 members' photos and profiles in the Members tab
+  ja: メンバータブで15人の写真・プロフィールをチェック
+  zh: 在成员页浏览15位成员的照片和资料
+  es: Revisa fotos y perfiles de los 15 en la pestaña Miembros
+  id: Lihat foto dan profil 15 member di tab Member
+  th: ดูรูปและโปรไฟล์ทั้ง 15 คนในแท็บเมมเบอร์
+멤버 맞히기 퀴즈로 얼굴 익히기:
+  en: Learn their faces with the guess-the-member quiz
+  ja: メンバー当てクイズで顔を覚える
+  zh: 用猜成员小测验记住大家
+  es: Aprende sus caras con el quiz de adivinar
+  id: Hafalkan wajah lewat kuis tebak member
+  th: จำหน้าด้วยเกมทายเมมเบอร์
+직캠 탭에서 마음 가는 멤버 직캠 보기 → 한눈에 탭에서 최애로 설정:
+  en: Watch fancams of whoever catches your eye → set them as your bias on Home
+  ja: 直カムタブで気になるメンバーの直カムを見る → ホームで推しに設定
+  zh: 在直拍页看喜欢的成员直拍 → 在首页设为本命
+  es: Mira fancams de quien te guste → márcalo como bias en Inicio
+  id: Tonton fancam member yang kamu suka → jadikan bias di Beranda
+  th: ดูแฟนแคมของคนที่สะดุดตา → ตั้งเป็นเมนในหน้าแรก
+응원 탭에서 캘린더 구독 → 음방·투표 마감이 휴대폰 캘린더에:
+  en: Subscribe to the calendar in the Support tab → shows and vote deadlines on your phone
+  ja: 応援タブでカレンダー購読 → 音楽番組・投票締切がスマホのカレンダーに
+  zh: 在应援页订阅日历 → 打歌和投票截止同步到手机
+  es: Suscríbete al calendario en Apoyo → programas y cierres de votación en tu móvil
+  id: Langganan kalender di tab Dukung → jadwal acara & batas voting masuk ke HP
+  th: ติดตามปฏิทินในแท็บซัพพอร์ต → รายการเพลงและวันปิดโหวตเข้ามือถือ
+홈 화면에 앱 설치 (오른쪽 위 '앱 설치'):
+  en: Install the app on your home screen ('Install app' at the top right)
+  ja: ホーム画面にアプリをインストール（右上の「アプリをインストール」）
+  zh: 把App添加到主屏幕（右上角“安装App”）
+  es: Instala la app en tu pantalla de inicio ('Instalar app' arriba a la derecha)
+  id: Pasang aplikasi di layar utama ('Pasang aplikasi' di kanan atas)
+  th: ติดตั้งแอปบนหน้าจอโฮม ('ติดตั้งแอป' มุมขวาบน)
+유튜브 A2O SOUL — 뮤직비디오·자체 콘텐츠:
+  en: YouTube A2O SOUL — MVs and original content
+  ja: YouTube A2O SOUL — MV・自主コンテンツ
+  zh: YouTube A2O SOUL — MV·自制内容
+  es: YouTube A2O SOUL — MV y contenido propio
+  id: YouTube A2O SOUL — MV dan konten orisinal
+  th: YouTube A2O SOUL — MV และคอนเทนต์ของวง
+유튜브 A2O WORLD — 소속사 채널 (데뷔 전 연습생 영상도 여기):
+  en: YouTube A2O WORLD — agency channel (pre-debut trainee videos too)
+  ja: YouTube A2O WORLD — 事務所チャンネル（デビュー前の練習生映像も）
+  zh: YouTube A2O WORLD — 公司频道（出道前练习生视频也在这）
+  es: YouTube A2O WORLD — canal de la agencia (también videos de trainees)
+  id: YouTube A2O WORLD — kanal agensi (video trainee pra-debut juga)
+  th: YouTube A2O WORLD — ช่องของค่าย (มีคลิปเทรนนีก่อนเดบิวต์ด้วย)
+인스타그램·X — 공지, 일정, 사진:
+  en: Instagram & X — notices, schedules and photos
+  ja: Instagram・X — 告知、スケジュール、写真
+  zh: Instagram·X — 公告、日程、照片
+  es: Instagram y X — avisos, agenda y fotos
+  id: Instagram & X — pengumuman, jadwal, foto
+  th: Instagram และ X — ประกาศ ตาราง และรูป
+플러스챗 — 멤버가 직접 보내는 메시지 (엠넷플러스 유료 구독):
+  en: PLUS CHAT — messages from the members themselves (paid Mnet Plus subscription)
+  ja: PLUS CHAT — メンバー本人からのメッセージ（Mnet Plus有料購読）
+  zh: PLUS CHAT — 成员亲自发送的消息（Mnet Plus付费订阅）
+  es: PLUS CHAT — mensajes de los propios miembros (suscripción de pago en Mnet Plus)
+  id: PLUS CHAT — pesan langsung dari member (langganan berbayar Mnet Plus)
+  th: PLUS CHAT — ข้อความจากเมมเบอร์โดยตรง (สมัครแบบเสียเงินใน Mnet Plus)
+링크는 멤버 탭 맨 위 '공식 채널'에 모여 있어요:
+  en: All links are in 'Official channels' at the top of the Members tab
+  ja: リンクはメンバータブ上部の「公式チャンネル」にまとまっています
+  zh: 链接都在成员页顶部的“官方频道”
+  es: Todos los enlaces están en 'Canales oficiales' arriba en Miembros
+  id: Semua tautan ada di 'Kanal resmi' di atas tab Member
+  th: ลิงก์ทั้งหมดอยู่ที่ 'ช่องทางทางการ' ด้านบนแท็บเมมเบอร์
+직캠 — 한 멤버만 따라가며 찍은 무대 영상:
+  en: Fancam (jikcam) — a stage video that follows one member
+  ja: 直カム — 1人のメンバーだけを追って撮ったステージ映像
+  zh: 直拍 — 只跟拍一位成员的舞台视频
+  es: Fancam — video de la presentación que sigue a un solo miembro
+  id: Fancam — video panggung yang fokus ke satu member
+  th: แฟนแคม (จิกแคม) — คลิปเวทีที่ตามถ่ายเมมเบอร์คนเดียว
+음방 — 음악방송 (더쇼·쇼챔피언·엠카운트다운·뮤직뱅크·음악중심·인기가요):
+  en: Music show — THE SHOW, Show Champion, M COUNTDOWN, Music Bank, Show! Music Core, Inkigayo
+  ja: 音楽番組 — THE SHOW・SHOW CHAMPION・M COUNTDOWN・ミュージックバンク・音楽中心・人気歌謡
+  zh: 打歌节目 — THE SHOW·Show Champion·M COUNTDOWN·音乐银行·音乐中心·人气歌谣
+  es: Programa musical — THE SHOW, Show Champion, M COUNTDOWN, Music Bank, Music Core, Inkigayo
+  id: Acara musik — THE SHOW, Show Champion, M COUNTDOWN, Music Bank, Music Core, Inkigayo
+  th: รายการเพลง — THE SHOW, Show Champion, M COUNTDOWN, Music Bank, Show! Music Core, Inkigayo
+사녹 — 음방 사전녹화 (팬이 직접 가서 보는 녹화):
+  en: Pre-recording — a music show stage recorded in advance, often with fans in the audience
+  ja: サノク — 音楽番組の事前収録（ファンが観覧できる収録）
+  zh: 预录 — 打歌节目的提前录制（粉丝可现场观看）
+  es: Pregrabación — presentación grabada antes de la emisión, a menudo con fans
+  id: Pra-rekam — panggung acara musik yang direkam lebih dulu, sering ditonton fans
+  th: พรีเรคคอร์ด — การอัดเวทีรายการเพลงล่วงหน้า มักมีแฟนเข้าชม
+스밍 — 음원 사이트에서 노래 스트리밍 (차트 순위에 반영):
+  en: Streaming — playing songs on music sites (counts toward charts)
+  ja: スミン — 音源サイトでのストリーミング（チャート順位に反映）
+  zh: 打榜（刷流） — 在音源网站播放歌曲（计入榜单）
+  es: Streaming — escuchar en sitios de música (cuenta para las listas)
+  id: Streaming — memutar lagu di situs musik (masuk hitungan chart)
+  th: สตรีม — เปิดฟังเพลงในเว็บเพลง (นับเข้าชาร์ต)
+1위 후보 — 음방에서 그 주 1위를 다투는 곡 (투표가 점수에 들어가요):
+  en: 1st-place nominee — a song competing for the weekly win on a music show (votes count)
+  ja: 1位候補 — 音楽番組でその週の1位を争う曲（投票が点数に入る）
+  zh: 一位候补 — 打歌节目当周争夺一位的歌曲（投票计入分数）
+  es: Nominado al 1.er lugar — canción que compite por ganar esa semana (los votos cuentan)
+  id: 'Nominasi #1 — lagu yang bersaing jadi juara minggu itu (voting dihitung)'
+  th: ผู้เข้าชิงอันดับ 1 — เพลงที่ชิงอันดับ 1 ประจำสัปดาห์ของรายการเพลง (โหวตมีผลต่อคะแนน)
+활동곡 — 음방 무대에서 부르는 곡 (지금은 'Dancing in the Dark'):
+  en: Promo track — the song performed on music shows (now 'Dancing in the Dark')
+  ja: 活動曲 — 音楽番組で披露する曲（今は『Dancing in the Dark』）
+  zh: 主打曲 — 打歌舞台上演唱的歌曲（现在是《Dancing in the Dark》）
+  es: Sencillo promocional — la canción de los programas (ahora 'Dancing in the Dark')
+  id: Lagu promosi — lagu yang dibawakan di acara musik (sekarang 'Dancing in the Dark')
+  th: เพลงโปรโมต — เพลงที่ขึ้นแสดงในรายการเพลง (ตอนนี้คือ 'Dancing in the Dark')
+포카 — 앨범에 랜덤으로 들어 있는 포토카드:
+  en: Photocard — a random member photo card inside the album
+  ja: トレカ — アルバムにランダムで入っているフォトカード
+  zh: 小卡 — 专辑里随机附赠的照片卡
+  es: Photocard — tarjeta con foto que viene al azar en el álbum
+  id: Photocard — kartu foto acak di dalam album
+  th: โฟโต้การ์ด — การ์ดรูปเมมเบอร์แบบสุ่มในอัลบั้ม
+팬싸·영통 — 앨범 구매로 응모하는 팬사인회·영상통화 이벤트:
+  en: Fansign / video call — events you enter by buying albums
+  ja: サイン会・ヨントン — アルバム購入で応募するイベント
+  zh: 签售·视频通话 — 购买专辑报名的活动
+  es: Fansign / videollamada — eventos a los que entras comprando álbumes
+  id: Fansign / video call — event yang diikuti lewat pembelian album
+  th: แฟนไซน์ / วิดีโอคอล — อีเวนต์ที่สมัครด้วยการซื้ออัลบั้ม
+루키즈·LTB·HTB — 데뷔 전 연습생 시절 이름 (A2O Rookies):
+  en: Rookies · LTB · HTB — names from the pre-debut trainee days (A2O Rookies)
+  ja: ルーキーズ・LTB・HTB — デビュー前の練習生時代の名前（A2O Rookies）
+  zh: Rookies·LTB·HTB — 出道前练习生时期的名称（A2O Rookies）
+  es: Rookies · LTB · HTB — nombres de la etapa de trainees (A2O Rookies)
+  id: Rookies · LTB · HTB — nama masa trainee pra-debut (A2O Rookies)
+  th: Rookies · LTB · HTB — ชื่อช่วงเทรนนีก่อนเดบิวต์ (A2O Rookies)
+덕질 처음이라면 — 첫 일주일:
+  en: New fan? Your first week
+  ja: 推し活初心者さんへ — 最初の1週間
+  zh: 刚入坑？第一周这样做
+  es: ¿Eres nuevo? Tu primera semana
+  id: Fans baru? Minggu pertamamu
+  th: แฟนใหม่? สัปดาห์แรกของคุณ
+공식 정보는 여기서:
+  en: Where to find official info
+  ja: 公式情報はここで
+  zh: 官方信息看这里
+  es: Dónde ver la info oficial
+  id: Info resmi ada di sini
+  th: ดูข้อมูลทางการได้ที่ไหน
+자주 쓰는 말:
+  en: Fandom terms
+  ja: よく使う言葉
+  zh: 常用词
+  es: Términos del fandom
+  id: Istilah fandom
+  th: คำศัพท์แฟนด้อม
+데뷔곡 'SUPERSTAR' 뮤직비디오로 시작:
+  en: Start with the debut song 'SUPERSTAR' MV
+  ja: デビュー曲『SUPERSTAR』のMVからスタート
+  zh: 从出道曲《SUPERSTAR》MV开始
+  es: Empieza con el MV del debut 'SUPERSTAR'
+  id: Mulai dari MV lagu debut 'SUPERSTAR'
+  th: เริ่มจาก MV เพลงเดบิวต์ 'SUPERSTAR'
+15명 군무를 한눈에 — 퍼포먼스 비디오:
+  en: See all 15 dancing together — performance video
+  ja: 15人の群舞をひと目で — パフォーマンスビデオ
+  zh: 一眼看15人群舞 — 表演视频
+  es: Los 15 bailando juntos — video de performance
+  id: Lihat dance 15 member sekaligus — performance video
+  th: ดูทั้ง 15 คนเต้นพร้อมกัน — เพอร์ฟอร์แมนซ์วิดีโอ
+더블 타이틀 'Dancing in the Dark' 뮤직비디오:
+  en: Double title track 'Dancing in the Dark' MV
+  ja: ダブルタイトル『Dancing in the Dark』MV
+  zh: 双主打《Dancing in the Dark》MV
+  es: MV del doble título 'Dancing in the Dark'
+  id: MV double title 'Dancing in the Dark'
+  th: MV ดับเบิลไตเติล 'Dancing in the Dark'
+멤버 소개 영상:
+  en: Member introduction video
+  ja: メンバー紹介映像
+  zh: 成员介绍视频
+  es: Video de presentación de los miembros
+  id: Video perkenalan member
+  th: คลิปแนะนำเมมเบอร์
+릴레이댄스로 멤버별 파트 확인:
+  en: Check each member's part with the relay dance
+  ja: リレーダンスでメンバー別パートを確認
+  zh: 通过接力舞确认每位成员的部分
+  es: Mira la parte de cada miembro en el relay dance
+  id: Cek part tiap member lewat relay dance
+  th: เช็กพาร์ตของแต่ละคนจากรีเลย์แดนซ์
+데뷔 쇼케이스 첫 무대:
+  en: First stage at the debut showcase
+  ja: デビューショーケースの初ステージ
+  zh: 出道Showcase首个舞台
+  es: Primera presentación en el showcase debut
+  id: Panggung pertama di showcase debut
+  th: เวทีแรกในโชว์เคสเดบิวต์

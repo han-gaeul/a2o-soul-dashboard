@@ -344,3 +344,4 @@ header .head-right { margin-left: auto; }
 .dlg-ko { white-space: nowrap; }
 #dlgTitle { min-width: 0; }
 @media (max-width: 480px) { #dlgTitle .bias-l { display: none; } }
+.versions { margin: 4px 0 0; padding-left: 18px; }
