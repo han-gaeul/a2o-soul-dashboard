@@ -645,49 +645,63 @@ if ("serviceWorker" in navigator) {
   else $("pickSec").remove();
 
   // ---------- 멤버 맞히기 퀴즈 (입덕 탭) ----------
-  // 썸네일 대신 영상 중간 장면(hq1~3)을 써서 제목 글씨로 답이 보이지 않게
-  const quizPool = allFancams.filter((v) => v.member);
-  const quizMembers = [...new Set(quizPool.map((v) => v.member))];
+  // 멤버 사진(members.yml photo·profile_history)이 4명 이상 있으면 사진 퀴즈,
+  // 없으면 직캠 장면 퀴즈 (썸네일은 이름 글씨가 있어서 영상 장면 사용, 화질 좋은 것부터 시도)
+  const photoQs = data.members.flatMap((m) => [m.photo, ...(m.profile_history || []).map((h) => h.photo)]
+    .filter(Boolean).map((src) => ({ member: m.name, photo: src })));
+  const photoMode = new Set(photoQs.map((x) => x.member)).size >= 4;
+  const quizPool = photoMode ? photoQs : allFancams.filter((v) => v.member).map((v) => ({ member: v.member, video: v }));
+  const quizMembers = [...new Set(quizPool.map((x) => x.member))];
   if (quizPool.length >= 4 && quizMembers.length >= 4) {
     const ROUND = 10;
     let q = 0, score = 0;
     const best = () => pref.get("quizBest", 0);
     const shuffle = (a) => a.map((x) => [Math.random(), x]).sort((x, y) => x[0] - y[0]).map((x) => x[1]);
     const showScore = () => { $("quizScore").textContent = t("quiz_score", { q: Math.min(q + 1, ROUND), n: ROUND, s: score, b: best() }); };
+    const frameImg = (id, n) => {
+      const srcs = [`maxres${n}`, `sd${n}`, `hq${n}`].map((f) => `https://i.ytimg.com/vi/${id}/${f}.jpg`);
+      const img = el("img", { class: "quiz-img", src: srcs[0], alt: "" });
+      let i = 0;
+      const next = () => {
+        i += 1;
+        if (i < srcs.length) img.src = srcs[i]; else img.closest(".quiz-cell")?.remove();
+      };
+      img.addEventListener("error", next);
+      // 없는 화질은 120x90 회색 기본 이미지로 오는 경우가 있어서 크기로도 확인
+      img.addEventListener("load", () => { if (img.naturalWidth <= 120) next(); });
+      return el("div", { class: "quiz-cell" }, img);
+    };
+    let recentQ = [];
     function ask() {
       if (q >= ROUND) return finish();
       showScore();
-      const v = quizPool[Math.floor(Math.random() * quizPool.length)];
-      const opts = shuffle([v.member, ...shuffle(quizMembers.filter((n) => n !== v.member)).slice(0, 3)]);
-      // 영상 25·50·75% 지점 세 장면을 나란히 → 세 장면에 계속 가운데 나오는 사람이 주인공
-      const frames = [1, 2, 3].map((n) => {
-        const img = el("img", { class: "quiz-img", src: `https://i.ytimg.com/vi/${v.id}/hq${n}.jpg`, alt: "" });
-        // 장면 이미지가 없는 영상은 썸네일로 (그것도 없으면 칸 숨김)
-        img.addEventListener("error", () => {
-          if (img.dataset.fallback) img.closest(".quiz-cell")?.remove();
-          else { img.dataset.fallback = "1"; img.src = thumbUrl(v.id); }
-        });
-        return el("div", { class: "quiz-cell" }, img);
-      });
+      const fresh = quizPool.filter((x) => !recentQ.includes(x));
+      const item = fresh[Math.floor(Math.random() * fresh.length)] || quizPool[0];
+      recentQ = [...recentQ, item].slice(-Math.min(ROUND, quizPool.length - 1));
+      const v = item.video || { member: item.member };
+      const opts = shuffle([item.member, ...shuffle(quizMembers.filter((n) => n !== item.member)).slice(0, 3)]);
+      const frames = item.photo
+        ? [el("div", { class: "quiz-cell quiz-photo" }, el("img", { class: "quiz-img", src: item.photo, alt: "" }))]
+        : [1, 2, 3].map((n) => frameImg(v.id, n));
       const result = el("div", { class: "quiz-result" });
       const btns = opts.map((n) => {
         const mem = data.members.find((x) => x.name === n);
         const b = el("button", { class: "quiz-opt", type: "button" }, n, mem?.ko ? el("span", { class: "muted" }, ` ${mem.ko}`) : null);
         b.addEventListener("click", () => {
           btns.forEach((x) => { x.disabled = true; });
-          const ok = n === v.member;
+          const ok = n === item.member;
           if (ok) score++;
           b.classList.add(ok ? "ok" : "no");
-          btns[opts.indexOf(v.member)].classList.add("ok");
+          btns[opts.indexOf(item.member)].classList.add("ok");
           const next = el("button", { class: "more", type: "button" }, q + 1 >= ROUND ? t("quiz_done") : t("quiz_next"));
           next.addEventListener("click", () => { q++; ask(); });
-          result.replaceChildren(el("b", {}, ok ? t("quiz_ok") : t("quiz_no", { name: v.member })),
-            ext(ytUrl(v.id), t("quiz_watch")), next);
+          result.replaceChildren(...[el("b", {}, ok ? t("quiz_ok") : t("quiz_no", { name: item.member })),
+            item.video ? ext(ytUrl(item.video.id), t("quiz_watch")) : null, next].filter(Boolean));
           showScore();
         });
         return b;
       });
-      $("quiz").replaceChildren(el("p", { class: "quiz-q" }, t("quiz_q")), el("div", { class: "quiz-frame" }, ...frames),
+      $("quiz").replaceChildren(el("p", { class: "quiz-q" }, t(item.photo ? "quiz_q_photo" : "quiz_q")), el("div", { class: "quiz-frame" }, ...frames),
         el("div", { class: "quiz-opts" }, ...btns), result);
     }
     function finish() {
