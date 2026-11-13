@@ -259,6 +259,7 @@ if ("serviceWorker" in navigator) {
   let evView = pref.get("evView", "cal");
   const todayD = new Date(`${todayKst}T00:00:00Z`);
   let calY = todayD.getUTCFullYear(), calM = todayD.getUTCMonth() + 1, calSel = todayKst;
+  let calFold = pref.get("calFold", true);
   const evTabs = el("div", { class: "filter-row ev-tabs" });
   const viewBtn = el("button", { type: "button", class: "ev-view" });
   const calBox = el("div", { class: "cal" });
@@ -302,8 +303,17 @@ if ("serviceWorker" in navigator) {
     next.addEventListener("click", () => { calM += 1; if (calM > 12) { calM = 1; calY += 1; } calSel = ""; renderCal(); });
     const monthName = new Intl.DateTimeFormat(LOCALES[LANG], { year: "numeric", month: "long", timeZone: "UTC" }).format(first);
     const grid = el("div", { class: "cal-grid" }, ...t("weekdays").map((w, i) => el("div", { class: `cal-wd${i === 0 ? " sun" : i === 6 ? " sat" : ""}` }, w)));
-    for (let i = 0; i < first.getUTCDay(); i++) grid.append(el("div", { class: "cal-cell empty" }));
+    // 접힌 상태(이번 달·기본 보기)는 오늘이 있는 주부터 2주만
+    const thisMonth = calY === todayD.getUTCFullYear() && calM === todayD.getUTCMonth() + 1;
+    const folded = calFold && thisMonth;
+    const lead = first.getUTCDay();
+    const weekOf = (d) => Math.floor((lead + d - 1) / 7);
+    const showWeeks = folded ? [weekOf(todayD.getUTCDate()), weekOf(todayD.getUTCDate()) + 1] : null;
+    const visible = (d) => !showWeeks || showWeeks.includes(weekOf(d));
+    if (!folded) for (let i = 0; i < lead; i++) grid.append(el("div", { class: "cal-cell empty" }));
+    else for (let i = 0; i < lead && showWeeks[0] === 0; i++) grid.append(el("div", { class: "cal-cell empty" }));
     for (let d = 1; d <= days; d++) {
+      if (!visible(d)) continue;
       const iso = `${calY}-${String(calM).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
       const list = byDay[iso] || [];
       const groups = [...new Set(list.map((e) => e.group))];
@@ -318,9 +328,11 @@ if ("serviceWorker" in navigator) {
     const sel = calSel ? (byDay[calSel] || []) : [];
     const rest = evs.filter((e) => e.date >= (calSel || todayKst)).sort((a, b) => (a.date + (a.time || "")).localeCompare(b.date + (b.time || "")));
     const list = calSel && sel.length ? sel : rest.slice(0, 6);
+    const foldBtn = thisMonth ? el("button", { type: "button", class: "cal-fold" }, calFold ? `${t("cal_more")} ▾` : `${t("cal_less")} ▴`) : null;
+    foldBtn?.addEventListener("click", () => { calFold = !calFold; pref.set("calFold", calFold); renderCal(); });
     calBox.replaceChildren(
       el("div", { class: "cal-head" }, prev, el("b", {}, monthName), next),
-      grid,
+      grid, foldBtn,
       el("div", { class: "cal-sub muted small" }, calSel && sel.length ? "" : t("cal_upcoming")),
       el("ul", { class: "events" }, ...(list.length ? list.map(evItem) : [el("li", { class: "empty" }, "–")])));
   }
@@ -1011,6 +1023,7 @@ if ("serviceWorker" in navigator) {
   }
 
   // ---------- 최애 (한눈에 맨 위) ----------
+
   let bias = pref.get("bias", "");
   function renderBias() {
     const m = data.members.find((x) => x.name === bias);
@@ -1039,8 +1052,46 @@ if ("serviceWorker" in navigator) {
     bias = name;
     pref.set("bias", name);
     renderBias();
+
+
   }
   renderBias();
+
+  // ---------- 헤더 사진 띠 (15명, 누르면 프로필) ----------
+  const withPhoto = data.members.filter((m) => m.photo);
+  if (withPhoto.length >= 5) {
+    const chip = (m, dup) => {
+      const b = el("button", { type: "button", class: "strip-m", ...(dup ? { "aria-hidden": "true", tabindex: "-1" } : {}) },
+        el("img", { src: m.photo, alt: "", loading: "lazy" }), el("span", {}, m.name));
+      b.addEventListener("click", () => openMember(m));
+      return b;
+    };
+    // 끝없이 흐르게 같은 줄을 두 번 (두 번째는 화면 읽기에서 제외)
+    $("stripTrack").append(...withPhoto.map((m) => chip(m, false)), ...withPhoto.map((m) => chip(m, true)));
+    $("strip").hidden = false;
+  }
+
+  // ---------- 포토카드 (입덕 탭): site/img/photocards/버전_이름.webp ----------
+  const pcs = data.photocards || [];
+  if (pcs.length) {
+    const versions = [...new Set(pcs.map((x) => x.version))];
+    let pcVer = versions[0];
+    const drawPc = () => {
+      $("pcTabs").replaceChildren(...versions.map((v) => {
+        const b = el("button", { type: "button", class: v === pcVer ? "on" : "" }, `${tc(v)} ${pcs.filter((x) => x.version === v).length}`);
+        b.addEventListener("click", () => { pcVer = v; drawPc(); });
+        return b;
+      }));
+      const list = pcs.filter((x) => x.version === pcVer)
+        .sort((a, b) => (a.member === bias ? -1 : b.member === bias ? 1 : 0));
+      $("pcGrid").replaceChildren(...list.map((x) => el("figure", { class: "pc" },
+        el("img", { src: x.src, alt: `${x.member} ${x.version}`, loading: "lazy" }),
+        el("figcaption", {}, x.member, x.label ? el("span", { class: "muted" }, ` · ${tc(x.label)}`) : null))));
+    };
+    drawPc();
+  } else {
+    $("pcSec").remove();
+  }
 
   // ---------- 차트 ----------
   const palette = ["#6c4cf5", "#f5734c", "#12a1a0", "#e0479e", "#d4a017", "#3b82f6", "#8b5cf6", "#22c55e"];

@@ -63,6 +63,7 @@ GitHub Actions가 수집하고 GitHub Pages로 배포합니다. 서버 없음.
 | `translations.yml` | 내용 번역 (한국어 원문 → en·ja·zh·es·id·th). 원문을 고치면 여기도 같이 — 빠지면 '수집 점검' 이슈에 떠요 |
 | `info.yml` | 세계관, 앨범(수록곡·버전·링크), 기록(1위 등), 티켓·굿즈 공식 판매처 |
 | `members.yml` | 멤버 프로필·생일·별칭 (사진·서명은 `site/img/members/`에 `라벨_이름` 파일로) |
+| `site/img/photocards/` | 포토카드 사진 `버전_이름.webp` → 입덕 탭 포토카드 |
 | `targets.yml` | 수집 채널, 시리즈 분류, 의견 보내기 링크(`feedback_url`) |
 
 일정·생일·투표 마감·서포트는 `data/calendar.ics`로도 만들어져서 응원 탭의 **캘린더 구독**으로 휴대폰 캘린더에 넣을 수 있어요.
