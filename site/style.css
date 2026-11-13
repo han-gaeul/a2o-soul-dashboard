@@ -397,3 +397,24 @@ header .head-right { margin-left: auto; }
 .cal-cell.today .cal-d { padding: 0 5px; }
 .dot { width: 5px; height: 5px; }
 .cal-sub { margin: 6px 0 0; }
+
+/* 헤더 사진 띠 */
+.strip { overflow: hidden; margin: -8px -4px 14px; mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+.strip-track { display: flex; gap: 10px; width: max-content; animation: strip 60s linear infinite; }
+.strip:hover .strip-track, .strip:focus-within .strip-track { animation-play-state: paused; }
+@keyframes strip { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .strip-track { animation: none; } .strip { overflow-x: auto; } }
+.strip-m { border: 0; background: none; padding: 0; display: grid; justify-items: center; gap: 3px; cursor: pointer; color: var(--muted); font: inherit; }
+.strip-m img { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 2px var(--card), 0 0 0 3px var(--line); }
+.strip-m span { font-size: 10px; font-weight: 700; letter-spacing: .02em; }
+
+/* 달력 접기 */
+.cal-fold { display: block; margin: 4px auto 0; border: 0; background: none; color: var(--accent); font: inherit; font-size: 12px; font-weight: 700; cursor: pointer; }
+
+/* 포토카드 */
+#pcTabs { margin-bottom: 10px; }
+#pcTabs button { border: 1px solid var(--line); background: var(--card); color: var(--muted); border-radius: 999px; padding: 5px 10px; font: inherit; font-size: 12px; font-weight: 600; cursor: pointer; }
+#pcTabs button.on { background: var(--accent-bg); border-color: var(--accent-bg); color: #fff; }
+.pc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 10px; }
+.pc { margin: 0; display: grid; gap: 4px; font-size: 12px; font-weight: 700; text-align: center; }
+.pc img { width: 100%; aspect-ratio: 55 / 85; object-fit: cover; border-radius: 8px; background: var(--line); }

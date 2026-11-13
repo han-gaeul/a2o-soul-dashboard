@@ -232,6 +232,31 @@ def auto_photos(m):
     return out
 
 
+def photocards(cfg):
+    """site/img/photocards/버전_이름.webp (예: SOUL_문.webp, 예판특전_메이크스타_문.webp) → [{version, label, member, src}]."""
+    folder = ROOT / "site" / "img" / "photocards"
+    if not folder.is_dir():
+        return []
+    keymap = {}
+    for m in cfg["members"]:
+        for k in (m["name"], str(m.get("ko") or "")):
+            if k:
+                keymap[unicodedata.normalize("NFC", k).lower()] = m["name"]
+    out = []
+    for f in sorted(folder.iterdir(), key=lambda f: unicodedata.normalize("NFC", f.name)):
+        if f.suffix.lower() not in IMG_EXT:
+            continue
+        parts = [x for x in unicodedata.normalize("NFC", f.stem).split("_") if x]
+        member = next((keymap[x.lower()] for x in parts if x.lower() in keymap), None)
+        rest = [x for x in parts if x.lower() not in keymap]
+        if not member or not rest:
+            continue
+        out.append({"version": rest[0], "label": " ".join(rest[1:]), "member": member, "src": f"img/photocards/{f.name}"})
+    order = {m["name"]: i for i, m in enumerate(cfg["members"])}
+    out.sort(key=lambda x: (x["version"], order.get(x["member"], 99), x["label"]))
+    return out
+
+
 IG_POST = re.compile(r"^https://(www\.)?instagram\.com/(p|reel)/[\w-]+/?")
 
 
@@ -1101,6 +1126,7 @@ def build(cfg):
         "feedback_url": str(cfg.get("feedback_url") or ""),
         "votes": [v for v in cfg["votes"] if v["end"] >= now_kst_str()],
         "prerecs": prerecs,
+        "photocards": photocards(cfg),
         "streaming": cfg["streaming"],
         "charts": cfg["charts"],
         "supports": sorted((x for x in cfg["supports"] if x["end"] >= today), key=lambda x: x["start"]),
