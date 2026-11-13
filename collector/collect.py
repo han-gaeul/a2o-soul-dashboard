@@ -313,6 +313,17 @@ def other_group_only(title):
     return bool(re.search(r"A2O\s*LITE|에이투오\s*라이트", head, re.I)) and not re.search(r"A2O\s*SOUL|에이투오\s*소울", head, re.I)
 
 
+def other_trainee_only(cfg, title):
+    """'A2O LTB DAVID, A2O LTG OA ...'처럼 유닛 뒤에 이름이 붙었는데 그 이름이 소울 멤버(별칭 포함)가 아닌 영상."""
+    names = re.findall(r"\b(?:LTB|HTB)\s+([A-Z][A-Z\-]+)\b", title)
+    if not names:
+        return False
+    known = set()
+    for m in cfg["members"]:
+        known |= {m["name"].upper()} | {str(a).upper() for a in m.get("aliases") or []}
+    return not any(n in known for n in names)
+
+
 def era_list(cfg):
     """활동 = info.yml 앨범의 활동곡(focus), 발매일 순."""
     out = []
@@ -924,8 +935,8 @@ def build(cfg):
             continue
         if vid not in overrides and reg.get("channel_id") not in tracked:  # 공식 채널 영상만
             continue
-        if vid not in overrides and other_group_only(reg["title"]):  # 합동 무대 채널의 A2O LITE 단독 영상
-            continue
+        if vid not in overrides and (other_group_only(reg["title"]) or other_trainee_only(cfg, reg["title"])):
+            continue  # A2O LITE 단독 영상, 소울 멤버가 아닌 연습생 개인 영상
         cat, member = resolve_video(cfg, registry, vid, overrides)
         pts = points(f"yt:{vid}", "views")
         value, delta = last_delta(pts)

@@ -1,7 +1,7 @@
 {
   "name": "A2O SOUL Tracker",
   "short_name": "SOUL Tracker",
-  "description": "A2O SOUL 영상·직캠·멤버·일정을 모아 보는 비공식 팬메이드 앱",
+  "description": "A2O SOUL 영상·직캠·멤버·일정·투표를 모아 보는 비공식 팬메이드 앱",
   "lang": "ko",
   "start_url": "./",
   "scope": "./",
@@ -15,6 +15,7 @@
     { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ],
   "shortcuts": [
+    { "name": "응원", "url": "./#cheer" },
     { "name": "MV", "url": "./#mv" },
     { "name": "멤버", "url": "./#members" },
     { "name": "직캠", "url": "./#fancams" },
