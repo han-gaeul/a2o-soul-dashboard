@@ -1442,6 +1442,126 @@
    "그런데도 무언가 비어 있다고 느낀 이들은, 사람을 살아 있게 하는 감정과 에너지 — 기쁨·사랑·설렘·열정, 곧 '소울(SOUL)'을 찾아 지구로 떠나요.",
    "데뷔 앨범 'SUPERSTAR'가 그 이야기의 첫 번째 챕터. 그룹은 자신들의 음악을 'NEW SYNTHWAVE'라고 불러요."
   ],
+  "pclist_credit": {
+   "label": "@soultemplates",
+   "url": "https://x.com/soultemplates"
+  },
+  "pclists": [
+   {
+    "album": "SUPERSTAR",
+    "label": "",
+    "member": "MOON",
+    "src": "img/pclists/SUPERSTAR_MOON.webp"
+   },
+   {
+    "album": "SUPERSTAR",
+    "label": "",
+    "member": "SORA",
+    "src": "img/pclists/SUPERSTAR_SORA.webp"
+   },
+   {
+    "album": "SUPERSTAR",
+    "label": "",
+    "member": "SEOHA",
+    "src": "img/pclists/SUPERSTAR_SEOHA.webp"
+   },
+   {
+    "album": "SUPERSTAR",
+    "label": "",
+    "member": "GAKU",
+    "src": "img/pclists/SUPERSTAR_GAKU.webp"
+   },
+   {
+    "album": "SUPERSTAR",
+    "label": "",
+    "member": "TEO",
+    "src": "img/pclists/SUPERSTAR_TEO.webp"
+   },
+   {
+    "album": "SUPERSTAR",
+    "label": "",
+    "member": "JUNE",
+    "src": "img/pclists/SUPERSTAR_JUNE.webp"
+   },
+   {
+    "album": "SUPERSTAR",
+    "label": "",
+    "member": "LUCIEN",
+    "src": "img/pclists/SUPERSTAR_LUCIEN.webp"
+   },
+   {
+    "album": "SUPERSTAR",
+    "label": "",
+    "member": "HANSUNG",
+    "src": "img/pclists/SUPERSTAR_HANSUNG.webp"
+   },
+   {
+    "album": "SUPERSTAR",
+    "label": "",
+    "member": "TAI",
+    "src": "img/pclists/SUPERSTAR_TAI.webp"
+   },
+   {
+    "album": "SUPERSTAR",
+    "label": "",
+    "member": "SEE-ONE",
+    "src": "img/pclists/SUPERSTAR_SEE-ONE.webp"
+   },
+   {
+    "album": "SUPERSTAR",
+    "label": "",
+    "member": "SONO",
+    "src": "img/pclists/SUPERSTAR_SONO.webp"
+   },
+   {
+    "album": "SUPERSTAR",
+    "label": "",
+    "member": "ALURE",
+    "src": "img/pclists/SUPERSTAR_ALURE.webp"
+   },
+   {
+    "album": "SUPERSTAR",
+    "label": "",
+    "member": "ZAI",
+    "src": "img/pclists/SUPERSTAR_ZAI.webp"
+   },
+   {
+    "album": "SUPERSTAR",
+    "label": "",
+    "member": "AYDEN",
+    "src": "img/pclists/SUPERSTAR_AYDEN.webp"
+   },
+   {
+    "album": "SUPERSTAR",
+    "label": "",
+    "member": "ZET",
+    "src": "img/pclists/SUPERSTAR_ZET.webp"
+   },
+   {
+    "album": "SUPERSTAR",
+    "label": "CARABINER Ver. 포카",
+    "member": null,
+    "src": "img/pclists/SUPERSTAR_CARABINER.webp"
+   },
+   {
+    "album": "SUPERSTAR",
+    "label": "Dancing in the Dark 방송 포카",
+    "member": null,
+    "src": "img/pclists/SUPERSTAR_BROADCAST-DITD.webp"
+   },
+   {
+    "album": "SUPERSTAR",
+    "label": "SUPERSTAR 방송 포카",
+    "member": null,
+    "src": "img/pclists/SUPERSTAR_BROADCAST-SUPERSTAR.webp"
+   },
+   {
+    "album": "SUPERSTAR",
+    "label": "올리브영 럭키드로우",
+    "member": null,
+    "src": "img/pclists/SUPERSTAR_OLIVEYOUNG.webp"
+   }
+  ],
   "photo_labels": {
    "댄인닼": "Dancing in the Dark",
    "슈퍼스타": "SUPERSTAR"
@@ -4961,6 +5081,14 @@
    "th": "เคยฝึกที่สถาบัน AJS และ REDSTAGE",
    "zh": "出身AJS·REDSTAGE学院"
   },
+  "CARABINER Ver. 포카": {
+   "en": "CARABINER Ver. PCs",
+   "es": "Photocards CARABINER Ver.",
+   "id": "PC CARABINER Ver.",
+   "ja": "CARABINER Ver. トレカ",
+   "th": "การ์ด CARABINER Ver.",
+   "zh": "CARABINER Ver. 小卡"
+  },
   "CONSTELLATION Ver. — SOUL Ver.와 같은 구성": {
    "en": "CONSTELLATION Ver. — same contents as SOUL Ver.",
    "es": "CONSTELLATION Ver. — mismo contenido que SOUL Ver.",
@@ -4968,6 +5096,14 @@
    "ja": "CONSTELLATION Ver. — SOUL Ver.と同じ構成",
    "th": "CONSTELLATION Ver. — ส่วนประกอบเหมือน SOUL Ver.",
    "zh": "CONSTELLATION Ver. — 与SOUL Ver.相同"
+  },
+  "Dancing in the Dark 방송 포카": {
+   "en": "Dancing in the Dark broadcast PCs",
+   "es": "Photocards de shows (Dancing in the Dark)",
+   "id": "PC siaran Dancing in the Dark",
+   "ja": "Dancing in the Dark 放送トレカ",
+   "th": "การ์ดรายการเพลง Dancing in the Dark",
+   "zh": "Dancing in the Dark 打歌小卡"
   },
   "EXPG STUDIO 오사카 출신": {
    "en": "Trained at EXPG STUDIO Osaka",
@@ -5016,6 +5152,14 @@
    "ja": "SOUL Ver. — フォトブック68p、CD-R、歌詞カード、ペーパーモビール、フォトカード3枚（15種からランダム）",
    "th": "SOUL Ver. — โฟโต้บุ๊ก 68 หน้า, CD-R, ใบเนื้อเพลง, โมบายกระดาษ, โฟโต้การ์ด 3 ใบ (สุ่มจาก 15 แบบ)",
    "zh": "SOUL Ver. — 写真书68页、CD-R、歌词纸、纸质挂饰、小卡3张（15款随机）"
+  },
+  "SUPERSTAR 방송 포카": {
+   "en": "SUPERSTAR broadcast PCs",
+   "es": "Photocards de shows (SUPERSTAR)",
+   "id": "PC siaran SUPERSTAR",
+   "ja": "SUPERSTAR 放送トレカ",
+   "th": "การ์ดรายการเพลง SUPERSTAR",
+   "zh": "SUPERSTAR 打歌小卡"
   },
   "URIZIP KPOP ACADEMY 출신": {
    "en": "Trained at URIZIP KPOP ACADEMY",
@@ -5728,6 +5872,14 @@
    "ja": "オールラウンダー（ボーカル・ダンス）",
    "th": "ออลราวด์เดอร์ (ร้อง·เต้น)",
    "zh": "全能型（声乐·舞蹈）"
+  },
+  "올리브영 럭키드로우": {
+   "en": "Olive Young lucky draw",
+   "es": "Sorteo Olive Young",
+   "id": "Lucky draw Olive Young",
+   "ja": "OLIVE YOUNG ラッキードロー",
+   "th": "ลัคกี้ดรอว์ Olive Young",
+   "zh": "Olive Young 幸运抽奖"
   },
   "유튜브 A2O SOUL": {
    "en": "YouTube A2O SOUL",
