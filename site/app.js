@@ -484,8 +484,30 @@ if ("serviceWorker" in navigator) {
   const gp = igEmbeds(data.group_posts);
   if (gp.length) $("groupPosts").append(...gp); else $("groupPostsSec").remove();
   $("membersHead").textContent = t("members_n", { n: data.members.length });
+  // 활동별 사진 보기: 역대 프로필 라벨(곡명)마다 15명 카드 사진을 한 번에 바꾸기
+  const eras = [...new Set(data.members.flatMap((m) => (m.profile_history || []).filter((h) => h.photo && h.label).map((h) => h.label)))];
+  if (eras.length >= 2) {
+    const row = el("div", { class: "filter-row era-row" });
+    let cur = pref.get("era", "");
+    const paint = () => {
+      row.querySelectorAll("button").forEach((b) => b.classList.toggle("on", b.dataset.era === cur));
+      document.querySelectorAll(".pcard[data-name]").forEach((c) => {
+        const m = data.members.find((x) => x.name === c.dataset.name);
+        const src = (cur && (m.profile_history || []).find((h) => h.label === cur)?.photo) || m.photo;
+        const img = c.querySelector(".avatar img");
+        if (img && src) img.src = src;
+      });
+    };
+    for (const e of eras) {
+      const b = el("button", { type: "button", "data-era": e }, e);
+      b.addEventListener("click", () => { cur = cur === e ? "" : e; pref.set("era", cur); paint(); });
+      row.append(b);
+    }
+    $("profiles").before(row);
+    queueMicrotask(paint);
+  }
   for (const m of data.members) {
-    const card = el("button", { class: "pcard", type: "button" },
+    const card = el("button", { class: "pcard", type: "button", "data-name": m.name },
       avatar(m),
       el("div", { class: "pinfo" },
         el("div", { class: "n" }, m.name, el("span", { class: "c" }, m.ko)),
@@ -614,12 +636,89 @@ if ("serviceWorker" in navigator) {
         grid);
       // 펼칠 때 카드 만들기 (썸네일을 한꺼번에 불러오지 않게)
       box.addEventListener("toggle", () => {
-        if (box.open && !grid.childElementCount) grid.append(...ep.videos.map((v) => videoCard(v, v.member || (v.category === "fancam" ? catLabel("fancam") : catLabel("stage")))));
+        if (!box.open || grid.childElementCount) return;
+        const cams = ep.videos.filter((v) => v.category === "fancam" && v.member);
+        if (cams.length >= 2) {
+          const btn = el("button", { class: "more cmp-open", type: "button" }, `▶▶ ${t("cmp_open")}`);
+          btn.addEventListener("click", () => openCompare(ep, cams));
+          box.insertBefore(btn, grid);
+        }
+        grid.append(...ep.videos.map((v) => videoCard(v, v.member || (v.category === "fancam" ? catLabel("fancam") : catLabel("stage")))));
       });
       $("episodes").append(box);
     }
   } else {
     $("episodesSec").remove();
+  }
+
+  // ---------- 직캠 나란히 보기 ----------
+  const cmpDlg = $("compareDialog");
+  $("cmpClose").addEventListener("click", () => cmpDlg.close());
+  cmpDlg.addEventListener("close", () => $("cmpBody").replaceChildren()); // 닫으면 재생 멈춤
+  function openCompare(ep, cams) {
+    $("cmpTitle").textContent = `${ep.date.slice(5).replace("-", ".")} ${ep.show}`;
+    const embed = (id) => `https://www.youtube-nocookie.com/embed/${id}?playsinline=1&rel=0&modestbranding=1&autoplay=1&mute=1`;
+    const slots = [0, 1].map((i) => {
+      const sel = el("select", { class: "sel" }, ...cams.map((v, j) => el("option", { value: j, ...(j === i ? { selected: "" } : {}) }, v.member)));
+      const frame = el("div", { class: "cmp-frame" });
+      const load = () => {
+        const v = cams[+sel.value];
+        frame.replaceChildren(el("iframe", { src: embed(v.id), title: v.title, allow: "autoplay; encrypted-media; picture-in-picture; fullscreen",
+          allowfullscreen: "", loading: "lazy" }));
+        setSeen(v.id, true);
+      };
+      sel.addEventListener("change", load);
+      return { sel, frame, load };
+    });
+    const go = el("button", { class: "more", type: "button" }, `▶ ${t("cmp_play")}`);
+    go.addEventListener("click", () => slots.forEach((x) => x.load()));
+    $("cmpBody").replaceChildren(el("p", { class: "note small" }, t("cmp_desc")),
+      el("div", { class: "cmp-pick" }, slots[0].sel, el("span", { class: "muted" }, "vs"), slots[1].sel), go,
+      el("div", { class: "cmp-grid" }, slots[0].frame, slots[1].frame));
+    cmpDlg.showModal();
+  }
+
+  // ---------- 데뷔 전 아카이브 (영상 탭) ----------
+  const pre = data.videos.filter((v) => v.predebut);
+  if (pre.length) {
+    const unitOf = (v) => (/\bLTB\b/.test(v.title) ? "LTB" : /\bHTB\b/.test(v.title) ? "HTB" : "etc");
+    for (const unit of ["LTB", "HTB", "etc"]) {
+      const list = pre.filter((v) => unitOf(v) === unit);
+      if (!list.length) continue;
+      const months = [...new Set(list.map((v) => (v.published_at || "").slice(0, 7)))].sort().reverse();
+      const span = months.length ? `${months[months.length - 1].replace("-", ".")}–${months[0].replace("-", ".")}` : "";
+      const body = el("div", { class: "arc-body" });
+      const box = el("details", { class: "howto" },
+        el("summary", {}, el("span", {}, el("b", {}, unit === "etc" ? t("arc_etc") : unit),
+          el("span", { class: "muted" }, ` · ${span} · ${t("videos_n", { n: list.length })}`))), body);
+      box.addEventListener("toggle", () => {
+        if (!box.open || body.childElementCount) return;
+        for (const mo of months) {
+          const vs = list.filter((v) => (v.published_at || "").startsWith(mo));
+          body.append(el("h3", { class: "arc-month" }, mo.replace("-", ".")),
+            el("div", { class: "videos" }, ...vs.map((v) => videoCard(v, (v.members || []).length === 1 ? v.members[0] : null))));
+        }
+      });
+      $("archive").append(box);
+    }
+  } else {
+    $("archiveSec").remove();
+  }
+
+  // ---------- 생일 카드 (한눈에 맨 위, 생일 당일 KST) ----------
+  const todayMD = new Date(Date.now() + 9 * 3600000).toISOString().slice(5, 10);
+  const bdays = data.members.filter((m) => m.birthday === todayMD);
+  if (bdays.length) {
+    $("bdayCard").append(...bdays.map((m) => {
+      const b = el("button", { class: "bday-card", type: "button" },
+        m.photo ? el("img", { src: m.photo, alt: "" }) : null,
+        el("div", {}, el("div", { class: "bday-t" }, t("bday_today", { name: m.name })),
+          el("div", { class: "muted small" }, `${m.ko} · ${t("bday_sub")}`)));
+      b.addEventListener("click", () => openMember(m));
+      return b;
+    }));
+  } else {
+    $("bdayCard").remove();
   }
 
   // ---------- 기록 (입덕 탭) ----------

@@ -55,6 +55,7 @@
 
   <!-- 한눈에 -->
   <div data-tab="overview">
+    <section class="card bday" id="bdayCard"></section>
     <section class="card bias" id="bias"></section>
     <section class="card" id="pickSec">
       <div class="sec-head"><h2 data-i18n="pick_title">🎲 오늘의 직캠</h2><button class="more pick-btn" id="pickBtn" type="button" data-i18n="pick_again">다른 거</button></div>
@@ -171,6 +172,11 @@
       <p class="note small" data-i18n="episodes_desc"></p>
       <div id="episodes"></div>
     </section>
+    <section class="card" id="archiveSec">
+      <h2 data-i18n="archive">데뷔 전 아카이브</h2>
+      <p class="note small" data-i18n="archive_desc"></p>
+      <div id="archive"></div>
+    </section>
     <section class="card">
       <div class="archive-tools">
         <input type="search" id="search" class="search" autocomplete="off">
@@ -227,6 +233,11 @@
     <li data-i18n="ios2"></li>
     <li data-i18n="ios3"></li>
   </ol>
+</dialog>
+
+<dialog id="compareDialog">
+  <div class="dlg-head"><h2 id="cmpTitle"></h2><button class="dlg-close" id="cmpClose" aria-label="닫기">✕</button></div>
+  <div id="cmpBody"></div>
 </dialog>
 
 <dialog id="memberDialog">

@@ -98,7 +98,8 @@ dialog::backdrop { background: rgba(0, 0, 0, .5); }
 .filter-row { display: flex; gap: 6px; flex-wrap: wrap; }
 .filters button { border: 1px solid var(--line); background: var(--card); color: var(--muted); border-radius: 999px;
                   padding: 6px 12px; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; }
-.filters button.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+.era-row button { border: 1px solid var(--line); background: var(--card); color: var(--muted); border-radius: 999px; padding: 6px 12px; font-size: 13px; font-weight: 600; cursor: pointer; }
+.era-row button.on, .filters button.on { background: var(--accent); border-color: var(--accent); color: #fff; }
 .more { display: block; margin: 16px auto 0; border: 1px solid var(--line); background: var(--card); color: var(--text);
         border-radius: 999px; padding: 8px 20px; font: inherit; font-size: 14px; cursor: pointer; }
 
@@ -304,3 +305,27 @@ header .head-right { margin-left: auto; }
 .quiz-photo { flex: 0 0 min(260px, 70%); aspect-ratio: 3 / 4; }
 .quiz-photo .quiz-img { left: 0; width: 100%; height: 100%; transform: none; object-fit: cover; }
 .tracks .focus { margin-left: 6px; font-size: 11px; vertical-align: middle; }
+
+/* 직캠 나란히 보기 */
+.cmp-open { margin: 0 12px 10px; width: calc(100% - 24px); }
+.cmp-pick { display: flex; gap: 8px; align-items: center; justify-content: center; }
+.cmp-pick .sel { flex: 1; min-width: 0; }
+.cmp-grid { display: grid; gap: 8px; margin-top: 12px; }
+@media (min-width: 720px) { .cmp-grid { grid-template-columns: 1fr 1fr; } }
+.cmp-frame { aspect-ratio: 16 / 9; background: #000; border-radius: 12px; overflow: hidden; }
+.cmp-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+/* 데뷔 전 아카이브 */
+.arc-body { padding: 0 12px 12px; }
+.arc-month { font-size: 13px; color: var(--muted); margin: 12px 0 6px; }
+
+/* 활동별 사진 */
+.era-row { margin-bottom: 10px; }
+
+/* 생일 카드 */
+.bday { background: linear-gradient(135deg, #ffe3ec, #efe7ff); }
+.bday-card { display: flex; align-items: center; gap: 12px; width: 100%; border: 0; background: none; text-align: left; cursor: pointer; color: inherit; padding: 0; }
+.bday-card + .bday-card { margin-top: 10px; }
+.bday-card img { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; }
+.bday-t { font-size: 18px; font-weight: 800; }
+.arc-body .videos, .ep .videos { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
