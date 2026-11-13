@@ -5309,6 +5309,14 @@
    "th": "จุดเด่นคือเสียงทุ้มต่ำแบบ 'เสียงถ้ำ'",
    "zh": "魅力点是“洞穴音”低音"
   },
+  "메이크스타": {
+   "en": "Makestar",
+   "es": "Makestar",
+   "id": "Makestar",
+   "ja": "Makestar",
+   "th": "Makestar",
+   "zh": "Makestar"
+  },
   "메인댄서": {
    "en": "Main dancer",
    "es": "Bailarín principal",
@@ -5380,6 +5388,14 @@
    "ja": "ミュージックバンク",
    "th": "Music Bank",
    "zh": "音乐银行"
+  },
+  "뮤직플랜트": {
+   "en": "Musicplant",
+   "es": "Musicplant",
+   "id": "Musicplant",
+   "ja": "Musicplant",
+   "th": "Musicplant",
+   "zh": "Musicplant"
   },
   "발라드를 좋아함 (최애곡 EXO 'For Life')": {
    "en": "Loves ballads (favorite song: EXO 'For Life')",
