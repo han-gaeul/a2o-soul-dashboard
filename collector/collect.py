@@ -787,6 +787,9 @@ def write_health(cfg, videos, members, today, official=()):
     for m in cfg["members"]:
         texts += [str(m.get("position") or "")] + [str(x) for k in ("nicknames", "career", "notes") for x in m.get(k) or []]
     texts += cfg["info"]["lore"] + [a["type"] for a in cfg["info"]["albums"]]
+    texts += [x["label"] for x in cfg["info"]["shops"]] + [x["note"] for x in cfg["info"]["shops"]]
+    texts += [a["note"] for a in cfg["info"]["albums"]] + [v for a in cfg["info"]["albums"] for v in a["versions"]]
+    texts += [x["note"] for x in cfg["streaming"]] + [str(v.get(k) or "") for v in cfg["votes"] for k in ("show", "app", "title", "note")]
     for v in cfg["howto"]["voting"]:
         texts += [v.get(k, "") for k in ("when", "pre", "live", "note")]
     for g in cfg["howto"]["streaming"]:
