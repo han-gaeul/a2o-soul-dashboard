@@ -187,6 +187,29 @@ def local_img(path):
     return rel if (ROOT / "site" / rel).is_file() else ""
 
 
+IMG_EXT = (".jpg", ".jpeg", ".png", ".webp")
+
+
+def auto_photos(m):
+    """site/img/members/ 에 멤버 이름으로 올린 파일 자동 연결 (members.yml 안 고쳐도 됨).
+    moon.jpg / 문.jpg → 대표 사진, moon-2.jpg · moon_데뷔.jpg 처럼 이름 뒤에 - 나 _ 붙은 것 → 추가 사진."""
+    folder = ROOT / "site" / "img" / "members"
+    if not folder.is_dir():
+        return "", []
+    keys = {m["name"].lower(), str(m.get("ko") or "").lower()} - {""}
+    main, extra = "", []
+    for f in sorted(folder.iterdir()):
+        if f.suffix.lower() not in IMG_EXT:
+            continue
+        stem = f.stem.lower()
+        rel = f"img/members/{f.name}"
+        if stem in keys:
+            main = main or rel
+        elif any(stem.startswith(k + "-") or stem.startswith(k + "_") for k in keys):
+            extra.append(rel)
+    return main, extra
+
+
 IG_POST = re.compile(r"^https://(www\.)?instagram\.com/(p|reel)/[\w-]+/?")
 
 
@@ -827,10 +850,11 @@ def build(cfg):
             "notes": m.get("notes") or [],
             "instagram_posts": [str(u) for u in (m.get("instagram_posts") or [])],
             "ig_mentions": [{k: x[k] for k in ("at", "text", "more", "url")} for x in ig_feed if m["name"] in x["members"]][:10],
-            "photo": local_img(m.get("photo")),
+            "photo": local_img(m.get("photo")) or auto_photos(m)[0],
             "signature": local_img(m.get("signature")),
             "birthday": str(m.get("birthday") or ""),
-            "profile_history": profile_history(m),
+            "profile_history": profile_history(m) + [{"label": "", "photo": x} for x in auto_photos(m)[1]
+                                                     if x not in {h.get("photo") for h in profile_history(m)}],
             "fancam_count": len(mine),
             "fancam_views": sum(v["views"] or 0 for v in mine),
             "fancam_delta": sum(v["delta"] or 0 for v in mine) or None,
