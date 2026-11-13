@@ -800,7 +800,15 @@
    ]
   }
  ],
- "events": [],
+ "events": [
+  {
+   "anniv": true,
+   "auto": true,
+   "date": "2027-01-20",
+   "title": "🎉 데뷔 100일",
+   "type": "기념일"
+  }
+ ],
  "fanchants": [
   {
    "category": "content",
