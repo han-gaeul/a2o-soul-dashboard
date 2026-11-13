@@ -330,3 +330,14 @@ header .head-right { margin-left: auto; }
 .bday-t { font-size: 18px; font-weight: 800; }
 .arc-body .videos, .ep .videos { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
 #cmpEp.sel { width: 100%; max-width: none; }
+
+/* 공유 */
+.share-btn { border: 1px solid var(--line); background: none; border-radius: 999px; padding: 6px 10px; font-size: 13px;
+  font-weight: 700; color: var(--muted); cursor: pointer; white-space: nowrap; }
+#dlgTitle .share-btn { margin-right: 8px; }
+#cmpTitle { display: flex; align-items: center; gap: 8px; }
+#cmpTitle .share-btn { margin-left: auto; margin-right: 8px; }
+.ep-tools { display: flex; justify-content: flex-end; padding: 0 12px 8px; }
+.toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 1000;
+  background: #111; color: #fff; padding: 10px 16px; border-radius: 999px; font-size: 14px; font-weight: 600; }
+@media (max-width: 480px) { #dlgTitle .share-l { display: none; } }
