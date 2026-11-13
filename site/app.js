@@ -659,9 +659,16 @@ if ("serviceWorker" in navigator) {
       showScore();
       const v = quizPool[Math.floor(Math.random() * quizPool.length)];
       const opts = shuffle([v.member, ...shuffle(quizMembers.filter((n) => n !== v.member)).slice(0, 3)]);
-      const frame = Math.floor(Math.random() * 3) + 1;
-      const img = el("img", { class: "quiz-img", src: `https://i.ytimg.com/vi/${v.id}/hq${frame}.jpg`, alt: "" });
-      img.addEventListener("error", () => { img.src = thumbUrl(v.id); }, { once: true });
+      // 영상 25·50·75% 지점 세 장면을 나란히 → 세 장면에 계속 가운데 나오는 사람이 주인공
+      const frames = [1, 2, 3].map((n) => {
+        const img = el("img", { class: "quiz-img", src: `https://i.ytimg.com/vi/${v.id}/hq${n}.jpg`, alt: "" });
+        // 장면 이미지가 없는 영상은 썸네일로 (그것도 없으면 칸 숨김)
+        img.addEventListener("error", () => {
+          if (img.dataset.fallback) img.closest(".quiz-cell")?.remove();
+          else { img.dataset.fallback = "1"; img.src = thumbUrl(v.id); }
+        });
+        return el("div", { class: "quiz-cell" }, img);
+      });
       const result = el("div", { class: "quiz-result" });
       const btns = opts.map((n) => {
         const mem = data.members.find((x) => x.name === n);
@@ -680,7 +687,8 @@ if ("serviceWorker" in navigator) {
         });
         return b;
       });
-      $("quiz").replaceChildren(el("div", { class: "quiz-frame" }, img), el("div", { class: "quiz-opts" }, ...btns), result);
+      $("quiz").replaceChildren(el("p", { class: "quiz-q" }, t("quiz_q")), el("div", { class: "quiz-frame" }, ...frames),
+        el("div", { class: "quiz-opts" }, ...btns), result);
     }
     function finish() {
       if (score > best()) pref.set("quizBest", score);

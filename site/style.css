@@ -286,8 +286,11 @@ header .head-right { margin-left: auto; }
 #pick .video { max-width: 360px; }
 
 /* 퀴즈 */
-.quiz-frame { position: relative; }
-.quiz-img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 12px; background: var(--line); display: block; }
+/* 직캠은 주인공이 화면 가운데 → 장면 가운데만 세로로 잘라서 보여주기 (세로 직캠은 딱 영상 부분) */
+.quiz-q { font-weight: 700; text-align: center; margin: 0 0 8px; }
+.quiz-frame { display: flex; gap: 4px; justify-content: center; max-width: 480px; margin: 0 auto; }
+.quiz-cell { position: relative; flex: 1; aspect-ratio: 9 / 16; overflow: hidden; border-radius: 10px; background: var(--line); }
+.quiz-img { position: absolute; top: 0; left: 50%; height: 100%; width: auto; max-width: none; transform: translateX(-50%); display: block; }
 .quiz-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
 .quiz-opt { padding: 12px 8px; border-radius: 12px; border: 1px solid var(--line); background: var(--card, #fff); color: inherit;
   font-size: 15px; font-weight: 700; cursor: pointer; }
