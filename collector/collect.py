@@ -12,6 +12,7 @@ import argparse
 import json
 import math
 import re
+import urllib.parse
 import unicodedata
 import sys
 from datetime import date, datetime, timedelta, timezone
@@ -134,8 +135,8 @@ def load_fan_files(cfg):
                     "links": {str(k): str(v) for k, v in (a.get("links") or {}).items() if str(v).startswith("https://")}}
                    for a in info.get("albums") or [] if a.get("title")],
         "photo_labels": {str(k): str(v) for k, v in (info.get("photo_labels") or {}).items()},
-        "pclists": pclists(cfg, info),
-        "pclist_credit": {str(k): str(v) for k, v in (info.get("pclist_credit") or {}).items()},
+        "photocard_credit": {str(k): str(v) for k, v in (info.get("photocard_credit") or {}).items()},
+        "photocard_order": [str(x) for x in info.get("photocard_order") or []],
         "records": [{"date": str(x["date"]), "title": str(x["title"]), "url": str(x.get("url") or "")}
                     for x in info.get("records") or [] if x.get("date") and x.get("title")],
         "shops": [{"label": str(x["label"]), "url": str(x["url"]), "note": str(x.get("note") or "")}
@@ -255,33 +256,12 @@ def photocards(cfg):
         rest = [x for x in parts if x.lower() not in keymap]
         if not member or not rest:
             continue
-        out.append({"version": rest[0], "label": " ".join(rest[1:]), "member": member, "src": f"img/photocards/{f.name}"})
+        out.append({"version": rest[0], "label": " ".join(rest[1:]), "member": member,
+                    "src": "img/photocards/" + urllib.parse.quote(f.name)})
     order = {m["name"]: i for i, m in enumerate(cfg["members"])}
-    out.sort(key=lambda x: (x["version"], order.get(x["member"], 99), x["label"]))
-    return out
-
-
-def pclists(cfg, info):
-    """site/img/pclists/앨범_대상.webp → [{album, member|None, label, src}] (원본 그대로, 출처 표시)."""
-    folder = ROOT / "site" / "img" / "pclists"
-    if not folder.is_dir():
-        return []
-    keymap = {}
-    for m in cfg["members"]:
-        for k in [m["name"], str(m.get("ko") or "")] + [str(a) for a in m.get("aliases") or []]:
-            if k:
-                keymap[unicodedata.normalize("NFC", k).upper()] = m["name"]
-    labels = {str(k).upper(): str(v) for k, v in (info.get("pclist_labels") or {}).items()}
-    order = {m["name"]: i for i, m in enumerate(cfg["members"])}
-    out = []
-    for f in folder.iterdir():
-        if f.suffix.lower() not in IMG_EXT:
-            continue
-        album, _, who = unicodedata.normalize("NFC", f.stem).partition("_")
-        member = keymap.get(who.upper())
-        out.append({"album": album, "member": member, "label": "" if member else labels.get(who.upper(), who),
-                    "src": f"img/pclists/{f.name}"})
-    out.sort(key=lambda x: (x["album"], x["member"] is None, order.get(x["member"], 99), x["label"]))
+    vorder = [str(v) for v in ((cfg.get("info") or {}).get("photocard_order") or [])]
+    vrank = lambda v: vorder.index(v) if v in vorder else len(vorder)
+    out.sort(key=lambda x: (vrank(x["version"]), x["version"], x["label"], order.get(x["member"], 99)))
     return out
 
 

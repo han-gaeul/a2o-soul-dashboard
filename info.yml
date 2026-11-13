@@ -49,11 +49,7 @@ shops:
   - { label: 메이크스타, url: "https://www.makestar.com/product/21531", note: "예약 특전 포토카드 이벤트" }
   - { label: 뮤직플랜트, url: "https://www.musicplant.co.kr/", note: "예약 특전 셀카 포토카드" }
 
-# 포카 리스트 이미지 (site/img/pclists/앨범_대상.webp) — 대상이 멤버 이름이면 멤버별, 아니면 단체 리스트
-#   팬 계정이 만든 템플릿은 '수정·자르기·출처 삭제 금지'라 원본 그대로 올리고 출처를 꼭 적어요
-pclist_credit: { label: "@soultemplates", url: "https://x.com/soultemplates" }
-pclist_labels:
-  CARABINER: CARABINER Ver. 포카
-  BROADCAST-SUPERSTAR: SUPERSTAR 방송 포카
-  BROADCAST-DITD: Dancing in the Dark 방송 포카
-  OLIVEYOUNG: 올리브영 럭키드로우
+# 포토카드 (입덕 탭·멤버 창) — site/img/photocards/버전_라벨_멤버.webp
+#   @soultemplates 포카 리스트 템플릿에서 잘라 만듦: python3 collector/pc_crop.py 템플릿폴더
+photocard_credit: { label: "@soultemplates", url: "https://x.com/soultemplates" }
+photocard_order: [앨범, 예판 특전, 팬사인·영통, 방송, 럭키드로우]

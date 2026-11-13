@@ -651,14 +651,15 @@ if ("serviceWorker" in navigator) {
         el("h3", {}, t(label, { n: list.length })),
         el("div", { class: "videos" }, ...list.map((v) => videoCard(v, null)))));
     }
-    const myPcl = ((data.info || {}).pclists || []).filter((x) => x.member === m.name);
-    if (myPcl.length) {
-      const cr = (data.info || {}).pclist_credit || {};
-      sections.push(el("section", { class: "dlg-sec", id: "dlg-pcl" },
-        el("h3", {}, t("pclist")),
-        ...myPcl.map((x) => el("a", { class: "pcl-img", href: x.src, target: "_blank", rel: "noopener" },
-          el("img", { src: x.src, alt: `${x.album} ${m.name} — ${t("pclist")}`, loading: "lazy", decoding: "async" }))),
-        cr.url ? el("p", { class: "pf-src" }, t("pclist_by"), " ", ext(cr.url, cr.label || cr.url)) : null));
+    const myPc = (data.photocards || []).filter((x) => x.member === m.name);
+    if (myPc.length) {
+      const cr = (data.info || {}).photocard_credit || {};
+      sections.push(el("section", { class: "dlg-sec", id: "dlg-pc" },
+        el("h3", {}, `${t("photocards")} ${myPc.length}`),
+        el("div", { class: "pc-grid" }, ...myPc.map((x) => el("figure", { class: "pc" },
+          el("img", { src: x.src, alt: `${m.name} ${tc(x.version)} ${x.label}`, loading: "lazy", decoding: "async" }),
+          el("figcaption", {}, el("span", { class: "muted" }, `${tc(x.version)} · ${x.label}`))))),
+        cr.url ? el("p", { class: "pf-src" }, t("pc_credit"), " ", ext(cr.url, cr.label || cr.url)) : null));
     }
     if ((m.ig_mentions || []).length) {
       sections.push(el("section", { class: "dlg-sec", id: "dlg-ig" },
@@ -1121,56 +1122,39 @@ if ("serviceWorker" in navigator) {
   $("tourFoot").onclick = openTour;
   if (!pref.get("tourSeen", false)) $("tourTip").hidden = false;
 
-  // ---------- 포토카드 (입덕 탭): site/img/photocards/버전_이름.webp ----------
+  // ---------- 포토카드 (입덕 탭): site/img/photocards/버전_라벨_멤버.webp ----------
   const pcs = data.photocards || [];
+  const pcCredit = (data.info || {}).photocard_credit || {};
+  const pcCreditLine = () => (pcCredit.url
+    ? el("p", { class: "pf-src" }, t("pc_credit"), " ", ext(pcCredit.url, pcCredit.label || pcCredit.url)) : null);
+  const pcCard = (x, withName = true) => el("figure", { class: "pc" },
+    el("img", { src: x.src, alt: `${x.member} ${tc(x.version)} ${x.label}`, loading: "lazy", decoding: "async" }),
+    el("figcaption", {}, withName ? x.member : null,
+      x.label ? el("span", { class: "muted" }, withName ? ` · ${x.label}` : x.label) : null));
   if (pcs.length) {
     const versions = [...new Set(pcs.map((x) => x.version))];
+    const mems = [...new Set(pcs.map((x) => x.member))].sort((a, b) => (a === bias ? -1 : b === bias ? 1 : 0));
     let pcVer = versions[0];
+    let pcWho = "";
+    const btn = (label, on, fn) => {
+      const b = el("button", { type: "button", class: on ? "on" : "", "aria-pressed": String(on) }, label);
+      b.addEventListener("click", fn);
+      return b;
+    };
     const drawPc = () => {
-      $("pcTabs").replaceChildren(...versions.map((v) => {
-        const b = el("button", { type: "button", class: v === pcVer ? "on" : "" }, `${tc(v)} ${pcs.filter((x) => x.version === v).length}`);
-        b.addEventListener("click", () => { pcVer = v; drawPc(); });
-        return b;
-      }));
-      const list = pcs.filter((x) => x.version === pcVer)
-        .sort((a, b) => (a.member === bias ? -1 : b.member === bias ? 1 : 0));
-      $("pcGrid").replaceChildren(...list.map((x) => el("figure", { class: "pc" },
-        el("img", { src: x.src, alt: `${x.member} ${x.version}`, loading: "lazy" }),
-        el("figcaption", {}, x.member, x.label ? el("span", { class: "muted" }, ` · ${tc(x.label)}`) : null))));
+      const inWho = pcs.filter((x) => !pcWho || x.member === pcWho);
+      $("pcTabs").replaceChildren(...versions.map((v) => btn(`${tc(v)} ${inWho.filter((x) => x.version === v).length}`, v === pcVer,
+        () => { pcVer = v; drawPc(); })));
+      $("pcMem").replaceChildren(btn(t("ev_all"), !pcWho, () => { pcWho = ""; drawPc(); }),
+        ...mems.map((m) => btn(m, m === pcWho, () => { pcWho = m; drawPc(); })));
+      const list = inWho.filter((x) => x.version === pcVer);
+      $("pcGrid").replaceChildren(...(list.length ? list.map((x) => pcCard(x)) : [el("p", { class: "muted" }, "—")]));
     };
     drawPc();
+    $("pcCredit").replaceWith(Object.assign(pcCreditLine() || el("p"), { id: "pcCredit" }));
   } else {
-    $("pcTabs").remove();
-    $("pcGrid").remove();
+    $("pcSec").remove();
   }
-
-  // ---------- 포카 리스트: 팬 계정 템플릿 — 원본 그대로(자르기·수정 없이) + 출처 ----------
-  const pcl = (data.info || {}).pclists || [];
-  const pclCredit = (data.info || {}).pclist_credit || {};
-  const pclName = (x) => x.member || tc(x.label);
-  const creditLine = () => pclCredit.url
-    ? el("p", { class: "pf-src" }, t("pclist_by"), " ", ext(pclCredit.url, pclCredit.label || pclCredit.url))
-    : null;
-  if (pcl.length) {
-    let pclSel = pcl.find((x) => x.member && x.member === bias) || pcl.find((x) => !x.member) || pcl[0];
-    const drawPcl = () => {
-      const groups = pcl.filter((x) => !x.member);
-      const mems = pcl.filter((x) => x.member).sort((a, b) => (a.member === bias ? -1 : b.member === bias ? 1 : 0));
-      $("pclTabs").replaceChildren(...[...groups, ...mems].map((x) => {
-        const b = el("button", { type: "button", class: x === pclSel ? "on" : "" }, pclName(x));
-        b.addEventListener("click", () => { pclSel = x; drawPcl(); });
-        return b;
-      }));
-      $("pclLink").href = pclSel.src;
-      $("pclImg").src = pclSel.src;
-      $("pclImg").alt = `${pclSel.album} ${pclName(pclSel)} — ${t("pclist")}`;
-      $("pclCredit").replaceWith(Object.assign(creditLine() || el("p"), { id: "pclCredit" }));
-    };
-    drawPcl();
-  } else {
-    $("pclBox").remove();
-  }
-  if (!pcs.length && !pcl.length) $("pcSec").remove();
 
   // ---------- 차트 ----------
   const palette = ["#6c4cf5", "#f5734c", "#12a1a0", "#e0479e", "#d4a017", "#3b82f6", "#8b5cf6", "#22c55e"];
