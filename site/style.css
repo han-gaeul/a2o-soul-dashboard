@@ -447,3 +447,22 @@ header .head-right { margin-left: auto; }
 @media (min-width: 720px) { .cal-ev { font-size: 10px; } .cal-head, .cal-grid { max-width: 560px; } }
 .cal-ev { padding: 0 1px; letter-spacing: -.02em; }
 .cal-cell.is-sel { box-shadow: inset 0 0 0 1px var(--accent); background: var(--chip); }
+
+/* 사이트 사용법 */
+.tour-tip { display: flex; align-items: center; gap: 6px; margin-bottom: 12px; padding: 4px 4px 4px 12px; border-radius: 12px;
+            background: var(--accent-bg); color: #fff; }
+.tour-open { flex: 1; text-align: left; background: none; border: 0; color: inherit; font: inherit; font-weight: 700; font-size: 14px;
+             padding: 8px 0; cursor: pointer; }
+.tour-x { background: none; border: 0; color: inherit; font-size: 14px; width: 36px; height: 36px; cursor: pointer; border-radius: 8px; }
+.tour-x:hover, .tour-open:hover { text-decoration: underline; }
+.tour-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+#tourDlg .tour-list { padding: 4px 0; }
+.tour-item { display: grid; grid-template-columns: 32px 1fr; gap: 2px 8px; align-items: start; padding: 10px 12px;
+             border: 1px solid var(--line); border-radius: 12px; color: inherit; text-decoration: none; }
+a.tour-item:hover { border-color: var(--accent); }
+.tour-ico { grid-row: span 2; font-size: 20px; line-height: 1.3; text-align: center; }
+.tour-item b { font-size: 14px; }
+.tour-item span { font-size: 13px; color: var(--muted); line-height: 1.5; }
+.tour-item .go { color: var(--accent); font-weight: 700; }
+.tour-never { text-align: center; margin: 12px 0 0; }
+.tour-foot { margin-right: 6px; background: none; font: inherit; cursor: pointer; }
