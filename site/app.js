@@ -562,13 +562,13 @@ if ("serviceWorker" in navigator) {
     ["short", (v) => v.short],
   ];
   const PAGE = 24;
-  const cur = { cat: "all", fmt: "all", q: "", series: "", show: "", unseen: false };
+  const cur = { cat: "all", fmt: "all", q: "", series: "", show: "", era: "", unseen: false };
   let shown = 0;
   const chipOf = (v) => (v.predebut ? catLabel("predebut") : v.member || v.series || catLabel(v.category));
   const pick = (defs, key) => defs.find((d) => d[0] === key)[1];
   const norm = (s) => (s || "").toLowerCase().normalize("NFKC");
   const base = (v) => (!cur.q || norm(v.title).includes(norm(cur.q)) || norm(v.member).includes(norm(cur.q)))
-    && (!cur.series || v.series === cur.series) && (!cur.show || v.show === cur.show) && (!cur.unseen || !seen.has(v.id));
+    && (!cur.series || v.series === cur.series) && (!cur.show || v.show === cur.show) && (!cur.era || v.era === cur.era) && (!cur.unseen || !seen.has(v.id));
   const current = () => data.videos.filter((v) => base(v) && pick(CATS, cur.cat)(v) && pick(FORMATS, cur.fmt)(v));
   function renderVideos(reset) {
     const list = current();
@@ -606,6 +606,8 @@ if ("serviceWorker" in navigator) {
   const uniq = (arr) => [...new Set(arr.filter(Boolean))];
   fillSelect($("seriesSel"), t("series_all"), uniq(data.videos.map((v) => v.series)).sort(), "series");
   fillSelect($("showSel"), t("show_all"), uniq(data.videos.map((v) => v.show)).sort(), "show");
+  // 활동: 최근 활동 먼저 (영상 목록에서 처음 나온 순서 = 최신순)
+  fillSelect($("eraSel"), t("era_all"), uniq(data.videos.map((v) => v.era)), "era");
   $("search").placeholder = t("search");
   let timer;
   $("search").addEventListener("input", (e) => { clearTimeout(timer); timer = setTimeout(() => { cur.q = e.target.value.trim(); refresh(); }, 150); });
@@ -676,6 +678,23 @@ if ("serviceWorker" in navigator) {
       el("div", { class: "cmp-pick" }, slots[0].sel, el("span", { class: "muted" }, "vs"), slots[1].sel), go,
       el("div", { class: "cmp-grid" }, slots[0].frame, slots[1].frame));
     cmpDlg.showModal();
+  }
+
+  // 직캠 탭에서 회차 고르고 바로 나란히 보기
+  const cmpEps = (data.episodes || []).map((ep) => ({ ep, cams: ep.videos.filter((v) => v.category === "fancam" && v.member) }))
+    .filter((x) => x.cams.length >= 2);
+  if (cmpEps.length) {
+    const wd2 = t("weekdays");
+    $("cmpEp").append(el("option", { value: "" }, t("cmp_pick")), ...cmpEps.map((x, i) => el("option", { value: i },
+      `${x.ep.date.slice(5).replace("-", ".")} (${wd2[new Date(`${x.ep.date}T12:00:00Z`).getUTCDay()]}) ${x.ep.show} · ${t("fancams_n", { n: x.cams.length })}`)));
+    $("cmpEp").addEventListener("change", (e) => {
+      if (e.target.value === "") return;
+      const x = cmpEps[+e.target.value];
+      openCompare(x.ep, x.cams);
+      e.target.value = "";
+    });
+  } else {
+    $("cmpSec").remove();
   }
 
   // ---------- 데뷔 전 아카이브 (영상 탭) ----------
