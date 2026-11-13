@@ -88,8 +88,11 @@ if ("serviceWorker" in navigator) {
   let TR = {};
   const tc = (s) => (LANG === "ko" || !s ? s : TR[s]?.[LANG] || s);
   // 자동으로 만든 문구(기록·기념일)는 언어별 틀로
-  const tx = (x) => (x.key ? t(x.key, { n: x.key.startsWith("anniv") ? x.n : fmt(x.n), show: tc(x.show), type: tc(x.type), name: x.name })
-    : tc(x.title));
+  const tx = (x) => {
+    if (x.key) return t(x.key, { n: x.key.startsWith("anniv") ? x.n : fmt(x.n), show: tc(x.show), type: tc(x.type), name: x.name });
+    const m = /^(.+) 출연$/.exec(x.title || ""); // 공지에서 뽑은 '뮤직뱅크 출연'
+    return m ? t("ev_show", { show: tc(m[1]) }) : tc(x.title);
+  };
   const kstDate = (s) => new Date(`${s.replace(" ", "T")}${s.length > 10 ? ":00" : "T00:00:00"}+09:00`); // "YYYY-MM-DD[ HH:MM]" KST
 
   // ---------- 탭 ----------
