@@ -681,6 +681,19 @@ def collect(cfg, rescan=False):
     use_ai = announce.enabled()
     extract, limit = (None, 15) if use_ai else (rules.extract, 100)
     print(f"[공지] 추출 방식: {'AI' if use_ai else '규칙'}")
+    if not use_ai and store.get("rules_version") != rules.RULES_VERSION:
+        # 규칙이 바뀌면 최근 공지를 새 규칙으로 다시 읽기. 본문이 저장 안 된 옛 기록은 지우고 다시 받아옴
+        posts = store.setdefault("posts", {})
+        for pid, post in list(posts.items()):
+            if post.get("caption"):
+                post["items"] = [i for i in rules.extract(post["caption"], kst_datetime(post.get("timestamp")), today) if i["title"]]
+            else:
+                posts.pop(pid)
+                if pid.startswith("x:"):
+                    for st in (store.get("x") or {}).values():
+                        st.pop("since_id", None)  # X는 최근 20개만 다시 (몇 센트)
+        store["rules_version"] = rules.RULES_VERSION
+        print(f"[공지] 규칙 v{rules.RULES_VERSION}로 다시 처리")
     if instagram.enabled():
         for username in cfg["instagram"]:
             try:

@@ -94,7 +94,8 @@ def run(media, store, today, kst_of, extract=None, limit=15):
             print(f"[공지] {m['id']} 추출 실패: {type(e).__name__} {e}")
             continue
         processed[m["id"]] = {"timestamp": m.get("timestamp"), "permalink": m.get("permalink"),
-                              "excerpt": (m.get("caption") or "")[:140], "items": [i for i in items if i["title"]]}
+                              "excerpt": (m.get("caption") or "")[:140], "caption": (m.get("caption") or "")[:1500],
+                              "items": [i for i in items if i["title"]]}
         print(f"[공지] {m['id']} {posted} 항목 {len(items)}개: " + ", ".join(i["title"] for i in items))
     for m in media:  # 캡션 없는 게시물도 처리한 걸로 기록해 매번 다시 보지 않게
         processed.setdefault(m["id"], {"timestamp": m.get("timestamp"), "permalink": m.get("permalink"), "excerpt": "", "items": []})
