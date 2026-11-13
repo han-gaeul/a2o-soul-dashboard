@@ -303,3 +303,4 @@ header .head-right { margin-left: auto; }
 .quiz-big { font-size: 36px; font-weight: 800; }
 .quiz-photo { flex: 0 0 min(260px, 70%); aspect-ratio: 3 / 4; }
 .quiz-photo .quiz-img { left: 0; width: 100%; height: 100%; transform: none; object-fit: cover; }
+.tracks .focus { margin-left: 6px; font-size: 11px; vertical-align: middle; }

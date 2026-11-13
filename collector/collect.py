@@ -124,9 +124,11 @@ def load_fan_files(cfg):
         "lore": [str(x) for x in info.get("lore") or []],
         "albums": [{"title": str(a["title"]), "type": str(a.get("type") or ""), "date": str(a.get("date") or ""),
                     "time": str(a.get("time") or ""), "tracks": [str(x) for x in a.get("tracks") or []],
+                    "focus": [str(x) for x in a.get("focus") or []],
                     "versions": [str(x) for x in a.get("versions") or []],
                     "links": {str(k): str(v) for k, v in (a.get("links") or {}).items() if str(v).startswith("https://")}}
                    for a in info.get("albums") or [] if a.get("title")],
+        "photo_labels": {str(k): str(v) for k, v in (info.get("photo_labels") or {}).items()},
         "records": [{"date": str(x["date"]), "title": str(x["title"]), "url": str(x.get("url") or "")}
                     for x in info.get("records") or [] if x.get("date") and x.get("title")],
         "shops": [{"label": str(x["label"]), "url": str(x["url"]), "note": str(x.get("note") or "")}
@@ -869,7 +871,8 @@ def build(cfg):
             "photo": local_img(m.get("photo")) or auto["photo"],
             "signature": local_img(m.get("signature")) or auto["signature"],
             "birthday": str(m.get("birthday") or ""),
-            "profile_history": profile_history(m) + [x for x in auto["extra"]
+            "profile_history": profile_history(m) + [{**x, "label": cfg["info"]["photo_labels"].get(x["label"], x["label"])}
+                                                     for x in auto["extra"]
                                                      if x["photo"] not in {h.get("photo") for h in profile_history(m)}],
             "fancam_count": len(mine),
             "fancam_views": sum(v["views"] or 0 for v in mine),

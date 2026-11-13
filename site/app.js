@@ -357,7 +357,8 @@ if ("serviceWorker" in navigator) {
       $("albums").append(el("div", { class: "album" },
         el("div", {}, el("b", {}, a.title), a.type ? el("span", { class: "muted" }, ` · ${a.type}`) : null),
         a.date ? el("div", { class: "muted small" }, [a.date.replaceAll("-", "."), a.time].filter(Boolean).join(" ") + " KST") : null,
-        a.tracks.length ? el("ol", { class: "tracks" }, ...a.tracks.map((x) => el("li", {}, x))) : null,
+        a.tracks.length ? el("ol", { class: "tracks" }, ...a.tracks.map((x) => el("li", {}, x,
+          (a.focus || []).some((f) => f.toLowerCase() === x.toLowerCase()) ? el("span", { class: "chip chip-on focus" }, t("focus_track")) : null))) : null,
         a.versions.length ? el("div", { class: "small" }, el("span", { class: "chip" }, t("album_versions")), a.versions.join(" · ")) : null,
         Object.keys(a.links).length ? el("div", { class: "links small" }, ...Object.entries(a.links).map(([k, u]) => ext(u, k))) : null));
     }
