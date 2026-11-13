@@ -474,8 +474,8 @@ def kst_datetime(iso):
 def auto_items(today):
     """announcements.json → (자동 반영 일정, 공지 정보, 확인 필요 목록)."""
     store = load_json("announcements.json", {})
-    events, notices, pending = [], [], []
-    seen_ev, seen_pend = set(), set()
+    events, notices, pending, votes = [], [], [], []
+    seen_ev, seen_pend, seen_vote = set(), set(), set()
     for pid, post in sorted(store.get("posts", {}).items(), key=lambda kv: kv[1].get("timestamp") or "", reverse=True):
         posted = kst_datetime(post.get("timestamp"))[:10]
         for i in post.get("items", []):
@@ -487,13 +487,20 @@ def auto_items(today):
                     seen_pend.add(key)
                     pending.append(row)
                 continue
+            if i["kind"] == "vote":  # 투표: 응원 탭 투표 카드·캘린더로 (기간·링크)
+                if i.get("end") and i["end"] >= now_kst_str() and (i["end"], i["title"]) not in seen_vote:
+                    seen_vote.add((i["end"], i["title"]))
+                    votes.append({"show": i.get("show") or "", "title": i["title"] if not i.get("show") else i["title"].replace(i["show"], "").strip(),
+                                  "app": i.get("app") or "", "start": i.get("start") or i["end"], "end": i["end"],
+                                  "url": i.get("url") or post.get("permalink"), "source": post.get("permalink"), "auto": True})
+                continue
             if i.get("date") and i["date"] >= today and (i["date"], i["title"]) not in seen_ev:
                 seen_ev.add((i["date"], i["title"]))
                 events.append({"date": i["date"], "time": i.get("time"), "type": row["label"], "title": i["title"],
                                "url": i.get("url") or post.get("permalink"), "auto": True})
             if i["kind"] in ("ticket", "merch", "release", "concert", "fanmeeting", "event") and future:
                 notices.append(row)
-    return events, notices[:20], pending
+    return events, notices[:20], pending, votes
 
 
 def youtube_upcoming(registry, today):
@@ -1028,7 +1035,11 @@ def build(cfg):
 
     by_id = {v["id"]: v for v in videos}
     today = datetime.now(KST).date().isoformat()
-    auto_events, notices, pending = auto_items(today)
+    auto_events, notices, pending, auto_votes = auto_items(today)
+    have = {(v["end"], v.get("show", ""), v.get("title", "")) for v in cfg["votes"]}
+    have_app = {(v["end"][:10], v.get("app", "")) for v in cfg["votes"] if v.get("app")}
+    cfg["votes"] += [v for v in auto_votes if (v["end"], v["show"], v["title"]) not in have
+                     and not (v["app"] and (v["end"][:10], v["app"]) in have_app)]
     seen = {(e["date"], e["title"]) for e in cfg["events"]}
     annivs = anniversaries(cfg["debut_date"])
     soon = (date.fromisoformat(today) + timedelta(days=120)).isoformat()

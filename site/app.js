@@ -247,43 +247,103 @@ if ("serviceWorker" in navigator) {
       return { ...e, group: groupOf(e), time: e.time || (show && showTime[show]) || e.time };
     })
     .sort((a, b) => (a.date + (a.time || "")).localeCompare(b.date + (b.time || "")));
+  // 달력에 넣을 생일은 보는 달 기준으로 (목록은 30일 이내만)
+  const birthdaysIn = (y, mo) => (data.members || []).filter((m) => (m.birthday || "").startsWith(String(mo).padStart(2, "0") + "-"))
+    .map((m) => ({ date: `${y}-${m.birthday}`, type: t("ev.birthday"), title: `🎂 ${t("ev.birthday")} · ${m.name}`, member: m.name, group: "anniv" }));
   const EV_GROUPS = [["all", "ev_all"], ["show", "ev_show_g"], ["anniv", "ev_anniv_g"], ["etc", "ev_etc_g"]];
   let evGroup = pref.get("evGroup", "all");
+  let evView = pref.get("evView", "cal");
+  const todayD = new Date(`${todayKst}T00:00:00Z`);
+  let calY = todayD.getUTCFullYear(), calM = todayD.getUTCMonth() + 1, calSel = todayKst;
   const evTabs = el("div", { class: "filter-row ev-tabs" });
+  const viewBtn = el("button", { type: "button", class: "ev-view" });
+  const calBox = el("div", { class: "cal" });
+  const pass = (e) => evGroup === "all" || e.group === evGroup;
+
+  function evItem(e) {
+    const d = new Date(`${e.date}T00:00:00Z`);
+    const wd = t("weekdays");
+    const isToday = e.date === todayKst;
+    const whenEl = el("div", { class: "when" },
+      isToday ? el("span", { class: "today" }, t("today")) : el("b", {}, `${d.getUTCMonth() + 1}.${d.getUTCDate()}`),
+      ` (${wd[d.getUTCDay()]})`, e.time ? ` ${e.time}` : null);
+    let title;
+    if (e.member) {
+      title = el("button", { type: "button", class: "linklike" }, e.title);
+      const mem = data.members.find((x) => x.name === e.member);
+      title.addEventListener("click", () => openMember(mem));
+    } else {
+      title = e.url ? ext(e.url, tx(e)) : el("span", {}, tx(e));
+    }
+    title.classList.add("what");
+    return el("li", { class: `ev-${e.group}` }, whenEl, el("div", {}, e.type ? el("span", { class: "chip" }, tc(e.type)) : null, title));
+  }
+
+  function monthEvents(y, mo) {
+    const pre = `${y}-${String(mo).padStart(2, "0")}`;
+    const seenB = new Set(allEvents.filter((e) => e.member).map((e) => e.date + e.member));
+    return [...allEvents.filter((e) => e.date.startsWith(pre)),
+      ...birthdaysIn(y, mo).filter((b) => !seenB.has(b.date + b.member))].filter(pass);
+  }
+
+  function renderCal() {
+    const evs = monthEvents(calY, calM);
+    const byDay = {};
+    for (const e of evs) (byDay[e.date] ||= []).push(e);
+    const first = new Date(Date.UTC(calY, calM - 1, 1));
+    const days = new Date(Date.UTC(calY, calM, 0)).getUTCDate();
+    const prev = el("button", { type: "button", class: "cal-nav", "aria-label": "‹" }, "‹");
+    const next = el("button", { type: "button", class: "cal-nav", "aria-label": "›" }, "›");
+    prev.addEventListener("click", () => { calM -= 1; if (calM < 1) { calM = 12; calY -= 1; } calSel = ""; renderCal(); });
+    next.addEventListener("click", () => { calM += 1; if (calM > 12) { calM = 1; calY += 1; } calSel = ""; renderCal(); });
+    const monthName = new Intl.DateTimeFormat(LOCALES[LANG], { year: "numeric", month: "long", timeZone: "UTC" }).format(first);
+    const grid = el("div", { class: "cal-grid" }, ...t("weekdays").map((w, i) => el("div", { class: `cal-wd${i === 0 ? " sun" : i === 6 ? " sat" : ""}` }, w)));
+    for (let i = 0; i < first.getUTCDay(); i++) grid.append(el("div", { class: "cal-cell empty" }));
+    for (let d = 1; d <= days; d++) {
+      const iso = `${calY}-${String(calM).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+      const list = byDay[iso] || [];
+      const groups = [...new Set(list.map((e) => e.group))];
+      const cell = el("button", { type: "button", class: `cal-cell${iso === todayKst ? " today" : ""}${iso === calSel ? " sel" : ""}${iso < todayKst ? " past" : ""}`,
+        "aria-label": `${iso} ${list.length}` },
+        el("span", { class: "cal-d" }, String(d)),
+        el("span", { class: "cal-dots" }, ...groups.map((g) => el("i", { class: `dot dot-${g}` }))));
+      cell.addEventListener("click", () => { calSel = iso; renderCal(); });
+      grid.append(cell);
+    }
+    // 고른 날 일정, 없으면 이 달 남은 일정
+    const sel = calSel ? (byDay[calSel] || []) : [];
+    const rest = evs.filter((e) => e.date >= (calSel || todayKst)).sort((a, b) => (a.date + (a.time || "")).localeCompare(b.date + (b.time || "")));
+    const list = calSel && sel.length ? sel : rest.slice(0, 6);
+    calBox.replaceChildren(
+      el("div", { class: "cal-head" }, prev, el("b", {}, monthName), next),
+      grid,
+      el("div", { class: "cal-sub muted small" }, calSel && sel.length ? "" : t("cal_upcoming")),
+      el("ul", { class: "events" }, ...(list.length ? list.map(evItem) : [el("li", { class: "empty" }, "–")])));
+  }
+
   function renderEvents() {
-    const list = allEvents.filter((e) => evGroup === "all" || e.group === evGroup).slice(0, 10);
     evTabs.replaceChildren(...EV_GROUPS.filter(([k]) => k === "all" || allEvents.some((e) => e.group === k)).map(([k, label]) => {
       const n = k === "all" ? allEvents.length : allEvents.filter((e) => e.group === k).length;
       const b = el("button", { type: "button", class: k === evGroup ? "on" : "" }, `${t(label)} ${n}`);
       b.addEventListener("click", () => { evGroup = k; pref.set("evGroup", k); renderEvents(); });
       return b;
     }));
-    const wd = t("weekdays");
-    $("events").replaceChildren(...(list.length ? list.map((e) => {
-      const d = new Date(`${e.date}T00:00:00Z`);
-      const isToday = e.date === todayKst;
-      const whenEl = el("div", { class: "when" },
-        isToday ? el("span", { class: "today" }, t("today")) : el("b", {}, `${d.getUTCMonth() + 1}.${d.getUTCDate()}`),
-        ` (${wd[d.getUTCDay()]})`, e.time ? ` ${e.time}` : null);
-      let title;
-      if (e.member) {
-        title = el("button", { type: "button", class: "linklike" }, e.title);
-        const mem = data.members.find((x) => x.name === e.member);
-        title.addEventListener("click", () => openMember(mem));
-      } else {
-        title = e.url ? ext(e.url, tx(e)) : el("span", {}, tx(e));
-      }
-      title.classList.add("what");
-      return el("li", { class: `ev-${e.group}` }, whenEl, el("div", {}, e.type ? el("span", { class: "chip" }, tc(e.type)) : null, title));
-    }) : [el("li", { class: "empty" }, "–")]));
+    viewBtn.textContent = evView === "cal" ? `☰ ${t("ev_list")}` : `📅 ${t("ev_cal")}`;
+    if (evView === "cal") {
+      $("events").hidden = true; calBox.hidden = false; renderCal();
+    } else {
+      calBox.hidden = true; $("events").hidden = false;
+      const list = allEvents.filter(pass).slice(0, 10);
+      $("events").replaceChildren(...(list.length ? list.map(evItem) : [el("li", { class: "empty" }, "–")]));
+    }
   }
-  if (allEvents.length) {
-    if (evGroup !== "all" && !allEvents.some((e) => e.group === evGroup)) evGroup = "all";
-    $("events").before(evTabs);
-    renderEvents();
-  } else {
-    $("events").replaceWith(empty("–"));
-  }
+  viewBtn.addEventListener("click", () => { evView = evView === "cal" ? "list" : "cal"; pref.set("evView", evView); renderEvents(); });
+  if (evGroup !== "all" && !allEvents.some((e) => e.group === evGroup)) evGroup = "all";
+  const evHead = $("eventsSection").querySelector(".sec-head");
+  evHead.insertBefore(viewBtn, evHead.querySelector(".see-all"));
+  $("events").before(evTabs);
+  $("events").after(calBox);
+  renderEvents();
 
   const newCount = data.videos.filter(isNew).length;
   if (newCount) $("recentHead").append(el("span", { class: "new-count" }, `NEW ${newCount}`));
@@ -313,7 +373,8 @@ if ("serviceWorker" in navigator) {
         el("div", { class: "vote-time" }, open ? t("vote_ends", { t: duration(end - Date.now()) }) : t("vote_starts", { t: duration(start - Date.now()) }),
           el("span", { class: "muted" }, ` · ${t("vote_end_at", { t: v.end.slice(5).replace("-", ".") })}`)),
         v.note ? el("div", { class: "muted small" }, tc(v.note)) : null,
-        v.url ? ext(v.url, t("vote_open")) : null));
+        el("div", { class: "vote-links" }, v.url ? ext(v.url, t("vote_open")) : null,
+          v.source && v.source !== v.url ? ext(v.source, t("from_notice"), " ↗") : null)));
     }
   } else {
     $("votes").append(empty(t("no_votes")));
