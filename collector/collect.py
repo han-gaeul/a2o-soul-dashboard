@@ -285,6 +285,17 @@ def build_episodes(videos, slim):
     return out
 
 
+
+def anniversaries(debut):
+    """데뷔 100일 단위(1000일까지) + 매년 데뷔 기념일(5주년까지). 데뷔일이 1일째."""
+    if not debut:
+        return []
+    d0 = date.fromisoformat(debut)
+    out = [{"date": (d0 + timedelta(days=n - 1)).isoformat(), "title": f"🎉 데뷔 {n}일"} for n in range(100, 1001, 100)]
+    out += [{"date": d0.replace(year=d0.year + y).isoformat(), "title": f"🎉 데뷔 {y}주년"} for y in range(1, 6)]
+    return [{**a, "type": "기념일", "auto": True, "anniv": True} for a in sorted(out, key=lambda a: a["date"])]
+
+
 def build_timeline(cfg, videos, episodes, subs=()):
     """기록: 데뷔·발매·첫 음방(자동) + 조회수·구독자 돌파(수집 기록 기준) + info.yml records(직접 입력)."""
     items = []
@@ -308,6 +319,10 @@ def build_timeline(cfg, videos, episodes, subs=()):
                 if a < m <= b and m >= 1_000_000:
                     items.append({"date": d, "kind": "views", "title": f"{song_of(v['title']) or 'MV'} MV {kr_num(m)}뷰 돌파",
                                   "url": f"https://youtu.be/{v['id']}"})
+    today = datetime.now(KST).date().isoformat()
+    for a in anniversaries(cfg["debut_date"]):
+        if a["date"] <= today:
+            items.append({"date": a["date"], "kind": "anniv", "title": a["title"]})
     for pts in subs:
         for (_, a), (d, b) in zip(pts, pts[1:]):
             m = crossed(a, b, subscriber_milestones())
@@ -840,8 +855,11 @@ def build(cfg):
     today = datetime.now(KST).date().isoformat()
     auto_events, notices, pending = auto_items(today)
     seen = {(e["date"], e["title"]) for e in cfg["events"]}
+    annivs = anniversaries(cfg["debut_date"])
+    soon = (date.fromisoformat(today) + timedelta(days=120)).isoformat()
     all_events = sorted([e for e in cfg["events"] if e["date"] >= today]
-                        + [e for e in auto_events + youtube_upcoming(registry, today) if (e["date"], e["title"]) not in seen],
+                        + [e for e in auto_events + youtube_upcoming(registry, today) if (e["date"], e["title"]) not in seen]
+                        + [a for a in annivs if today <= a["date"] <= soon],
                         key=lambda e: (e["date"], e.get("time") or ""))
     write_pending(pending)
     recent = sorted((v for v in videos if v["category"] != "fancam"),
@@ -879,7 +897,7 @@ def build(cfg):
                   "tips": cfg["guide"]["tips"]},
     }
     save_json("dashboard.json", dashboard)
-    write_calendar(cfg, [e for e in all_events if e.get("auto")])
+    write_calendar(cfg, [e for e in all_events if e.get("auto") and not e.get("anniv")] + annivs)
     print(f"dashboard.json 생성: 영상 {len(videos)}개 (MV {len(mvs)}, 직캠 {len(fancams)}), 일정 {len(dashboard['events'])}개")
 
 
