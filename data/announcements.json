@@ -547,13 +547,31 @@
    "items": [],
    "permalink": "https://x.com/A2O_SOUL/status/2121589290241270233",
    "timestamp": "2026-11-14T13:01:18.000Z"
+  },
+  "x:2121674241892561049": {
+   "caption": "[📍]\n261115 (일) A2O SOUL 인기가요 사전녹화에 참여하시는 분은 인원 체크 시간에 맞춰 사진 속 장소로 모여주시기 바랍니다🪩\n\n[인원 체크 시작 시간] \n1번 ~ 100번 - AM 4:00 (KST)\n101번 ~ 200번 - AM 5:00 (KST)\n201번 ~ - AM 6:00 (KST)\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2O_SOUL/status/2121674241892561049/photo/1",
+   "excerpt": "[📍]\n261115 (일) A2O SOUL 인기가요 사전녹화에 참여하시는 분은 인원 체크 시간에 맞춰 사진 속 장소로 모여주시기 바랍니다🪩\n\n[인원 체크 시작 시간] \n1번 ~ 100번 - AM 4:00 (KST)\n101번 ~ 200번 - AM 5:0",
+   "items": [
+    {
+     "confidence": 0.85,
+     "date": "2026-11-15",
+     "end_date": null,
+     "kind": "music_show",
+     "place": null,
+     "time": null,
+     "title": "인기가요 출연",
+     "url": null
+    }
+   ],
+   "permalink": "https://x.com/A2O_SOUL/status/2121674241892561049",
+   "timestamp": "2026-11-14T18:38:52.000Z"
   }
  },
  "rules_version": 5,
  "x": {
   "A2O_SOUL": {
    "id": "1986498790229262336",
-   "since_id": "2121589290241270233"
+   "since_id": "2121674241892561049"
   }
  }
 }
