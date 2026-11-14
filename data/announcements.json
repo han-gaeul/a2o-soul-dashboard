@@ -84,6 +84,24 @@
    "permalink": "https://www.instagram.com/p/DffB08FTZ_2/",
    "timestamp": "2026-11-08T15:00:23+0000"
   },
+  "18115336615887431": {
+   "caption": "Show! Music Core\nLet’s go, Let‘s go🪩\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark",
+   "excerpt": "Show! Music Core\nLet’s go, Let‘s go🪩\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark",
+   "items": [
+    {
+     "confidence": 0.5,
+     "date": null,
+     "end_date": null,
+     "kind": "music_show",
+     "place": null,
+     "time": null,
+     "title": "음악중심 출연",
+     "url": null
+    }
+   ],
+   "permalink": "https://www.instagram.com/reel/DfuNOuHSvT6/",
+   "timestamp": "2026-11-14T12:30:32+0000"
+  },
   "18117714101327416": {
    "caption": "CONCEPT PHOTO : Dancing in the Dark\n#SEEONE\n\nA2O SOUL DEBUT ALBUM [SUPERSTAR]\n➫ 2026.11.09 6PM (KST)\n\n💿 Pre-save&order\nhttps://presave.a2osoul.world/superstar\n\n#A2O #A2OSOUL\n#SUPERSTAR\n#Dancing_in_the_Dark",
    "excerpt": "CONCEPT PHOTO : Dancing in the Dark\n#SEEONE\n\nA2O SOUL DEBUT ALBUM [SUPERSTAR]\n➫ 2026.11.09 6PM (KST)\n\n💿 Pre-save&order\nhttps://presave.a2oso",
@@ -104,6 +122,13 @@
    "items": [],
    "permalink": "https://www.instagram.com/p/Dfds2glzCt5/",
    "timestamp": "2026-11-08T03:00:37+0000"
+  },
+  "18122156740992081": {
+   "caption": "𝘋𝘢𝘯𝘤𝘪𝘯𝘨 𝘪𝘯 𝘵𝘩𝘦 ’𝗠𝘂𝘀𝗶𝗰 𝗖𝗼𝗿𝗲‘ 🕺\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark",
+   "excerpt": "𝘋𝘢𝘯𝘤𝘪𝘯𝘨 𝘪𝘯 𝘵𝘩𝘦 ’𝗠𝘂𝘀𝗶𝗰 𝗖𝗼𝗿𝗲‘ 🕺\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark",
+   "items": [],
+   "permalink": "https://www.instagram.com/reel/DfuQ9OOxvTw/",
+   "timestamp": "2026-11-14T13:00:36+0000"
   },
   "18127865603490671": {
    "caption": "CONCEPT PHOTO : Dancing in the Dark\n#MOON\n\nA2O SOUL DEBUT ALBUM [SUPERSTAR]\n➫ 2026.11.09 6PM (KST)\n\n💿 Pre-save&order\nhttps://presave.a2osoul.world/superstar\n\n#A2O #A2OSOUL\n#SUPERSTAR\n#Dancing_in_the_Dark",
@@ -508,13 +533,27 @@
    "items": [],
    "permalink": "https://x.com/A2O_SOUL/status/2121521488918684091",
    "timestamp": "2026-11-14T08:31:53.000Z"
+  },
+  "x:2121582231827501169": {
+   "caption": "[📱] \nShow! Music Core\nLet’s go, Let‘s go🪩\n\n🔗 https://vm.tiktok.com/ZPL3y8XS6/\n🔗 https://www.instagram.com/reel/DfuNOuHSvT6/\n🔗 https://youtube.com/shorts/y-FncPYOlxk\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2O_SOUL/status/2121582231827501169/video/1",
+   "excerpt": "[📱] \nShow! Music Core\nLet’s go, Let‘s go🪩\n\n🔗 https://vm.tiktok.com/ZPL3y8XS6/\n🔗 https://www.instagram.com/reel/DfuNOuHSvT6/\n🔗 https://youtub",
+   "items": [],
+   "permalink": "https://x.com/A2O_SOUL/status/2121582231827501169",
+   "timestamp": "2026-11-14T12:33:15.000Z"
+  },
+  "x:2121589290241270233": {
+   "caption": "[📱]\n𝘋𝘢𝘯𝘤𝘪𝘯𝘨 𝘪𝘯 𝘵𝘩𝘦 ’𝗠𝘂𝘀𝗶𝗰 𝗖𝗼𝗿𝗲‘ 🕺\n\n🔗 https://vm.tiktok.com/ZPL3y5MsY/\n🔗 https://www.instagram.com/reel/DfuQ9OOxvTw/\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2O_SOUL/status/2121589290241270233/video/1",
+   "excerpt": "[📱]\n𝘋𝘢𝘯𝘤𝘪𝘯𝘨 𝘪𝘯 𝘵𝘩𝘦 ’𝗠𝘂𝘀𝗶𝗰 𝗖𝗼𝗿𝗲‘ 🕺\n\n🔗 https://vm.tiktok.com/ZPL3y5MsY/\n🔗 https://www.instagram.com/reel/DfuQ9OOxvTw/\n\n#A2O #A2OSOUL\n#Dancing_",
+   "items": [],
+   "permalink": "https://x.com/A2O_SOUL/status/2121589290241270233",
+   "timestamp": "2026-11-14T13:01:18.000Z"
   }
  },
  "rules_version": 5,
  "x": {
   "A2O_SOUL": {
    "id": "1986498790229262336",
-   "since_id": "2121521488918684091"
+   "since_id": "2121589290241270233"
   }
  }
 }
