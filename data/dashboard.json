@@ -1607,15 +1607,21 @@
    "그런데도 무언가 비어 있다고 느낀 이들은, 사람을 살아 있게 하는 감정과 에너지 — 기쁨·사랑·설렘·열정, 곧 '소울(SOUL)'을 찾아 지구로 떠나요.",
    "데뷔 앨범 'SUPERSTAR'가 그 이야기의 첫 번째 챕터. 그룹은 자신들의 음악을 'NEW SYNTHWAVE'라고 불러요."
   ],
-  "pclist_credit": {
-   "label": "@soultemplates",
-   "url": "https://x.com/soultemplates"
-  },
-  "pclists": [],
   "photo_labels": {
    "댄인닼": "Dancing in the Dark",
    "슈퍼스타": "SUPERSTAR"
   },
+  "photocard_credit": {
+   "label": "@soultemplates",
+   "url": "https://x.com/soultemplates"
+  },
+  "photocard_order": [
+   "앨범",
+   "예판 특전",
+   "팬사인·영통",
+   "방송",
+   "럭키드로우"
+  ],
   "records": [],
   "shops": [
    {
@@ -4752,7 +4758,830 @@
   }
  ],
  "notices": [],
- "photocards": [],
+ "photocards": [
+  {
+   "label": "CARABINER Ver.",
+   "member": "MOON",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CARABINER%20Ver._MOON.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "CARABINER Ver.",
+   "member": "SORA",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CARABINER%20Ver._SORA.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "CARABINER Ver.",
+   "member": "SEOHA",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CARABINER%20Ver._SEOHA.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "CARABINER Ver.",
+   "member": "GAKU",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CARABINER%20Ver._GAKU.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "CARABINER Ver.",
+   "member": "TEO",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CARABINER%20Ver._TEO.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "CARABINER Ver.",
+   "member": "JUNE",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CARABINER%20Ver._JUNE.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "CARABINER Ver.",
+   "member": "LUCIEN",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CARABINER%20Ver._LUCIEN.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "CARABINER Ver.",
+   "member": "HANSUNG",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CARABINER%20Ver._HANSUNG.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "CARABINER Ver.",
+   "member": "TAI",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CARABINER%20Ver._TAI.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "CARABINER Ver.",
+   "member": "SEE-ONE",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CARABINER%20Ver._SEE-ONE.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "CARABINER Ver.",
+   "member": "SONO",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CARABINER%20Ver._SONO.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "CARABINER Ver.",
+   "member": "ALURE",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CARABINER%20Ver._ALURE.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "CARABINER Ver.",
+   "member": "ZAI",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CARABINER%20Ver._ZAI.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "CARABINER Ver.",
+   "member": "AYDEN",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CARABINER%20Ver._AYDEN.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "CARABINER Ver.",
+   "member": "ZET",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CARABINER%20Ver._ZET.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "CONSTELLATION Ver.",
+   "member": "MOON",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CONSTELLATION%20Ver._MOON.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "CONSTELLATION Ver.",
+   "member": "SORA",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CONSTELLATION%20Ver._SORA.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "CONSTELLATION Ver.",
+   "member": "SEOHA",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CONSTELLATION%20Ver._SEOHA.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "CONSTELLATION Ver.",
+   "member": "GAKU",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CONSTELLATION%20Ver._GAKU.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "CONSTELLATION Ver.",
+   "member": "TEO",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CONSTELLATION%20Ver._TEO.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "CONSTELLATION Ver.",
+   "member": "JUNE",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CONSTELLATION%20Ver._JUNE.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "CONSTELLATION Ver.",
+   "member": "LUCIEN",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CONSTELLATION%20Ver._LUCIEN.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "CONSTELLATION Ver.",
+   "member": "HANSUNG",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CONSTELLATION%20Ver._HANSUNG.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "CONSTELLATION Ver.",
+   "member": "TAI",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CONSTELLATION%20Ver._TAI.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "CONSTELLATION Ver.",
+   "member": "SEE-ONE",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CONSTELLATION%20Ver._SEE-ONE.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "CONSTELLATION Ver.",
+   "member": "SONO",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CONSTELLATION%20Ver._SONO.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "CONSTELLATION Ver.",
+   "member": "ALURE",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CONSTELLATION%20Ver._ALURE.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "CONSTELLATION Ver.",
+   "member": "ZAI",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CONSTELLATION%20Ver._ZAI.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "CONSTELLATION Ver.",
+   "member": "AYDEN",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CONSTELLATION%20Ver._AYDEN.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "CONSTELLATION Ver.",
+   "member": "ZET",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CONSTELLATION%20Ver._ZET.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "SOUL Ver.",
+   "member": "MOON",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_SOUL%20Ver._MOON.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "SOUL Ver.",
+   "member": "SORA",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_SOUL%20Ver._SORA.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "SOUL Ver.",
+   "member": "SEOHA",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_SOUL%20Ver._SEOHA.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "SOUL Ver.",
+   "member": "GAKU",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_SOUL%20Ver._GAKU.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "SOUL Ver.",
+   "member": "TEO",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_SOUL%20Ver._TEO.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "SOUL Ver.",
+   "member": "JUNE",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_SOUL%20Ver._JUNE.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "SOUL Ver.",
+   "member": "LUCIEN",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_SOUL%20Ver._LUCIEN.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "SOUL Ver.",
+   "member": "HANSUNG",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_SOUL%20Ver._HANSUNG.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "SOUL Ver.",
+   "member": "TAI",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_SOUL%20Ver._TAI.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "SOUL Ver.",
+   "member": "SEE-ONE",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_SOUL%20Ver._SEE-ONE.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "SOUL Ver.",
+   "member": "SONO",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_SOUL%20Ver._SONO.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "SOUL Ver.",
+   "member": "ALURE",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_SOUL%20Ver._ALURE.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "SOUL Ver.",
+   "member": "ZAI",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_SOUL%20Ver._ZAI.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "SOUL Ver.",
+   "member": "AYDEN",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_SOUL%20Ver._AYDEN.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "SOUL Ver.",
+   "member": "ZET",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_SOUL%20Ver._ZET.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "Apple Music (Carabiner)",
+   "member": "SEE-ONE",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20%28Carabiner%29_SEE-ONE.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Apple Music A (Photobook)",
+   "member": "MOON",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20A%20%28Photobook%29_MOON.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Apple Music A (Photobook)",
+   "member": "SORA",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20A%20%28Photobook%29_SORA.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Apple Music A (Photobook)",
+   "member": "GAKU",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20A%20%28Photobook%29_GAKU.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Apple Music A (Photobook)",
+   "member": "TEO",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20A%20%28Photobook%29_TEO.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Apple Music A (Photobook)",
+   "member": "JUNE",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20A%20%28Photobook%29_JUNE.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Apple Music A (Photobook)",
+   "member": "TAI",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20A%20%28Photobook%29_TAI.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Apple Music A (Photobook)",
+   "member": "SEE-ONE",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20A%20%28Photobook%29_SEE-ONE.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Apple Music A (Photobook)",
+   "member": "SONO",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20A%20%28Photobook%29_SONO.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Apple Music A (Photobook)",
+   "member": "ALURE",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20A%20%28Photobook%29_ALURE.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Apple Music A (Photobook)",
+   "member": "AYDEN",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20A%20%28Photobook%29_AYDEN.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Apple Music A (Photobook)",
+   "member": "ZET",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20A%20%28Photobook%29_ZET.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Apple Music B (Photobook)",
+   "member": "MOON",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20B%20%28Photobook%29_MOON.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Apple Music B (Photobook)",
+   "member": "GAKU",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20B%20%28Photobook%29_GAKU.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Apple Music B (Photobook)",
+   "member": "HANSUNG",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20B%20%28Photobook%29_HANSUNG.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Apple Music B (Photobook)",
+   "member": "ZAI",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20B%20%28Photobook%29_ZAI.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Apple Music B (Photobook)",
+   "member": "AYDEN",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20B%20%28Photobook%29_AYDEN.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Withmuu (Carabiner)",
+   "member": "MOON",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Carabiner%29_MOON.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Withmuu (Carabiner)",
+   "member": "SORA",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Carabiner%29_SORA.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Withmuu (Carabiner)",
+   "member": "SEOHA",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Carabiner%29_SEOHA.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Withmuu (Carabiner)",
+   "member": "GAKU",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Carabiner%29_GAKU.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Withmuu (Carabiner)",
+   "member": "TEO",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Carabiner%29_TEO.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Withmuu (Carabiner)",
+   "member": "JUNE",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Carabiner%29_JUNE.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Withmuu (Carabiner)",
+   "member": "LUCIEN",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Carabiner%29_LUCIEN.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Withmuu (Carabiner)",
+   "member": "HANSUNG",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Carabiner%29_HANSUNG.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Withmuu (Carabiner)",
+   "member": "TAI",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Carabiner%29_TAI.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Withmuu (Carabiner)",
+   "member": "SEE-ONE",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Carabiner%29_SEE-ONE.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Withmuu (Carabiner)",
+   "member": "SONO",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Carabiner%29_SONO.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Withmuu (Carabiner)",
+   "member": "ALURE",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Carabiner%29_ALURE.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Withmuu (Carabiner)",
+   "member": "ZAI",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Carabiner%29_ZAI.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Withmuu (Carabiner)",
+   "member": "AYDEN",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Carabiner%29_AYDEN.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Withmuu (Carabiner)",
+   "member": "ZET",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Carabiner%29_ZET.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Withmuu (Photobook)",
+   "member": "MOON",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Photobook%29_MOON.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Withmuu (Photobook)",
+   "member": "SORA",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Photobook%29_SORA.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Withmuu (Photobook)",
+   "member": "SEOHA",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Photobook%29_SEOHA.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Withmuu (Photobook)",
+   "member": "GAKU",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Photobook%29_GAKU.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Withmuu (Photobook)",
+   "member": "TEO",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Photobook%29_TEO.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Withmuu (Photobook)",
+   "member": "JUNE",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Photobook%29_JUNE.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Withmuu (Photobook)",
+   "member": "LUCIEN",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Photobook%29_LUCIEN.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Withmuu (Photobook)",
+   "member": "HANSUNG",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Photobook%29_HANSUNG.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Withmuu (Photobook)",
+   "member": "TAI",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Photobook%29_TAI.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Withmuu (Photobook)",
+   "member": "SEE-ONE",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Photobook%29_SEE-ONE.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Withmuu (Photobook)",
+   "member": "SONO",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Photobook%29_SONO.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Withmuu (Photobook)",
+   "member": "ALURE",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Photobook%29_ALURE.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Withmuu (Photobook)",
+   "member": "ZAI",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Photobook%29_ZAI.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Withmuu (Photobook)",
+   "member": "AYDEN",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Photobook%29_AYDEN.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Withmuu (Photobook)",
+   "member": "ZET",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Photobook%29_ZET.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Dancing in the Dark",
+   "member": "MOON",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_Dancing%20in%20the%20Dark_MOON.webp",
+   "version": "방송"
+  },
+  {
+   "label": "Dancing in the Dark",
+   "member": "SORA",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_Dancing%20in%20the%20Dark_SORA.webp",
+   "version": "방송"
+  },
+  {
+   "label": "Dancing in the Dark",
+   "member": "SEOHA",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_Dancing%20in%20the%20Dark_SEOHA.webp",
+   "version": "방송"
+  },
+  {
+   "label": "Dancing in the Dark",
+   "member": "GAKU",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_Dancing%20in%20the%20Dark_GAKU.webp",
+   "version": "방송"
+  },
+  {
+   "label": "Dancing in the Dark",
+   "member": "TEO",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_Dancing%20in%20the%20Dark_TEO.webp",
+   "version": "방송"
+  },
+  {
+   "label": "Dancing in the Dark",
+   "member": "JUNE",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_Dancing%20in%20the%20Dark_JUNE.webp",
+   "version": "방송"
+  },
+  {
+   "label": "Dancing in the Dark",
+   "member": "LUCIEN",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_Dancing%20in%20the%20Dark_LUCIEN.webp",
+   "version": "방송"
+  },
+  {
+   "label": "Dancing in the Dark",
+   "member": "HANSUNG",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_Dancing%20in%20the%20Dark_HANSUNG.webp",
+   "version": "방송"
+  },
+  {
+   "label": "Dancing in the Dark",
+   "member": "TAI",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_Dancing%20in%20the%20Dark_TAI.webp",
+   "version": "방송"
+  },
+  {
+   "label": "Dancing in the Dark",
+   "member": "SEE-ONE",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_Dancing%20in%20the%20Dark_SEE-ONE.webp",
+   "version": "방송"
+  },
+  {
+   "label": "Dancing in the Dark",
+   "member": "SONO",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_Dancing%20in%20the%20Dark_SONO.webp",
+   "version": "방송"
+  },
+  {
+   "label": "Dancing in the Dark",
+   "member": "ALURE",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_Dancing%20in%20the%20Dark_ALURE.webp",
+   "version": "방송"
+  },
+  {
+   "label": "Dancing in the Dark",
+   "member": "ZAI",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_Dancing%20in%20the%20Dark_ZAI.webp",
+   "version": "방송"
+  },
+  {
+   "label": "Dancing in the Dark",
+   "member": "AYDEN",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_Dancing%20in%20the%20Dark_AYDEN.webp",
+   "version": "방송"
+  },
+  {
+   "label": "Dancing in the Dark",
+   "member": "ZET",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_Dancing%20in%20the%20Dark_ZET.webp",
+   "version": "방송"
+  },
+  {
+   "label": "SUPERSTAR",
+   "member": "MOON",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_SUPERSTAR_MOON.webp",
+   "version": "방송"
+  },
+  {
+   "label": "SUPERSTAR",
+   "member": "SORA",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_SUPERSTAR_SORA.webp",
+   "version": "방송"
+  },
+  {
+   "label": "SUPERSTAR",
+   "member": "SEOHA",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_SUPERSTAR_SEOHA.webp",
+   "version": "방송"
+  },
+  {
+   "label": "SUPERSTAR",
+   "member": "GAKU",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_SUPERSTAR_GAKU.webp",
+   "version": "방송"
+  },
+  {
+   "label": "SUPERSTAR",
+   "member": "TEO",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_SUPERSTAR_TEO.webp",
+   "version": "방송"
+  },
+  {
+   "label": "SUPERSTAR",
+   "member": "JUNE",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_SUPERSTAR_JUNE.webp",
+   "version": "방송"
+  },
+  {
+   "label": "SUPERSTAR",
+   "member": "LUCIEN",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_SUPERSTAR_LUCIEN.webp",
+   "version": "방송"
+  },
+  {
+   "label": "SUPERSTAR",
+   "member": "HANSUNG",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_SUPERSTAR_HANSUNG.webp",
+   "version": "방송"
+  },
+  {
+   "label": "SUPERSTAR",
+   "member": "TAI",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_SUPERSTAR_TAI.webp",
+   "version": "방송"
+  },
+  {
+   "label": "SUPERSTAR",
+   "member": "SEE-ONE",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_SUPERSTAR_SEE-ONE.webp",
+   "version": "방송"
+  },
+  {
+   "label": "SUPERSTAR",
+   "member": "SONO",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_SUPERSTAR_SONO.webp",
+   "version": "방송"
+  },
+  {
+   "label": "SUPERSTAR",
+   "member": "ALURE",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_SUPERSTAR_ALURE.webp",
+   "version": "방송"
+  },
+  {
+   "label": "SUPERSTAR",
+   "member": "ZAI",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_SUPERSTAR_ZAI.webp",
+   "version": "방송"
+  },
+  {
+   "label": "SUPERSTAR",
+   "member": "AYDEN",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_SUPERSTAR_AYDEN.webp",
+   "version": "방송"
+  },
+  {
+   "label": "SUPERSTAR",
+   "member": "ZET",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_SUPERSTAR_ZET.webp",
+   "version": "방송"
+  },
+  {
+   "label": "Olive Young",
+   "member": "MOON",
+   "src": "img/photocards/%EB%9F%AD%ED%82%A4%EB%93%9C%EB%A1%9C%EC%9A%B0_Olive%20Young_MOON.webp",
+   "version": "럭키드로우"
+  },
+  {
+   "label": "Olive Young",
+   "member": "SORA",
+   "src": "img/photocards/%EB%9F%AD%ED%82%A4%EB%93%9C%EB%A1%9C%EC%9A%B0_Olive%20Young_SORA.webp",
+   "version": "럭키드로우"
+  },
+  {
+   "label": "Olive Young",
+   "member": "SEOHA",
+   "src": "img/photocards/%EB%9F%AD%ED%82%A4%EB%93%9C%EB%A1%9C%EC%9A%B0_Olive%20Young_SEOHA.webp",
+   "version": "럭키드로우"
+  },
+  {
+   "label": "Olive Young",
+   "member": "GAKU",
+   "src": "img/photocards/%EB%9F%AD%ED%82%A4%EB%93%9C%EB%A1%9C%EC%9A%B0_Olive%20Young_GAKU.webp",
+   "version": "럭키드로우"
+  },
+  {
+   "label": "Olive Young",
+   "member": "TEO",
+   "src": "img/photocards/%EB%9F%AD%ED%82%A4%EB%93%9C%EB%A1%9C%EC%9A%B0_Olive%20Young_TEO.webp",
+   "version": "럭키드로우"
+  },
+  {
+   "label": "Olive Young",
+   "member": "JUNE",
+   "src": "img/photocards/%EB%9F%AD%ED%82%A4%EB%93%9C%EB%A1%9C%EC%9A%B0_Olive%20Young_JUNE.webp",
+   "version": "럭키드로우"
+  },
+  {
+   "label": "Olive Young",
+   "member": "LUCIEN",
+   "src": "img/photocards/%EB%9F%AD%ED%82%A4%EB%93%9C%EB%A1%9C%EC%9A%B0_Olive%20Young_LUCIEN.webp",
+   "version": "럭키드로우"
+  },
+  {
+   "label": "Olive Young",
+   "member": "HANSUNG",
+   "src": "img/photocards/%EB%9F%AD%ED%82%A4%EB%93%9C%EB%A1%9C%EC%9A%B0_Olive%20Young_HANSUNG.webp",
+   "version": "럭키드로우"
+  },
+  {
+   "label": "Olive Young",
+   "member": "TAI",
+   "src": "img/photocards/%EB%9F%AD%ED%82%A4%EB%93%9C%EB%A1%9C%EC%9A%B0_Olive%20Young_TAI.webp",
+   "version": "럭키드로우"
+  },
+  {
+   "label": "Olive Young",
+   "member": "SEE-ONE",
+   "src": "img/photocards/%EB%9F%AD%ED%82%A4%EB%93%9C%EB%A1%9C%EC%9A%B0_Olive%20Young_SEE-ONE.webp",
+   "version": "럭키드로우"
+  },
+  {
+   "label": "Olive Young",
+   "member": "SONO",
+   "src": "img/photocards/%EB%9F%AD%ED%82%A4%EB%93%9C%EB%A1%9C%EC%9A%B0_Olive%20Young_SONO.webp",
+   "version": "럭키드로우"
+  },
+  {
+   "label": "Olive Young",
+   "member": "ALURE",
+   "src": "img/photocards/%EB%9F%AD%ED%82%A4%EB%93%9C%EB%A1%9C%EC%9A%B0_Olive%20Young_ALURE.webp",
+   "version": "럭키드로우"
+  },
+  {
+   "label": "Olive Young",
+   "member": "ZAI",
+   "src": "img/photocards/%EB%9F%AD%ED%82%A4%EB%93%9C%EB%A1%9C%EC%9A%B0_Olive%20Young_ZAI.webp",
+   "version": "럭키드로우"
+  },
+  {
+   "label": "Olive Young",
+   "member": "AYDEN",
+   "src": "img/photocards/%EB%9F%AD%ED%82%A4%EB%93%9C%EB%A1%9C%EC%9A%B0_Olive%20Young_AYDEN.webp",
+   "version": "럭키드로우"
+  },
+  {
+   "label": "Olive Young",
+   "member": "ZET",
+   "src": "img/photocards/%EB%9F%AD%ED%82%A4%EB%93%9C%EB%A1%9C%EC%9A%B0_Olive%20Young_ZET.webp",
+   "version": "럭키드로우"
+  }
+ ],
  "prerecs": [],
  "recent": [
   {
@@ -5143,14 +5972,6 @@
    "th": "เคยฝึกที่สถาบัน AJS และ REDSTAGE",
    "zh": "出身AJS·REDSTAGE学院"
   },
-  "CARABINER Ver. 포카": {
-   "en": "CARABINER Ver. PCs",
-   "es": "Photocards CARABINER Ver.",
-   "id": "PC CARABINER Ver.",
-   "ja": "CARABINER Ver. トレカ",
-   "th": "การ์ด CARABINER Ver.",
-   "zh": "CARABINER Ver. 小卡"
-  },
   "CONSTELLATION Ver. — SOUL Ver.와 같은 구성": {
    "en": "CONSTELLATION Ver. — same contents as SOUL Ver.",
    "es": "CONSTELLATION Ver. — mismo contenido que SOUL Ver.",
@@ -5158,14 +5979,6 @@
    "ja": "CONSTELLATION Ver. — SOUL Ver.と同じ構成",
    "th": "CONSTELLATION Ver. — ส่วนประกอบเหมือน SOUL Ver.",
    "zh": "CONSTELLATION Ver. — 与SOUL Ver.相同"
-  },
-  "Dancing in the Dark 방송 포카": {
-   "en": "Dancing in the Dark broadcast PCs",
-   "es": "Photocards de shows (Dancing in the Dark)",
-   "id": "PC siaran Dancing in the Dark",
-   "ja": "Dancing in the Dark 放送トレカ",
-   "th": "การ์ดรายการเพลง Dancing in the Dark",
-   "zh": "Dancing in the Dark 打歌小卡"
   },
   "EXPG STUDIO 오사카 출신": {
    "en": "Trained at EXPG STUDIO Osaka",
@@ -5270,14 +6083,6 @@
    "ja": "SOUL Ver. — フォトブック68p、CD-R、歌詞カード、ペーパーモビール、フォトカード3枚（15種からランダム）",
    "th": "SOUL Ver. — โฟโต้บุ๊ก 68 หน้า, CD-R, ใบเนื้อเพลง, โมบายกระดาษ, โฟโต้การ์ด 3 ใบ (สุ่มจาก 15 แบบ)",
    "zh": "SOUL Ver. — 写真书68页、CD-R、歌词纸、纸质挂饰、小卡3张（15款随机）"
-  },
-  "SUPERSTAR 방송 포카": {
-   "en": "SUPERSTAR broadcast PCs",
-   "es": "Photocards de shows (SUPERSTAR)",
-   "id": "PC siaran SUPERSTAR",
-   "ja": "SUPERSTAR 放送トレカ",
-   "th": "การ์ดรายการเพลง SUPERSTAR",
-   "zh": "SUPERSTAR 打歌小卡"
   },
   "URIZIP KPOP ACADEMY 출신": {
    "en": "Trained at URIZIP KPOP ACADEMY",
@@ -5535,6 +6340,14 @@
    "th": "แร็ป, แดนซ์",
    "zh": "说唱、舞蹈"
   },
+  "럭키드로우": {
+   "en": "Lucky draw",
+   "es": "Sorteo",
+   "id": "Lucky draw",
+   "ja": "ラッキードロー",
+   "th": "ลัคกี้ดรอว์",
+   "zh": "幸运抽奖"
+  },
   "로그인한 상태에서 MV를 끝까지 보기": {
    "en": "Watch the MV to the end while logged in",
    "es": "Mira el MV completo con sesión iniciada",
@@ -5686,6 +6499,14 @@
    "ja": "リリース",
    "th": "ปล่อยผลงาน",
    "zh": "发行"
+  },
+  "방송": {
+   "en": "Music shows",
+   "es": "Programas musicales",
+   "id": "Acara musik",
+   "ja": "音楽番組",
+   "th": "รายการเพลง",
+   "zh": "打歌"
   },
   "보컬": {
    "en": "Vocal",
@@ -5919,6 +6740,14 @@
    "th": "IDOLCHAMP",
    "zh": "IDOLCHAMP"
   },
+  "앨범": {
+   "en": "Album",
+   "es": "Álbum",
+   "id": "Album",
+   "ja": "アルバム",
+   "th": "อัลบั้ม",
+   "zh": "专辑"
+  },
   "앨범·팬사인회·영상통화 이벤트 (11/13 기준 품절)": {
    "en": "Albums, fansign & video call events (sold out as of Nov 13)",
    "es": "Álbumes, fansign y videollamadas (agotado al 13/11)",
@@ -5999,6 +6828,14 @@
    "th": "อีเวนต์โฟโต้การ์ดพรีออเดอร์",
    "zh": "预购特典小卡活动"
   },
+  "예판 특전": {
+   "en": "Pre-order benefits",
+   "es": "Beneficios de preventa",
+   "id": "Benefit pre-order",
+   "ja": "予約特典",
+   "th": "ของแถมพรีออเดอร์",
+   "zh": "预售特典"
+  },
   "오케스트라 보이": {
    "en": "Orchestra boy",
    "es": "Chico orquesta",
@@ -6014,14 +6851,6 @@
    "ja": "オールラウンダー（ボーカル・ダンス）",
    "th": "ออลราวด์เดอร์ (ร้อง·เต้น)",
    "zh": "全能型（声乐·舞蹈）"
-  },
-  "올리브영 럭키드로우": {
-   "en": "Olive Young lucky draw",
-   "es": "Sorteo Olive Young",
-   "id": "Lucky draw Olive Young",
-   "ja": "OLIVE YOUNG ラッキードロー",
-   "th": "ลัคกี้ดรอว์ Olive Young",
-   "zh": "Olive Young 幸运抽奖"
   },
   "유튜브 A2O SOUL": {
    "en": "YouTube A2O SOUL",
@@ -6414,6 +7243,14 @@
    "ja": "ポップ・R&Bが好き",
    "th": "ชอบป็อปและอาร์แอนด์บี",
    "zh": "喜欢流行和R&B"
+  },
+  "팬사인·영통": {
+   "en": "Fansign · Video call",
+   "es": "Firma de fans · Videollamada",
+   "id": "Fansign · Video call",
+   "ja": "サイン会・ヨントン",
+   "th": "แฟนไซน์ · วิดีโอคอล",
+   "zh": "签售·视频通话"
   },
   "팬싸": {
    "en": "Fansign",
