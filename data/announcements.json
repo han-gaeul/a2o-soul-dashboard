@@ -458,13 +458,63 @@
    "items": [],
    "permalink": "https://x.com/A2O_SOUL/status/2121218883596300417",
    "timestamp": "2026-11-13T12:29:26.000Z"
+  },
+  "x:2121453071633183047": {
+   "caption": "[📍]\n261114 (토) A2O SOUL 쇼! 음악중심 생방송에 참여하시는 분은 인원 체크 시간에 맞춰 사진 속 장소로 모여주시기 바랍니다🪩\n\n인원 체크 시간 - PM 1:30 (KST)\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2O_SOUL/status/2121453071633183047/photo/1",
+   "excerpt": "[📍]\n261114 (토) A2O SOUL 쇼! 음악중심 생방송에 참여하시는 분은 인원 체크 시간에 맞춰 사진 속 장소로 모여주시기 바랍니다🪩\n\n인원 체크 시간 - PM 1:30 (KST)\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dar",
+   "items": [
+    {
+     "confidence": 0.9,
+     "date": "2026-11-14",
+     "end_date": null,
+     "kind": "music_show",
+     "place": null,
+     "time": null,
+     "title": "음악중심 출연",
+     "url": null
+    }
+   ],
+   "permalink": "https://x.com/A2O_SOUL/status/2121453071633183047",
+   "timestamp": "2026-11-14T04:00:01.000Z"
+  },
+  "x:2121483269921485298": {
+   "caption": "[#음악중심] \n잠시 후, 3시 20분 ‘음악중심’에 A2O SOUL이 출연합니다. 팬 여러분의 많은 시청 부탁드립니다. \n\n#A2O #A2OSOUL \n#Dancing_in_the_Dark",
+   "excerpt": "[#음악중심] \n잠시 후, 3시 20분 ‘음악중심’에 A2O SOUL이 출연합니다. 팬 여러분의 많은 시청 부탁드립니다. \n\n#A2O #A2OSOUL \n#Dancing_in_the_Dark",
+   "items": [
+    {
+     "confidence": 0.9,
+     "date": "2026-11-14",
+     "end_date": null,
+     "kind": "music_show",
+     "place": null,
+     "time": "15:20",
+     "title": "음악중심 출연",
+     "url": null
+    }
+   ],
+   "permalink": "https://x.com/A2O_SOUL/status/2121483269921485298",
+   "timestamp": "2026-11-14T06:00:01.000Z"
+  },
+  "x:2121521035577323718": {
+   "caption": "[📸] \n2026.11.14\nMBC 음악중심\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2O_SOUL/status/2121521035577323718/photo/1",
+   "excerpt": "[📸] \n2026.11.14\nMBC 음악중심\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2O_SOUL/status/2121521035577323718/photo/1",
+   "items": [],
+   "permalink": "https://x.com/A2O_SOUL/status/2121521035577323718",
+   "timestamp": "2026-11-14T08:30:05.000Z"
+  },
+  "x:2121521488918684091": {
+   "caption": "[🔗]\nA2O SOUL (에이투오 소울) - Dancing in the Dark | Show! MusicCore | MBC261114방송\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark\nhttps://youtu.be/MC4KZBX20cM?si=r208l9jPWaz75kQO",
+   "excerpt": "[🔗]\nA2O SOUL (에이투오 소울) - Dancing in the Dark | Show! MusicCore | MBC261114방송\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark\nhttps://youtu.be/MC4KZBX20c",
+   "items": [],
+   "permalink": "https://x.com/A2O_SOUL/status/2121521488918684091",
+   "timestamp": "2026-11-14T08:31:53.000Z"
   }
  },
  "rules_version": 5,
  "x": {
   "A2O_SOUL": {
    "id": "1986498790229262336",
-   "since_id": "2121218883596300417"
+   "since_id": "2121521488918684091"
   }
  }
 }
