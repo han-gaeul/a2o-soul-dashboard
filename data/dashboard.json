@@ -890,12 +890,33 @@
    "url": "https://x.com/A2O_SOUL/status/2120577300970484178"
   },
   {
+   "date": "2026-11-14",
+   "short": "팬싸",
+   "time": "19:30",
+   "title": "Musicart 팬사인회",
+   "type": "행사"
+  },
+  {
    "auto": true,
    "date": "2026-11-15",
    "time": null,
    "title": "인기가요 출연",
    "type": "음방",
    "url": "https://x.com/A2O_SOUL/status/2121135379441123606"
+  },
+  {
+   "date": "2026-11-15",
+   "short": "영통",
+   "time": "18:00",
+   "title": "Mnet Plus 영상통화 팬사인회",
+   "type": "행사"
+  },
+  {
+   "date": "2026-11-15",
+   "short": "팬싸",
+   "time": "20:00",
+   "title": "Mnet Plus 팬사인회",
+   "type": "행사"
   },
   {
    "auto": true,
@@ -920,6 +941,44 @@
    "title": "케이팝업 차트쇼 출연",
    "type": "음방",
    "url": "https://x.com/A2O_SOUL/status/2121177298196168939"
+  },
+  {
+   "date": "2026-11-18",
+   "short": "영통",
+   "time": "19:00",
+   "title": "Makestar 영상통화 팬사인회",
+   "type": "행사"
+  },
+  {
+   "date": "2026-11-20",
+   "short": "팬싸",
+   "time": "20:00",
+   "title": "Makestar 팬사인회",
+   "type": "행사"
+  },
+  {
+   "date": "2026-11-21",
+   "short": "영통",
+   "time": "18:30",
+   "title": "Withmuu 영상통화 팬사인회",
+   "type": "행사"
+  },
+  {
+   "date": "2026-11-21",
+   "short": "팬싸",
+   "time": "20:30",
+   "title": "Withmuu 팬사인회",
+   "type": "행사"
+  },
+  {
+   "date": "2026-12-18",
+   "title": "KBS 가요대축제 출연",
+   "type": "음방"
+  },
+  {
+   "date": "2026-12-25",
+   "title": "SBS 가요대전 출연",
+   "type": "음방"
   },
   {
    "anniv": true,
@@ -5124,6 +5183,54 @@
    "th": "ร่วมใน 'REVOLUTION' และ 'CHAMPAGNE' ของ HTB",
    "zh": "参与HTB《REVOLUTION》《CHAMPAGNE》"
   },
+  "KBS 가요대축제": {
+   "en": "KBS Song Festival",
+   "es": "KBS Song Festival",
+   "id": "KBS Song Festival",
+   "ja": "KBS歌謡祭",
+   "th": "KBS Song Festival",
+   "zh": "KBS歌谣大祝祭"
+  },
+  "Makestar 영상통화 팬사인회": {
+   "en": "Makestar video call fansign",
+   "es": "Videollamada Makestar",
+   "id": "Video call fansign Makestar",
+   "ja": "Makestar ヨントン",
+   "th": "วิดีโอคอลแฟนไซน์ Makestar",
+   "zh": "Makestar 视频签售"
+  },
+  "Makestar 팬사인회": {
+   "en": "Makestar fansign",
+   "es": "Firma de fans Makestar",
+   "id": "Fansign Makestar",
+   "ja": "Makestar サイン会",
+   "th": "แฟนไซน์ Makestar",
+   "zh": "Makestar 签售会"
+  },
+  "Mnet Plus 영상통화 팬사인회": {
+   "en": "Mnet Plus video call fansign",
+   "es": "Videollamada Mnet Plus",
+   "id": "Video call fansign Mnet Plus",
+   "ja": "Mnet Plus ヨントン",
+   "th": "วิดีโอคอลแฟนไซน์ Mnet Plus",
+   "zh": "Mnet Plus 视频签售"
+  },
+  "Mnet Plus 팬사인회": {
+   "en": "Mnet Plus fansign",
+   "es": "Firma de fans Mnet Plus",
+   "id": "Fansign Mnet Plus",
+   "ja": "Mnet Plus サイン会",
+   "th": "แฟนไซน์ Mnet Plus",
+   "zh": "Mnet Plus 签售会"
+  },
+  "Musicart 팬사인회": {
+   "en": "Musicart fansign",
+   "es": "Firma de fans Musicart",
+   "id": "Fansign Musicart",
+   "ja": "Musicart サイン会",
+   "th": "แฟนไซน์ Musicart",
+   "zh": "Musicart 签售会"
+  },
   "POWERVOCAL Star Incubating Center 출신": {
    "en": "Trained at POWERVOCAL Star Incubating Center",
    "es": "Formado en POWERVOCAL Star Incubating Center",
@@ -5131,6 +5238,14 @@
    "ja": "POWERVOCAL Star Incubating Center出身",
    "th": "เคยฝึกที่ POWERVOCAL Star Incubating Center",
    "zh": "出身POWERVOCAL Star Incubating Center"
+  },
+  "SBS 가요대전": {
+   "en": "SBS Gayo Daejeon",
+   "es": "SBS Gayo Daejeon",
+   "id": "SBS Gayo Daejeon",
+   "ja": "SBS歌謡大祭典",
+   "th": "SBS Gayo Daejeon",
+   "zh": "SBS歌谣大战"
   },
   "SHOW K-POP": {
    "en": "SHOW K-POP",
@@ -5171,6 +5286,22 @@
    "ja": "URIZIP KPOP ACADEMY出身",
    "th": "เคยฝึกที่ URIZIP KPOP ACADEMY",
    "zh": "出身URIZIP KPOP ACADEMY"
+  },
+  "Withmuu 영상통화 팬사인회": {
+   "en": "Withmuu video call fansign",
+   "es": "Videollamada Withmuu",
+   "id": "Video call fansign Withmuu",
+   "ja": "Withmuu ヨントン",
+   "th": "วิดีโอคอลแฟนไซน์ Withmuu",
+   "zh": "Withmuu 视频签售"
+  },
+  "Withmuu 팬사인회": {
+   "en": "Withmuu fansign",
+   "es": "Firma de fans Withmuu",
+   "id": "Fansign Withmuu",
+   "ja": "Withmuu サイン会",
+   "th": "แฟนไซน์ Withmuu",
+   "zh": "Withmuu 签售会"
   },
   "가볍고 정확한 춤선": {
    "en": "Light, precise dance lines",
@@ -5836,6 +5967,14 @@
    "th": "พื้นฐานสตรีทแดนซ์แน่นหลายแนว",
    "zh": "扎实的街舞基本功，驾驭多种风格"
   },
+  "영통": {
+   "en": "Video call",
+   "es": "Videollamada",
+   "id": "Video call",
+   "ja": "ヨントン",
+   "th": "วิดีโอคอล",
+   "zh": "视频签售"
+  },
   "영화 'The Marked Sheep'(2022) 조연": {
    "en": "Supporting role in the film 'The Marked Sheep' (2022)",
    "es": "Papel secundario en la película 'The Marked Sheep' (2022)",
@@ -6275,6 +6414,14 @@
    "ja": "ポップ・R&Bが好き",
    "th": "ชอบป็อปและอาร์แอนด์บี",
    "zh": "喜欢流行和R&B"
+  },
+  "팬싸": {
+   "en": "Fansign",
+   "es": "Firma",
+   "id": "Fansign",
+   "ja": "サイン会",
+   "th": "แฟนไซน์",
+   "zh": "签售"
   },
   "팬싸·영통 — 앨범 구매로 응모하는 팬사인회·영상통화 이벤트": {
    "en": "Fansign / video call — events you enter by buying albums",
