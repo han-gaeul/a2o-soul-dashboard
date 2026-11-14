@@ -51,6 +51,8 @@ def load_config():
     cfg["channels"] = cfg.get("channels") or []
     cfg["instagram"] = cfg.get("instagram") or []
     cfg["x"] = [str(u).lstrip("@") for u in (cfg.get("x") or [])]
+    cfg["x_vendors"] = [{"handle": str(v["handle"]).lstrip("@"), "name": str(v.get("name") or v["handle"])}
+                        for v in (cfg.get("x_vendors") or []) if isinstance(v, dict) and v.get("handle")]
     cfg["videos"] = cfg.get("videos") or []
     cfg["debut_date"] = str(cfg.get("debut_date") or "")
     # MV로 인정하는 채널 (mv: true). 그 밖의 채널에 올라온 MV는 콘텐츠로
@@ -553,7 +555,8 @@ def auto_items(today):
             if i.get("date") and i["date"] >= today and (i["date"], i["title"]) not in seen_ev:
                 seen_ev.add((i["date"], i["title"]))
                 events.append({"date": i["date"], "time": i.get("time"), "type": row["label"], "title": i["title"],
-                               "url": i.get("url") or post.get("permalink"), "auto": True})
+                               "url": i.get("url") or post.get("permalink"), "auto": True,
+                               **({"short": i["short"]} if i.get("short") else {})})
             if i["kind"] in ("ticket", "merch", "release", "concert", "fanmeeting", "event") and future:
                 notices.append(row)
     prerecs.sort(key=lambda x: x["start"])
@@ -750,12 +753,15 @@ def collect(cfg, rescan=False):
         posts = store.setdefault("posts", {})
         for pid, post in list(posts.items()):
             if post.get("caption"):
-                post["items"] = [i for i in rules.extract(post["caption"], kst_datetime(post.get("timestamp")), today) if i["title"]]
+                ext = (lambda c, p_, t_, v=post.get("vendor", ""): rules.fansign_items(c, p_, v)) if pid.startswith("xv:") else rules.extract
+                post["items"] = [i for i in ext(post["caption"], kst_datetime(post.get("timestamp")), today) if i["title"]]
             else:
                 posts.pop(pid)
                 if pid.startswith("x:"):
                     for st in (store.get("x") or {}).values():
                         st.pop("since_id", None)  # X는 최근 20개만 다시 (몇 센트)
+                if pid.startswith("xv:"):
+                    (store.get("x_vendors") or {}).pop("since_id", None)
         store["rules_version"] = rules.RULES_VERSION
         print(f"[공지] 규칙 v{rules.RULES_VERSION}로 다시 처리")
     if instagram.enabled():
@@ -785,6 +791,28 @@ def collect(cfg, rescan=False):
             if posts:
                 st["since_id"] = max(posts, key=lambda p: int(p["tweet_id"]))["tweet_id"]
                 announce.run(posts, store, today, kst_datetime, extract, limit)
+        # 판매처(Mnet Plus·Makestar·Withmuu 등) 팬사인회·영통 공지 — 검색으로 A2O SOUL 관련 글만 (읽은 글 수만큼 과금)
+        vendors = cfg.get("x_vendors") or []
+        if vendors:
+            vst = store.setdefault("x_vendors", {})
+            names = {v["handle"].lower(): v["name"] for v in vendors}
+            query = ("(\"A2O SOUL\" OR A2OSOUL OR 에이투오소울 OR \"에이투오 소울\") "
+                     "(팬사인회 OR 사인회 OR 영상통화 OR 영통 OR fansign OR \"video call\") "
+                     f"({' OR '.join('from:' + v['handle'] for v in vendors)}) -is:retweet -is:reply")
+            try:
+                posts = xposts.search_posts(query, since_id=vst.get("since_id"))
+            except Exception as e:  # noqa: BLE001
+                print(f"[공지] X 판매처 검색 실패: {e}")
+                posts = []
+            print(f"[공지] X 판매처 새 글 {len(posts)}개")
+            if posts:
+                vst["since_id"] = max(posts, key=lambda p: int(p["tweet_id"]))["tweet_id"]
+                for post in posts:
+                    vendor = names.get(post["author"].lower(), post["author"])
+                    announce.run([post], store, today, kst_datetime,
+                                 lambda c, p_, t_, v=vendor: rules.fansign_items(c, p_, v), limit)
+                    if post["id"] in store["posts"]:
+                        store["posts"][post["id"]]["vendor"] = vendor
     elif cfg["x"]:
         print("[공지] X_BEARER_TOKEN 없음 — X 건너뜀")
     save_json("announcements.json", store)
