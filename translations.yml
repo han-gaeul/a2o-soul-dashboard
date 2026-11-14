@@ -1219,10 +1219,6 @@ SHOW K-POP:
   es: K-POP UP CHART SHOW
   id: K-POP UP CHART SHOW
   th: K-POP UP CHART SHOW
-"CARABINER Ver. 포카": { en: "CARABINER Ver. PCs", ja: "CARABINER Ver. トレカ", zh: "CARABINER Ver. 小卡", es: "Photocards CARABINER Ver.", id: "PC CARABINER Ver.", th: "การ์ด CARABINER Ver." }
-"SUPERSTAR 방송 포카": { en: "SUPERSTAR broadcast PCs", ja: "SUPERSTAR 放送トレカ", zh: "SUPERSTAR 打歌小卡", es: "Photocards de shows (SUPERSTAR)", id: "PC siaran SUPERSTAR", th: "การ์ดรายการเพลง SUPERSTAR" }
-"Dancing in the Dark 방송 포카": { en: "Dancing in the Dark broadcast PCs", ja: "Dancing in the Dark 放送トレカ", zh: "Dancing in the Dark 打歌小卡", es: "Photocards de shows (Dancing in the Dark)", id: "PC siaran Dancing in the Dark", th: "การ์ดรายการเพลง Dancing in the Dark" }
-"올리브영 럭키드로우": { en: "Olive Young lucky draw", ja: "OLIVE YOUNG ラッキードロー", zh: "Olive Young 幸运抽奖", es: "Sorteo Olive Young", id: "Lucky draw Olive Young", th: "ลัคกี้ดรอว์ Olive Young" }
 팬싸: { en: Fansign, ja: サイン会, zh: 签售, es: Firma, id: Fansign, th: แฟนไซน์ }
 영통: { en: Video call, ja: ヨントン, zh: 视频签售, es: Videollamada, id: Video call, th: วิดีโอคอล }
 Musicart 팬사인회: { en: Musicart fansign, ja: Musicart サイン会, zh: Musicart 签售会, es: Firma de fans Musicart, id: Fansign Musicart, th: แฟนไซน์ Musicart }
@@ -1234,3 +1230,8 @@ Withmuu 영상통화 팬사인회: { en: Withmuu video call fansign, ja: Withmuu
 Withmuu 팬사인회: { en: Withmuu fansign, ja: Withmuu サイン会, zh: Withmuu 签售会, es: Firma de fans Withmuu, id: Fansign Withmuu, th: แฟนไซน์ Withmuu }
 KBS 가요대축제: { en: KBS Song Festival, ja: KBS歌謡祭, zh: KBS歌谣大祝祭, es: KBS Song Festival, id: KBS Song Festival, th: KBS Song Festival }
 SBS 가요대전: { en: SBS Gayo Daejeon, ja: SBS歌謡大祭典, zh: SBS歌谣大战, es: SBS Gayo Daejeon, id: SBS Gayo Daejeon, th: SBS Gayo Daejeon }
+앨범: { en: Album, ja: アルバム, zh: 专辑, es: Álbum, id: Album, th: อัลบั้ม }
+예판 특전: { en: Pre-order benefits, ja: 予約特典, zh: 预售特典, es: Beneficios de preventa, id: Benefit pre-order, th: ของแถมพรีออเดอร์ }
+팬사인·영통: { en: Fansign · Video call, ja: サイン会・ヨントン, zh: 签售·视频通话, es: Firma de fans · Videollamada, id: Fansign · Video call, th: แฟนไซน์ · วิดีโอคอล }
+방송: { en: Music shows, ja: 音楽番組, zh: 打歌, es: Programas musicales, id: Acara musik, th: รายการเพลง }
+럭키드로우: { en: Lucky draw, ja: ラッキードロー, zh: 幸运抽奖, es: Sorteo, id: Lucky draw, th: ลัคกี้ดรอว์ }
