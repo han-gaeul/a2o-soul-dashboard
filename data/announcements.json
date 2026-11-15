@@ -565,13 +565,31 @@
    ],
    "permalink": "https://x.com/A2O_SOUL/status/2121674241892561049",
    "timestamp": "2026-11-14T18:38:52.000Z"
+  },
+  "x:2121770155013202029": {
+   "caption": "[🔔]\n261116 아리랑TV SHOW K-POP 사전녹화 참여자 안내\n\n🔗 https://artist.mnetplus.world/main/stg/a2osoul/contents/6af88433fcbfd2033a1104ee\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark",
+   "excerpt": "[🔔]\n261116 아리랑TV SHOW K-POP 사전녹화 참여자 안내\n\n🔗 https://artist.mnetplus.world/main/stg/a2osoul/contents/6af88433fcbfd2033a1104ee\n\n#A2O #A2OSOUL\n#",
+   "items": [
+    {
+     "confidence": 0.8,
+     "date": "2026-11-16",
+     "end_date": null,
+     "kind": "music_show",
+     "place": null,
+     "time": null,
+     "title": "SHOW K-POP 출연",
+     "url": null
+    }
+   ],
+   "permalink": "https://x.com/A2O_SOUL/status/2121770155013202029",
+   "timestamp": "2026-11-15T01:00:00.000Z"
   }
  },
  "rules_version": 5,
  "x": {
   "A2O_SOUL": {
    "id": "1986498790229262336",
-   "since_id": "2121674241892561049"
+   "since_id": "2121770155013202029"
   }
  }
 }
