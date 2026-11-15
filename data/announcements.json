@@ -647,13 +647,31 @@
    "items": [],
    "permalink": "https://x.com/A2O_SOUL/status/2121883401649336634",
    "timestamp": "2026-11-15T08:30:00.000Z"
+  },
+  "x:2122073933671535070": {
+   "caption": "[📍]\n261116 (월) A2O SOUL 아리랑TV SHOW K-POP 사전녹화에 참여하시는 분은 인원 체크 시간에 맞춰 사진 속 장소로 모여주시기 바랍니다🪩\n\n인원 체크 시작 시간 - AM 6:30 (KST)\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2O_SOUL/status/2122073933671535070/photo/1",
+   "excerpt": "[📍]\n261116 (월) A2O SOUL 아리랑TV SHOW K-POP 사전녹화에 참여하시는 분은 인원 체크 시간에 맞춰 사진 속 장소로 모여주시기 바랍니다🪩\n\n인원 체크 시작 시간 - AM 6:30 (KST)\n\n#A2O #A2OSOUL\n#Danci",
+   "items": [
+    {
+     "confidence": 0.8,
+     "date": "2026-11-16",
+     "end_date": null,
+     "kind": "music_show",
+     "place": null,
+     "time": null,
+     "title": "SHOW K-POP 출연",
+     "url": null
+    }
+   ],
+   "permalink": "https://x.com/A2O_SOUL/status/2122073933671535070",
+   "timestamp": "2026-11-15T21:07:06.000Z"
   }
  },
  "rules_version": 5,
  "x": {
   "A2O_SOUL": {
    "id": "1986498790229262336",
-   "since_id": "2121883401649336634"
+   "since_id": "2122073933671535070"
   }
  }
 }
