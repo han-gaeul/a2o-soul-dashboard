@@ -448,13 +448,43 @@ if ("serviceWorker" in navigator) {
     $("voteHome").remove();
   }
 
+  // 에투소 1시간 스밍 리스트 — 소울 곡엔 음원 사이트 검색 버튼, 사이사이 다른 가수 곡 자리
+  const sp = data.stream_playlist || {};
+  if ((sp.tracks || []).length) {
+    const q = (song) => encodeURIComponent(`A2O SOUL ${song}`);
+    const ko = LANG === "ko";
+    const kr = [[ko ? "멜론" : "Melon", (x) => `https://www.melon.com/search/total/index.htm?q=${q(x)}`], [ko ? "지니" : "Genie", (x) => `https://www.genie.co.kr/search/searchMain?query=${q(x)}`],
+      [ko ? "벅스" : "Bugs", (x) => `https://music.bugs.co.kr/search/integrated?q=${q(x)}`], ["FLO", (x) => `https://www.music-flo.com/search/all?keyword=${q(x)}`],
+      ["VIBE", (x) => `https://vibe.naver.com/search?query=${q(x)}`]];
+    const global = [["Spotify", (x) => `https://open.spotify.com/search/${q(x)}`], ["YouTube Music", (x) => `https://music.youtube.com/search?q=${q(x)}`]];
+    const sites = LANG === "ko" ? [...kr, ...global] : [...global, ...kr];
+    let n = 0;
+    const rows = sp.tracks.map((x) => {
+      if (x.song) {
+        n += 1;
+        return el("li", { class: "pl-song" }, el("span", { class: "pl-n" }, String(n)),
+          el("div", {}, el("b", {}, x.song),
+            el("div", { class: "links small" }, ...sites.map(([label, url]) => ext(url(x.song), label)))));
+      }
+      const from = n + 1;
+      n += x.other;
+      return el("li", { class: "pl-other muted" }, el("span", { class: "pl-n" }, x.other > 1 ? `${from}–${n}` : String(from)),
+        el("div", {}, t("stream_other", { n: x.other })));
+    });
+    $("streaming").before(el("div", { class: "playlist" },
+      el("h3", {}, tc(sp.title)), sp.desc ? el("p", { class: "muted small" }, tc(sp.desc)) : null,
+      el("ol", { class: "pl" }, ...rows, el("li", { class: "pl-other muted" }, el("span", { class: "pl-n" }, "↻"), el("div", {}, t("stream_repeat")))),
+      (sp.tips || []).length ? el("details", { class: "howto", open: "" }, el("summary", {}, t("stream_tips")),
+        el("ul", { class: "howto-steps" }, ...sp.tips.map((x) => el("li", {}, tc(x))))) : null));
+  }
   if ((data.streaming || []).length) {
+    $("streaming").before(el("h3", { class: "pl-mv" }, t("stream_mv")));
     for (const s of data.streaming) {
       $("streaming").append(el("li", {},
         el("div", {}, el("b", {}, s.title), s.note ? el("span", { class: "muted" }, ` · ${tc(s.note)}`) : null),
         Object.keys(s.links).length ? el("div", { class: "links small" }, ...Object.entries(s.links).map(([k, u]) => ext(u, k))) : null));
     }
-  } else {
+  } else if (!(sp.tracks || []).length) {
     $("streaming").closest("section").remove();
   }
 
@@ -1142,7 +1172,7 @@ if ("serviceWorker" in navigator) {
   const photos = data.photos || [];
   if (photos.length) {
     let who = "", shown = 18;
-    const mems = data.members.map((m) => m.name).filter((n) => photos.some((x) => (x.members || []).includes(n)));
+    const mems = data.members.map((m) => m.name);  // 15명 모두 (사진이 아직 없으면 '없음' 표시)
     const btn = (label, on, fn) => {
       const b = el("button", { type: "button", class: on ? "on" : "", "aria-pressed": String(on) }, label);
       b.addEventListener("click", fn);
@@ -1150,8 +1180,12 @@ if ("serviceWorker" in navigator) {
     };
     const draw = () => {
       $("photoMem").replaceChildren(btn(t("ev_all"), !who, () => { who = ""; shown = 18; draw(); }),
-        ...mems.map((n) => btn(n, n === who, () => { who = n; shown = 18; draw(); })));
+        ...mems.map((n) => {
+          const c = photos.filter((x) => (x.members || []).includes(n)).length;
+          return btn(c ? `${n} ${c}` : n, n === who, () => { who = n; shown = 18; draw(); });
+        }));
       const list = photos.filter((x) => !who || (x.members || []).includes(who));
+      if (!list.length) { $("photoGrid").replaceChildren(empty(t("photos_none"))); $("photoMore").hidden = true; return; }
       $("photoGrid").replaceChildren(...list.slice(0, shown).map((x) => {
         const img = el("img", { src: x.src, alt: x.text || "A2O SOUL", loading: "lazy", decoding: "async", referrerpolicy: "no-referrer" });
         const a = el("a", { href: x.url, target: "_blank", rel: "noopener", title: `${x.at} · ${x.text || ""}` }, img,

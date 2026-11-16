@@ -6278,6 +6278,34 @@
    "views": 134822
   }
  ],
+ "stream_playlist": {
+  "desc": "멜론 순위는 '24시간 동안 들은 사람 수'와 '1시간 이용량'을 반반 합쳐요. 1시간 이용량은 한 계정이 한 곡을 1시간에 1번만 세서, 소울 곡을 순서대로 계속 반복해 두면 매시간 모든 곡이 한 번씩 반영돼요.",
+  "tips": [
+   "이 5곡을 위 순서대로 반복 재생 (셔플 끄기) — 같은 곡만 연달아 틀면 그 시간엔 1번만 세요",
+   "스트리밍 이용권으로 로그인한 상태에서, 음소거·볼륨 0 말고 작게라도 소리 켜기",
+   "곡마다 하트(좋아요) 누르기",
+   "이용권이 있는 음원 사이트가 여러 개면 사이트마다 각각 — 가족·친구 계정도 큰 힘이 돼요 (들은 사람 수가 중요)",
+   "해외 팬은 Spotify·Apple Music·YouTube Music에서 — 국내 차트엔 안 들어가지만 글로벌 차트에 반영돼요"
+  ],
+  "title": "에투소 스밍 리스트",
+  "tracks": [
+   {
+    "song": "Dancing in the Dark"
+   },
+   {
+    "song": "Superstar"
+   },
+   {
+    "song": "While We're Young"
+   },
+   {
+    "song": "Very First Love"
+   },
+   {
+    "song": "Moonlight Shadow"
+   }
+  ]
+ },
  "streaming": [
   {
    "links": {
@@ -6689,6 +6717,24 @@
    "th": "เคยอยู่คณะนักร้องประสานเสียงเยาวชนคยองกี",
    "zh": "京畿少年少女合唱团成员"
   },
+  "곡마다 하트(좋아요) 누르기": {
+   "en": "Tap the heart (like) on every song",
+   "es": "Da corazón (me gusta) a cada canción",
+   "id": "Tekan hati (suka) di setiap lagu",
+   "ja": "曲ごとにハート（いいね）を押す",
+   "pt": "Toque no coração (curtir) em cada música",
+   "th": "กดหัวใจ (ถูกใจ) ทุกเพลง",
+   "zh": "每首歌都点爱心（喜欢）"
+  },
+  "곡마다 하트(좋아요) 누르기, 이용권 있는 음원 사이트가 여러 개면 사이트마다 각각": {
+   "en": "Tap the heart (like) on each song, and if you have passes on several music sites, stream on each",
+   "es": "Da corazón (me gusta) a cada canción y, si tienes suscripción en varios sitios, reproduce en cada uno",
+   "id": "Tekan hati (suka) di setiap lagu, dan kalau punya langganan di beberapa situs musik, putar di masing-masing",
+   "ja": "曲ごとにハート（いいね）を押す、利用券のある音源サイトが複数あればサイトごとに",
+   "pt": "Toque no coração (curtir) em cada música e, se tiver assinatura em vários sites, toque em cada um",
+   "th": "กดหัวใจ (ถูกใจ) ทุกเพลง และถ้ามีแพ็กเกจหลายเว็บก็เปิดแยกทุกเว็บ",
+   "zh": "每首歌都点爱心（喜欢），如果有多个音源网站的会员，每个网站都放"
+  },
   "공식 정보는 여기서": {
    "en": "Where to find official info",
    "es": "Dónde ver la info oficial",
@@ -7049,6 +7095,15 @@
    "th": "เมนโวคอล",
    "zh": "主唱"
   },
+  "멜론 순위는 '24시간 동안 들은 사람 수'와 '1시간 이용량'을 반반 합쳐요. 1시간 이용량은 한 계정이 한 곡을 1시간에 1번만 세서, 소울 곡을 순서대로 계속 반복해 두면 매시간 모든 곡이 한 번씩 반영돼요.": {
+   "en": "Melon's ranking combines '24-hour unique listeners' and '1-hour plays' 50:50. In the 1-hour count each account counts once per song per hour, so looping the SOUL songs in order makes every song count once every hour.",
+   "es": "El ranking de Melon combina 50:50 los 'oyentes únicos en 24 horas' y las 'reproducciones de 1 hora'. En la cuenta de 1 hora cada cuenta suma una vez por canción por hora, así que repetir las canciones de SOUL en orden hace que todas cuenten cada hora.",
+   "id": "Peringkat Melon menggabungkan 'jumlah pendengar 24 jam' dan 'pemutaran 1 jam' 50:50. Di hitungan 1 jam, tiap akun dihitung sekali per lagu per jam, jadi memutar lagu SOUL berurutan terus membuat semua lagu terhitung tiap jam.",
+   "ja": "メロンの順位は「24時間で聴いた人数」と「1時間の利用量」を半分ずつ合算します。1時間の利用量は1アカウント1曲につき1時間1回だけ数えるので、SOULの曲を順番にリピートし続ければ毎時すべての曲が1回ずつ反映されます。",
+   "pt": "O ranking do Melon soma 50:50 os 'ouvintes únicos em 24 horas' e as 'reproduções de 1 hora'. Na contagem de 1 hora, cada conta conta uma vez por música por hora, então repetir as músicas do SOUL em ordem faz todas contarem a cada hora.",
+   "th": "อันดับเมลอนรวม 'จำนวนคนฟังใน 24 ชั่วโมง' กับ 'ยอดเล่น 1 ชั่วโมง' อย่างละครึ่ง ยอด 1 ชั่วโมงนับบัญชีละ 1 ครั้งต่อเพลงต่อชั่วโมง ดังนั้นเปิดเพลงของ SOUL วนตามลำดับไว้ ทุกเพลงจะถูกนับชั่วโมงละครั้ง",
+   "zh": "Melon 排名由“24小时收听人数”和“1小时播放量”各占一半。1小时播放量中每个账号每首歌每小时只算1次，所以按顺序循环播放SOUL的歌，每首歌每小时都会被计算一次。"
+  },
   "멤버 맞히기 퀴즈로 얼굴 익히기": {
    "en": "Learn their faces with the guess-the-member quiz",
    "es": "Aprende sus caras con el quiz de adivinar",
@@ -7256,6 +7311,15 @@
    "th": "พรีเรคคอร์ด — การอัดเวทีรายการเพลงล่วงหน้า มักมีแฟนเข้าชม",
    "zh": "预录 — 打歌节目的提前录制（粉丝可现场观看）"
   },
+  "사이사이 다른 곡은 지금 차트 상위권 곡으로 — 같은 가수만 연속 재생하면 비정상 재생으로 걸러질 수 있어요": {
+   "en": "Fill the gaps with current top-chart songs — playing only one artist back-to-back can be filtered as abnormal streaming",
+   "es": "Rellena los huecos con éxitos actuales — reproducir solo un artista seguido puede filtrarse como streaming anormal",
+   "id": "Isi selanya dengan lagu chart teratas sekarang — memutar satu artis saja berturut-turut bisa tersaring sebagai streaming tidak wajar",
+   "ja": "合間の曲は今のチャート上位曲で — 同じ歌手だけを連続再生すると異常再生として除外されることがあります",
+   "pt": "Preencha os intervalos com sucessos atuais — tocar só um artista em sequência pode ser filtrado como streaming anormal",
+   "th": "เพลงคั่นให้ใช้เพลงที่ติดชาร์ตตอนนี้ ถ้าเปิดแต่ศิลปินเดียวติดกันอาจถูกกรองว่าเป็นการสตรีมผิดปกติ",
+   "zh": "中间穿插当前榜单靠前的歌 — 只连续播放同一歌手可能被判定为异常播放而被过滤"
+  },
   "사진 촬영을 좋아해 레트로 감성용 구형 휴대폰을 따로 씀": {
    "en": "Loves taking photos — keeps an old phone just for retro-style shots",
    "es": "Le encanta la fotografía: usa un móvil viejo para fotos retro",
@@ -7318,6 +7382,15 @@
    "pt": "Single de pré-lançamento · música de debut",
    "th": "ซิงเกิลปล่อยล่วงหน้า · เพลงโปรโมตช่วงเดบิวต์",
    "zh": "先行单曲·出道主打"
+  },
+  "셔플 끄고 순서대로, 볼륨 0·음소거 말고 작게라도 소리 켜기": {
+   "en": "Shuffle off, play in order, and keep the sound on (not muted or at 0), even if quiet",
+   "es": "Sin aleatorio, en orden, y con el sonido encendido (ni silencio ni volumen 0), aunque sea bajo",
+   "id": "Matikan shuffle, putar berurutan, dan nyalakan suara (jangan mute/volume 0) walau kecil",
+   "ja": "シャッフルはオフで順番どおり、音量0・ミュートではなく小さくても音を出す",
+   "pt": "Sem aleatório, em ordem, e com o som ligado (sem mudo ou volume 0), mesmo baixo",
+   "th": "ปิดสุ่ม เล่นตามลำดับ และเปิดเสียงไว้ (ไม่ปิดเสียง/ไม่เป็น 0) ถึงจะเบาก็ได้",
+   "zh": "关闭随机播放按顺序，不要静音或音量0，小声也要开着"
   },
   "소울메이트로 동갑 멤버 소라를 꼽음": {
    "en": "Calls same-age member SORA his soulmate",
@@ -7382,6 +7455,15 @@
    "th": "พ. · MBC M",
    "zh": "周三 · MBC M"
   },
+  "수록곡 5곡을 모두 넣기 — 앨범 전곡 이용자 수가 앨범 순위·음방 음원 점수에 도움": {
+   "en": "Include all 5 album tracks — listeners across the whole album help album rankings and music show digital scores",
+   "es": "Incluye las 5 canciones del álbum — los oyentes de todo el álbum ayudan al ranking y a la puntuación digital en los programas",
+   "id": "Masukkan kelima lagu album — jumlah pendengar seluruh album membantu peringkat album dan skor digital di acara musik",
+   "ja": "収録曲5曲すべてを入れる — アルバム全曲の利用者数がアルバム順位・音楽番組の音源点数に効きます",
+   "pt": "Inclua as 5 faixas do álbum — ouvintes do álbum inteiro ajudam no ranking e na pontuação digital dos programas musicais",
+   "th": "ใส่ครบทั้ง 5 เพลงในอัลบั้ม จำนวนคนฟังทั้งอัลบั้มช่วยอันดับอัลบั้มและคะแนนดิจิทัลในรายการเพลง",
+   "zh": "收录曲5首都放进去 — 全专辑的收听人数有助于专辑排名和打歌节目的音源分"
+  },
   "스밍 — 음원 사이트에서 노래 스트리밍 (차트 순위에 반영)": {
    "en": "Streaming — playing songs on music sites (counts toward charts)",
    "es": "Streaming — escuchar en sitios de música (cuenta para las listas)",
@@ -7399,6 +7481,15 @@
    "pt": "Se apresenta como o 'all-rounder de ouro'",
    "th": "แนะนำตัวว่าเป็น 'ออลราวด์เดอร์สีทอง'",
    "zh": "自称“黄金全能型”"
+  },
+  "스트리밍 이용권으로 로그인한 상태에서, 음소거·볼륨 0 말고 작게라도 소리 켜기": {
+   "en": "Log in with a streaming pass, and keep the sound on (not muted or at 0), even if quiet",
+   "es": "Inicia sesión con tu suscripción y mantén el sonido encendido (ni silencio ni volumen 0), aunque sea bajo",
+   "id": "Login dengan langganan streaming, dan nyalakan suara (jangan mute/volume 0) walau kecil",
+   "ja": "ストリーミング利用券でログインした状態で、ミュート・音量0ではなく小さくても音を出す",
+   "pt": "Entre com uma assinatura de streaming e mantenha o som ligado (sem mudo ou volume 0), mesmo baixo",
+   "th": "ล็อกอินด้วยแพ็กเกจสตรีม และเปิดเสียงไว้ (ไม่ปิดเสียง/ไม่เป็น 0) ถึงจะเบาก็ได้",
+   "zh": "用流媒体会员登录，不要静音或音量0，小声也要开着"
   },
   "시원시원한 큰 춤선": {
    "en": "Big, bold dance lines",
@@ -7471,6 +7562,24 @@
    "pt": "Vote com a moeda do app ganha em missões e anúncios",
    "th": "โหวตด้วยแต้มที่ได้จากภารกิจและโฆษณาในแอป",
    "zh": "用App任务·广告获得的道具投票"
+  },
+  "에투소 1시간 스밍 리스트": {
+   "en": "A2O SOUL 1-hour streaming playlist",
+   "es": "Playlist de streaming de 1 hora de A2O SOUL",
+   "id": "Playlist streaming 1 jam A2O SOUL",
+   "ja": "A2O SOUL 1時間ストリーミングリスト",
+   "pt": "Playlist de streaming de 1 hora do A2O SOUL",
+   "th": "เพลย์ลิสต์สตรีม 1 ชั่วโมงของ A2O SOUL",
+   "zh": "A2O SOUL 1小时打榜歌单"
+  },
+  "에투소 스밍 리스트": {
+   "en": "A2O SOUL streaming playlist",
+   "es": "Playlist de streaming de A2O SOUL",
+   "id": "Playlist streaming A2O SOUL",
+   "ja": "A2O SOUL ストリーミングリスト",
+   "pt": "Playlist de streaming do A2O SOUL",
+   "th": "เพลย์ลิสต์สตรีม A2O SOUL",
+   "zh": "A2O SOUL 打榜歌单"
   },
   "엠넷플러스(Mnet Plus)": {
    "en": "Mnet Plus",
@@ -7715,6 +7824,15 @@
    "th": "เว็บเพลง (Melon, Genie, Bugs, FLO, VIBE)",
    "zh": "音源网站（Melon·Genie·Bugs·FLO·VIBE）"
   },
+  "음원 차트는 '몇 번 들었나'보다 '몇 명이 들었나'를 봐요. 한 곡만 반복하지 말고 이 1시간짜리 리스트를 순서대로 계속 돌려 주세요.": {
+   "en": "Korean music charts care more about how many people listen than how many times. Don't loop one song — keep playing this 1-hour list in order.",
+   "es": "Las listas coreanas cuentan más cuántas personas escuchan que cuántas veces. No repitas una sola canción: reproduce esta lista de 1 hora en orden.",
+   "id": "Chart musik Korea lebih melihat berapa orang yang mendengar daripada berapa kali. Jangan ulang satu lagu — putar playlist 1 jam ini berurutan terus.",
+   "ja": "韓国の音源チャートは「何回聴いたか」より「何人が聴いたか」を重視します。1曲リピートではなく、この1時間リストを順番に回し続けてください。",
+   "pt": "As paradas coreanas contam mais quantas pessoas ouvem do que quantas vezes. Não repita uma música só — toque esta lista de 1 hora em ordem, sem parar.",
+   "th": "ชาร์ตเพลงเกาหลีดูว่ามีกี่คนฟังมากกว่าฟังกี่รอบ อย่าวนเพลงเดียว ให้เปิดเพลย์ลิสต์ 1 ชั่วโมงนี้ตามลำดับไปเรื่อยๆ",
+   "zh": "韩国音源榜更看重“多少人听”而不是“听了几遍”。不要单曲循环，请按顺序一直播放这份1小时歌单。"
+  },
   "응원 탭 '투표'(또는 한눈에 탭 맨 위)에서 어떤 앱인지·마감 시간을 확인 — 사이트의 시간은 모두 한국 시간(KST)": {
    "en": "Check which app and the deadline under Votes in Support (or at the top of Home) — all times on this site are Korea time (KST)",
    "es": "Revisa la app y la fecha límite en Votaciones (Apoyo) o arriba en Inicio — todas las horas son de Corea (KST)",
@@ -7732,6 +7850,24 @@
    "pt": "Assine o calendário na aba Apoio → programas e prazos de votação no seu celular",
    "th": "ติดตามปฏิทินในแท็บซัพพอร์ต → รายการเพลงและวันปิดโหวตเข้ามือถือ",
    "zh": "在应援页订阅日历 → 打歌和投票截止同步到手机"
+  },
+  "이 5곡을 위 순서대로 반복 재생 (셔플 끄기) — 같은 곡만 연달아 틀면 그 시간엔 1번만 세요": {
+   "en": "Loop these 5 songs in the order above (shuffle off) — playing one song back-to-back still counts only once that hour",
+   "es": "Repite estas 5 canciones en el orden de arriba (sin aleatorio) — repetir una sola seguida cuenta solo una vez esa hora",
+   "id": "Ulangi 5 lagu ini sesuai urutan di atas (shuffle mati) — memutar satu lagu berulang tetap dihitung sekali di jam itu",
+   "ja": "この5曲を上の順番でリピート（シャッフルはオフ）— 同じ曲だけ連続で流してもその1時間は1回しか数えません",
+   "pt": "Repita estas 5 músicas na ordem acima (sem aleatório) — tocar uma só seguidas conta só uma vez naquela hora",
+   "th": "เปิด 5 เพลงนี้วนตามลำดับด้านบน (ปิดสุ่ม) — เปิดเพลงเดียวซ้ำติดกันก็นับแค่ครั้งเดียวในชั่วโมงนั้น",
+   "zh": "按上面的顺序循环这5首（关闭随机）— 同一首连放在那一小时也只算1次"
+  },
+  "이용권이 있는 음원 사이트가 여러 개면 사이트마다 각각 — 가족·친구 계정도 큰 힘이 돼요 (들은 사람 수가 중요)": {
+   "en": "If you have passes on several music sites, stream on each — family and friends' accounts help a lot too (the number of listeners matters)",
+   "es": "Si tienes suscripción en varios sitios, reproduce en cada uno — las cuentas de familia y amigos también ayudan mucho (importa el número de oyentes)",
+   "id": "Kalau punya langganan di beberapa situs, putar di masing-masing — akun keluarga dan teman juga sangat membantu (jumlah pendengar itu penting)",
+   "ja": "利用券のある音源サイトが複数あればサイトごとに — 家族・友達のアカウントも大きな力に（聴いた人数が大事）",
+   "pt": "Se tiver assinatura em vários sites, toque em cada um — contas de família e amigos também ajudam muito (o número de ouvintes importa)",
+   "th": "ถ้ามีแพ็กเกจหลายเว็บก็เปิดแยกทุกเว็บ บัญชีครอบครัวและเพื่อนก็ช่วยได้มาก (จำนวนคนฟังสำคัญ)",
+   "zh": "如果有多个音源网站的会员，每个网站都放 — 家人朋友的账号也很有帮助（收听人数很重要）"
   },
   "인기가요": {
    "en": "Inkigayo",
@@ -7867,6 +8003,15 @@
    "pt": "Música de promoção atual (faixa-título dupla do mini-álbum de debut)",
    "th": "เพลงโปรโมตตอนนี้ (ดับเบิลไตเติลของมินิอัลบั้มเดบิวต์)",
    "zh": "当前主打（出道迷你专辑双主打）"
+  },
+  "지금 활동곡 Dancing in the Dark를 맨 앞에 — 리스트가 돌 때마다 한 번씩 확실히 들어가게": {
+   "en": "Put the current promo track Dancing in the Dark first — so it plays every time the list loops",
+   "es": "Pon primero la canción de promoción actual, Dancing in the Dark — así suena en cada vuelta",
+   "id": "Taruh lagu promosi sekarang, Dancing in the Dark, paling awal — supaya pasti terputar tiap putaran",
+   "ja": "今の活動曲 Dancing in the Dark を一番最初に — リストが一周するたびに必ず1回入るように",
+   "pt": "Coloque a música de promoção atual, Dancing in the Dark, em primeiro — assim ela toca a cada volta",
+   "th": "ใส่เพลงโปรโมต Dancing in the Dark ไว้เป็นเพลงแรก จะได้ถูกเล่นทุกรอบ",
+   "zh": "把当前主打 Dancing in the Dark 放在第一首 — 每循环一次都一定会播到"
   },
   "지아이": {
    "en": "Jiayi",
@@ -8200,6 +8345,24 @@
    "pt": "Como votar (fãs internacionais)",
    "th": "วิธีโหวตสำหรับแฟนต่างประเทศ",
    "zh": "海外粉丝投票指南"
+  },
+  "해외 팬은 Spotify·Apple Music·YouTube Music에서 — 국내 차트엔 안 들어가지만 글로벌 차트·바이럴 차트에 반영돼요": {
+   "en": "Global fans: use Spotify, Apple Music or YouTube Music — they don't count toward Korean charts but do count for global and viral charts",
+   "es": "Fans internacionales: usen Spotify, Apple Music o YouTube Music — no cuentan para las listas coreanas pero sí para las globales y virales",
+   "id": "Fans luar negeri: pakai Spotify, Apple Music, atau YouTube Music — tidak masuk chart Korea, tapi masuk chart global dan viral",
+   "ja": "海外ファンは Spotify・Apple Music・YouTube Music で — 韓国チャートには入りませんが、グローバル・バイラルチャートに反映されます",
+   "pt": "Fãs internacionais: usem Spotify, Apple Music ou YouTube Music — não contam para as paradas coreanas, mas contam para as globais e virais",
+   "th": "แฟนต่างประเทศใช้ Spotify, Apple Music หรือ YouTube Music ไม่นับในชาร์ตเกาหลี แต่นับในชาร์ตโกลบอลและไวรัล",
+   "zh": "海外粉丝用 Spotify·Apple Music·YouTube Music — 不计入韩国榜单，但会计入全球榜和病毒榜"
+  },
+  "해외 팬은 Spotify·Apple Music·YouTube Music에서 — 국내 차트엔 안 들어가지만 글로벌 차트에 반영돼요": {
+   "en": "Global fans: use Spotify, Apple Music or YouTube Music — they don't count toward Korean charts but do count for global charts",
+   "es": "Fans internacionales: usen Spotify, Apple Music o YouTube Music — no cuentan para las listas coreanas pero sí para las globales",
+   "id": "Fans luar negeri: pakai Spotify, Apple Music, atau YouTube Music — tidak masuk chart Korea, tapi masuk chart global",
+   "ja": "海外ファンは Spotify・Apple Music・YouTube Music で — 韓国チャートには入りませんがグローバルチャートに反映されます",
+   "pt": "Fãs internacionais: usem Spotify, Apple Music ou YouTube Music — não contam para as paradas coreanas, mas contam para as globais",
+   "th": "แฟนต่างประเทศใช้ Spotify, Apple Music หรือ YouTube Music ไม่นับในชาร์ตเกาหลี แต่นับในชาร์ตโกลบอล",
+   "zh": "海外粉丝用 Spotify·Apple Music·YouTube Music — 不计入韩国榜单，但会计入全球榜"
   },
   "행사": {
    "en": "Event",
