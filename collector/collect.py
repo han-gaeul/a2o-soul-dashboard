@@ -280,14 +280,15 @@ def ig_images(m):
         return [m["media_url"]]
     if m.get("media_type") == "CAROUSEL_ALBUM":
         kids = (m.get("children") or {}).get("data", [])
-        return [k["media_url"] for k in kids if k.get("media_type") == "IMAGE" and k.get("media_url")][:4]
+        return [k["media_url"] for k in kids if k.get("media_type") == "IMAGE" and k.get("media_url")][:10]
     return []
 
 
-def photo_feed(cfg, registry, store, limit=60):
+def photo_feed(cfg, registry, store, limit=400):
     """공식 인스타·X 사진 게시물 → [{src, url, at, account, members, text}] 최신순."""
     out = []
-    for u, posts in (registry.get("ig_posts") or {}).items():
+    src_posts = {**(registry.get("ig_posts") or {}), **(registry.get("ig_photos") or {})}
+    for u, posts in src_posts.items():
         if u not in cfg["instagram"]:
             continue
         for m in posts:
@@ -823,6 +824,15 @@ def collect(cfg, rescan=False):
                  "images": ig_images(m)}
                 for m in media]
             announce.run(media, store, today, kst_datetime, extract, limit)
+            # 사진 모음: 예전 게시물까지 (이미지 주소는 며칠 뒤 만료돼서 매번 새로 받음)
+            try:
+                allm = instagram.fetch_media_pages(username)
+                registry.setdefault("ig_photos", {})[username] = [
+                    {"id": m["id"], "caption": (m.get("caption") or "")[:400], "timestamp": m.get("timestamp"),
+                     "permalink": m.get("permalink"), "images": ig_images(m)} for m in allm if ig_images(m)]
+                print(f"[IG] 사진 게시물 {len(registry['ig_photos'][username])}개 (전체 {len(allm)}개 중)")
+            except Exception as e:  # noqa: BLE001
+                print(f"[IG] {username} 사진 모음 조회 실패: {e}")
     if xposts.enabled():
         xstate = store.setdefault("x", {})
         for username in cfg["x"]:

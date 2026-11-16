@@ -469,7 +469,7 @@ if ("serviceWorker" in navigator) {
     });
     $("streaming").before(el("div", { class: "playlist" },
       el("h3", {}, tc(sp.title)), sp.desc ? el("p", { class: "muted small" }, tc(sp.desc)) : null,
-      el("ol", { class: "pl" }, ...rows),
+      el("ol", { class: "pl" }, ...rows, el("li", { class: "pl-other muted" }, el("span", { class: "pl-n" }, "↻"), el("div", {}, t("stream_repeat")))),
       (sp.tips || []).length ? el("details", { class: "howto", open: "" }, el("summary", {}, t("stream_tips")),
         el("ul", { class: "howto-steps" }, ...sp.tips.map((x) => el("li", {}, tc(x))))) : null));
   }
