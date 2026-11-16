@@ -3,19 +3,5 @@
 날짜가 비었거나 틀렸으면 체크하지 말고 `schedule.yml`에 직접 적어 주세요.
 
 - [ ] **투표** 더쇼 사전투표 · 날짜 없음 · 확신 60% · [원문](https://x.com/BIGCChoice/status/2122148017201684854) <!-- key:xo:2122148017201684854||더쇼 사전투표 -->
-- [ ] **투표** [팬 계정] ONE FINAL STRETCH TO VOTE A2O SOUL! 🗳️ · 날짜 없음 · 확신 60% · [원문](https://x.com/A2OSOULBASE/status/2122121681691160763) <!-- key:xf:2122121681691160763||[팬 계정] ONE FINAL STRETCH TO VOTE A2O SOUL! 🗳️ -->
-- [ ] **투표** [팬 계정] KEEP VOTING FOR A2O SOUL EVERYONE! ✨ · 날짜 없음 · 확신 60% · [원문](https://x.com/A2OSOULBASE/status/2121985035331150270) <!-- key:xf:2121985035331150270||[팬 계정] KEEP VOTING FOR A2O SOUL EVERYONE! ✨ -->
 - [ ] **투표** ❤️‍🔥11월 셋째 주 핫스테이지의 주인공은?❤️‍🔥 · 날짜 없음 · 확신 60% · [원문](https://x.com/HIGHER_twt/status/2121872987632861530) <!-- key:xo:2121872987632861530||❤️‍🔥11월 셋째 주 핫스테이지의 주인공은?❤️‍🔥 -->
-- [ ] **투표** [팬 계정] Look at how genuinely happy A2O SOUL is! 🥹💙 · 날짜 없음 · 확신 60% · [원문](https://x.com/A2OSOULBASE/status/2121776581488291923) <!-- key:xf:2121776581488291923||[팬 계정] Look at how genuinely happy A2O SOUL is! 🥹💙 -->
-- [ ] **투표** [팬 계정] UNITED AS ONE FOR A2O SOUL ♡ · 날짜 없음 · 확신 60% · [원문](https://x.com/A2OSOULBASE/status/2121767291935494244) <!-- key:xf:2121767291935494244||[팬 계정] UNITED AS ONE FOR A2O SOUL ♡ -->
-- [ ] **투표** [팬 계정] 🚨 A2O SOUL 인터내셔널 팬베이스 연합 첫 1위 달성 캠페인! 🚨 · 날짜 없음 · 확신 60% · [원문](https://x.com/A2OSOULBASE/status/2121767249447117275) <!-- key:xf:2121767249447117275||[팬 계정] 🚨 A2O SOUL 인터내셔널 팬베이스 연합 첫 1위 달성 캠페인! 🚨 -->
-- [ ] **투표** [팬 계정] 🚨 A2O SOUL INTERNATIONAL FANBASES JOINT FIRST WIN CAMPAIGN!  · 날짜 없음 · 확신 60% · [원문](https://x.com/A2OSOULBASE/status/2121767221274063301) <!-- key:xf:2121767221274063301||[팬 계정] 🚨 A2O SOUL INTERNATIONAL FANBASES JOINT FIRST WIN CAMPAIGN!  -->
-- [ ] **투표** [팬 계정] "A2O SOUL - Dancing in the Dark" dropped to 2ND PLACE. · 날짜 없음 · 확신 60% · [원문](https://x.com/A2OSOULBASE/status/2121645898723909833) <!-- key:xf:2121645898723909833||[팬 계정] "A2O SOUL - Dancing in the Dark" dropped to 2ND PLACE. -->
-- [ ] **투표** [팬 계정] 더쇼 투표 · 날짜 없음 · 확신 60% · [원문](https://x.com/A2OSOULBASE/status/2121589552976675172) <!-- key:xf:2121589552976675172||[팬 계정] 더쇼 투표 -->
 - [ ] **투표** 음악중심 투표 · 날짜 없음 · 확신 60% · [원문](https://x.com/muniverse_io/status/2121513471250432220) <!-- key:xo:2121513471250432220||음악중심 투표 -->
-- [ ] **투표** 💘 11월 2주차 · 날짜 없음 · 확신 60% · [원문](https://x.com/HIGHER_twt/status/2121173731217375318) <!-- key:xo:2121173731217375318||💘 11월 2주차 -->
-- [ ] **투표** 케이팝업 차트쇼 투표 · 날짜 없음 · 확신 60% · [원문](https://x.com/twt_my1pick/status/2121153814694879438) <!-- key:xo:2121153814694879438||케이팝업 차트쇼 투표 -->
-- [ ] **투표** 인기가요 생방송 투표 · 날짜 없음 · 확신 60% · [원문](https://x.com/HIGHER_twt/status/2121105778417566157) <!-- key:xo:2121105778417566157||인기가요 생방송 투표 -->
-- [ ] **투표** 【THEME PRE-VOTE Result】 · 날짜 없음 · 확신 60% · [원문](https://x.com/UPICK_twt/status/2121081322634653804) <!-- key:xo:2121081322634653804||【THEME PRE-VOTE Result】 -->
-- [ ] **투표** 【THEME VOTE】 · 날짜 없음 · 확신 60% · [원문](https://x.com/UPICK_twt/status/2120433953433874516) <!-- key:xo:2120433953433874516||【THEME VOTE】 -->
-- [ ] **투표** 🎧K-POP K탑 CHART · 날짜 없음 · 확신 60% · [원문](https://x.com/KTOPSTAR_offcl/status/2120426552508981535) <!-- key:xo:2120426552508981535||🎧K-POP K탑 CHART -->
