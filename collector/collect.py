@@ -424,7 +424,7 @@ def classify(cfg, title, duration_s):
 # ---------- 응원법·음방 회차·기록 ----------
 
 FANCHANT = re.compile(r"fan\s?chant|응원법", re.I)
-SHOW_WEEKDAY = {"더쇼": 1, "쇼챔피언": 2, "엠카운트다운": 3, "뮤직뱅크": 4, "음악중심": 5, "인기가요": 6}
+SHOW_WEEKDAY = {"SHOW K-POP": 0, "더쇼": 1, "쇼챔피언": 2, "엠카운트다운": 3, "뮤직뱅크": 4, "음악중심": 5, "인기가요": 6}
 
 
 def song_of(title):
