@@ -1355,6 +1355,17 @@
   "checked": "2026-11-12",
   "streaming": [
    {
+    "global": true,
+    "steps": [
+     "응원 탭 '투표'(또는 한눈에 탭 맨 위)에서 어떤 앱인지·마감 시간을 확인 — 사이트의 시간은 모두 한국 시간(KST)",
+     "위 표에서 앱 이름을 눌러 설치 → 구글·애플·이메일 계정으로 가입 (한국 전화번호 없이 가입되는 앱이 많아요)",
+     "출석·광고·미션으로 투표권을 미리 모아 두고, 투표 기간에 A2O SOUL에 투표",
+     "생방송 투표는 방송 시간(KST)에만 열려요 — 방송 일정은 한눈에 탭 달력에서",
+     "새 투표·사녹 공지는 사이트에 자동으로 올라와요. 홈 화면에 추가해 두고 자주 확인해 주세요"
+    ],
+    "title": "해외 팬 투표 시작하기"
+   },
+   {
     "steps": [
      "해당 사이트 스트리밍 이용권으로 로그인한 상태에서 재생",
      "음소거·볼륨 0 말고 작게라도 소리 켜기",
@@ -1771,6 +1782,16 @@
     "versions": []
    }
   ],
+  "fanchant_guides": [
+   {
+    "song": "Dancing in the Dark",
+    "src": "img/fanchants/dancing-in-the-dark.webp"
+   },
+   {
+    "song": "SUPERSTAR",
+    "src": "img/fanchants/superstar.webp"
+   }
+  ],
   "lore": [
    "15명의 소년은 모든 것이 갖춰진 행성 SOULITE(소울라이트)에서 왔어요.",
    "그런데도 무언가 비어 있다고 느낀 이들은, 사람을 살아 있게 하는 감정과 에너지 — 기쁨·사랑·설렘·열정, 곧 '소울(SOUL)'을 찾아 지구로 떠나요.",
@@ -1844,6 +1865,7 @@
  ],
  "members": [
   {
+   "aliases": [],
    "birth_year": 2007,
    "birthday": "04-07",
    "career": [
@@ -1971,7 +1993,7 @@
     "소울메이트로 동갑 멤버 소라를 꼽음"
    ],
    "photo": "img/members/댄인닼_문.webp",
-   "position": "보컬, 비주얼 센터",
+   "position": "리더, 보컬, 비주얼 센터",
    "predebut": [],
    "profile_history": [
     {
@@ -1986,6 +2008,7 @@
    "signature": "img/members/서명_문.svg"
   },
   {
+   "aliases": [],
    "birth_year": 2007,
    "birthday": "07-30",
    "career": [
@@ -2072,6 +2095,7 @@
    "signature": "img/members/서명_소라.svg"
   },
   {
+   "aliases": [],
    "birth_year": 2008,
    "birthday": "01-01",
    "career": [
@@ -2170,299 +2194,7 @@
    "signature": "img/members/서명_서하.svg"
   },
   {
-   "birth_year": 2009,
-   "birthday": "09-04",
-   "career": [
-    "URIZIP KPOP ACADEMY 출신",
-    "A2O Rookies LTB(2024.10~) → HTB(2025.2~)",
-    "HTB 'REVOLUTION', 'CHAMPAGNE' 참여"
-   ],
-   "fancam_count": 5,
-   "fancam_delta": 7022,
-   "fancam_views": 148243,
-   "fancams": [
-    {
-     "category": "fancam",
-     "channel": "KBS Kpop",
-     "delta": 6026,
-     "era": "Dancing in the Dark",
-     "id": "A5MPS2AplvQ",
-     "member": "GAKU",
-     "predebut": false,
-     "published_at": "2026-11-14T01:20:27Z",
-     "series": "",
-     "short": false,
-     "show": "뮤직뱅크",
-     "title": "[얼빡직캠 4K] A2O SOUL 가쿠 'Dancing in the Dark' (A2O SOUL GAKU Facecam) @뮤직뱅크(Music Bank) 261113",
-     "views": 36622
-    },
-    {
-     "category": "fancam",
-     "channel": "ALL THE K-POP",
-     "delta": 150,
-     "era": "SUPERSTAR",
-     "id": "BlkB-JbTuyc",
-     "member": "GAKU",
-     "predebut": false,
-     "published_at": "2026-10-31T09:00:11Z",
-     "series": "",
-     "short": false,
-     "show": "쇼챔피언",
-     "title": "[쇼챔1분직캠] A2O SOUL GAKU의 ＜SUPERSTAR＞♬ #A2OSOUL #GAKU #SUPERSTAR",
-     "views": 11239
-    },
-    {
-     "category": "fancam",
-     "channel": "KBS Kpop",
-     "delta": 167,
-     "era": "SUPERSTAR",
-     "id": "UHFMgZtwmOc",
-     "member": "GAKU",
-     "predebut": false,
-     "published_at": "2026-10-24T01:11:34Z",
-     "series": "",
-     "short": false,
-     "show": "뮤직뱅크",
-     "title": "[K-Fancam] A2O SOUL 가쿠 직캠 'SUPERSTAR' (A2O SOUL GAKU Fancam) @뮤직뱅크(Music Bank) 261023",
-     "views": 23579
-    },
-    {
-     "category": "fancam",
-     "channel": "M2",
-     "delta": 598,
-     "era": "SUPERSTAR",
-     "id": "N50_f6b_ExE",
-     "member": "GAKU",
-     "predebut": false,
-     "published_at": "2026-10-22T09:32:39Z",
-     "series": "",
-     "short": false,
-     "show": "M2",
-     "title": "[MPD직캠] A2O SOUL 가쿠 직캠 4K 'SUPERSTAR' (A2O SOUL GAKU FanCam) | @MCOUNTDOWN_2026.10.22",
-     "views": 56787
-    },
-    {
-     "category": "fancam",
-     "channel": "ALL THE K-POP",
-     "delta": 81,
-     "era": "SUPERSTAR",
-     "id": "lt2XfAcqwX0",
-     "member": "GAKU",
-     "predebut": false,
-     "published_at": "2026-10-22T07:58:12Z",
-     "series": "",
-     "short": false,
-     "show": "쇼챔피언",
-     "title": "[쇼챔직캠 4K] A2O SOUL GAKU - SUPERSTAR | Show Champion | EP.615 | 261021",
-     "views": 20016
-    }
-   ],
-   "ig_mentions": [],
-   "instagram_posts": [],
-   "ko": "가쿠",
-   "name": "GAKU",
-   "nationality": "일본",
-   "nicknames": [],
-   "notes": [
-    "해산물을 좋아함"
-   ],
-   "photo": "img/members/댄인닼_가쿠.webp",
-   "position": "",
-   "predebut": [
-    {
-     "category": "content",
-     "channel": "A2O WORLD",
-     "delta": 481,
-     "era": "",
-     "id": "2kervlM-g-I",
-     "member": "",
-     "predebut": true,
-     "published_at": "2025-04-08T17:15:07Z",
-     "series": "Zal-Life",
-     "short": false,
-     "show": "",
-     "title": "A2O HTB, A2O LTB 'CHAMPAGNE' Zal-Life Behind The Scenes",
-     "views": 32751
-    },
-    {
-     "category": "content",
-     "channel": "A2O WORLD",
-     "delta": 1962,
-     "era": "",
-     "id": "LnCsqVsf4XI",
-     "member": "",
-     "predebut": true,
-     "published_at": "2025-04-04T10:00:32Z",
-     "series": "Zal-Dance",
-     "short": false,
-     "show": "",
-     "title": "A2O HTB, A2O LTB 'CHAMPAGNE' Zal-Dance Official Video",
-     "views": 198398
-    },
-    {
-     "category": "content",
-     "channel": "A2O WORLD",
-     "delta": 64,
-     "era": "",
-     "id": "JxSbLS12gLo",
-     "member": "",
-     "predebut": true,
-     "published_at": "2025-03-12T06:00:12Z",
-     "series": "Zal-Life",
-     "short": false,
-     "show": "",
-     "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Life Behind The Scenes",
-     "views": 11530
-    },
-    {
-     "category": "content",
-     "channel": "A2O WORLD",
-     "delta": 94,
-     "era": "",
-     "id": "X50b7DmPIuA",
-     "member": "",
-     "predebut": true,
-     "published_at": "2025-03-07T10:37:17Z",
-     "series": "Zal-Dance",
-     "short": true,
-     "show": "",
-     "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Dance Official Video",
-     "views": 25543
-    },
-    {
-     "category": "content",
-     "channel": "A2O WORLD",
-     "delta": 430,
-     "era": "",
-     "id": "G_NJdu0dYrk",
-     "member": "",
-     "predebut": true,
-     "published_at": "2025-02-16T07:04:26Z",
-     "series": "Zal-Life",
-     "short": false,
-     "show": "",
-     "title": "A2O HTB, A2O LTB ’REVOLUTION’ Zal-Life Behind The Scenes",
-     "views": 24761
-    },
-    {
-     "category": "content",
-     "channel": "A2O WORLD",
-     "delta": 191,
-     "era": "",
-     "id": "0mE2leFm_D0",
-     "member": "",
-     "predebut": true,
-     "published_at": "2025-02-14T10:44:50Z",
-     "series": "Zal-Dance",
-     "short": true,
-     "show": "",
-     "title": "A2O HTB, A2O LTB ‘REVOLUTION’ Zal-Dance Official Video",
-     "views": 30949
-    },
-    {
-     "category": "content",
-     "channel": "A2O WORLD",
-     "delta": 325,
-     "era": "",
-     "id": "hXOmejPxZRE",
-     "member": "",
-     "predebut": true,
-     "published_at": "2025-02-10T04:24:16Z",
-     "series": "Zal-Life",
-     "short": false,
-     "show": "",
-     "title": "A2O LTB, LTG ‘BAD & BOSSY’ Zal-Life Behind The Scenes",
-     "views": 30875
-    },
-    {
-     "category": "content",
-     "channel": "A2O WORLD",
-     "delta": 180,
-     "era": "",
-     "id": "701rNAy-PgE",
-     "member": "",
-     "predebut": true,
-     "published_at": "2025-02-07T10:40:40Z",
-     "series": "Zal-Dance",
-     "short": true,
-     "show": "",
-     "title": "A2O LTB, A2O LTG ‘BAD & BOSSY’ Zal-Dance Official Video",
-     "views": 36511
-    },
-    {
-     "category": "content",
-     "channel": "A2O WORLD",
-     "delta": 165,
-     "era": "",
-     "id": "p7W25dzLL5E",
-     "member": "",
-     "predebut": true,
-     "published_at": "2024-12-29T08:27:26Z",
-     "series": "Zal-Life",
-     "short": false,
-     "show": "",
-     "title": "A2O Rookies LTB ‘BLACK MADONNA’ Zal-Life Behind The Scenes",
-     "views": 31674
-    },
-    {
-     "category": "content",
-     "channel": "A2O WORLD",
-     "delta": 1143,
-     "era": "",
-     "id": "jYLVV3_RwQE",
-     "member": "",
-     "predebut": true,
-     "published_at": "2024-12-18T08:11:08Z",
-     "series": "Zal-Dance",
-     "short": false,
-     "show": "",
-     "title": "A2O Rookies LTB ‘BLACK MADONNA’ Zal-Dance Official Video",
-     "views": 207353
-    },
-    {
-     "category": "content",
-     "channel": "A2O WORLD",
-     "delta": 144,
-     "era": "",
-     "id": "fSeummulVNI",
-     "member": "",
-     "predebut": true,
-     "published_at": "2024-12-10T20:23:09Z",
-     "series": "Zal-Life",
-     "short": false,
-     "show": "",
-     "title": "A2O Rookies LTB 'CANDY' Zal-Life Behind The Scenes",
-     "views": 169771
-    },
-    {
-     "category": "content",
-     "channel": "A2O WORLD",
-     "delta": 4621,
-     "era": "",
-     "id": "E10wtRjr3TI",
-     "member": "",
-     "predebut": true,
-     "published_at": "2024-11-22T11:08:27Z",
-     "series": "",
-     "short": false,
-     "show": "",
-     "title": "A2O Rookies LTB ’CANDY‘ Zalpha Pop Official Video",
-     "views": 5539528
-    }
-   ],
-   "profile_history": [
-    {
-     "label": "Dancing in the Dark",
-     "photo": "img/members/댄인닼_가쿠.webp"
-    },
-    {
-     "label": "SUPERSTAR",
-     "photo": "img/members/슈퍼스타_가쿠.webp"
-    }
-   ],
-   "signature": "img/members/서명_가쿠.svg"
-  },
-  {
+   "aliases": [],
    "birth_year": 2009,
    "birthday": "07-30",
    "career": [
@@ -2715,6 +2447,303 @@
    "signature": "img/members/서명_테오.svg"
   },
   {
+   "aliases": [],
+   "birth_year": 2009,
+   "birthday": "09-04",
+   "career": [
+    "URIZIP KPOP ACADEMY 출신",
+    "A2O Rookies LTB(2024.10~) → HTB(2025.2~)",
+    "HTB 'REVOLUTION', 'CHAMPAGNE' 참여"
+   ],
+   "fancam_count": 5,
+   "fancam_delta": 7022,
+   "fancam_views": 148243,
+   "fancams": [
+    {
+     "category": "fancam",
+     "channel": "KBS Kpop",
+     "delta": 6026,
+     "era": "Dancing in the Dark",
+     "id": "A5MPS2AplvQ",
+     "member": "GAKU",
+     "predebut": false,
+     "published_at": "2026-11-14T01:20:27Z",
+     "series": "",
+     "short": false,
+     "show": "뮤직뱅크",
+     "title": "[얼빡직캠 4K] A2O SOUL 가쿠 'Dancing in the Dark' (A2O SOUL GAKU Facecam) @뮤직뱅크(Music Bank) 261113",
+     "views": 36622
+    },
+    {
+     "category": "fancam",
+     "channel": "ALL THE K-POP",
+     "delta": 150,
+     "era": "SUPERSTAR",
+     "id": "BlkB-JbTuyc",
+     "member": "GAKU",
+     "predebut": false,
+     "published_at": "2026-10-31T09:00:11Z",
+     "series": "",
+     "short": false,
+     "show": "쇼챔피언",
+     "title": "[쇼챔1분직캠] A2O SOUL GAKU의 ＜SUPERSTAR＞♬ #A2OSOUL #GAKU #SUPERSTAR",
+     "views": 11239
+    },
+    {
+     "category": "fancam",
+     "channel": "KBS Kpop",
+     "delta": 167,
+     "era": "SUPERSTAR",
+     "id": "UHFMgZtwmOc",
+     "member": "GAKU",
+     "predebut": false,
+     "published_at": "2026-10-24T01:11:34Z",
+     "series": "",
+     "short": false,
+     "show": "뮤직뱅크",
+     "title": "[K-Fancam] A2O SOUL 가쿠 직캠 'SUPERSTAR' (A2O SOUL GAKU Fancam) @뮤직뱅크(Music Bank) 261023",
+     "views": 23579
+    },
+    {
+     "category": "fancam",
+     "channel": "M2",
+     "delta": 598,
+     "era": "SUPERSTAR",
+     "id": "N50_f6b_ExE",
+     "member": "GAKU",
+     "predebut": false,
+     "published_at": "2026-10-22T09:32:39Z",
+     "series": "",
+     "short": false,
+     "show": "M2",
+     "title": "[MPD직캠] A2O SOUL 가쿠 직캠 4K 'SUPERSTAR' (A2O SOUL GAKU FanCam) | @MCOUNTDOWN_2026.10.22",
+     "views": 56787
+    },
+    {
+     "category": "fancam",
+     "channel": "ALL THE K-POP",
+     "delta": 81,
+     "era": "SUPERSTAR",
+     "id": "lt2XfAcqwX0",
+     "member": "GAKU",
+     "predebut": false,
+     "published_at": "2026-10-22T07:58:12Z",
+     "series": "",
+     "short": false,
+     "show": "쇼챔피언",
+     "title": "[쇼챔직캠 4K] A2O SOUL GAKU - SUPERSTAR | Show Champion | EP.615 | 261021",
+     "views": 20016
+    }
+   ],
+   "ig_mentions": [],
+   "instagram_posts": [],
+   "ko": "가쿠",
+   "name": "GAKU",
+   "nationality": "일본",
+   "nicknames": [],
+   "notes": [
+    "해산물을 좋아함"
+   ],
+   "photo": "img/members/댄인닼_가쿠.webp",
+   "position": "비주얼",
+   "predebut": [
+    {
+     "category": "content",
+     "channel": "A2O WORLD",
+     "delta": 481,
+     "era": "",
+     "id": "2kervlM-g-I",
+     "member": "",
+     "predebut": true,
+     "published_at": "2025-04-08T17:15:07Z",
+     "series": "Zal-Life",
+     "short": false,
+     "show": "",
+     "title": "A2O HTB, A2O LTB 'CHAMPAGNE' Zal-Life Behind The Scenes",
+     "views": 32751
+    },
+    {
+     "category": "content",
+     "channel": "A2O WORLD",
+     "delta": 1962,
+     "era": "",
+     "id": "LnCsqVsf4XI",
+     "member": "",
+     "predebut": true,
+     "published_at": "2025-04-04T10:00:32Z",
+     "series": "Zal-Dance",
+     "short": false,
+     "show": "",
+     "title": "A2O HTB, A2O LTB 'CHAMPAGNE' Zal-Dance Official Video",
+     "views": 198398
+    },
+    {
+     "category": "content",
+     "channel": "A2O WORLD",
+     "delta": 64,
+     "era": "",
+     "id": "JxSbLS12gLo",
+     "member": "",
+     "predebut": true,
+     "published_at": "2025-03-12T06:00:12Z",
+     "series": "Zal-Life",
+     "short": false,
+     "show": "",
+     "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Life Behind The Scenes",
+     "views": 11530
+    },
+    {
+     "category": "content",
+     "channel": "A2O WORLD",
+     "delta": 94,
+     "era": "",
+     "id": "X50b7DmPIuA",
+     "member": "",
+     "predebut": true,
+     "published_at": "2025-03-07T10:37:17Z",
+     "series": "Zal-Dance",
+     "short": true,
+     "show": "",
+     "title": "A2O HTB, A2O LTB, A2O LTG 'DON'T KILL MY VIBE' Zal-Dance Official Video",
+     "views": 25543
+    },
+    {
+     "category": "content",
+     "channel": "A2O WORLD",
+     "delta": 430,
+     "era": "",
+     "id": "G_NJdu0dYrk",
+     "member": "",
+     "predebut": true,
+     "published_at": "2025-02-16T07:04:26Z",
+     "series": "Zal-Life",
+     "short": false,
+     "show": "",
+     "title": "A2O HTB, A2O LTB ’REVOLUTION’ Zal-Life Behind The Scenes",
+     "views": 24761
+    },
+    {
+     "category": "content",
+     "channel": "A2O WORLD",
+     "delta": 191,
+     "era": "",
+     "id": "0mE2leFm_D0",
+     "member": "",
+     "predebut": true,
+     "published_at": "2025-02-14T10:44:50Z",
+     "series": "Zal-Dance",
+     "short": true,
+     "show": "",
+     "title": "A2O HTB, A2O LTB ‘REVOLUTION’ Zal-Dance Official Video",
+     "views": 30949
+    },
+    {
+     "category": "content",
+     "channel": "A2O WORLD",
+     "delta": 325,
+     "era": "",
+     "id": "hXOmejPxZRE",
+     "member": "",
+     "predebut": true,
+     "published_at": "2025-02-10T04:24:16Z",
+     "series": "Zal-Life",
+     "short": false,
+     "show": "",
+     "title": "A2O LTB, LTG ‘BAD & BOSSY’ Zal-Life Behind The Scenes",
+     "views": 30875
+    },
+    {
+     "category": "content",
+     "channel": "A2O WORLD",
+     "delta": 180,
+     "era": "",
+     "id": "701rNAy-PgE",
+     "member": "",
+     "predebut": true,
+     "published_at": "2025-02-07T10:40:40Z",
+     "series": "Zal-Dance",
+     "short": true,
+     "show": "",
+     "title": "A2O LTB, A2O LTG ‘BAD & BOSSY’ Zal-Dance Official Video",
+     "views": 36511
+    },
+    {
+     "category": "content",
+     "channel": "A2O WORLD",
+     "delta": 165,
+     "era": "",
+     "id": "p7W25dzLL5E",
+     "member": "",
+     "predebut": true,
+     "published_at": "2024-12-29T08:27:26Z",
+     "series": "Zal-Life",
+     "short": false,
+     "show": "",
+     "title": "A2O Rookies LTB ‘BLACK MADONNA’ Zal-Life Behind The Scenes",
+     "views": 31674
+    },
+    {
+     "category": "content",
+     "channel": "A2O WORLD",
+     "delta": 1143,
+     "era": "",
+     "id": "jYLVV3_RwQE",
+     "member": "",
+     "predebut": true,
+     "published_at": "2024-12-18T08:11:08Z",
+     "series": "Zal-Dance",
+     "short": false,
+     "show": "",
+     "title": "A2O Rookies LTB ‘BLACK MADONNA’ Zal-Dance Official Video",
+     "views": 207353
+    },
+    {
+     "category": "content",
+     "channel": "A2O WORLD",
+     "delta": 144,
+     "era": "",
+     "id": "fSeummulVNI",
+     "member": "",
+     "predebut": true,
+     "published_at": "2024-12-10T20:23:09Z",
+     "series": "Zal-Life",
+     "short": false,
+     "show": "",
+     "title": "A2O Rookies LTB 'CANDY' Zal-Life Behind The Scenes",
+     "views": 169771
+    },
+    {
+     "category": "content",
+     "channel": "A2O WORLD",
+     "delta": 4621,
+     "era": "",
+     "id": "E10wtRjr3TI",
+     "member": "",
+     "predebut": true,
+     "published_at": "2024-11-22T11:08:27Z",
+     "series": "",
+     "short": false,
+     "show": "",
+     "title": "A2O Rookies LTB ’CANDY‘ Zalpha Pop Official Video",
+     "views": 5539528
+    }
+   ],
+   "profile_history": [
+    {
+     "label": "Dancing in the Dark",
+     "photo": "img/members/댄인닼_가쿠.webp"
+    },
+    {
+     "label": "SUPERSTAR",
+     "photo": "img/members/슈퍼스타_가쿠.webp"
+    }
+   ],
+   "signature": "img/members/서명_가쿠.svg"
+  },
+  {
+   "aliases": [
+    "JUNLIN"
+   ],
    "birth_year": 2009,
    "birthday": "11-09",
    "career": [
@@ -2879,73 +2908,7 @@
    "signature": "img/members/서명_준.svg"
   },
   {
-   "birth_year": 2010,
-   "birthday": "12-10",
-   "career": [
-    "AJS·REDSTAGE 아카데미 출신",
-    "비공개 연습생으로 데뷔"
-   ],
-   "fancam_count": 2,
-   "fancam_delta": 314,
-   "fancam_views": 21012,
-   "fancams": [
-    {
-     "category": "fancam",
-     "channel": "ALL THE K-POP",
-     "delta": 65,
-     "era": "SUPERSTAR",
-     "id": "tYNBl8--3w4",
-     "member": "LUCIEN",
-     "predebut": false,
-     "published_at": "2026-11-03T09:00:19Z",
-     "series": "",
-     "short": false,
-     "show": "쇼챔피언",
-     "title": "[쇼챔1분직캠] A2O SOUL LUCIEN의 ＜SUPERSTAR＞♬ #A2OSOUL #LUCIEN #SUPERSTAR",
-     "views": 6273
-    },
-    {
-     "category": "fancam",
-     "channel": "ALL THE K-POP",
-     "delta": 249,
-     "era": "SUPERSTAR",
-     "id": "p4k1ZAdEgsA",
-     "member": "LUCIEN",
-     "predebut": false,
-     "published_at": "2026-10-22T07:58:20Z",
-     "series": "",
-     "short": false,
-     "show": "쇼챔피언",
-     "title": "[쇼챔직캠 4K] A2O SOUL LUCIEN - SUPERSTAR | Show Champion | EP.615 | 261021",
-     "views": 14739
-    }
-   ],
-   "ig_mentions": [],
-   "instagram_posts": [],
-   "ko": "루시엔",
-   "name": "LUCIEN",
-   "nationality": "한국·미국",
-   "nicknames": [],
-   "notes": [
-    "팀에서 가장 차분한 성격",
-    "네오 소울을 좋아함 (최애 아티스트 에리카 바두)"
-   ],
-   "photo": "img/members/댄인닼_루시엔.webp",
-   "position": "랩, 댄스",
-   "predebut": [],
-   "profile_history": [
-    {
-     "label": "Dancing in the Dark",
-     "photo": "img/members/댄인닼_루시엔.webp"
-    },
-    {
-     "label": "SUPERSTAR",
-     "photo": "img/members/슈퍼스타_루시엔.webp"
-    }
-   ],
-   "signature": "img/members/서명_루시엔.svg"
-  },
-  {
+   "aliases": [],
    "birth_year": 2010,
    "birthday": "02-25",
    "career": [
@@ -3015,6 +2978,232 @@
    "signature": "img/members/서명_한성.svg"
   },
   {
+   "aliases": [],
+   "birth_year": 2010,
+   "birthday": "12-10",
+   "career": [
+    "AJS·REDSTAGE 아카데미 출신",
+    "비공개 연습생으로 데뷔"
+   ],
+   "fancam_count": 2,
+   "fancam_delta": 314,
+   "fancam_views": 21012,
+   "fancams": [
+    {
+     "category": "fancam",
+     "channel": "ALL THE K-POP",
+     "delta": 65,
+     "era": "SUPERSTAR",
+     "id": "tYNBl8--3w4",
+     "member": "LUCIEN",
+     "predebut": false,
+     "published_at": "2026-11-03T09:00:19Z",
+     "series": "",
+     "short": false,
+     "show": "쇼챔피언",
+     "title": "[쇼챔1분직캠] A2O SOUL LUCIEN의 ＜SUPERSTAR＞♬ #A2OSOUL #LUCIEN #SUPERSTAR",
+     "views": 6273
+    },
+    {
+     "category": "fancam",
+     "channel": "ALL THE K-POP",
+     "delta": 249,
+     "era": "SUPERSTAR",
+     "id": "p4k1ZAdEgsA",
+     "member": "LUCIEN",
+     "predebut": false,
+     "published_at": "2026-10-22T07:58:20Z",
+     "series": "",
+     "short": false,
+     "show": "쇼챔피언",
+     "title": "[쇼챔직캠 4K] A2O SOUL LUCIEN - SUPERSTAR | Show Champion | EP.615 | 261021",
+     "views": 14739
+    }
+   ],
+   "ig_mentions": [],
+   "instagram_posts": [],
+   "ko": "루시엔",
+   "name": "LUCIEN",
+   "nationality": "한국·미국",
+   "nicknames": [],
+   "notes": [
+    "팀에서 가장 차분한 성격",
+    "네오 소울을 좋아함 (최애 아티스트 에리카 바두)"
+   ],
+   "photo": "img/members/댄인닼_루시엔.webp",
+   "position": "랩, 댄스",
+   "predebut": [],
+   "profile_history": [
+    {
+     "label": "Dancing in the Dark",
+     "photo": "img/members/댄인닼_루시엔.webp"
+    },
+    {
+     "label": "SUPERSTAR",
+     "photo": "img/members/슈퍼스타_루시엔.webp"
+    }
+   ],
+   "signature": "img/members/서명_루시엔.svg"
+  },
+  {
+   "aliases": [
+    "SEEONE",
+    "SEE ONE"
+   ],
+   "birth_year": 2011,
+   "birthday": "02-10",
+   "career": [
+    "키즈모델 활동",
+    "댄스 보컬 아카데미 HIBEAT 출신",
+    "전 JYP엔터테인먼트 연습생"
+   ],
+   "fancam_count": 3,
+   "fancam_delta": 1682,
+   "fancam_views": 29741,
+   "fancams": [
+    {
+     "category": "fancam",
+     "channel": "MBCkpop",
+     "delta": 1482,
+     "era": "Dancing in the Dark",
+     "id": "F33CuuvrXj0",
+     "member": "SEE-ONE",
+     "predebut": false,
+     "published_at": "2026-11-14T08:01:26Z",
+     "series": "",
+     "short": false,
+     "show": "음악중심",
+     "title": "[#음중직캠] A2O SOUL SEE-ONE (에이투오 소울 시원) – Dancing in the Dark FanCam | 쇼! 음악중심 | MBC261114",
+     "views": 12498
+    },
+    {
+     "category": "fancam",
+     "channel": "ALL THE K-POP",
+     "delta": 59,
+     "era": "SUPERSTAR",
+     "id": "UCJPmP_Q3tY",
+     "member": "SEE-ONE",
+     "predebut": false,
+     "published_at": "2026-11-02T09:00:23Z",
+     "series": "",
+     "short": false,
+     "show": "쇼챔피언",
+     "title": "[쇼챔1분직캠] A2O SOUL SEE-ONE의 ＜SUPERSTAR＞♬ #A2OSOUL #SEE-ONE #SUPERSTAR",
+     "views": 5727
+    },
+    {
+     "category": "fancam",
+     "channel": "ALL THE K-POP",
+     "delta": 141,
+     "era": "SUPERSTAR",
+     "id": "Aya4oPdU-FI",
+     "member": "SEE-ONE",
+     "predebut": false,
+     "published_at": "2026-10-22T07:58:27Z",
+     "series": "",
+     "short": false,
+     "show": "쇼챔피언",
+     "title": "[쇼챔직캠 4K] A2O SOUL SEE-ONE - SUPERSTAR | Show Champion | EP.615 | 261021",
+     "views": 11516
+    }
+   ],
+   "ig_mentions": [],
+   "instagram_posts": [],
+   "ko": "시원",
+   "name": "SEE-ONE",
+   "nationality": "한국·일본",
+   "nicknames": [],
+   "notes": [
+    "매력 포인트는 '동굴 보이스' 저음"
+   ],
+   "photo": "img/members/댄인닼_시원.webp",
+   "position": "보컬, 랩",
+   "predebut": [],
+   "profile_history": [
+    {
+     "label": "Dancing in the Dark",
+     "photo": "img/members/댄인닼_시원.webp"
+    },
+    {
+     "label": "SUPERSTAR",
+     "photo": "img/members/슈퍼스타_시원.webp"
+    }
+   ],
+   "signature": "img/members/서명_시원.svg"
+  },
+  {
+   "aliases": [],
+   "birth_year": 2011,
+   "birthday": "07-08",
+   "career": [
+    "태국어 더빙 아역 성우 — 디즈니 '엔칸토' 안토니오, '피노키오'(2022) 피노키오 등",
+    "태국 One31 시트콤 'Ban Saran Land'(2018) 출연",
+    "비공개 연습생으로 데뷔"
+   ],
+   "fancam_count": 2,
+   "fancam_delta": 772,
+   "fancam_views": 70285,
+   "fancams": [
+    {
+     "category": "fancam",
+     "channel": "ALL THE K-POP",
+     "delta": 125,
+     "era": "SUPERSTAR",
+     "id": "X-SgenK4cmo",
+     "member": "ALURE",
+     "predebut": false,
+     "published_at": "2026-10-31T09:00:24Z",
+     "series": "",
+     "short": false,
+     "show": "쇼챔피언",
+     "title": "[쇼챔1분직캠] A2O SOUL ALURE의 ＜SUPERSTAR＞♬ #A2OSOUL #ALURE #SUPERSTAR",
+     "views": 12575
+    },
+    {
+     "category": "fancam",
+     "channel": "ALL THE K-POP",
+     "delta": 647,
+     "era": "SUPERSTAR",
+     "id": "cN8UIsynHBI",
+     "member": "ALURE",
+     "predebut": false,
+     "published_at": "2026-10-22T07:58:27Z",
+     "series": "",
+     "short": false,
+     "show": "쇼챔피언",
+     "title": "[쇼챔직캠 4K] A2O SOUL ALURE - SUPERSTAR | Show Champion | EP.615 | 261021",
+     "views": 57710
+    }
+   ],
+   "ig_mentions": [],
+   "instagram_posts": [],
+   "ko": "알루어",
+   "name": "ALURE",
+   "nationality": "태국",
+   "nicknames": [
+    "아기 명창"
+   ],
+   "notes": [
+    "보컬로 입사해 짧은 기간에 댄스 실력을 크게 끌어올림",
+    "팝·R&B를 좋아함"
+   ],
+   "photo": "img/members/댄인닼_알루어.webp",
+   "position": "보컬",
+   "predebut": [],
+   "profile_history": [
+    {
+     "label": "Dancing in the Dark",
+     "photo": "img/members/댄인닼_알루어.webp"
+    },
+    {
+     "label": "SUPERSTAR",
+     "photo": "img/members/슈퍼스타_알루어.webp"
+    }
+   ],
+   "signature": "img/members/서명_알루어.svg"
+  },
+  {
+   "aliases": [],
    "birth_year": 2011,
    "birthday": "08-09",
    "career": [
@@ -3143,7 +3332,7 @@
     "시티워크를 좋아함"
    ],
    "photo": "img/members/댄인닼_타이.webp",
-   "position": "",
+   "position": "콘셉트 센터, 메인댄서",
    "predebut": [
     {
      "category": "content",
@@ -3429,88 +3618,7 @@
    "signature": "img/members/서명_타이.svg"
   },
   {
-   "birth_year": 2011,
-   "birthday": "02-10",
-   "career": [
-    "키즈모델 활동",
-    "댄스 보컬 아카데미 HIBEAT 출신",
-    "전 JYP엔터테인먼트 연습생"
-   ],
-   "fancam_count": 3,
-   "fancam_delta": 1682,
-   "fancam_views": 29741,
-   "fancams": [
-    {
-     "category": "fancam",
-     "channel": "MBCkpop",
-     "delta": 1482,
-     "era": "Dancing in the Dark",
-     "id": "F33CuuvrXj0",
-     "member": "SEE-ONE",
-     "predebut": false,
-     "published_at": "2026-11-14T08:01:26Z",
-     "series": "",
-     "short": false,
-     "show": "음악중심",
-     "title": "[#음중직캠] A2O SOUL SEE-ONE (에이투오 소울 시원) – Dancing in the Dark FanCam | 쇼! 음악중심 | MBC261114",
-     "views": 12498
-    },
-    {
-     "category": "fancam",
-     "channel": "ALL THE K-POP",
-     "delta": 59,
-     "era": "SUPERSTAR",
-     "id": "UCJPmP_Q3tY",
-     "member": "SEE-ONE",
-     "predebut": false,
-     "published_at": "2026-11-02T09:00:23Z",
-     "series": "",
-     "short": false,
-     "show": "쇼챔피언",
-     "title": "[쇼챔1분직캠] A2O SOUL SEE-ONE의 ＜SUPERSTAR＞♬ #A2OSOUL #SEE-ONE #SUPERSTAR",
-     "views": 5727
-    },
-    {
-     "category": "fancam",
-     "channel": "ALL THE K-POP",
-     "delta": 141,
-     "era": "SUPERSTAR",
-     "id": "Aya4oPdU-FI",
-     "member": "SEE-ONE",
-     "predebut": false,
-     "published_at": "2026-10-22T07:58:27Z",
-     "series": "",
-     "short": false,
-     "show": "쇼챔피언",
-     "title": "[쇼챔직캠 4K] A2O SOUL SEE-ONE - SUPERSTAR | Show Champion | EP.615 | 261021",
-     "views": 11516
-    }
-   ],
-   "ig_mentions": [],
-   "instagram_posts": [],
-   "ko": "시원",
-   "name": "SEE-ONE",
-   "nationality": "한국·일본",
-   "nicknames": [],
-   "notes": [
-    "매력 포인트는 '동굴 보이스' 저음"
-   ],
-   "photo": "img/members/댄인닼_시원.webp",
-   "position": "랩, 댄스",
-   "predebut": [],
-   "profile_history": [
-    {
-     "label": "Dancing in the Dark",
-     "photo": "img/members/댄인닼_시원.webp"
-    },
-    {
-     "label": "SUPERSTAR",
-     "photo": "img/members/슈퍼스타_시원.webp"
-    }
-   ],
-   "signature": "img/members/서명_시원.svg"
-  },
-  {
+   "aliases": [],
    "birth_year": 2011,
    "birthday": "11-05",
    "career": [
@@ -3577,76 +3685,9 @@
    "signature": "img/members/서명_소노.svg"
   },
   {
-   "birth_year": 2011,
-   "birthday": "07-08",
-   "career": [
-    "태국어 더빙 아역 성우 — 디즈니 '엔칸토' 안토니오, '피노키오'(2022) 피노키오 등",
-    "태국 One31 시트콤 'Ban Saran Land'(2018) 출연",
-    "비공개 연습생으로 데뷔"
+   "aliases": [
+    "JIAYI"
    ],
-   "fancam_count": 2,
-   "fancam_delta": 772,
-   "fancam_views": 70285,
-   "fancams": [
-    {
-     "category": "fancam",
-     "channel": "ALL THE K-POP",
-     "delta": 125,
-     "era": "SUPERSTAR",
-     "id": "X-SgenK4cmo",
-     "member": "ALURE",
-     "predebut": false,
-     "published_at": "2026-10-31T09:00:24Z",
-     "series": "",
-     "short": false,
-     "show": "쇼챔피언",
-     "title": "[쇼챔1분직캠] A2O SOUL ALURE의 ＜SUPERSTAR＞♬ #A2OSOUL #ALURE #SUPERSTAR",
-     "views": 12575
-    },
-    {
-     "category": "fancam",
-     "channel": "ALL THE K-POP",
-     "delta": 647,
-     "era": "SUPERSTAR",
-     "id": "cN8UIsynHBI",
-     "member": "ALURE",
-     "predebut": false,
-     "published_at": "2026-10-22T07:58:27Z",
-     "series": "",
-     "short": false,
-     "show": "쇼챔피언",
-     "title": "[쇼챔직캠 4K] A2O SOUL ALURE - SUPERSTAR | Show Champion | EP.615 | 261021",
-     "views": 57710
-    }
-   ],
-   "ig_mentions": [],
-   "instagram_posts": [],
-   "ko": "알루어",
-   "name": "ALURE",
-   "nationality": "태국",
-   "nicknames": [
-    "아기 명창"
-   ],
-   "notes": [
-    "보컬로 입사해 짧은 기간에 댄스 실력을 크게 끌어올림",
-    "팝·R&B를 좋아함"
-   ],
-   "photo": "img/members/댄인닼_알루어.webp",
-   "position": "보컬",
-   "predebut": [],
-   "profile_history": [
-    {
-     "label": "Dancing in the Dark",
-     "photo": "img/members/댄인닼_알루어.webp"
-    },
-    {
-     "label": "SUPERSTAR",
-     "photo": "img/members/슈퍼스타_알루어.webp"
-    }
-   ],
-   "signature": "img/members/서명_알루어.svg"
-  },
-  {
    "birth_year": 2012,
    "birthday": "01-06",
    "career": [
@@ -4108,6 +4149,7 @@
    "signature": "img/members/서명_자이.svg"
   },
   {
+   "aliases": [],
    "birth_year": 2012,
    "birthday": "03-27",
    "career": [
@@ -4177,7 +4219,7 @@
     "사진 촬영을 좋아해 레트로 감성용 구형 휴대폰을 따로 씀"
    ],
    "photo": "img/members/댄인닼_에이든.webp",
-   "position": "보컬",
+   "position": "리드보컬, 메인댄서",
    "predebut": [
     {
      "category": "content",
@@ -4493,6 +4535,9 @@
    "signature": "img/members/서명_에이든.svg"
   },
   {
+   "aliases": [
+    "HANZE"
+   ],
    "birth_year": 2012,
    "birthday": "06-21",
    "career": [
@@ -4593,7 +4638,7 @@
     "소울메이트로 맏형 문을 꼽음"
    ],
    "photo": "img/members/댄인닼_제트.webp",
-   "position": "댄스",
+   "position": "댄스, 에이스",
    "predebut": [
     {
      "category": "content",
@@ -5092,14 +5137,14 @@
   },
   {
    "label": "CARABINER Ver.",
-   "member": "GAKU",
-   "src": "img/photocards/%EC%95%A8%EB%B2%94_CARABINER%20Ver._GAKU.webp",
+   "member": "TEO",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CARABINER%20Ver._TEO.webp",
    "version": "앨범"
   },
   {
    "label": "CARABINER Ver.",
-   "member": "TEO",
-   "src": "img/photocards/%EC%95%A8%EB%B2%94_CARABINER%20Ver._TEO.webp",
+   "member": "GAKU",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CARABINER%20Ver._GAKU.webp",
    "version": "앨범"
   },
   {
@@ -5110,20 +5155,14 @@
   },
   {
    "label": "CARABINER Ver.",
-   "member": "LUCIEN",
-   "src": "img/photocards/%EC%95%A8%EB%B2%94_CARABINER%20Ver._LUCIEN.webp",
-   "version": "앨범"
-  },
-  {
-   "label": "CARABINER Ver.",
    "member": "HANSUNG",
    "src": "img/photocards/%EC%95%A8%EB%B2%94_CARABINER%20Ver._HANSUNG.webp",
    "version": "앨범"
   },
   {
    "label": "CARABINER Ver.",
-   "member": "TAI",
-   "src": "img/photocards/%EC%95%A8%EB%B2%94_CARABINER%20Ver._TAI.webp",
+   "member": "LUCIEN",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CARABINER%20Ver._LUCIEN.webp",
    "version": "앨범"
   },
   {
@@ -5134,14 +5173,20 @@
   },
   {
    "label": "CARABINER Ver.",
-   "member": "SONO",
-   "src": "img/photocards/%EC%95%A8%EB%B2%94_CARABINER%20Ver._SONO.webp",
+   "member": "ALURE",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CARABINER%20Ver._ALURE.webp",
    "version": "앨범"
   },
   {
    "label": "CARABINER Ver.",
-   "member": "ALURE",
-   "src": "img/photocards/%EC%95%A8%EB%B2%94_CARABINER%20Ver._ALURE.webp",
+   "member": "TAI",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CARABINER%20Ver._TAI.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "CARABINER Ver.",
+   "member": "SONO",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CARABINER%20Ver._SONO.webp",
    "version": "앨범"
   },
   {
@@ -5182,14 +5227,14 @@
   },
   {
    "label": "CONSTELLATION Ver.",
-   "member": "GAKU",
-   "src": "img/photocards/%EC%95%A8%EB%B2%94_CONSTELLATION%20Ver._GAKU.webp",
+   "member": "TEO",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CONSTELLATION%20Ver._TEO.webp",
    "version": "앨범"
   },
   {
    "label": "CONSTELLATION Ver.",
-   "member": "TEO",
-   "src": "img/photocards/%EC%95%A8%EB%B2%94_CONSTELLATION%20Ver._TEO.webp",
+   "member": "GAKU",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CONSTELLATION%20Ver._GAKU.webp",
    "version": "앨범"
   },
   {
@@ -5200,20 +5245,14 @@
   },
   {
    "label": "CONSTELLATION Ver.",
-   "member": "LUCIEN",
-   "src": "img/photocards/%EC%95%A8%EB%B2%94_CONSTELLATION%20Ver._LUCIEN.webp",
-   "version": "앨범"
-  },
-  {
-   "label": "CONSTELLATION Ver.",
    "member": "HANSUNG",
    "src": "img/photocards/%EC%95%A8%EB%B2%94_CONSTELLATION%20Ver._HANSUNG.webp",
    "version": "앨범"
   },
   {
    "label": "CONSTELLATION Ver.",
-   "member": "TAI",
-   "src": "img/photocards/%EC%95%A8%EB%B2%94_CONSTELLATION%20Ver._TAI.webp",
+   "member": "LUCIEN",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CONSTELLATION%20Ver._LUCIEN.webp",
    "version": "앨범"
   },
   {
@@ -5224,14 +5263,20 @@
   },
   {
    "label": "CONSTELLATION Ver.",
-   "member": "SONO",
-   "src": "img/photocards/%EC%95%A8%EB%B2%94_CONSTELLATION%20Ver._SONO.webp",
+   "member": "ALURE",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CONSTELLATION%20Ver._ALURE.webp",
    "version": "앨범"
   },
   {
    "label": "CONSTELLATION Ver.",
-   "member": "ALURE",
-   "src": "img/photocards/%EC%95%A8%EB%B2%94_CONSTELLATION%20Ver._ALURE.webp",
+   "member": "TAI",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CONSTELLATION%20Ver._TAI.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "CONSTELLATION Ver.",
+   "member": "SONO",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_CONSTELLATION%20Ver._SONO.webp",
    "version": "앨범"
   },
   {
@@ -5272,14 +5317,14 @@
   },
   {
    "label": "SOUL Ver.",
-   "member": "GAKU",
-   "src": "img/photocards/%EC%95%A8%EB%B2%94_SOUL%20Ver._GAKU.webp",
+   "member": "TEO",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_SOUL%20Ver._TEO.webp",
    "version": "앨범"
   },
   {
    "label": "SOUL Ver.",
-   "member": "TEO",
-   "src": "img/photocards/%EC%95%A8%EB%B2%94_SOUL%20Ver._TEO.webp",
+   "member": "GAKU",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_SOUL%20Ver._GAKU.webp",
    "version": "앨범"
   },
   {
@@ -5290,20 +5335,14 @@
   },
   {
    "label": "SOUL Ver.",
-   "member": "LUCIEN",
-   "src": "img/photocards/%EC%95%A8%EB%B2%94_SOUL%20Ver._LUCIEN.webp",
-   "version": "앨범"
-  },
-  {
-   "label": "SOUL Ver.",
    "member": "HANSUNG",
    "src": "img/photocards/%EC%95%A8%EB%B2%94_SOUL%20Ver._HANSUNG.webp",
    "version": "앨범"
   },
   {
    "label": "SOUL Ver.",
-   "member": "TAI",
-   "src": "img/photocards/%EC%95%A8%EB%B2%94_SOUL%20Ver._TAI.webp",
+   "member": "LUCIEN",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_SOUL%20Ver._LUCIEN.webp",
    "version": "앨범"
   },
   {
@@ -5314,14 +5353,20 @@
   },
   {
    "label": "SOUL Ver.",
-   "member": "SONO",
-   "src": "img/photocards/%EC%95%A8%EB%B2%94_SOUL%20Ver._SONO.webp",
+   "member": "ALURE",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_SOUL%20Ver._ALURE.webp",
    "version": "앨범"
   },
   {
    "label": "SOUL Ver.",
-   "member": "ALURE",
-   "src": "img/photocards/%EC%95%A8%EB%B2%94_SOUL%20Ver._ALURE.webp",
+   "member": "TAI",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_SOUL%20Ver._TAI.webp",
+   "version": "앨범"
+  },
+  {
+   "label": "SOUL Ver.",
+   "member": "SONO",
+   "src": "img/photocards/%EC%95%A8%EB%B2%94_SOUL%20Ver._SONO.webp",
    "version": "앨범"
   },
   {
@@ -5362,14 +5407,14 @@
   },
   {
    "label": "Apple Music A (Photobook)",
-   "member": "GAKU",
-   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20A%20%28Photobook%29_GAKU.webp",
+   "member": "TEO",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20A%20%28Photobook%29_TEO.webp",
    "version": "예판 특전"
   },
   {
    "label": "Apple Music A (Photobook)",
-   "member": "TEO",
-   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20A%20%28Photobook%29_TEO.webp",
+   "member": "GAKU",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20A%20%28Photobook%29_GAKU.webp",
    "version": "예판 특전"
   },
   {
@@ -5380,26 +5425,26 @@
   },
   {
    "label": "Apple Music A (Photobook)",
-   "member": "TAI",
-   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20A%20%28Photobook%29_TAI.webp",
-   "version": "예판 특전"
-  },
-  {
-   "label": "Apple Music A (Photobook)",
    "member": "SEE-ONE",
    "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20A%20%28Photobook%29_SEE-ONE.webp",
    "version": "예판 특전"
   },
   {
    "label": "Apple Music A (Photobook)",
-   "member": "SONO",
-   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20A%20%28Photobook%29_SONO.webp",
+   "member": "ALURE",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20A%20%28Photobook%29_ALURE.webp",
    "version": "예판 특전"
   },
   {
    "label": "Apple Music A (Photobook)",
-   "member": "ALURE",
-   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20A%20%28Photobook%29_ALURE.webp",
+   "member": "TAI",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20A%20%28Photobook%29_TAI.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Apple Music A (Photobook)",
+   "member": "SONO",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20A%20%28Photobook%29_SONO.webp",
    "version": "예판 특전"
   },
   {
@@ -5464,14 +5509,14 @@
   },
   {
    "label": "Withmuu (Carabiner)",
-   "member": "GAKU",
-   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Carabiner%29_GAKU.webp",
+   "member": "TEO",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Carabiner%29_TEO.webp",
    "version": "예판 특전"
   },
   {
    "label": "Withmuu (Carabiner)",
-   "member": "TEO",
-   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Carabiner%29_TEO.webp",
+   "member": "GAKU",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Carabiner%29_GAKU.webp",
    "version": "예판 특전"
   },
   {
@@ -5482,20 +5527,14 @@
   },
   {
    "label": "Withmuu (Carabiner)",
-   "member": "LUCIEN",
-   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Carabiner%29_LUCIEN.webp",
-   "version": "예판 특전"
-  },
-  {
-   "label": "Withmuu (Carabiner)",
    "member": "HANSUNG",
    "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Carabiner%29_HANSUNG.webp",
    "version": "예판 특전"
   },
   {
    "label": "Withmuu (Carabiner)",
-   "member": "TAI",
-   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Carabiner%29_TAI.webp",
+   "member": "LUCIEN",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Carabiner%29_LUCIEN.webp",
    "version": "예판 특전"
   },
   {
@@ -5506,14 +5545,20 @@
   },
   {
    "label": "Withmuu (Carabiner)",
-   "member": "SONO",
-   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Carabiner%29_SONO.webp",
+   "member": "ALURE",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Carabiner%29_ALURE.webp",
    "version": "예판 특전"
   },
   {
    "label": "Withmuu (Carabiner)",
-   "member": "ALURE",
-   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Carabiner%29_ALURE.webp",
+   "member": "TAI",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Carabiner%29_TAI.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Withmuu (Carabiner)",
+   "member": "SONO",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Carabiner%29_SONO.webp",
    "version": "예판 특전"
   },
   {
@@ -5554,14 +5599,14 @@
   },
   {
    "label": "Withmuu (Photobook)",
-   "member": "GAKU",
-   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Photobook%29_GAKU.webp",
+   "member": "TEO",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Photobook%29_TEO.webp",
    "version": "예판 특전"
   },
   {
    "label": "Withmuu (Photobook)",
-   "member": "TEO",
-   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Photobook%29_TEO.webp",
+   "member": "GAKU",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Photobook%29_GAKU.webp",
    "version": "예판 특전"
   },
   {
@@ -5572,20 +5617,14 @@
   },
   {
    "label": "Withmuu (Photobook)",
-   "member": "LUCIEN",
-   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Photobook%29_LUCIEN.webp",
-   "version": "예판 특전"
-  },
-  {
-   "label": "Withmuu (Photobook)",
    "member": "HANSUNG",
    "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Photobook%29_HANSUNG.webp",
    "version": "예판 특전"
   },
   {
    "label": "Withmuu (Photobook)",
-   "member": "TAI",
-   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Photobook%29_TAI.webp",
+   "member": "LUCIEN",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Photobook%29_LUCIEN.webp",
    "version": "예판 특전"
   },
   {
@@ -5596,14 +5635,20 @@
   },
   {
    "label": "Withmuu (Photobook)",
-   "member": "SONO",
-   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Photobook%29_SONO.webp",
+   "member": "ALURE",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Photobook%29_ALURE.webp",
    "version": "예판 특전"
   },
   {
    "label": "Withmuu (Photobook)",
-   "member": "ALURE",
-   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Photobook%29_ALURE.webp",
+   "member": "TAI",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Photobook%29_TAI.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Withmuu (Photobook)",
+   "member": "SONO",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Photobook%29_SONO.webp",
    "version": "예판 특전"
   },
   {
@@ -5644,14 +5689,14 @@
   },
   {
    "label": "Dancing in the Dark",
-   "member": "GAKU",
-   "src": "img/photocards/%EB%B0%A9%EC%86%A1_Dancing%20in%20the%20Dark_GAKU.webp",
+   "member": "TEO",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_Dancing%20in%20the%20Dark_TEO.webp",
    "version": "방송"
   },
   {
    "label": "Dancing in the Dark",
-   "member": "TEO",
-   "src": "img/photocards/%EB%B0%A9%EC%86%A1_Dancing%20in%20the%20Dark_TEO.webp",
+   "member": "GAKU",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_Dancing%20in%20the%20Dark_GAKU.webp",
    "version": "방송"
   },
   {
@@ -5662,20 +5707,14 @@
   },
   {
    "label": "Dancing in the Dark",
-   "member": "LUCIEN",
-   "src": "img/photocards/%EB%B0%A9%EC%86%A1_Dancing%20in%20the%20Dark_LUCIEN.webp",
-   "version": "방송"
-  },
-  {
-   "label": "Dancing in the Dark",
    "member": "HANSUNG",
    "src": "img/photocards/%EB%B0%A9%EC%86%A1_Dancing%20in%20the%20Dark_HANSUNG.webp",
    "version": "방송"
   },
   {
    "label": "Dancing in the Dark",
-   "member": "TAI",
-   "src": "img/photocards/%EB%B0%A9%EC%86%A1_Dancing%20in%20the%20Dark_TAI.webp",
+   "member": "LUCIEN",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_Dancing%20in%20the%20Dark_LUCIEN.webp",
    "version": "방송"
   },
   {
@@ -5686,14 +5725,20 @@
   },
   {
    "label": "Dancing in the Dark",
-   "member": "SONO",
-   "src": "img/photocards/%EB%B0%A9%EC%86%A1_Dancing%20in%20the%20Dark_SONO.webp",
+   "member": "ALURE",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_Dancing%20in%20the%20Dark_ALURE.webp",
    "version": "방송"
   },
   {
    "label": "Dancing in the Dark",
-   "member": "ALURE",
-   "src": "img/photocards/%EB%B0%A9%EC%86%A1_Dancing%20in%20the%20Dark_ALURE.webp",
+   "member": "TAI",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_Dancing%20in%20the%20Dark_TAI.webp",
+   "version": "방송"
+  },
+  {
+   "label": "Dancing in the Dark",
+   "member": "SONO",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_Dancing%20in%20the%20Dark_SONO.webp",
    "version": "방송"
   },
   {
@@ -5734,14 +5779,14 @@
   },
   {
    "label": "SUPERSTAR",
-   "member": "GAKU",
-   "src": "img/photocards/%EB%B0%A9%EC%86%A1_SUPERSTAR_GAKU.webp",
+   "member": "TEO",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_SUPERSTAR_TEO.webp",
    "version": "방송"
   },
   {
    "label": "SUPERSTAR",
-   "member": "TEO",
-   "src": "img/photocards/%EB%B0%A9%EC%86%A1_SUPERSTAR_TEO.webp",
+   "member": "GAKU",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_SUPERSTAR_GAKU.webp",
    "version": "방송"
   },
   {
@@ -5752,20 +5797,14 @@
   },
   {
    "label": "SUPERSTAR",
-   "member": "LUCIEN",
-   "src": "img/photocards/%EB%B0%A9%EC%86%A1_SUPERSTAR_LUCIEN.webp",
-   "version": "방송"
-  },
-  {
-   "label": "SUPERSTAR",
    "member": "HANSUNG",
    "src": "img/photocards/%EB%B0%A9%EC%86%A1_SUPERSTAR_HANSUNG.webp",
    "version": "방송"
   },
   {
    "label": "SUPERSTAR",
-   "member": "TAI",
-   "src": "img/photocards/%EB%B0%A9%EC%86%A1_SUPERSTAR_TAI.webp",
+   "member": "LUCIEN",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_SUPERSTAR_LUCIEN.webp",
    "version": "방송"
   },
   {
@@ -5776,14 +5815,20 @@
   },
   {
    "label": "SUPERSTAR",
-   "member": "SONO",
-   "src": "img/photocards/%EB%B0%A9%EC%86%A1_SUPERSTAR_SONO.webp",
+   "member": "ALURE",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_SUPERSTAR_ALURE.webp",
    "version": "방송"
   },
   {
    "label": "SUPERSTAR",
-   "member": "ALURE",
-   "src": "img/photocards/%EB%B0%A9%EC%86%A1_SUPERSTAR_ALURE.webp",
+   "member": "TAI",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_SUPERSTAR_TAI.webp",
+   "version": "방송"
+  },
+  {
+   "label": "SUPERSTAR",
+   "member": "SONO",
+   "src": "img/photocards/%EB%B0%A9%EC%86%A1_SUPERSTAR_SONO.webp",
    "version": "방송"
   },
   {
@@ -5824,14 +5869,14 @@
   },
   {
    "label": "Olive Young",
-   "member": "GAKU",
-   "src": "img/photocards/%EB%9F%AD%ED%82%A4%EB%93%9C%EB%A1%9C%EC%9A%B0_Olive%20Young_GAKU.webp",
+   "member": "TEO",
+   "src": "img/photocards/%EB%9F%AD%ED%82%A4%EB%93%9C%EB%A1%9C%EC%9A%B0_Olive%20Young_TEO.webp",
    "version": "럭키드로우"
   },
   {
    "label": "Olive Young",
-   "member": "TEO",
-   "src": "img/photocards/%EB%9F%AD%ED%82%A4%EB%93%9C%EB%A1%9C%EC%9A%B0_Olive%20Young_TEO.webp",
+   "member": "GAKU",
+   "src": "img/photocards/%EB%9F%AD%ED%82%A4%EB%93%9C%EB%A1%9C%EC%9A%B0_Olive%20Young_GAKU.webp",
    "version": "럭키드로우"
   },
   {
@@ -5842,20 +5887,14 @@
   },
   {
    "label": "Olive Young",
-   "member": "LUCIEN",
-   "src": "img/photocards/%EB%9F%AD%ED%82%A4%EB%93%9C%EB%A1%9C%EC%9A%B0_Olive%20Young_LUCIEN.webp",
-   "version": "럭키드로우"
-  },
-  {
-   "label": "Olive Young",
    "member": "HANSUNG",
    "src": "img/photocards/%EB%9F%AD%ED%82%A4%EB%93%9C%EB%A1%9C%EC%9A%B0_Olive%20Young_HANSUNG.webp",
    "version": "럭키드로우"
   },
   {
    "label": "Olive Young",
-   "member": "TAI",
-   "src": "img/photocards/%EB%9F%AD%ED%82%A4%EB%93%9C%EB%A1%9C%EC%9A%B0_Olive%20Young_TAI.webp",
+   "member": "LUCIEN",
+   "src": "img/photocards/%EB%9F%AD%ED%82%A4%EB%93%9C%EB%A1%9C%EC%9A%B0_Olive%20Young_LUCIEN.webp",
    "version": "럭키드로우"
   },
   {
@@ -5866,14 +5905,20 @@
   },
   {
    "label": "Olive Young",
-   "member": "SONO",
-   "src": "img/photocards/%EB%9F%AD%ED%82%A4%EB%93%9C%EB%A1%9C%EC%9A%B0_Olive%20Young_SONO.webp",
+   "member": "ALURE",
+   "src": "img/photocards/%EB%9F%AD%ED%82%A4%EB%93%9C%EB%A1%9C%EC%9A%B0_Olive%20Young_ALURE.webp",
    "version": "럭키드로우"
   },
   {
    "label": "Olive Young",
-   "member": "ALURE",
-   "src": "img/photocards/%EB%9F%AD%ED%82%A4%EB%93%9C%EB%A1%9C%EC%9A%B0_Olive%20Young_ALURE.webp",
+   "member": "TAI",
+   "src": "img/photocards/%EB%9F%AD%ED%82%A4%EB%93%9C%EB%A1%9C%EC%9A%B0_Olive%20Young_TAI.webp",
+   "version": "럭키드로우"
+  },
+  {
+   "label": "Olive Young",
+   "member": "SONO",
+   "src": "img/photocards/%EB%9F%AD%ED%82%A4%EB%93%9C%EB%A1%9C%EC%9A%B0_Olive%20Young_SONO.webp",
    "version": "럭키드로우"
   },
   {
@@ -5895,6 +5940,7 @@
    "version": "럭키드로우"
   }
  ],
+ "photos": [],
  "prerecs": [],
  "recent": [
   {
@@ -6179,6 +6225,7 @@
    "es": "Abre la 1.ª y 2.ª estrofa de 'SUPERSTAR'",
    "id": "Pembuka verse 1 & 2 di 'SUPERSTAR'",
    "ja": "『SUPERSTAR』1・2番の導入パート担当",
+   "pt": "Abre o 1º e o 2º verso de 'SUPERSTAR'",
    "th": "ร้องท่อนเปิดเวิร์สที่ 1 และ 2 ของ 'SUPERSTAR'",
    "zh": "负责《SUPERSTAR》第一、二段开头"
   },
@@ -6187,6 +6234,7 @@
    "es": "Canta las notas altas de 'SUPERSTAR'",
    "id": "Bagian nada tinggi di 'SUPERSTAR'",
    "ja": "『SUPERSTAR』の高音パート担当",
+   "pt": "Canta as notas altas de 'SUPERSTAR'",
    "th": "ร้องท่อนเสียงสูงใน 'SUPERSTAR'",
    "zh": "负责《SUPERSTAR》高音部分"
   },
@@ -6195,6 +6243,7 @@
    "es": "Mira los MV de 'SUPERSTAR' y 'Dancing in the Dark' (ruta de abajo)",
    "id": "Tonton MV 'SUPERSTAR' dan 'Dancing in the Dark' (rute di bawah)",
    "ja": "『SUPERSTAR』と『Dancing in the Dark』のMVを見る（下の入門コース）",
+   "pt": "Assista aos MVs de 'SUPERSTAR' e 'Dancing in the Dark' (roteiro inicial abaixo)",
    "th": "ดู MV 'SUPERSTAR' และ 'Dancing in the Dark' (คอร์สเริ่มต้นด้านล่าง)",
    "zh": "观看《SUPERSTAR》和《Dancing in the Dark》MV（下方入门路线）"
   },
@@ -6203,6 +6252,7 @@
    "es": "Pick del mes de noviembre · Novato masculino (nominados ZET y SEOHA)",
    "id": "Pick of the Month November · Rookie Pria (nominasi ZET & SEOHA)",
    "ja": "11月の今月のピック · ルーキー男性部門（ZET・SEOHAノミネート）",
+   "pt": "Pick do Mês de novembro · Rookie masculino (ZET e SEOHA indicados)",
    "th": "Pick of the Month พฤศจิกายน · รุกกี้ชาย (ZET & SEOHA เข้าชิง)",
    "zh": "11月本月之选 · 新人男子组（ZET·SEOHA入围）"
   },
@@ -6211,6 +6261,7 @@
    "es": "Los 15 bailando juntos — video de performance",
    "id": "Lihat dance 15 member sekaligus — performance video",
    "ja": "15人の群舞をひと目で — パフォーマンスビデオ",
+   "pt": "Os 15 dançando juntos — vídeo de performance",
    "th": "ดูทั้ง 15 คนเต้นพร้อมกัน — เพอร์ฟอร์แมนซ์วิดีโอ",
    "zh": "一眼看15人群舞 — 表演视频"
   },
@@ -6219,6 +6270,7 @@
    "es": "Los 15 chicos vienen de SOULITE, un planeta donde no falta nada.",
    "id": "15 pemuda ini berasal dari SOULITE, planet yang serba lengkap.",
    "ja": "15人の少年は、すべてがそろった惑星SOULITE（ソウルライト）からやって来ました。",
+   "pt": "Os 15 garotos vêm de SOULITE, um planeta onde não falta nada.",
    "th": "เด็กหนุ่มทั้ง 15 คนมาจาก SOULITE ดาวที่มีทุกอย่างพร้อมสรรพ",
    "zh": "15位少年来自应有尽有的星球SOULITE。"
   },
@@ -6227,6 +6279,7 @@
    "es": "Nominado al 1.er lugar — canción que compite por ganar esa semana (los votos cuentan)",
    "id": "Nominasi #1 — lagu yang bersaing jadi juara minggu itu (voting dihitung)",
    "ja": "1位候補 — 音楽番組でその週の1位を争う曲（投票が点数に入る）",
+   "pt": "Indicado ao 1º lugar — música que disputa a vitória da semana num programa musical (os votos contam)",
    "th": "ผู้เข้าชิงอันดับ 1 — เพลงที่ชิงอันดับ 1 ประจำสัปดาห์ของรายการเพลง (โหวตมีผลต่อคะแนน)",
    "zh": "一位候补 — 打歌节目当周争夺一位的歌曲（投票计入分数）"
   },
@@ -6235,6 +6288,7 @@
    "es": "A2O Rookies HTB como 'JUNLIN' (feb. 2025–)",
    "id": "A2O Rookies HTB sebagai 'JUNLIN' (Feb 2025–)",
    "ja": "A2O Rookies HTB『JUNLIN』（2025.2〜）",
+   "pt": "A2O Rookies HTB como 'JUNLIN' (fev. 2025–)",
    "th": "A2O Rookies HTB ในชื่อ 'JUNLIN' (ก.พ. 2025–)",
    "zh": "A2O Rookies HTB「俊霖（JUNLIN）」（2025.2起）"
   },
@@ -6243,14 +6297,16 @@
    "es": "A2O Rookies LTB como 'JIAYI' (oct. 2024–)",
    "id": "A2O Rookies LTB sebagai 'JIAYI' (Okt 2024–)",
    "ja": "A2O Rookies LTB『JIAYI』（2024.10〜）",
+   "pt": "A2O Rookies LTB como 'JIAYI' (out. 2024–)",
    "th": "A2O Rookies LTB ในชื่อ 'JIAYI' (ต.ค. 2024–)",
-   "zh": "A2O Rookies LTB「佳艺（JIAYI）」（2024.10起）"
+   "zh": "A2O Rookies LTB「嘉一（JIAYI）」（2024.10起）"
   },
   "A2O Rookies LTB '한저(HANZE)' (2024.10~)": {
    "en": "A2O Rookies LTB as 'HANZE' (Oct 2024–)",
    "es": "A2O Rookies LTB como 'HANZE' (oct. 2024–)",
    "id": "A2O Rookies LTB sebagai 'HANZE' (Okt 2024–)",
    "ja": "A2O Rookies LTB『HANZE』（2024.10〜）",
+   "pt": "A2O Rookies LTB como 'HANZE' (out. 2024–)",
    "th": "A2O Rookies LTB ในชื่อ 'HANZE' (ต.ค. 2024–)",
    "zh": "A2O Rookies LTB「瀚泽（HANZE）」（2024.10起）"
   },
@@ -6259,6 +6315,7 @@
    "es": "A2O Rookies LTB (oct. 2024–)",
    "id": "A2O Rookies LTB (Okt 2024–)",
    "ja": "A2O Rookies LTB（2024.10〜）",
+   "pt": "A2O Rookies LTB (out. 2024–)",
    "th": "A2O Rookies LTB (ต.ค. 2024–)",
    "zh": "A2O Rookies LTB（2024.10起）"
   },
@@ -6267,6 +6324,7 @@
    "es": "A2O Rookies LTB (ago. 2025–)",
    "id": "A2O Rookies LTB (Agu 2025–)",
    "ja": "A2O Rookies LTB（2025.8〜）",
+   "pt": "A2O Rookies LTB (ago. 2025–)",
    "th": "A2O Rookies LTB (ส.ค. 2025–)",
    "zh": "A2O Rookies LTB（2025.8起）"
   },
@@ -6275,6 +6333,7 @@
    "es": "A2O Rookies LTB (oct. 2024–) → HTB (feb. 2025–)",
    "id": "A2O Rookies LTB (Okt 2024–) → HTB (Feb 2025–)",
    "ja": "A2O Rookies LTB（2024.10〜）→ HTB（2025.2〜）",
+   "pt": "A2O Rookies LTB (out. 2024–) → HTB (fev. 2025–)",
    "th": "A2O Rookies LTB (ต.ค. 2024–) → HTB (ก.พ. 2025–)",
    "zh": "A2O Rookies LTB（2024.10起）→ HTB（2025.2起）"
   },
@@ -6283,6 +6342,7 @@
    "es": "Página de artista de A2O Entertainment",
    "id": "Halaman artis A2O Entertainment",
    "ja": "A2O Entertainment アーティストページ",
+   "pt": "Página do artista na A2O Entertainment",
    "th": "หน้าศิลปิน A2O Entertainment",
    "zh": "A2O Entertainment 艺人页面"
   },
@@ -6291,6 +6351,7 @@
    "es": "Formado en las academias AJS y REDSTAGE",
    "id": "Lulusan akademi AJS dan REDSTAGE",
    "ja": "AJS・REDSTAGEアカデミー出身",
+   "pt": "Treinou nas academias AJS e REDSTAGE",
    "th": "เคยฝึกที่สถาบัน AJS และ REDSTAGE",
    "zh": "出身AJS·REDSTAGE学院"
   },
@@ -6299,6 +6360,7 @@
    "es": "CONSTELLATION Ver. — mismo contenido que SOUL Ver.",
    "id": "CONSTELLATION Ver. — isi sama dengan SOUL Ver.",
    "ja": "CONSTELLATION Ver. — SOUL Ver.と同じ構成",
+   "pt": "CONSTELLATION Ver. — mesmo conteúdo da SOUL Ver.",
    "th": "CONSTELLATION Ver. — ส่วนประกอบเหมือน SOUL Ver.",
    "zh": "CONSTELLATION Ver. — 与SOUL Ver.相同"
   },
@@ -6307,6 +6369,7 @@
    "es": "Formado en EXPG STUDIO Osaka",
    "id": "Lulusan EXPG STUDIO Osaka",
    "ja": "EXPG STUDIO大阪出身",
+   "pt": "Treinou no EXPG STUDIO Osaka",
    "th": "เคยฝึกที่ EXPG STUDIO โอซาก้า",
    "zh": "出身EXPG STUDIO大阪"
   },
@@ -6315,6 +6378,7 @@
    "es": "Participó en 'REVOLUTION' y 'CHAMPAGNE' de HTB",
    "id": "Ikut di 'REVOLUTION' dan 'CHAMPAGNE' HTB",
    "ja": "HTB『REVOLUTION』『CHAMPAGNE』に参加",
+   "pt": "Participou de 'REVOLUTION' e 'CHAMPAGNE' do HTB",
    "th": "ร่วมใน 'REVOLUTION' และ 'CHAMPAGNE' ของ HTB",
    "zh": "参与HTB《REVOLUTION》《CHAMPAGNE》"
   },
@@ -6323,6 +6387,7 @@
    "es": "KBS Song Festival",
    "id": "KBS Song Festival",
    "ja": "KBS歌謡祭",
+   "pt": "KBS Song Festival",
    "th": "KBS Song Festival",
    "zh": "KBS歌谣大祝祭"
   },
@@ -6331,6 +6396,7 @@
    "es": "Videollamada Makestar",
    "id": "Video call fansign Makestar",
    "ja": "Makestar ヨントン",
+   "pt": "Fansign por videochamada Makestar",
    "th": "วิดีโอคอลแฟนไซน์ Makestar",
    "zh": "Makestar 视频签售"
   },
@@ -6339,6 +6405,7 @@
    "es": "Firma de fans Makestar",
    "id": "Fansign Makestar",
    "ja": "Makestar サイン会",
+   "pt": "Fansign Makestar",
    "th": "แฟนไซน์ Makestar",
    "zh": "Makestar 签售会"
   },
@@ -6347,6 +6414,7 @@
    "es": "Videollamada Mnet Plus",
    "id": "Video call fansign Mnet Plus",
    "ja": "Mnet Plus ヨントン",
+   "pt": "Fansign por videochamada Mnet Plus",
    "th": "วิดีโอคอลแฟนไซน์ Mnet Plus",
    "zh": "Mnet Plus 视频签售"
   },
@@ -6355,6 +6423,7 @@
    "es": "Firma de fans Mnet Plus",
    "id": "Fansign Mnet Plus",
    "ja": "Mnet Plus サイン会",
+   "pt": "Fansign Mnet Plus",
    "th": "แฟนไซน์ Mnet Plus",
    "zh": "Mnet Plus 签售会"
   },
@@ -6363,6 +6432,7 @@
    "es": "Firma de fans Musicart",
    "id": "Fansign Musicart",
    "ja": "Musicart サイン会",
+   "pt": "Fansign Musicart",
    "th": "แฟนไซน์ Musicart",
    "zh": "Musicart 签售会"
   },
@@ -6371,6 +6441,7 @@
    "es": "Formado en POWERVOCAL Star Incubating Center",
    "id": "Lulusan POWERVOCAL Star Incubating Center",
    "ja": "POWERVOCAL Star Incubating Center出身",
+   "pt": "Treinou no POWERVOCAL Star Incubating Center",
    "th": "เคยฝึกที่ POWERVOCAL Star Incubating Center",
    "zh": "出身POWERVOCAL Star Incubating Center"
   },
@@ -6379,6 +6450,7 @@
    "es": "SBS Gayo Daejeon",
    "id": "SBS Gayo Daejeon",
    "ja": "SBS歌謡大祭典",
+   "pt": "SBS Gayo Daejeon",
    "th": "SBS Gayo Daejeon",
    "zh": "SBS歌谣大战"
   },
@@ -6387,6 +6459,7 @@
    "es": "SHOW K-POP",
    "id": "SHOW K-POP",
    "ja": "SHOW K-POP",
+   "pt": "SHOW K-POP",
    "th": "SHOW K-POP",
    "zh": "SHOW K-POP"
   },
@@ -6395,6 +6468,7 @@
    "es": "Finalista del concurso de modelos infantiles de SM Entertainment",
    "id": "Finalis kontes model cilik SM Entertainment",
    "ja": "SMエンターテインメント子役モデル選抜大会で決選進出",
+   "pt": "Finalista no concurso de modelos infantis da SM Entertainment",
    "th": "ผ่านเข้ารอบชิงการคัดเลือกนายแบบเด็กของ SM Entertainment",
    "zh": "入围SM娱乐儿童模特选拔赛决赛"
   },
@@ -6403,6 +6477,7 @@
    "es": "SOUL Ver. — fotolibro de 68 págs., CD-R, hoja de letras, móvil de papel, 3 photocards (al azar de 15)",
    "id": "SOUL Ver. — photobook 68 hlm, CD-R, lirik, paper mobile, 3 photocard (acak dari 15)",
    "ja": "SOUL Ver. — フォトブック68p、CD-R、歌詞カード、ペーパーモビール、フォトカード3枚（15種からランダム）",
+   "pt": "SOUL Ver. — photobook de 68 páginas, CD-R, encarte de letras, móbile de papel, 3 photocards (aleatórios entre 15)",
    "th": "SOUL Ver. — โฟโต้บุ๊ก 68 หน้า, CD-R, ใบเนื้อเพลง, โมบายกระดาษ, โฟโต้การ์ด 3 ใบ (สุ่มจาก 15 แบบ)",
    "zh": "SOUL Ver. — 写真书68页、CD-R、歌词纸、纸质挂饰、小卡3张（15款随机）"
   },
@@ -6411,6 +6486,7 @@
    "es": "Formado en URIZIP KPOP ACADEMY",
    "id": "Lulusan URIZIP KPOP ACADEMY",
    "ja": "URIZIP KPOP ACADEMY出身",
+   "pt": "Treinou na URIZIP KPOP ACADEMY",
    "th": "เคยฝึกที่ URIZIP KPOP ACADEMY",
    "zh": "出身URIZIP KPOP ACADEMY"
   },
@@ -6419,6 +6495,7 @@
    "es": "Videollamada Withmuu",
    "id": "Video call fansign Withmuu",
    "ja": "Withmuu ヨントン",
+   "pt": "Fansign por videochamada Withmuu",
    "th": "วิดีโอคอลแฟนไซน์ Withmuu",
    "zh": "Withmuu 视频签售"
   },
@@ -6427,6 +6504,7 @@
    "es": "Firma de fans Withmuu",
    "id": "Fansign Withmuu",
    "ja": "Withmuu サイン会",
+   "pt": "Fansign Withmuu",
    "th": "แฟนไซน์ Withmuu",
    "zh": "Withmuu 签售会"
   },
@@ -6435,6 +6513,7 @@
    "es": "Líneas de baile ligeras y precisas",
    "id": "Garis dance ringan dan presisi",
    "ja": "軽やかで正確なダンスライン",
+   "pt": "Movimentos leves e precisos",
    "th": "ท่าเต้นเบาและแม่นยำ",
    "zh": "轻盈精准的舞蹈线条"
   },
@@ -6443,6 +6522,7 @@
    "es": "No repitas solo el mismo MV: intercala otros videos (presentaciones, fancams)",
    "id": "Jangan ulang MV yang sama terus — selingi video lain (panggung, fancam)",
    "ja": "同じMVだけを連続リピートせず、他の動画（ステージ・直カム）を挟む",
+   "pt": "Não repita o mesmo MV sem parar — intercale outros vídeos (apresentações, fancams)",
    "th": "อย่าวน MV เดิมซ้ำๆ — สลับกับคลิปอื่น (เวที, แฟนแคม)",
    "zh": "不要只循环同一MV，中间穿插其他视频（舞台·直拍）"
   },
@@ -6451,6 +6531,7 @@
    "es": "Miembro del coro infantil de Gyeonggi",
    "id": "Anggota Paduan Suara Anak Gyeonggi",
    "ja": "京畿少年少女合唱団で活動",
+   "pt": "Integrou o Coral Infantojuvenil de Gyeonggi",
    "th": "เคยอยู่คณะนักร้องประสานเสียงเยาวชนคยองกี",
    "zh": "京畿少年少女合唱团成员"
   },
@@ -6459,6 +6540,7 @@
    "es": "Dónde ver la info oficial",
    "id": "Info resmi ada di sini",
    "ja": "公式情報はここで",
+   "pt": "Onde encontrar informações oficiais",
    "th": "ดูข้อมูลทางการได้ที่ไหน",
    "zh": "官方信息看这里"
   },
@@ -6467,6 +6549,7 @@
    "es": "Rey oficial de la energía",
    "id": "Raja semangat resmi",
    "ja": "公式テンション王",
+   "pt": "Rei oficial da animação",
    "th": "ราชาเทนชันประจำวง",
    "zh": "官方气氛王"
   },
@@ -6475,6 +6558,7 @@
    "es": "Sitio oficial",
    "id": "Situs resmi",
    "ja": "公式サイト",
+   "pt": "Site oficial",
    "th": "เว็บไซต์ทางการ",
    "zh": "官方网站"
   },
@@ -6483,6 +6567,7 @@
    "es": "Aun así sentían que algo faltaba, así que viajan a la Tierra en busca de las emociones y la energía que hacen sentir vivas a las personas —alegría, amor, emoción y pasión—: el 'SOUL'.",
    "id": "Merasa ada yang kosong, mereka pergi ke Bumi untuk mencari emosi dan energi yang membuat manusia hidup — bahagia, cinta, debar, gairah: 'SOUL'.",
    "ja": "それでも何かが足りないと感じた彼らは、人を生き生きとさせる感情とエネルギー——喜び・愛・ときめき・情熱、つまり「SOUL」を探しに地球へ旅立ちます。",
+   "pt": "Mesmo assim sentindo que algo faltava, eles partem para a Terra em busca das emoções e da energia que fazem as pessoas se sentirem vivas — alegria, amor, empolgação e paixão: a 'SOUL'.",
    "th": "แต่ก็ยังรู้สึกว่าขาดบางอย่าง พวกเขาจึงออกเดินทางมายังโลกเพื่อตามหาอารมณ์และพลังที่ทำให้คนรู้สึกมีชีวิต — ความสุข ความรัก ความตื่นเต้น และความหลงใหล นั่นคือ 'SOUL'",
    "zh": "即便如此仍觉得缺了点什么的他们，为了寻找让人鲜活的情感与能量——喜悦、爱、心动、热情，也就是“SOUL”，出发前往地球。"
   },
@@ -6491,6 +6576,7 @@
    "es": "Vie 17:15 · KBS2",
    "id": "Jum 17:15 · KBS2",
    "ja": "金 17:15 · KBS2",
+   "pt": "Sex 17:15 · KBS2",
    "th": "ศ. 17:15 · KBS2",
    "zh": "周五 17:15 · KBS2"
   },
@@ -6499,6 +6585,7 @@
    "es": "Aniversario",
    "id": "Hari jadi",
    "ja": "記念日",
+   "pt": "Data especial",
    "th": "วันครบรอบ",
    "zh": "纪念日"
   },
@@ -6507,6 +6594,7 @@
    "es": "Otro",
    "id": "Lainnya",
    "ja": "その他",
+   "pt": "Outros",
    "th": "อื่นๆ",
    "zh": "其他"
   },
@@ -6515,6 +6603,7 @@
    "es": "Le encanta el neo soul (artista favorita: Erykah Badu)",
    "id": "Suka neo soul (artis favorit: Erykah Badu)",
    "ja": "ネオソウルが好き（推しアーティストはエリカ・バドゥ）",
+   "pt": "Adora neo soul (artista favorita: Erykah Badu)",
    "th": "ชอบนีโอโซล (ศิลปินคนโปรด: Erykah Badu)",
    "zh": "喜欢新灵魂乐（最爱歌手Erykah Badu）"
   },
@@ -6523,6 +6612,7 @@
    "es": "Ganó varias competencias de baile",
    "id": "Menang di banyak kompetisi dance",
    "ja": "多数のダンス大会で受賞",
+   "pt": "Venceu vários concursos de dança",
    "th": "ชนะการแข่งขันเต้นหลายรายการ",
    "zh": "多次获得舞蹈比赛奖项"
   },
@@ -6531,6 +6621,7 @@
    "es": "La mayoría de apps dan votos por misiones y anuncios: acumúlalos antes",
    "id": "Kebanyakan aplikasi kasih vote lewat misi dan iklan — kumpulkan dari awal",
    "ja": "多くはアプリのミッション・広告で投票権を集めるので事前に貯めておく",
+   "pt": "A maioria dos apps dá votos por missões e anúncios — junte com antecedência",
    "th": "แอปส่วนใหญ่ให้สิทธิ์โหวตจากภารกิจและโฆษณา — สะสมไว้ล่วงหน้า",
    "zh": "大多数App通过任务·广告获得投票券，记得提前攒"
   },
@@ -6539,6 +6630,7 @@
    "es": "Baile",
    "id": "Dance",
    "ja": "ダンス",
+   "pt": "Dança",
    "th": "แดนซ์",
    "zh": "舞蹈"
   },
@@ -6547,6 +6639,7 @@
    "es": "Formado en la academia de baile y voz HIBEAT",
    "id": "Lulusan akademi dance & vokal HIBEAT",
    "ja": "ダンス・ボーカルアカデミーHIBEAT出身",
+   "pt": "Treinou na academia de dança e vocal HIBEAT",
    "th": "เคยฝึกที่สถาบันเต้นและร้อง HIBEAT",
    "zh": "出身舞蹈声乐学院HIBEAT"
   },
@@ -6555,6 +6648,7 @@
    "es": "Centro del dance break",
    "id": "Center di dance break",
    "ja": "ダンスブレイクのセンター",
+   "pt": "Centro do dance break",
    "th": "เซ็นเตอร์ช่วงแดนซ์เบรก",
    "zh": "舞蹈Break C位"
   },
@@ -6563,14 +6657,25 @@
    "es": "Dio clases de un día en una academia de baile",
    "id": "Mengajar kelas satu hari di akademi dance",
    "ja": "ダンス教室でワンデークラスを担当",
+   "pt": "Deu aulas avulsas numa academia de dança",
    "th": "สอนคลาสวันเดียวที่สถาบันเต้น",
    "zh": "在舞蹈学院开设一日课程"
+  },
+  "댄스, 에이스": {
+   "en": "Dance, ace",
+   "es": "Baile, as",
+   "id": "Dance, ace",
+   "ja": "ダンス、エース",
+   "pt": "Dança, ace",
+   "th": "แดนซ์, เอซ",
+   "zh": "舞蹈、王牌"
   },
   "더블 타이틀 'Dancing in the Dark' 뮤직비디오": {
    "en": "Double title track 'Dancing in the Dark' MV",
    "es": "MV del doble título 'Dancing in the Dark'",
    "id": "MV double title 'Dancing in the Dark'",
    "ja": "ダブルタイトル『Dancing in the Dark』MV",
+   "pt": "MV da faixa-título dupla 'Dancing in the Dark'",
    "th": "MV ดับเบิลไตเติล 'Dancing in the Dark'",
    "zh": "双主打《Dancing in the Dark》MV"
   },
@@ -6579,6 +6684,7 @@
    "es": "THE SHOW",
    "id": "THE SHOW",
    "ja": "THE SHOW",
+   "pt": "THE SHOW",
    "th": "THE SHOW",
    "zh": "THE SHOW"
   },
@@ -6587,6 +6693,7 @@
    "es": "¿Eres nuevo? Tu primera semana",
    "id": "Fans baru? Minggu pertamamu",
    "ja": "推し活初心者さんへ — 最初の1週間",
+   "pt": "Fã novo? Sua primeira semana",
    "th": "แฟนใหม่? สัปดาห์แรกของคุณ",
    "zh": "刚入坑？第一周这样做"
   },
@@ -6595,6 +6702,7 @@
    "es": "Mini álbum debut",
    "id": "Mini album debut",
    "ja": "デビューミニアルバム",
+   "pt": "Mini-álbum de debut",
    "th": "มินิอัลบั้มเดบิวต์",
    "zh": "出道迷你专辑"
   },
@@ -6603,6 +6711,7 @@
    "es": "Narración en inglés del video del showcase debut",
    "id": "Narasi bahasa Inggris di video showcase debut",
    "ja": "デビューショーケース映像の英語ナレーション",
+   "pt": "Narração em inglês no vídeo do showcase de debut",
    "th": "บรรยายภาษาอังกฤษในวิดีโอโชว์เคสเดบิวต์",
    "zh": "出道Showcase视频英语旁白"
   },
@@ -6611,6 +6720,7 @@
    "es": "Primera presentación en el showcase debut",
    "id": "Panggung pertama di showcase debut",
    "ja": "デビューショーケースの初ステージ",
+   "pt": "Primeira apresentação no showcase de debut",
    "th": "เวทีแรกในโชว์เคสเดบิวต์",
    "zh": "出道Showcase首个舞台"
   },
@@ -6619,6 +6729,7 @@
    "es": "El álbum debut 'SUPERSTAR' es el primer capítulo de esa historia. El grupo llama a su música 'NEW SYNTHWAVE'.",
    "id": "Album debut 'SUPERSTAR' adalah bab pertama cerita itu. Grup ini menyebut musik mereka 'NEW SYNTHWAVE'.",
    "ja": "デビューアルバム『SUPERSTAR』がその物語の第1章。グループは自分たちの音楽を「NEW SYNTHWAVE」と呼んでいます。",
+   "pt": "O álbum de debut 'SUPERSTAR' é o primeiro capítulo dessa história. O grupo chama sua música de 'NEW SYNTHWAVE'.",
    "th": "อัลบั้มเดบิวต์ 'SUPERSTAR' คือบทแรกของเรื่องราวนี้ และวงเรียกดนตรีของตัวเองว่า 'NEW SYNTHWAVE'",
    "zh": "出道专辑《SUPERSTAR》是这个故事的第一章。他们把自己的音乐称为“NEW SYNTHWAVE”。"
   },
@@ -6627,6 +6738,7 @@
    "es": "Empieza con el MV del debut 'SUPERSTAR'",
    "id": "Mulai dari MV lagu debut 'SUPERSTAR'",
    "ja": "デビュー曲『SUPERSTAR』のMVからスタート",
+   "pt": "Comece pelo MV da música de debut 'SUPERSTAR'",
    "th": "เริ่มจาก MV เพลงเดบิวต์ 'SUPERSTAR'",
    "zh": "从出道曲《SUPERSTAR》MV开始"
   },
@@ -6635,6 +6747,7 @@
    "es": "Hada de las intros",
    "id": "Peri pembuka",
    "ja": "導入の妖精",
+   "pt": "Fada da introdução",
    "th": "นางฟ้าท่อนเปิด",
    "zh": "开场小精灵"
   },
@@ -6643,6 +6756,7 @@
    "es": "Dubái",
    "id": "Dubai",
    "ja": "ドバイ",
+   "pt": "Dubai",
    "th": "ดูไบ",
    "zh": "迪拜"
   },
@@ -6651,6 +6765,7 @@
    "es": "En vivo",
    "id": "Live",
    "ja": "ライブ",
+   "pt": "Live",
    "th": "ไลฟ์",
    "zh": "直播"
   },
@@ -6659,6 +6774,7 @@
    "es": "Rap, baile",
    "id": "Rap, dance",
    "ja": "ラップ、ダンス",
+   "pt": "Rap, dança",
    "th": "แร็ป, แดนซ์",
    "zh": "说唱、舞蹈"
   },
@@ -6667,6 +6783,7 @@
    "es": "Sorteo",
    "id": "Lucky draw",
    "ja": "ラッキードロー",
+   "pt": "Lucky draw",
    "th": "ลัคกี้ดรอว์",
    "zh": "幸运抽奖"
   },
@@ -6675,6 +6792,7 @@
    "es": "Mira el MV completo con sesión iniciada",
    "id": "Tonton MV sampai habis sambil login",
    "ja": "ログインした状態でMVを最後まで見る",
+   "pt": "Assista ao MV até o fim, logado",
    "th": "ล็อกอินแล้วดู MV จนจบ",
    "zh": "登录状态下完整观看MV"
   },
@@ -6683,14 +6801,43 @@
    "es": "Rookies · LTB · HTB — nombres de la etapa de trainees (A2O Rookies)",
    "id": "Rookies · LTB · HTB — nama masa trainee pra-debut (A2O Rookies)",
    "ja": "ルーキーズ・LTB・HTB — デビュー前の練習生時代の名前（A2O Rookies）",
+   "pt": "Rookies · LTB · HTB — nomes da época de trainee antes do debut (A2O Rookies)",
    "th": "Rookies · LTB · HTB — ชื่อช่วงเทรนนีก่อนเดบิวต์ (A2O Rookies)",
    "zh": "Rookies·LTB·HTB — 出道前练习生时期的名称（A2O Rookies）"
+  },
+  "리더, 보컬, 비주얼 센터": {
+   "en": "Leader, vocal, visual center",
+   "es": "Líder, voz, centro visual",
+   "id": "Leader, vokal, visual center",
+   "ja": "リーダー、ボーカル、ビジュアルセンター",
+   "pt": "Líder, vocal, centro visual",
+   "th": "ลีดเดอร์, ร้อง, วิชวลเซ็นเตอร์",
+   "zh": "队长、主唱、颜值担当·C位"
+  },
+  "리드보컬, 메인댄서": {
+   "en": "Lead vocal, main dancer",
+   "es": "Voz líder, bailarín principal",
+   "id": "Lead vocal, main dancer",
+   "ja": "リードボーカル、メインダンサー",
+   "pt": "Vocal líder, dançarino principal",
+   "th": "ลีดโวคอล, เมนแดนเซอร์",
+   "zh": "领唱、主舞"
+  },
+  "릴레이댄스": {
+   "en": "Relay dance",
+   "es": "Relay dance",
+   "id": "Relay dance",
+   "ja": "リレーダンス",
+   "pt": "Relay dance",
+   "th": "รีเลย์แดนซ์",
+   "zh": "接力舞蹈"
   },
   "릴레이댄스로 멤버별 파트 확인": {
    "en": "Check each member's part with the relay dance",
    "es": "Mira la parte de cada miembro en el relay dance",
    "id": "Cek part tiap member lewat relay dance",
    "ja": "リレーダンスでメンバー別パートを確認",
+   "pt": "Veja a parte de cada membro na relay dance",
    "th": "เช็กพาร์ตของแต่ละคนจากรีเลย์แดนซ์",
    "zh": "通过接力舞确认每位成员的部分"
   },
@@ -6699,6 +6846,7 @@
    "es": "LiNC",
    "id": "LiNC",
    "ja": "LiNC",
+   "pt": "LiNC",
    "th": "LiNC",
    "zh": "LiNC"
   },
@@ -6707,6 +6855,7 @@
    "es": "Todos los enlaces están en 'Canales oficiales' arriba en Miembros",
    "id": "Semua tautan ada di 'Kanal resmi' di atas tab Member",
    "ja": "リンクはメンバータブ上部の「公式チャンネル」にまとまっています",
+   "pt": "Todos os links estão em 'Canais oficiais', no topo da aba Membros",
    "th": "ลิงก์ทั้งหมดอยู่ที่ 'ช่องทางทางการ' ด้านบนแท็บเมมเบอร์",
    "zh": "链接都在成员页顶部的“官方频道”"
   },
@@ -6715,6 +6864,7 @@
    "es": "Su encanto: su voz grave tipo 'cueva'",
    "id": "Daya tariknya suara bass 'cave voice'",
    "ja": "チャームポイントは「洞窟ボイス」の低音",
+   "pt": "Seu charme é a voz grave de 'caverna'",
    "th": "จุดเด่นคือเสียงทุ้มต่ำแบบ 'เสียงถ้ำ'",
    "zh": "魅力点是“洞穴音”低音"
   },
@@ -6723,6 +6873,7 @@
    "es": "Makestar",
    "id": "Makestar",
    "ja": "Makestar",
+   "pt": "Makestar",
    "th": "Makestar",
    "zh": "Makestar"
   },
@@ -6731,6 +6882,7 @@
    "es": "Bailarín principal",
    "id": "Main dancer",
    "ja": "メインダンサー",
+   "pt": "Dançarino principal",
    "th": "เมนแดนเซอร์",
    "zh": "主舞"
   },
@@ -6739,6 +6891,7 @@
    "es": "Vocalista principal",
    "id": "Main vocal",
    "ja": "メインボーカル",
+   "pt": "Vocal principal",
    "th": "เมนโวคอล",
    "zh": "主唱"
   },
@@ -6747,6 +6900,7 @@
    "es": "Aprende sus caras con el quiz de adivinar",
    "id": "Hafalkan wajah lewat kuis tebak member",
    "ja": "メンバー当てクイズで顔を覚える",
+   "pt": "Aprenda os rostos com o quiz de adivinhar o membro",
    "th": "จำหน้าด้วยเกมทายเมมเบอร์",
    "zh": "用猜成员小测验记住大家"
   },
@@ -6755,6 +6909,7 @@
    "es": "Video de presentación de los miembros",
    "id": "Video perkenalan member",
    "ja": "メンバー紹介映像",
+   "pt": "Vídeo de apresentação dos membros",
    "th": "คลิปแนะนำเมมเบอร์",
    "zh": "成员介绍视频"
   },
@@ -6763,6 +6918,7 @@
    "es": "Revisa fotos y perfiles de los 15 en la pestaña Miembros",
    "id": "Lihat foto dan profil 15 member di tab Member",
    "ja": "メンバータブで15人の写真・プロフィールをチェック",
+   "pt": "Veja fotos e perfis dos 15 membros na aba Membros",
    "th": "ดูรูปและโปรไฟล์ทั้ง 15 คนในแท็บเมมเบอร์",
    "zh": "在成员页浏览15位成员的照片和资料"
   },
@@ -6771,6 +6927,7 @@
    "es": "Jue 18:00 · Mnet",
    "id": "Kam 18:00 · Mnet",
    "ja": "木 18:00 · Mnet",
+   "pt": "Qui 18:00 · Mnet",
    "th": "พฤ. 18:00 · Mnet",
    "zh": "周四 18:00 · Mnet"
   },
@@ -6779,6 +6936,7 @@
    "es": "Encanto del contraste entre su cara seria y su sonrisa",
    "id": "Pesona kontras antara wajah datar dan senyumnya",
    "ja": "無表情と笑顔のギャップが魅力",
+   "pt": "Contraste charmoso entre a cara séria e o sorriso",
    "th": "เสน่ห์ความต่างระหว่างหน้านิ่งกับรอยยิ้ม",
    "zh": "面无表情与笑脸的反差魅力"
   },
@@ -6787,6 +6945,7 @@
    "es": "MUNIVERSE · MUBEAT (global)",
    "id": "MUNIVERSE · MUBEAT (global)",
    "ja": "MUNIVERSE · MUBEAT（グローバル）",
+   "pt": "MUNIVERSE · MUBEAT (global)",
    "th": "MUNIVERSE · MUBEAT (โกลบอล)",
    "zh": "MUNIVERSE · MUBEAT（全球）"
   },
@@ -6795,6 +6954,7 @@
    "es": "Music Bank",
    "id": "Music Bank",
    "ja": "ミュージックバンク",
+   "pt": "Music Bank",
    "th": "Music Bank",
    "zh": "音乐银行"
   },
@@ -6803,6 +6963,7 @@
    "es": "Musicplant",
    "id": "Musicplant",
    "ja": "Musicplant",
+   "pt": "Musicplant",
    "th": "Musicplant",
    "zh": "Musicplant"
   },
@@ -6811,6 +6972,7 @@
    "es": "Le encantan las baladas (canción favorita: EXO 'For Life')",
    "id": "Suka balada (lagu favorit: EXO 'For Life')",
    "ja": "バラードが好き（好きな曲はEXO『For Life』）",
+   "pt": "Adora baladas (música favorita: 'For Life' do EXO)",
    "th": "ชอบเพลงบัลลาด (เพลงโปรด: EXO 'For Life')",
    "zh": "喜欢抒情歌（最爱歌曲EXO《For Life》）"
   },
@@ -6819,6 +6981,7 @@
    "es": "Lanzamiento",
    "id": "Rilis",
    "ja": "リリース",
+   "pt": "Lançamento",
    "th": "ปล่อยผลงาน",
    "zh": "发行"
   },
@@ -6827,6 +6990,7 @@
    "es": "Programas musicales",
    "id": "Acara musik",
    "ja": "音楽番組",
+   "pt": "Programas musicais",
    "th": "รายการเพลง",
    "zh": "打歌"
   },
@@ -6835,14 +6999,25 @@
    "es": "Voz",
    "id": "Vokal",
    "ja": "ボーカル",
+   "pt": "Vocal",
    "th": "ร้อง",
    "zh": "主唱"
+  },
+  "보컬, 랩": {
+   "en": "Vocal, rap",
+   "es": "Voz, rap",
+   "id": "Vokal, rap",
+   "ja": "ボーカル、ラップ",
+   "pt": "Vocal, rap",
+   "th": "ร้อง, แร็ป",
+   "zh": "主唱、说唱"
   },
   "보컬, 비주얼 센터": {
    "en": "Vocal, visual center",
    "es": "Voz, centro visual",
    "id": "Vokal, visual center",
    "ja": "ボーカル、ビジュアルセンター",
+   "pt": "Vocal, centro visual",
    "th": "ร้อง, วิชวลเซ็นเตอร์",
    "zh": "主唱、颜值担当·C位"
   },
@@ -6851,6 +7026,7 @@
    "es": "Entró como vocalista y mejoró mucho su baile en poco tiempo",
    "id": "Masuk sebagai vokalis dan cepat meningkatkan kemampuan dance",
    "ja": "ボーカルとして入社し、短期間でダンス力を大きく伸ばした",
+   "pt": "Entrou como vocal e evoluiu muito na dança em pouco tempo",
    "th": "เข้ามาในฐานะนักร้อง แล้วพัฒนาการเต้นได้เร็วมาก",
    "zh": "以声乐身份加入，短时间内舞蹈实力大幅提升"
   },
@@ -6859,6 +7035,7 @@
    "es": "El ganador obtiene un anuncio en la pantalla gigante de COEX Media Tower",
    "id": "Pemenang kategori dapat iklan di billboard COEX Media Tower",
    "ja": "部門1位はCOEXメディアタワーの大型ビジョン広告",
+   "pt": "O vencedor da categoria ganha um anúncio no telão da COEX Media Tower",
    "th": "ผู้ชนะประเภทได้ป้ายโฆษณาบนจอ COEX Media Tower",
    "zh": "组别第一名可获COEX媒体塔大屏广告"
   },
@@ -6867,6 +7044,7 @@
    "es": "Debutó como trainee no revelado",
    "id": "Debut sebagai trainee yang dirahasiakan",
    "ja": "非公開練習生としてデビュー",
+   "pt": "Debutou como trainee secreto",
    "th": "เดบิวต์ในฐานะเทรนนีที่ไม่เปิดเผยตัว",
    "zh": "以未公开练习生身份出道"
   },
@@ -6875,6 +7053,7 @@
    "es": "Visual",
    "id": "Visual",
    "ja": "ビジュアル",
+   "pt": "Visual",
    "th": "วิชวล",
    "zh": "颜值担当"
   },
@@ -6883,14 +7062,25 @@
    "es": "Su especialidad es el beatbox",
    "id": "Keahliannya beatbox",
    "ja": "特技はビートボックス",
+   "pt": "Beatbox é sua especialidade",
    "th": "ความสามารถพิเศษคือบีตบ็อกซ์",
    "zh": "特长是Beatbox"
+  },
+  "비하인드": {
+   "en": "Behind the scenes",
+   "es": "Detrás de cámaras",
+   "id": "Behind the scenes",
+   "ja": "ビハインド",
+   "pt": "Bastidores",
+   "th": "เบื้องหลัง",
+   "zh": "幕后"
   },
   "빅크(BIGC)": {
    "en": "BIGC",
    "es": "BIGC",
    "id": "BIGC",
    "ja": "BIGC",
+   "pt": "BIGC",
    "th": "BIGC",
    "zh": "BIGC"
   },
@@ -6899,6 +7089,7 @@
    "es": "Él mismo transforma ropa vintage",
    "id": "Me-reform sendiri baju vintage",
    "ja": "古着を自分でリメイクして着る",
+   "pt": "Customiza roupas vintage ele mesmo",
    "th": "รีฟอร์มเสื้อผ้าวินเทจใส่เอง",
    "zh": "会亲手改造古着来穿"
   },
@@ -6907,6 +7098,7 @@
    "es": "Pregrabación — presentación grabada antes de la emisión, a menudo con fans",
    "id": "Pra-rekam — panggung acara musik yang direkam lebih dulu, sering ditonton fans",
    "ja": "サノク — 音楽番組の事前収録（ファンが観覧できる収録）",
+   "pt": "Pré-gravação — apresentação gravada antes do programa, muitas vezes com fãs na plateia",
    "th": "พรีเรคคอร์ด — การอัดเวทีรายการเพลงล่วงหน้า มักมีแฟนเข้าชม",
    "zh": "预录 — 打歌节目的提前录制（粉丝可现场观看）"
   },
@@ -6915,14 +7107,25 @@
    "es": "Le encanta la fotografía: usa un móvil viejo para fotos retro",
    "id": "Suka foto — pakai HP lama khusus untuk nuansa retro",
    "ja": "写真好きでレトロな雰囲気用に古いスマホを別に使う",
+   "pt": "Adora fotografar — tem um celular antigo só para fotos retrô",
    "th": "ชอบถ่ายรูป มีมือถือรุ่นเก่าไว้ถ่ายฟีลเรโทรโดยเฉพาะ",
    "zh": "喜欢拍照，专门用旧手机拍复古感照片"
+  },
+  "새 투표·사녹 공지는 사이트에 자동으로 올라와요. 홈 화면에 추가해 두고 자주 확인해 주세요": {
+   "en": "New votes and pre-recording notices appear here automatically. Add the site to your home screen and check often",
+   "es": "Las nuevas votaciones y avisos de pregrabación aparecen aquí solos. Añade el sitio a tu pantalla de inicio y revisa seguido",
+   "id": "Voting dan pengumuman pra-rekaman baru muncul otomatis di sini. Tambahkan ke layar utama dan sering cek ya",
+   "ja": "新しい投票・事前収録の告知はサイトに自動で載ります。ホーム画面に追加してこまめにチェックしてください",
+   "pt": "Novas votações e avisos de pré-gravação aparecem aqui automaticamente. Adicione o site à tela de início e confira sempre",
+   "th": "โหวตและประกาศพรีเรคใหม่จะขึ้นที่เว็บอัตโนมัติ เพิ่มไว้ที่หน้าจอโฮมแล้วเข้ามาเช็กบ่อยๆ",
+   "zh": "新的投票和预录公告会自动更新到网站。把网站添加到主屏幕，常来看看"
   },
   "생방송 중 앱 실시간 투표 배너": {
    "en": "Live voting banner in the app during the broadcast",
    "es": "Banner de votación en vivo en la app durante la emisión",
    "id": "Banner voting live di aplikasi saat siaran",
    "ja": "生放送中にアプリのリアルタイム投票バナー",
+   "pt": "Banner de votação ao vivo no app durante a transmissão",
    "th": "แบนเนอร์โหวตสดในแอประหว่างออกอากาศ",
    "zh": "直播期间App内实时投票横幅"
   },
@@ -6931,14 +7134,25 @@
    "es": "Votación en vivo: hasta 5 votos por cuenta",
    "id": "Voting live: maks. 5 suara per akun",
    "ja": "生放送投票は1アカウント最大5票",
+   "pt": "Votação ao vivo: até 5 votos por conta",
    "th": "โหวตสด: สูงสุด 5 โหวตต่อบัญชี",
    "zh": "直播投票每个账号最多5票"
+  },
+  "생방송 투표는 방송 시간(KST)에만 열려요 — 방송 일정은 한눈에 탭 달력에서": {
+   "en": "Live votes only open during the broadcast (KST) — see the calendar on Home for show times",
+   "es": "La votación en vivo solo se abre durante la emisión (KST) — mira el calendario en Inicio",
+   "id": "Voting live hanya dibuka saat siaran (KST) — lihat jadwal di kalender Beranda",
+   "ja": "生放送投票は放送時間（KST）だけ開きます — 放送日程はホームのカレンダーで",
+   "pt": "A votação ao vivo só abre durante a transmissão (KST) — veja os horários no calendário do Início",
+   "th": "โหวตสดเปิดเฉพาะช่วงออกอากาศ (KST) — ดูเวลาในปฏิทินหน้าหลัก",
+   "zh": "直播投票只在播出时间（KST）开放 — 播出日程见首页日历"
   },
   "선공개 싱글": {
    "en": "Pre-release single",
    "es": "Sencillo de prelanzamiento",
    "id": "Single pra-rilis",
    "ja": "先行シングル",
+   "pt": "Single de pré-lançamento",
    "th": "ซิงเกิลปล่อยล่วงหน้า",
    "zh": "先行单曲"
   },
@@ -6947,6 +7161,7 @@
    "es": "Sencillo de prelanzamiento · sencillo promocional del debut",
    "id": "Single pra-rilis · lagu promosi debut",
    "ja": "先行シングル・デビュー活動曲",
+   "pt": "Single de pré-lançamento · música de debut",
    "th": "ซิงเกิลปล่อยล่วงหน้า · เพลงโปรโมตช่วงเดบิวต์",
    "zh": "先行单曲·出道主打"
   },
@@ -6955,6 +7170,7 @@
    "es": "Considera a SORA, de su misma edad, su alma gemela",
    "id": "Menyebut SORA yang seumuran sebagai soulmate-nya",
    "ja": "ソウルメイトに同い年のSORAを挙げた",
+   "pt": "Diz que o SORA, da mesma idade, é sua alma gêmea",
    "th": "บอกว่าเพื่อนร่วมรุ่น SORA คือโซลเมต",
    "zh": "称同龄成员SORA为灵魂伴侣"
   },
@@ -6963,6 +7179,7 @@
    "es": "Considera a MOON, el mayor, su alma gemela",
    "id": "Menyebut MOON, member tertua, sebagai soulmate-nya",
    "ja": "ソウルメイトに最年長のMOONを挙げた",
+   "pt": "Diz que o MOON, o mais velho, é sua alma gêmea",
    "th": "บอกว่าพี่ใหญ่ MOON คือโซลเมต",
    "zh": "称大哥MOON为灵魂伴侣"
   },
@@ -6971,6 +7188,7 @@
    "es": "Su comida favorita es el jjajangmyeon",
    "id": "Soul food-nya jjajangmyeon",
    "ja": "ソウルフードはジャージャー麺",
+   "pt": "Sua comida favorita é jjajangmyeon",
    "th": "อาหารจานโปรดคือจาจังมยอน",
    "zh": "灵魂食物是炸酱面"
   },
@@ -6979,6 +7197,7 @@
    "es": "Video solista 'Love Is Gone' Zal-Dance (abr. 2025)",
    "id": "Video solo 'Love Is Gone' Zal-Dance (Apr 2025)",
    "ja": "ソロ『Love Is Gone』Zal-Dance映像（2025.4）",
+   "pt": "Vídeo solo 'Love Is Gone' Zal-Dance (abr. 2025)",
    "th": "คลิปโซโล 'Love Is Gone' Zal-Dance (เม.ย. 2025)",
    "zh": "个人《Love Is Gone》Zal-Dance视频（2025.4）"
   },
@@ -6987,6 +7206,7 @@
    "es": "Video solista 'Palette' Zal-Dance (jun. 2025)",
    "id": "Video solo 'Palette' Zal-Dance (Jun 2025)",
    "ja": "ソロ『Palette』Zal-Dance映像（2025.6）",
+   "pt": "Vídeo solo 'Palette' Zal-Dance (jun. 2025)",
    "th": "คลิปโซโล 'Palette' Zal-Dance (มิ.ย. 2025)",
    "zh": "个人《Palette》Zal-Dance视频（2025.6）"
   },
@@ -6995,6 +7215,7 @@
    "es": "Show Champion",
    "id": "Show Champion",
    "ja": "SHOW CHAMPION",
+   "pt": "Show Champion",
    "th": "Show Champion",
    "zh": "Show Champion"
   },
@@ -7003,6 +7224,7 @@
    "es": "Mié · MBC M",
    "id": "Rab · MBC M",
    "ja": "水 · MBC M",
+   "pt": "Qua · MBC M",
    "th": "พ. · MBC M",
    "zh": "周三 · MBC M"
   },
@@ -7011,6 +7233,7 @@
    "es": "Streaming — escuchar en sitios de música (cuenta para las listas)",
    "id": "Streaming — memutar lagu di situs musik (masuk hitungan chart)",
    "ja": "スミン — 音源サイトでのストリーミング（チャート順位に反映）",
+   "pt": "Streaming — ouvir as músicas nos sites de música (conta para as paradas)",
    "th": "สตรีม — เปิดฟังเพลงในเว็บเพลง (นับเข้าชาร์ต)",
    "zh": "打榜（刷流） — 在音源网站播放歌曲（计入榜单）"
   },
@@ -7019,6 +7242,7 @@
    "es": "Se presenta como el 'todoterreno dorado'",
    "id": "Menyebut dirinya 'golden all-rounder'",
    "ja": "自らを「黄金オールラウンダー」と紹介",
+   "pt": "Se apresenta como o 'all-rounder de ouro'",
    "th": "แนะนำตัวว่าเป็น 'ออลราวด์เดอร์สีทอง'",
    "zh": "自称“黄金全能型”"
   },
@@ -7027,6 +7251,7 @@
    "es": "Líneas de baile amplias y enérgicas",
    "id": "Garis dance besar dan lepas",
    "ja": "のびのびとした大きなダンスライン",
+   "pt": "Movimentos amplos e marcantes",
    "th": "ท่าเต้นใหญ่ เต็มที่",
    "zh": "大开大合的舞蹈线条"
   },
@@ -7035,6 +7260,7 @@
    "es": "Le encanta pasear por la ciudad",
    "id": "Suka jalan-jalan keliling kota",
    "ja": "街歩きが好き",
+   "pt": "Adora passear pela cidade",
    "th": "ชอบเดินเที่ยวในเมือง",
    "zh": "喜欢City Walk"
   },
@@ -7043,6 +7269,7 @@
    "es": "Álbum físico a la venta el 10 de noviembre de 2026",
    "id": "Album fisik rilis 10 November 2026",
    "ja": "CDは2026年11月10日発売",
+   "pt": "Álbum físico lançado em 10/11/2026",
    "th": "อัลบั้มแบบแผ่นวางจำหน่าย 10 พ.ย. 2026",
    "zh": "实体专辑于2026年11月10日发行"
   },
@@ -7051,6 +7278,7 @@
    "es": "Pequeño gran cantante",
    "id": "Penyanyi cilik andal",
    "ja": "ちびっこ名唱",
+   "pt": "Pequeno mestre vocal",
    "th": "นักร้องเสียงทองตัวน้อย",
    "zh": "小歌王"
   },
@@ -7059,6 +7287,7 @@
    "es": "IDOLCHAMP",
    "id": "IDOLCHAMP",
    "ja": "IDOLCHAMP",
+   "pt": "IDOLCHAMP",
    "th": "IDOLCHAMP",
    "zh": "IDOLCHAMP"
   },
@@ -7067,6 +7296,7 @@
    "es": "Álbum",
    "id": "Album",
    "ja": "アルバム",
+   "pt": "Álbum",
    "th": "อัลบั้ม",
    "zh": "专辑"
   },
@@ -7075,6 +7305,7 @@
    "es": "Álbumes, fansign y videollamadas (agotado al 13/11)",
    "id": "Album, fansign & video call (habis per 13/11)",
    "ja": "アルバム・サイン会・ビデオ通話イベント（11/13時点で完売）",
+   "pt": "Álbuns, eventos de fansign e videochamada (esgotado em 13/11)",
    "th": "อัลบั้ม, แฟนไซน์ และวิดีโอคอล (ขายหมด ณ 13 พ.ย.)",
    "zh": "专辑·签售·视频通话活动（截至11/13已售罄）"
   },
@@ -7083,6 +7314,7 @@
    "es": "Vota con la moneda que ganas en misiones y anuncios",
    "id": "Vote pakai poin dari misi dan iklan di aplikasi",
    "ja": "アプリのミッション・広告で集めたポイントで投票",
+   "pt": "Vote com a moeda do app ganha em missões e anúncios",
    "th": "โหวตด้วยแต้มที่ได้จากภารกิจและโฆษณาในแอป",
    "zh": "用App任务·广告获得的道具投票"
   },
@@ -7091,6 +7323,7 @@
    "es": "Mnet Plus",
    "id": "Mnet Plus",
    "ja": "Mnet Plus",
+   "pt": "Mnet Plus",
    "th": "Mnet Plus",
    "zh": "Mnet Plus"
   },
@@ -7099,6 +7332,7 @@
    "es": "M COUNTDOWN",
    "id": "M COUNTDOWN",
    "ja": "M COUNTDOWN",
+   "pt": "M COUNTDOWN",
    "th": "M COUNTDOWN",
    "zh": "M COUNTDOWN"
   },
@@ -7107,6 +7341,7 @@
    "es": "No uses la misma cuenta en varios dispositivos a la vez",
    "id": "Jangan streaming di banyak perangkat dengan akun yang sama sekaligus",
    "ja": "同じアカウントで複数の端末から同時に再生しない",
+   "pt": "Não toque em vários aparelhos com a mesma conta ao mesmo tempo",
    "th": "อย่าสตรีมหลายเครื่องด้วยบัญชีเดียวพร้อมกัน",
    "zh": "不要用同一账号在多台设备同时播放"
   },
@@ -7115,6 +7350,7 @@
    "es": "Base sólida de street dance en muchos estilos",
    "id": "Dasar street dance yang kuat di berbagai genre",
    "ja": "多彩なジャンルをこなすストリートダンスの基礎力",
+   "pt": "Base sólida de street dance em vários estilos",
    "th": "พื้นฐานสตรีทแดนซ์แน่นหลายแนว",
    "zh": "扎实的街舞基本功，驾驭多种风格"
   },
@@ -7123,6 +7359,7 @@
    "es": "Videollamada",
    "id": "Video call",
    "ja": "ヨントン",
+   "pt": "Videochamada",
    "th": "วิดีโอคอล",
    "zh": "视频签售"
   },
@@ -7131,14 +7368,25 @@
    "es": "Papel secundario en la película 'The Marked Sheep' (2022)",
    "id": "Pemeran pendukung film 'The Marked Sheep' (2022)",
    "ja": "映画『The Marked Sheep』（2022）助演",
+   "pt": "Papel coadjuvante no filme 'The Marked Sheep' (2022)",
    "th": "นักแสดงสมทบในภาพยนตร์ 'The Marked Sheep' (2022)",
    "zh": "电影《The Marked Sheep》（2022）配角"
+  },
+  "예능·라디오": {
+   "en": "Variety & radio",
+   "es": "Variedades y radio",
+   "id": "Variety & radio",
+   "ja": "バラエティ・ラジオ",
+   "pt": "Variedades e rádio",
+   "th": "วาไรตี้·วิทยุ",
+   "zh": "综艺·电台"
   },
   "예약 특전 셀카 포토카드": {
    "en": "Pre-order selfie photocard",
    "es": "Photocard selfie de preventa",
    "id": "Photocard selfie pre-order",
    "ja": "予約特典セルカフォトカード",
+   "pt": "Photocard selfie de pré-venda",
    "th": "โฟโต้การ์ดเซลฟี่พรีออเดอร์",
    "zh": "预购特典自拍小卡"
   },
@@ -7147,6 +7395,7 @@
    "es": "Evento de photocard de preventa",
    "id": "Event photocard pre-order",
    "ja": "予約特典フォトカードイベント",
+   "pt": "Evento de photocard de pré-venda",
    "th": "อีเวนต์โฟโต้การ์ดพรีออเดอร์",
    "zh": "预购特典小卡活动"
   },
@@ -7155,6 +7404,7 @@
    "es": "Beneficios de preventa",
    "id": "Benefit pre-order",
    "ja": "予約特典",
+   "pt": "Brindes de pré-venda",
    "th": "ของแถมพรีออเดอร์",
    "zh": "预售特典"
   },
@@ -7163,6 +7413,7 @@
    "es": "Chico orquesta",
    "id": "Orchestra boy",
    "ja": "オーケストラボーイ",
+   "pt": "Garoto da orquestra",
    "th": "ออร์เคสตราบอย",
    "zh": "管弦乐男孩"
   },
@@ -7171,14 +7422,34 @@
    "es": "Todoterreno (voz y baile)",
    "id": "All-rounder (vokal & dance)",
    "ja": "オールラウンダー（ボーカル・ダンス）",
+   "pt": "All-rounder (vocal e dança)",
    "th": "ออลราวด์เดอร์ (ร้อง·เต้น)",
    "zh": "全能型（声乐·舞蹈）"
+  },
+  "웰컴 투 소울라이트": {
+   "en": "Welcome to SOULITE",
+   "es": "Bienvenidos a SOULITE",
+   "id": "Welcome to SOULITE",
+   "ja": "ウェルカム・トゥ・ソウライト",
+   "pt": "Bem-vindos a SOULITE",
+   "th": "Welcome to SOULITE",
+   "zh": "欢迎来到SOULITE"
+  },
+  "위 표에서 앱 이름을 눌러 설치 → 구글·애플·이메일 계정으로 가입 (한국 전화번호 없이 가입되는 앱이 많아요)": {
+   "en": "Tap an app name in the table above to install it, then sign up with Google, Apple or email (most apps don't need a Korean phone number)",
+   "es": "Toca el nombre de la app en la tabla para instalarla y regístrate con Google, Apple o correo (la mayoría no pide número coreano)",
+   "id": "Ketuk nama aplikasi di tabel atas untuk memasang, lalu daftar dengan Google, Apple, atau email (banyak aplikasi tidak perlu nomor Korea)",
+   "ja": "上の表のアプリ名をタップしてインストール → Google・Apple・メールで登録（韓国の電話番号なしで登録できるアプリが多いです）",
+   "pt": "Toque no nome do app na tabela acima para instalar e cadastre-se com Google, Apple ou e-mail (a maioria não pede número coreano)",
+   "th": "แตะชื่อแอปในตารางด้านบนเพื่อติดตั้ง แล้วสมัครด้วย Google, Apple หรืออีเมล (หลายแอปไม่ต้องใช้เบอร์เกาหลี)",
+   "zh": "点上表中的App名称安装 → 用Google、Apple或邮箱注册（很多App不需要韩国手机号）"
   },
   "유튜브 A2O SOUL": {
    "en": "YouTube A2O SOUL",
    "es": "YouTube A2O SOUL",
    "id": "YouTube A2O SOUL",
    "ja": "YouTube A2O SOUL",
+   "pt": "YouTube A2O SOUL",
    "th": "YouTube A2O SOUL",
    "zh": "YouTube A2O SOUL"
   },
@@ -7187,6 +7458,7 @@
    "es": "YouTube A2O SOUL — MV y contenido propio",
    "id": "YouTube A2O SOUL — MV dan konten orisinal",
    "ja": "YouTube A2O SOUL — MV・自主コンテンツ",
+   "pt": "YouTube A2O SOUL — MVs e conteúdo próprio",
    "th": "YouTube A2O SOUL — MV และคอนเทนต์ของวง",
    "zh": "YouTube A2O SOUL — MV·自制内容"
   },
@@ -7195,6 +7467,7 @@
    "es": "YouTube A2O WORLD",
    "id": "YouTube A2O WORLD",
    "ja": "YouTube A2O WORLD",
+   "pt": "YouTube A2O WORLD",
    "th": "YouTube A2O WORLD",
    "zh": "YouTube A2O WORLD"
   },
@@ -7203,6 +7476,7 @@
    "es": "YouTube A2O WORLD — canal de la agencia (también videos de trainees)",
    "id": "YouTube A2O WORLD — kanal agensi (video trainee pra-debut juga)",
    "ja": "YouTube A2O WORLD — 事務所チャンネル（デビュー前の練習生映像も）",
+   "pt": "YouTube A2O WORLD — canal da agência (vídeos da época de trainee também)",
    "th": "YouTube A2O WORLD — ช่องของค่าย (มีคลิปเทรนนีก่อนเดบิวต์ด้วย)",
    "zh": "YouTube A2O WORLD — 公司频道（出道前练习生视频也在这）"
   },
@@ -7211,6 +7485,7 @@
    "es": "Vistas del MV en YouTube",
    "id": "Penayangan MV YouTube",
    "ja": "YouTube MV再生回数",
+   "pt": "Views dos MVs no YouTube",
    "th": "ยอดวิว MV บน YouTube",
    "zh": "YouTube MV播放量"
   },
@@ -7219,6 +7494,7 @@
    "es": "U+PICK",
    "id": "U+PICK",
    "ja": "U+PICK",
+   "pt": "U+PICK",
    "th": "U+PICK",
    "zh": "U+PICK"
   },
@@ -7227,6 +7503,7 @@
    "es": "App U+PICK",
    "id": "Aplikasi U+PICK",
    "ja": "U+PICKアプリ",
+   "pt": "App U+PICK",
    "th": "แอป U+PICK",
    "zh": "U+PICK App"
   },
@@ -7235,6 +7512,7 @@
    "es": "Programa musical",
    "id": "Acara musik",
    "ja": "音楽番組",
+   "pt": "Programa musical",
    "th": "รายการเพลง",
    "zh": "打歌节目"
   },
@@ -7243,6 +7521,7 @@
    "es": "Programa musical — THE SHOW, Show Champion, M COUNTDOWN, Music Bank, Music Core, Inkigayo",
    "id": "Acara musik — THE SHOW, Show Champion, M COUNTDOWN, Music Bank, Music Core, Inkigayo",
    "ja": "音楽番組 — THE SHOW・SHOW CHAMPION・M COUNTDOWN・ミュージックバンク・音楽中心・人気歌謡",
+   "pt": "Programa musical — THE SHOW, Show Champion, M COUNTDOWN, Music Bank, Show! Music Core, Inkigayo",
    "th": "รายการเพลง — THE SHOW, Show Champion, M COUNTDOWN, Music Bank, Show! Music Core, Inkigayo",
    "zh": "打歌节目 — THE SHOW·Show Champion·M COUNTDOWN·音乐银行·音乐中心·人气歌谣"
   },
@@ -7251,6 +7530,7 @@
    "es": "Votaciones de programas musicales: lo básico",
    "id": "Dasar voting acara musik",
    "ja": "音楽番組投票の共通ポイント",
+   "pt": "Votação em programas musicais: o básico",
    "th": "พื้นฐานการโหวตรายการเพลง",
    "zh": "打歌节目投票通用"
   },
@@ -7259,6 +7539,7 @@
    "es": "No silencies ni pongas el volumen a 0: déjalo bajo pero encendido",
    "id": "Jangan mute atau volume 0 — nyalakan walau pelan",
    "ja": "ミュートや音量0にせず、小さくても音を出す",
+   "pt": "Não deixe no mudo nem no volume 0 — mantenha o som ligado, mesmo baixo",
    "th": "อย่าปิดเสียงหรือตั้งเสียงเป็น 0 — เปิดไว้แม้จะเบา",
    "zh": "不要静音或音量调0，小声也要开着"
   },
@@ -7267,6 +7548,7 @@
    "es": "Show! Music Core",
    "id": "Show! Music Core",
    "ja": "SHOW! 音楽中心",
+   "pt": "Show! Music Core",
    "th": "Show! Music Core",
    "zh": "Show! 音乐中心"
   },
@@ -7275,14 +7557,25 @@
    "es": "Sitios de música (Melon, Genie, Bugs, FLO, VIBE)",
    "id": "Situs musik (Melon, Genie, Bugs, FLO, VIBE)",
    "ja": "音源サイト（Melon・Genie・Bugs・FLO・VIBE）",
+   "pt": "Sites de música (Melon, Genie, Bugs, FLO, VIBE)",
    "th": "เว็บเพลง (Melon, Genie, Bugs, FLO, VIBE)",
    "zh": "音源网站（Melon·Genie·Bugs·FLO·VIBE）"
+  },
+  "응원 탭 '투표'(또는 한눈에 탭 맨 위)에서 어떤 앱인지·마감 시간을 확인 — 사이트의 시간은 모두 한국 시간(KST)": {
+   "en": "Check which app and the deadline under Votes in Support (or at the top of Home) — all times on this site are Korea time (KST)",
+   "es": "Revisa la app y la fecha límite en Votaciones (Apoyo) o arriba en Inicio — todas las horas son de Corea (KST)",
+   "id": "Cek aplikasi dan batas waktunya di Voting (tab Dukungan) atau paling atas Beranda — semua waktu di situs ini waktu Korea (KST)",
+   "ja": "応援タブの「投票」（またはホームの一番上）でアプリと締切を確認 — サイトの時間はすべて韓国時間（KST）",
+   "pt": "Veja qual é o app e o prazo em 'Votações' na aba Apoio (ou no topo do Início) — todos os horários do site são de Coreia (KST)",
+   "th": "ดูว่าใช้แอปไหนและปิดโหวตเมื่อไรที่ 'โหวต' ในแท็บซัพพอร์ต (หรือบนสุดของหน้าหลัก) — เวลาบนเว็บเป็นเวลาเกาหลี (KST)",
+   "zh": "在「应援」的投票（或首页最上方）确认用哪个App和截止时间 — 本站时间均为韩国时间（KST）"
   },
   "응원 탭에서 캘린더 구독 → 음방·투표 마감이 휴대폰 캘린더에": {
    "en": "Subscribe to the calendar in the Support tab → shows and vote deadlines on your phone",
    "es": "Suscríbete al calendario en Apoyo → programas y cierres de votación en tu móvil",
    "id": "Langganan kalender di tab Dukung → jadwal acara & batas voting masuk ke HP",
    "ja": "応援タブでカレンダー購読 → 音楽番組・投票締切がスマホのカレンダーに",
+   "pt": "Assine o calendário na aba Apoio → programas e prazos de votação no seu celular",
    "th": "ติดตามปฏิทินในแท็บซัพพอร์ต → รายการเพลงและวันปิดโหวตเข้ามือถือ",
    "zh": "在应援页订阅日历 → 打歌和投票截止同步到手机"
   },
@@ -7291,6 +7584,7 @@
    "es": "Inkigayo",
    "id": "Inkigayo",
    "ja": "人気歌謡",
+   "pt": "Inkigayo",
    "th": "Inkigayo",
    "zh": "人气歌谣"
   },
@@ -7299,6 +7593,7 @@
    "es": "Instagram @a2o.soul",
    "id": "Instagram @a2o.soul",
    "ja": "Instagram @a2o.soul",
+   "pt": "Instagram @a2o.soul",
    "th": "Instagram @a2o.soul",
    "zh": "Instagram @a2o.soul"
   },
@@ -7307,14 +7602,25 @@
    "es": "Instagram y X — avisos, agenda y fotos",
    "id": "Instagram & X — pengumuman, jadwal, foto",
    "ja": "Instagram・X — 告知、スケジュール、写真",
+   "pt": "Instagram e X — avisos, agenda e fotos",
    "th": "Instagram และ X — ประกาศ ตาราง และรูป",
    "zh": "Instagram·X — 公告、日程、照片"
+  },
+  "인터뷰": {
+   "en": "Interviews",
+   "es": "Entrevistas",
+   "id": "Wawancara",
+   "ja": "インタビュー",
+   "pt": "Entrevistas",
+   "th": "สัมภาษณ์",
+   "zh": "采访"
   },
   "일 15:20 · SBS": {
    "en": "Sun 15:20 · SBS",
    "es": "Dom 15:20 · SBS",
    "id": "Min 15:20 · SBS",
    "ja": "日 15:20 · SBS",
+   "pt": "Dom 15:20 · SBS",
    "th": "อา. 15:20 · SBS",
    "zh": "周日 15:20 · SBS"
   },
@@ -7323,6 +7629,7 @@
    "es": "Participó en la división masculina de la audición japonesa 'iCON Z'",
    "id": "Ikut audisi Jepang 'iCON Z' divisi pria",
    "ja": "日本のオーディション『iCON Z』男性部門に参加",
+   "pt": "Participou da categoria masculina da audição japonesa 'iCON Z'",
    "th": "เข้าร่วมออดิชันญี่ปุ่น 'iCON Z' ประเภทชาย",
    "zh": "参加日本选秀《iCON Z》男子组"
   },
@@ -7331,6 +7638,7 @@
    "es": "Habla 4 idiomas: japonés, coreano, inglés y chino",
    "id": "Menguasai 4 bahasa: Jepang, Korea, Inggris, Mandarin",
    "ja": "日本語・韓国語・英語・中国語の4か国語",
+   "pt": "Fala 4 idiomas: japonês, coreano, inglês e chinês",
    "th": "พูดได้ 4 ภาษา: ญี่ปุ่น เกาหลี อังกฤษ จีน",
    "zh": "会日语、韩语、英语、中文四种语言"
   },
@@ -7339,6 +7647,7 @@
    "es": "Términos del fandom",
    "id": "Istilah fandom",
    "ja": "よく使う言葉",
+   "pt": "Termos do fandom",
    "th": "คำศัพท์แฟนด้อม",
    "zh": "常用词"
   },
@@ -7347,6 +7656,7 @@
    "es": "Su muletilla es \"Lit!\"",
    "id": "Kata andalannya \"Lit!\"",
    "ja": "口癖は「Lit!」",
+   "pt": "Seu bordão é \"Lit!\"",
    "th": "คำติดปากคือ \"Lit!\"",
    "zh": "口头禅是“Lit!”"
   },
@@ -7355,6 +7665,7 @@
    "es": "Arma listas sobre todo con videos de canales oficiales",
    "id": "Playlist utamakan video dari kanal resmi",
    "ja": "プレイリストは公式チャンネルの動画中心で",
+   "pt": "Monte playlists principalmente com vídeos dos canais oficiais",
    "th": "ทำเพลย์ลิสต์จากคลิปช่องทางการเป็นหลัก",
    "zh": "歌单以官方频道视频为主"
   },
@@ -7363,6 +7674,7 @@
    "es": "Ex-trainee de JYP Entertainment",
    "id": "Mantan trainee JYP Entertainment",
    "ja": "元JYPエンターテインメント練習生",
+   "pt": "Ex-trainee da JYP Entertainment",
    "th": "อดีตเทรนนี JYP Entertainment",
    "zh": "前JYP娱乐练习生"
   },
@@ -7371,6 +7683,7 @@
    "es": "Viene del mismo estudio de baile que ZET; entrenaron juntos unos 4 años",
    "id": "Satu studio dance dengan ZET, berlatih bersama sekitar 4 tahun",
    "ja": "ZETと同じダンススタジオ出身で約4年間一緒に練習",
+   "pt": "Veio do mesmo estúdio de dança do ZET — treinaram juntos por cerca de 4 anos",
    "th": "มาจากสตูดิโอเต้นเดียวกับ ZET ฝึกด้วยกันราว 4 ปี",
    "zh": "与ZET出身同一舞蹈工作室，一起练习约4年"
   },
@@ -7379,6 +7692,7 @@
    "es": "Dale me gusta, comenta y comparte",
    "id": "Jangan lupa like, komen, dan share",
    "ja": "いいね・コメント・共有も一緒に",
+   "pt": "Curta, comente e compartilhe também",
    "th": "กดไลก์ คอมเมนต์ และแชร์ด้วย",
    "zh": "也要点赞·评论·分享"
   },
@@ -7387,6 +7701,7 @@
    "es": "Apareció en programas de baile en China",
    "id": "Tampil di acara dance Tiongkok",
    "ja": "中国のダンス番組に出演",
+   "pt": "Apareceu em programas de dança chineses",
    "th": "เคยออกรายการเต้นในจีน",
    "zh": "参加中国舞蹈节目"
   },
@@ -7395,6 +7710,7 @@
    "es": "Sencillo promocional actual (doble título del mini álbum debut)",
    "id": "Lagu promosi saat ini (double title mini album debut)",
    "ja": "現在の活動曲（デビューミニアルバムのダブルタイトル）",
+   "pt": "Música de promoção atual (faixa-título dupla do mini-álbum de debut)",
    "th": "เพลงโปรโมตตอนนี้ (ดับเบิลไตเติลของมินิอัลบั้มเดบิวต์)",
    "zh": "当前主打（出道迷你专辑双主打）"
   },
@@ -7403,14 +7719,16 @@
    "es": "Jiayi",
    "id": "Jiayi",
    "ja": "ジアイ",
+   "pt": "Jiayi",
    "th": "เจียอี้",
-   "zh": "佳艺"
+   "zh": "嘉一"
   },
   "직캠 — 한 멤버만 따라가며 찍은 무대 영상": {
    "en": "Fancam (jikcam) — a stage video that follows one member",
    "es": "Fancam — video de la presentación que sigue a un solo miembro",
    "id": "Fancam — video panggung yang fokus ke satu member",
    "ja": "直カム — 1人のメンバーだけを追って撮ったステージ映像",
+   "pt": "Fancam (jikcam) — vídeo da apresentação que acompanha um só membro",
    "th": "แฟนแคม (จิกแคม) — คลิปเวทีที่ตามถ่ายเมมเบอร์คนเดียว",
    "zh": "直拍 — 只跟拍一位成员的舞台视频"
   },
@@ -7419,6 +7737,7 @@
    "es": "Mira fancams de quien te guste → márcalo como bias en Inicio",
    "id": "Tonton fancam member yang kamu suka → jadikan bias di Beranda",
    "ja": "直カムタブで気になるメンバーの直カムを見る → ホームで推しに設定",
+   "pt": "Assista aos fancams de quem chamar sua atenção → defina como bias no Início",
    "th": "ดูแฟนแคมของคนที่สะดุดตา → ตั้งเป็นเมนในหน้าแรก",
    "zh": "在直拍页看喜欢的成员直拍 → 在首页设为本命"
   },
@@ -7427,6 +7746,7 @@
    "es": "Formado en TNS Vocal & Dance Academy (Changwon)",
    "id": "Lulusan TNS Vocal & Dance Academy, Changwon",
    "ja": "昌原TNSボーカルダンス学院出身",
+   "pt": "Treinou na TNS Vocal & Dance Academy, em Changwon",
    "th": "เคยฝึกที่ TNS Vocal & Dance Academy ชางวอน",
    "zh": "出身昌原TNS声乐舞蹈学院"
   },
@@ -7435,6 +7755,7 @@
    "es": "Formó una banda en primaria y lanzó un sencillo",
    "id": "Membentuk band saat SD dan merilis single",
    "ja": "小学生のときにバンドを結成しシングルをリリース",
+   "pt": "Formou uma banda no ensino fundamental e lançou um single",
    "th": "ตั้งวงดนตรีตอนประถมและปล่อยซิงเกิล",
    "zh": "小学时组过乐队并发行单曲"
   },
@@ -7443,22 +7764,43 @@
    "es": "Deportista: le encantan el fútbol y el baloncesto",
    "id": "Suka olahraga — sepak bola dan basket",
    "ja": "サッカー・バスケが好きなスポーツ派",
+   "pt": "Esportista — adora futebol e basquete",
    "th": "สายกีฬา ชอบฟุตบอลและบาสเกตบอล",
    "zh": "运动派，喜欢足球和篮球"
+  },
+  "출석·광고·미션으로 투표권을 미리 모아 두고, 투표 기간에 A2O SOUL에 투표": {
+   "en": "Collect votes in advance through check-ins, ads and missions, then vote for A2O SOUL during the voting period",
+   "es": "Junta votos antes con asistencias, anuncios y misiones, y vota por A2O SOUL durante el periodo",
+   "id": "Kumpulkan vote lebih dulu lewat absen, iklan dan misi, lalu vote A2O SOUL saat periode voting",
+   "ja": "出席・広告・ミッションで投票券を事前に貯めて、投票期間にA2O SOULへ投票",
+   "pt": "Junte votos com antecedência com check-ins, anúncios e missões, e vote no A2O SOUL durante o período",
+   "th": "สะสมสิทธิ์โหวตล่วงหน้าจากการเช็กอิน ดูโฆษณา และภารกิจ แล้วโหวตให้ A2O SOUL ในช่วงโหวต",
+   "zh": "通过签到、看广告、做任务提前攒票，投票期间投给A2O SOUL"
   },
   "케이팝업 차트쇼": {
    "en": "K-POP UP CHART SHOW",
    "es": "K-POP UP CHART SHOW",
    "id": "K-POP UP CHART SHOW",
    "ja": "K-POP UP CHART SHOW",
+   "pt": "K-POP UP CHART SHOW",
    "th": "K-POP UP CHART SHOW",
    "zh": "K-POP UP CHART SHOW"
+  },
+  "콘셉트 센터, 메인댄서": {
+   "en": "Concept center, main dancer",
+   "es": "Centro conceptual, bailarín principal",
+   "id": "Concept center, main dancer",
+   "ja": "コンセプトセンター、メインダンサー",
+   "pt": "Centro conceitual, dançarino principal",
+   "th": "คอนเซ็ปต์เซ็นเตอร์, เมนแดนเซอร์",
+   "zh": "概念C位、主舞"
   },
   "키즈·틴즈 댄스 배틀 'THE FUTURE' 키즈 부문 준우승 2회, 그랜드 챔피언 대회 키즈 부문 우승": {
    "en": "Kids/teens dance battle 'THE FUTURE': kids runner-up twice, kids winner at the grand championship",
    "es": "Batalla de baile 'THE FUTURE': dos veces subcampeón infantil y campeón infantil del gran campeonato",
    "id": "Battle dance 'THE FUTURE': 2x runner-up kategori anak, juara kategori anak di grand championship",
    "ja": "キッズ・ティーンズダンスバトル『THE FUTURE』キッズ部門準優勝2回、グランドチャンピオン大会キッズ部門優勝",
+   "pt": "Batalha de dança 'THE FUTURE': vice-campeão infantil duas vezes e campeão infantil no grand championship",
    "th": "แบทเทิลแดนซ์เด็ก 'THE FUTURE': รองชนะเลิศรุ่นเด็ก 2 ครั้ง และชนะเลิศรุ่นเด็กในรายการแกรนด์แชมเปียน",
    "zh": "少儿舞蹈对决《THE FUTURE》少儿组两次亚军、总冠军赛少儿组冠军"
   },
@@ -7467,6 +7809,7 @@
    "es": "Trabajó como modelo infantil",
    "id": "Pernah jadi model cilik",
    "ja": "キッズモデルとして活動",
+   "pt": "Trabalhou como modelo infantil",
    "th": "เคยเป็นนายแบบเด็ก",
    "zh": "曾任儿童模特"
   },
@@ -7475,6 +7818,7 @@
    "es": "Apareció en la comedia tailandesa de One31 'Ban Saran Land' (2018)",
    "id": "Tampil di sitkom One31 Thailand 'Ban Saran Land' (2018)",
    "ja": "タイOne31のシットコム『Ban Saran Land』（2018）に出演",
+   "pt": "Atuou na sitcom tailandesa 'Ban Saran Land' (One31, 2018)",
    "th": "แสดงซิทคอม 'บ้านสราญแลนด์' (2018) ช่อง One31",
    "zh": "出演泰国One31情景喜剧《Ban Saran Land》（2018）"
   },
@@ -7483,6 +7827,7 @@
    "es": "Actor de doblaje infantil en tailandés — Antonio en 'Encanto' de Disney, Pinocho en 'Pinocho' (2022) y más",
    "id": "Pengisi suara cilik dubbing Thailand — Antonio di 'Encanto' Disney, Pinokio di 'Pinocchio' (2022), dll.",
    "ja": "タイ語吹き替えの子役声優 — ディズニー『ミラベルと魔法だらけの家』アントニオ、『ピノキオ』（2022）ピノキオなど",
+   "pt": "Dublador infantil em tailandês — Antonio em 'Encanto' da Disney, Pinóquio em 'Pinóquio' (2022) e outros",
    "th": "นักพากย์เด็กพากย์ไทย — อันโตนิโอใน 'Encanto' ของดิสนีย์, พินอคคิโอใน 'Pinocchio' (2022) และอื่นๆ",
    "zh": "泰语配音童星——迪士尼《魔法满屋》安东尼奥、《木偶奇遇记》（2022）匹诺曹等"
   },
@@ -7491,6 +7836,7 @@
    "es": "Sáb · MBC",
    "id": "Sab · MBC",
    "ja": "土 · MBC",
+   "pt": "Sáb · MBC",
    "th": "ส. · MBC",
    "zh": "周六 · MBC"
   },
@@ -7499,6 +7845,7 @@
    "es": "Tomate",
    "id": "Tomat",
    "ja": "トマト",
+   "pt": "Tomate",
    "th": "มะเขือเทศ",
    "zh": "番茄"
   },
@@ -7507,6 +7854,7 @@
    "es": "Consulta los plazos en 'Votaciones' de la pestaña Apoyo (en rojo si cierran pronto)",
    "id": "Cek periode voting di 'Voting' tab Dukung (merah jika hampir berakhir)",
    "ja": "投票期間は応援タブの「投票」で確認（締切間近は赤で表示）",
+   "pt": "Confira os prazos em 'Votações' na aba Apoio (fica vermelho quando está acabando)",
    "th": "ดูช่วงเวลาโหวตที่ 'โหวต' ในแท็บซัพพอร์ต (ใกล้ปิดจะเป็นสีแดง)",
    "zh": "投票时间在应援页“投票”中查看（即将截止时显示为红色）"
   },
@@ -7515,14 +7863,25 @@
    "es": "Las apps y reglas cambian a menudo: revisa también los avisos oficiales",
    "id": "Aplikasi dan aturan voting sering berubah — cek juga pengumuman resmi",
    "ja": "投票アプリや方式はよく変わるので公式告知も確認",
+   "pt": "Os apps e as regras mudam bastante — confira também os avisos oficiais",
    "th": "แอปและกติกาโหวตเปลี่ยนบ่อย — ตรวจประกาศทางการด้วย",
    "zh": "投票App和规则常有变化，请同时查看官方公告"
+  },
+  "티저·트레일러": {
+   "en": "Teasers & trailers",
+   "es": "Teasers y tráileres",
+   "id": "Teaser & trailer",
+   "ja": "ティーザー・トレーラー",
+   "pt": "Teasers e trailers",
+   "th": "ทีเซอร์·เทรลเลอร์",
+   "zh": "预告·预告片"
   },
   "팀에서 가장 차분한 성격": {
    "en": "The calmest personality on the team",
    "es": "La personalidad más tranquila del grupo",
    "id": "Kepribadian paling tenang di tim",
    "ja": "グループで一番落ち着いた性格",
+   "pt": "A personalidade mais calma do grupo",
    "th": "นิสัยสุขุมที่สุดในวง",
    "zh": "团内性格最沉稳"
   },
@@ -7531,6 +7890,7 @@
    "es": "El miembro más animado del grupo",
    "id": "Member paling heboh di tim",
    "ja": "グループで一番ノリがいいメンバー",
+   "pt": "O membro mais animado do grupo",
    "th": "สมาชิกที่สนุกสนานที่สุดในวง",
    "zh": "团内最有活力的成员"
   },
@@ -7539,6 +7899,7 @@
    "es": "El mayor del grupo, siempre cuida de los menores",
    "id": "Member tertua yang selalu menjaga adik-adiknya",
    "ja": "グループ最年長で弟たちの面倒をよく見る",
+   "pt": "O mais velho, cuida bem dos mais novos",
    "th": "พี่ใหญ่ของวงที่คอยดูแลน้องๆ",
    "zh": "团内大哥，很会照顾弟弟们"
   },
@@ -7547,6 +7908,7 @@
    "es": "El que anima el ambiente del grupo",
    "id": "Mood maker tim",
    "ja": "グループのムードメーカー",
+   "pt": "O que anima o grupo",
    "th": "มู้ดเมกเกอร์ของวง",
    "zh": "团内气氛担当"
   },
@@ -7555,6 +7917,7 @@
    "es": "Timbre potente",
    "id": "Warna suara yang powerful",
    "ja": "パワフルな歌声",
+   "pt": "Timbre de voz poderoso",
    "th": "น้ำเสียงทรงพลัง",
    "zh": "有力量的音色"
   },
@@ -7563,6 +7926,7 @@
    "es": "Le encantan el pop y el R&B",
    "id": "Suka pop dan R&B",
    "ja": "ポップ・R&Bが好き",
+   "pt": "Adora pop e R&B",
    "th": "ชอบป็อปและอาร์แอนด์บี",
    "zh": "喜欢流行和R&B"
   },
@@ -7571,6 +7935,7 @@
    "es": "Firma de fans · Videollamada",
    "id": "Fansign · Video call",
    "ja": "サイン会・ヨントン",
+   "pt": "Fansign · Videochamada",
    "th": "แฟนไซน์ · วิดีโอคอล",
    "zh": "签售·视频通话"
   },
@@ -7579,6 +7944,7 @@
    "es": "Firma",
    "id": "Fansign",
    "ja": "サイン会",
+   "pt": "Fansign",
    "th": "แฟนไซน์",
    "zh": "签售"
   },
@@ -7587,6 +7953,7 @@
    "es": "Fansign / videollamada — eventos a los que entras comprando álbumes",
    "id": "Fansign / video call — event yang diikuti lewat pembelian album",
    "ja": "サイン会・ヨントン — アルバム購入で応募するイベント",
+   "pt": "Fansign / videochamada — eventos que você concorre comprando álbuns",
    "th": "แฟนไซน์ / วิดีโอคอล — อีเวนต์ที่สมัครด้วยการซื้ออัลบั้ม",
    "zh": "签售·视频通话 — 购买专辑报名的活动"
   },
@@ -7595,6 +7962,7 @@
    "es": "FANCAST",
    "id": "FANCAST",
    "ja": "FANCAST",
+   "pt": "FANCAST",
    "th": "FANCAST",
    "zh": "FANCAST"
   },
@@ -7603,6 +7971,7 @@
    "es": "Photocard — tarjeta con foto que viene al azar en el álbum",
    "id": "Photocard — kartu foto acak di dalam album",
    "ja": "トレカ — アルバムにランダムで入っているフォトカード",
+   "pt": "Photocard — card com foto de um membro, aleatório dentro do álbum",
    "th": "โฟโต้การ์ด — การ์ดรูปเมมเบอร์แบบสุ่มในอัลบั้ม",
    "zh": "小卡 — 专辑里随机附赠的照片卡"
   },
@@ -7611,6 +7980,7 @@
    "es": "Presencia escénica expresiva con gestos y caras",
    "id": "Performa panggung ekspresif lewat ekspresi dan gestur",
    "ja": "表情やジェスチャーを生かしたステージパフォーマンス",
+   "pt": "Presença de palco expressiva, com caras e gestos",
    "th": "การแสดงบนเวทีที่ใช้สีหน้าและท่าทางได้ดี",
    "zh": "善用表情与手势的舞台表现"
   },
@@ -7619,6 +7989,7 @@
    "es": "PLUS CHAT",
    "id": "PLUS CHAT",
    "ja": "PLUS CHAT",
+   "pt": "PLUS CHAT",
    "th": "PLUS CHAT",
    "zh": "PLUS CHAT"
   },
@@ -7627,6 +7998,7 @@
    "es": "PLUS CHAT — mensajes de los propios miembros (suscripción de pago en Mnet Plus)",
    "id": "PLUS CHAT — pesan langsung dari member (langganan berbayar Mnet Plus)",
    "ja": "PLUS CHAT — メンバー本人からのメッセージ（Mnet Plus有料購読）",
+   "pt": "PLUS CHAT — mensagens dos próprios membros (assinatura paga do Mnet Plus)",
    "th": "PLUS CHAT — ข้อความจากเมมเบอร์โดยตรง (สมัครแบบเสียเงินใน Mnet Plus)",
    "zh": "PLUS CHAT — 成员亲自发送的消息（Mnet Plus付费订阅）"
   },
@@ -7635,6 +8007,7 @@
    "es": "HIGHER",
    "id": "HIGHER",
    "ja": "HIGHER",
+   "pt": "HIGHER",
    "th": "HIGHER",
    "zh": "HIGHER"
   },
@@ -7643,6 +8016,7 @@
    "es": "Usa una lista con otras canciones en vez de repetir una (mira la lista de streaming en Apoyo)",
    "id": "Pakai playlist campuran, bukan ulang satu lagu (lihat daftar streaming di tab Dukung)",
    "ja": "1曲リピートより他の曲を混ぜたプレイリストで（応援タブのストリーミングリスト参照）",
+   "pt": "Use uma playlist com outras músicas em vez de repetir uma só (veja a lista de streaming na aba Apoio)",
    "th": "ใช้เพลย์ลิสต์ที่สลับกับเพลงอื่น แทนการวนเพลงเดียว (ดูเพลย์ลิสต์สตรีมในแท็บซัพพอร์ต)",
    "zh": "比起单曲循环，用混合其他歌曲的歌单（参考应援页的打榜歌单）"
   },
@@ -7651,6 +8025,7 @@
    "es": "Reproduce con sesión iniciada y un pase de streaming de ese sitio",
    "id": "Putar sambil login dengan paket streaming situs itu",
    "ja": "そのサイトのストリーミング利用券でログインした状態で再生",
+   "pt": "Toque logado com um plano de streaming daquele site",
    "th": "เล่นขณะล็อกอินด้วยแพ็กเกจสตรีมของเว็บนั้น",
    "zh": "使用该网站的流媒体会员登录后播放"
   },
@@ -7659,14 +8034,25 @@
    "es": "Le encanta el marisco",
    "id": "Suka seafood",
    "ja": "海鮮が好き",
+   "pt": "Adora frutos do mar",
    "th": "ชอบอาหารทะเล",
    "zh": "喜欢海鲜"
+  },
+  "해외 팬 투표 시작하기": {
+   "en": "How to vote (global fans)",
+   "es": "Cómo votar (fans internacionales)",
+   "id": "Cara voting (fans internasional)",
+   "ja": "海外ファン向け 投票の始め方",
+   "pt": "Como votar (fãs internacionais)",
+   "th": "วิธีโหวตสำหรับแฟนต่างประเทศ",
+   "zh": "海外粉丝投票指南"
   },
   "행사": {
    "en": "Event",
    "es": "Evento",
    "id": "Acara",
    "ja": "イベント",
+   "pt": "Evento",
    "th": "อีเวนต์",
    "zh": "活动"
   },
@@ -7675,6 +8061,7 @@
    "es": "Instala la app en tu pantalla de inicio ('Instalar app' arriba a la derecha)",
    "id": "Pasang aplikasi di layar utama ('Pasang aplikasi' di kanan atas)",
    "ja": "ホーム画面にアプリをインストール（右上の「アプリをインストール」）",
+   "pt": "Instale o app na tela de início ('Instalar app' no canto superior direito)",
    "th": "ติดตั้งแอปบนหน้าจอโฮม ('ติดตั้งแอป' มุมขวาบน)",
    "zh": "把App添加到主屏幕（右上角“安装App”）"
   },
@@ -7683,6 +8070,7 @@
    "es": "Mar 18:00 · SBS Life",
    "id": "Sel 18:00 · SBS Life",
    "ja": "火 18:00 · SBS Life",
+   "pt": "Ter 18:00 · SBS Life",
    "th": "อ. 18:00 · SBS Life",
    "zh": "周二 18:00 · SBS Life"
   },
@@ -7691,6 +8079,7 @@
    "es": "Sencillo promocional — la canción de los programas (ahora 'Dancing in the Dark')",
    "id": "Lagu promosi — lagu yang dibawakan di acara musik (sekarang 'Dancing in the Dark')",
    "ja": "活動曲 — 音楽番組で披露する曲（今は『Dancing in the Dark』）",
+   "pt": "Música de promoção — a que é apresentada nos programas musicais (agora 'Dancing in the Dark')",
    "th": "เพลงโปรโมต — เพลงที่ขึ้นแสดงในรายการเพลง (ตอนนี้คือ 'Dancing in the Dark')",
    "zh": "主打曲 — 打歌舞台上演唱的歌曲（现在是《Dancing in the Dark》）"
   }
