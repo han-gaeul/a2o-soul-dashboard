@@ -368,8 +368,8 @@ A2O_MENTION = re.compile(r"A2O\s?SOUL|A2OSOUL|에이투오\s?소울|에이투오
 def official_extract(caption, posted, today):
     """음방·투표 앱 공식 계정 글: 본문에 A2O SOUL이 있고 투표 기간이 읽히면 링크가 없어도 바로 반영.
     (A2O SOUL이 후보인지 본문에 없는 일반 투표는 빼기)"""
-    if not A2O_MENTION.search(caption or ""):
-        return []
+    if not A2O_MENTION.search(caption or "") or re.search(r"결과\s*(발표|공개)?|RESULTS?\b|WINNERS?\b|발표합니다", caption or "", re.I):
+        return []  # A2O SOUL 없는 일반 투표, 이미 끝난 투표의 결과 발표 글은 빼기
     return [{**i, "confidence": max(i["confidence"], 0.9)} if i["kind"] == "vote" and i.get("end") else i
             for i in rules.extract(caption, posted, today) if i["kind"] == "vote"]
 
@@ -668,6 +668,10 @@ def auto_items(today):
                 continue
             if i["confidence"] < announce.AUTO_CONFIDENCE:
                 key = (i.get("date"), i["title"])
+                # 날짜 없는 항목: 팬 계정 투표 독려 글은 확인할 게 없어서 빼고, 나머지도 올라온 지 2일 지나면 뺌
+                if not i.get("date") and (pid.startswith("xf:") and i["kind"] == "vote"
+                                          or posted < (date.fromisoformat(today) - timedelta(days=2)).isoformat()):
+                    continue
                 if future and key not in seen_pend and posted >= (date.fromisoformat(today) - timedelta(days=30)).isoformat():
                     seen_pend.add(key)
                     pending.append(row)
