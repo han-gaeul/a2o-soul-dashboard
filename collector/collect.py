@@ -686,6 +686,7 @@ def auto_items(today):
             if i["kind"] in ("ticket", "merch", "release", "concert", "fanmeeting", "event") and future:
                 notices.append(row)
     prerecs.sort(key=lambda x: x["start"])
+    notices.sort(key=lambda x: (x.get("date") or "9999", x.get("time") or "99:99"))
     return events, notices[:20], pending, votes, prerecs
 
 
@@ -1421,7 +1422,7 @@ def build(cfg):
         "episodes": episodes,
         "timeline": timeline,
         "events": all_events,
-        "notices": notices,
+        "notices": sorted(notices, key=lambda x: (x.get("date") or "9999", x.get("time") or "99:99")),  # 가까운 날짜부터
         "categories": CATEGORIES,
         "feedback_url": str(cfg.get("feedback_url") or ""),
         "push": {k: str(v) for k, v in (cfg.get("push") or {}).items() if k in ("api", "vapid_public") and v},
