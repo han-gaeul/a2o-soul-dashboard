@@ -93,6 +93,14 @@ if ("serviceWorker" in navigator) {
     const m = /^(.+) 출연$/.exec(x.title || ""); // 공지에서 뽑은 '뮤직뱅크 출연'
     return m ? t("ev_show", { show: tc(m[1]) }) : tc(x.title);
   };
+  // 한국 밖에서 보면 KST 옆에 내 시간도
+  const awayFromKst = new Date().getTimezoneOffset() !== -540;
+  const localOf = (date, time) => {
+    if (!awayFromKst || !date || !time) return "";
+    const d = new Date(`${date}T${time}:00+09:00`);
+    if (Number.isNaN(d.getTime())) return "";
+    return t("local_time", { t: d.toLocaleString(LOCALES[LANG], { month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" }) });
+  };
   const kstDate = (s) => new Date(`${s.replace(" ", "T")}${s.length > 10 ? ":00" : "T00:00:00"}+09:00`); // "YYYY-MM-DD[ HH:MM]" KST
 
   // ---------- 탭 ----------
@@ -290,7 +298,8 @@ if ("serviceWorker" in navigator) {
     const isToday = e.date === todayKst;
     const whenEl = el("div", { class: "when" },
       isToday ? el("span", { class: "today" }, t("today")) : el("b", {}, `${d.getUTCMonth() + 1}.${d.getUTCDate()}`),
-      ` (${wd[d.getUTCDay()]})`, e.time ? ` ${e.time}` : null);
+      ` (${wd[d.getUTCDay()]})`, e.time ? ` ${e.time}` : null,
+      e.time && localOf(e.date, e.time) ? el("span", { class: "local-t" }, localOf(e.date, e.time)) : null);
     let title;
     if (e.member) {
       title = el("button", { type: "button", class: "linklike" }, e.title);
@@ -432,12 +441,28 @@ if ("serviceWorker" in navigator) {
         el("span", { class: `chip ${open ? "chip-on" : ""}` }, open ? t("vote_now") : t("vote_soon")),
         el("b", {}, [tc(v.show), tc(v.title)].filter(Boolean).join(" · ")), v.app ? el("span", { class: "muted" }, ` · ${tc(v.app)}`) : null),
       el("div", { class: "vote-time" }, open ? t("vote_ends", { t: duration(end - Date.now()) }) : t("vote_starts", { t: duration(start - Date.now()) }),
-        el("span", { class: "muted" }, ` · ${t("vote_end_at", { t: v.end.slice(5).replace("-", ".") })}`)),
+        el("span", { class: "muted" }, ` · ${t("vote_end_at", { t: v.end.slice(5).replace("-", ".") })}`),
+        localOf(v.end.slice(0, 10), v.end.slice(11)) ? el("span", { class: "local-t" }, localOf(v.end.slice(0, 10), v.end.slice(11))) : null),
       v.note ? el("div", { class: "muted small" }, tc(v.note)) : null,
       el("div", { class: "vote-links" },
         v.url ? ext(v.url, t("vote_open")) : (v.app ? ext(appSearch(v.app), t("vote_find_app", { app: tc(v.app) })) : null),
         v.source && v.source !== v.url ? ext(v.source, t("from_notice"), " ↗") : null));
   };
+  // 상단 띠: 진행 중이고 48시간 안에 마감하는 투표 (닫으면 그 투표는 이 기기에서 다시 안 보임)
+  {
+    const hidden = new Set(pref.get("voteBarHidden", []));
+    const soon = votes.filter((v) => Date.now() >= kstDate(v.start) && kstDate(v.end) - Date.now() < 48 * 3600000 && !hidden.has(v.end + v.title))
+      .sort((a, b) => kstDate(a.end) - kstDate(b.end));
+    if (soon.length) {
+      const v = soon[0];
+      const close = el("button", { type: "button", class: "vb-x", "aria-label": "✕" }, "✕");
+      const bar = el("div", { class: `vote-bar${kstDate(v.end) - Date.now() < 6 * 3600000 ? " urgent" : ""}`, role: "status" },
+        el("a", { href: "#cheer", class: "vb-main" }, `🗳 ${[tc(v.show), tc(v.title)].filter(Boolean).join(" · ")} — ${t("vote_ends", { t: duration(kstDate(v.end) - Date.now()) })}`,
+          soon.length > 1 ? el("span", { class: "vb-more" }, ` +${soon.length - 1}`) : null), close);
+      close.addEventListener("click", () => { hidden.add(v.end + v.title); pref.set("voteBarHidden", [...hidden].slice(-30)); bar.remove(); });
+      $("tabs").before(bar);
+    }
+  }
   if (votes.length) {
     for (const v of votes) $("votes").append(voteCard(v));
     // 한눈에 탭 맨 위에도 진행 중·곧 시작 투표
@@ -924,6 +949,15 @@ if ("serviceWorker" in navigator) {
   $("chantGuides").replaceChildren(...guides.map((g) => el("a", { class: "chant-guide", href: g.src, target: "_blank", rel: "noopener" },
     el("img", { src: g.src, alt: `${g.song} ${t("fanchants")}`, loading: "lazy", decoding: "async" }),
     el("span", {}, `${g.song} · ${t("fanchant_guide")}`))));
+  const call = (data.info || {}).fanchant_call;
+  if (call && (call.lines || []).length) {
+    $("chantGuides").after(el("div", { class: "chant-call" },
+      el("h3", {}, `${t("chant_call")} · ${call.song}`), el("p", { class: "muted small" }, t("chant_call_desc")),
+      ...call.lines.map((ln) => el("div", { class: "call-line" }, ...ln.map((x) => {
+        const [ko, rom] = String(x).split("|");
+        return el("span", { class: "call-name" }, el("b", { lang: "ko" }, ko), rom ? el("small", {}, rom) : null);
+      })))));
+  }
   if (chants.length) $("fanchants").append(...chants.map((v) => videoCard(v, v.song || null)));
   if (!chants.length && !guides.length) $("fanchantSec").remove();
 
