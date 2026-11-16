@@ -561,7 +561,14 @@ if ("serviceWorker" in navigator) {
     $("charts").append(empty(t("no_charts")));
   }
 
-  const notices = data.notices || [];
+  // 정렬: 다가오는(진행 중 포함) 일정 날짜·시간 빠른 순 → 지난 일정 최근 순 → 날짜 없는 공지
+  const _nk = (x) => (x.date || "") + " " + (x.time || "");
+  const _past = (x) => (x.end_date || x.date) < todayKst;
+  const notices = [...(data.notices || [])].sort((a, b) => {
+    const ga = !a.date ? 2 : _past(a) ? 1 : 0, gb = !b.date ? 2 : _past(b) ? 1 : 0;
+    if (ga !== gb) return ga - gb;
+    return ga === 1 ? _nk(b).localeCompare(_nk(a)) : _nk(a).localeCompare(_nk(b));
+  });
   const shops = data.info?.shops || [];
   // 한눈에 탭: 음반 구매처 한 번에
   if (shops.length) {
