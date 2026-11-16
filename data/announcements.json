@@ -87,18 +87,7 @@
   "18115336615887431": {
    "caption": "Show! Music Core\nLet’s go, Let‘s go🪩\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark",
    "excerpt": "Show! Music Core\nLet’s go, Let‘s go🪩\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark",
-   "items": [
-    {
-     "confidence": 0.5,
-     "date": null,
-     "end_date": null,
-     "kind": "music_show",
-     "place": null,
-     "time": null,
-     "title": "음악중심 출연",
-     "url": null
-    }
-   ],
+   "items": [],
    "permalink": "https://www.instagram.com/reel/DfuNOuHSvT6/",
    "timestamp": "2026-11-14T12:30:32+0000"
   },
@@ -667,7 +656,7 @@
    "timestamp": "2026-11-15T21:07:06.000Z"
   }
  },
- "rules_version": 5,
+ "rules_version": 6,
  "x": {
   "A2O_SOUL": {
    "id": "1986498790229262336",
