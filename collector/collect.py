@@ -361,6 +361,11 @@ def fan_extract(caption, posted, today):
     """팬 계정 글: 규칙으로 뽑되 확신을 낮춰 전부 '확인 필요'로."""
     return [{**i, "confidence": min(i["confidence"], 0.6), "title": f"[팬 계정] {i['title']}"} for i in rules.extract(caption, posted, today)]
 
+def official_extract(caption, posted, today):
+    """음방·투표 앱 공식 계정(X 금색 인증) 글: 투표 기간이 읽히면 링크가 없어도 바로 반영."""
+    return [{**i, "confidence": max(i["confidence"], 0.9)} if i["kind"] == "vote" and i.get("end") else i
+            for i in rules.extract(caption, posted, today) if i["kind"] == "vote"]
+
 PAST_DAYS = 120  # 지난 일정을 달력에 남기는 기간
 IG_POST = re.compile(r"^https://(www\.)?instagram\.com/(p|reel)/[\w-]+/?")
 
@@ -553,7 +558,7 @@ def build_timeline(cfg, videos, episodes, subs=()):
     # 음방 1위: 공식 공지에서 자동 (같은 날·같은 음방은 하나)
     wins = set()
     for pid, post in (load_json("announcements.json", {}).get("posts") or {}).items():
-        if pid.startswith(("xf:", "xv:")):  # 팬 계정·판매처 글은 기록에 안 넣음
+        if pid.startswith(("xf:", "xv:", "xo:")):  # 팬 계정·판매처·음방 공식 글은 기록에 안 넣음
             continue
         for i in post.get("items", []):
             if i.get("kind") == "win" and i.get("date") and (i["date"], i.get("show")) not in wins:
@@ -900,7 +905,7 @@ def collect(cfg, rescan=False):
         for pid, post in list(posts.items()):
             if post.get("caption"):
                 ext = ((lambda c, p_, t_, v=post.get("vendor", ""): rules.fansign_items(c, p_, v)) if pid.startswith("xv:")
-                       else fan_extract if pid.startswith("xf:") else rules.extract)
+                       else fan_extract if pid.startswith("xf:") else official_extract if pid.startswith("xo:") else rules.extract)
                 post["items"] = [i for i in ext(post["caption"], kst_datetime(post.get("timestamp")), today) if i["title"]]
             else:
                 posts.pop(pid)
@@ -999,6 +1004,27 @@ def collect(cfg, rescan=False):
                                  lambda c, p_, t_, v=vendor: rules.fansign_items(c, p_, v), limit)
                     if post["id"] in store["posts"]:
                         store["posts"][post["id"]]["vendor"] = vendor
+        # 음방·투표 앱 공식 계정 — 계정 목록 없이, A2O SOUL 투표·1위 후보 글 중 X 금색 인증(기관) 계정 글만 (3시간마다, 읽은 글 수만큼 과금)
+        ost = store.setdefault("x_official_votes", {})
+        if not ost.get("at") or now - datetime.fromisoformat(ost["at"]) >= timedelta(hours=3):
+            query = ("(\"A2O SOUL\" OR A2OSOUL OR 에이투오소울 OR \"에이투오 소울\") "
+                     "(투표 OR 사전투표 OR 1위후보 OR \"1위 후보\" OR vote OR voting OR nominee OR nominees) "
+                     "-from:A2O_SOUL -is:retweet -is:reply")
+            try:
+                posts = xposts.search_posts(query, since_id=ost.get("since_id"), max_results=50)
+                ost["at"] = now.isoformat(timespec="minutes")
+                vend = {v["handle"].lower() for v in cfg.get("x_vendors") or []} | {u.lower() for u in cfg["x_fans"]}
+                official = [p_ for p_ in posts if p_.get("verified_type") in ("business", "government") and p_["author"].lower() not in vend]
+                if posts:
+                    ost["since_id"] = max(posts, key=lambda p_: int(p_["tweet_id"]))["tweet_id"]
+                for p_ in official:
+                    p_["id"] = "xo:" + p_["tweet_id"]
+                    p_["caption"] = f"{p_.get('author_name') or ''}\n{p_['caption']}"  # 계정 이름(예: THE SHOW)으로 음방 이름 찾기
+                if official:
+                    announce.run(official, store, today, kst_datetime, official_extract, limit)
+                print(f"[공지] X 음방 공식 투표 글 {len(official)}개 (검색 {len(posts)}개 중)")
+            except Exception as e:  # noqa: BLE001
+                print(f"[공지] X 음방 공식 투표 검색 실패: {e}")
         # 팬 계정(정보 계정) — 일정·투표 후보만 뽑아 전부 '확인 필요' 이슈로 (사이트에 바로 반영 안 함, 새 글 피드에도 안 섞음)
         fstate = store.setdefault("x_fans", {})
         for username in cfg["x_fans"]:
