@@ -6,7 +6,7 @@
 import re
 from datetime import date, timedelta
 
-RULES_VERSION = 7  # 규칙을 바꾸면 올리기 → 다음 수집 때 최근 공지를 다시 읽어 일정을 새로 뽑음
+RULES_VERSION = 8  # 규칙을 바꾸면 올리기 → 다음 수집 때 최근 공지를 다시 읽어 일정을 새로 뽑음
 
 SHOWS = [
     ("더쇼", r"더\s?쇼(?!\s?챔)|THE\s?SHOW"),
@@ -299,9 +299,14 @@ WHEN_LINE = re.compile(r"일시|일정|날짜|DATE|SCHEDULE|日時", re.I)
 NOT_WHEN = re.compile(r"응모|구매|판매|접수|당첨|발표|결제|주문|기간|PERIOD|PURCHASE|ANNOUNCE|WINNER|APPLY|ENTRY", re.I)
 
 
+EVENT_WORD = re.compile(r"이벤트|행사|사인회|팬\s?사인|영상\s?통화|영통|대면|EVENT|FAN\s?SIGN|VIDEO\s?CALL", re.I)
+FACE = re.compile(r"대면|오프라인|OFFLINE|IN[-\s]?PERSON", re.I)
+
+
 def fansign_items(caption, posted, vendor):
-    """'[EVENT] A2O SOUL ... 영상통화 팬사인회 / 행사 일시: 2026년 11월 21일 (토) 18:30' → 행사 일정.
-    일시 줄을 못 찾으면 확신 낮음('확인 필요' 이슈)."""
+    """판매처 팬사인회·영통 공지 → 행사 일정.
+    '[응모 기간]' 같은 머리줄 아래 날짜는 건너뛰고, '이벤트 일시' 아래 줄('- 단체 영상통화: 11/25(수) 19:00')이나
+    날짜만 있는 줄 다음의 시간 줄('[대면/30명] 20:00 ~')을 각각 일정으로. 못 찾으면 확신 낮음('확인 필요' 이슈)."""
     caption = caption or ""
     if not FANSIGN.search(caption) or not re.search(r"A2O\s?SOUL|에이투오\s?소울|A2OSOUL", caption, re.I):
         return []
@@ -309,27 +314,60 @@ def fansign_items(caption, posted, vendor):
         pday = date.fromisoformat(posted[:10])
     except ValueError:
         return []
-    video = bool(VIDEO.search(caption))
-    title = f"{vendor} {'영상통화 팬사인회' if video else '팬사인회'}".strip()
-    short = "영통" if video else "팬싸"
     urls = [u for u in URL.findall(caption) if not SKIP_URL.search(u)]
     url = urls[0] if urls else None
     lines = [ln.strip() for ln in caption.splitlines() if ln.strip()]
-    items, seen = [], set()
+    whole_video = bool(VIDEO.search(caption))
+
+    def item(d, tm, ln, conf):
+        video = bool(VIDEO.search(ln)) or (whole_video and not FACE.search(ln))
+        title = f"{vendor} {'영상통화 팬사인회' if video else '팬사인회'}".strip()
+        return {**_item("event", title, d, tm, conf, url), "short": "영통" if video else "팬싸"}
+
+    items, seen, fallback = [], set(), None
+    mode, pending = "none", None  # mode: none / when(행사 일시 구역) / skip(응모·발표 구역)
     for ln in lines:
-        if not WHEN_LINE.search(ln) or NOT_WHEN.search(ln):
+        if ln.startswith("#"):
             continue
-        d, tm = _when(ln.split("~")[0], pday)
-        if d and d >= pday and d not in seen:
-            seen.add(d)
-            items.append({**_item("event", title, d, tm, 0.85 if tm else 0.8, url), "short": short})
+        head = ln.split("~")[0]
+        ds = _dates(head, pday)
+        tm = _time(head)
+        if not ds and not tm:  # 머리줄
+            if NOT_WHEN.search(ln):
+                mode, pending = "skip", None
+            elif WHEN_LINE.search(ln) or EVENT_WORD.search(ln):
+                mode = "when"
+            elif re.search(r"특전|혜택|BENEFIT|안내|NOTICE", ln, re.I):
+                mode, pending = "none", None
+            continue
+        if NOT_WHEN.search(ln) and not WHEN_LINE.search(ln):
+            continue
+        if mode == "skip" and not WHEN_LINE.search(ln):
+            continue
+        if ds:
+            d = ds[0]
+            if d < pday:
+                continue
+            if not (mode == "when" or WHEN_LINE.search(ln) or EVENT_WORD.search(ln)):
+                fallback = fallback or (d, tm, ln)
+                continue
+            if tm:
+                key = (d, tm, bool(VIDEO.search(ln)))
+                if key not in seen:
+                    seen.add(key)
+                    items.append(item(d, tm, ln, 0.85))
+                pending = None
+            else:
+                pending = (d, ln)
+        elif tm and pending:  # 날짜 줄 다음의 시간 줄
+            key = (pending[0], tm, bool(VIDEO.search(ln)))
+            if key not in seen:
+                seen.add(key)
+                items.append(item(pending[0], tm, ln, 0.85))
+    if pending and not any(i["date"] == pending[0].isoformat() for i in items):
+        items.append(item(pending[0], None, pending[1], 0.8))
     if items:
         return items
-    # 일시 줄이 없으면: 신청·발표 줄이 아닌 곳의 날짜를 '확인 필요'로
-    for ln in lines:
-        if NOT_WHEN.search(ln):
-            continue
-        ds = [x for x in _dates(ln, pday) if x >= pday]
-        if ds:
-            return [{**_item("event", title, ds[0], _time(ln), 0.6, url), "short": short}]
+    if fallback:
+        return [item(fallback[0], fallback[1], fallback[2], 0.6)]
     return []
