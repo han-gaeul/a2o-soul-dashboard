@@ -1909,6 +1909,32 @@
     "versions": []
    }
   ],
+  "fanchant_call": {
+   "lines": [
+    [
+     "문|Mun",
+     "소라|So-ra",
+     "서하|Seo-ha",
+     "테오|Te-o",
+     "가쿠|Ga-ku",
+     "준|Jun"
+    ],
+    [
+     "한성|Han-seong",
+     "루시엔|Ru-si-en",
+     "시원|Si-won",
+     "알루어|Al-lu-eo",
+     "타이|Ta-i"
+    ],
+    [
+     "소노|So-no",
+     "자이|Ja-i",
+     "에이든|E-i-deun",
+     "제-트|Je-teu"
+    ]
+   ],
+   "song": "Dancing in the Dark"
+  },
   "fanchant_guides": [
    {
     "song": "Dancing in the Dark",
