@@ -42,16 +42,16 @@ photo_labels:
 #   예) - { date: 2026-11-20, title: "엠카운트다운 첫 1위", url: "https://..." }
 records: []
 
-# 음반·굿즈 판매처 (한눈에 탭 '음반 구매처' + 응원 탭) { label, url, note, kind } — 사이트 주소를 모르면 판매처 공식 X 주소
+# 음반·굿즈 판매처 (한눈에 탭 '음반 구매처' + 응원 탭) { label, url, note, kind }
 #   예) - { label: 공식 스토어, url: "https://...", note: "앨범·응원봉" }
 shops:
   - { label: Mnet Plus Merch (A2O), url: "https://mnetplusmerch.com/product/list.html?cate_no=374", note: "앨범·팬사인회·영상통화 이벤트", kind: 앨범 }
   - { label: 메이크스타, url: "https://www.makestar.com/product/21531", note: "팬사인회·영상통화, 미공개 셀카 포카", kind: 앨범 }
-  - { label: 위드뮤, url: "https://x.com/Withmuu_twt", note: "팬사인회·영상통화, 단독 포카 15종", kind: 앨범 }
-  - { label: 뮤직아트, url: "https://x.com/musicart_twt", note: "팬사인회, 미공개 셀카 15종", kind: 앨범 }
+  - { label: 위드뮤, url: "https://www.withmuu.com/", note: "팬사인회·영상통화, 단독 포카 15종", kind: 앨범 }
+  - { label: 뮤직아트, url: "https://musicart.kr/", note: "팬사인회, 미공개 셀카 15종", kind: 앨범 }
   - { label: 뮤직플랜트, url: "https://www.musicplant.co.kr/", note: "예약 특전 셀카 포토카드", kind: 앨범 }
-  - { label: 애플뮤직, url: "https://x.com/applemusic_m", note: "팬사인회·특전", kind: 앨범 }
-  - { label: 점프업, url: "https://x.com/JumpUp_ent", note: "특전", kind: 앨범 }
+  - { label: 애플뮤직, url: "https://www.applemusic.co.kr/", note: "팬사인회·특전", kind: 앨범 }
+  - { label: 점프업, url: "https://jumpupent.com/", note: "특전", kind: 앨범 }
   - { label: 팬플리, url: "https://fanplee.com", note: "세트 판매", kind: 앨범 }
   - { label: 올엠디, url: "https://allmd8838.cafe24.com/product/list.html?cate_no=3213", note: "공동구매·대량구매", kind: 앨범 }
 
