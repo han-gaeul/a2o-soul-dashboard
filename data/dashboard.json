@@ -9939,6 +9939,15 @@
    "th": "เพลงคั่นให้ใช้เพลงที่ติดชาร์ตตอนนี้ ถ้าเปิดแต่ศิลปินเดียวติดกันอาจถูกกรองว่าเป็นการสตรีมผิดปกติ",
    "zh": "中间穿插当前榜单靠前的歌 — 只连续播放同一歌手可能被判定为异常播放而被过滤"
   },
+  "사전투표는 마감 · 생방송 중 빅크 앱 실시간 투표 배너로 (팬 계정 @A2OSOULBASE 기준)": {
+   "en": "Pre-vote closed · vote via the live banner in the BIGC app during the broadcast (per fan account @A2OSOULBASE)",
+   "es": "Prevotación cerrada · vota en el banner en vivo de la app BIGC durante la emisión (según @A2OSOULBASE)",
+   "id": "Pra-vote sudah ditutup · vote lewat banner live di aplikasi BIGC saat siaran (menurut @A2OSOULBASE)",
+   "ja": "事前投票は締切 · 生放送中にBIGCアプリのリアルタイム投票バナーから（ファンアカウント @A2OSOULBASE より）",
+   "pt": "Pré-votação encerrada · vote pelo banner ao vivo no app BIGC durante a transmissão (segundo @A2OSOULBASE)",
+   "th": "โหวตล่วงหน้าปิดแล้ว · โหวตผ่านแบนเนอร์สดในแอป BIGC ระหว่างออกอากาศ (ตามบัญชีแฟน @A2OSOULBASE)",
+   "zh": "预投票已截止 · 直播中通过BIGC App实时投票横幅投票（据粉丝账号 @A2OSOULBASE）"
+  },
   "사진 촬영을 좋아해 레트로 감성용 구형 휴대폰을 따로 씀": {
    "en": "Loves taking photos — keeps an old phone just for retro-style shots",
    "es": "Le encanta la fotografía: usa un móvil viejo para fotos retro",
@@ -9965,6 +9974,15 @@
    "pt": "Banner de votação ao vivo no app durante a transmissão",
    "th": "แบนเนอร์โหวตสดในแอประหว่างออกอากาศ",
    "zh": "直播期间App内实时投票横幅"
+  },
+  "생방송 투표 (1위 후보)": {
+   "en": "Live vote (1st place nominee)",
+   "es": "Votación en vivo (nominado al 1.er lugar)",
+   "id": "Vote live (nominasi juara 1)",
+   "ja": "生放送投票（1位候補）",
+   "pt": "Votação ao vivo (indicado ao 1º lugar)",
+   "th": "โหวตสด (ผู้เข้าชิงอันดับ 1)",
+   "zh": "直播投票（一位候选）"
   },
   "생방송 투표는 계정당 최대 5표": {
    "en": "Live voting: up to 5 votes per account",
@@ -13728,6 +13746,14 @@
    "show": "유픽",
    "start": "2026-11-01 00:00",
    "title": "11월 이달의 픽 · 루키 남자 (제트·서하 후보)"
+  },
+  {
+   "app": "빅크(BIGC)",
+   "end": "2026-11-17 19:00",
+   "note": "사전투표는 마감 · 생방송 중 빅크 앱 실시간 투표 배너로 (팬 계정 @A2OSOULBASE 기준)",
+   "show": "더쇼",
+   "start": "2026-11-17 18:00",
+   "title": "생방송 투표 (1위 후보)"
   }
  ]
 }
