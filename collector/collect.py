@@ -645,6 +645,15 @@ def auto_items(today):
                 i = {**i, "confidence": 1.0, "title": i["title"].replace("[팬 계정] ", "")}
             row = {**i, "post": post.get("permalink"), "posted": posted, "label": announce.KINDS.get(i["kind"], "기타"), "key": akey}
             future = (i.get("end_date") or i.get("date") or "9999") >= today
+            # 팬 계정 투표 글: 마감 시각까지 읽히면 승인 없이 '팬 계정 제보' 표시로 바로 투표 칸에
+            if (i["kind"] == "vote" and pid.startswith("xf:") and akey not in approved and i.get("end")
+                    and i["end"] >= now_kst_str() and (i["end"], i["title"]) not in seen_vote):
+                seen_vote.add((i["end"], i["title"]))
+                title = i["title"].replace("[팬 계정] ", "")
+                votes.append({"show": i.get("show") or "", "title": title if not i.get("show") else title.replace(i["show"], "").strip(),
+                              "app": i.get("app") or "", "start": i.get("start") or i["end"], "end": i["end"],
+                              "url": i.get("url") or post.get("permalink"), "source": post.get("permalink"), "auto": True, "fan": True})
+                continue
             if i["confidence"] < announce.AUTO_CONFIDENCE:
                 key = (i.get("date"), i["title"])
                 if future and key not in seen_pend and posted >= (date.fromisoformat(today) - timedelta(days=30)).isoformat():
