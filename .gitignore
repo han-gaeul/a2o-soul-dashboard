@@ -4,3 +4,7 @@ __pycache__/
 *.pyc
 .venv/
 db.sqlite3
+
+# 이슈 본문용 임시 파일 (수집 때마다 새로 만듦)
+data/health.md
+data/pending.md
