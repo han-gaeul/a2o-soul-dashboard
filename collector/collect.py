@@ -152,7 +152,7 @@ def load_fan_files(cfg):
         "photocard_order": [str(x) for x in info.get("photocard_order") or []],
         "records": [{"date": str(x["date"]), "title": str(x["title"]), "url": str(x.get("url") or "")}
                     for x in info.get("records") or [] if x.get("date") and x.get("title")],
-        "shops": [{"label": str(x["label"]), "url": str(x["url"]), "note": str(x.get("note") or "")}
+        "shops": [{"label": str(x["label"]), "url": str(x["url"]), "note": str(x.get("note") or ""), "kind": str(x.get("kind") or "")}
                   for x in info.get("shops") or [] if x.get("label") and str(x.get("url", "")).startswith("https://")],
     }
     guide = read_yml("guide.yml")
