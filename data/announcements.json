@@ -1022,6 +1022,35 @@
    "permalink": "https://x.com/A2OSOULBASE/status/2122297810846621737",
    "timestamp": "2026-11-16T11:56:43.000Z"
   },
+  "xf:2122359932251181367": {
+   "caption": "🚨 MASS EMAIL CAMPAIGN FOR A2O SOUL’S PRIVACY AND PROTECTION 🚨\n\nCalling all A2O SOUL fans! Let’s unite and urge A2O Entertainment to protect the members!\n\nEMAIL TEMPLATE: https://tinyurl.com/48x36jbz\n\nPROTECT A2O SOUL\n#A2O_소울을_보호하라\nRESPECT A2O SOUL\n#A2O_소울을_존중하라 https://x.com/A2OSOULBASE/status/2122359932251181367/photo/1",
+   "excerpt": "🚨 MASS EMAIL CAMPAIGN FOR A2O SOUL’S PRIVACY AND PROTECTION 🚨\n\nCalling all A2O SOUL fans! Let’s unite and urge A2O Entertainment to protect ",
+   "items": [],
+   "permalink": "https://x.com/A2OSOULBASE/status/2122359932251181367",
+   "timestamp": "2026-11-16T16:03:34.000Z"
+  },
+  "xf:2122360072856825861": {
+   "caption": "UNITED AS ONE FOR A2O SOUL:\n\n@A2OSOULBASE\n\n@A2OSOUL_INTL\n \n@a2osoulvote\n\n@a2osoulstation\n\n@A2OSOULPH\n\n@A2OSOULBRASIL\n\n@a2osoulmex\n\n@A2OSOUL_INA\n\n@A2OSOUL_BASEJP\n\n@A2OSOULPROTECT\n\n@A2OSOULFRANCE\n \n@A2OSOUL_PERU\n \n@a2osoul_news\n \n@a2osoulpost",
+   "excerpt": "UNITED AS ONE FOR A2O SOUL:\n\n@A2OSOULBASE\n\n@A2OSOUL_INTL\n \n@a2osoulvote\n\n@a2osoulstation\n\n@A2OSOULPH\n\n@A2OSOULBRASIL\n\n@a2osoulmex\n\n@A2OSOUL_",
+   "items": [
+    {
+     "app": "",
+     "confidence": 0.6,
+     "date": null,
+     "end": null,
+     "end_date": null,
+     "kind": "vote",
+     "place": null,
+     "show": "",
+     "start": null,
+     "time": null,
+     "title": "[팬 계정] UNITED AS ONE FOR A2O SOUL:",
+     "url": null
+    }
+   ],
+   "permalink": "https://x.com/A2OSOULBASE/status/2122360072856825861",
+   "timestamp": "2026-11-16T16:04:07.000Z"
+  },
   "xo:2120350813545541722": {
    "caption": "한 달에 한 번 아티스트와 팬이\n함께 만들어가는 음악 차트쇼🎧 🎶\n\n<ENA 케이팝업 차트쇼 26회>\nENA SPECIAL CHOICE✔️\n\n🗓️투표 기간​\n˙ 2026.11.11(수) 12:00 ~ 11.15(일) 23:59 KST\n\n🎖️투표 리워드\n˙ 방송 내 단독 스페셜 코너\n˙ 구간 달성 시 촬영장 서포트 진행\n\n지금 바로 투표하고,\nENA 케이팝업 차트쇼 방청 이벤트에도 참여하세요🌟\n🔗 https://t.co/aSB6HzgFOD\n\n📍방청 이벤트 참여하기\n🔗https://t.co/zINsGWliSW\n\n#Kei #노이 #드래곤포니 #바이비 #싸이커스 #앰퍼샌드원 #에이투오소울 #엔탑 #오브코어 #이츠 #임영민 #키빗업 #피원하모니 #피크\n\n— 마이원픽",
    "excerpt": "한 달에 한 번 아티스트와 팬이\n함께 만들어가는 음악 차트쇼🎧 🎶\n\n<ENA 케이팝업 차트쇼 26회>\nENA SPECIAL CHOICE✔️\n\n🗓️투표 기간​\n˙ 2026.11.11(수) 12:00 ~ 11.15(일) 23:59 KST\n\n🎖️투표 리워드",
@@ -1498,7 +1527,7 @@
  "x_fans": {
   "A2OSOULBASE": {
    "id": "1630504378468827137",
-   "since_id": "2122297810846621737"
+   "since_id": "2122360072856825861"
   }
  },
  "x_official_votes": {
