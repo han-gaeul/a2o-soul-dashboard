@@ -70,13 +70,25 @@ def fetch_photo_posts(uid, username, pages=5):
     return out
 
 
-def search_posts(query, since_id=None, max_results=50):
-    """최근 7일 검색 → [{id, tweet_id, caption, timestamp, permalink, author}] (최신순). since_id로 새 글만."""
+def search_posts(query, since_id=None, max_results=50, pages=1):
+    """최근 7일 검색 → [{id, tweet_id, caption, timestamp, permalink, author}] (최신순). since_id로 새 글만.
+    pages: 결과가 많으면 다음 쪽까지 (쪽마다 max_results개 읽음 → 과금)."""
     params = {"query": query, "max_results": max(10, min(100, max_results)),
               "tweet.fields": "created_at,note_tweet,entities,author_id", "expansions": "author_id", "user.fields": "username,verified_type,name"}
     if since_id:
         params["since_id"] = since_id
-    res = _get("/tweets/search/recent", params)
+    out = []
+    for _ in range(max(1, pages)):
+        res = _get("/tweets/search/recent", params)
+        out += _search_page(res)
+        token = (res.get("meta") or {}).get("next_token")
+        if not token:
+            break
+        params["next_token"] = token
+    return out
+
+
+def _search_page(res):
     people = {u["id"]: u for u in (res.get("includes") or {}).get("users", [])}
     users = {k: u["username"] for k, u in people.items()}
     out = []

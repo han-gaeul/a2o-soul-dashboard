@@ -1006,15 +1006,22 @@ def collect(cfg, rescan=False):
                         store["posts"][post["id"]]["vendor"] = vendor
         # 음방·투표 앱 공식 계정 — 계정 목록 없이, A2O SOUL 투표·1위 후보 글 중 X 금색 인증(기관) 계정 글만 (3시간마다, 읽은 글 수만큼 과금)
         ost = store.setdefault("x_official_votes", {})
-        if not ost.get("at") or now - datetime.fromisoformat(ost["at"]) >= timedelta(hours=3):
+        if ost.get("deep") != 1 or not ost.get("at") or now - datetime.fromisoformat(ost["at"]) >= timedelta(hours=3):
             query = ("(\"A2O SOUL\" OR A2OSOUL OR 에이투오소울 OR \"에이투오 소울\") "
                      "(투표 OR 사전투표 OR 1위후보 OR \"1위 후보\" OR vote OR voting OR nominee OR nominees) "
                      "-from:A2O_SOUL -is:retweet -is:reply")
             try:
-                posts = xposts.search_posts(query, since_id=ost.get("since_id"), max_results=50)
+                # 팬 글이 많아서 최신 50개만 보면 며칠 전 공식 글을 놓침 → 처음 한 번은 최근 7일을 5쪽(최대 500개)까지
+                deep = ost.get("deep") != 1
+                posts = xposts.search_posts(query, since_id=None if deep else ost.get("since_id"),
+                                            max_results=100, pages=5 if deep else 2)
                 ost["at"] = now.isoformat(timespec="minutes")
+                ost["deep"] = 1
                 vend = {v["handle"].lower() for v in cfg.get("x_vendors") or []} | {u.lower() for u in cfg["x_fans"]}
                 official = [p_ for p_ in posts if p_.get("verified_type") in ("business", "government") and p_["author"].lower() not in vend]
+                # 점검용: 마지막 검색에서 몇 개를 읽었고, 인증 계정 중 누가 있었는지 (공개 계정 이름만)
+                ost["last"] = {"read": len(posts), "official": sorted({p_["author"] for p_ in official}),
+                               "verified": sorted({f"{p_['author']}:{p_.get('verified_type')}" for p_ in posts if p_.get("verified_type") not in (None, "none")})[:30]}
                 if posts:
                     ost["since_id"] = max(posts, key=lambda p_: int(p_["tweet_id"]))["tweet_id"]
                 for p_ in official:
