@@ -85,8 +85,21 @@ x:
 
 # 판매처 X 계정 — 이 계정들 글 중 'A2O SOUL + 팬사인회/영통'만 검색해서 일정에 자동 반영
 #   handle: X 아이디(@ 없이), name: 사이트에 보일 이름 (schedule.yml 제목과 같게 쓰면 중복 없이 합쳐짐)
-x_vendors: []
-#  - { handle: 아이디, name: Withmuu }
+# 판매처 아이디: 팬 제보·검색 기준 (2026-11-16). 틀린 아이디는 검색 결과가 없을 뿐 오류는 안 나요
+x_vendors:
+  - { handle: Withmuu_twt, name: Withmuu }
+  - { handle: Makestarcorp, name: Makestar }
+  - { handle: musicart_twt, name: Musicart }
+  - { handle: musicplant_kr, name: Music Plant }
+  - { handle: applemusic_m, name: Apple Music }
+  - { handle: JumpUp_ent, name: Jumpup }
+  - { handle: nemoz_lab, name: Nemoz }
+  - { handle: allmd_kpophub, name: ALLMD }
+  - { handle: fanplee_music, name: Fanplee }
+  - { handle: soundwave_korea, name: Soundwave }
+  - { handle: Ktown4u_main, name: Ktown4u }
+  - { handle: EVERLINESHOP, name: Everline }
+  - { handle: MusicKorea_kr, name: Music Korea }
 
 # 영상 개별 설정 — 다른 채널 영상 추가, 자동 분류 덮어쓰기
 #   category: mv | fancam | content
