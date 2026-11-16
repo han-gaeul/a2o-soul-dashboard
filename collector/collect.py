@@ -1452,6 +1452,7 @@ def build(cfg):
         "categories": CATEGORIES,
         "feedback_url": str(cfg.get("feedback_url") or ""),
         "push": {k: str(v) for k, v in (cfg.get("push") or {}).items() if k in ("api", "vapid_public") and v},
+        "yt_channels": sorted(registry.get("channels") or {}),  # Cloudflare Worker가 YouTube 새 영상 즉시 알림(WebSub) 구독에 씀
         "votes": [v for v in cfg["votes"] if v["end"] >= now_kst_str()],
         "prerecs": prerecs,
         "photocards": photocards(cfg),
