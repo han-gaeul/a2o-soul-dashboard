@@ -108,6 +108,11 @@ def load_fan_files(cfg):
     cfg["streaming"] = [{"title": str(x.get("title", "")), "note": str(x.get("note") or ""),
                          "links": {str(k): str(u) for k, u in (x.get("links") or {}).items() if u}}
                         for x in votes.get("streaming") or []]
+    sp = votes.get("stream_playlist") or {}
+    cfg["stream_playlist"] = {"title": str(sp.get("title") or ""), "desc": str(sp.get("desc") or ""),
+                              "tracks": [{"song": str(x["song"])} if x.get("song") else {"other": int(x.get("other") or 1)}
+                                         for x in sp.get("tracks") or [] if isinstance(x, dict)],
+                              "tips": [str(x) for x in sp.get("tips") or []]} if sp.get("tracks") else {}
     cfg["charts"] = [{"song": str(c.get("song", "")), "service": str(c.get("service", "")), "type": str(c.get("type") or ""),
                       "ranks": sorted((str(d), int(r)) for d, r in (c.get("ranks") or {}).items())}
                      for c in read_yml("charts.yml").get("charts") or []]
@@ -275,14 +280,15 @@ def ig_images(m):
         return [m["media_url"]]
     if m.get("media_type") == "CAROUSEL_ALBUM":
         kids = (m.get("children") or {}).get("data", [])
-        return [k["media_url"] for k in kids if k.get("media_type") == "IMAGE" and k.get("media_url")][:4]
+        return [k["media_url"] for k in kids if k.get("media_type") == "IMAGE" and k.get("media_url")][:10]
     return []
 
 
-def photo_feed(cfg, registry, store, limit=60):
+def photo_feed(cfg, registry, store, limit=400):
     """공식 인스타·X 사진 게시물 → [{src, url, at, account, members, text}] 최신순."""
     out = []
-    for u, posts in (registry.get("ig_posts") or {}).items():
+    src_posts = {**(registry.get("ig_posts") or {}), **(registry.get("ig_photos") or {})}
+    for u, posts in src_posts.items():
         if u not in cfg["instagram"]:
             continue
         for m in posts:
@@ -818,6 +824,15 @@ def collect(cfg, rescan=False):
                  "images": ig_images(m)}
                 for m in media]
             announce.run(media, store, today, kst_datetime, extract, limit)
+            # 사진 모음: 예전 게시물까지 (이미지 주소는 며칠 뒤 만료돼서 매번 새로 받음)
+            try:
+                allm = instagram.fetch_media_pages(username)
+                registry.setdefault("ig_photos", {})[username] = [
+                    {"id": m["id"], "caption": (m.get("caption") or "")[:400], "timestamp": m.get("timestamp"),
+                     "permalink": m.get("permalink"), "images": ig_images(m)} for m in allm if ig_images(m)]
+                print(f"[IG] 사진 게시물 {len(registry['ig_photos'][username])}개 (전체 {len(allm)}개 중)")
+            except Exception as e:  # noqa: BLE001
+                print(f"[IG] {username} 사진 모음 조회 실패: {e}")
     if xposts.enabled():
         xstate = store.setdefault("x", {})
         for username in cfg["x"]:
@@ -949,6 +964,7 @@ def write_health(cfg, videos, members, today, official=()):
     texts += cfg["info"]["lore"] + [a["type"] for a in cfg["info"]["albums"]]
     texts += [x["label"] for x in cfg["info"]["shops"]] + [x["note"] for x in cfg["info"]["shops"]]
     texts += [a["note"] for a in cfg["info"]["albums"]] + [v for a in cfg["info"]["albums"] for v in a["versions"]]
+    texts += [cfg["stream_playlist"].get("title", ""), cfg["stream_playlist"].get("desc", "")] + cfg["stream_playlist"].get("tips", [])
     texts += [x["note"] for x in cfg["streaming"]] + [str(v.get(k) or "") for v in cfg["votes"] for k in ("show", "app", "title", "note")]
     for v in cfg["howto"]["voting"]:
         texts += [v.get(k, "") for k in ("when", "pre", "live", "note")]
@@ -1229,6 +1245,7 @@ def build(cfg):
         "prerecs": prerecs,
         "photocards": photocards(cfg),
         "streaming": cfg["streaming"],
+        "stream_playlist": cfg["stream_playlist"],
         "charts": cfg["charts"],
         "supports": sorted((x for x in cfg["supports"] if x["end"] >= today), key=lambda x: x["start"]),
         "howto": cfg["howto"],

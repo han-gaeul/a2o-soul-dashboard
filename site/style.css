@@ -483,3 +483,13 @@ a.tour-item:hover { border-color: var(--accent); }
 .chant-guide { display: block; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; color: inherit; text-decoration: none; }
 .chant-guide img { display: block; width: 100%; height: auto; background: #fff; }
 .chant-guide span { display: block; padding: 8px 12px; font-size: 13px; font-weight: 700; }
+
+/* 스밍 리스트 */
+.playlist h3, .pl-mv { font-size: 15px; margin: 4px 0 6px; }
+.pl-mv { margin-top: 18px; }
+.pl { list-style: none; padding: 0; margin: 10px 0; display: grid; gap: 6px; }
+.pl li { display: grid; grid-template-columns: 44px 1fr; align-items: start; gap: 8px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 10px; }
+.pl .pl-song { border-color: var(--accent); }
+.pl .pl-other { border-style: dashed; font-size: 13px; padding: 6px 10px; }
+.pl-n { font-weight: 700; text-align: center; font-variant-numeric: tabular-nums; }
+.pl .links { margin-top: 4px; gap: 4px 10px; }

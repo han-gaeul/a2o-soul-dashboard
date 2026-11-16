@@ -28,3 +28,25 @@ def fetch_media(username, limit=25):
     r = requests.get(url, params={"fields": fields, "access_token": os.environ["IG_ACCESS_TOKEN"]}, timeout=30)
     r.raise_for_status()
     return r.json()["business_discovery"].get("media", {}).get("data", [])
+
+
+MEDIA_FIELDS = ("id,caption,timestamp,permalink,media_type,media_url,thumbnail_url,like_count,comments_count,"
+                "children{media_type,media_url}")
+
+
+def fetch_media_pages(username, pages=8, per=50):
+    """공개 계정 게시물을 최신순으로 여러 페이지 (사진 모음용, 최대 pages×per개)."""
+    ver = os.environ.get("GRAPH_API_VERSION", "v21.0")
+    url = f"https://graph.facebook.com/{ver}/{os.environ['IG_USER_ID']}"
+    out, after = [], None
+    for _ in range(pages):
+        media = f"media.after({after}).limit({per})" if after else f"media.limit({per})"
+        r = requests.get(url, params={"fields": f"business_discovery.username({username}){{{media}{{{MEDIA_FIELDS}}}}}",
+                                      "access_token": os.environ["IG_ACCESS_TOKEN"]}, timeout=30)
+        r.raise_for_status()
+        m = r.json()["business_discovery"].get("media", {})
+        out += m.get("data", [])
+        after = (m.get("paging") or {}).get("cursors", {}).get("after")
+        if not after or not m.get("data"):
+            break
+    return out
