@@ -2,6 +2,7 @@
 **맞는 항목은 체크(☑)만 하세요** — 다음 수집(1시간 안) 때 사이트에 자동으로 들어가요. 틀린 건 그냥 두면 돼요.
 날짜가 비었거나 틀렸으면 체크하지 말고 `schedule.yml`에 직접 적어 주세요.
 
+- [ ] **행사** Music Plant 영상통화 팬사인회 · 2026-11-28 · 확신 60% · [원문](https://x.com/musicplant_kr/status/2122208044436127838) <!-- key:xv:2122208044436127838|2026-11-28|Music Plant 영상통화 팬사인회 -->
 - [ ] **투표** [팬 계정] ONE FINAL STRETCH TO VOTE A2O SOUL! 🗳️ · 날짜 없음 · 확신 60% · [원문](https://x.com/A2OSOULBASE/status/2122121681691160763) <!-- key:xf:2122121681691160763||[팬 계정] ONE FINAL STRETCH TO VOTE A2O SOUL! 🗳️ -->
 - [ ] **투표** [팬 계정] KEEP VOTING FOR A2O SOUL EVERYONE! ✨ · 날짜 없음 · 확신 60% · [원문](https://x.com/A2OSOULBASE/status/2121985035331150270) <!-- key:xf:2121985035331150270||[팬 계정] KEEP VOTING FOR A2O SOUL EVERYONE! ✨ -->
 - [ ] **투표** [팬 계정] Look at how genuinely happy A2O SOUL is! 🥹💙 · 날짜 없음 · 확신 60% · [원문](https://x.com/A2OSOULBASE/status/2121776581488291923) <!-- key:xf:2121776581488291923||[팬 계정] Look at how genuinely happy A2O SOUL is! 🥹💙 -->

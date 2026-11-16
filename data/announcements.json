@@ -1011,6 +1011,26 @@
    "permalink": "https://x.com/Withmuu_twt/status/2121483267778232561",
    "timestamp": "2026-11-14T06:00:00.000Z",
    "vendor": "Withmuu"
+  },
+  "xv:2122208044436127838": {
+   "caption": "[FAN SIGN EVENT]\n#A2O #A2OSOUL\n#SUPERSTAR\n#Dancing_in_the_Dark\n\n🗓️이벤트 : 2026년 11월 28일 (토)\n[단체 영상통화/20명] 18:00 (KST) ~\n[대면/30명] 20:00 (KST) ~\n\n[응모자 특전]\n🎁 미공개 셀카 포토카드 15종 중 1종 랜덤 증정\n\n🩵 응모 기간\n2026.11.16 (월) 15:00 KST ~ 2026.11.18 (수) 23:59 KST\n\n🛒뮤직플랜트 온라인몰\nhttps://t.co/95D655hegS\n\n#뮤직플랜트 #MUSICPLANT",
+   "excerpt": "[FAN SIGN EVENT]\n#A2O #A2OSOUL\n#SUPERSTAR\n#Dancing_in_the_Dark\n\n🗓️이벤트 : 2026년 11월 28일 (토)\n[단체 영상통화/20명] 18:00 (KST) ~\n[대면/30명] 20:00 (KST) ~",
+   "items": [
+    {
+     "confidence": 0.6,
+     "date": "2026-11-28",
+     "end_date": null,
+     "kind": "event",
+     "place": null,
+     "short": "영통",
+     "time": null,
+     "title": "Music Plant 영상통화 팬사인회",
+     "url": null
+    }
+   ],
+   "permalink": "https://x.com/musicplant_kr/status/2122208044436127838",
+   "timestamp": "2026-11-16T06:00:01.000Z",
+   "vendor": "Music Plant"
   }
  },
  "rules_version": 7,
@@ -1027,6 +1047,6 @@
   }
  },
  "x_vendors": {
-  "since_id": "2121483267778232561"
+  "since_id": "2122208044436127838"
  }
 }
