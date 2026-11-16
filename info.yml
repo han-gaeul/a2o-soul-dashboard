@@ -53,3 +53,8 @@ shops:
 #   @soultemplates 포카 리스트 템플릿에서 잘라 만듦: python3 collector/pc_crop.py 템플릿폴더
 photocard_credit: { label: "@soultemplates", url: "https://x.com/soultemplates" }
 photocard_order: [앨범, 예판 특전, 팬사인·영통, 방송, 럭키드로우]
+
+# 응원법 가이드 이미지 (응원 탭 '응원법' 영상 위에 표시) — site/img/fanchants/ 에 올리고 여기에 적기
+fanchant_guides:
+  - { song: Dancing in the Dark, src: img/fanchants/dancing-in-the-dark.webp }
+  - { song: SUPERSTAR, src: img/fanchants/superstar.webp }

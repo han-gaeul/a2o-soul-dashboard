@@ -1,6 +1,6 @@
 // ---------- 언어 ----------
-const LANGS = ["ko", "en", "ja", "zh", "es", "id", "th"];
-const LOCALES = { ko: "ko-KR", en: "en-US", ja: "ja-JP", zh: "zh-CN", es: "es-ES", id: "id-ID", th: "th-TH" };
+const LANGS = ["ko", "en", "ja", "zh", "es", "id", "th", "pt"];
+const LOCALES = { ko: "ko-KR", en: "en-US", ja: "ja-JP", zh: "zh-CN", es: "es-ES", id: "id-ID", th: "th-TH", pt: "pt-BR" };
 // 기기별 설정(최애·본 영상) — 막혀 있어도 사이트는 그대로 동작
 const pref = {
   get(k, d) { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch (_) { return d; } },
@@ -21,7 +21,7 @@ function t(key, vars = {}) {
   for (const [k, v] of Object.entries(vars)) s = s.replaceAll(`{${k}}`, v);
   return s;
 }
-document.documentElement.lang = LANG;
+document.documentElement.lang = LANG === "pt" ? "pt-BR" : LANG;
 document.querySelectorAll("[data-i18n]").forEach((n) => { n.textContent = t(n.dataset.i18n); });
 (function langSelect() {
   const sel = document.getElementById("lang");
@@ -86,7 +86,7 @@ if ("serviceWorker" in navigator) {
   const nat = (s) => (s || "").split("·").map((x) => (t("nat")[x] || x)).join("·");
   // 내용 번역 (translations.yml): 한국어 원문 그대로 키, 없으면 원문
   let TR = {};
-  const tc = (s) => (LANG === "ko" || !s ? s : TR[s]?.[LANG] || s);
+  const tc = (s) => (LANG === "ko" || !s ? s : TR[s]?.[LANG] || TR[s]?.en || s);
   // 자동으로 만든 문구(기록·기념일)는 언어별 틀로
   const tx = (x) => {
     if (x.key) return t(x.key, { n: x.key.startsWith("anniv") ? x.n : fmt(x.n), show: tc(x.show), type: tc(x.type), name: x.name });
@@ -455,6 +455,12 @@ if ("serviceWorker" in navigator) {
   }
 
   const howto = data.howto || {};
+  // '뮤니버스(MUNIVERSE) · 뮤빗(MUBEAT, 글로벌)' → 앱마다 찾기 링크
+  const appLinks = (txt) => {
+    const raw = String(txt).split(/\s*·\s*/), shown = String(tc(txt)).split(/\s*·\s*/);
+    const label = shown.length === raw.length ? shown : raw.map((a) => tc(a));
+    return raw.flatMap((a, i) => [i ? " · " : null, ext(appSearch(a.replace(/,.*\)/, ")")), label[i])]).filter(Boolean);
+  };
   if ((howto.voting || []).length || (howto.streaming || []).length) {
     if ((howto.voting || []).length) {
       const box = el("details", { class: "howto", open: "" }, el("summary", {}, t("howto_voting")));
@@ -462,15 +468,15 @@ if ("serviceWorker" in navigator) {
         box.append(el("div", { class: "howto-show" },
           el("div", {}, el("b", {}, tc(v.show)), v.when ? el("span", { class: "muted" }, ` · ${tc(v.when)}`) : null),
           el("div", { class: "howto-apps" },
-            v.pre ? el("span", {}, el("span", { class: "chip" }, t("howto_pre")), ` ${tc(v.pre)}`) : null,
-            v.live ? el("span", {}, el("span", { class: "chip chip-on" }, t("howto_live")), ` ${tc(v.live)}`) : null),
+            v.pre ? el("span", {}, el("span", { class: "chip" }, t("howto_pre")), " ", ...appLinks(v.pre)) : null,
+            v.live ? el("span", {}, el("span", { class: "chip chip-on" }, t("howto_live")), " ", ...appLinks(v.live)) : null),
           v.note ? el("div", { class: "muted small" }, tc(v.note)) : null,
           v.url ? ext(v.url, "↗ link") : null));
       }
       $("howto").append(box);
     }
     for (const g of howto.streaming || []) {
-      $("howto").append(el("details", { class: "howto" }, el("summary", {}, tc(g.title)),
+      $("howto").append(el("details", { class: "howto", ...(g.global && LANG !== "ko" ? { open: "" } : {}) }, el("summary", {}, tc(g.title)),
         el("ol", { class: "howto-steps" }, ...g.steps.map((x) => el("li", {}, tc(x))))));
     }
     if (howto.checked) $("howtoChecked").textContent = t("howto_checked", { d: howto.checked.replaceAll("-", ".") });
@@ -662,6 +668,16 @@ if ("serviceWorker" in navigator) {
         el("h3", {}, t(label, { n: list.length })),
         el("div", { class: "videos" }, ...list.map((v) => videoCard(v, null)))));
     }
+    // 더 찾아보기: 데뷔 전 이름(별칭)까지 넣어 유튜브·빌리빌리 검색 (연습실·커버 영상 등 사이트에 없는 것)
+    {
+      const names = [m.name, (m.aliases || [])[0]].filter(Boolean);
+      const q = encodeURIComponent(`A2O ${names.join(" ")}`);
+      sections.push(el("section", { class: "dlg-sec", id: "dlg-more" },
+        el("h3", {}, t("more_search")),
+        el("div", { class: "links small" },
+          ext(`https://www.youtube.com/results?search_query=${q}`, "YouTube ↗"),
+          ext(`https://search.bilibili.com/all?keyword=${q}`, "bilibili ↗"))));
+    }
     const myPc = (data.photocards || []).filter((x) => x.member === m.name);
     if (myPc.length) {
       const cr = (data.info || {}).photocard_credit || {};
@@ -780,7 +796,7 @@ if ("serviceWorker" in navigator) {
   const PAGE = 24;
   const cur = { cat: "all", fmt: "all", q: "", series: "", show: "", era: "", unseen: false };
   let shown = 0;
-  const chipOf = (v) => (v.predebut ? catLabel("predebut") : v.member || v.series || catLabel(v.category));
+  const chipOf = (v) => (v.predebut ? catLabel("predebut") : v.member || tc(v.series) || catLabel(v.category));
   const pick = (defs, key) => defs.find((d) => d[0] === key)[1];
   const norm = (s) => (s || "").toLowerCase().normalize("NFKC");
   const base = (v) => (!cur.q || norm(v.title).includes(norm(cur.q)) || norm(v.member).includes(norm(cur.q)))
@@ -839,8 +855,13 @@ if ("serviceWorker" in navigator) {
 
   // ---------- 응원법 (응원 탭) ----------
   const chants = data.fanchants || [];
+  const guides = (data.info || {}).fanchant_guides || [];
+  // 공식 응원법 가이드 이미지 — 누르면 원본 크기
+  $("chantGuides").replaceChildren(...guides.map((g) => el("a", { class: "chant-guide", href: g.src, target: "_blank", rel: "noopener" },
+    el("img", { src: g.src, alt: `${g.song} ${t("fanchants")}`, loading: "lazy", decoding: "async" }),
+    el("span", {}, `${g.song} · ${t("fanchant_guide")}`))));
   if (chants.length) $("fanchants").append(...chants.map((v) => videoCard(v, v.song || null)));
-  else $("fanchantSec").remove();
+  if (!chants.length && !guides.length) $("fanchantSec").remove();
 
   // ---------- 음방 회차별 무대 (영상 탭) ----------
   const eps = data.episodes || [];
@@ -1111,6 +1132,35 @@ if ("serviceWorker" in navigator) {
     // 끝없이 흐르게 같은 줄을 두 번 (두 번째는 화면 읽기에서 제외)
     $("stripTrack").append(...withPhoto.map((m) => chip(m, false)), ...withPhoto.map((m) => chip(m, true)));
     $("strip").hidden = false;
+  }
+
+  // ---------- 공식 사진 모음 (멤버 탭): 인스타·X 사진 게시물, 멤버 이름이 본문에 있으면 멤버별로 ----------
+  const photos = data.photos || [];
+  if (photos.length) {
+    let who = "", shown = 18;
+    const mems = data.members.map((m) => m.name).filter((n) => photos.some((x) => (x.members || []).includes(n)));
+    const btn = (label, on, fn) => {
+      const b = el("button", { type: "button", class: on ? "on" : "", "aria-pressed": String(on) }, label);
+      b.addEventListener("click", fn);
+      return b;
+    };
+    const draw = () => {
+      $("photoMem").replaceChildren(btn(t("ev_all"), !who, () => { who = ""; shown = 18; draw(); }),
+        ...mems.map((n) => btn(n, n === who, () => { who = n; shown = 18; draw(); })));
+      const list = photos.filter((x) => !who || (x.members || []).includes(who));
+      $("photoGrid").replaceChildren(...list.slice(0, shown).map((x) => {
+        const img = el("img", { src: x.src, alt: x.text || "A2O SOUL", loading: "lazy", decoding: "async", referrerpolicy: "no-referrer" });
+        const a = el("a", { href: x.url, target: "_blank", rel: "noopener", title: `${x.at} · ${x.text || ""}` }, img,
+          el("span", { class: `src src-${x.account}` }, x.account === "x" ? "X" : "IG"));
+        img.addEventListener("error", () => a.remove());  // 만료된 주소는 숨김
+        return a;
+      }));
+      $("photoMore").hidden = list.length <= shown;
+    };
+    $("photoMore").onclick = () => { shown += 18; draw(); };
+    draw();
+  } else {
+    $("photoSec").remove();
   }
 
   // ---------- 사이트 사용법: 입덕 탭 섹션 + 첫 방문 안내 + 하단 버튼 ----------

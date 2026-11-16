@@ -22,6 +22,8 @@
 #     예) instagram_posts: ["https://www.instagram.com/p/XXXXXXXXXXX/"]
 #     게시물 → ⋯ → 링크 복사로 얻은 주소. 원본이 삭제되면 임베드도 같이 사라짐
 #
+# 순서: 'Dancing in the Dark' 공식 응원법 멤버 콜 순서 (멤버 목록·띠 등이 이 순서로 보임)
+# 포지션 일부(리더·에이스·콘셉트 센터 등)는 팬 제보 반영 (2026-11)
 # 출처(생일 포함): 나무위키 각 멤버 문서와 'A2O Rookies' 인원 변천사 (2026-11-10 기준, 요약), kpopbio.com
 #       틀린 게 있으면 고쳐주세요
 # 그룹 공식 채널 (멤버 탭 상단에 표시). 멤버 개인 공식 SNS는 아직 없음
@@ -44,7 +46,7 @@ members:
     nationality: 한국
     birth_year: 2007
     birthday: "04-07"
-    position: 보컬, 비주얼 센터
+    position: 리더, 보컬, 비주얼 센터
     career: [창원 TNS보컬댄스학원 출신, 비공개 연습생으로 데뷔]
     notes: [팀의 맏형으로 동생들을 잘 챙김, 소울메이트로 동갑 멤버 소라를 꼽음]
 
@@ -71,16 +73,6 @@ members:
     career: [경기소년소녀합창단 활동, 비공개 연습생으로 데뷔]
     notes: ["'SUPERSTAR' 고음 파트 담당", 데뷔 쇼케이스 영상 영어 내레이션, 무표정과 웃는 얼굴의 반전 매력]
 
-  - name: GAKU
-    ko: 가쿠
-    nationality: 일본
-    birth_year: 2009
-    birthday: "09-04"
-    position: ""
-    career: [URIZIP KPOP ACADEMY 출신, "A2O Rookies LTB(2024.10~) → HTB(2025.2~)", "HTB 'REVOLUTION', 'CHAMPAGNE' 참여"]
-    notes: [해산물을 좋아함]
-    units: [{ unit: LTB, until: 2025-02-13 }, { unit: HTB, since: 2025-02-14 }]
-
   - name: TEO
     ko: 테오
     nationality: 중국
@@ -90,6 +82,16 @@ members:
     nicknames: [공식 텐션왕]
     career: [중국 댄스 방송 출연, 다수 댄스 대회 수상, "A2O Rookies LTB(2024.10~) → HTB(2025.2~)"]
     notes: [댄스 브레이크 센터, 팀에서 흥이 가장 많은 멤버, 소울푸드는 짜장면]
+    units: [{ unit: LTB, until: 2025-02-13 }, { unit: HTB, since: 2025-02-14 }]
+
+  - name: GAKU
+    ko: 가쿠
+    nationality: 일본
+    birth_year: 2009
+    birthday: "09-04"
+    position: 비주얼
+    career: [URIZIP KPOP ACADEMY 출신, "A2O Rookies LTB(2024.10~) → HTB(2025.2~)", "HTB 'REVOLUTION', 'CHAMPAGNE' 참여"]
+    notes: [해산물을 좋아함]
     units: [{ unit: LTB, until: 2025-02-13 }, { unit: HTB, since: 2025-02-14 }]
 
   - name: JUNE
@@ -103,15 +105,6 @@ members:
     notes: [빈티지 옷을 직접 리폼해서 입음, 축구·농구를 좋아하는 운동파]
     units: [{ unit: HTB, since: 2025-02-14 }]
 
-  - name: LUCIEN
-    ko: 루시엔
-    nationality: 한국·미국
-    birth_year: 2010
-    birthday: "12-10"
-    position: 랩, 댄스
-    career: [AJS·REDSTAGE 아카데미 출신, 비공개 연습생으로 데뷔]
-    notes: [팀에서 가장 차분한 성격, 네오 소울을 좋아함 (최애 아티스트 에리카 바두)]
-
   - name: HANSUNG
     ko: 한성
     nationality: 한국
@@ -122,35 +115,24 @@ members:
     career: [POWERVOCAL Star Incubating Center 출신, 비공개 연습생으로 데뷔]
     notes: [파워풀한 음색, 발라드를 좋아함 (최애곡 EXO 'For Life')]
 
-  - name: TAI
-    ko: 타이
-    nationality: 중국
-    birth_year: 2011
-    birthday: "08-09"
-    position: ""
-    career: [SM엔터테인먼트 아역 모델 선발대회 결선 진출, "영화 'The Marked Sheep'(2022) 조연", A2O Rookies LTB (2024.10~)]
-    notes: [초등학생 때 밴드를 결성해 싱글 발매, 시티워크를 좋아함]
-    units: [{ unit: LTB }]
+  - name: LUCIEN
+    ko: 루시엔
+    nationality: 한국·미국
+    birth_year: 2010
+    birthday: "12-10"
+    position: 랩, 댄스
+    career: [AJS·REDSTAGE 아카데미 출신, 비공개 연습생으로 데뷔]
+    notes: [팀에서 가장 차분한 성격, 네오 소울을 좋아함 (최애 아티스트 에리카 바두)]
 
   - name: SEE-ONE
     ko: 시원
     nationality: 한국·일본
     birth_year: 2011
     birthday: "02-10"
-    position: 랩, 댄스
+    position: 보컬, 랩
     aliases: [SEEONE, SEE ONE]
     career: [키즈모델 활동, 댄스 보컬 아카데미 HIBEAT 출신, 전 JYP엔터테인먼트 연습생]
     notes: ["매력 포인트는 '동굴 보이스' 저음"]
-
-  - name: SONO
-    ko: 소노
-    nationality: 일본
-    birth_year: 2011
-    birthday: "11-05"
-    position: 비주얼
-    career: [A2O Rookies LTB (2025.8~)]
-    notes: [팀의 분위기 메이커, 일본어·한국어·영어·중국어 4개 국어]
-    units: [{ unit: LTB, since: 2025-08-22 }]
 
   - name: ALURE
     ko: 알루어
@@ -164,6 +146,26 @@ members:
       - "태국 One31 시트콤 'Ban Saran Land'(2018) 출연"
       - 비공개 연습생으로 데뷔
     notes: [보컬로 입사해 짧은 기간에 댄스 실력을 크게 끌어올림, 팝·R&B를 좋아함]
+
+  - name: TAI
+    ko: 타이
+    nationality: 중국
+    birth_year: 2011
+    birthday: "08-09"
+    position: 콘셉트 센터, 메인댄서
+    career: [SM엔터테인먼트 아역 모델 선발대회 결선 진출, "영화 'The Marked Sheep'(2022) 조연", A2O Rookies LTB (2024.10~)]
+    notes: [초등학생 때 밴드를 결성해 싱글 발매, 시티워크를 좋아함]
+    units: [{ unit: LTB }]
+
+  - name: SONO
+    ko: 소노
+    nationality: 일본
+    birth_year: 2011
+    birthday: "11-05"
+    position: 비주얼
+    career: [A2O Rookies LTB (2025.8~)]
+    notes: [팀의 분위기 메이커, 일본어·한국어·영어·중국어 4개 국어]
+    units: [{ unit: LTB, since: 2025-08-22 }]
 
   - name: ZAI
     ko: 자이
@@ -182,7 +184,7 @@ members:
     nationality: 중국
     birth_year: 2012
     birthday: "03-27"
-    position: 보컬
+    position: 리드보컬, 메인댄서
     nicknames: [도입 요정]
     career: [A2O Rookies LTB (2024.10~), "솔로 'Love Is Gone' Zal-Dance 영상(2025.4)"]
     notes: ["'SUPERSTAR' 1·2절 도입부 담당", 사진 촬영을 좋아해 레트로 감성용 구형 휴대폰을 따로 씀]
@@ -193,7 +195,7 @@ members:
     nationality: 중국
     birth_year: 2012
     birthday: "06-21"
-    position: 댄스
+    position: 댄스, 에이스
     nicknames: [오케스트라 보이]
     aliases: [HANZE, 한저]
     career: [A2O Rookies LTB '한저(HANZE)' (2024.10~), "솔로 'Palette' Zal-Dance 영상(2025.6)"]

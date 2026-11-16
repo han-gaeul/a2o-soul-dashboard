@@ -24,7 +24,7 @@ def fetch_media(username, limit=25):
     ver = os.environ.get("GRAPH_API_VERSION", "v21.0")
     url = f"https://graph.facebook.com/{ver}/{os.environ['IG_USER_ID']}"
     fields = (f"business_discovery.username({username})"
-              f"{{media.limit({int(limit)}){{id,caption,timestamp,permalink,media_type,like_count,comments_count}}}}")
+              f"{{media.limit({int(limit)}){{id,caption,timestamp,permalink,media_type,media_url,thumbnail_url,like_count,comments_count,children{{media_type,media_url}}}}}}")
     r = requests.get(url, params={"fields": fields, "access_token": os.environ["IG_ACCESS_TOKEN"]}, timeout=30)
     r.raise_for_status()
     return r.json()["business_discovery"].get("media", {}).get("data", [])

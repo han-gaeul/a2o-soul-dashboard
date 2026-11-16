@@ -119,7 +119,7 @@ dialog::backdrop { background: rgba(0, 0, 0, .5); }
 .pf-row { display: grid; grid-template-columns: 64px 1fr; gap: 8px; padding: 8px 0; border-top: 1px solid var(--line); }
 .pf-label { color: var(--muted); font-size: 13px; }
 .pf-row ul { margin: 0; padding-left: 18px; }
-.pf-src { color: var(--muted); font-size: 11px; opacity: .7; text-align: right; margin-top: 20px; }
+.pf-src { color: var(--muted); font-size: 11px; text-align: right; margin-top: 20px; }
 .pf-src a { text-decoration: underline; }
 
 /* 멤버 탭 */
@@ -464,3 +464,22 @@ a.tour-item:hover { border-color: var(--accent); }
 .tour-item .go { color: var(--accent); font-weight: 700; }
 .tour-never { text-align: center; margin: 12px 0 0; }
 .tour-foot { margin-right: 6px; background: none; font: inherit; cursor: pointer; }
+
+/* 공식 사진 모음 */
+.photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+@media (min-width: 720px) { .photo-grid { grid-template-columns: repeat(5, 1fr); } }
+.photo-grid a { position: relative; display: block; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 6px; background: var(--line); }
+.photo-grid img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.photo-grid .src { position: absolute; left: 4px; bottom: 4px; font-size: 10px; }
+
+.vote-home .sec-head { margin-top: 0; }
+.vote-home .sec-head h2 { margin: 0; }
+@media (prefers-color-scheme: dark) { .cal-wd.sat { color: #8fb0ff; } }
+
+/* 응원법 가이드 이미지 */
+.chant-guides { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 12px; }
+@media (min-width: 720px) { .chant-guides { grid-template-columns: 1fr 1fr; } }
+.chant-guides:empty { display: none; }
+.chant-guide { display: block; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; color: inherit; text-decoration: none; }
+.chant-guide img { display: block; width: 100%; height: auto; background: #fff; }
+.chant-guide span { display: block; padding: 8px 12px; font-size: 13px; font-weight: 700; }
