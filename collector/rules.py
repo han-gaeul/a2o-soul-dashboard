@@ -6,7 +6,7 @@
 import re
 from datetime import date, timedelta
 
-RULES_VERSION = 9  # 규칙을 바꾸면 올리기 → 다음 수집 때 최근 공지를 다시 읽어 일정을 새로 뽑음
+RULES_VERSION = 10  # 규칙을 바꾸면 올리기 → 다음 수집 때 최근 공지를 다시 읽어 일정을 새로 뽑음
 
 SHOWS = [
     ("더쇼", r"더\s?쇼(?!\s?챔)|THE\s?SHOW"),
@@ -150,6 +150,11 @@ def _when(text, pday, base=None):
     return d, _time(text)
 
 
+VOTE_KINDS = [("엔딩요정 투표", re.compile(r"엔딩\s?요정|ENDING\s?FAIRY", re.I)),
+              ("HOT STAGE 투표", re.compile(r"HOT\s?STAGE|핫\s?스테이지", re.I)),
+              ("팬픽캠 투표", re.compile(r"팬\s?픽\s?캠|FAN\s?PICK\s?CAM", re.I))]
+
+
 def vote_items(caption, pday):
     """투표 안내 → [{kind: vote, title, show, app, start, end, url, confidence}]"""
     if not VOTE.search(caption) or PRE_REC.search(caption):
@@ -159,8 +164,9 @@ def vote_items(caption, pday):
     url = next((u for ln in lines if re.search(r"투표|vote|링크|link", ln, re.I) for u in URL.findall(ln) if u in urls), urls[0] if urls else None)
     show = next((n for n, rx in SHOW_RE if rx.search(caption)), "")
     app = next((n for n, rx in VOTE_APPS_RE if rx.search(caption)), "")
-    kind = "사전투표" if re.search(r"사전\s?투표|PRE-?VOT", caption, re.I) else \
-        "생방송 투표" if re.search(r"실시간|생방송|LIVE\s?VOT", caption, re.I) else "투표"
+    special = next((name for name, rx in VOTE_KINDS if rx.search(caption)), None)
+    kind = special or ("사전투표" if re.search(r"사전\s?투표|PRE-?VOT", caption, re.I) else
+                       "생방송 투표" if re.search(r"실시간\s?투표|생방송\s?투표|LIVE\s?VOT", caption, re.I) else "투표")
     start = end = None
     for ln in lines:
         if "~" in ln and (_dates(ln, pday) or _time(ln)):
