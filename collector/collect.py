@@ -52,6 +52,7 @@ def load_config():
     cfg["channels"] = cfg.get("channels") or []
     cfg["instagram"] = cfg.get("instagram") or []
     cfg["x"] = [str(u).lstrip("@") for u in (cfg.get("x") or [])]
+    cfg["x_fans"] = [str(u).lstrip("@") for u in (cfg.get("x_fans") or [])]
     cfg["x_vendors"] = [{"handle": str(v["handle"]).lstrip("@"), "name": str(v.get("name") or v["handle"])}
                         for v in (cfg.get("x_vendors") or []) if isinstance(v, dict) and v.get("handle")]
     cfg["videos"] = cfg.get("videos") or []
@@ -306,6 +307,12 @@ def photo_feed(cfg, registry, store, limit=400):
     out.sort(key=lambda x: (x["at"], -x["n"]), reverse=True)
     return out[:limit]
 
+
+def fan_extract(caption, posted, today):
+    """팬 계정 글: 규칙으로 뽑되 확신을 낮춰 전부 '확인 필요'로."""
+    return [{**i, "confidence": min(i["confidence"], 0.6), "title": f"[팬 계정] {i['title']}"} for i in rules.extract(caption, posted, today)]
+
+PAST_DAYS = 120  # 지난 일정을 달력에 남기는 기간
 IG_POST = re.compile(r"^https://(www\.)?instagram\.com/(p|reel)/[\w-]+/?")
 
 
@@ -453,8 +460,9 @@ def anniversaries(debut):
     if not debut:
         return []
     d0 = date.fromisoformat(debut)
-    out = [{"date": (d0 + timedelta(days=n - 1)).isoformat(), "title": f"🎉 데뷔 {n}일", "key": "anniv_days", "n": n}
-           for n in range(100, 1001, 100)]
+    out = [{"date": d0.isoformat(), "title": "🎉 데뷔", "key": "anniv_debut", "n": 0}]
+    out += [{"date": (d0 + timedelta(days=n - 1)).isoformat(), "title": f"🎉 데뷔 {n}일", "key": "anniv_days", "n": n}
+            for n in range(100, 1001, 100)]
     out += [{"date": d0.replace(year=d0.year + y).isoformat(), "title": f"🎉 데뷔 {y}주년", "key": "anniv_years", "n": y}
             for y in range(1, 6)]
     return [{**a, "type": "기념일", "auto": True, "anniv": True} for a in sorted(out, key=lambda a: a["date"])]
@@ -573,7 +581,8 @@ def auto_items(today):
                                   "app": i.get("app") or "", "start": i.get("start") or i["end"], "end": i["end"],
                                   "url": i.get("url") or post.get("permalink"), "source": post.get("permalink"), "auto": True})
                 continue
-            if i.get("date") and i["date"] >= today and (i["date"], i["title"]) not in seen_ev:
+            past_from = (date.fromisoformat(today) - timedelta(days=PAST_DAYS)).isoformat()
+            if i.get("date") and i["date"] >= past_from and (i["date"], i["title"]) not in seen_ev:
                 seen_ev.add((i["date"], i["title"]))
                 events.append({"date": i["date"], "time": i.get("time"), "type": row["label"], "title": i["title"],
                                "url": i.get("url") or post.get("permalink"), "auto": True,
@@ -799,7 +808,8 @@ def collect(cfg, rescan=False):
         posts = store.setdefault("posts", {})
         for pid, post in list(posts.items()):
             if post.get("caption"):
-                ext = (lambda c, p_, t_, v=post.get("vendor", ""): rules.fansign_items(c, p_, v)) if pid.startswith("xv:") else rules.extract
+                ext = ((lambda c, p_, t_, v=post.get("vendor", ""): rules.fansign_items(c, p_, v)) if pid.startswith("xv:")
+                       else fan_extract if pid.startswith("xf:") else rules.extract)
                 post["items"] = [i for i in ext(post["caption"], kst_datetime(post.get("timestamp")), today) if i["title"]]
             else:
                 posts.pop(pid)
@@ -808,6 +818,9 @@ def collect(cfg, rescan=False):
                         st.pop("since_id", None)  # X는 최근 20개만 다시 (몇 센트)
                 if pid.startswith("xv:"):
                     (store.get("x_vendors") or {}).pop("since_id", None)
+                if pid.startswith("xf:"):
+                    for st in (store.get("x_fans") or {}).values():
+                        st.pop("since_id", None)
         store["rules_version"] = rules.RULES_VERSION
         print(f"[공지] 규칙 v{rules.RULES_VERSION}로 다시 처리")
     if instagram.enabled():
@@ -855,14 +868,24 @@ def collect(cfg, rescan=False):
         if vendors:
             vst = store.setdefault("x_vendors", {})
             names = {v["handle"].lower(): v["name"] for v in vendors}
-            query = ("(\"A2O SOUL\" OR A2OSOUL OR 에이투오소울 OR \"에이투오 소울\") "
-                     "(팬사인회 OR 사인회 OR 영상통화 OR 영통 OR fansign OR \"video call\") "
-                     f"({' OR '.join('from:' + v['handle'] for v in vendors)}) -is:retweet -is:reply")
-            try:
-                posts = xposts.search_posts(query, since_id=vst.get("since_id"))
-            except Exception as e:  # noqa: BLE001
-                print(f"[공지] X 판매처 검색 실패: {e}")
-                posts = []
+            base = ("(\"A2O SOUL\" OR A2OSOUL OR 에이투오소울 OR \"에이투오 소울\") "
+                    "(팬사인회 OR 사인회 OR 영상통화 OR 영통 OR fansign OR \"video call\") ")
+            # 검색어는 512자 제한 → 판매처를 몇 개씩 나눠서
+            groups, cur = [], []
+            for v in vendors:
+                if cur and len(base) + len(" OR ".join("from:" + h for h in cur + [v["handle"]])) + 30 > 500:
+                    groups.append(cur)
+                    cur = []
+                cur.append(v["handle"])
+            if cur:
+                groups.append(cur)
+            posts = []
+            for g in groups:
+                query = base + f"({' OR '.join('from:' + h for h in g)}) -is:retweet -is:reply"
+                try:
+                    posts += xposts.search_posts(query, since_id=vst.get("since_id"))
+                except Exception as e:  # noqa: BLE001
+                    print(f"[공지] X 판매처 검색 실패: {e}")
             print(f"[공지] X 판매처 새 글 {len(posts)}개")
             if posts:
                 vst["since_id"] = max(posts, key=lambda p: int(p["tweet_id"]))["tweet_id"]
@@ -872,6 +895,22 @@ def collect(cfg, rescan=False):
                                  lambda c, p_, t_, v=vendor: rules.fansign_items(c, p_, v), limit)
                     if post["id"] in store["posts"]:
                         store["posts"][post["id"]]["vendor"] = vendor
+        # 팬 계정(정보 계정) — 일정·투표 후보만 뽑아 전부 '확인 필요' 이슈로 (사이트에 바로 반영 안 함, 새 글 피드에도 안 섞음)
+        fstate = store.setdefault("x_fans", {})
+        for username in cfg["x_fans"]:
+            st = fstate.setdefault(username, {})
+            try:
+                st.setdefault("id", xposts.user_id(username))
+                posts = xposts.fetch_posts(st["id"], username, since_id=st.get("since_id"))
+            except Exception as e:  # noqa: BLE001
+                print(f"[공지] X 팬 계정 @{username} 조회 실패: {e}")
+                continue
+            print(f"[공지] X 팬 계정 @{username} 새 글 {len(posts)}개")
+            if posts:
+                st["since_id"] = max(posts, key=lambda p: int(p["tweet_id"]))["tweet_id"]
+                for xp in posts:
+                    xp["id"] = "xf:" + xp["tweet_id"]
+                announce.run(posts, store, today, kst_datetime, fan_extract, limit)
     elif cfg["x"]:
         print("[공지] X_BEARER_TOKEN 없음 — X 건너뜀")
     save_json("announcements.json", store)
@@ -1211,10 +1250,22 @@ def build(cfg):
     seen = {(e["date"], e["title"]) for e in cfg["events"]}
     annivs = anniversaries(cfg["debut_date"])
     soon = (date.fromisoformat(today) + timedelta(days=120)).isoformat()
-    all_events = sorted([e for e in cfg["events"] if e["date"] >= today]
+    # 지난 일정도 달력에 남김 (PAST_DAYS일 전까지) — 목록·'다가오는 일정'은 화면에서 오늘 이후만
+    past_from = (date.fromisoformat(today) - timedelta(days=PAST_DAYS)).isoformat()
+    all_events = sorted([e for e in cfg["events"] if e["date"] >= past_from]
                         + [e for e in auto_events + youtube_upcoming(registry, today) if (e["date"], e["title"]) not in seen]
-                        + [a for a in annivs if today <= a["date"] <= soon],
+                        + [a for a in annivs if past_from <= a["date"] <= soon],
                         key=lambda e: (e["date"], e.get("time") or ""))
+    # 지난 음방 출연: 음방 영상이 올라온 회차 → 달력에 '○○ 출연' (공지로 이미 잡힌 날은 건너뜀)
+    have = {(e["date"], e["title"]) for e in all_events}
+    for ep in episodes:
+        title = f"{ep['show']} 출연"
+        if ep["date"] < today and ep["date"] >= past_from and (ep["date"], title) not in have:
+            vid = next((v for v in ep["videos"] if v["category"] != "fancam"), ep["videos"][0])
+            all_events.append({"date": ep["date"], "time": None, "type": "음방", "title": title,
+                               "url": f"https://youtu.be/{vid['id']}", "auto": True, "past": True})
+            have.add((ep["date"], title))
+    all_events.sort(key=lambda e: (e["date"], e.get("time") or ""))
     write_pending(pending)
     recent = sorted((v for v in videos if v["category"] != "fancam"),
                     key=lambda v: v["published_at"] or "", reverse=True)[:12]
@@ -1256,7 +1307,7 @@ def build(cfg):
                   "tips": cfg["guide"]["tips"], "beginner": cfg["guide"]["beginner"]},
     }
     save_json("dashboard.json", dashboard)
-    write_calendar(cfg, [e for e in all_events if e.get("auto") and not e.get("anniv")] + annivs)
+    write_calendar(cfg, [e for e in all_events if e.get("auto") and not e.get("anniv") and not e.get("past")] + annivs)
     official = [(registry["channels"].get(channel_id(c), {}).get("title") or channel_id(c), channel_id(c))
                 for c in cfg["channels"] if (c.get("kpi") or c.get("mv")) and channel_id(c)]
     write_health(cfg, videos, members, today, official)
