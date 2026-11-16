@@ -840,14 +840,24 @@ def collect(cfg, rescan=False):
         if vendors:
             vst = store.setdefault("x_vendors", {})
             names = {v["handle"].lower(): v["name"] for v in vendors}
-            query = ("(\"A2O SOUL\" OR A2OSOUL OR 에이투오소울 OR \"에이투오 소울\") "
-                     "(팬사인회 OR 사인회 OR 영상통화 OR 영통 OR fansign OR \"video call\") "
-                     f"({' OR '.join('from:' + v['handle'] for v in vendors)}) -is:retweet -is:reply")
-            try:
-                posts = xposts.search_posts(query, since_id=vst.get("since_id"))
-            except Exception as e:  # noqa: BLE001
-                print(f"[공지] X 판매처 검색 실패: {e}")
-                posts = []
+            base = ("(\"A2O SOUL\" OR A2OSOUL OR 에이투오소울 OR \"에이투오 소울\") "
+                    "(팬사인회 OR 사인회 OR 영상통화 OR 영통 OR fansign OR \"video call\") ")
+            # 검색어는 512자 제한 → 판매처를 몇 개씩 나눠서
+            groups, cur = [], []
+            for v in vendors:
+                if cur and len(base) + len(" OR ".join("from:" + h for h in cur + [v["handle"]])) + 30 > 500:
+                    groups.append(cur)
+                    cur = []
+                cur.append(v["handle"])
+            if cur:
+                groups.append(cur)
+            posts = []
+            for g in groups:
+                query = base + f"({' OR '.join('from:' + h for h in g)}) -is:retweet -is:reply"
+                try:
+                    posts += xposts.search_posts(query, since_id=vst.get("since_id"))
+                except Exception as e:  # noqa: BLE001
+                    print(f"[공지] X 판매처 검색 실패: {e}")
             print(f"[공지] X 판매처 새 글 {len(posts)}개")
             if posts:
                 vst["since_id"] = max(posts, key=lambda p: int(p["tweet_id"]))["tweet_id"]
