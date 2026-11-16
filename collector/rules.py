@@ -6,7 +6,7 @@
 import re
 from datetime import date, timedelta
 
-RULES_VERSION = 5  # 규칙을 바꾸면 올리기 → 다음 수집 때 최근 공지를 다시 읽어 일정을 새로 뽑음
+RULES_VERSION = 6  # 규칙을 바꾸면 올리기 → 다음 수집 때 최근 공지를 다시 읽어 일정을 새로 뽑음
 
 SHOWS = [
     ("더쇼", r"더\s?쇼(?!\s?챔)|THE\s?SHOW"),
@@ -259,6 +259,8 @@ def extract(caption, posted, today):
             d, conf = None, 0.5
         if recap and (d is None or d <= pday):  # 지난 무대 링크·사진·감사 인사
             continue
+        if d is None and not tm and not all_dates and not rel_all and not re.search(r"출연|예정|출격|ON\s?AIR|APPEAR", caption, re.I):
+            continue  # 날짜·시간 없이 음방 이름만 ('Show! Music Core / Let's go') → 무대 영상·사진 소개글
         if d is not None and d < pday:
             continue
         if len(shows) > 1 and not ds:
