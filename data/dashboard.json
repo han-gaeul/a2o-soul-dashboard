@@ -5691,33 +5691,33 @@
  "notices": [
   {
    "confidence": 0.85,
-   "date": "2026-11-28",
+   "date": "2026-11-22",
    "end_date": null,
-   "key": "xv:2122208044436127838|2026-11-28|Music Plant 영상통화 팬사인회",
+   "key": "xv:2120758495830000028|2026-11-22|Apple Music 영상통화 팬사인회",
    "kind": "event",
    "label": "행사",
    "place": null,
-   "post": "https://x.com/musicplant_kr/status/2122208044436127838",
-   "posted": "2026-11-16",
+   "post": "https://x.com/applemusic_m/status/2120758495830000028",
+   "posted": "2026-11-12",
    "short": "영통",
    "time": "18:00",
-   "title": "Music Plant 영상통화 팬사인회",
-   "url": null
+   "title": "Apple Music 영상통화 팬사인회",
+   "url": "https://abit.ly/fifjxyl"
   },
   {
    "confidence": 0.85,
-   "date": "2026-11-28",
+   "date": "2026-11-22",
    "end_date": null,
-   "key": "xv:2122208044436127838|2026-11-28|Music Plant 팬사인회",
+   "key": "xv:2120758495830000028|2026-11-22|Apple Music 팬사인회",
    "kind": "event",
    "label": "행사",
    "place": null,
-   "post": "https://x.com/musicplant_kr/status/2122208044436127838",
-   "posted": "2026-11-16",
+   "post": "https://x.com/applemusic_m/status/2120758495830000028",
+   "posted": "2026-11-12",
    "short": "팬싸",
-   "time": "20:00",
-   "title": "Music Plant 팬사인회",
-   "url": null
+   "time": "19:00",
+   "title": "Apple Music 팬사인회",
+   "url": "https://abit.ly/fifjxyl"
   },
   {
    "confidence": 0.85,
@@ -5751,33 +5751,33 @@
   },
   {
    "confidence": 0.85,
-   "date": "2026-11-22",
+   "date": "2026-11-28",
    "end_date": null,
-   "key": "xv:2120758495830000028|2026-11-22|Apple Music 영상통화 팬사인회",
+   "key": "xv:2122208044436127838|2026-11-28|Music Plant 영상통화 팬사인회",
    "kind": "event",
    "label": "행사",
    "place": null,
-   "post": "https://x.com/applemusic_m/status/2120758495830000028",
-   "posted": "2026-11-12",
+   "post": "https://x.com/musicplant_kr/status/2122208044436127838",
+   "posted": "2026-11-16",
    "short": "영통",
    "time": "18:00",
-   "title": "Apple Music 영상통화 팬사인회",
-   "url": "https://abit.ly/fifjxyl"
+   "title": "Music Plant 영상통화 팬사인회",
+   "url": null
   },
   {
    "confidence": 0.85,
-   "date": "2026-11-22",
+   "date": "2026-11-28",
    "end_date": null,
-   "key": "xv:2120758495830000028|2026-11-22|Apple Music 팬사인회",
+   "key": "xv:2122208044436127838|2026-11-28|Music Plant 팬사인회",
    "kind": "event",
    "label": "행사",
    "place": null,
-   "post": "https://x.com/applemusic_m/status/2120758495830000028",
-   "posted": "2026-11-12",
+   "post": "https://x.com/musicplant_kr/status/2122208044436127838",
+   "posted": "2026-11-16",
    "short": "팬싸",
-   "time": "19:00",
-   "title": "Apple Music 팬사인회",
-   "url": "https://abit.ly/fifjxyl"
+   "time": "20:00",
+   "title": "Music Plant 팬사인회",
+   "url": null
   }
  ],
  "photocards": [
