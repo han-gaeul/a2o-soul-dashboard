@@ -2,8 +2,8 @@ name: Update dashboard
 
 on:
   schedule:
-    - cron: "7 * * * *"   # 매시 7분 (음방 당일 공지 반영) — X는 since_id로 새 글만 읽어 비용 거의 그대로
-  workflow_dispatch:          # Actions 탭에서 수동 실행
+    - cron: "7 * * * *"   # 예비용 매시 7분 — 평소엔 Cloudflare Worker(push-worker)가 10분마다, YouTube 새 영상은 올라오는 즉시 실행시킴
+  workflow_dispatch:          # Actions 탭에서 수동 실행 + Worker가 실행
     inputs:
       rescan:
         description: "채널 업로드를 처음부터 다시 확인 (필터·멤버 표기 바꾼 뒤)"
