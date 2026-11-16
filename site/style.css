@@ -552,3 +552,5 @@ button.pc:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px;
 .cm-tile.on .cm-sub { color: var(--accent, #6c4cf5); font-weight: 700; }
 [data-tab="cheer"] section.card { scroll-margin-top: 64px; }
 details.howto { scroll-margin-top: 64px; }
+
+.chip-fan { background: transparent; border: 1px dashed var(--muted); color: var(--muted); margin-left: 4px; }
