@@ -37,6 +37,7 @@
     <div class="head-right">
       <div class="head-actions">
         <select class="lang" id="lang" aria-label="Language"></select>
+        <button class="install push-btn" id="pushBtn" type="button" hidden>🔔 <span data-i18n="push_btn">알림</span></button>
         <button class="install" id="installBtn" type="button" hidden data-i18n="install">앱 설치</button>
       </div>
       <div class="meta" id="updated" data-i18n="loading">불러오는 중…</div>
@@ -315,6 +316,11 @@
   <div class="dlg-head"><h2 id="tourTitle" data-i18n="tour">사이트 사용법</h2><button class="dlg-close" id="tourClose" type="button" aria-label="✕">✕</button></div>
   <ol class="tour-list" id="tourDlgList"></ol>
   <p class="tour-never"><button type="button" class="more" id="tourNever" data-i18n="tour_never">다시 안 보기</button></p>
+</dialog>
+
+<dialog id="pushDlg" aria-labelledby="pushTitle">
+  <div class="dlg-head"><h2 id="pushTitle" data-i18n="push_title">알림 받기</h2><button class="dlg-close" id="pushClose" type="button" aria-label="✕">✕</button></div>
+  <div id="pushBody"></div>
 </dialog>
 
 <dialog id="pcView" class="pc-view" aria-label="Photocard">
