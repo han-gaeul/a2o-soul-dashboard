@@ -289,7 +289,7 @@ def ig_images(m):
     return []
 
 
-def photo_feed(cfg, registry, store, limit=400):
+def photo_feed(cfg, registry, store, limit=600):
     """공식 인스타·X 사진 게시물 → [{src, url, at, account, members, text}] 최신순."""
     out = []
     src_posts = {**(registry.get("ig_posts") or {}), **(registry.get("ig_photos") or {})}
@@ -301,9 +301,11 @@ def photo_feed(cfg, registry, store, limit=400):
             for i, src in enumerate(m.get("images") or []):
                 out.append({"src": src, "url": m.get("permalink"), "at": kst_datetime(m.get("timestamp")), "account": "ig",
                             "members": detect_members(cfg, text), "text": text.split("\n")[0][:80], "n": i})
+    x_posts = {x["id"]: x for posts in (registry.get("x_photos") or {}).values() for x in posts}
     for pid, post in (store.get("posts") or {}).items():
-        if not pid.startswith("x:"):
-            continue
+        if pid.startswith("x:") and post.get("images") and pid not in x_posts:
+            x_posts[pid] = post
+    for pid, post in x_posts.items():
         text = (post.get("caption") or "").strip()
         for i, src in enumerate(post.get("images") or []):
             out.append({"src": src, "url": post.get("permalink"), "at": kst_datetime(post.get("timestamp")), "account": "x",
@@ -900,6 +902,19 @@ def collect(cfg, rescan=False):
                 for xp in posts:  # 사진 모음용 이미지 주소
                     if xp.get("images") and xp["id"] in store["posts"]:
                         store["posts"][xp["id"]]["images"] = xp["images"][:4]
+            # 사진 모음: 예전 글까지 한 번 훑어 두고(X는 읽은 글 수만큼 과금), 이후엔 새 글의 사진만 더함
+            xp_all = registry.setdefault("x_photos", {})
+            if username not in xp_all:
+                try:
+                    xp_all[username] = xposts.fetch_photo_posts(st["id"], username)
+                    print(f"[X] @{username} 사진 글 {len(xp_all[username])}개 (예전 글까지)")
+                except Exception as e:  # noqa: BLE001
+                    print(f"[X] @{username} 사진 모음 조회 실패: {e}")
+            if username in xp_all:
+                have = {x["id"] for x in xp_all[username]}
+                xp_all[username] = [{"id": xp["id"], "caption": (xp.get("caption") or "")[:400], "timestamp": xp.get("timestamp"),
+                                     "permalink": xp.get("permalink"), "images": xp["images"][:4]}
+                                    for xp in posts if xp.get("images") and xp["id"] not in have] + xp_all[username]
         # 판매처(Mnet Plus·Makestar·Withmuu 등) 팬사인회·영통 공지 — 검색으로 A2O SOUL 관련 글만 (읽은 글 수만큼 과금)
         vendors = cfg.get("x_vendors") or []
         if vendors:
