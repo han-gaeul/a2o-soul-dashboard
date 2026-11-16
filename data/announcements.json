@@ -1502,23 +1502,16 @@
   }
  },
  "x_official_votes": {
-  "at": "2026-11-16T20:22+09:00",
+  "at": "2026-11-16T23:30+09:00",
   "deep": 1,
   "last": {
-   "official": [
-    "HIGHER_twt"
-   ],
-   "read": 10,
+   "official": [],
+   "read": 4,
    "verified": [
-    "A2OSOULBASE:blue",
-    "A2OSOULPH:blue",
-    "ALLTHEKPOP:blue",
-    "HIGHER_twt:business",
-    "ZAIDORABLE:blue",
-    "forkpopvote:blue"
+    "seohaloverz:blue"
    ]
   },
-  "since_id": "2122283319932956965",
+  "since_id": "2122329249109733547",
   "v": 2
  },
  "x_vendors": {
