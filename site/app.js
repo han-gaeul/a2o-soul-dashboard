@@ -855,8 +855,13 @@ if ("serviceWorker" in navigator) {
 
   // ---------- 응원법 (응원 탭) ----------
   const chants = data.fanchants || [];
+  const guides = (data.info || {}).fanchant_guides || [];
+  // 공식 응원법 가이드 이미지 — 누르면 원본 크기
+  $("chantGuides").replaceChildren(...guides.map((g) => el("a", { class: "chant-guide", href: g.src, target: "_blank", rel: "noopener" },
+    el("img", { src: g.src, alt: `${g.song} ${t("fanchants")}`, loading: "lazy", decoding: "async" }),
+    el("span", {}, `${g.song} · ${t("fanchant_guide")}`))));
   if (chants.length) $("fanchants").append(...chants.map((v) => videoCard(v, v.song || null)));
-  else $("fanchantSec").remove();
+  if (!chants.length && !guides.length) $("fanchantSec").remove();
 
   // ---------- 음방 회차별 무대 (영상 탭) ----------
   const eps = data.episodes || [];

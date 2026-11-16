@@ -136,6 +136,8 @@ def load_fan_files(cfg):
                     "links": {str(k): str(v) for k, v in (a.get("links") or {}).items() if str(v).startswith("https://")}}
                    for a in info.get("albums") or [] if a.get("title")],
         "photo_labels": {str(k): str(v) for k, v in (info.get("photo_labels") or {}).items()},
+        "fanchant_guides": [{"song": str(g.get("song") or ""), "src": str(g["src"])}
+                            for g in info.get("fanchant_guides") or [] if isinstance(g, dict) and g.get("src")],
         "photocard_credit": {str(k): str(v) for k, v in (info.get("photocard_credit") or {}).items()},
         "photocard_order": [str(x) for x in info.get("photocard_order") or []],
         "records": [{"date": str(x["date"]), "title": str(x["title"]), "url": str(x.get("url") or "")}
