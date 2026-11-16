@@ -104,7 +104,7 @@ if ("serviceWorker" in navigator) {
   const kstDate = (s) => new Date(`${s.replace(" ", "T")}${s.length > 10 ? ":00" : "T00:00:00"}+09:00`); // "YYYY-MM-DD[ HH:MM]" KST
 
   // ---------- 탭 ----------
-  const tabs = ["overview", "cheer", "mv", "members", "fancams", "videos", "guide"];
+  const tabs = ["overview", "notice", "cheer", "mv", "members", "fancams", "videos", "guide"];
   const drawn = new Set();
   const drawers = {};
   // 공유 링크: #member/MOON → 멤버 탭, #ep/날짜/방송 → 영상 탭, #cmp/날짜/방송/A/B → 직캠 탭
@@ -614,6 +614,41 @@ if ("serviceWorker" in navigator) {
     }
   } else {
     $("igFeedSec").remove();
+  }
+
+  // ---------- 공지 탭: 공식 공지 글 (사녹 집합 장소·공지·예약 안내) ----------
+  const nposts = data.notice_posts || [];
+  if (nposts.length) {
+    let kind = "";
+    const kinds = ["prerec", "place", "notice", "release", "schedule"].filter((k) => nposts.some((x) => x.kind === k));
+    const fresh = nposts.filter((x) => ageHours(kstDate(x.at).toISOString()) <= 24).length;
+    if (fresh) $("noticeTab").append(el("span", { class: "tab-dot", "aria-label": t("notice_new", { n: fresh }) }, String(fresh)));
+    const draw = () => {
+      $("noticeKinds").replaceChildren(...["", ...kinds].map((k) => {
+        const b = el("button", { type: "button", class: k === kind ? "on" : "", "aria-pressed": String(k === kind) },
+          k ? t(`notice_${k}`) : t("ev_all"));
+        b.addEventListener("click", () => { kind = k; draw(); });
+        return b;
+      }));
+      $("noticePosts").replaceChildren(...nposts.filter((x) => !kind || x.kind === kind).map((x) => {
+        const iso = kstDate(x.at).toISOString();
+        const imgs = (x.images || []).map((src) => {
+          const img = el("img", { src, alt: "", loading: "lazy", decoding: "async", referrerpolicy: "no-referrer" });
+          img.addEventListener("error", () => img.remove());
+          return img;
+        });
+        return el("a", { class: "ig-post notice-post", href: x.url, target: "_blank", rel: "noopener" },
+          el("div", { class: "ig-meta" }, el("span", { class: `src src-${x.account}` }, x.account === "x" ? "X" : "IG"),
+            el("span", { class: "chip" }, t(`notice_${x.kind}`)),
+            ageHours(iso) <= NEW_HOURS ? el("span", { class: "chip chip-on" }, "NEW") : null,
+            el("span", { class: "muted" }, when(iso))),
+          el("div", { class: "ig-text" }, x.text),
+          imgs.length ? el("div", { class: `notice-imgs n${imgs.length}` }, ...imgs) : null);
+      }));
+    };
+    draw();
+  } else {
+    $("noticePostsSec").append(empty(t("notice_none")));
   }
 
   // ---------- 세계관·앨범 (입덕 탭) ----------

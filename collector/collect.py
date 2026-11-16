@@ -323,6 +323,40 @@ def photo_feed(cfg, registry, store, limit=600):
     return out[:limit]
 
 
+NOTICE_KIND = [("place", re.compile(r"^\s*\[📍\]|인원 체크")),
+               ("prerec", re.compile(r"사전녹화|사후녹화|참여자 안내|공개방송")),
+               ("release", re.compile(r"PRE-?ORDER|RELEASE\s*\||is now available|TRACK\s*LIST|트랙리스트", re.I)),
+               ("schedule", re.compile(r"SCHEDULE|TIMETABLE|스케줄", re.I))]
+
+
+def notice_feed(cfg, registry, store, limit=60):
+    """공식 인스타·X 공지 글(사녹 집합 장소·공지·예약/발매 안내 등) → 최신순 [{url, at, account, kind, text, images}]."""
+    posts = {}
+    for u, items in {**(registry.get("ig_photos") or {}), **(registry.get("ig_posts") or {})}.items():
+        if u in cfg["instagram"]:
+            for m in items:
+                posts.setdefault(m.get("permalink"), {**m, "account": "ig"})
+    for items in (registry.get("x_photos") or {}).values():
+        for m in items:
+            posts.setdefault(m.get("permalink"), {**m, "account": "x"})
+    for pid, m in (store.get("posts") or {}).items():
+        acc = "x" if pid.startswith("x:") else ("ig" if pid.isdigit() else None)
+        if acc and m.get("permalink"):
+            posts.setdefault(m["permalink"], {**m, "account": acc})
+    out = []
+    for url, m in posts.items():
+        text = (m.get("caption") or "").strip()
+        if not url or not NOT_MEMBER_PHOTO.search(text):
+            continue
+        text = re.sub(r"\s*https://t\.co/\w+\s*$", "", text)  # X 사진 링크
+        text = "\n".join(ln for ln in text.split("\n") if not re.fullmatch(r"(\s*#\S+)+\s*", ln)).strip()  # 해시태그만 있는 줄
+        kind = next((k for k, rx in NOTICE_KIND if rx.search(text)), "notice")
+        out.append({"url": url, "at": kst_datetime(m.get("timestamp")), "account": m["account"], "kind": kind,
+                    "text": text[:600], "images": (m.get("images") or [])[:4]})
+    out.sort(key=lambda x: x["at"], reverse=True)
+    return out[:limit]
+
+
 def fan_extract(caption, posted, today):
     """팬 계정 글: 규칙으로 뽑되 확신을 낮춰 전부 '확인 필요'로."""
     return [{**i, "confidence": min(i["confidence"], 0.6), "title": f"[팬 계정] {i['title']}"} for i in rules.extract(caption, posted, today)]
@@ -1340,6 +1374,7 @@ def build(cfg):
         "accounts": accounts,
         "ig_feed": [x for x in feed_all if x["account"] != "x"][:15] + [x for x in feed_all if x["account"] == "x"][:15],
         "photos": photo_feed(cfg, registry, load_json("announcements.json", {})),
+        "notice_posts": notice_feed(cfg, registry, load_json("announcements.json", {})),
         "mvs": mvs,
         "members": members,
         "group_links": cfg["group_links"],

@@ -46,6 +46,7 @@
 
   <nav class="tabs" id="tabs">
     <a href="#overview" class="on" data-i18n="tab.overview">한눈에</a>
+    <a href="#notice" id="noticeTab" data-i18n="tab.notice">공지</a>
     <a href="#cheer" data-i18n="tab.cheer">응원</a>
     <a href="#mv" data-i18n="tab.mv">MV</a>
     <a href="#members" data-i18n="tab.members">멤버</a>
@@ -101,6 +102,16 @@
   </div>
 
   <!-- 응원: 투표·스밍·차트·서포트·캘린더 -->
+  <!-- 공지 -->
+  <div data-tab="notice" hidden>
+    <section class="card" id="noticePostsSec">
+      <h2 data-i18n="notice_posts">📢 공식 공지 글</h2>
+      <p class="muted small" data-i18n="notice_posts_desc">공식 인스타·X의 사녹 집합 장소·공지·예약 안내 — 1시간마다 자동으로 모아요</p>
+      <div class="filter-row era-row" id="noticeKinds"></div>
+      <div class="notice-list" id="noticePosts"></div>
+    </section>
+  </div>
+
   <div data-tab="cheer" hidden>
     <section class="card" id="prerecSec">
       <h2 data-i18n="prerec">사녹 신청</h2>
