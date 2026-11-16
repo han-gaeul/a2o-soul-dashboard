@@ -124,3 +124,13 @@ videos:
 push:
   api: "https://push.a2osoul-tracker.com"
   vapid_public: "BPszmnnzF5KS8DntczISNMfwY2etOSx_oX7L38hORWSCX_mfJE2MzKSKralQ_Y3NcK1osX-iEArij0qscPlj1YU"
+
+# 투표 앱·음방 공식 X 계정 (@ 없이) — 금색 인증(기관)이 아니라 자동 판별이 안 되는 계정만 적기
+#   이 계정들 글에 A2O SOUL + 투표 기간이 있으면 응원 탭 투표 칸에 바로 (팬 계정 표시 없이)
+x_vote_accounts:
+  - BIGCChoice       # 빅크 초이스 (더쇼)
+  - UPICK_twt        # 유픽
+  - muniverse_io     # 뮤니버스 (음악중심)
+  - HIGHER_twt       # 하이어 (인기가요)
+  - KTOPSTAR_offcl   # 케이탑스타
+  - twt_my1pick      # 마이원픽

@@ -56,6 +56,7 @@ def load_config():
     cfg["x_fans"] = [str(u).lstrip("@") for u in (cfg.get("x_fans") or [])]
     cfg["x_vendors"] = [{"handle": str(v["handle"]).lstrip("@"), "name": str(v.get("name") or v["handle"])}
                         for v in (cfg.get("x_vendors") or []) if isinstance(v, dict) and v.get("handle")]
+    cfg["x_vote_accounts"] = [str(u).lstrip("@") for u in (cfg.get("x_vote_accounts") or [])]
     cfg["videos"] = cfg.get("videos") or []
     cfg["debut_date"] = str(cfg.get("debut_date") or "")
     # MV로 인정하는 채널 (mv: true). 그 밖의 채널에 올라온 MV는 콘텐츠로
@@ -361,8 +362,14 @@ def fan_extract(caption, posted, today):
     """팬 계정 글: 규칙으로 뽑되 확신을 낮춰 전부 '확인 필요'로."""
     return [{**i, "confidence": min(i["confidence"], 0.6), "title": f"[팬 계정] {i['title']}"} for i in rules.extract(caption, posted, today)]
 
+A2O_MENTION = re.compile(r"A2O\s?SOUL|A2OSOUL|에이투오\s?소울|에이투오소울", re.I)
+
+
 def official_extract(caption, posted, today):
-    """음방·투표 앱 공식 계정(X 금색 인증) 글: 투표 기간이 읽히면 링크가 없어도 바로 반영."""
+    """음방·투표 앱 공식 계정 글: 본문에 A2O SOUL이 있고 투표 기간이 읽히면 링크가 없어도 바로 반영.
+    (A2O SOUL이 후보인지 본문에 없는 일반 투표는 빼기)"""
+    if not A2O_MENTION.search(caption or ""):
+        return []
     return [{**i, "confidence": max(i["confidence"], 0.9)} if i["kind"] == "vote" and i.get("end") else i
             for i in rules.extract(caption, posted, today) if i["kind"] == "vote"]
 
@@ -1007,6 +1014,11 @@ def collect(cfg, rescan=False):
                         store["posts"][post["id"]]["vendor"] = vendor
         # 음방·투표 앱 공식 계정 — 계정 목록 없이, A2O SOUL 투표·1위 후보 글 중 X 금색 인증(기관) 계정 글만 (3시간마다, 읽은 글 수만큼 과금)
         ost = store.setdefault("x_official_votes", {})
+        if ost.get("v") != 2:  # 판별 방식이 바뀌어서 예전에 모은 공식 투표 글은 지우고 다시 검색
+            for pid in [k for k in store.get("posts", {}) if k.startswith("xo:")]:
+                store["posts"].pop(pid)
+            ost.clear()
+            ost["v"] = 2
         if ost.get("deep") != 1 or not ost.get("at") or now - datetime.fromisoformat(ost["at"]) >= timedelta(hours=3):
             query = ("(\"A2O SOUL\" OR A2OSOUL OR 에이투오소울 OR \"에이투오 소울\") "
                      "(투표 OR 사전투표 OR 1위후보 OR \"1위 후보\" OR vote OR voting OR nominee OR nominees) "
@@ -1019,7 +1031,9 @@ def collect(cfg, rescan=False):
                 ost["at"] = now.isoformat(timespec="minutes")
                 ost["deep"] = 1
                 vend = {v["handle"].lower() for v in cfg.get("x_vendors") or []} | {u.lower() for u in cfg["x_fans"]}
-                official = [p_ for p_ in posts if p_.get("verified_type") in ("business", "government") and p_["author"].lower() not in vend]
+                known = {u.lower() for u in cfg["x_vote_accounts"]}  # 파란 인증이라 자동으로 못 가리는 투표 앱·음방 공식 계정
+                official = [p_ for p_ in posts if p_["author"].lower() not in vend
+                            and (p_.get("verified_type") in ("business", "government") or p_["author"].lower() in known)]
                 # 점검용: 마지막 검색에서 몇 개를 읽었고, 인증 계정 중 누가 있었는지 (공개 계정 이름만)
                 ost["last"] = {"read": len(posts), "official": sorted({p_["author"] for p_ in official}),
                                "verified": sorted({f"{p_['author']}:{p_.get('verified_type')}" for p_ in posts if p_.get("verified_type") not in (None, "none")})[:30]}
@@ -1027,7 +1041,7 @@ def collect(cfg, rescan=False):
                     ost["since_id"] = max(posts, key=lambda p_: int(p_["tweet_id"]))["tweet_id"]
                 for p_ in official:
                     p_["id"] = "xo:" + p_["tweet_id"]
-                    p_["caption"] = f"{p_.get('author_name') or ''}\n{p_['caption']}"  # 계정 이름(예: THE SHOW)으로 음방 이름 찾기
+                    p_["caption"] = f"{p_['caption']}\n\n— {p_.get('author_name') or p_['author']}"  # 계정 이름(예: THE SHOW)으로도 음방·앱 찾기
                 if official:
                     announce.run(official, store, today, kst_datetime, official_extract, limit)
                 print(f"[공지] X 음방 공식 투표 글 {len(official)}개 (검색 {len(posts)}개 중)")
