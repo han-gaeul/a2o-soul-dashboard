@@ -539,3 +539,16 @@ button.pc:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px;
 .notice-imgs { display: flex; flex-wrap: wrap; gap: 6px; }
 .notice-imgs img { width: 120px; height: 120px; object-fit: cover; border-radius: 8px; display: block; background: var(--line); }
 .tab-dot { display: inline-block; min-width: 16px; height: 16px; padding: 0 4px; margin-left: 4px; border-radius: 8px; background: #e5484d; color: #fff; font-size: 10px; line-height: 16px; text-align: center; vertical-align: 1px; }
+
+/* 응원 탭 메뉴 타일 */
+.cheer-menu { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 8px; margin-bottom: 14px; }
+.cm-tile { display: grid; justify-items: center; align-content: start; gap: 2px; padding: 12px 6px 10px; border: 1px solid var(--line); border-radius: 14px;
+  background: var(--card, #fff); color: inherit; font: inherit; cursor: pointer; text-align: center; }
+.cm-tile:hover, .cm-tile:focus-visible { border-color: var(--accent, #6c4cf5); }
+.cm-tile.on { border-color: var(--accent, #6c4cf5); box-shadow: inset 0 0 0 1px var(--accent, #6c4cf5); }
+.cm-icon { font-size: 26px; line-height: 1.2; }
+.cm-label { font-size: 13px; font-weight: 700; line-height: 1.3; word-break: keep-all; }
+.cm-sub { font-size: 11px; color: var(--muted, #888); }
+.cm-tile.on .cm-sub { color: var(--accent, #6c4cf5); font-weight: 700; }
+[data-tab="cheer"] section.card { scroll-margin-top: 64px; }
+details.howto { scroll-margin-top: 64px; }

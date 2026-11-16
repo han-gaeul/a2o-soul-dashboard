@@ -113,12 +113,13 @@
   </div>
 
   <div data-tab="cheer" hidden>
+    <nav class="cheer-menu" id="cheerMenu" aria-label="menu"></nav>
     <section class="card" id="prerecSec">
       <h2 data-i18n="prerec">사녹 신청</h2>
       <p class="note small" data-i18n="prerec_desc"></p>
       <div class="votes" id="prerecs"></div>
     </section>
-    <section class="card">
+    <section class="card" id="votesSec">
       <h2 data-i18n="votes">투표</h2>
       <div class="votes" id="votes"></div>
     </section>
@@ -127,7 +128,7 @@
       <div class="links" id="shops"></div>
       <div class="supports" id="notices"></div>
     </section>
-    <section class="card">
+    <section class="card" id="streamSec">
       <h2 data-i18n="streaming">스밍 리스트</h2>
       <ol class="stream" id="streaming"></ol>
     </section>
@@ -141,11 +142,11 @@
       <div id="howto"></div>
       <p class="note small" id="howtoChecked"></p>
     </section>
-    <section class="card">
+    <section class="card" id="chartsSec">
       <h2 data-i18n="charts">음원 차트</h2>
       <div id="charts"></div>
     </section>
-    <section class="card">
+    <section class="card" id="supportsSec">
       <h2 data-i18n="supports">생일 카페 · 서포트</h2>
       <div class="supports" id="supports"></div>
     </section>

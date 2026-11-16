@@ -698,6 +698,40 @@ if ("serviceWorker" in navigator) {
   });
   $("calLinks").append(copyBtn);
 
+  // ---------- 응원 탭 맨 위 메뉴: 할 일을 타일로 한눈에, 누르면 해당 칸으로 ----------
+  {
+    const cnt = (id, sel) => ($(id) ? $(id).querySelectorAll(sel).length : 0);
+    const rg = (data.howto?.streaming || []).find((g) => /라디오/.test(g.title));
+    const radio = rg && [...document.querySelectorAll("#howto details.howto")].find((d) => d.querySelector("summary")?.textContent === tc(rg.title));
+    const tiles = [
+      ["🎙", "prerec", "prerecSec", cnt("prerecs", ".vote"), true],
+      ["🗳", "votes", "votesSec", cnt("votes", ".vote"), true],
+      ["🎧", "streaming", "streamSec"],
+      ["📣", "fanchants", "fanchantSec"],
+      ["📻", "cheer_radio", radio],
+      ["📖", "howto", "howtoSec"],
+      ["📊", "charts", "chartsSec"],
+      ["🎂", "supports", "supportsSec", cnt("supports", ".support"), true],
+      ["📢", "notices", "noticesSec"],
+      ["📅", "calendar", "calendarSec"],
+    ];
+    const items = tiles.map(([icon, key, target, n, counted]) => {
+      const node = typeof target === "string" ? $(target) : target;
+      if (!node) return null;
+      const b = el("button", { type: "button", class: `cm-tile${counted && n ? " on" : ""}` },
+        el("span", { class: "cm-icon", "aria-hidden": "true" }, icon),
+        el("span", { class: "cm-label" }, t(key)),
+        counted ? el("span", { class: "cm-sub" }, n ? t("cheer_open", { n }) : t("cheer_none")) : null);
+      b.addEventListener("click", () => {
+        if (node.tagName === "DETAILS") node.open = true;
+        node.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+      return b;
+    }).filter(Boolean);
+    if (items.length) $("cheerMenu").append(...items);
+    else $("cheerMenu").remove();
+  }
+
   // ---------- MV ----------
   const goal = (f) => (f
     ? el("div", { class: "m goal", title: t("goal_tip") }, t("goal", { target: kr(f.target), days: f.days, rate: kr(f.rate) }))
