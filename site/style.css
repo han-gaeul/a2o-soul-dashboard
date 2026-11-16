@@ -493,3 +493,15 @@ a.tour-item:hover { border-color: var(--accent); }
 .pl .pl-other { border-style: dashed; font-size: 13px; padding: 6px 10px; }
 .pl-n { font-weight: 700; text-align: center; font-variant-numeric: tabular-nums; }
 .pl .links { margin-top: 4px; gap: 4px 10px; }
+
+/* 포토카드 크게 보기 */
+button.pc { all: unset; display: block; cursor: pointer; }
+button.pc img { width: 100%; height: auto; display: block; border-radius: 8px; }
+button.pc:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 8px; }
+.pc-cap { display: block; font-size: 12px; margin-top: 4px; text-align: center; }
+.pc-view { border: 0; padding: 12px; background: transparent; max-width: min(92vw, 420px); width: 100%; overflow: visible; }
+.pc-view::backdrop { background: rgba(0, 0, 0, .82); }
+.pc-view img { display: block; width: 100%; height: auto; max-height: 72vh; object-fit: contain; border-radius: 14px; }
+.pc-view .dlg-close { position: absolute; top: -6px; right: 4px; color: #fff; background: rgba(0,0,0,.4); border-radius: 50%; width: 36px; height: 36px; }
+.pc-view-bar { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 10px; color: #fff; font-size: 13px; text-align: center; }
+.pc-view-bar button { background: rgba(255,255,255,.18); color: #fff; border: 0; border-radius: 50%; width: 44px; height: 44px; font-size: 22px; cursor: pointer; flex: none; }

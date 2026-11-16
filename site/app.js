@@ -463,7 +463,7 @@ if ("serviceWorker" in navigator) {
       if (x.song) {
         n += 1;
         return el("li", { class: "pl-song" }, el("span", { class: "pl-n" }, String(n)),
-          el("div", {}, el("b", {}, x.song),
+          el("div", {}, el("b", {}, x.song), x.title ? el("span", { class: "chip chip-on focus" }, t("title_track")) : null,
             el("div", { class: "links small" }, ...sites.map(([label, url]) => ext(url(x.song), label)))));
       }
       const from = n + 1;
@@ -682,6 +682,37 @@ if ("serviceWorker" in navigator) {
   const avatar = (m, cls = "avatar") => el("div", { class: cls, "aria-hidden": "true" },
     m.photo ? el("img", { src: m.photo, alt: "", loading: "lazy" }) : (m.ko ? m.ko[0] : m.name[0]));
 
+  // ---------- 포토카드 크게 보기: 누르면 크게, 좌우 버튼·스와이프·방향키로 넘기기 ----------
+  function openPcViewer(list, idx) {
+    const dlg = $("pcView");
+    let i = idx;
+    const show = () => {
+      const x = list[i];
+      $("pcViewImg").src = x.src;
+      $("pcViewImg").alt = `${x.member} ${tc(x.version)} ${x.label}`;
+      $("pcViewCap").textContent = `${x.member} · ${tc(x.version)}${x.label ? ` · ${x.label}` : ""}  (${i + 1}/${list.length})`;
+    };
+    const go = (d) => { i = (i + d + list.length) % list.length; show(); };
+    $("pcPrev").onclick = () => go(-1);
+    $("pcNext").onclick = () => go(1);
+    $("pcClose").onclick = () => dlg.close();
+    dlg.onkeydown = (e) => { if (e.key === "ArrowLeft") go(-1); if (e.key === "ArrowRight") go(1); };
+    let x0 = null;
+    dlg.ontouchstart = (e) => { x0 = e.touches[0].clientX; };
+    dlg.ontouchend = (e) => { if (x0 == null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1); x0 = null; };
+    dlg.onclick = (e) => { if (e.target === dlg) dlg.close(); };
+    show();
+    const top = document.querySelector("dialog[open]:not(#pcView)");
+    if (top && !dlg.open) top.after(dlg);  // 멤버 창 위에 뜨도록
+    dlg.showModal();
+  }
+  const pcBtn = (x, list, i, caption) => {
+    const b = el("button", { type: "button", class: "pc", "aria-label": `${x.member} ${tc(x.version)} ${x.label}` },
+      el("img", { src: x.src, alt: "", loading: "lazy", decoding: "async" }), caption);
+    b.addEventListener("click", () => openPcViewer(list, i));
+    return b;
+  };
+
   function openMember(m, focus) {
     const star = el("button", { class: "bias-btn", type: "button" });
     const paintStar = () => {
@@ -717,9 +748,8 @@ if ("serviceWorker" in navigator) {
       const cr = (data.info || {}).photocard_credit || {};
       sections.push(el("section", { class: "dlg-sec", id: "dlg-pc" },
         el("h3", {}, `${t("photocards")} ${myPc.length}`),
-        el("div", { class: "pc-grid" }, ...myPc.map((x) => el("figure", { class: "pc" },
-          el("img", { src: x.src, alt: `${m.name} ${tc(x.version)} ${x.label}`, loading: "lazy", decoding: "async" }),
-          el("figcaption", {}, el("span", { class: "muted" }, `${tc(x.version)} · ${x.label}`))))),
+        el("div", { class: "pc-grid" }, ...myPc.map((x, i) => pcBtn(x, myPc, i,
+          el("span", { class: "pc-cap muted" }, `${tc(x.version)} · ${x.label}`)))),
         cr.url ? el("p", { class: "pf-src" }, t("pc_credit"), " ", ext(cr.url, cr.label || cr.url)) : null));
     }
     if ((m.ig_mentions || []).length) {
@@ -1226,10 +1256,8 @@ if ("serviceWorker" in navigator) {
   const pcCredit = (data.info || {}).photocard_credit || {};
   const pcCreditLine = () => (pcCredit.url
     ? el("p", { class: "pf-src" }, t("pc_credit"), " ", ext(pcCredit.url, pcCredit.label || pcCredit.url)) : null);
-  const pcCard = (x, withName = true) => el("figure", { class: "pc" },
-    el("img", { src: x.src, alt: `${x.member} ${tc(x.version)} ${x.label}`, loading: "lazy", decoding: "async" }),
-    el("figcaption", {}, withName ? x.member : null,
-      x.label ? el("span", { class: "muted" }, withName ? ` · ${x.label}` : x.label) : null));
+  const pcCard = (x, list, i) => pcBtn(x, list, i, el("span", { class: "pc-cap" }, x.member,
+    x.label ? el("span", { class: "muted" }, ` · ${x.label}`) : null));
   if (pcs.length) {
     const versions = [...new Set(pcs.map((x) => x.version))];
     const mems = [...new Set(pcs.map((x) => x.member))].sort((a, b) => (a === bias ? -1 : b === bias ? 1 : 0));
@@ -1247,7 +1275,7 @@ if ("serviceWorker" in navigator) {
       $("pcMem").replaceChildren(btn(t("ev_all"), !pcWho, () => { pcWho = ""; drawPc(); }),
         ...mems.map((m) => btn(m, m === pcWho, () => { pcWho = m; drawPc(); })));
       const list = inWho.filter((x) => x.version === pcVer);
-      $("pcGrid").replaceChildren(...(list.length ? list.map((x) => pcCard(x)) : [el("p", { class: "muted" }, "—")]));
+      $("pcGrid").replaceChildren(...(list.length ? list.map((x, i) => pcCard(x, list, i)) : [el("p", { class: "muted" }, "—")]));
     };
     drawPc();
     $("pcCredit").replaceWith(Object.assign(pcCreditLine() || el("p"), { id: "pcCredit" }));

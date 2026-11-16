@@ -25,8 +25,8 @@ stream_playlist:
   title: 에투소 스밍 리스트
   desc: 멜론 순위는 '24시간 동안 들은 사람 수'와 '1시간 이용량'을 반반 합쳐요. 1시간 이용량은 한 계정이 한 곡을 1시간에 1번만 세서, 소울 곡을 순서대로 계속 반복해 두면 매시간 모든 곡이 한 번씩 반영돼요.
   tracks:
-    - song: Dancing in the Dark
-    - song: Superstar
+    - { song: Dancing in the Dark, title: true }
+    - { song: Superstar, title: true }
     - song: While We're Young
     - song: Very First Love
     - song: Moonlight Shadow
@@ -40,8 +40,8 @@ stream_playlist:
 # MV·영상 링크: 위에서부터 순서대로 표시. links는 있는 것만
 streaming:
   - title: Dancing in the Dark
-    note: 지금 활동곡 (데뷔 미니앨범 더블 타이틀)
+    note: 더블 타이틀 · 지금 활동곡
     links: { MV: "https://youtu.be/JPJokqIoIJI" }   # 예) 멜론: "https://...", Spotify: "https://..."
   - title: SUPERSTAR
-    note: 선공개 싱글·데뷔 활동곡
+    note: 더블 타이틀 · 선공개 싱글
     links: { MV: "https://youtu.be/IAURqrShEUQ", "INFINITE MV": "https://youtu.be/B5Aa4gnnt9I" }
