@@ -18,7 +18,32 @@ votes:
     end: "2026-11-20 23:59"   # 마감 시각은 기사에 없어서 날짜 끝으로 — 앱에서 확인
     note: 부문 1위는 코엑스 미디어타워 전광판 광고
 
-# 스밍 리스트: 위에서부터 순서대로 표시. links는 있는 것만
+# 1시간 스밍 리스트 (응원 탭 '스밍 리스트' 맨 위) — 위에서부터 이 순서로 재생
+#   song: 소울 곡 (음원 사이트 검색 버튼이 자동으로 붙음) / other: 그 자리에 넣을 다른 가수 곡 수
+#   곡 길이 약 3분 × 18곡 ≈ 1시간. 활동곡이 바뀌면 순서만 바꾸면 돼요
+stream_playlist:
+  title: 에투소 1시간 스밍 리스트
+  desc: 음원 차트는 '몇 번 들었나'보다 '몇 명이 들었나'를 봐요. 한 곡만 반복하지 말고 이 1시간짜리 리스트를 순서대로 계속 돌려 주세요.
+  tracks:
+    - song: Dancing in the Dark
+    - other: 3
+    - song: SUPERSTAR
+    - other: 3
+    - song: While We're Young
+    - other: 2
+    - song: Very First Love
+    - other: 2
+    - song: Moonlight Shadow
+    - other: 3
+  tips:
+    - 지금 활동곡 Dancing in the Dark를 맨 앞에 — 리스트가 돌 때마다 한 번씩 확실히 들어가게
+    - 수록곡 5곡을 모두 넣기 — 앨범 전곡 이용자 수가 앨범 순위·음방 음원 점수에 도움
+    - 사이사이 다른 곡은 지금 차트 상위권 곡으로 — 같은 가수만 연속 재생하면 비정상 재생으로 걸러질 수 있어요
+    - 셔플 끄고 순서대로, 볼륨 0·음소거 말고 작게라도 소리 켜기
+    - 곡마다 하트(좋아요) 누르기, 이용권 있는 음원 사이트가 여러 개면 사이트마다 각각
+    - 해외 팬은 Spotify·Apple Music·YouTube Music에서 — 국내 차트엔 안 들어가지만 글로벌 차트·바이럴 차트에 반영돼요
+
+# MV·영상 링크: 위에서부터 순서대로 표시. links는 있는 것만
 streaming:
   - title: Dancing in the Dark
     note: 지금 활동곡 (데뷔 미니앨범 더블 타이틀)

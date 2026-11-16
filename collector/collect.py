@@ -108,6 +108,11 @@ def load_fan_files(cfg):
     cfg["streaming"] = [{"title": str(x.get("title", "")), "note": str(x.get("note") or ""),
                          "links": {str(k): str(u) for k, u in (x.get("links") or {}).items() if u}}
                         for x in votes.get("streaming") or []]
+    sp = votes.get("stream_playlist") or {}
+    cfg["stream_playlist"] = {"title": str(sp.get("title") or ""), "desc": str(sp.get("desc") or ""),
+                              "tracks": [{"song": str(x["song"])} if x.get("song") else {"other": int(x.get("other") or 1)}
+                                         for x in sp.get("tracks") or [] if isinstance(x, dict)],
+                              "tips": [str(x) for x in sp.get("tips") or []]} if sp.get("tracks") else {}
     cfg["charts"] = [{"song": str(c.get("song", "")), "service": str(c.get("service", "")), "type": str(c.get("type") or ""),
                       "ranks": sorted((str(d), int(r)) for d, r in (c.get("ranks") or {}).items())}
                      for c in read_yml("charts.yml").get("charts") or []]
@@ -949,6 +954,7 @@ def write_health(cfg, videos, members, today, official=()):
     texts += cfg["info"]["lore"] + [a["type"] for a in cfg["info"]["albums"]]
     texts += [x["label"] for x in cfg["info"]["shops"]] + [x["note"] for x in cfg["info"]["shops"]]
     texts += [a["note"] for a in cfg["info"]["albums"]] + [v for a in cfg["info"]["albums"] for v in a["versions"]]
+    texts += [cfg["stream_playlist"].get("title", ""), cfg["stream_playlist"].get("desc", "")] + cfg["stream_playlist"].get("tips", [])
     texts += [x["note"] for x in cfg["streaming"]] + [str(v.get(k) or "") for v in cfg["votes"] for k in ("show", "app", "title", "note")]
     for v in cfg["howto"]["voting"]:
         texts += [v.get(k, "") for k in ("when", "pre", "live", "note")]
@@ -1229,6 +1235,7 @@ def build(cfg):
         "prerecs": prerecs,
         "photocards": photocards(cfg),
         "streaming": cfg["streaming"],
+        "stream_playlist": cfg["stream_playlist"],
         "charts": cfg["charts"],
         "supports": sorted((x for x in cfg["supports"] if x["end"] >= today), key=lambda x: x["start"]),
         "howto": cfg["howto"],
