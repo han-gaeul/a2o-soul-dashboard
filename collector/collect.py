@@ -52,6 +52,7 @@ def load_config():
     cfg["channels"] = cfg.get("channels") or []
     cfg["instagram"] = cfg.get("instagram") or []
     cfg["x"] = [str(u).lstrip("@") for u in (cfg.get("x") or [])]
+    cfg["x_fans"] = [str(u).lstrip("@") for u in (cfg.get("x_fans") or [])]
     cfg["x_vendors"] = [{"handle": str(v["handle"]).lstrip("@"), "name": str(v.get("name") or v["handle"])}
                         for v in (cfg.get("x_vendors") or []) if isinstance(v, dict) and v.get("handle")]
     cfg["videos"] = cfg.get("videos") or []
@@ -299,6 +300,11 @@ def photo_feed(cfg, registry, store, limit=60):
                         "members": detect_members(cfg, text), "text": text.split("\n")[0][:80], "n": i})
     out.sort(key=lambda x: (x["at"], -x["n"]), reverse=True)
     return out[:limit]
+
+
+def fan_extract(caption, posted, today):
+    """팬 계정 글: 규칙으로 뽑되 확신을 낮춰 전부 '확인 필요'로."""
+    return [{**i, "confidence": min(i["confidence"], 0.6), "title": f"[팬 계정] {i['title']}"} for i in rules.extract(caption, posted, today)]
 
 PAST_DAYS = 120  # 지난 일정을 달력에 남기는 기간
 IG_POST = re.compile(r"^https://(www\.)?instagram\.com/(p|reel)/[\w-]+/?")
@@ -796,7 +802,8 @@ def collect(cfg, rescan=False):
         posts = store.setdefault("posts", {})
         for pid, post in list(posts.items()):
             if post.get("caption"):
-                ext = (lambda c, p_, t_, v=post.get("vendor", ""): rules.fansign_items(c, p_, v)) if pid.startswith("xv:") else rules.extract
+                ext = ((lambda c, p_, t_, v=post.get("vendor", ""): rules.fansign_items(c, p_, v)) if pid.startswith("xv:")
+                       else fan_extract if pid.startswith("xf:") else rules.extract)
                 post["items"] = [i for i in ext(post["caption"], kst_datetime(post.get("timestamp")), today) if i["title"]]
             else:
                 posts.pop(pid)
@@ -805,6 +812,9 @@ def collect(cfg, rescan=False):
                         st.pop("since_id", None)  # X는 최근 20개만 다시 (몇 센트)
                 if pid.startswith("xv:"):
                     (store.get("x_vendors") or {}).pop("since_id", None)
+                if pid.startswith("xf:"):
+                    for st in (store.get("x_fans") or {}).values():
+                        st.pop("since_id", None)
         store["rules_version"] = rules.RULES_VERSION
         print(f"[공지] 규칙 v{rules.RULES_VERSION}로 다시 처리")
     if instagram.enabled():
@@ -870,6 +880,22 @@ def collect(cfg, rescan=False):
                                  lambda c, p_, t_, v=vendor: rules.fansign_items(c, p_, v), limit)
                     if post["id"] in store["posts"]:
                         store["posts"][post["id"]]["vendor"] = vendor
+        # 팬 계정(정보 계정) — 일정·투표 후보만 뽑아 전부 '확인 필요' 이슈로 (사이트에 바로 반영 안 함, 새 글 피드에도 안 섞음)
+        fstate = store.setdefault("x_fans", {})
+        for username in cfg["x_fans"]:
+            st = fstate.setdefault(username, {})
+            try:
+                st.setdefault("id", xposts.user_id(username))
+                posts = xposts.fetch_posts(st["id"], username, since_id=st.get("since_id"))
+            except Exception as e:  # noqa: BLE001
+                print(f"[공지] X 팬 계정 @{username} 조회 실패: {e}")
+                continue
+            print(f"[공지] X 팬 계정 @{username} 새 글 {len(posts)}개")
+            if posts:
+                st["since_id"] = max(posts, key=lambda p: int(p["tweet_id"]))["tweet_id"]
+                for xp in posts:
+                    xp["id"] = "xf:" + xp["tweet_id"]
+                announce.run(posts, store, today, kst_datetime, fan_extract, limit)
     elif cfg["x"]:
         print("[공지] X_BEARER_TOKEN 없음 — X 건너뜀")
     save_json("announcements.json", store)
