@@ -520,3 +520,15 @@ button.pc:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px;
 .call-name { display: inline-flex; flex-direction: column; align-items: center; padding: 4px 10px; border-radius: 10px; border: 1px solid var(--line); }
 .call-name b { font-size: 15px; }
 .call-name small { font-size: 11px; color: var(--muted); }
+
+/* 섹션 머리 오른쪽 버튼 */
+.sec-head { align-items: center; gap: 8px; }
+.sec-head h2 { margin: 0; }
+.sec-head > .more, .sec-head > a.more { margin: 0 0 0 auto; flex: none; }
+/* 음반 구매처 */
+.shop-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 8px; }
+@media (min-width: 720px) { .shop-grid { grid-template-columns: repeat(3, 1fr); } }
+.shop-grid .shop { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; font-weight: 700; text-decoration: none; color: var(--text); }
+.shop-grid .shop .muted { font-weight: 500; }
+/* 영상 탭 음방 탭 */
+.show-tabs { margin: 0 0 12px; }

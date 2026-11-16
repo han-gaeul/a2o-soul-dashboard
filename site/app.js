@@ -562,6 +562,18 @@ if ("serviceWorker" in navigator) {
 
   const notices = data.notices || [];
   const shops = data.info?.shops || [];
+  // 한눈에 탭: 음반 구매처 한 번에
+  if (shops.length) {
+    $("shopGrid").replaceChildren(...shops.map((x) => {
+      const a = ext(x.url, tc(x.label));
+      a.classList.add("shop");
+      if (x.note) a.append(el("span", { class: "muted small" }, tc(x.note)));
+      return a;
+    }));
+    $("shopHome").hidden = false;
+  } else {
+    $("shopHome").remove();
+  }
   for (const x of shops) $("shops").append(ext(x.url, tc(x.label), x.note ? el("span", { class: "muted" }, ` · ${tc(x.note)}`) : null));
   if (!shops.length) $("shops").remove();
   if (notices.length || shops.length) {
@@ -963,12 +975,34 @@ if ("serviceWorker" in navigator) {
 
   // ---------- 음방 회차별 무대 (영상 탭) ----------
   const eps = data.episodes || [];
+  // 영상 탭 위 음방별 탭 — 회차별 무대·전체 영상 둘 다 거름
+  {
+    const shows = [...new Set([...eps.map((e) => e.show), ...data.videos.map((v) => v.show)].filter(Boolean))];
+    const order = (data.howto?.voting || []).map((v) => v.show);
+    shows.sort((a, b) => ((order.indexOf(a) + 1) || 99) - ((order.indexOf(b) + 1) || 99) || a.localeCompare(b));
+    let curShow = "";
+    const drawTabs = () => {
+      $("showTabs").replaceChildren(...[["", t("show_all")], ...shows.map((x) => [x, tc(x)])].map(([k, label]) => {
+        const n = k ? eps.filter((e) => e.show === k).length : eps.length;
+        const b = el("button", { type: "button", class: k === curShow ? "on" : "", "aria-pressed": String(k === curShow) }, n ? `${label} ${n}` : label);
+        b.addEventListener("click", () => {
+          curShow = k;
+          drawTabs();
+          document.querySelectorAll("#episodes > details.ep").forEach((d) => { d.hidden = !!k && d.dataset.show !== k; });
+          const sel = $("showSel");
+          if (sel) { sel.value = k; sel.dispatchEvent(new Event("change")); }
+        });
+        return b;
+      }));
+    };
+    if (shows.length) drawTabs(); else $("showTabs").remove();
+  }
   if (eps.length) {
     const wd = t("weekdays");
     for (const ep of eps) {
       const day = wd[new Date(`${ep.date}T12:00:00Z`).getUTCDay()];
       const grid = el("div", { class: "videos" });
-      const box = el("details", { class: "howto ep", id: `ep-${ep.date}-${ep.show}` },
+      const box = el("details", { class: "howto ep", id: `ep-${ep.date}-${ep.show}`, "data-show": ep.show },
         el("summary", {}, el("span", {}, el("b", {}, `${ep.date.slice(5).replace("-", ".")} (${day}) ${tc(ep.show)}`),
           el("span", { class: "muted" }, ` · ${ep.ep ? `EP.${ep.ep} · ` : ""}${t("videos_n", { n: ep.videos.length })}`))),
         grid);

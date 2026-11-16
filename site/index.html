@@ -61,6 +61,11 @@
       <div class="sec-head"><h2 data-i18n="vote_home">🗳 진행 중인 투표</h2><a class="more" href="#cheer" data-i18n="vote_more">응원 탭 ›</a></div>
       <div class="votes" id="voteHomeList"></div>
     </section>
+    <section class="card" id="shopHome" hidden>
+      <h2 data-i18n="shops_home">💿 음반 구매처</h2>
+      <p class="muted small" data-i18n="shops_home_desc">공식 판매처 — 팬싸·특전은 판매처마다 달라요</p>
+      <div class="shop-grid" id="shopGrid"></div>
+    </section>
     <section class="card bday" id="bdayCard"></section>
     <section class="card bias" id="bias"></section>
     <section class="card" id="pickSec">
@@ -158,10 +163,6 @@
 
   <!-- 멤버 -->
   <div data-tab="members" hidden>
-    <section class="card">
-      <h2 data-i18n="channels">공식 채널</h2>
-      <div class="links" id="groupLinks"></div>
-    </section>
     <section class="card" id="photoSec">
       <h2 data-i18n="photos">📸 공식 사진</h2>
       <p class="muted small" data-i18n="photos_desc">공식 인스타·X에 올라온 사진 — 누르면 원본 게시물로</p>
@@ -201,6 +202,7 @@
 
   <!-- 영상 아카이브 -->
   <div data-tab="videos" hidden>
+    <div class="filter-row era-row show-tabs" id="showTabs"></div>
     <section class="card" id="episodesSec">
       <h2 data-i18n="episodes">음방 회차별 무대</h2>
       <p class="note small" data-i18n="episodes_desc"></p>
@@ -233,6 +235,10 @@
     <section class="card" id="beginnerSec">
       <h2 data-i18n="beginner">처음 오셨나요?</h2>
       <div id="beginner"></div>
+    </section>
+    <section class="card">
+      <h2 data-i18n="channels">공식 채널</h2>
+      <div class="links" id="groupLinks"></div>
     </section>
     <section class="card">
       <h2 data-i18n="guide_course">입문 코스</h2>
