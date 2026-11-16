@@ -122,7 +122,8 @@ def load_fan_files(cfg):
     keep = ("show", "when", "pre", "live", "note", "url")
     cfg["howto"] = {"checked": str(howto.get("checked") or ""),
                     "voting": [{k: str(v[k]) for k in keep if v.get(k)} for v in howto.get("voting") or [] if v.get("show")],
-                    "streaming": [{"title": str(s["title"]), "steps": [str(x) for x in s.get("steps") or []]}
+                    "streaming": [{"title": str(s["title"]), "steps": [str(x) for x in s.get("steps") or []],
+                                   **({"global": True} if s.get("global") else {})}
                                   for s in howto.get("streaming") or [] if s.get("title")]}
     info = read_yml("info.yml")
     cfg["info"] = {
@@ -264,6 +265,38 @@ def photocards(cfg):
     out.sort(key=lambda x: (vrank(x["version"]), x["version"], x["label"], order.get(x["member"], 99)))
     return out
 
+
+
+def ig_images(m):
+    """인스타 게시물 → 사진 주소 (캐러셀은 앞 4장, 영상은 제외). 주소는 며칠 뒤 만료돼서 매 수집마다 새로 받음."""
+    if m.get("media_type") == "IMAGE" and m.get("media_url"):
+        return [m["media_url"]]
+    if m.get("media_type") == "CAROUSEL_ALBUM":
+        kids = (m.get("children") or {}).get("data", [])
+        return [k["media_url"] for k in kids if k.get("media_type") == "IMAGE" and k.get("media_url")][:4]
+    return []
+
+
+def photo_feed(cfg, registry, store, limit=60):
+    """공식 인스타·X 사진 게시물 → [{src, url, at, account, members, text}] 최신순."""
+    out = []
+    for u, posts in (registry.get("ig_posts") or {}).items():
+        if u not in cfg["instagram"]:
+            continue
+        for m in posts:
+            text = (m.get("caption") or "").strip()
+            for i, src in enumerate(m.get("images") or []):
+                out.append({"src": src, "url": m.get("permalink"), "at": kst_datetime(m.get("timestamp")), "account": "ig",
+                            "members": detect_members(cfg, text), "text": text.split("\n")[0][:80], "n": i})
+    for pid, post in (store.get("posts") or {}).items():
+        if not pid.startswith("x:"):
+            continue
+        text = (post.get("caption") or "").strip()
+        for i, src in enumerate(post.get("images") or []):
+            out.append({"src": src, "url": post.get("permalink"), "at": kst_datetime(post.get("timestamp")), "account": "x",
+                        "members": detect_members(cfg, text), "text": text.split("\n")[0][:80], "n": i})
+    out.sort(key=lambda x: (x["at"], -x["n"]), reverse=True)
+    return out[:limit]
 
 IG_POST = re.compile(r"^https://(www\.)?instagram\.com/(p|reel)/[\w-]+/?")
 
@@ -594,7 +627,7 @@ def purge_unofficial(cfg, registry, history, channel_ids):
     """등록 채널 밖의 영상(예전 검색 수집분 등)을 registry·history에서 제거."""
     keep_ids = {v["id"] for v in cfg["videos"]}
     drop = [vid for vid, reg in registry["videos"].items()
-            if vid not in keep_ids and reg.get("channel_id") not in channel_ids]
+            if vid not in keep_ids and reg.get("channel_id") not in channel_ids and not reg.get("discovered")]
     for vid in drop:
         registry["videos"].pop(vid)
         history.pop(f"yt:{vid}", None)
@@ -675,6 +708,31 @@ def collect(cfg, rescan=False):
     for cid in set(channels) - set(registry["channels"]):
         print(f"[YT] 채널을 찾을 수 없음: {cid}")
 
+    # 방송사 라디오·예능 출연 영상 찾기 (검색 100유닛이라 몇 시간에 한 번)
+    #   제목에 그룹명이 있고, 채널 이름이 방송사·라디오 목록에 맞는 것만 (리액션·팬 채널 제외)
+    disc = cfg.get("discover") or {}
+    if disc.get("query"):
+        last = registry.get("discover_at")
+        every = timedelta(hours=float(disc.get("every_hours", 6)))
+        if rescan or not last or now - datetime.fromisoformat(last) >= every:
+            ch_re = re.compile(disc.get("channels") or r"MBC|KBS|SBS|JTBC|Mnet|tvN|EBS|ENA", re.I)
+            title_re = re.compile(GROUP_PATTERN, re.I)
+            after = (now - timedelta(days=int(disc.get("days", 14)))).astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+            try:
+                found_s = youtube.search_videos(disc["query"], published_after=after)
+                registry["discover_at"] = now.isoformat(timespec="minutes")
+            except Exception as e:  # noqa: BLE001
+                print(f"[YT] 검색 실패: {e}")
+                found_s = []
+            for up in found_s:
+                if up["id"] in registry["videos"] or up["channel_id"] in channels:
+                    continue
+                if not title_re.search(up["title"]) or not ch_re.search(up["channel_title"]):
+                    continue
+                registry["videos"][up["id"]] = {"title": up["title"], "published_at": up["published_at"],
+                                                "channel_id": up["channel_id"], "discovered": True}
+                print(f"[YT] 방송사 영상 찾음: {up['channel_title']} — {up['title']}")
+
     # 등록된 공식 채널 영상과 targets.yml에 직접 적은 영상만 유지
     removed = purge_unofficial(cfg, registry, history, set(channels))
     if removed:
@@ -754,7 +812,8 @@ def collect(cfg, rescan=False):
             # 피드·멤버 언급용 최근 게시물 (이미지는 저장하지 않음 — 본문·링크·반응 수만)
             registry.setdefault("ig_posts", {})[username] = [
                 {"id": m["id"], "caption": (m.get("caption") or "")[:1000], "timestamp": m.get("timestamp"),
-                 "permalink": m.get("permalink"), "likes": m.get("like_count"), "comments": m.get("comments_count")}
+                 "permalink": m.get("permalink"), "likes": m.get("like_count"), "comments": m.get("comments_count"),
+                 "images": ig_images(m)}
                 for m in media]
             announce.run(media, store, today, kst_datetime, extract, limit)
     if xposts.enabled():
@@ -771,6 +830,9 @@ def collect(cfg, rescan=False):
             if posts:
                 st["since_id"] = max(posts, key=lambda p: int(p["tweet_id"]))["tweet_id"]
                 announce.run(posts, store, today, kst_datetime, extract, limit)
+                for xp in posts:  # 사진 모음용 이미지 주소
+                    if xp.get("images") and xp["id"] in store["posts"]:
+                        store["posts"][xp["id"]]["images"] = xp["images"][:4]
         # 판매처(Mnet Plus·Makestar·Withmuu 등) 팬사인회·영통 공지 — 검색으로 A2O SOUL 관련 글만 (읽은 글 수만큼 과금)
         vendors = cfg.get("x_vendors") or []
         if vendors:
@@ -1090,6 +1152,7 @@ def build(cfg):
             "birth_year": m.get("birth_year"),
             "position": m.get("position") or "",
             "nicknames": m.get("nicknames") or [],
+            "aliases": [str(a) for a in m.get("aliases") or [] if re.fullmatch(r"[A-Za-z][A-Za-z -]+", str(a))],
             "career": m.get("career") or [],
             "notes": m.get("notes") or [],
             "instagram_posts": [str(u) for u in (m.get("instagram_posts") or [])],
@@ -1145,6 +1208,7 @@ def build(cfg):
         "kpis": kpis,
         "accounts": accounts,
         "ig_feed": [x for x in feed_all if x["account"] != "x"][:15] + [x for x in feed_all if x["account"] == "x"][:15],
+        "photos": photo_feed(cfg, registry, load_json("announcements.json", {})),
         "mvs": mvs,
         "members": members,
         "group_links": cfg["group_links"],

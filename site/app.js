@@ -455,6 +455,12 @@ if ("serviceWorker" in navigator) {
   }
 
   const howto = data.howto || {};
+  // '뮤니버스(MUNIVERSE) · 뮤빗(MUBEAT, 글로벌)' → 앱마다 찾기 링크
+  const appLinks = (txt) => {
+    const raw = String(txt).split(/\s*·\s*/), shown = String(tc(txt)).split(/\s*·\s*/);
+    const label = shown.length === raw.length ? shown : raw.map((a) => tc(a));
+    return raw.flatMap((a, i) => [i ? " · " : null, ext(appSearch(a.replace(/,.*\)/, ")")), label[i])]).filter(Boolean);
+  };
   if ((howto.voting || []).length || (howto.streaming || []).length) {
     if ((howto.voting || []).length) {
       const box = el("details", { class: "howto", open: "" }, el("summary", {}, t("howto_voting")));
@@ -462,15 +468,15 @@ if ("serviceWorker" in navigator) {
         box.append(el("div", { class: "howto-show" },
           el("div", {}, el("b", {}, tc(v.show)), v.when ? el("span", { class: "muted" }, ` · ${tc(v.when)}`) : null),
           el("div", { class: "howto-apps" },
-            v.pre ? el("span", {}, el("span", { class: "chip" }, t("howto_pre")), ` ${tc(v.pre)}`) : null,
-            v.live ? el("span", {}, el("span", { class: "chip chip-on" }, t("howto_live")), ` ${tc(v.live)}`) : null),
+            v.pre ? el("span", {}, el("span", { class: "chip" }, t("howto_pre")), " ", ...appLinks(v.pre)) : null,
+            v.live ? el("span", {}, el("span", { class: "chip chip-on" }, t("howto_live")), " ", ...appLinks(v.live)) : null),
           v.note ? el("div", { class: "muted small" }, tc(v.note)) : null,
           v.url ? ext(v.url, "↗ link") : null));
       }
       $("howto").append(box);
     }
     for (const g of howto.streaming || []) {
-      $("howto").append(el("details", { class: "howto" }, el("summary", {}, tc(g.title)),
+      $("howto").append(el("details", { class: "howto", ...(g.global && LANG !== "ko" ? { open: "" } : {}) }, el("summary", {}, tc(g.title)),
         el("ol", { class: "howto-steps" }, ...g.steps.map((x) => el("li", {}, tc(x))))));
     }
     if (howto.checked) $("howtoChecked").textContent = t("howto_checked", { d: howto.checked.replaceAll("-", ".") });
@@ -661,6 +667,16 @@ if ("serviceWorker" in navigator) {
       sections.push(el("section", { class: "dlg-sec", id: `dlg-${key}` },
         el("h3", {}, t(label, { n: list.length })),
         el("div", { class: "videos" }, ...list.map((v) => videoCard(v, null)))));
+    }
+    // 더 찾아보기: 데뷔 전 이름(별칭)까지 넣어 유튜브·빌리빌리 검색 (연습실·커버 영상 등 사이트에 없는 것)
+    {
+      const names = [m.name, (m.aliases || [])[0]].filter(Boolean);
+      const q = encodeURIComponent(`A2O ${names.join(" ")}`);
+      sections.push(el("section", { class: "dlg-sec", id: "dlg-more" },
+        el("h3", {}, t("more_search")),
+        el("div", { class: "links small" },
+          ext(`https://www.youtube.com/results?search_query=${q}`, "YouTube ↗"),
+          ext(`https://search.bilibili.com/all?keyword=${q}`, "bilibili ↗"))));
     }
     const myPc = (data.photocards || []).filter((x) => x.member === m.name);
     if (myPc.length) {
@@ -1111,6 +1127,35 @@ if ("serviceWorker" in navigator) {
     // 끝없이 흐르게 같은 줄을 두 번 (두 번째는 화면 읽기에서 제외)
     $("stripTrack").append(...withPhoto.map((m) => chip(m, false)), ...withPhoto.map((m) => chip(m, true)));
     $("strip").hidden = false;
+  }
+
+  // ---------- 공식 사진 모음 (멤버 탭): 인스타·X 사진 게시물, 멤버 이름이 본문에 있으면 멤버별로 ----------
+  const photos = data.photos || [];
+  if (photos.length) {
+    let who = "", shown = 18;
+    const mems = data.members.map((m) => m.name).filter((n) => photos.some((x) => (x.members || []).includes(n)));
+    const btn = (label, on, fn) => {
+      const b = el("button", { type: "button", class: on ? "on" : "", "aria-pressed": String(on) }, label);
+      b.addEventListener("click", fn);
+      return b;
+    };
+    const draw = () => {
+      $("photoMem").replaceChildren(btn(t("ev_all"), !who, () => { who = ""; shown = 18; draw(); }),
+        ...mems.map((n) => btn(n, n === who, () => { who = n; shown = 18; draw(); })));
+      const list = photos.filter((x) => !who || (x.members || []).includes(who));
+      $("photoGrid").replaceChildren(...list.slice(0, shown).map((x) => {
+        const img = el("img", { src: x.src, alt: x.text || "A2O SOUL", loading: "lazy", decoding: "async", referrerpolicy: "no-referrer" });
+        const a = el("a", { href: x.url, target: "_blank", rel: "noopener", title: `${x.at} · ${x.text || ""}` }, img,
+          el("span", { class: `src src-${x.account}` }, x.account === "x" ? "X" : "IG"));
+        img.addEventListener("error", () => a.remove());  // 만료된 주소는 숨김
+        return a;
+      }));
+      $("photoMore").hidden = list.length <= shown;
+    };
+    $("photoMore").onclick = () => { shown += 18; draw(); };
+    draw();
+  } else {
+    $("photoSec").remove();
   }
 
   // ---------- 사이트 사용법: 입덕 탭 섹션 + 첫 방문 안내 + 하단 버튼 ----------

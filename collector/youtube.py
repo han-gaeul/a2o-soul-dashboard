@@ -1,4 +1,4 @@
-"""YouTube Data API v3. 모든 호출이 1유닛 (search.list는 안 씀)."""
+"""YouTube Data API v3. 대부분 1유닛, search_videos만 100유닛 (몇 시간에 한 번만)."""
 import os
 import re
 
@@ -100,3 +100,16 @@ def fetch_videos(ids):
             }
     return out
 
+
+
+def search_videos(query, published_after=None, max_results=50):
+    """키워드 검색 (100유닛) → [{id, title, published_at, channel_id, channel_title}] 최신순."""
+    params = {"part": "snippet", "q": query, "type": "video", "order": "date", "maxResults": max_results}
+    if published_after:
+        params["publishedAfter"] = published_after
+    out = []
+    for it in _get("search", params).get("items", []):
+        sn = it["snippet"]
+        out.append({"id": it["id"]["videoId"], "title": sn["title"], "published_at": sn.get("publishedAt"),
+                    "channel_id": sn.get("channelId"), "channel_title": sn.get("channelTitle", "")})
+    return out

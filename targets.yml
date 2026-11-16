@@ -55,6 +55,14 @@ channels:
     filter: group
     kpi: false
 
+# 방송사 라디오·예능 출연 영상 자동 찾기 (YouTube 검색, every_hours마다 한 번 — 검색은 100유닛이라 자주 안 함)
+#   제목에 그룹명이 있고 채널 이름이 channels(정규식)에 맞는 영상만 등록 — 리액션·팬 채널은 제외됨
+discover:
+  query: "A2O SOUL"
+  every_hours: 6
+  days: 14
+  channels: "\\b(MBC|KBS|SBS|JTBC|Mnet|tvN|EBS|ENA)\\b|라디오|RADIO|아리랑|Arirang|1theK|원더케이|딩고|Dingo|스튜디오 춤|STUDIO CHOOM|문명특급|주간아이돌|Weekly Idol|뮤플리|NAVER NOW|이지금"
+
 # 영상 시리즈 — 제목 정규식(대소문자 무시)으로 분류, 위에서부터 먼저 맞는 것 (전체 영상 탭 '시리즈' 필터)
 series:
   - { name: 웰컴 투 소울라이트, pattern: "WELCOME TO SOULITE|Welcome to SOULITE" }
@@ -62,6 +70,7 @@ series:
   - { name: 릴레이댄스, pattern: "릴레이댄스|릴댄" }
   - { name: Zal-Dance, pattern: "Zal-Dance" }
   - { name: Zal-Life, pattern: "Zal-Life" }
+  - { name: 예능·라디오, pattern: "라디오|RADIO|핫클립|보이는 ?라디오|주간아이돌|Weekly Idol|문명특급|아는 ?형님|런닝맨|놀라운 ?토요일|정오의 희망곡|두시탈출|IDOL RADIO|아이돌 ?라디오" }
   - { name: 인터뷰, pattern: "인터뷰|Interview|MC석" }
   - { name: 비하인드, pattern: "BEHIND|Backstage|비하인드" }
   - { name: 티저·트레일러, pattern: "Teaser|Trailer|티저|Highlight Medley|Find the SOUL|Coming to You" }
@@ -88,4 +97,6 @@ x_vendors: []
 #   - id: XXXXXXXXXXX
 #     category: fancam
 #     member: MOON
-videos: []
+videos:
+  - id: PbpHyIQerX8   # [핫클립/SUB] 정오의 희망곡 김신영입니다 (팬 제보)
+    category: content

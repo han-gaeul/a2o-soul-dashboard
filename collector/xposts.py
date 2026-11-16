@@ -26,19 +26,24 @@ def user_id(username):
 
 def fetch_posts(uid, username, since_id=None, first_limit=20):
     """[{id, caption, timestamp, permalink}] (최신순). 처음엔 최근 first_limit개만, 이후엔 since_id 이후 새 글 전부."""
-    params = {"exclude": "replies,retweets", "tweet.fields": "created_at,note_tweet,entities"}
+    params = {"exclude": "replies,retweets", "tweet.fields": "created_at,note_tweet,entities,attachments",
+              "expansions": "attachments.media_keys", "media.fields": "type,url,preview_image_url"}
     if since_id:
         params.update(since_id=since_id, max_results=100)
     else:
         params["max_results"] = max(5, min(100, first_limit))
     out = []
-    for t in _get(f"/users/{uid}/tweets", params).get("data", []):
+    res = _get(f"/users/{uid}/tweets", params)
+    media = {m["media_key"]: m for m in (res.get("includes") or {}).get("media", [])}
+    for t in res.get("data", []):
         text = (t.get("note_tweet") or {}).get("text") or t.get("text") or ""
         for u in (t.get("entities") or {}).get("urls", []):  # t.co → 실제 주소
             if u.get("url") and u.get("expanded_url"):
                 text = text.replace(u["url"], u["expanded_url"])
+        imgs = [media[k].get("url") or media[k].get("preview_image_url")
+                for k in (t.get("attachments") or {}).get("media_keys", []) if k in media and media[k].get("type") == "photo"]
         out.append({"id": f"x:{t['id']}", "tweet_id": t["id"], "caption": text, "timestamp": t.get("created_at"),
-                    "permalink": f"https://x.com/{username}/status/{t['id']}"})
+                    "permalink": f"https://x.com/{username}/status/{t['id']}", "images": [u for u in imgs if u]})
     return out
 
 
