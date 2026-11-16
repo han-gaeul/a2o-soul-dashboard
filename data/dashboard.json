@@ -9122,6 +9122,15 @@
    "th": "แฟนไซน์ Fanplee",
    "zh": "Fanplee 签售会"
   },
+  "HOT STAGE 투표": {
+   "en": "HOT STAGE vote",
+   "es": "Votación HOT STAGE",
+   "id": "Vote HOT STAGE",
+   "ja": "HOT STAGE投票",
+   "pt": "Votação HOT STAGE",
+   "th": "โหวต HOT STAGE",
+   "zh": "HOT STAGE投票"
+  },
   "HTB 'REVOLUTION', 'CHAMPAGNE' 참여": {
    "en": "Featured in HTB's 'REVOLUTION' and 'CHAMPAGNE'",
    "es": "Participó en 'REVOLUTION' y 'CHAMPAGNE' de HTB",
@@ -10445,6 +10454,15 @@
    "th": "เพลย์ลิสต์สตรีม A2O SOUL",
    "zh": "A2O SOUL 打榜歌单"
   },
+  "엔딩요정 투표": {
+   "en": "Ending Fairy vote",
+   "es": "Votación Ending Fairy",
+   "id": "Vote Ending Fairy",
+   "ja": "エンディング妖精投票",
+   "pt": "Votação Ending Fairy",
+   "th": "โหวตเอนดิ้งแฟรี่",
+   "zh": "结尾妖精投票"
+  },
   "엠넷플러스(Mnet Plus)": {
    "en": "Mnet Plus",
    "es": "Mnet Plus",
@@ -11236,6 +11254,15 @@
    "pt": "Fanplee",
    "th": "Fanplee",
    "zh": "Fanplee"
+  },
+  "팬픽캠 투표": {
+   "en": "Fan Pick Cam vote",
+   "es": "Votación Fan Pick Cam",
+   "id": "Vote Fan Pick Cam",
+   "ja": "ファンピックカム投票",
+   "pt": "Votação Fan Pick Cam",
+   "th": "โหวต Fan Pick Cam",
+   "zh": "粉丝选择直拍投票"
   },
   "포카 — 앨범에 랜덤으로 들어 있는 포토카드": {
    "en": "Photocard — a random member photo card inside the album",
