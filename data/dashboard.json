@@ -1226,6 +1226,13 @@
    "url": "https://x.com/A2O_SOUL/status/2122073933671535070"
   },
   {
+   "date": "2026-11-16",
+   "time": "18:00",
+   "title": "Dancing in the Dark 퍼포먼스 비디오 공개",
+   "type": "기타",
+   "url": "https://youtu.be/RRfoJjvqr7k"
+  },
+  {
    "auto": true,
    "date": "2026-11-17",
    "time": null,
@@ -7840,6 +7847,15 @@
    "pt": "DJs e grade mudam com frequência — confira a programação no app antes de enviar",
    "th": "ดีเจและผังรายการเปลี่ยนบ่อย — เช็กผังในแอปก่อนส่ง",
    "zh": "DJ和节目表经常变动，发送前请在App确认"
+  },
+  "Dancing in the Dark 퍼포먼스 비디오 공개": {
+   "en": "Dancing in the Dark Performance Video release",
+   "es": "Estreno del Performance Video de Dancing in the Dark",
+   "id": "Rilis Performance Video Dancing in the Dark",
+   "ja": "Dancing in the Dark パフォーマンスビデオ公開",
+   "pt": "Lançamento do Performance Video de Dancing in the Dark",
+   "th": "ปล่อย Performance Video เพลง Dancing in the Dark",
+   "zh": "Dancing in the Dark 表演视频公开"
   },
   "EXPG STUDIO 오사카 출신": {
    "en": "Trained at EXPG STUDIO Osaka",
