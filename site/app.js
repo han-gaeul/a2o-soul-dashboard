@@ -1,6 +1,6 @@
 // ---------- 언어 ----------
-const LANGS = ["ko", "en", "ja", "zh", "es", "id", "th"];
-const LOCALES = { ko: "ko-KR", en: "en-US", ja: "ja-JP", zh: "zh-CN", es: "es-ES", id: "id-ID", th: "th-TH" };
+const LANGS = ["ko", "en", "ja", "zh", "es", "id", "th", "pt"];
+const LOCALES = { ko: "ko-KR", en: "en-US", ja: "ja-JP", zh: "zh-CN", es: "es-ES", id: "id-ID", th: "th-TH", pt: "pt-BR" };
 // 기기별 설정(최애·본 영상) — 막혀 있어도 사이트는 그대로 동작
 const pref = {
   get(k, d) { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch (_) { return d; } },
@@ -21,7 +21,7 @@ function t(key, vars = {}) {
   for (const [k, v] of Object.entries(vars)) s = s.replaceAll(`{${k}}`, v);
   return s;
 }
-document.documentElement.lang = LANG;
+document.documentElement.lang = LANG === "pt" ? "pt-BR" : LANG;
 document.querySelectorAll("[data-i18n]").forEach((n) => { n.textContent = t(n.dataset.i18n); });
 (function langSelect() {
   const sel = document.getElementById("lang");
@@ -86,7 +86,7 @@ if ("serviceWorker" in navigator) {
   const nat = (s) => (s || "").split("·").map((x) => (t("nat")[x] || x)).join("·");
   // 내용 번역 (translations.yml): 한국어 원문 그대로 키, 없으면 원문
   let TR = {};
-  const tc = (s) => (LANG === "ko" || !s ? s : TR[s]?.[LANG] || s);
+  const tc = (s) => (LANG === "ko" || !s ? s : TR[s]?.[LANG] || TR[s]?.en || s);
   // 자동으로 만든 문구(기록·기념일)는 언어별 틀로
   const tx = (x) => {
     if (x.key) return t(x.key, { n: x.key.startsWith("anniv") ? x.n : fmt(x.n), show: tc(x.show), type: tc(x.type), name: x.name });
@@ -796,7 +796,7 @@ if ("serviceWorker" in navigator) {
   const PAGE = 24;
   const cur = { cat: "all", fmt: "all", q: "", series: "", show: "", era: "", unseen: false };
   let shown = 0;
-  const chipOf = (v) => (v.predebut ? catLabel("predebut") : v.member || v.series || catLabel(v.category));
+  const chipOf = (v) => (v.predebut ? catLabel("predebut") : v.member || tc(v.series) || catLabel(v.category));
   const pick = (defs, key) => defs.find((d) => d[0] === key)[1];
   const norm = (s) => (s || "").toLowerCase().normalize("NFKC");
   const base = (v) => (!cur.q || norm(v.title).includes(norm(cur.q)) || norm(v.member).includes(norm(cur.q)))

@@ -119,7 +119,7 @@ dialog::backdrop { background: rgba(0, 0, 0, .5); }
 .pf-row { display: grid; grid-template-columns: 64px 1fr; gap: 8px; padding: 8px 0; border-top: 1px solid var(--line); }
 .pf-label { color: var(--muted); font-size: 13px; }
 .pf-row ul { margin: 0; padding-left: 18px; }
-.pf-src { color: var(--muted); font-size: 11px; opacity: .7; text-align: right; margin-top: 20px; }
+.pf-src { color: var(--muted); font-size: 11px; text-align: right; margin-top: 20px; }
 .pf-src a { text-decoration: underline; }
 
 /* 멤버 탭 */
@@ -471,3 +471,7 @@ a.tour-item:hover { border-color: var(--accent); }
 .photo-grid a { position: relative; display: block; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 6px; background: var(--line); }
 .photo-grid img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .photo-grid .src { position: absolute; left: 4px; bottom: 4px; font-size: 10px; }
+
+.vote-home .sec-head { margin-top: 0; }
+.vote-home .sec-head h2 { margin: 0; }
+@media (prefers-color-scheme: dark) { .cal-wd.sat { color: #8fb0ff; } }

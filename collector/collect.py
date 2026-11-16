@@ -955,7 +955,7 @@ def write_health(cfg, videos, members, today, official=()):
     for b in cfg["guide"]["beginner"]:
         texts += [b["title"]] + b["items"]
     texts += [c["note"] for c in cfg["guide"]["course"]]
-    missing = sorted({x for x in texts if x and re.search(r"[가-힣]", x) and set(tr.get(x, {})) < {"en", "ja", "zh", "es", "id", "th"}})
+    missing = sorted({x for x in texts if x and re.search(r"[가-힣]", x) and set(tr.get(x, {})) < {"en", "ja", "zh", "es", "id", "th", "pt"}})
     if missing:
         secs.append(("번역이 없는 문구", "`translations.yml`에 원문 그대로 추가 (en·ja·zh·es·id·th)", [f"- {x}" for x in missing]))
     # 5) 투표 가이드가 오래됨
