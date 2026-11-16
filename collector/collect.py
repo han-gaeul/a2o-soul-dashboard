@@ -300,6 +300,7 @@ def photo_feed(cfg, registry, store, limit=60):
     out.sort(key=lambda x: (x["at"], -x["n"]), reverse=True)
     return out[:limit]
 
+PAST_DAYS = 120  # 지난 일정을 달력에 남기는 기간
 IG_POST = re.compile(r"^https://(www\.)?instagram\.com/(p|reel)/[\w-]+/?")
 
 
@@ -447,8 +448,9 @@ def anniversaries(debut):
     if not debut:
         return []
     d0 = date.fromisoformat(debut)
-    out = [{"date": (d0 + timedelta(days=n - 1)).isoformat(), "title": f"🎉 데뷔 {n}일", "key": "anniv_days", "n": n}
-           for n in range(100, 1001, 100)]
+    out = [{"date": d0.isoformat(), "title": "🎉 데뷔", "key": "anniv_debut", "n": 0}]
+    out += [{"date": (d0 + timedelta(days=n - 1)).isoformat(), "title": f"🎉 데뷔 {n}일", "key": "anniv_days", "n": n}
+            for n in range(100, 1001, 100)]
     out += [{"date": d0.replace(year=d0.year + y).isoformat(), "title": f"🎉 데뷔 {y}주년", "key": "anniv_years", "n": y}
             for y in range(1, 6)]
     return [{**a, "type": "기념일", "auto": True, "anniv": True} for a in sorted(out, key=lambda a: a["date"])]
@@ -567,7 +569,8 @@ def auto_items(today):
                                   "app": i.get("app") or "", "start": i.get("start") or i["end"], "end": i["end"],
                                   "url": i.get("url") or post.get("permalink"), "source": post.get("permalink"), "auto": True})
                 continue
-            if i.get("date") and i["date"] >= today and (i["date"], i["title"]) not in seen_ev:
+            past_from = (date.fromisoformat(today) - timedelta(days=PAST_DAYS)).isoformat()
+            if i.get("date") and i["date"] >= past_from and (i["date"], i["title"]) not in seen_ev:
                 seen_ev.add((i["date"], i["title"]))
                 events.append({"date": i["date"], "time": i.get("time"), "type": row["label"], "title": i["title"],
                                "url": i.get("url") or post.get("permalink"), "auto": True,
@@ -1205,10 +1208,22 @@ def build(cfg):
     seen = {(e["date"], e["title"]) for e in cfg["events"]}
     annivs = anniversaries(cfg["debut_date"])
     soon = (date.fromisoformat(today) + timedelta(days=120)).isoformat()
-    all_events = sorted([e for e in cfg["events"] if e["date"] >= today]
+    # 지난 일정도 달력에 남김 (PAST_DAYS일 전까지) — 목록·'다가오는 일정'은 화면에서 오늘 이후만
+    past_from = (date.fromisoformat(today) - timedelta(days=PAST_DAYS)).isoformat()
+    all_events = sorted([e for e in cfg["events"] if e["date"] >= past_from]
                         + [e for e in auto_events + youtube_upcoming(registry, today) if (e["date"], e["title"]) not in seen]
-                        + [a for a in annivs if today <= a["date"] <= soon],
+                        + [a for a in annivs if past_from <= a["date"] <= soon],
                         key=lambda e: (e["date"], e.get("time") or ""))
+    # 지난 음방 출연: 음방 영상이 올라온 회차 → 달력에 '○○ 출연' (공지로 이미 잡힌 날은 건너뜀)
+    have = {(e["date"], e["title"]) for e in all_events}
+    for ep in episodes:
+        title = f"{ep['show']} 출연"
+        if ep["date"] < today and ep["date"] >= past_from and (ep["date"], title) not in have:
+            vid = next((v for v in ep["videos"] if v["category"] != "fancam"), ep["videos"][0])
+            all_events.append({"date": ep["date"], "time": None, "type": "음방", "title": title,
+                               "url": f"https://youtu.be/{vid['id']}", "auto": True, "past": True})
+            have.add((ep["date"], title))
+    all_events.sort(key=lambda e: (e["date"], e.get("time") or ""))
     write_pending(pending)
     recent = sorted((v for v in videos if v["category"] != "fancam"),
                     key=lambda v: v["published_at"] or "", reverse=True)[:12]
@@ -1249,7 +1264,7 @@ def build(cfg):
                   "tips": cfg["guide"]["tips"], "beginner": cfg["guide"]["beginner"]},
     }
     save_json("dashboard.json", dashboard)
-    write_calendar(cfg, [e for e in all_events if e.get("auto") and not e.get("anniv")] + annivs)
+    write_calendar(cfg, [e for e in all_events if e.get("auto") and not e.get("anniv") and not e.get("past")] + annivs)
     official = [(registry["channels"].get(channel_id(c), {}).get("title") or channel_id(c), channel_id(c))
                 for c in cfg["channels"] if (c.get("kpi") or c.get("mv")) and channel_id(c)]
     write_health(cfg, videos, members, today, official)
