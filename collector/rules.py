@@ -6,7 +6,7 @@
 import re
 from datetime import date, timedelta
 
-RULES_VERSION = 6  # 규칙을 바꾸면 올리기 → 다음 수집 때 최근 공지를 다시 읽어 일정을 새로 뽑음
+RULES_VERSION = 7  # 규칙을 바꾸면 올리기 → 다음 수집 때 최근 공지를 다시 읽어 일정을 새로 뽑음
 
 SHOWS = [
     ("더쇼", r"더\s?쇼(?!\s?챔)|THE\s?SHOW"),
@@ -119,6 +119,10 @@ def _item(kind, title, d, tm, conf, url=None):
 
 
 
+# ---------- 음방 1위 ----------
+WIN = re.compile(r"(?<![\d.])1\s?위|1st\s?WIN|FIRST\s?WIN|\bNo\.?\s?1\b|🏆", re.I)
+NOT_WIN = re.compile(r"후보|NOMINEE|투표|VOT|사전|D-\d", re.I)
+
 # ---------- 투표 공지 ----------
 VOTE = re.compile(r"투표|VOTE|VOTING", re.I)
 VOTE_APPS = [
@@ -195,6 +199,11 @@ def extract(caption, posted, today):
         return []
     lines = [ln for ln in caption.splitlines() if ln.strip()]
     shows_all = [name for name, rx in SHOW_RE if rx.search(caption)]
+
+    # 0) 음방 1위: '뮤직뱅크 1위' + 감사·축하 (1위 후보·투표 안내는 제외) → 기록
+    if WIN.search(caption) and shows_all and not NOT_WIN.search(caption):
+        return [{"kind": "win", "title": f"{shows_all[0]} 1위", "show": shows_all[0], "date": pday.isoformat(), "time": None,
+                 "end_date": None, "place": None, "url": None, "confidence": 0.9}]
 
     # 0) 투표 안내 (기간·투표 링크)
     votes = vote_items(caption, pday)

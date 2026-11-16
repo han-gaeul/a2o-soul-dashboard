@@ -111,7 +111,7 @@ def load_fan_files(cfg):
                         for x in votes.get("streaming") or []]
     sp = votes.get("stream_playlist") or {}
     cfg["stream_playlist"] = {"title": str(sp.get("title") or ""), "desc": str(sp.get("desc") or ""),
-                              "tracks": [{"song": str(x["song"])} if x.get("song") else {"other": int(x.get("other") or 1)}
+                              "tracks": [{"song": str(x["song"]), "title": bool(x.get("title"))} if x.get("song") else {"other": int(x.get("other") or 1)}
                                          for x in sp.get("tracks") or [] if isinstance(x, dict)],
                               "tips": [str(x) for x in sp.get("tips") or []]} if sp.get("tracks") else {}
     cfg["charts"] = [{"song": str(c.get("song", "")), "service": str(c.get("service", "")), "type": str(c.get("type") or ""),
@@ -501,6 +501,16 @@ def build_timeline(cfg, videos, episodes, subs=()):
             m = crossed(a, b, subscriber_milestones())
             if m:
                 items.append({"date": d, "kind": "subs", "title": f"유튜브 구독자 {kr_num(m)} 돌파", "key": "tl_subs", "n": m})
+    # 음방 1위: 공식 공지에서 자동 (같은 날·같은 음방은 하나)
+    wins = set()
+    for pid, post in (load_json("announcements.json", {}).get("posts") or {}).items():
+        if pid.startswith(("xf:", "xv:")):  # 팬 계정·판매처 글은 기록에 안 넣음
+            continue
+        for i in post.get("items", []):
+            if i.get("kind") == "win" and i.get("date") and (i["date"], i.get("show")) not in wins:
+                wins.add((i["date"], i.get("show")))
+                items.append({"date": i["date"], "kind": "win", "title": i["title"], "key": "tl_win", "show": i.get("show"),
+                              "url": post.get("permalink")})
     for x in cfg["info"]["records"]:
         items.append({"date": x["date"], "kind": "record", "title": x["title"], "url": x["url"]})
     seen, out = set(), []
