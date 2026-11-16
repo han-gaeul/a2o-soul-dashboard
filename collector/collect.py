@@ -11,6 +11,7 @@ data/dashboard.json 사이트가 읽는 집계 결과
 import argparse
 import json
 import math
+import os
 import re
 import urllib.parse
 import unicodedata
@@ -142,6 +143,9 @@ def load_fan_files(cfg):
                     "links": {str(k): str(v) for k, v in (a.get("links") or {}).items() if str(v).startswith("https://")}}
                    for a in info.get("albums") or [] if a.get("title")],
         "photo_labels": {str(k): str(v) for k, v in (info.get("photo_labels") or {}).items()},
+        "fanchant_call": {"song": str((info.get("fanchant_call") or {}).get("song") or ""),
+                          "lines": [[str(x) for x in ln] for ln in (info.get("fanchant_call") or {}).get("lines") or []]}
+        if info.get("fanchant_call") else None,
         "fanchant_guides": [{"song": str(g.get("song") or ""), "src": str(g["src"])}
                             for g in info.get("fanchant_guides") or [] if isinstance(g, dict) and g.get("src")],
         "photocard_credit": {str(k): str(v) for k, v in (info.get("photocard_credit") or {}).items()},
@@ -563,15 +567,38 @@ def kst_datetime(iso):
     return datetime.fromisoformat(iso.replace("Z", "+00:00").replace("+0000", "+00:00")).astimezone(KST).strftime("%Y-%m-%d %H:%M")
 
 
+APPROVE_LINE = re.compile(r"^\s*[-*]\s*\[[xX]\].*<!--\s*key:(.+?)\s*-->")
+
+
+def read_approvals(store):
+    """'자동 수집 확인 필요' 이슈에서 체크(☑)한 항목 → store['approved']에 저장 (워크플로가 이슈 본문을 APPROVALS_FILE로 넘김)."""
+    path = os.environ.get("APPROVALS_FILE")
+    if not path or not os.path.exists(path):
+        return False
+    keys = [m.group(1) for ln in open(path, encoding="utf-8").read().splitlines() if (m := APPROVE_LINE.match(ln))]
+    have = store.setdefault("approved", [])
+    new = [k for k in keys if k not in have]
+    have.extend(new)
+    if new:
+        print(f"[공지] 이슈에서 체크한 항목 {len(new)}개 반영")
+    return bool(new)
+
+
 def auto_items(today):
     """announcements.json → (자동 반영 일정, 공지 정보, 확인 필요 목록)."""
     store = load_json("announcements.json", {})
+    if read_approvals(store):
+        save_json("announcements.json", store)
+    approved = set(store.get("approved") or [])
     events, notices, pending, votes, prerecs = [], [], [], [], []
     seen_ev, seen_pend, seen_vote = set(), set(), set()
     for pid, post in sorted(store.get("posts", {}).items(), key=lambda kv: kv[1].get("timestamp") or "", reverse=True):
         posted = kst_datetime(post.get("timestamp"))[:10]
         for i in post.get("items", []):
-            row = {**i, "post": post.get("permalink"), "posted": posted, "label": announce.KINDS.get(i["kind"], "기타")}
+            akey = f"{pid}|{i.get('date') or ''}|{i['title']}"
+            if akey in approved:  # 이슈에서 체크 → 확인된 항목으로
+                i = {**i, "confidence": 1.0, "title": i["title"].replace("[팬 계정] ", "")}
+            row = {**i, "post": post.get("permalink"), "posted": posted, "label": announce.KINDS.get(i["kind"], "기타"), "key": akey}
             future = (i.get("end_date") or i.get("date") or "9999") >= today
             if i["confidence"] < announce.AUTO_CONFIDENCE:
                 key = (i.get("date"), i["title"])
@@ -967,12 +994,13 @@ def write_pending(pending):
     if not pending:
         path.unlink(missing_ok=True)
         return
-    lines = ["공식 인스타·X 공지에서 자동으로 뽑았지만 확신이 낮아 사이트에 바로 넣지 않은 항목이에요.",
-             "맞으면 `schedule.yml`(일정)이나 `targets.yml` 등에 옮겨 적고, 아니면 무시하세요. 다음 수집 때 이 이슈가 갱신돼요.", "",
-             "| 종류 | 내용 | 날짜 | 장소 | 확신 | 원문 |", "|---|---|---|---|---|---|"]
+    lines = ["공식 인스타·X 공지(와 팬 계정)에서 자동으로 뽑았지만 확신이 낮아 사이트에 바로 넣지 않은 항목이에요.",
+             "**맞는 항목은 체크(☑)만 하세요** — 다음 수집(1시간 안) 때 사이트에 자동으로 들어가요. 틀린 건 그냥 두면 돼요.",
+             "날짜가 비었거나 틀렸으면 체크하지 말고 `schedule.yml`에 직접 적어 주세요.", ""]
     for p in pending:
-        when = " ".join(x for x in [p.get("date") or "", p.get("time") or ""] if x) or "-"
-        lines.append(f"| {p['label']} | {p['title']} | {when} | {p.get('place') or '-'} | {p['confidence']:.0%} | [게시물]({p.get('post')}) |")
+        when = " ".join(x for x in [p.get("date") or "", p.get("time") or ""] if x) or "날짜 없음"
+        lines.append(f"- [ ] **{p['label']}** {p['title']} · {when}{' · ' + p['place'] if p.get('place') else ''}"
+                     f" · 확신 {p['confidence']:.0%} · [원문]({p.get('post')}) <!-- key:{p['key']} -->")
     path.write_text("\n".join(lines) + "\n", "utf-8")
 
 

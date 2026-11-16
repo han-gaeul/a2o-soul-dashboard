@@ -44,6 +44,14 @@ jobs:
 
       - run: pip install -r requirements.txt
 
+      # '자동 수집 확인 필요' 이슈에서 체크한 항목 → 수집 때 사이트에 반영
+      - name: Read approvals
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          NUM=$(gh issue list --state open --search "자동 수집 확인 필요 in:title" --json number --jq '.[0].number')
+          if [ -n "$NUM" ]; then gh issue view "$NUM" --json body --jq .body > "$RUNNER_TEMP/approvals.md" || true; fi
+
       # push(코드·targets.yml 수정)일 때는 수집 없이 다시 빌드만
       - name: Collect & build
         env:
@@ -56,6 +64,7 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           SITE_URL: https://a2osoul-tracker.com/
+          APPROVALS_FILE: ${{ runner.temp }}/approvals.md
         run: python collector/collect.py ${{ github.event_name == 'push' && '--build' || '' }} ${{ inputs.rescan && '--rescan' || '' }}
 
       - name: Commit data
