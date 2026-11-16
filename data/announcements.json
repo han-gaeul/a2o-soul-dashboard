@@ -673,6 +673,24 @@
    "permalink": "https://x.com/A2O_SOUL/status/2122153033274712319",
    "timestamp": "2026-11-16T02:21:25.000Z"
   },
+  "x:2122245788965490856": {
+   "caption": "[#SHOWKPOP]\n잠시 후, 6시 'SHOW K-POP'에 A2O SOUL이 출연합니다.\n팬 여러분의 많은 시청 부탁드립니다.\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark",
+   "excerpt": "[#SHOWKPOP]\n잠시 후, 6시 'SHOW K-POP'에 A2O SOUL이 출연합니다.\n팬 여러분의 많은 시청 부탁드립니다.\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark",
+   "items": [
+    {
+     "confidence": 0.9,
+     "date": "2026-11-16",
+     "end_date": null,
+     "kind": "music_show",
+     "place": null,
+     "time": "18:00",
+     "title": "SHOW K-POP 출연",
+     "url": null
+    }
+   ],
+   "permalink": "https://x.com/A2O_SOUL/status/2122245788965490856",
+   "timestamp": "2026-11-16T08:30:00.000Z"
+  },
   "xf:2121586007254708290": {
    "caption": "[📸] 261114 @A2O_SOUL \n\n2026.11.14\nMBC Show! Music Core\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2OSOULBASE/status/2121586007254708290/photo/1",
    "excerpt": "[📸] 261114 @A2O_SOUL \n\n2026.11.14\nMBC Show! Music Core\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2OSOULBASE/status/2121586007254708",
@@ -1054,7 +1072,7 @@
      "show": "인기가요",
      "start": null,
      "time": null,
-     "title": "인기가요 생방송 투표",
+     "title": "인기가요 HOT STAGE 투표",
      "url": null
     }
    ],
@@ -1240,7 +1258,22 @@
   "xo:2121898502250762256": {
    "caption": "내 손으로 뽑은 엔딩요정, 직접 보러 가자! 🎟️\n\n✨My Ending Fairy✨\n\nSBS 인기가요 1332회의 가장 빛나는 순간을 장식할\n‘엔딩요정’으로 내 최애를 직접 선택하고, 방청권에도 도전해보세요! 💖\n\n투표하러 가기: https://t.co/1L76ClaLlY\n📌 투표 일정: 2026. 11. 15 18:00 ~ 2026. 11. 20 12:00 (KST)\n(매주 일요일 18:00 ~ 금요일 12:00 (KST))\n📌 결과는 SBS 인기가요 1332회 11월 22일 생방송에서 공개!\n\n엔딩요정 투표에 참여하고 인증까지 완료하면\n추첨을 통해 1332회 SBS 인기가요 방청권을 드려요! 💖\n\n🗳️ EVENT 참여 방법\n1️⃣ HIGHER 앱에서 엔딩요정 투표하기\n2️⃣ 본 게시글에 투표 인증서 + 필수 해시태그를 답글로 남기기\n　- 필수 해시태그: #하이어 #HIGHER #응원하는아티스트(한글/영어) #인기가요방청권\n3️⃣ 구글 폼을 작성하면 참여 완료!\n\n✨ 내가 선택한 엔딩요정이 장식할 특별한 순간,\n인기가요에서 직접 만나보세요! 🎟️\n\n🔗 방청권 이벤트 참여하기\nhttps://t.co/dWOuBQ7W0T\n\n#A2OSOUL #BabyDONTCry #CHAERYEONG #Keyveatz #LNGSHOT #롱샷 #베이비돈크라이 #에이투오소울 #채령 #키비츠 #SBS #Inkigayo #인기가요 #하이어엔딩요정 #SBS엔딩요정 #MYPICKMYENDING #MYENDINGFAIRY #VOTE #투표\n\n— HIGHER",
    "excerpt": "내 손으로 뽑은 엔딩요정, 직접 보러 가자! 🎟️\n\n✨My Ending Fairy✨\n\nSBS 인기가요 1332회의 가장 빛나는 순간을 장식할\n‘엔딩요정’으로 내 최애를 직접 선택하고, 방청권에도 도전해보세요! 💖\n\n투표하러 가기: https://t.c",
-   "items": [],
+   "items": [
+    {
+     "app": "하이어(HIGHER)",
+     "confidence": 0.9,
+     "date": "2026-11-20",
+     "end": "2026-11-20 12:00",
+     "end_date": null,
+     "kind": "vote",
+     "place": null,
+     "show": "인기가요",
+     "start": "2026-11-15 18:00",
+     "time": "12:00",
+     "title": "인기가요 엔딩요정 투표",
+     "url": null
+    }
+   ],
    "permalink": "https://x.com/HIGHER_twt/status/2121898502250762256",
    "timestamp": "2026-11-15T09:30:00.000Z"
   },
@@ -1373,11 +1406,11 @@
    "vendor": "Music Plant"
   }
  },
- "rules_version": 9,
+ "rules_version": 10,
  "x": {
   "A2O_SOUL": {
    "id": "1986498790229262336",
-   "since_id": "2122153033274712319"
+   "since_id": "2122245788965490856"
   }
  },
  "x_fans": {
