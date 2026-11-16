@@ -1092,6 +1092,132 @@
  ],
  "events": [
   {
+   "anniv": true,
+   "auto": true,
+   "date": "2026-10-13",
+   "key": "anniv_debut",
+   "n": 0,
+   "title": "🎉 데뷔",
+   "type": "기념일"
+  },
+  {
+   "auto": true,
+   "date": "2026-10-15",
+   "past": true,
+   "time": null,
+   "title": "엠카운트다운 출연",
+   "type": "음방",
+   "url": "https://youtu.be/8CBIZKw6qGc"
+  },
+  {
+   "auto": true,
+   "date": "2026-10-21",
+   "past": true,
+   "time": null,
+   "title": "쇼챔피언 출연",
+   "type": "음방",
+   "url": "https://youtu.be/X5C40RxMSy8"
+  },
+  {
+   "auto": true,
+   "date": "2026-10-22",
+   "past": true,
+   "time": null,
+   "title": "엠카운트다운 출연",
+   "type": "음방",
+   "url": "https://youtu.be/AVAriLoBQhs"
+  },
+  {
+   "auto": true,
+   "date": "2026-10-23",
+   "past": true,
+   "time": null,
+   "title": "뮤직뱅크 출연",
+   "type": "음방",
+   "url": "https://youtu.be/nZ036cnzySk"
+  },
+  {
+   "auto": true,
+   "date": "2026-10-24",
+   "past": true,
+   "time": null,
+   "title": "음악중심 출연",
+   "type": "음방",
+   "url": "https://youtu.be/S5EdafQAD58"
+  },
+  {
+   "auto": true,
+   "date": "2026-10-25",
+   "past": true,
+   "time": null,
+   "title": "인기가요 출연",
+   "type": "음방",
+   "url": "https://youtu.be/VMwmRgMowzw"
+  },
+  {
+   "auto": true,
+   "date": "2026-10-30",
+   "past": true,
+   "time": null,
+   "title": "뮤직뱅크 출연",
+   "type": "음방",
+   "url": "https://youtu.be/ADbEcqGZ-pI"
+  },
+  {
+   "auto": true,
+   "date": "2026-11-01",
+   "past": true,
+   "time": null,
+   "title": "인기가요 출연",
+   "type": "음방",
+   "url": "https://youtu.be/xLCPlXA3QMw"
+  },
+  {
+   "auto": true,
+   "date": "2026-11-13",
+   "time": "17:10",
+   "title": "뮤직뱅크 출연",
+   "type": "음방",
+   "url": "https://x.com/A2O_SOUL/status/2121146042758361088"
+  },
+  {
+   "auto": true,
+   "date": "2026-11-14",
+   "time": "15:20",
+   "title": "음악중심 출연",
+   "type": "음방",
+   "url": "https://x.com/A2O_SOUL/status/2121483269921485298"
+  },
+  {
+   "date": "2026-11-14",
+   "short": "팬싸",
+   "time": "19:30",
+   "title": "Musicart 팬사인회",
+   "type": "행사"
+  },
+  {
+   "auto": true,
+   "date": "2026-11-15",
+   "time": "15:20",
+   "title": "인기가요 출연",
+   "type": "음방",
+   "url": "https://x.com/A2O_SOUL/status/2121844892980658314"
+  },
+  {
+   "date": "2026-11-15",
+   "short": "영통",
+   "time": "18:00",
+   "title": "Mnet Plus 영상통화 팬사인회",
+   "type": "행사"
+  },
+  {
+   "date": "2026-11-15",
+   "short": "팬싸",
+   "time": "20:00",
+   "title": "Mnet Plus 팬사인회",
+   "type": "행사"
+  },
+  {
    "auto": true,
    "date": "2026-11-16",
    "time": null,
@@ -6399,6 +6525,13 @@
    "name": "SUPERSTAR",
    "title": "선공개 싱글 'SUPERSTAR' 발매",
    "type": "선공개 싱글"
+  },
+  {
+   "date": "2026-10-13",
+   "key": "anniv_debut",
+   "kind": "anniv",
+   "n": 0,
+   "title": "🎉 데뷔"
   }
  ],
  "tr": {
@@ -6537,6 +6670,42 @@
    "th": "เคยฝึกที่สถาบัน AJS และ REDSTAGE",
    "zh": "出身AJS·REDSTAGE学院"
   },
+  "ALLMD 영상통화 팬사인회": {
+   "en": "ALLMD video call fansign",
+   "es": "Videollamada ALLMD",
+   "id": "Video call fansign ALLMD",
+   "ja": "ALLMD ヨントン",
+   "pt": "Fansign por videochamada ALLMD",
+   "th": "วิดีโอคอลแฟนไซน์ ALLMD",
+   "zh": "ALLMD 视频签售"
+  },
+  "ALLMD 팬사인회": {
+   "en": "ALLMD fansign",
+   "es": "Firma de fans ALLMD",
+   "id": "Fansign ALLMD",
+   "ja": "ALLMD サイン会",
+   "pt": "Fansign ALLMD",
+   "th": "แฟนไซน์ ALLMD",
+   "zh": "ALLMD 签售会"
+  },
+  "Apple Music 영상통화 팬사인회": {
+   "en": "Apple Music video call fansign",
+   "es": "Videollamada Apple Music",
+   "id": "Video call fansign Apple Music",
+   "ja": "Apple Music ヨントン",
+   "pt": "Fansign por videochamada Apple Music",
+   "th": "วิดีโอคอลแฟนไซน์ Apple Music",
+   "zh": "Apple Music 视频签售"
+  },
+  "Apple Music 팬사인회": {
+   "en": "Apple Music fansign",
+   "es": "Firma de fans Apple Music",
+   "id": "Fansign Apple Music",
+   "ja": "Apple Music サイン会",
+   "pt": "Fansign Apple Music",
+   "th": "แฟนไซน์ Apple Music",
+   "zh": "Apple Music 签售会"
+  },
   "CONSTELLATION Ver. — SOUL Ver.와 같은 구성": {
    "en": "CONSTELLATION Ver. — same contents as SOUL Ver.",
    "es": "CONSTELLATION Ver. — mismo contenido que SOUL Ver.",
@@ -6555,6 +6724,42 @@
    "th": "เคยฝึกที่ EXPG STUDIO โอซาก้า",
    "zh": "出身EXPG STUDIO大阪"
   },
+  "Everline 영상통화 팬사인회": {
+   "en": "Everline video call fansign",
+   "es": "Videollamada Everline",
+   "id": "Video call fansign Everline",
+   "ja": "Everline ヨントン",
+   "pt": "Fansign por videochamada Everline",
+   "th": "วิดีโอคอลแฟนไซน์ Everline",
+   "zh": "Everline 视频签售"
+  },
+  "Everline 팬사인회": {
+   "en": "Everline fansign",
+   "es": "Firma de fans Everline",
+   "id": "Fansign Everline",
+   "ja": "Everline サイン会",
+   "pt": "Fansign Everline",
+   "th": "แฟนไซน์ Everline",
+   "zh": "Everline 签售会"
+  },
+  "Fanplee 영상통화 팬사인회": {
+   "en": "Fanplee video call fansign",
+   "es": "Videollamada Fanplee",
+   "id": "Video call fansign Fanplee",
+   "ja": "Fanplee ヨントン",
+   "pt": "Fansign por videochamada Fanplee",
+   "th": "วิดีโอคอลแฟนไซน์ Fanplee",
+   "zh": "Fanplee 视频签售"
+  },
+  "Fanplee 팬사인회": {
+   "en": "Fanplee fansign",
+   "es": "Firma de fans Fanplee",
+   "id": "Fansign Fanplee",
+   "ja": "Fanplee サイン会",
+   "pt": "Fansign Fanplee",
+   "th": "แฟนไซน์ Fanplee",
+   "zh": "Fanplee 签售会"
+  },
   "HTB 'REVOLUTION', 'CHAMPAGNE' 참여": {
    "en": "Featured in HTB's 'REVOLUTION' and 'CHAMPAGNE'",
    "es": "Participó en 'REVOLUTION' y 'CHAMPAGNE' de HTB",
@@ -6564,6 +6769,24 @@
    "th": "ร่วมใน 'REVOLUTION' และ 'CHAMPAGNE' ของ HTB",
    "zh": "参与HTB《REVOLUTION》《CHAMPAGNE》"
   },
+  "Jumpup 영상통화 팬사인회": {
+   "en": "Jumpup video call fansign",
+   "es": "Videollamada Jumpup",
+   "id": "Video call fansign Jumpup",
+   "ja": "Jumpup ヨントン",
+   "pt": "Fansign por videochamada Jumpup",
+   "th": "วิดีโอคอลแฟนไซน์ Jumpup",
+   "zh": "Jumpup 视频签售"
+  },
+  "Jumpup 팬사인회": {
+   "en": "Jumpup fansign",
+   "es": "Firma de fans Jumpup",
+   "id": "Fansign Jumpup",
+   "ja": "Jumpup サイン会",
+   "pt": "Fansign Jumpup",
+   "th": "แฟนไซน์ Jumpup",
+   "zh": "Jumpup 签售会"
+  },
   "KBS 가요대축제": {
    "en": "KBS Song Festival",
    "es": "KBS Song Festival",
@@ -6572,6 +6795,24 @@
    "pt": "KBS Song Festival",
    "th": "KBS Song Festival",
    "zh": "KBS歌谣大祝祭"
+  },
+  "Ktown4u 영상통화 팬사인회": {
+   "en": "Ktown4u video call fansign",
+   "es": "Videollamada Ktown4u",
+   "id": "Video call fansign Ktown4u",
+   "ja": "Ktown4u ヨントン",
+   "pt": "Fansign por videochamada Ktown4u",
+   "th": "วิดีโอคอลแฟนไซน์ Ktown4u",
+   "zh": "Ktown4u 视频签售"
+  },
+  "Ktown4u 팬사인회": {
+   "en": "Ktown4u fansign",
+   "es": "Firma de fans Ktown4u",
+   "id": "Fansign Ktown4u",
+   "ja": "Ktown4u サイン会",
+   "pt": "Fansign Ktown4u",
+   "th": "แฟนไซน์ Ktown4u",
+   "zh": "Ktown4u 签售会"
   },
   "Makestar 영상통화 팬사인회": {
    "en": "Makestar video call fansign",
@@ -6609,6 +6850,51 @@
    "th": "แฟนไซน์ Mnet Plus",
    "zh": "Mnet Plus 签售会"
   },
+  "Music Korea 영상통화 팬사인회": {
+   "en": "Music Korea video call fansign",
+   "es": "Videollamada Music Korea",
+   "id": "Video call fansign Music Korea",
+   "ja": "Music Korea ヨントン",
+   "pt": "Fansign por videochamada Music Korea",
+   "th": "วิดีโอคอลแฟนไซน์ Music Korea",
+   "zh": "Music Korea 视频签售"
+  },
+  "Music Korea 팬사인회": {
+   "en": "Music Korea fansign",
+   "es": "Firma de fans Music Korea",
+   "id": "Fansign Music Korea",
+   "ja": "Music Korea サイン会",
+   "pt": "Fansign Music Korea",
+   "th": "แฟนไซน์ Music Korea",
+   "zh": "Music Korea 签售会"
+  },
+  "Music Plant 영상통화 팬사인회": {
+   "en": "Music Plant video call fansign",
+   "es": "Videollamada Music Plant",
+   "id": "Video call fansign Music Plant",
+   "ja": "Music Plant ヨントン",
+   "pt": "Fansign por videochamada Music Plant",
+   "th": "วิดีโอคอลแฟนไซน์ Music Plant",
+   "zh": "Music Plant 视频签售"
+  },
+  "Music Plant 팬사인회": {
+   "en": "Music Plant fansign",
+   "es": "Firma de fans Music Plant",
+   "id": "Fansign Music Plant",
+   "ja": "Music Plant サイン会",
+   "pt": "Fansign Music Plant",
+   "th": "แฟนไซน์ Music Plant",
+   "zh": "Music Plant 签售会"
+  },
+  "Musicart 영상통화 팬사인회": {
+   "en": "Musicart video call fansign",
+   "es": "Videollamada Musicart",
+   "id": "Video call fansign Musicart",
+   "ja": "Musicart ヨントン",
+   "pt": "Fansign por videochamada Musicart",
+   "th": "วิดีโอคอลแฟนไซน์ Musicart",
+   "zh": "Musicart 视频签售"
+  },
   "Musicart 팬사인회": {
    "en": "Musicart fansign",
    "es": "Firma de fans Musicart",
@@ -6617,6 +6903,24 @@
    "pt": "Fansign Musicart",
    "th": "แฟนไซน์ Musicart",
    "zh": "Musicart 签售会"
+  },
+  "Nemoz 영상통화 팬사인회": {
+   "en": "Nemoz video call fansign",
+   "es": "Videollamada Nemoz",
+   "id": "Video call fansign Nemoz",
+   "ja": "Nemoz ヨントン",
+   "pt": "Fansign por videochamada Nemoz",
+   "th": "วิดีโอคอลแฟนไซน์ Nemoz",
+   "zh": "Nemoz 视频签售"
+  },
+  "Nemoz 팬사인회": {
+   "en": "Nemoz fansign",
+   "es": "Firma de fans Nemoz",
+   "id": "Fansign Nemoz",
+   "ja": "Nemoz サイン会",
+   "pt": "Fansign Nemoz",
+   "th": "แฟนไซน์ Nemoz",
+   "zh": "Nemoz 签售会"
   },
   "POWERVOCAL Star Incubating Center 출신": {
    "en": "Trained at POWERVOCAL Star Incubating Center",
@@ -6662,6 +6966,24 @@
    "pt": "SOUL Ver. — photobook de 68 páginas, CD-R, encarte de letras, móbile de papel, 3 photocards (aleatórios entre 15)",
    "th": "SOUL Ver. — โฟโต้บุ๊ก 68 หน้า, CD-R, ใบเนื้อเพลง, โมบายกระดาษ, โฟโต้การ์ด 3 ใบ (สุ่มจาก 15 แบบ)",
    "zh": "SOUL Ver. — 写真书68页、CD-R、歌词纸、纸质挂饰、小卡3张（15款随机）"
+  },
+  "Soundwave 영상통화 팬사인회": {
+   "en": "Soundwave video call fansign",
+   "es": "Videollamada Soundwave",
+   "id": "Video call fansign Soundwave",
+   "ja": "Soundwave ヨントン",
+   "pt": "Fansign por videochamada Soundwave",
+   "th": "วิดีโอคอลแฟนไซน์ Soundwave",
+   "zh": "Soundwave 视频签售"
+  },
+  "Soundwave 팬사인회": {
+   "en": "Soundwave fansign",
+   "es": "Firma de fans Soundwave",
+   "id": "Fansign Soundwave",
+   "ja": "Soundwave サイン会",
+   "pt": "Fansign Soundwave",
+   "th": "แฟนไซน์ Soundwave",
+   "zh": "Soundwave 签售会"
   },
   "URIZIP KPOP ACADEMY 출신": {
    "en": "Trained at URIZIP KPOP ACADEMY",
