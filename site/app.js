@@ -582,17 +582,32 @@ if ("serviceWorker" in navigator) {
   } else {
     $("shopHome").remove();
   }
-  for (const x of shops) $("shops").append(ext(x.url, tc(x.label), x.note ? el("span", { class: "muted" }, ` · ${tc(x.note)}`) : null));
-  if (!shops.length) $("shops").remove();
-  if (notices.length || shops.length) {
+  // 공지 탭 맨 위: 팬싸·영통·행사 일정을 날짜별 카드로 (지난 일정·날짜 없는 공지는 뒤로)
+  if (notices.length) {
+    const wd = (d) => kstDate(d).toLocaleDateString(LOCALES[LANG] || "en", { weekday: "short", timeZone: "Asia/Seoul" });
+    const days = new Map();
     for (const x of notices) {
-      const when = [x.date ? x.date.slice(5).replace("-", ".") : "", x.time || "",
-        x.end_date && x.end_date !== x.date ? `~ ${x.end_date.slice(5).replace("-", ".")}` : ""].filter(Boolean).join(" ");
-      $("notices").append(el("div", { class: "support" },
-        el("div", {}, el("span", { class: "chip" }, x.label), el("b", {}, x.title)),
-        when || x.place ? el("div", { class: "muted" }, [when, x.place].filter(Boolean).join(" · ")) : null,
-        el("div", { class: "links small" }, x.url ? ext(x.url, "↗ link") : null, x.post ? ext(x.post, `${t("from_notice")} ↗`) : null)));
+      const k = x.date || "";
+      if (!days.has(k)) days.set(k, []);
+      days.get(k).push(x);
     }
+    const kind = (x) => (x.short === "영통" ? ["fs-video", t("fs_video")] : x.short === "팬싸" ? ["fs-sign", t("fs_sign")] : ["", tc(x.label)]);
+    const name = (x) => (x.short ? x.title.replace(/\s*(영상통화\s*)?팬사인회$/, "") : x.title);
+    $("notices").replaceChildren(...[...days].map(([d, list]) => {
+      const past = d && d < todayKst;
+      const left = d ? Math.round((kstDate(d) - kstDate(todayKst)) / 86400000) : null;
+      return el("div", { class: `fs-day${past ? " past" : ""}${d === todayKst ? " today" : ""}` },
+        el("div", { class: "fs-date" }, d ? `${d.slice(5).replace("-", ".")} (${wd(d)})` : t("fs_nodate"),
+          left != null && left >= 0 ? el("span", { class: "fs-dday" }, left ? `D-${left}` : "D-DAY") : null),
+        ...list.sort((a, b) => (a.time || "99").localeCompare(b.time || "99")).map((x) => {
+          const [cls, label] = kind(x);
+          return el("a", { class: "fs-row", href: x.post || x.url || "#", target: "_blank", rel: "noopener" },
+            el("span", { class: "fs-time" }, x.time || "—"),
+            el("span", { class: `chip ${cls}` }, label),
+            el("span", { class: "fs-name" }, name(x)),
+            el("span", { class: "fs-go", "aria-hidden": "true" }, "↗"));
+        }));
+    }));
   } else {
     $("noticesSec").remove();
   }
@@ -720,7 +735,6 @@ if ("serviceWorker" in navigator) {
       ["📖", "howto", "howtoSec"],
       ["📊", "charts", "chartsSec"],
       ["🎂", "supports", "supportsSec", cnt("supports", ".support"), true],
-      ["📢", "notices", "noticesSec"],
       ["📅", "calendar", "calendarSec"],
     ];
     const items = tiles.map(([icon, key, target, n, counted]) => {
