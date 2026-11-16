@@ -50,6 +50,14 @@ channels:
     filter: group
     kpi: false
     show: 쇼챔피언
+  - handle: thekpop                # THE K-POP (더쇼)
+    filter: group
+    kpi: false
+    show: 더쇼
+  - handle: showkpop.official      # 아리랑TV SHOW K-POP
+    filter: group
+    kpi: false
+    show: SHOW K-POP
   # 음원 유통사
   - id: UC_pwIXKXNm5KGhdEVzmY60A   # STONE MUSIC
     filter: group
