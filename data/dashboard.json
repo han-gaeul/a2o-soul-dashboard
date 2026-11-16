@@ -1968,19 +1968,58 @@
   "records": [],
   "shops": [
    {
+    "kind": "앨범",
     "label": "Mnet Plus Merch (A2O)",
-    "note": "앨범·팬사인회·영상통화 이벤트 (11/13 기준 품절)",
+    "note": "앨범·팬사인회·영상통화 이벤트",
     "url": "https://mnetplusmerch.com/product/list.html?cate_no=374"
    },
    {
+    "kind": "앨범",
     "label": "메이크스타",
-    "note": "예약 특전 포토카드 이벤트",
+    "note": "팬사인회·영상통화, 미공개 셀카 포카",
     "url": "https://www.makestar.com/product/21531"
    },
    {
+    "kind": "앨범",
+    "label": "위드뮤",
+    "note": "팬사인회·영상통화, 단독 포카 15종",
+    "url": "https://www.withmuu.com/"
+   },
+   {
+    "kind": "앨범",
+    "label": "뮤직아트",
+    "note": "팬사인회, 미공개 셀카 15종",
+    "url": "https://musicart.kr/"
+   },
+   {
+    "kind": "앨범",
     "label": "뮤직플랜트",
     "note": "예약 특전 셀카 포토카드",
     "url": "https://www.musicplant.co.kr/"
+   },
+   {
+    "kind": "앨범",
+    "label": "애플뮤직",
+    "note": "팬사인회·특전",
+    "url": "https://www.applemusic.co.kr/"
+   },
+   {
+    "kind": "앨범",
+    "label": "점프업",
+    "note": "특전",
+    "url": "https://jumpupent.com/"
+   },
+   {
+    "kind": "앨범",
+    "label": "팬플리",
+    "note": "세트 판매",
+    "url": "https://fanplee.com"
+   },
+   {
+    "kind": "앨범",
+    "label": "올엠디",
+    "note": "공동구매·대량구매",
+    "url": "https://allmd8838.cafe24.com/product/list.html?cate_no=3213"
    }
   ]
  },
@@ -8112,6 +8151,15 @@
    "th": "กดหัวใจ (ถูกใจ) ทุกเพลง และถ้ามีแพ็กเกจหลายเว็บก็เปิดแยกทุกเว็บ",
    "zh": "每首歌都点爱心（喜欢），如果有多个音源网站的会员，每个网站都放"
   },
+  "공동구매·대량구매": {
+   "en": "Group & bulk orders",
+   "es": "Compras grupales y al por mayor",
+   "id": "Group order & bulk",
+   "ja": "共同購入・大量購入",
+   "pt": "Compras coletivas e em quantidade",
+   "th": "สั่งรวม·สั่งจำนวนมาก",
+   "zh": "团购·批量购买"
+  },
   "공식 정보는 여기서": {
    "en": "Where to find official info",
    "es": "Dónde ver la info oficial",
@@ -8544,6 +8592,15 @@
    "th": "Music Bank",
    "zh": "音乐银行"
   },
+  "뮤직아트": {
+   "en": "Musicart",
+   "es": "Musicart",
+   "id": "Musicart",
+   "ja": "ミュージックアート",
+   "pt": "Musicart",
+   "th": "Musicart",
+   "zh": "Musicart"
+  },
   "뮤직플랜트": {
    "en": "Musicplant",
    "es": "Musicplant",
@@ -8760,6 +8817,15 @@
    "th": "ซิงเกิลปล่อยล่วงหน้า · เพลงโปรโมตช่วงเดบิวต์",
    "zh": "先行单曲·出道主打"
   },
+  "세트 판매": {
+   "en": "Set sales",
+   "es": "Venta en set",
+   "id": "Penjualan set",
+   "ja": "セット販売",
+   "pt": "Venda em conjunto",
+   "th": "ขายเป็นเซ็ต",
+   "zh": "套装销售"
+  },
   "셔플 끄고 순서대로, 볼륨 0·음소거 말고 작게라도 소리 켜기": {
    "en": "Shuffle off, play in order, and keep the sound on (not muted or at 0), even if quiet",
    "es": "Sin aleatorio, en orden, y con el sonido encendido (ni silencio ni volumen 0), aunque sea bajo",
@@ -8913,6 +8979,15 @@
    "th": "IDOLCHAMP",
    "zh": "IDOLCHAMP"
   },
+  "애플뮤직": {
+   "en": "Apple Music (KR)",
+   "es": "Apple Music (KR)",
+   "id": "Apple Music (KR)",
+   "ja": "Apple Music (KR)",
+   "pt": "Apple Music (KR)",
+   "th": "Apple Music (KR)",
+   "zh": "Apple Music (KR)"
+  },
   "앨범": {
    "en": "Album",
    "es": "Álbum",
@@ -8921,6 +8996,15 @@
    "pt": "Álbum",
    "th": "อัลบั้ม",
    "zh": "专辑"
+  },
+  "앨범·팬사인회·영상통화 이벤트": {
+   "en": "Albums, fansign & video call events",
+   "es": "Álbumes, firmas y videollamadas",
+   "id": "Album, fansign & video call",
+   "ja": "アルバム・サイン会・ヨントン",
+   "pt": "Álbuns, fansign e videochamada",
+   "th": "อัลบั้ม แฟนไซน์ วิดีโอคอล",
+   "zh": "专辑·签售·视频签售"
   },
   "앨범·팬사인회·영상통화 이벤트 (11/13 기준 품절)": {
    "en": "Albums, fansign & video call events (sold out as of Nov 13)",
@@ -9066,6 +9150,15 @@
    "th": "ออลราวด์เดอร์ (ร้อง·เต้น)",
    "zh": "全能型（声乐·舞蹈）"
   },
+  "올엠디": {
+   "en": "ALLMD",
+   "es": "ALLMD",
+   "id": "ALLMD",
+   "ja": "ALLMD",
+   "pt": "ALLMD",
+   "th": "ALLMD",
+   "zh": "ALLMD"
+  },
   "웰컴 투 소울라이트": {
    "en": "Welcome to SOULITE",
    "es": "Bienvenidos a SOULITE",
@@ -9083,6 +9176,15 @@
    "pt": "Toque no nome do app na tabela acima para instalar e cadastre-se com Google, Apple ou e-mail (a maioria não pede número coreano)",
    "th": "แตะชื่อแอปในตารางด้านบนเพื่อติดตั้ง แล้วสมัครด้วย Google, Apple หรืออีเมล (หลายแอปไม่ต้องใช้เบอร์เกาหลี)",
    "zh": "点上表中的App名称安装 → 用Google、Apple或邮箱注册（很多App不需要韩国手机号）"
+  },
+  "위드뮤": {
+   "en": "Withmuu",
+   "es": "Withmuu",
+   "id": "Withmuu",
+   "ja": "Withmuu",
+   "pt": "Withmuu",
+   "th": "Withmuu",
+   "zh": "Withmuu"
   },
   "유튜브 A2O SOUL": {
    "en": "YouTube A2O SOUL",
@@ -9345,6 +9447,15 @@
    "th": "อดีตเทรนนี JYP Entertainment",
    "zh": "前JYP娱乐练习生"
   },
+  "점프업": {
+   "en": "Jumpup",
+   "es": "Jumpup",
+   "id": "Jumpup",
+   "ja": "Jumpup",
+   "pt": "Jumpup",
+   "th": "Jumpup",
+   "zh": "Jumpup"
+  },
   "제트와 같은 댄스 스튜디오 출신으로 약 4년간 함께 연습": {
    "en": "From the same dance studio as ZET — trained together for about 4 years",
    "es": "Viene del mismo estudio de baile que ZET; entrenaron juntos unos 4 años",
@@ -9543,6 +9654,15 @@
    "th": "แอปและกติกาโหวตเปลี่ยนบ่อย — ตรวจประกาศทางการด้วย",
    "zh": "投票App和规则常有变化，请同时查看官方公告"
   },
+  "특전": {
+   "en": "Benefits",
+   "es": "Beneficios",
+   "id": "Benefit",
+   "ja": "特典",
+   "pt": "Brindes",
+   "th": "ของแถม",
+   "zh": "特典"
+  },
   "티저·트레일러": {
    "en": "Teasers & trailers",
    "es": "Teasers y tráileres",
@@ -9615,6 +9735,42 @@
    "th": "แฟนไซน์ · วิดีโอคอล",
    "zh": "签售·视频通话"
   },
+  "팬사인회, 미공개 셀카 15종": {
+   "en": "Fansign, 15 unreleased selfies",
+   "es": "Firmas, 15 selfies inéditas",
+   "id": "Fansign, 15 selfie unreleased",
+   "ja": "サイン会、未公開セルカ15種",
+   "pt": "Fansign, 15 selfies inéditas",
+   "th": "แฟนไซน์ เซลฟี่ไม่เคยปล่อย 15 แบบ",
+   "zh": "签售，未公开自拍15种"
+  },
+  "팬사인회·영상통화, 단독 포카 15종": {
+   "en": "Fansign & video call, 15 exclusive PCs",
+   "es": "Firmas y videollamadas, 15 photocards exclusivas",
+   "id": "Fansign & video call, 15 PC eksklusif",
+   "ja": "サイン会・ヨントン、単独トレカ15種",
+   "pt": "Fansign e videochamada, 15 photocards exclusivos",
+   "th": "แฟนไซน์ วิดีโอคอล การ์ดพิเศษ 15 แบบ",
+   "zh": "签售·视频签售，独家小卡15种"
+  },
+  "팬사인회·영상통화, 미공개 셀카 포카": {
+   "en": "Fansign & video call, unreleased selfie PCs",
+   "es": "Firmas y videollamadas, photocards selfie inéditas",
+   "id": "Fansign & video call, PC selfie unreleased",
+   "ja": "サイン会・ヨントン、未公開セルカトレカ",
+   "pt": "Fansign e videochamada, photocards selfie inéditos",
+   "th": "แฟนไซน์ วิดีโอคอล การ์ดเซลฟี่ไม่เคยปล่อย",
+   "zh": "签售·视频签售，未公开自拍小卡"
+  },
+  "팬사인회·특전": {
+   "en": "Fansign & benefits",
+   "es": "Firmas y beneficios",
+   "id": "Fansign & benefit",
+   "ja": "サイン会・特典",
+   "pt": "Fansign e brindes",
+   "th": "แฟนไซน์และของแถม",
+   "zh": "签售·特典"
+  },
   "팬싸": {
    "en": "Fansign",
    "es": "Firma",
@@ -9641,6 +9797,15 @@
    "pt": "FANCAST",
    "th": "FANCAST",
    "zh": "FANCAST"
+  },
+  "팬플리": {
+   "en": "Fanplee",
+   "es": "Fanplee",
+   "id": "Fanplee",
+   "ja": "Fanplee",
+   "pt": "Fanplee",
+   "th": "Fanplee",
+   "zh": "Fanplee"
   },
   "포카 — 앨범에 랜덤으로 들어 있는 포토카드": {
    "en": "Photocard — a random member photo card inside the album",
