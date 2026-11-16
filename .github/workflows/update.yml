@@ -65,8 +65,11 @@ jobs:
           git add data
           if ! git diff --cached --quiet; then
             git commit -m "data: $(TZ=Asia/Seoul date +'%Y-%m-%d %H:%M')"
-            git pull --rebase -X theirs   # 충돌 시 방금 수집한 data를 우선
-            git push
+            # 그사이 PR이 머지되면 push가 거절될 수 있어서 최대 3번 다시 시도
+            for i in 1 2 3; do
+              git pull --rebase -X theirs && git push && break   # 충돌 시 방금 수집한 data를 우선
+              echo "push 재시도 $i"; sleep 5
+            done
           fi
 
       # 확신이 낮은 자동 수집 공지 항목 → '자동 수집 확인 필요' 이슈 하나로 계속 갱신
