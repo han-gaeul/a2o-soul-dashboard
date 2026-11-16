@@ -1531,16 +1531,16 @@
   }
  },
  "x_official_votes": {
-  "at": "2026-11-16T23:30+09:00",
+  "at": "2026-11-17T02:30+09:00",
   "deep": 1,
   "last": {
    "official": [],
-   "read": 4,
+   "read": 6,
    "verified": [
-    "seohaloverz:blue"
+    "a2osoulvote:blue"
    ]
   },
-  "since_id": "2122329249109733547",
+  "since_id": "2122374865781170307",
   "v": 2
  },
  "x_vendors": {
