@@ -47,6 +47,29 @@ def fetch_posts(uid, username, since_id=None, first_limit=20):
     return out
 
 
+def fetch_photo_posts(uid, username, pages=5):
+    """사진 모음용: 예전 글까지 넘겨 보며 사진이 있는 글만 [{id, caption, timestamp, permalink, images}] (최대 pages×100개 읽음)."""
+    params = {"exclude": "replies,retweets", "max_results": 100, "tweet.fields": "created_at,note_tweet,attachments",
+              "expansions": "attachments.media_keys", "media.fields": "type,url"}
+    out, token = [], None
+    for _ in range(pages):
+        if token:
+            params["pagination_token"] = token
+        res = _get(f"/users/{uid}/tweets", params)
+        media = {m["media_key"]: m for m in (res.get("includes") or {}).get("media", [])}
+        for t in res.get("data", []):
+            imgs = [media[k]["url"] for k in (t.get("attachments") or {}).get("media_keys", [])
+                    if k in media and media[k].get("type") == "photo" and media[k].get("url")]
+            if imgs:
+                text = (t.get("note_tweet") or {}).get("text") or t.get("text") or ""
+                out.append({"id": f"x:{t['id']}", "caption": text[:400], "timestamp": t.get("created_at"),
+                            "permalink": f"https://x.com/{username}/status/{t['id']}", "images": imgs[:4]})
+        token = (res.get("meta") or {}).get("next_token")
+        if not token:
+            break
+    return out
+
+
 def search_posts(query, since_id=None, max_results=50):
     """최근 7일 검색 → [{id, tweet_id, caption, timestamp, permalink, author}] (최신순). since_id로 새 글만."""
     params = {"query": query, "max_results": max(10, min(100, max_results)),
