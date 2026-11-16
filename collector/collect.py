@@ -289,6 +289,11 @@ def ig_images(m):
     return []
 
 
+# 멤버 사진이 아닌 글(사녹 집합 장소·공지·발매/예약 안내 포스터·일정표·트랙리스트 등)은 사진 모음에서 뺌
+NOT_MEMBER_PHOTO = re.compile(r"^\s*\[(📍|🔔|📢|📌|🗓|📅)\]|사전녹화|사후녹화|인원 체크|PRE-?ORDER|RELEASE\s*\||is now available|"
+                              r"TRACK\s*LIST|SCHEDULE|TIMETABLE|스케줄|트랙리스트|공지|안내|NOTICE", re.I)
+
+
 def photo_feed(cfg, registry, store, limit=600):
     """공식 인스타·X 사진 게시물 → [{src, url, at, account, members, text}] 최신순."""
     out = []
@@ -298,6 +303,8 @@ def photo_feed(cfg, registry, store, limit=600):
             continue
         for m in posts:
             text = (m.get("caption") or "").strip()
+            if NOT_MEMBER_PHOTO.search(text):
+                continue
             for i, src in enumerate(m.get("images") or []):
                 out.append({"src": src, "url": m.get("permalink"), "at": kst_datetime(m.get("timestamp")), "account": "ig",
                             "members": detect_members(cfg, text), "text": text.split("\n")[0][:80], "n": i})
@@ -307,6 +314,8 @@ def photo_feed(cfg, registry, store, limit=600):
             x_posts[pid] = post
     for pid, post in x_posts.items():
         text = (post.get("caption") or "").strip()
+        if NOT_MEMBER_PHOTO.search(text):
+            continue
         for i, src in enumerate(post.get("images") or []):
             out.append({"src": src, "url": post.get("permalink"), "at": kst_datetime(post.get("timestamp")), "account": "x",
                         "members": detect_members(cfg, text), "text": text.split("\n")[0][:80], "n": i})
