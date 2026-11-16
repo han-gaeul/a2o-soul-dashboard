@@ -441,7 +441,7 @@ header .head-right { margin-left: auto; }
 .cal-ev.ev-etc { background: var(--line); color: var(--text); }
 @media (prefers-color-scheme: dark) { .cal-ev.ev-anniv { background: #3a2c12; color: #f3c46b; } }
 .cal-more { font-size: 9px; color: var(--muted); font-weight: 700; }
-.cal-cell.past .cal-ev { opacity: .6; }
+.cal-cell.past .cal-ev { opacity: .75; }
 @media (min-width: 720px) { .cal-ev { font-size: 10px; } .cal-head, .cal-grid { max-width: 560px; } }
 .cal-ev { padding: 0 1px; letter-spacing: -.02em; }
 .cal-cell.is-sel { box-shadow: inset 0 0 0 1px var(--accent); background: var(--chip); }

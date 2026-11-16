@@ -238,6 +238,7 @@ if ("serviceWorker" in navigator) {
     if (e.short) return tc(e.short);
     if (e.member) return e.member;
     if (e.key === "anniv_days") return `D+${e.n}`;
+    if (e.key === "anniv_debut") return "DEBUT";
     if (e.key === "anniv_years") return `${e.n}${LANG === "ko" ? "주년" : "y"}`;
     const m = /^(.+) 출연$/.exec(e.title || "");
     if (m) return short(m[1]);
@@ -260,12 +261,14 @@ if ("serviceWorker" in navigator) {
     date: v.start.slice(0, 10), time: v.start.slice(11), type: t("prerec"),
     title: `📝 ${t("prerec_title", { show: tc(v.show) })}`, url: v.url || v.source, short: `${short(v.show)}✍`,
   }));
-  const allEvents = [...(data.events || []).filter((e) => e.date >= todayKst), ...upcomingBirthdays(), ...voteEvents, ...supportEvents, ...prerecEvents]
+  // 지난 일정도 달력에 남김 — 목록·개수·'다가오는 일정'은 오늘 이후만 (upcomingEvents)
+  const allEvents = [...(data.events || []), ...upcomingBirthdays(), ...voteEvents, ...supportEvents, ...prerecEvents]
     .map((e) => {
       const show = /^(.+) 출연$/.exec(e.title || "")?.[1];
       return { ...e, group: groupOf(e), time: e.time || (show && showTime[show]) || e.time };
     })
     .sort((a, b) => (a.date + (a.time || "")).localeCompare(b.date + (b.time || "")));
+  const upcomingEvents = allEvents.filter((e) => e.date >= todayKst);
   // 달력에 넣을 생일은 보는 달 기준으로 (목록은 30일 이내만)
   const birthdaysIn = (y, mo) => (data.members || []).filter((m) => (m.birthday || "").startsWith(String(mo).padStart(2, "0") + "-"))
     .map((m) => ({ date: `${y}-${m.birthday}`, type: t("ev.birthday"), title: `🎂 ${t("ev.birthday")} · ${m.name}`, member: m.name, group: "anniv" }));
@@ -341,22 +344,23 @@ if ("serviceWorker" in navigator) {
       cell.addEventListener("click", () => { calSel = iso; renderCal(); });
       grid.append(cell);
     }
-    // 고른 날 일정, 없으면 이 달 남은 일정
+    // 고른 날 일정, 없으면 이 달 남은 일정 (지난 달이면 그 달 일정 전체)
     const sel = calSel ? (byDay[calSel] || []) : [];
-    const rest = evs.filter((e) => e.date >= (calSel || todayKst)).sort((a, b) => (a.date + (a.time || "")).localeCompare(b.date + (b.time || "")));
+    const pastMonth = `${calY}-${String(calM).padStart(2, "0")}` < todayKst.slice(0, 7);
+    const rest = evs.filter((e) => pastMonth || e.date >= (calSel || todayKst)).sort((a, b) => (a.date + (a.time || "")).localeCompare(b.date + (b.time || "")));
     const list = calSel && sel.length ? sel : rest.slice(0, 6);
     const foldBtn = thisMonth ? el("button", { type: "button", class: "cal-fold" }, calFold ? `${t("cal_more")} ▾` : `${t("cal_less")} ▴`) : null;
     foldBtn?.addEventListener("click", () => { calFold = !calFold; pref.set("calFold", calFold); renderCal(); });
     calBox.replaceChildren(
-      el("div", { class: "cal-head" }, prev, el("b", {}, monthName), next),
-      grid, foldBtn,
-      el("div", { class: "cal-sub muted small" }, calSel && sel.length ? "" : t("cal_upcoming")),
+      ...[el("div", { class: "cal-head" }, prev, el("b", {}, monthName), next),
+        grid, foldBtn].filter(Boolean),
+      el("div", { class: "cal-sub muted small" }, (calSel && sel.length) || pastMonth ? "" : t("cal_upcoming")),
       el("ul", { class: "events" }, ...(list.length ? list.map(evItem) : [el("li", { class: "empty" }, "–")])));
   }
 
   function renderEvents() {
     evTabs.replaceChildren(...EV_GROUPS.filter(([k]) => k === "all" || allEvents.some((e) => e.group === k)).map(([k, label]) => {
-      const n = k === "all" ? allEvents.length : allEvents.filter((e) => e.group === k).length;
+      const n = k === "all" ? upcomingEvents.length : upcomingEvents.filter((e) => e.group === k).length;
       const b = el("button", { type: "button", class: k === evGroup ? "on" : "" }, `${t(label)} ${n}`);
       b.addEventListener("click", () => { evGroup = k; pref.set("evGroup", k); renderEvents(); });
       return b;
@@ -366,7 +370,7 @@ if ("serviceWorker" in navigator) {
       $("events").hidden = true; calBox.hidden = false; renderCal();
     } else {
       calBox.hidden = true; $("events").hidden = false;
-      const list = allEvents.filter(pass).slice(0, 10);
+      const list = upcomingEvents.filter(pass).slice(0, 10);
       $("events").replaceChildren(...(list.length ? list.map(evItem) : [el("li", { class: "empty" }, "–")]));
     }
   }
