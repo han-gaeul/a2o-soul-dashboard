@@ -708,6 +708,27 @@
    "permalink": "https://x.com/A2O_SOUL/status/2122291090447311204",
    "timestamp": "2026-11-16T11:30:00.000Z"
   },
+  "x:2122422260208386097": {
+   "caption": "[📍]\n261117 (화) A2O SOUL SBS Life 더쇼 사전녹화에 참여하시는 분은 인원 체크 시간에 맞춰 사진 속 장소로 모여주시기 바랍니다🪩\n\n[인원 체크 시작 시간] \n1번 ~ 100번 - AM 5:30 (KST)\n101번 ~ 200번 - AM 6:30 (KST)\n201번 ~ 300번 - AM 7:30 (KST)\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2O_SOUL/status/2122422260208386097/photo/1",
+   "excerpt": "[📍]\n261117 (화) A2O SOUL SBS Life 더쇼 사전녹화에 참여하시는 분은 인원 체크 시간에 맞춰 사진 속 장소로 모여주시기 바랍니다🪩\n\n[인원 체크 시작 시간] \n1번 ~ 100번 - AM 5:30 (KST)\n101번 ~ 200번 -",
+   "images": [
+    "https://pbs.twimg.com/media/HXRbyzRbYAAHHYi.jpg"
+   ],
+   "items": [
+    {
+     "confidence": 0.85,
+     "date": "2026-11-17",
+     "end_date": null,
+     "kind": "music_show",
+     "place": null,
+     "time": null,
+     "title": "더쇼 출연",
+     "url": null
+    }
+   ],
+   "permalink": "https://x.com/A2O_SOUL/status/2122422260208386097",
+   "timestamp": "2026-11-16T20:11:14.000Z"
+  },
   "xf:2121586007254708290": {
    "caption": "[📸] 261114 @A2O_SOUL \n\n2026.11.14\nMBC Show! Music Core\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2OSOULBASE/status/2121586007254708290/photo/1",
    "excerpt": "[📸] 261114 @A2O_SOUL \n\n2026.11.14\nMBC Show! Music Core\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2OSOULBASE/status/2121586007254708",
@@ -1521,7 +1542,7 @@
  "x": {
   "A2O_SOUL": {
    "id": "1986498790229262336",
-   "since_id": "2122291090447311204"
+   "since_id": "2122422260208386097"
   }
  },
  "x_fans": {
