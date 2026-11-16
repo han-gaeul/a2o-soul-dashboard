@@ -8388,7 +8388,10 @@
   }
  ],
  "prerecs": [],
- "push": {},
+ "push": {
+  "api": "https://push.a2osoul-tracker.com",
+  "vapid_public": "BPszmnnzF5KS8DntczISNMfwY2etOSx_oX7L38hORWSCX_mfJE2MzKSKralQ_Y3NcK1osX-iEArij0qscPlj1YU"
+ },
  "recent": [
   {
    "category": "content",
