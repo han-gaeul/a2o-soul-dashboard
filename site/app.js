@@ -414,23 +414,34 @@ if ("serviceWorker" in navigator) {
   }
 
   const votes = (data.votes || []).filter((v) => kstDate(v.end) > Date.now());
+  // 투표 링크가 없으면 앱 이름으로 찾기 (공식 링크가 생기면 votes.yml url에)
+  const appSearch = (app) => {
+    const name = (String(app).match(/\(([^)]+)\)/) || [])[1] || String(app);  // '유픽(U+PICK)' → 'U+PICK'
+    return `https://www.google.com/search?q=${encodeURIComponent(`${name} app`)}`;
+  };
+  const voteCard = (v) => {
+    const start = kstDate(v.start), end = kstDate(v.end);
+    const open = Date.now() >= start;
+    const urgent = open && end - Date.now() < 6 * 3600000;
+    return el("div", { class: `vote${urgent ? " urgent" : ""}` },
+      el("div", { class: "vote-top" },
+        el("span", { class: `chip ${open ? "chip-on" : ""}` }, open ? t("vote_now") : t("vote_soon")),
+        el("b", {}, [tc(v.show), tc(v.title)].filter(Boolean).join(" · ")), v.app ? el("span", { class: "muted" }, ` · ${tc(v.app)}`) : null),
+      el("div", { class: "vote-time" }, open ? t("vote_ends", { t: duration(end - Date.now()) }) : t("vote_starts", { t: duration(start - Date.now()) }),
+        el("span", { class: "muted" }, ` · ${t("vote_end_at", { t: v.end.slice(5).replace("-", ".") })}`)),
+      v.note ? el("div", { class: "muted small" }, tc(v.note)) : null,
+      el("div", { class: "vote-links" },
+        v.url ? ext(v.url, t("vote_open")) : (v.app ? ext(appSearch(v.app), t("vote_find_app", { app: tc(v.app) })) : null),
+        v.source && v.source !== v.url ? ext(v.source, t("from_notice"), " ↗") : null));
+  };
   if (votes.length) {
-    for (const v of votes) {
-      const start = kstDate(v.start), end = kstDate(v.end);
-      const open = Date.now() >= start;
-      const urgent = open && end - Date.now() < 6 * 3600000;
-      $("votes").append(el("div", { class: `vote${urgent ? " urgent" : ""}` },
-        el("div", { class: "vote-top" },
-          el("span", { class: `chip ${open ? "chip-on" : ""}` }, open ? t("vote_now") : t("vote_soon")),
-          el("b", {}, [tc(v.show), tc(v.title)].filter(Boolean).join(" · ")), v.app ? el("span", { class: "muted" }, ` · ${tc(v.app)}`) : null),
-        el("div", { class: "vote-time" }, open ? t("vote_ends", { t: duration(end - Date.now()) }) : t("vote_starts", { t: duration(start - Date.now()) }),
-          el("span", { class: "muted" }, ` · ${t("vote_end_at", { t: v.end.slice(5).replace("-", ".") })}`)),
-        v.note ? el("div", { class: "muted small" }, tc(v.note)) : null,
-        el("div", { class: "vote-links" }, v.url ? ext(v.url, t("vote_open")) : null,
-          v.source && v.source !== v.url ? ext(v.source, t("from_notice"), " ↗") : null)));
-    }
+    for (const v of votes) $("votes").append(voteCard(v));
+    // 한눈에 탭 맨 위에도 진행 중·곧 시작 투표
+    $("voteHomeList").append(...votes.map(voteCard));
+    $("voteHome").hidden = false;
   } else {
     $("votes").append(empty(t("no_votes")));
+    $("voteHome").remove();
   }
 
   if ((data.streaming || []).length) {
