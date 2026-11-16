@@ -17,6 +17,8 @@ events:
   - { date: 2026-11-20, time: "20:00", type: 행사, title: Makestar 팬사인회, short: 팬싸 }
   - { date: 2026-11-21, time: "18:30", type: 행사, title: Withmuu 영상통화 팬사인회, short: 영통 }
   - { date: 2026-11-21, time: "20:30", type: 행사, title: Withmuu 팬사인회, short: 팬싸 }
+  # 공식 영상
+  - { date: 2026-11-16, time: "18:00", type: 기타, title: Dancing in the Dark 퍼포먼스 비디오 공개, url: "https://youtu.be/RRfoJjvqr7k" }
   # 연말 무대
   - { date: 2026-12-18, type: 음방, title: KBS 가요대축제 출연 }
   - { date: 2026-12-25, type: 음방, title: SBS 가요대전 출연 }
