@@ -1389,6 +1389,77 @@ if ("serviceWorker" in navigator) {
   $("tourFoot").onclick = openTour;
   if (!pref.get("tourSeen", false)) $("tourTip").hidden = false;
 
+  // ---------- 웹 푸시 알림 (🔔 알림 받기) ----------
+  {
+    const cfg = data.push || {};
+    const supported = "serviceWorker" in navigator && "PushManager" in window && "Notification" in window;
+    const ios = /iP(hone|ad|od)/.test(navigator.userAgent);
+    const standalone = matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+    if (cfg.api && cfg.vapid_public && (supported || ios)) {
+      const TOPICS = ["notice", "vote", "show", "video"];
+      const dlg = $("pushDlg"), btn = $("pushBtn");
+      const keyBytes = (b64) => Uint8Array.from(atob(b64.replace(/-/g, "+").replace(/_/g, "/") + "===".slice((b64.length + 3) % 4)), (c) => c.charCodeAt(0));
+      const getSub = async () => (supported ? (await navigator.serviceWorker.ready).pushManager.getSubscription() : null);
+      const mark = (on) => btn.classList.toggle("on", !!on);
+      btn.hidden = false;
+      getSub().then(mark).catch(() => {});
+      const render = async (msg) => {
+        const sub = await getSub().catch(() => null);
+        const body = [];
+        if (!supported || (ios && !standalone)) {
+          body.push(el("p", {}, t("push_ios")));
+          const b = el("button", { type: "button", class: "more" }, t("ios_title"));
+          b.onclick = () => { dlg.close(); $("installHelp").showModal(); };
+          body.push(b);
+        } else {
+          const chosen = new Set(pref.get("pushTopics", TOPICS));
+          body.push(el("p", { class: "muted small" }, t("push_desc")));
+          body.push(el("div", { class: "push-topics" }, ...TOPICS.map((k) => {
+            const cb = el("input", { type: "checkbox", value: k, ...(chosen.has(k) ? { checked: "" } : {}) });
+            cb.onchange = () => (cb.checked ? chosen.add(k) : chosen.delete(k));
+            return el("label", {}, cb, " ", t(`push_t_${k}`));
+          })));
+          const on = el("button", { type: "button", class: "install" }, sub ? t("push_save") : t("push_on"));
+          on.onclick = async () => {
+            on.disabled = true;
+            try {
+              if ((await Notification.requestPermission()) !== "granted") return render(t("push_denied"));
+              const reg = await navigator.serviceWorker.ready;
+              const s = (await reg.pushManager.getSubscription()) ||
+                (await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: keyBytes(cfg.vapid_public) }));
+              const topics = TOPICS.filter((k) => chosen.has(k));
+              const r = await fetch(cfg.api.replace(/\/$/, "") + "/subscribe", { method: "POST", headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ sub: s.toJSON(), topics, lang: LANG }) });
+              if (!r.ok) throw new Error(r.status);
+              pref.set("pushTopics", topics);
+              mark(true);
+              render(t("push_ok"));
+            } catch (_) {
+              render(t("push_fail"));
+            }
+          };
+          const row = el("div", { class: "push-actions" }, on);
+          if (sub) {
+            const off = el("button", { type: "button", class: "more" }, t("push_off"));
+            off.onclick = async () => {
+              try { await fetch(cfg.api.replace(/\/$/, "") + "/unsubscribe", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ endpoint: sub.endpoint }) }); } catch (_) { /* 무시 */ }
+              await sub.unsubscribe().catch(() => {});
+              mark(false);
+              render(t("push_off_ok"));
+            };
+            row.append(off);
+          }
+          body.push(row, el("p", { class: "muted small" }, t("push_delay")));
+        }
+        if (msg) body.unshift(el("p", { class: "push-msg", role: "status" }, msg));
+        $("pushBody").replaceChildren(...body);
+      };
+      btn.onclick = () => { render(); dlg.showModal(); };
+      $("pushClose").onclick = () => dlg.close();
+      dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); });
+    }
+  }
+
   // ---------- 포토카드 (입덕 탭): site/img/photocards/버전_라벨_멤버.webp ----------
   const pcs = data.photocards || [];
   const pcCredit = (data.info || {}).photocard_credit || {};

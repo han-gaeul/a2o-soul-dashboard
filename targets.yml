@@ -117,3 +117,10 @@ x_vendors:
 videos:
   - id: PbpHyIQerX8   # [핫클립/SUB] 정오의 희망곡 김신영입니다 (팬 제보)
     category: content
+
+# 웹 푸시 알림 (사이트 '🔔 알림 받기') — 둘 다 있어야 버튼이 보임
+#   api: 구독 저장 Cloudflare Worker 주소 (push-worker/worker.js), vapid_public: VAPID 공개키
+#   비밀키는 GitHub Secrets의 VAPID_PRIVATE_KEY
+push:
+  api: ""
+  vapid_public: ""

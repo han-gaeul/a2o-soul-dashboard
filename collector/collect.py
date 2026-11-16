@@ -1398,6 +1398,7 @@ def build(cfg):
         "notices": notices,
         "categories": CATEGORIES,
         "feedback_url": str(cfg.get("feedback_url") or ""),
+        "push": {k: str(v) for k, v in (cfg.get("push") or {}).items() if k in ("api", "vapid_public") and v},
         "votes": [v for v in cfg["votes"] if v["end"] >= now_kst_str()],
         "prerecs": prerecs,
         "photocards": photocards(cfg),
@@ -1429,6 +1430,12 @@ def main():
     if not args.build:
         collect(cfg, rescan=args.rescan)
     build(cfg)
+    if not args.build:  # 매시간 수집 때만 (배포용 --build에선 안 보냄)
+        try:
+            import webpush
+            save_json("push_state.json", webpush.run(load_json("dashboard.json", {}), cfg, load_json("push_state.json", {})))
+        except Exception as e:  # noqa: BLE001
+            print(f"[푸시] 건너뜀: {type(e).__name__} {e}")
 
 
 if __name__ == "__main__":
