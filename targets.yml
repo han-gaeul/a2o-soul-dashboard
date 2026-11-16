@@ -122,5 +122,5 @@ videos:
 #   api: 구독 저장 Cloudflare Worker 주소 (push-worker/worker.js), vapid_public: VAPID 공개키
 #   비밀키는 GitHub Secrets의 VAPID_PRIVATE_KEY
 push:
-  api: ""
-  vapid_public: ""
+  api: "https://push.a2osoul-tracker.com"
+  vapid_public: "BPszmnnzF5KS8DntczISNMfwY2etOSx_oX7L38hORWSCX_mfJE2MzKSKralQ_Y3NcK1osX-iEArij0qscPlj1YU"
