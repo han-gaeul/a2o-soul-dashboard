@@ -70,6 +70,10 @@ chain_stores:
   - { name: TOWER RECORDS, note: "일본 전국", q: タワーレコード, langs: [ja] }
   - { name: HMV, note: "일본 전국", q: HMV, langs: [ja] }
 
+# 투표 앱 — 누르면 폰에 맞는 앱 스토어(설치돼 있으면 '열기')로. name: votes.yml app에 들어가는 이름
+vote_apps:
+  - { name: 빅크, ios: "https://apps.apple.com/app/id1575835045", android: "https://play.google.com/store/apps/details?id=im.bigc.lively" }
+
 # 음방 생방송 보는 곳 — 방송사 공식 온에어 (국내 기준, 해외에선 막힐 수 있음). 확인된 곳만
 show_live:
   - { show: 더쇼, label: SBS Life, url: "https://www.sbs.co.kr/live/S11" }

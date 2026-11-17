@@ -170,6 +170,8 @@ def load_fan_files(cfg):
                           "langs": [str(l) for l in x.get("langs") or []]}
                          for x in info.get("chain_stores") or [] if isinstance(x, dict) and x.get("name")],
         "offline_stores_credit": str(info.get("offline_stores_credit") or ""),
+        "vote_apps": [{"name": str(x["name"]), **{k: str(x[k]) for k in ("ios", "android") if str(x.get(k) or "").startswith("https://")}}
+                      for x in info.get("vote_apps") or [] if x.get("name")],
         # 음방 생방송 보는 곳 (방송사 온에어) — show: 일정·투표 제목에 들어가는 이름
         "show_live": [{"show": str(x["show"]), "label": str(x.get("label") or ""), "url": str(x["url"])}
                       for x in info.get("show_live") or [] if x.get("show") and str(x.get("url", "")).startswith("https://")],

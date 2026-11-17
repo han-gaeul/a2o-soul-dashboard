@@ -463,11 +463,23 @@ if ("serviceWorker" in navigator) {
   };
   const appLetter = (app) => ((String(app).match(/\(([A-Za-z])/) || [])[1] || String(app).trim()[0] || "?").toUpperCase();
   const SHOW_RX = /더쇼|THE SHOW|쇼챔|엠카|M COUNTDOWN|뮤직뱅크|뮤뱅|음악중심|음중|인기가요|SHOW K-POP|케이팝업/i;
+  // 투표 앱 스토어 링크 (info.yml vote_apps) — 아이폰은 App Store, 그 밖엔 Google Play (설치돼 있으면 '열기')
+  const IOS = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  const appStore = (app) => {
+    const x = (data.info?.vote_apps || []).find((a) => String(app || "").includes(a.name));
+    return x ? (IOS ? x.ios : x.android) || x.ios || x.android : null;
+  };
+  // 투표 버튼이 갈 곳: 앱 안에서만 하는 투표(in_app, 생방송 투표)는 앱으로, 아니면 투표 링크 → 앱 → 앱 검색
+  const voteHref = (v) => {
+    const live = v.in_app || (kstDate(v.end) - kstDate(v.start) <= 6 * 3600000);
+    return (live && appStore(v.app)) || v.url || appStore(v.app) || (v.app ? appSearch(v.app) : "");
+  };
+  const voteLabel = (v) => (voteHref(v) === appStore(v.app) ? t("vote_in_app", { app: tc(v.app) }) : v.url ? t("vote_open") : t("vote_find_app", { app: tc(v.app) }));
   const voteTile = (v, full) => {
     const start = kstDate(v.start), end = kstDate(v.end), now = Date.now();
     const open = now >= start;
     const urgent = open && end - now < 72 * 3600000;
-    const href = v.url || (v.app ? appSearch(v.app) : "");
+    const href = voteHref(v);
     const pct = open ? Math.min(100, Math.max(3, ((now - start) / Math.max(1, end - start)) * 100)) : 0;
     const title = [v.show && !String(v.title).includes(v.show) ? tc(v.show) : "", tc(v.title)].filter(Boolean).join(" · ");
     const tile = el(href ? "a" : "div", { class: `vt${urgent ? " urgent" : ""}${open ? "" : " upcoming"}`, ...(href ? { href, target: "_blank", rel: "noopener" } : {}) },
@@ -481,7 +493,7 @@ if ("serviceWorker" in navigator) {
       el("div", { class: "vt-when muted" }, open ? t("vote_end_at", { t: v.end.slice(5).replace("-", ".") }) : `${v.start.slice(5).replace("-", ".")} ~ ${v.end.slice(v.end.slice(0, 10) === v.start.slice(0, 10) ? 11 : 5).replace("-", ".")}`,
         localOf(v.end.slice(0, 10), v.end.slice(11)) ? el("span", { class: "local-t" }, localOf(v.end.slice(0, 10), v.end.slice(11))) : null),
       full && v.note ? el("div", { class: "vt-note" }, tc(v.note)) : null,
-      el("div", { class: "vt-go" }, v.url ? t("vote_open") : v.app ? t("vote_find_app", { app: tc(v.app) }) : ""));
+      el("div", { class: "vt-go" }, href ? voteLabel(v) : ""));
     return tile;
   };
   const voteKey = (v) => (Date.now() >= kstDate(v.start) ? kstDate(v.end) : kstDate(v.start));
@@ -495,10 +507,10 @@ if ("serviceWorker" in navigator) {
       const close = el("button", { type: "button", class: "vb-x", "aria-label": "✕" }, "✕");
       const bar = el("div", { class: `vote-bar${kstDate(v.end) - Date.now() < 6 * 3600000 ? " urgent" : ""}`, role: "status" },
         // 누르면 바로 투표 링크로 (없으면 투표 앱 찾기)
-        el("a", { href: v.url || (v.app ? appSearch(v.app) : "#cheer"), ...(v.url || v.app ? { target: "_blank", rel: "noopener" } : {}), class: "vb-main" },
+        el("a", { href: voteHref(v) || "#cheer", ...(voteHref(v) ? { target: "_blank", rel: "noopener" } : {}), class: "vb-main" },
           `🗳 ${[tc(v.show), tc(v.title)].filter(Boolean).join(" · ")} — ${t("vote_ends", { t: duration(kstDate(v.end) - Date.now()) })}`,
           soon.length > 1 ? el("span", { class: "vb-more" }, ` +${soon.length - 1}`) : null),
-        v.url || v.app ? el("a", { class: "vb-go", href: v.url || appSearch(v.app), target: "_blank", rel: "noopener" }, v.url ? t("vote_open") : t("vote_find_app", { app: tc(v.app) })) : null, close);
+        voteHref(v) ? el("a", { class: "vb-go", href: voteHref(v), target: "_blank", rel: "noopener" }, voteLabel(v)) : null, close);
       close.addEventListener("click", () => { hidden.add(v.end + v.title); pref.set("voteBarHidden", [...hidden].slice(-30)); bar.remove(); });
       $("tabs").before(bar);
     }
