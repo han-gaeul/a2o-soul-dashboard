@@ -2076,32 +2076,18 @@
   "since_id": "2122618084649468286"
  },
  "x_official_votes": {
-  "at": "2026-11-17T20:50+09:00",
+  "at": "2026-11-17T23:50+09:00",
   "deep": 1,
   "last": {
-   "official": [
-    "BIGCChoice"
-   ],
-   "read": 57,
+   "official": [],
+   "read": 6,
    "verified": [
-    "12O106:blue",
-    "A2OSOULBASE:blue",
-    "A2OSOULPH:blue",
-    "BIGCChoice:blue",
-    "KshowAnalysis1:blue",
-    "LiIyhzt7:blue",
-    "MCBSkpopvotes:blue",
     "a2osoulvote:blue",
-    "dieoana2o:blue",
-    "helloitsfah:blue",
-    "listen2seohart:blue",
-    "mondleincamine:blue",
-    "moooon_hh:blue",
-    "onlyseeonee:blue",
-    "seohaloverz:blue"
+    "juhyunbabo:blue",
+    "mondleincamine:blue"
    ]
   },
-  "since_id": "2122657633127862374",
+  "since_id": "2122685811540029574",
   "v": 2
  },
  "x_stores": {
