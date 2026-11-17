@@ -72,7 +72,18 @@ chain_stores:
 
 # 투표 앱 — 누르면 폰에 맞는 앱 스토어(설치돼 있으면 '열기')로. name: votes.yml app에 들어가는 이름
 vote_apps:
+# android가 없으면 Google Play에서 q(없으면 name)로 검색
   - { name: 빅크, ios: "https://apps.apple.com/app/id1575835045", android: "https://play.google.com/store/apps/details?id=im.bigc.lively" }
+  - { name: 하이어, q: Higher 하이어, ios: "https://apps.apple.com/app/id1672001935" }
+  - { name: 유픽, q: UPICK 유픽, ios: "https://apps.apple.com/app/id6443780271" }
+  - { name: 아이돌챔프, q: IDOLCHAMP, ios: "https://apps.apple.com/app/id1185735018" }
+  - { name: 엠넷플러스, q: Mnet Plus, ios: "https://apps.apple.com/app/id6443405421" }
+  - { name: 팬캐스트, q: Fancast 팬캐스트, ios: "https://apps.apple.com/app/id1641638840" }
+  - { name: 뮤니버스, ios: "https://apps.apple.com/app/id6749677921", android: "https://play.google.com/store/apps/details?id=com.tnk.muniverse" }
+  - { name: 뮤빗, q: Mubeat, ios: "https://apps.apple.com/app/id1320789688" }
+  - { name: LiNC, q: LiNC 링크, ios: "https://apps.apple.com/app/id6467824343" }
+  - { name: 케이탑스타, q: K탑스타 KTOPSTAR, ios: "https://apps.apple.com/app/id6503354936" }
+  - { name: 마이원픽, q: 마이원픽 my1pick, ios: "https://apps.apple.com/app/id1496135213" }
 
 # 음방 생방송 보는 곳 — 방송사 공식 온에어 (국내 기준, 해외에선 막힐 수 있음). 확인된 곳만
 show_live:
