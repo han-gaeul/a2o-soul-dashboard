@@ -447,9 +447,12 @@ def media_feed(cfg, state, limit=40):
     for m in (state.get("posts") or {}).values():
         if m.get("author", "").lower() not in names or MEDIA_SKIP.search(m.get("caption") or ""):  # 목록에서 뺀 계정·논란 기사는 숨김
             continue
-        text = re.sub(r"\s*https://t\.co/\w+\s*$", "", (m.get("caption") or "").strip())
+        text = re.sub(r"\s*https://(t\.co/\w+|x\.com/\S+/photo/\d)\s*$", "", (m.get("caption") or "").strip())
+        imgs = (m.get("images") or [])[:4]
+        if not imgs and (yt := re.search(r"(?:youtu\.be/|youtube\.com/(?:watch\?v=|shorts/))([\w-]{11})", text)):
+            imgs = [f"https://i.ytimg.com/vi/{yt.group(1)}/hqdefault.jpg"]  # 사진 없는 글은 유튜브 링크 썸네일로
         out.append({"url": m["permalink"], "at": kst_datetime(m.get("timestamp")), "handle": m["author"],
-                    "name": names[m["author"].lower()], "text": text[:400], "images": (m.get("images") or [])[:4],
+                    "name": names[m["author"].lower()], "text": text[:400], "images": imgs,
                     "video": bool(m.get("video"))})
     out.sort(key=lambda x: x["at"] or "", reverse=True)
     return out[:limit]
