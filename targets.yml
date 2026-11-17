@@ -135,7 +135,8 @@ push:
 
 # 투표 앱·음방 공식 X 계정 (@ 없이) — 금색 인증(기관)이 아니라 자동 판별이 안 되는 계정만 적기
 #   이 계정들 글에 A2O SOUL + 투표 기간이 있으면 응원 탭 투표 칸에 바로 (팬 계정 표시 없이)
-# 매체·콘텐츠 계정 — A2O SOUL을 언급한 글만 1시간마다 검색해 공지 탭 '매체·콘텐츠'에 (최근 2주)
+# 매체·콘텐츠 계정 — A2O SOUL을 언급한 글만 1시간마다 검색해 영상 탭 '매체·콘텐츠'에 (최근 2주)
+# 콘텐츠(챌린지·화보·인터뷰·무대)만 — 가십성 뉴스 계정은 넣지 않기. 논란·비판 기사는 걸러냄
 # 없는 아이디는 하루 한 번 확인해서 '수집 점검' 이슈에 알려줘요. 새 매체 후보도 거기에
 x_media:
   - { handle: myidolmiim, name: miim }
@@ -157,8 +158,6 @@ x_media:
   - { handle: VogueKorea, name: VOGUE Korea }
   - { handle: marieclairekr, name: marie claire Korea }
   - { handle: cosmopolitan_kr, name: COSMOPOLITAN Korea }
-  - { handle: soompi, name: Soompi }
-  - { handle: allkpop, name: allkpop }
 
 x_vote_accounts:
   - BIGCChoice       # 빅크 초이스 (더쇼)
