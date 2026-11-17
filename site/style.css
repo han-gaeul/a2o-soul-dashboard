@@ -482,7 +482,9 @@ a.tour-item:hover { border-color: var(--accent); }
 .chant-guides:empty { display: none; }
 .chant-guide { display: block; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; color: inherit; text-decoration: none; }
 .chant-guide img { display: block; width: 100%; height: auto; background: #fff; }
-.chant-guide span { display: block; padding: 8px 12px; font-size: 13px; font-weight: 700; }
+.chant-guide > span { display: block; padding: 8px 12px 0; font-size: 13px; font-weight: 700; }
+.chant-guide .chant-links { display: flex; flex-wrap: wrap; gap: 6px 12px; padding: 6px 12px 10px; font-weight: 600; }
+.chant-links a { color: var(--accent); text-decoration: none; font-size: 13px; }
 
 /* 스밍 리스트 */
 .playlist h3, .pl-mv { font-size: 15px; margin: 4px 0 6px; }

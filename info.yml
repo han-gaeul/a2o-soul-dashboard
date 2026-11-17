@@ -82,8 +82,16 @@ photocard_order: [앨범, 예판 특전, 팬사인·영통, 방송, 럭키드로
 
 # 응원법 가이드 이미지 (응원 탭 '응원법' 영상 위에 표시) — site/img/fanchants/ 에 올리고 여기에 적기
 fanchant_guides:
-  - { song: Dancing in the Dark, src: img/fanchants/dancing-in-the-dark.webp }
-  - { song: SUPERSTAR, src: img/fanchants/superstar.webp }
+  # src: 미리보기(작은 사진) / full: 누르면 여는 원본 고화질 (공식 X 원본 사진) / post: 공식 글 / video: 공식 응원법 영상
+  - song: Dancing in the Dark
+    src: img/fanchants/dancing-in-the-dark.webp
+    full: "https://pbs.twimg.com/media/HWvHHLFaQAAW-r3?format=jpg&name=orig"
+    post: https://x.com/A2O_SOUL/status/2120011066642166008
+    video: https://youtu.be/23dgxvhaxnw
+  - song: SUPERSTAR
+    src: img/fanchants/superstar.webp
+    full: "https://pbs.twimg.com/media/HUlheHDbkAAN4LF?format=jpg&name=orig"
+    post: https://x.com/A2O_SOUL/status/2110325079192281560
 
 # 멤버 콜 (응원 탭 응원법) — 공식 응원법 이미지의 멤버 콜 순서. '한글|로마자 발음'
 fanchant_call:

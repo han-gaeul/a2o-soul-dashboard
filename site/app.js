@@ -1069,10 +1069,18 @@ if ("serviceWorker" in navigator) {
   // ---------- 응원법 (응원 탭) ----------
   const chants = data.fanchants || [];
   const guides = (data.info || {}).fanchant_guides || [];
-  // 공식 응원법 가이드 이미지 — 누르면 원본 크기
-  $("chantGuides").replaceChildren(...guides.map((g) => el("a", { class: "chant-guide", href: g.src, target: "_blank", rel: "noopener" },
-    el("img", { src: g.src, alt: `${g.song} ${t("fanchants")}`, loading: "lazy", decoding: "async" }),
-    el("span", {}, `${g.song} · ${t("fanchant_guide")}`))));
+  // 공식 응원법 가이드 이미지 — 미리보기는 고화질 원본(공식 X)으로 보여주고, 누르면 원본을 새 창에서(손가락으로 확대)
+  $("chantGuides").replaceChildren(...guides.map((g) => {
+    const img = el("img", { src: g.full ? g.full.replace("name=orig", "name=large") : g.src, alt: `${g.song} ${t("fanchants")}`, loading: "lazy", decoding: "async", referrerpolicy: "no-referrer" });
+    if (g.full) img.addEventListener("error", () => { if (img.src !== new URL(g.src, location.href).href) img.src = g.src; }, { once: true });
+    return el("div", { class: "chant-guide" },
+      el("a", { href: g.full || g.src, target: "_blank", rel: "noopener", class: "chant-img" }, img),
+      el("span", {}, `${g.song} · ${t("fanchant_guide")}`),
+      el("span", { class: "chant-links" },
+        el("a", { href: g.full || g.src, target: "_blank", rel: "noopener" }, `🔍 ${t("chant_zoom")}`),
+        g.video ? el("a", { href: g.video, target: "_blank", rel: "noopener" }, `▶ ${t("chant_video")}`) : null,
+        g.post ? el("a", { href: g.post, target: "_blank", rel: "noopener" }, `↗ ${t("chant_post")}`) : null));
+  }));
   const call = (data.info || {}).fanchant_call;
   if (call && (call.lines || []).length) {
     $("chantGuides").after(el("div", { class: "chant-call" },
