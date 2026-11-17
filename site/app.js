@@ -523,10 +523,11 @@ if ("serviceWorker" in navigator) {
       const n = data.debut_date ? Math.round((Date.parse(w.date) - Date.parse(data.debut_date)) / 86400000) : 0;
       const show = tc(w.show);
       const site = location.origin + location.pathname;
-      const shareText = t("win_share_text", { show });
+      const shareText = [t("win_share_text", { show }), w.tags].filter(Boolean).join(" ");
       const share = el("button", { type: "button", class: "win-btn" }, t("win_share"));
       share.addEventListener("click", async () => {
-        if (navigator.share) { try { await navigator.share({ text: shareText, url: site }); return; } catch { return; } }
+        // 문구와 주소를 한 메시지로 (카톡 등에서 말풍선이 나뉘지 않게)
+        if (navigator.share) { try { await navigator.share({ text: `${shareText}\n${site}` }); return; } catch { return; } }
         window.open(`https://x.com/intent/post?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(site)}`, "_blank", "noopener");
       });
       const watch = w.url || `https://www.youtube.com/results?search_query=${encodeURIComponent(`A2O SOUL ${w.show} 1위 앵콜`)}`;

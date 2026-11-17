@@ -117,6 +117,7 @@ jobs:
           mkdir -p _site/data
           cp -r site/. _site/
           cp data/dashboard.json data/calendar.ics _site/data/
+          python collector/og_win.py _site   # 음방 1위 후 7일 동안 링크 미리보기를 축하용으로
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
