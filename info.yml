@@ -57,7 +57,7 @@ offline_stores:
   - { name: 케이타운포유 코엑스, area: 서울 삼성(코엑스), handle: Ktown4u_coex, versions: "랜덤 Ver.", date: 2026-11-10 }
   - { name: Ksendy 김포점, area: 경기 김포, handle: ksendy_official, versions: "", date: 2026-11-10 }
   - { name: 뮤직앤갤러리, area: 대전, handle: musicngallery, versions: "", date: 2026-11-12 }
-  - { name: OffiK, area: "", handle: "", versions: "CARABINER Ver.", date: 2026-11-10 }
+  - { name: 오피크(OffiK) 신촌점, area: 서울 신촌, handle: offik_official, versions: "CARABINER Ver.", date: 2026-11-10, url: "https://x.com/offik_official/status/2120049140474478736" }
   # 일본 (일본어 화면에서 먼저)
   - { name: HMV&BOOKS SHIBUYA, area: 도쿄 시부야, handle: HmvBooksShibuya, versions: "선착 특전 포토카드", date: 2026-11-13, langs: [ja], url: "https://x.com/HmvBooksShibuya/status/2121136111963803736", site: "https://www.hmv.co.jp/store/BTK/" }
 
