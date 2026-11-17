@@ -514,6 +514,41 @@ if ("serviceWorker" in navigator) {
       $("tabs").before(bar);
     }
   }
+  // 음방 1위 축하 배너: 1위 후 7일 동안 맨 위에 크게 (첫 1위면 '데뷔 첫 음방 1위')
+  {
+    const wins = (data.timeline || []).filter((x) => x.kind === "win").sort((a, b) => a.date.localeCompare(b.date));
+    const w = wins[wins.length - 1];
+    if (w && (Date.parse(todayKst) - Date.parse(w.date)) / 86400000 <= 7) {
+      const first = wins.length === 1;
+      const n = data.debut_date ? Math.round((Date.parse(w.date) - Date.parse(data.debut_date)) / 86400000) : 0;
+      const show = tc(w.show);
+      const site = location.origin + location.pathname;
+      const shareText = t("win_share_text", { show });
+      const share = el("button", { type: "button", class: "win-btn" }, t("win_share"));
+      share.addEventListener("click", async () => {
+        if (navigator.share) { try { await navigator.share({ text: shareText, url: site }); return; } catch { return; } }
+        window.open(`https://x.com/intent/post?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(site)}`, "_blank", "noopener");
+      });
+      const watch = w.url || `https://www.youtube.com/results?search_query=${encodeURIComponent(`A2O SOUL ${w.show} 1위 앵콜`)}`;
+      // 공식 단체 사진 (info.yml wins.image) — 못 불러오면 사진 없이
+      let photo = null;
+      if (w.image) {
+        const img = el("img", { src: w.image, alt: "A2O SOUL", referrerpolicy: "no-referrer", decoding: "async" });
+        photo = w.image_post ? el("a", { class: "win-photo", href: w.image_post, target: "_blank", rel: "noopener" }, img) : el("div", { class: "win-photo" }, img);
+        img.addEventListener("error", () => { photo.remove(); banner.classList.remove("has-photo"); });
+      }
+      const banner = el("section", { class: `win-hero${photo ? " has-photo" : ""}`, role: "status" },
+        photo,
+        el("div", { class: "win-confetti", "aria-hidden": "true" }, ...Array.from({ length: 28 }, (_, i) => el("i", { style: `--i:${i}` }))),
+        el("div", { class: "win-trophy", "aria-hidden": "true" }, "🏆"),
+        el("div", { class: "win-body" },
+          el("div", { class: "win-kicker" }, "A2O SOUL"),
+          el("h2", { class: "win-title" }, first ? t("win_first", { show }) : t("win_n", { show })),
+          el("div", { class: "win-sub" }, [`${show}${w.ep ? ` ${t("win_ep", { n: w.ep })}` : ""}`, w.date.replaceAll("-", "."), n > 0 ? t("win_days", { n }) : ""].filter(Boolean).join(" · ")),
+          el("div", { class: "win-acts" }, el("a", { class: "win-btn primary", href: watch, target: "_blank", rel: "noopener" }, t("win_watch")), share)));
+      $("tabs").before(banner);
+    }
+  }
   // 상단 띠: 오늘 A2O SOUL이 나오는 음방 — 시작 1시간 반 전부터 끝날 무렵까지 '생방송 보기'
   {
     const nowMs = Date.now();
@@ -521,7 +556,7 @@ if ("serviceWorker" in navigator) {
     const airTime = (e) => e.time || (/(\d{1,2}:\d{2})/.exec(((data.howto?.voting || []).find((v) => liveFor(e.title)?.show && String(v.show).includes(liveFor(e.title).show)) || {}).when || "") || [])[1];
     const onAir = (data.events || []).filter((e) => e.type === "음방" && e.date === todayKst && liveFor(e.title) && airTime(e))
       .map((e) => ({ e: { ...e, time: airTime(e).padStart(5, "0") }, at: +kstDate(`${e.date} ${airTime(e).padStart(5, "0")}`) }))
-      .find(({ at }) => nowMs >= at - 90 * 60000 && nowMs <= at + 150 * 60000);
+      .find(({ at }) => nowMs >= at - 90 * 60000 && nowMs <= at + 75 * 60000);
     if (onAir) {
       const x = liveFor(onAir.e.title);
       const now = nowMs >= onAir.at;
