@@ -571,7 +571,8 @@ if ("serviceWorker" in navigator) {
   });
   // 지금 언어 지역의 판매처(langs)를 먼저 — 예: 일본어 화면이면 일본 판매처가 위로
   const mine = (x) => ((x.langs || []).includes(LANG) ? 0 : (x.langs || []).length ? 2 : 1);
-  const shops = [...(data.info?.shops || [])].filter((x) => mine(x) < 2 || LANG !== "ko").sort((a, b) => mine(a) - mine(b));
+  // 지역 판매처(langs 지정)는 그 언어 화면에서만
+  const shops = [...(data.info?.shops || [])].filter((x) => mine(x) < 2).sort((a, b) => mine(a) - mine(b));
   // 한눈에 탭: 음반 구매처 한 번에
   if (shops.length) {
     $("shopGrid").replaceChildren(...shops.map((x) => {
@@ -582,7 +583,7 @@ if ("serviceWorker" in navigator) {
     }));
     $("shopHome").hidden = false;
     // 오프라인 매장: 최근 입고 확인 순 — 이름은 매장 계정/입고 글로
-    const offs = [...(data.info?.offline_stores || [])].sort((a, b) => mine(a) - mine(b) || (b.date || "").localeCompare(a.date || ""));
+    const offs = [...(data.info?.offline_stores || [])].filter((x) => mine(x) < 2).sort((a, b) => mine(a) - mine(b) || (b.date || "").localeCompare(a.date || ""));
     if (offs.length) {
       const credit = data.info?.offline_stores_credit;
       $("offlineNote").textContent = [t("off_desc"), credit ? t("off_credit", { who: credit }) : ""].filter(Boolean).join(" · ");
