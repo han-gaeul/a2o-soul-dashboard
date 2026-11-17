@@ -70,6 +70,14 @@ chain_stores:
   - { name: TOWER RECORDS, note: "일본 전국", q: タワーレコード, langs: [ja] }
   - { name: HMV, note: "일본 전국", q: HMV, langs: [ja] }
 
+# 음방 생방송 보는 곳 — 방송사 공식 온에어 (국내 기준, 해외에선 막힐 수 있음). 확인된 곳만
+show_live:
+  - { show: 더쇼, label: SBS Life, url: "https://www.sbs.co.kr/live/S11" }
+  - { show: 엠카운트다운, label: Mnet Plus, url: "https://www.mnetplus.world/" }
+  - { show: 뮤직뱅크, label: KBS2, url: "https://onair.kbs.co.kr/index.html?sname=onair&stype=live&ch_code=12" }
+  - { show: 음악중심, label: MBC, url: "https://onair.imbc.com/" }
+  - { show: 인기가요, label: SBS, url: "https://www.sbs.co.kr/live/S01" }
+
 shops:
   - { label: Mnet Plus Merch (A2O), url: "https://mnetplusmerch.com/product/list.html?cate_no=374", note: "앨범·팬사인회·영상통화 이벤트", kind: 앨범 }
   - { label: 메이크스타, url: "https://www.makestar.com/product/21531", note: "팬사인회·영상통화, 미공개 셀카 포카", kind: 앨범 }
