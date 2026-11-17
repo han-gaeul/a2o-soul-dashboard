@@ -785,3 +785,27 @@ dialog.dlg-full[open] { display: flex; flex-direction: column; }
   .tour-item .tour-ico { grid-row: auto; width: 36px; height: 36px; font-size: 19px; }
   .tour-item span:not(.tour-ico):not(.go) { font-size: 12px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 }
+/* 세로 길이 줄이기: 접힌 항목, 기록 묶음, 폰 레이아웃 */
+.fold-x { display: none !important; }
+.fold-more { display: block; margin: 10px auto 0; }
+.timeline .tl-show::before { background: var(--accent-bg); }
+.tl-chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 2px; }
+.tl-chips .chip { font-size: 11px; }
+/* 포토카드 '전체': 버전마다 한 줄 가로 스크롤 */
+.pc-all .pc-grid { display: flex; overflow-x: auto; gap: 8px; padding-bottom: 4px; scroll-snap-type: x proximity; }
+.pc-all .pc-grid .pc { flex: 0 0 92px; scroll-snap-align: start; }
+@media (max-width: 720px) {
+  #votes.vt-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 4px; }
+  #votes .vt { flex: 0 0 78%; scroll-snap-align: start; }
+  #kpis { grid-template-columns: 1fr 1fr; gap: 8px; }
+  #tourSec .tour-item span:not(.tour-ico) { display: none; }
+  #tourSec .tour-list { grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+  #tourSec .tour-item { padding: 8px 6px; justify-items: center; text-align: center; }
+  #tourSec .tour-item b { font-size: 12px; }
+  .chain-grid { display: flex; overflow-x: auto; }
+  .chain-grid .chain { flex: 0 0 62%; }
+}
+@media (max-width: 720px) {
+  .pl .links { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 2px; }
+  .pl .links a { flex: none; }
+}
