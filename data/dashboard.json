@@ -2777,6 +2777,33 @@
     "note": "일본 · 수입반 온라인",
     "url": "https://tower.jp/artist/6440143"
    }
+  ],
+  "show_live": [
+   {
+    "label": "SBS Life",
+    "show": "더쇼",
+    "url": "https://www.sbs.co.kr/live/S11"
+   },
+   {
+    "label": "Mnet Plus",
+    "show": "엠카운트다운",
+    "url": "https://www.mnetplus.world/"
+   },
+   {
+    "label": "KBS2",
+    "show": "뮤직뱅크",
+    "url": "https://onair.kbs.co.kr/index.html?sname=onair&stype=live&ch_code=12"
+   },
+   {
+    "label": "MBC",
+    "show": "음악중심",
+    "url": "https://onair.imbc.com/"
+   },
+   {
+    "label": "SBS",
+    "show": "인기가요",
+    "url": "https://www.sbs.co.kr/live/S01"
+   }
   ]
  },
  "kpis": [
