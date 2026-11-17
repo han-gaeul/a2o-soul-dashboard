@@ -1474,6 +1474,28 @@
    "permalink": "https://x.com/HIGHER_twt/status/2122260894574854310",
    "timestamp": "2026-11-16T09:30:01.000Z"
   },
+  "xo:2122562880541192246": {
+   "caption": "💘 11월의 하이픽 아티스트 중간집계 D-13 \nTOP 5️⃣ 아티스트를 공개합니다! \n \n최애픽! 하이픽!\n지금 바로 투표하고, 내 최애를 10월 최고의 아티스트로 만들어주세요! 🔥\n\n🏆 1위 아티스트에게 주어지는 강력한 리워드\n• 홍대입구역 디지털 사이니지 광고 송출 🎬\n• 연말 결선 '2026 하이픽 파이널' 진출 🎤\n\n📅 투표 일정: 11월 1일 2:00PM ~ 11월 30일 2:00PM (KST)\n🔗 투표 링크: https://t.co/Wt8QkDifs5\n\n💘 November HIGH-PICK Artist Vote — D-13!\nHere are the current TOP 5️⃣ artists!\n\nYour Pick! HIGH-PICK!\nVote now and make your favorite the Best Artist of October! 🔥\n\n🏆 Powerful Rewards for the #1 Artist\n• Digital signage advertisement at Hongik Univ. Station 🎬\n• Advance to the year-end ‘2026 HIGH-PICK Final’ 🎤\n\n📅 Voting Period: November 1, 2:00 PM – November 30, 2:00 PM (KST)\n🔗 Vote here: https://t.co/Wt8QkDifs5\n\n💘 11月 HIGH-PICKアーティスト投票 — D-13！\n現在のTOP 5️⃣アーティストを公開します！\n\n推しをPICK！HIGH-PICK！\n今すぐ投票して、あなたの推しを10月のベストアーティストにしましょう！🔥\n\n🏆 1位アーティストには豪華リワード！\n• 弘大入口駅デジタルサイネージ広告掲載 🎬\n• 年末決勝戦「2026 HIGH-PICK FINAL」進出 🎤\n\n📅 投票期間：11月1日 2:00 PM ～ 11月30日 2:00 PM（KST）\n🔗 投票はこちら：https://t.co/Wt8QkDifs5\n\n#A2OSOUL #LIMYOUNGWOONG #NCTWISH #RESCENE #TOMORROW_X_TOGETHER #리센느 #에이투오소울 #엔시티위시 #임영웅 #투모로우바이투게더 #투표 #VOTE #HIGHER #하이어 #이달의_하이픽 #11월_하이픽\n\n— HIGHER",
+   "excerpt": "💘 11월의 하이픽 아티스트 중간집계 D-13 \nTOP 5️⃣ 아티스트를 공개합니다! \n \n최애픽! 하이픽!\n지금 바로 투표하고, 내 최애를 10월 최고의 아티스트로 만들어주세요! 🔥\n\n🏆 1위 아티스트에게 주어지는 강력한 리워드\n• 홍대입구역 디지털",
+   "items": [
+    {
+     "app": "하이어(HIGHER)",
+     "confidence": 0.9,
+     "date": "2026-11-30",
+     "end": "2026-11-30 14:00",
+     "end_date": null,
+     "kind": "vote",
+     "place": null,
+     "show": "",
+     "start": "2026-11-01 14:00",
+     "time": "14:00",
+     "title": "💘 11월의 하이픽 아티스트 중간집계 D-13",
+     "url": null
+    }
+   ],
+   "permalink": "https://x.com/HIGHER_twt/status/2122562880541192246",
+   "timestamp": "2026-11-17T05:30:00.000Z"
+  },
   "xv:2119672177347981651": {
    "caption": "[💿] A2O SOUL DEBUT EP [SUPERSTAR]\n발매 기념 공개 팬사인회\n\n📢응모 마감 D-1‼️\n✨당일 공개 팬사인회에서 SPECIAL STAGE가 진행됩니다.\n\n📅2026.11.14 (토) 19:30 (KST)\n📍스타필드 수원 타워 아트리움\n\n[ONLINE] 뮤직아트 온라인몰\n🛒온라인 응모기간 : 2026.11.08 (일) 14:00 ~ 11.10 (화) 23:59 (KST)\n\n[OFFLINE] 영풍문고 스타필드수원점 내 음반매장\n🛒오프라인 응모기간 : 2026.11.08 (일) 14:00 ~ 11.10 (화) 21:00 (KST)\n\n🌠응모자 전원 미공개 셀카 포토카드 15종 중 1종 랜덤 증정\n\n🔗https://t.co/I1sj0S6DOk",
    "excerpt": "[💿] A2O SOUL DEBUT EP [SUPERSTAR]\n발매 기념 공개 팬사인회\n\n📢응모 마감 D-1‼️\n✨당일 공개 팬사인회에서 SPECIAL STAGE가 진행됩니다.\n\n📅2026.11.14 (토) 19:30 (KST)\n📍스타필드 수원 타워 아",
@@ -1610,16 +1632,25 @@
   }
  },
  "x_official_votes": {
-  "at": "2026-11-17T11:40+09:00",
+  "at": "2026-11-17T14:41+09:00",
   "deep": 1,
   "last": {
-   "official": [],
-   "read": 2,
+   "official": [
+    "HIGHER_twt"
+   ],
+   "read": 12,
    "verified": [
+    "A2OSOULBASE:blue",
+    "A2OSOULPH:blue",
+    "HIGHER_twt:business",
+    "a2osoulpost:blue",
+    "a2osoulstation:blue",
+    "a2osoulvote:blue",
+    "ishkpopvotes:blue",
     "puppylhz:blue"
    ]
   },
-  "since_id": "2122506613601009809",
+  "since_id": "2122562880541192246",
   "v": 2
  },
  "x_vendors": {
