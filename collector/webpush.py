@@ -18,21 +18,21 @@ import requests
 KST = timezone(timedelta(hours=9))
 
 MSG = {
-    "ko": {"show_now": "🔴 지금 생방송 중", "notice": "📢 새 공지", "prerec": "🎙 사녹 신청 곧 시작", "vote": "🗳 투표 마감 임박", "vote_body": "{name} — {t} 마감",
+    "ko": {"ev_show": "{show} 출연", "show_now": "🔴 지금 생방송 중", "notice": "📢 새 공지", "prerec": "🎙 사녹 신청 곧 시작", "vote": "🗳 투표 마감 임박", "vote_body": "{name} — {t} 마감",
            "show": "📺 곧 시작", "show_body": "{t} {name}", "video": "🎬 새 영상", "video_more": "{title} 외 {n}개"},
-    "en": {"show_now": "🔴 Live now", "notice": "📢 New notice", "prerec": "🎙 Pre-recording sign-up opens soon", "vote": "🗳 Vote closing soon", "vote_body": "{name} — ends {t} KST",
+    "en": {"ev_show": "On {show}", "show_now": "🔴 Live now", "notice": "📢 New notice", "prerec": "🎙 Pre-recording sign-up opens soon", "vote": "🗳 Vote closing soon", "vote_body": "{name} — ends {t} KST",
            "show": "📺 Starting soon", "show_body": "{t} KST {name}", "video": "🎬 New video", "video_more": "{title} +{n} more"},
-    "ja": {"show_now": "🔴 生放送中", "notice": "📢 新しいお知らせ", "prerec": "🎙 事前収録の応募がまもなく開始", "vote": "🗳 投票締切間近", "vote_body": "{name} — {t} 締切 (KST)",
+    "ja": {"ev_show": "{show} 出演", "show_now": "🔴 生放送中", "notice": "📢 新しいお知らせ", "prerec": "🎙 事前収録の応募がまもなく開始", "vote": "🗳 投票締切間近", "vote_body": "{name} — {t} 締切 (KST)",
            "show": "📺 まもなく開始", "show_body": "{t} (KST) {name}", "video": "🎬 新しい動画", "video_more": "{title} ほか{n}件"},
-    "zh": {"show_now": "🔴 正在直播", "notice": "📢 新公告", "prerec": "🎙 预录报名即将开始", "vote": "🗳 投票即将截止", "vote_body": "{name} — {t} 截止 (KST)",
+    "zh": {"ev_show": "出演 {show}", "show_now": "🔴 正在直播", "notice": "📢 新公告", "prerec": "🎙 预录报名即将开始", "vote": "🗳 投票即将截止", "vote_body": "{name} — {t} 截止 (KST)",
            "show": "📺 即将开始", "show_body": "{t} (KST) {name}", "video": "🎬 新视频", "video_more": "{title} 等 {n} 个"},
-    "es": {"show_now": "🔴 En vivo ahora", "notice": "📢 Nuevo aviso", "prerec": "🎙 La inscripción a la pregrabación abre pronto", "vote": "🗳 La votación cierra pronto", "vote_body": "{name} — cierra {t} KST",
+    "es": {"ev_show": "En {show}", "show_now": "🔴 En vivo ahora", "notice": "📢 Nuevo aviso", "prerec": "🎙 La inscripción a la pregrabación abre pronto", "vote": "🗳 La votación cierra pronto", "vote_body": "{name} — cierra {t} KST",
            "show": "📺 Empieza pronto", "show_body": "{t} KST {name}", "video": "🎬 Nuevo video", "video_more": "{title} y {n} más"},
-    "id": {"show_now": "🔴 Sedang live", "notice": "📢 Pengumuman baru", "prerec": "🎙 Pendaftaran pra-rekaman segera dibuka", "vote": "🗳 Voting segera ditutup", "vote_body": "{name} — tutup {t} KST",
+    "id": {"ev_show": "Tampil di {show}", "show_now": "🔴 Sedang live", "notice": "📢 Pengumuman baru", "prerec": "🎙 Pendaftaran pra-rekaman segera dibuka", "vote": "🗳 Voting segera ditutup", "vote_body": "{name} — tutup {t} KST",
            "show": "📺 Segera dimulai", "show_body": "{t} KST {name}", "video": "🎬 Video baru", "video_more": "{title} +{n} lainnya"},
-    "th": {"show_now": "🔴 กำลังออกอากาศสด", "notice": "📢 ประกาศใหม่", "prerec": "🎙 ใกล้เปิดสมัครพรีเรคคอร์ด", "vote": "🗳 โหวตใกล้ปิด", "vote_body": "{name} — ปิด {t} KST",
+    "th": {"ev_show": "ออกรายการ {show}", "show_now": "🔴 กำลังออกอากาศสด", "notice": "📢 ประกาศใหม่", "prerec": "🎙 ใกล้เปิดสมัครพรีเรคคอร์ด", "vote": "🗳 โหวตใกล้ปิด", "vote_body": "{name} — ปิด {t} KST",
            "show": "📺 ใกล้เริ่มแล้ว", "show_body": "{t} KST {name}", "video": "🎬 วิดีโอใหม่", "video_more": "{title} และอีก {n} รายการ"},
-    "pt": {"show_now": "🔴 Ao vivo agora", "notice": "📢 Novo aviso", "prerec": "🎙 Inscrição na pré-gravação abre em breve", "vote": "🗳 Votação fechando", "vote_body": "{name} — fecha {t} KST",
+    "pt": {"ev_show": "No {show}", "show_now": "🔴 Ao vivo agora", "notice": "📢 Novo aviso", "prerec": "🎙 Inscrição na pré-gravação abre em breve", "vote": "🗳 Votação fechando", "vote_body": "{name} — fecha {t} KST",
            "show": "📺 Começa em breve", "show_body": "{t} KST {name}", "video": "🎬 Novo vídeo", "video_more": "{title} +{n}"},
 }
 
@@ -116,7 +116,10 @@ def compose(kind, data, lang, group=None):
         name = " · ".join(trs(p) for p in data["parts"] if p) if lang != "ko" else data["name"]
         return m["vote"], m["vote_body"].format(name=name, t=data["t"]), data["url"]
     if kind == "show":
-        name = trs(data["name"]) if lang != "ko" else data["name"]
+        name = data["name"]
+        if lang != "ko":  # '더쇼 출연' → 'On THE SHOW' (방송 이름은 translations.yml)
+            mm = re.fullmatch(r"(.+?)\s*출연", name)
+            name = m["ev_show"].format(show=trs(mm.group(1))) if mm else trs(name)
         return (m["show_now"] if data.get("now") else m["show"]), m["show_body"].format(name=name, t=data["t"]), data["url"]
     if kind == "video":
         body = data["title"] if not group or len(group) < 2 else m["video_more"].format(title=data["title"], n=len(group) - 1)
