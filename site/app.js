@@ -469,11 +469,8 @@ if ("serviceWorker" in navigator) {
     const x = (data.info?.vote_apps || []).find((a) => String(app || "").includes(a.name));
     return x ? (IOS ? x.ios : x.android) || x.ios || x.android : null;
   };
-  // 투표 버튼이 갈 곳: 앱 안에서만 하는 투표(in_app, 생방송 투표)는 앱으로, 아니면 투표 링크 → 앱 → 앱 검색
-  const voteHref = (v) => {
-    const live = v.in_app || (kstDate(v.end) - kstDate(v.start) <= 6 * 3600000);
-    return (live && appStore(v.app)) || v.url || appStore(v.app) || (v.app ? appSearch(v.app) : "");
-  };
+  // 투표 버튼이 갈 곳: 투표는 앱 안에서 하니 앱(스토어, 설치돼 있으면 '열기')이 먼저, 앱을 모르면 투표 링크 → 앱 검색
+  const voteHref = (v) => appStore(v.app) || v.url || (v.app ? appSearch(v.app) : "");
   const voteLabel = (v) => (voteHref(v) === appStore(v.app) ? t("vote_in_app", { app: tc(v.app) }) : v.url ? t("vote_open") : t("vote_find_app", { app: tc(v.app) }));
   const voteTile = (v, full) => {
     const start = kstDate(v.start), end = kstDate(v.end), now = Date.now();
@@ -494,6 +491,8 @@ if ("serviceWorker" in navigator) {
         localOf(v.end.slice(0, 10), v.end.slice(11)) ? el("span", { class: "local-t" }, localOf(v.end.slice(0, 10), v.end.slice(11))) : null),
       full && v.note ? el("div", { class: "vt-note" }, tc(v.note)) : null,
       el("div", { class: "vt-go" }, href ? voteLabel(v) : ""));
+    // 응원 탭: 앱으로 가는 타일엔 투표 안내 글 링크도 따로 (타일 밖 한 줄)
+    if (full && v.url && href !== v.url) return el("div", { class: "vt-wrap" }, tile, ext(v.url, `↗ ${t("from_notice")}`));
     return tile;
   };
   const voteKey = (v) => (Date.now() >= kstDate(v.start) ? kstDate(v.end) : kstDate(v.start));
@@ -608,7 +607,7 @@ if ("serviceWorker" in navigator) {
   const appLinks = (txt) => {
     const raw = String(txt).split(/\s*·\s*/), shown = String(tc(txt)).split(/\s*·\s*/);
     const label = shown.length === raw.length ? shown : raw.map((a) => tc(a));
-    return raw.flatMap((a, i) => [i ? " · " : null, ext(appSearch(a.replace(/,.*\)/, ")")), label[i])]).filter(Boolean);
+    return raw.flatMap((a, i) => [i ? " · " : null, ext(appStore(a) || appSearch(a.replace(/,.*\)/, ")")), label[i])]).filter(Boolean);
   };
   if ((howto.voting || []).length || (howto.streaming || []).length) {
     // ① 이번 주 음방 투표: 요일 칸(짧게) + 누른 방송의 앱·메모는 아래 한 줄로
