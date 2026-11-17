@@ -43,9 +43,11 @@ photo_labels:
 records: []
 
 # 음방 1위 (직접 입력 — 공식 공지에서도 자동으로 잡힘, 같은 날·같은 음방은 하나로)
-#   1위 후 7일 동안 한눈에 맨 위에 축하 배너 { date, show, ep(회차), url(앵콜·수상 영상이나 공지), image(배너 사진), image_post(사진 원본 글) }
+#   1위 후 7일 동안 한눈에 맨 위에 축하 배너 { date, show, ep(회차), url(앵콜·수상 영상이나 공지), image(배너 사진), image_post(사진 원본 글),
+#   tags(공유 해시태그), og(7일 동안 링크 미리보기 이미지, site/ 기준 경로) }
 wins:
-  - { date: 2026-11-17, show: 더쇼, ep: 404, image: "https://pbs.twimg.com/media/HWaKAPjaAAASLtT.jpg?name=large", image_post: "https://x.com/A2O_SOUL/status/2118538863505522863" }
+  - { date: 2026-11-17, show: 더쇼, ep: 404, image: "https://pbs.twimg.com/media/HWaKAPjaAAASLtT.jpg?name=large", image_post: "https://x.com/A2O_SOUL/status/2118538863505522863",
+      tags: "#A2OSOUL1stWin #DancingInTheDark1stWin", og: img/og/win-20261117.png }
 
 # 음반·굿즈 판매처 (한눈에 탭 '음반 구매처' + 응원 탭) { label, url, note, kind }
 #   예) - { label: 공식 스토어, url: "https://...", note: "앨범·응원봉" }

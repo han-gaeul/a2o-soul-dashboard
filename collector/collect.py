@@ -156,7 +156,8 @@ def load_fan_files(cfg):
         "photocard_credit": {str(k): str(v) for k, v in (info.get("photocard_credit") or {}).items()},
         "photocard_order": [str(x) for x in info.get("photocard_order") or []],
         "wins": [{"date": str(x["date"]), "show": str(x["show"]), "ep": str(x.get("ep") or ""), "url": str(x.get("url") or ""),
-                  "image": str(x.get("image") or ""), "image_post": str(x.get("image_post") or "")}
+                  "image": str(x.get("image") or ""), "image_post": str(x.get("image_post") or ""),
+                  "tags": str(x.get("tags") or ""), "og": str(x.get("og") or "")}
                  for x in info.get("wins") or [] if x.get("date") and x.get("show")],
         "records": [{"date": str(x["date"]), "title": str(x["title"]), "url": str(x.get("url") or "")}
                     for x in info.get("records") or [] if x.get("date") and x.get("title")],
@@ -688,7 +689,8 @@ def build_timeline(cfg, videos, episodes, subs=()):
         if (w["date"], w["show"]) not in wins:
             wins.add((w["date"], w["show"]))
             items.append({"date": w["date"], "kind": "win", "title": f"{w['show']} 1위", "key": "tl_win", "show": w["show"],
-                          "ep": w["ep"], "url": w["url"], "image": w["image"], "image_post": w["image_post"]})
+                          "ep": w["ep"], "url": w["url"], "image": w["image"], "image_post": w["image_post"],
+                          "tags": w["tags"], "og": w["og"]})
     for x in cfg["info"]["records"]:
         items.append({"date": x["date"], "kind": "record", "title": x["title"], "url": x["url"]})
     seen, out = set(), []
