@@ -522,7 +522,8 @@ if ("serviceWorker" in navigator) {
       const first = wins.length === 1;
       const n = data.debut_date ? Math.round((Date.parse(w.date) - Date.parse(data.debut_date)) / 86400000) : 0;
       const show = tc(w.show);
-      const site = location.origin + location.pathname;
+      // 주소 끝에 ?win=날짜 — 카톡 등이 예전 미리보기를 저장해 둬도 새 카드로 다시 읽게
+      const site = `${location.origin}${location.pathname}?win=${w.date.replaceAll("-", "")}`;
       const shareText = [t("win_share_text", { show }), w.tags].filter(Boolean).join(" ");
       const share = el("button", { type: "button", class: "win-btn" }, t("win_share"));
       share.addEventListener("click", async () => {
