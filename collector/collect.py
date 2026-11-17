@@ -161,8 +161,14 @@ def load_fan_files(cfg):
                   for x in info.get("shops") or [] if x.get("label") and str(x.get("url", "")).startswith("https://")],
         "offline_stores": [{"name": str(x["name"]), "area": str(x.get("area") or ""), "handle": str(x.get("handle") or "").lstrip("@"),
                             "versions": str(x.get("versions") or ""), "date": str(x.get("date") or ""),
-                            "langs": [str(l) for l in x.get("langs") or []], **{k: str(x[k]) for k in ("url", "site") if str(x.get(k) or "").startswith("https://")}}
+                            "langs": [str(l) for l in x.get("langs") or []], **{k: str(x[k]) for k in ("url", "site") if str(x.get(k) or "").startswith("https://")},
+                            **({"lat": float(x["lat"]), "lng": float(x["lng"]), "approx": bool(x.get("approx"))} if x.get("lat") and x.get("lng") else {}),
+                            **({"addr": str(x["addr"])} if x.get("addr") else {})}
                            for x in info.get("offline_stores") or [] if isinstance(x, dict) and x.get("name")],
+        # 어디서나 살 수 있는 체인 음반 매장 (지도에서 가까운 지점 찾기)
+        "chain_stores": [{"name": str(x["name"]), "note": str(x.get("note") or ""), "q": str(x.get("q") or x["name"]),
+                          "langs": [str(l) for l in x.get("langs") or []]}
+                         for x in info.get("chain_stores") or [] if isinstance(x, dict) and x.get("name")],
         "offline_stores_credit": str(info.get("offline_stores_credit") or ""),
     }
     guide = read_yml("guide.yml")
@@ -362,9 +368,72 @@ def notice_feed(cfg, registry, store, limit=60):
         text = "\n".join(ln for ln in text.split("\n") if not re.fullmatch(r"(\s*#\S+)+\s*", ln)).strip()  # 해시태그만 있는 줄
         kind = next((k for k, rx in NOTICE_KIND if rx.search(text)), "notice")
         out.append({"url": url, "at": kst_datetime(m.get("timestamp")), "account": m["account"], "kind": kind,
-                    "text": text[:600], "images": (m.get("images") or [])[:4]})
+                    "text": text[:600], "images": (m.get("images") or [])[:4], **notice_summary(kind, text)})
     out.sort(key=lambda x: x["at"], reverse=True)
     return out[:limit]
+
+
+def store_post_title(caption):
+    """입고 글 → 한 줄 요약 (해시태그·링크 뺀 첫 의미 있는 줄)."""
+    for ln in (caption or "").splitlines():
+        ln = re.sub(r"https?://\S+|#\S+", "", ln).strip(" -·|[]")
+        if len(re.sub(r"\W", "", ln)) >= 4:
+            return ln[:60]
+    return ""
+
+
+def store_posts(x, seen):
+    """매장 입고 글 목록 (info.yml의 글 + 검색으로 찾은 글), 최신순."""
+    out = list((seen or {}).get("posts") or [])
+    if x.get("url") and not any(p["url"] == x["url"] for p in out):
+        out.append({"date": x.get("date") or "", "url": x["url"], "text": ""})
+    return sorted(out, key=lambda p: p["date"], reverse=True)[:12]
+
+
+def notice_summary(kind, text):
+    """공지 글 → 제목 한 줄 + 핵심 정보(인원 체크 시간·신청 시간·링크) + 나머지 설명."""
+    lines = [ln.replace("\xa0", " ").strip() for ln in text.split("\n")]
+    lines = [ln for ln in lines if ln and not re.fullmatch(r"\[[^\]]{1,4}\]", ln)]
+    title, facts, rest = "", [], []
+
+    def hm(s_):
+        m = re.search(r"(AM|PM|오전|오후)?\s*(\d{1,2}):(\d{2})\s*(AM|PM)?", s_, re.I)
+        if not m:
+            return ""
+        h = int(m.group(2)) % 12 if (m.group(1) or m.group(4)) else int(m.group(2))
+        if (m.group(1) or m.group(4) or "").upper() in ("PM", "오후"):
+            h += 12
+        return f"{h:02d}:{m.group(3)}"
+
+    for ln in lines:
+        if not title and not re.search(r"https?://", ln):
+            t_ = re.sub(r"^(\d{2})(\d{2})(\d{2})\b", lambda m: f"{int(m.group(2))}.{int(m.group(3))}", ln)
+            t_ = re.sub(r"\s*A2O SOUL\s*", " ", t_)
+            t_ = re.sub(r"\s*(사전녹화|생방송|녹화)에 참여하시는 분은.*$", r" \1 집합", t_)
+            title = re.sub(r"\s+", " ", t_).strip()[:70]
+            continue
+        if re.fullmatch(r"(\s*#\S+)+", ln) or (re.search(r"인원\s*체크", ln) and not hm(ln)):
+            continue
+        slots = re.findall(r"(\d+)\s*번?\s*~\s*(\d+)?\s*번?\s*[-:]\s*((?:AM|PM|오전|오후)?\s*\d{1,2}:\d{2}(?:\s*(?:AM|PM))?)", ln, re.I)
+        if slots:
+            facts += [{"type": "slot", "range": f"{a}~{b}", "time": hm(t_)} for a, b, t_ in slots]
+            continue
+        if re.search(r"인원\s*체크", ln) and hm(ln):
+            facts.append({"type": "check", "time": hm(ln)})
+            continue
+        if re.search(r"신청\s*기간", ln) and "~" in ln:
+            a, b = ln.split("~", 1)
+            d = re.search(r"(\d{1,2})\s*월\s*(\d{1,2})\s*일", a)
+            facts.append({"type": "apply", "date": f"{d.group(1)}.{d.group(2)}" if d else "", "from": hm(a), "to": hm(b)})
+            continue
+        u = re.search(r"https?://\S+", ln)
+        if u:
+            if not re.search(r"x\.com/|twitter\.com/|t\.co/", u.group(0)):
+                host = re.sub(r"^www\.", "", u.group(0).split("/")[2])
+                facts.append({"type": "link", "url": u.group(0), "label": "Mnet Plus" if "mnetplus" in host else host})
+            continue
+        rest.append(ln)
+    return {"title": title, "facts": facts[:6], "desc": " ".join(rest)[:160]}
 
 
 def media_feed(cfg, state, limit=40):
@@ -1123,8 +1192,14 @@ def collect(cfg, rescan=False):
                         continue
                     h, day = p_["author"], (kst_datetime(p_["timestamp"]) or "")[:10]
                     if h.lower() in known:
-                        if day >= (seen.get(h.lower()) or {}).get("date", ""):
-                            seen[h.lower()] = {"date": day, "url": p_["permalink"]}
+                        cur = seen.setdefault(h.lower(), {"date": "", "url": ""})
+                        if day >= cur.get("date", ""):
+                            cur.update(date=day, url=p_["permalink"])
+                        lst = cur.setdefault("posts", [])
+                        if not any(x["url"] == p_["permalink"] for x in lst):  # 매장의 입고 글 전부 (최근 12개)
+                            lst.append({"date": day, "url": p_["permalink"], "text": store_post_title(p_["caption"])})
+                            lst.sort(key=lambda x: x["date"], reverse=True)
+                            del lst[12:]
                     elif h.lower() not in skip and h.lower() not in cands:
                         cands[h.lower()] = {"handle": h, "name": p_.get("author_name") or h, "date": day, "url": p_["permalink"],
                                             "text": re.sub(r"\s+", " ", p_["caption"])[:80]}
@@ -1280,6 +1355,7 @@ def write_health(cfg, videos, members, today, official=(), store_cands=None, med
         texts += [str(m.get("position") or "")] + [str(x) for k in ("nicknames", "career", "notes") for x in m.get(k) or []]
     texts += cfg["info"]["lore"] + [a["type"] for a in cfg["info"]["albums"]]
     texts += [x["label"] for x in cfg["info"]["shops"]] + [x["note"] for x in cfg["info"]["shops"]]
+    texts += [x[k] for x in cfg["info"]["chain_stores"] if not x["langs"] for k in ("name", "note")]
     texts += [a["note"] for a in cfg["info"]["albums"]] + [v for a in cfg["info"]["albums"] for v in a["versions"]]
     texts += [cfg["stream_playlist"].get("title", ""), cfg["stream_playlist"].get("desc", "")] + cfg["stream_playlist"].get("tips", [])
     texts += [x["note"] for x in cfg["streaming"]] + [str(v.get(k) or "") for v in cfg["votes"] for k in ("show", "app", "title", "note")]
@@ -1598,9 +1674,10 @@ def build(cfg):
         "supports": sorted((x for x in cfg["supports"] if x["end"] >= today), key=lambda x: x["start"]),
         "howto": cfg["howto"],
         "tr": cfg["tr"],
-        "info": {**cfg["info"], "offline_stores": [  # 입고 글이 더 최근에 잡혔으면 날짜·글 링크 갱신
-            {**x, **({"date": seen["date"], "url": seen["url"]} if (seen := (stores_state.get("seen") or {}).get(x["handle"].lower()))
-                      and seen["date"] >= x["date"] else {})}
+        "info": {**cfg["info"], "offline_stores": [  # 입고 글이 더 최근에 잡혔으면 날짜·글 링크 갱신 + 입고 글 목록
+            {**x, **({"date": seen["date"], "url": seen["url"]} if (seen := (stores_state.get("seen") or {}).get(x["handle"].lower()) or {})
+                      and seen.get("date", "") >= x["date"] else {}),
+             "posts": store_posts(x, seen)}
             for x in cfg["info"].get("offline_stores") or []]},
         "guide": {"course": [{**c, **{k: by_id[c["id"]][k] for k in slim}}
                              for c in cfg["guide"]["course"] if c["id"] in by_id],

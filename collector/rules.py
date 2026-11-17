@@ -6,7 +6,7 @@
 import re
 from datetime import date, timedelta
 
-RULES_VERSION = 10  # 규칙을 바꾸면 올리기 → 다음 수집 때 최근 공지를 다시 읽어 일정을 새로 뽑음
+RULES_VERSION = 11  # 규칙을 바꾸면 올리기 → 다음 수집 때 최근 공지를 다시 읽어 일정을 새로 뽑음
 
 SHOWS = [
     ("더쇼", r"더\s?쇼(?!\s?챔)|THE\s?SHOW"),
@@ -309,6 +309,50 @@ EVENT_WORD = re.compile(r"이벤트|행사|사인회|팬\s?사인|영상\s?통�
 FACE = re.compile(r"대면|오프라인|OFFLINE|IN[-\s]?PERSON", re.I)
 
 
+APPLY_HEAD = re.compile(r"응모\s*(기간|마감|일정)|ENTRY\s*PERIOD|APPLY\s*PERIOD|応募期間", re.I)
+WIN_HEAD = re.compile(r"당첨(자)?\s*(발표|안내)|WINNER", re.I)
+
+
+def apply_period(caption, posted):
+    """팬싸 공지의 응모 기간·당첨 발표 → {apply_start, apply_end, announce} ('YYYY-MM-DD HH:MM'). 못 찾으면 빈 dict.
+    '응모 기간 : 11.08 (일) 14:00 ~ 11.10 (화) 23:59', 머리줄 다음 줄의 기간, '📌~11/14 (토) 11:59PM' 같은 마감 줄."""
+    try:
+        pday = date.fromisoformat(posted[:10])
+    except ValueError:
+        return {}
+    out, head = {}, False
+
+    def at(text, default_day=None):
+        ds = _dates(text, pday)
+        d = ds[0] if ds else default_day
+        if not d:
+            return None
+        return f"{d.isoformat()} {_time(text) or '23:59'}"
+
+    for ln in [x.strip() for x in (caption or "").splitlines() if x.strip()]:
+        if WIN_HEAD.search(ln) and "announce" not in out:
+            a = at(ln.split(":", 1)[-1] if re.search(r"발표\s*:", ln) else ln)
+            if a:
+                out["announce"] = a[:10]
+            continue
+        is_head = bool(APPLY_HEAD.search(ln))
+        rangey = "~" in ln and _dates(ln, pday)
+        if "apply_end" not in out and (is_head or head) and rangey:
+            left, right = ln.split("~", 1)
+            left = left.split(":", 1)[1] if APPLY_HEAD.search(left) and ":" in left else left
+            s_ = at(left)
+            e_ = at(right, default_day=date.fromisoformat(s_[:10]) if s_ else None)
+            if e_:
+                out.update({"apply_end": e_, **({"apply_start": s_} if s_ else {})})
+            head = False
+            continue
+        if "apply_end" not in out and re.match(r"^\W*~\s*\S", ln) and _dates(ln, pday):  # '📌~11/14 (토) 11:59PM'
+            out["apply_end"] = at(ln)
+            continue
+        head = is_head and not _dates(ln, pday)
+    return out
+
+
 def fansign_items(caption, posted, vendor):
     """판매처 팬사인회·영통 공지 → 행사 일정.
     '[응모 기간]' 같은 머리줄 아래 날짜는 건너뛰고, '이벤트 일시' 아래 줄('- 단체 영상통화: 11/25(수) 19:00')이나
@@ -372,8 +416,9 @@ def fansign_items(caption, posted, vendor):
                 items.append(item(pending[0], tm, ln, 0.85))
     if pending and not any(i["date"] == pending[0].isoformat() for i in items):
         items.append(item(pending[0], None, pending[1], 0.8))
+    ap = apply_period(caption, posted)
     if items:
-        return items
+        return [{**i, **ap} for i in items]
     if fallback:
-        return [item(fallback[0], fallback[1], fallback[2], 0.6)]
+        return [{**item(fallback[0], fallback[1], fallback[2], 0.6), **ap}]
     return []

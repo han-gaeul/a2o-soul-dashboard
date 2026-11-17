@@ -60,8 +60,8 @@
   <div data-tab="overview">
     <div class="tour-tip" id="tourTip" hidden><button type="button" class="tour-open" id="tourOpen" data-i18n="tour_tip">👋 처음이세요? 30초 사용법</button><button type="button" class="tour-x" id="tourX" aria-label="✕">✕</button></div>
     <section class="card vote-home" id="voteHome" hidden>
-      <div class="sec-head"><h2 data-i18n="vote_home">🗳 진행 중인 투표</h2><a class="more" href="#cheer" data-i18n="vote_more">응원 탭 ›</a></div>
-      <div class="votes" id="voteHomeList"></div>
+      <div class="sec-head"><h2><span data-i18n="vote_home">🗳 진행 중인 투표</span> <span class="muted small" id="voteHomeCount"></span></h2><a class="more" href="#cheer" data-i18n="vote_more">응원 탭 ›</a></div>
+      <div class="vt-grid vt-row" id="voteHomeList"></div>
     </section>
     <section class="card" id="shopHome" hidden>
       <h2 data-i18n="shops_home">💿 음반 구매처</h2>
@@ -70,7 +70,13 @@
       <div id="offlineStores" hidden>
         <h3 class="off-title" data-i18n="off_title">🏬 오프라인 매장</h3>
         <p class="muted small" id="offlineNote"></p>
-        <div class="off-list" id="offlineList"></div>
+        <div class="filter-row era-row" id="offRegions"></div>
+        <div class="off-wrap"><div class="off-map" id="offMap" hidden></div><div class="off-list" id="offlineList"></div></div>
+      </div>
+      <div id="chainStores" hidden>
+        <h3 class="off-title" data-i18n="chain_title">🛒 어디서나 살 수 있는 음반 매장</h3>
+        <p class="muted small" data-i18n="chain_desc">전국 체인 — 지점별 재고는 매장에 문의하세요</p>
+        <div class="chain-grid" id="chainGrid"></div>
       </div>
     </section>
     <section class="card bday" id="bdayCard"></section>
@@ -119,7 +125,7 @@
       <h2 data-i18n="notice_posts">📢 공식 공지 글</h2>
       <p class="muted small" data-i18n="notice_posts_desc">공식 인스타·X의 사녹 집합 장소·공지·예약 안내 — 1시간마다 자동으로 모아요</p>
       <div class="filter-row era-row" id="noticeKinds"></div>
-      <div class="notice-list" id="noticePosts"></div>
+      <div class="np-grid" id="noticePosts"></div>
     </section>
     <section class="card" id="mediaPostsSec">
       <h2 data-i18n="media_posts">📸 매체·콘텐츠</h2>
@@ -138,7 +144,7 @@
     </section>
     <section class="card" id="votesSec">
       <h2 data-i18n="votes">투표</h2>
-      <div class="votes" id="votes"></div>
+      <div class="vt-grid" id="votes"></div>
     </section>
     <section class="card" id="streamSec">
       <h2 data-i18n="streaming">스밍 리스트</h2>
@@ -310,7 +316,7 @@
   </ol>
 </dialog>
 
-<dialog id="compareDialog">
+<dialog id="compareDialog" class="dlg-full">
   <div class="dlg-head"><h2 id="cmpTitle"></h2><button class="dlg-close" id="cmpClose" aria-label="닫기">✕</button></div>
   <div id="cmpBody"></div>
 </dialog>
