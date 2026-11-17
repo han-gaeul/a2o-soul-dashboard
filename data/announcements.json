@@ -1521,6 +1521,28 @@
    "permalink": "https://x.com/HIGHER_twt/status/2122562880541192246",
    "timestamp": "2026-11-17T05:30:00.000Z"
   },
+  "xo:2122600639901442334": {
+   "caption": "#✦ MBC 쇼! 음악중심 970회 STAGE M PICK 투표 중간 발표 ✦\n\nMuniverse에서 내가 매주 뽑는 쇼! 음악중심 레전드 무대\n970회 선두를 달리고 있는 스테이지 TOP 5를 공개합니다.\n\n최종 트로피의 주인공은 11/21 토요일\n<쇼! 음악중심> 방송에서 확인하세요!\n\n🗳️ 뮤니버스에서 #스테이지엠픽 투표하기:\n🔗 https://t.co/7N5lLl6b9I\n\n#장민호 #규현 #베스티 #엔시티드림 #에이티즈 #채령 #트레저 #피원하모니 #이세계아이돌 #싸이커스 #투어스 #아일릿 #리센느 #엑스러브 #베이비돈크라이 #롱샷 #키빗업 #언차일드 #하트오브우먼 #에이투오소울\n\n— Muniverse",
+   "excerpt": "#✦ MBC 쇼! 음악중심 970회 STAGE M PICK 투표 중간 발표 ✦\n\nMuniverse에서 내가 매주 뽑는 쇼! 음악중심 레전드 무대\n970회 선두를 달리고 있는 스테이지 TOP 5를 공개합니다.\n\n최종 트로피의 주인공은 11/21 토요일\n",
+   "items": [
+    {
+     "app": "뮤니버스(MUNIVERSE)",
+     "confidence": 0.6,
+     "date": null,
+     "end": null,
+     "end_date": null,
+     "kind": "vote",
+     "place": null,
+     "show": "음악중심",
+     "start": null,
+     "time": null,
+     "title": "음악중심 투표",
+     "url": null
+    }
+   ],
+   "permalink": "https://x.com/muniverse_io/status/2122600639901442334",
+   "timestamp": "2026-11-17T08:00:03.000Z"
+  },
   "xv:2119672177347981651": {
    "caption": "[💿] A2O SOUL DEBUT EP [SUPERSTAR]\n발매 기념 공개 팬사인회\n\n📢응모 마감 D-1‼️\n✨당일 공개 팬사인회에서 SPECIAL STAGE가 진행됩니다.\n\n📅2026.11.14 (토) 19:30 (KST)\n📍스타필드 수원 타워 아트리움\n\n[ONLINE] 뮤직아트 온라인몰\n🛒온라인 응모기간 : 2026.11.08 (일) 14:00 ~ 11.10 (화) 23:59 (KST)\n\n[OFFLINE] 영풍문고 스타필드수원점 내 음반매장\n🛒오프라인 응모기간 : 2026.11.08 (일) 14:00 ~ 11.10 (화) 21:00 (KST)\n\n🌠응모자 전원 미공개 셀카 포토카드 15종 중 1종 랜덤 증정\n\n🔗https://t.co/I1sj0S6DOk",
    "excerpt": "[💿] A2O SOUL DEBUT EP [SUPERSTAR]\n발매 기념 공개 팬사인회\n\n📢응모 마감 D-1‼️\n✨당일 공개 팬사인회에서 SPECIAL STAGE가 진행됩니다.\n\n📅2026.11.14 (토) 19:30 (KST)\n📍스타필드 수원 타워 아",
@@ -1759,25 +1781,21 @@
   "since_id": "2122208183259476071"
  },
  "x_official_votes": {
-  "at": "2026-11-17T14:41+09:00",
+  "at": "2026-11-17T17:50+09:00",
   "deep": 1,
   "last": {
    "official": [
-    "HIGHER_twt"
+    "muniverse_io"
    ],
-   "read": 12,
+   "read": 14,
    "verified": [
-    "A2OSOULBASE:blue",
     "A2OSOULPH:blue",
-    "HIGHER_twt:business",
-    "a2osoulpost:blue",
-    "a2osoulstation:blue",
     "a2osoulvote:blue",
-    "ishkpopvotes:blue",
-    "puppylhz:blue"
+    "itsmoonlights_:blue",
+    "muniverse_io:blue"
    ]
   },
-  "since_id": "2122562880541192246",
+  "since_id": "2122613350286946522",
   "v": 2
  },
  "x_stores": {
