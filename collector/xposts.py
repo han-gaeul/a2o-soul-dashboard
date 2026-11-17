@@ -70,11 +70,26 @@ def fetch_photo_posts(uid, username, pages=5):
     return out
 
 
-def search_posts(query, since_id=None, max_results=50, pages=1):
+def users_exist(usernames):
+    """핸들 목록 → {소문자 핸들: True/False} (없거나 정지된 계정은 False). 100개씩 한 번에."""
+    out = {}
+    names = [u for u in usernames if u]
+    for i in range(0, len(names), 100):
+        chunk = names[i:i + 100]
+        res = _get("/users/by", {"usernames": ",".join(chunk)})
+        found = {u["username"].lower() for u in res.get("data", [])}
+        out.update({u.lower(): u.lower() in found for u in chunk})
+    return out
+
+
+def search_posts(query, since_id=None, max_results=50, pages=1, media=False):
     """최근 7일 검색 → [{id, tweet_id, caption, timestamp, permalink, author}] (최신순). since_id로 새 글만.
-    pages: 결과가 많으면 다음 쪽까지 (쪽마다 max_results개 읽음 → 과금)."""
+    pages: 결과가 많으면 다음 쪽까지 (쪽마다 max_results개 읽음 → 과금). media: 사진·영상 썸네일도 (images)."""
     params = {"query": query, "max_results": max(10, min(100, max_results)),
               "tweet.fields": "created_at,note_tweet,entities,author_id", "expansions": "author_id", "user.fields": "username,verified_type,name"}
+    if media:
+        params.update({"tweet.fields": params["tweet.fields"] + ",attachments",
+                       "expansions": "author_id,attachments.media_keys", "media.fields": "type,url,preview_image_url"})
     if since_id:
         params["since_id"] = since_id
     out = []
@@ -90,6 +105,7 @@ def search_posts(query, since_id=None, max_results=50, pages=1):
 
 def _search_page(res):
     people = {u["id"]: u for u in (res.get("includes") or {}).get("users", [])}
+    media = {m["media_key"]: m for m in (res.get("includes") or {}).get("media", [])}
     users = {k: u["username"] for k, u in people.items()}
     out = []
     for t in res.get("data", []):
@@ -101,5 +117,9 @@ def _search_page(res):
         out.append({"id": f"xv:{t['id']}", "tweet_id": t["id"], "caption": text, "timestamp": t.get("created_at"),
                     "permalink": f"https://x.com/{name}/status/{t['id']}", "author": name,
                     "verified_type": (people.get(t.get("author_id")) or {}).get("verified_type"),
-                    "author_name": (people.get(t.get("author_id")) or {}).get("name")})
+                    "author_name": (people.get(t.get("author_id")) or {}).get("name"),
+                    "images": [u for u in (media[k].get("url") or media[k].get("preview_image_url")
+                                           for k in (t.get("attachments") or {}).get("media_keys", []) if k in media) if u][:4],
+                    "video": any(media[k].get("type") in ("video", "animated_gif")
+                                 for k in (t.get("attachments") or {}).get("media_keys", []) if k in media)})
     return out
