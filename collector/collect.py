@@ -1036,10 +1036,14 @@ def collect(cfg, rescan=False):
                     sst["since_id"] = max(posts, key=lambda p_: int(p_["tweet_id"]))["tweet_id"]
                 known = {str(x.get("handle") or "").lower() for x in cfg["info"].get("offline_stores") or []} - {""}
                 skip = {v["handle"].lower() for v in cfg.get("x_vendors") or []} | {u.lower() for u in cfg["x_fans"]}
+                if sst.get("v") != 2:  # 판별 기준을 좁혀서 예전 후보는 비움
+                    sst["candidates"], sst["v"] = {}, 2
                 seen, cands = sst.setdefault("seen", {}), sst.setdefault("candidates", {})
                 n_new = 0
                 for p_ in posts:
-                    if not re.search(r"입고|NEW\s?RELEASE|신보", p_["caption"], re.I):
+                    # '교복 입고 나와' 같은 팬 글이 섞이지 않게 매장 입고 공지 표현만 ('입고 공지·완료·안내·되었', 재입고, 신보 입고, NEW RELEASE)
+                    if not re.search(r"(신보|음반|앨범|ALBUM)?\s*입고\s*(공지|완료|안내|소식|되었|됐|했)|재입고|신보\s*입고|NEW\s?RELEASE|IN\s?STOCK|RESTOCK",
+                                     p_["caption"], re.I):
                         continue
                     h, day = p_["author"], (kst_datetime(p_["timestamp"]) or "")[:10]
                     if h.lower() in known:
