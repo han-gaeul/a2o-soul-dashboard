@@ -46,7 +46,7 @@ records: []
 #   예) - { label: 공식 스토어, url: "https://...", note: "앨범·응원봉" }
 # 오프라인 음반 매장 (홈 '음반 구매처' 아래) — 정리 도움 @star_light_4u · 팬 제보
 #   handle: 매장 X 계정 (@ 없이) — 수집 때 그 계정의 A2O SOUL 입고 글을 찾아 '입고 확인' 날짜를 자동으로 갱신
-#   versions: 확인된 버전 / date: 입고 확인일
+#   versions: 확인된 버전 / date: 입고 확인일 / url: 입고 글 / site: 매장 홈페이지(없으면 X 계정)
 offline_stores_credit: "@star_light_4u"
 offline_stores:
   - { name: 메이크스타 스페이스 강남, area: 서울 강남, handle: MAKESTARSPACEGN, versions: "EP · CARABINER Ver.", date: 2026-11-10 }
@@ -59,7 +59,7 @@ offline_stores:
   - { name: 뮤직앤갤러리, area: 대전, handle: musicngallery, versions: "", date: 2026-11-12 }
   - { name: OffiK, area: "", handle: "", versions: "CARABINER Ver.", date: 2026-11-10 }
   # 일본 (일본어 화면에서 먼저)
-  - { name: HMV&BOOKS SHIBUYA, area: 도쿄 시부야, handle: HmvBooksShibuya, versions: "선착 특전 포토카드", date: 2026-11-13, langs: [ja], url: "https://x.com/HmvBooksShibuya/status/2121136111963803736" }
+  - { name: HMV&BOOKS SHIBUYA, area: 도쿄 시부야, handle: HmvBooksShibuya, versions: "선착 특전 포토카드", date: 2026-11-13, langs: [ja], url: "https://x.com/HmvBooksShibuya/status/2121136111963803736", site: "https://www.hmv.co.jp/store/BTK/" }
 
 shops:
   - { label: Mnet Plus Merch (A2O), url: "https://mnetplusmerch.com/product/list.html?cate_no=374", note: "앨범·팬사인회·영상통화 이벤트", kind: 앨범 }

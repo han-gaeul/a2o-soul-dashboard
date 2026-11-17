@@ -158,7 +158,7 @@ def load_fan_files(cfg):
                   for x in info.get("shops") or [] if x.get("label") and str(x.get("url", "")).startswith("https://")],
         "offline_stores": [{"name": str(x["name"]), "area": str(x.get("area") or ""), "handle": str(x.get("handle") or "").lstrip("@"),
                             "versions": str(x.get("versions") or ""), "date": str(x.get("date") or ""),
-                            "langs": [str(l) for l in x.get("langs") or []], **({"url": str(x["url"])} if x.get("url") else {})}
+                            "langs": [str(l) for l in x.get("langs") or []], **{k: str(x[k]) for k in ("url", "site") if str(x.get(k) or "").startswith("https://")}}
                            for x in info.get("offline_stores") or [] if isinstance(x, dict) and x.get("name")],
         "offline_stores_credit": str(info.get("offline_stores_credit") or ""),
     }

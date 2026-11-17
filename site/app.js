@@ -587,13 +587,15 @@ if ("serviceWorker" in navigator) {
       const credit = data.info?.offline_stores_credit;
       $("offlineNote").textContent = [t("off_desc"), credit ? t("off_credit", { who: credit }) : ""].filter(Boolean).join(" · ");
       $("offlineList").replaceChildren(...offs.map((x) => {
-        const href = x.url || (x.handle ? `https://x.com/${x.handle}` : "");
+        const href = x.site || (x.handle ? `https://x.com/${x.handle}` : "") || x.url || "";
         const name = href ? el("a", { href, target: "_blank", rel: "noopener" }, tc(x.name)) : el("span", {}, tc(x.name));
+        const inDate = x.date ? t("off_in", { d: x.date.slice(5).replace("-", ".") }) : "";
         return el("div", { class: "off-row" },
           el("div", { class: "off-name" }, name, x.area ? el("span", { class: "muted small" }, ` · ${tc(x.area)}`) : null),
           el("div", { class: "off-meta" },
             x.versions ? el("span", { class: "chip" }, tc(x.versions)) : null,
-            x.date ? el("span", { class: "muted small" }, t("off_in", { d: x.date.slice(5).replace("-", ".") })) : null));
+            inDate ? (x.url ? el("a", { class: "muted small", href: x.url, target: "_blank", rel: "noopener" }, `${inDate} ↗`)
+              : el("span", { class: "muted small" }, inDate)) : null));
       }));
       $("offlineStores").hidden = false;
     }
