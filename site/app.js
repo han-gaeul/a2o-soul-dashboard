@@ -81,6 +81,18 @@ if ("serviceWorker" in navigator) {
   // 외부 링크는 http(s)만 (yml에 잘못된 주소가 들어가도 javascript: 등은 막기)
   const ext = (href, ...children) => el("a", { href: /^https?:\/\//i.test(href || "") ? href : "#", target: "_blank", rel: "noopener" }, ...children);
   const empty = (msg) => el("div", { class: "empty" }, msg);
+  // 긴 목록 접기: 앞의 n개만 보이고 '더 보기 (+k)' — 폰에서 세로로 너무 길어지지 않게
+  const MOBILE = window.matchMedia("(max-width: 720px)").matches;
+  const fold = (box, n) => {
+    if (!box) return;
+    box.parentElement?.querySelector(`:scope > .fold-more[data-for="${box.id}"]`)?.remove();
+    const kids = [...box.children];
+    if (kids.length <= n + 1) return;
+    kids.slice(n).forEach((k) => k.classList.add("fold-x"));
+    const b = el("button", { type: "button", class: "more fold-more", "data-for": box.id }, t("more_n", { n: kids.length - n }));
+    b.addEventListener("click", () => { kids.forEach((k) => k.classList.remove("fold-x")); b.remove(); });
+    box.after(b);
+  };
   const kstFmt = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" });
   const todayKst = kstFmt.format(new Date()); // YYYY-MM-DD
   const nat = (s) => (s || "").split("·").map((x) => (t("nat")[x] || x)).join("·");
@@ -395,6 +407,7 @@ if ("serviceWorker" in navigator) {
   if (newCount) $("recentHead").append(el("span", { class: "new-count" }, `NEW ${newCount}`));
   if (data.recent.length) {
     for (const v of data.recent) $("recent").append(videoCard(v, v.member || catLabel(v.category)));
+    if (MOBILE) fold($("recent"), 6);
   } else {
     $("recent").replaceWith(empty(t("empty_videos")));
   }
@@ -535,9 +548,10 @@ if ("serviceWorker" in navigator) {
     });
     $("streaming").before(el("div", { class: "playlist" },
       el("h3", {}, tc(sp.title)), sp.desc ? el("p", { class: "muted small" }, tc(sp.desc)) : null,
-      el("ol", { class: "pl" }, ...rows, el("li", { class: "pl-other muted" }, el("span", { class: "pl-n" }, "↻"), el("div", {}, t("stream_repeat")))),
-      (sp.tips || []).length ? el("details", { class: "howto", open: "" }, el("summary", {}, t("stream_tips")),
+      el("ol", { class: "pl", id: "plList" }, ...rows, el("li", { class: "pl-other muted" }, el("span", { class: "pl-n" }, "↻"), el("div", {}, t("stream_repeat")))),
+      (sp.tips || []).length ? el("details", { class: "howto", ...(MOBILE ? {} : { open: "" }) }, el("summary", {}, t("stream_tips")),
         el("ul", { class: "howto-steps" }, ...sp.tips.map((x) => el("li", {}, tc(x))))) : null));
+    fold($("plList"), MOBILE ? 6 : 12);
   }
   if ((data.streaming || []).length) {
     $("streaming").before(el("h3", { class: "pl-mv" }, t("stream_mv")));
@@ -546,6 +560,7 @@ if ("serviceWorker" in navigator) {
         el("div", {}, el("b", {}, s.title), s.note ? el("span", { class: "muted" }, ` · ${tc(s.note)}`) : null),
         Object.keys(s.links).length ? el("div", { class: "links small" }, ...Object.entries(s.links).map(([k, u]) => ext(u, k))) : null));
     }
+    fold($("streaming"), MOBILE ? 4 : 8);
   } else if (!(sp.tracks || []).length) {
     $("streaming").closest("section").remove();
   }
@@ -705,6 +720,7 @@ if ("serviceWorker" in navigator) {
           return b;
         }));
         $("offlineList").replaceChildren(...list.map(card));
+        if (MOBILE) fold($("offlineList"), 3);
         if (map) {
           const pts = list.filter((x) => x.lat).map((x) => [x.lat, x.lng]);
           markers.forEach((m, name) => m.setOpacity(list.some((x) => x.name === name) ? 1 : 0.25));
@@ -863,7 +879,7 @@ if ("serviceWorker" in navigator) {
             th));
       }));
     };
-    let npMax = 12;
+    let npMax = MOBILE ? 6 : 12;
     const npMore = el("button", { type: "button", class: "more np-more" }, t("more"));
     npMore.addEventListener("click", () => { npMax = 999; draw(); });
     $("noticePosts").after(npMore);
@@ -1168,6 +1184,7 @@ if ("serviceWorker" in navigator) {
     card.addEventListener("click", () => openMember(m));
     $("profiles").append(card);
   }
+  if (MOBILE) fold($("profiles"), 6);
 
   // ---------- 직캠 / 입덕 가이드: 멤버별 최신 직캠 카드 ----------
   function fancamCard(m) {
@@ -1187,6 +1204,7 @@ if ("serviceWorker" in navigator) {
   }
   for (const m of data.members) $("members").append(fancamCard(m));
   for (const m of data.members) $("guideMembers").append(fancamCard(m));
+  if (MOBILE) { fold($("members"), 6); fold($("guideMembers"), 6); }
 
   // 처음 오셨나요? (첫 번째 카드만 펼쳐 둠)
   const beg = data.guide?.beginner || [];
@@ -1202,6 +1220,7 @@ if ("serviceWorker" in navigator) {
       el("span", { class: "step" }, String(i + 1)),
       el("div", { class: "course-card" }, c.note ? el("div", { class: "course-note" }, tc(c.note)) : null,
         videoCard(c, c.member || catLabel(c.category))))));
+    if (MOBILE) fold($("course"), 3);
   } else {
     $("course").closest("section").remove();
   }
@@ -1220,7 +1239,7 @@ if ("serviceWorker" in navigator) {
     ["long", (v) => !v.short],
     ["short", (v) => v.short],
   ];
-  const PAGE = 24;
+  const PAGE = MOBILE ? 12 : 24;
   const cur = { cat: "all", fmt: "all", q: "", series: "", show: "", era: "", unseen: false };
   let shown = 0;
   const chipOf = (v) => (v.predebut ? catLabel("predebut") : v.member || tc(v.series) || catLabel(v.category));
@@ -1523,13 +1542,26 @@ if ("serviceWorker" in navigator) {
   }
 
   // ---------- 기록 (입덕 탭) ----------
-  const tl = data.timeline || [];
+  const tl = (data.timeline || []).filter((x) => !(x.kind === "anniv" && !x.n));  // '🎉 데뷔'(0주년)는 '데뷔'와 겹쳐서 뺌
   if (tl.length) {
+    // 음방 첫 무대들은 한 줄로 묶기: 첫 음방 무대 · 10.15 엠카운트다운 · 10.19 SHOW K-POP …
+    const shows = tl.filter((x) => x.kind === "show").sort((a, b) => a.date.localeCompare(b.date));
+    let showsDone = false;
     for (const x of tl) {
+      if (x.kind === "show") {
+        if (showsDone) continue;
+        showsDone = true;
+        $("timeline").append(el("li", { class: "tl-show" },
+          el("span", { class: "tl-date" }, `${shows[0].date.replaceAll("-", ".")} ~ ${shows[shows.length - 1].date.slice(5).replace("-", ".")}`),
+          el("span", {}, t("tl_first_shows")),
+          el("span", { class: "tl-chips" }, ...shows.map((s_) => el("span", { class: "chip" }, `${s_.date.slice(5).replace("-", ".")} ${tc(s_.show)}`)))));
+        continue;
+      }
       $("timeline").append(el("li", { class: `tl-${x.kind}` },
         el("span", { class: "tl-date" }, x.date.replaceAll("-", ".")),
         x.url ? ext(x.url, tx(x)) : el("span", {}, tx(x))));
     }
+    fold($("timeline"), 5);
   } else {
     $("timelineSec").remove();
   }
@@ -1833,11 +1865,13 @@ if ("serviceWorker" in navigator) {
             el("div", { class: "pc-grid" }, ...list.map((x, i) => pcCard(x, list, i))));
         }));
         $("pcGrid").classList.add("pc-all");
+        fold($("pcGrid"), 99);  // 이전 '더 보기' 버튼 지우기
         return;
       }
       $("pcGrid").classList.remove("pc-all");
       const list = inWho.filter((x) => x.version === pcVer);
       $("pcGrid").replaceChildren(...(list.length ? list.map((x, i) => pcCard(x, list, i)) : [el("p", { class: "muted" }, "—")]));
+      fold($("pcGrid"), MOBILE ? 12 : 24);
     };
     drawPc();
     $("pcCredit").replaceWith(Object.assign(pcCreditLine() || el("p"), { id: "pcCredit" }));
