@@ -18,21 +18,21 @@ import requests
 KST = timezone(timedelta(hours=9))
 
 MSG = {
-    "ko": {"notice": "📢 새 공지", "prerec": "🎙 사녹 신청 곧 시작", "vote": "🗳 투표 마감 임박", "vote_body": "{name} — {t} 마감",
+    "ko": {"show_now": "🔴 지금 생방송 중", "notice": "📢 새 공지", "prerec": "🎙 사녹 신청 곧 시작", "vote": "🗳 투표 마감 임박", "vote_body": "{name} — {t} 마감",
            "show": "📺 곧 시작", "show_body": "{t} {name}", "video": "🎬 새 영상", "video_more": "{title} 외 {n}개"},
-    "en": {"notice": "📢 New notice", "prerec": "🎙 Pre-recording sign-up opens soon", "vote": "🗳 Vote closing soon", "vote_body": "{name} — ends {t} KST",
+    "en": {"show_now": "🔴 Live now", "notice": "📢 New notice", "prerec": "🎙 Pre-recording sign-up opens soon", "vote": "🗳 Vote closing soon", "vote_body": "{name} — ends {t} KST",
            "show": "📺 Starting soon", "show_body": "{t} KST {name}", "video": "🎬 New video", "video_more": "{title} +{n} more"},
-    "ja": {"notice": "📢 新しいお知らせ", "prerec": "🎙 事前収録の応募がまもなく開始", "vote": "🗳 投票締切間近", "vote_body": "{name} — {t} 締切 (KST)",
+    "ja": {"show_now": "🔴 生放送中", "notice": "📢 新しいお知らせ", "prerec": "🎙 事前収録の応募がまもなく開始", "vote": "🗳 投票締切間近", "vote_body": "{name} — {t} 締切 (KST)",
            "show": "📺 まもなく開始", "show_body": "{t} (KST) {name}", "video": "🎬 新しい動画", "video_more": "{title} ほか{n}件"},
-    "zh": {"notice": "📢 新公告", "prerec": "🎙 预录报名即将开始", "vote": "🗳 投票即将截止", "vote_body": "{name} — {t} 截止 (KST)",
+    "zh": {"show_now": "🔴 正在直播", "notice": "📢 新公告", "prerec": "🎙 预录报名即将开始", "vote": "🗳 投票即将截止", "vote_body": "{name} — {t} 截止 (KST)",
            "show": "📺 即将开始", "show_body": "{t} (KST) {name}", "video": "🎬 新视频", "video_more": "{title} 等 {n} 个"},
-    "es": {"notice": "📢 Nuevo aviso", "prerec": "🎙 La inscripción a la pregrabación abre pronto", "vote": "🗳 La votación cierra pronto", "vote_body": "{name} — cierra {t} KST",
+    "es": {"show_now": "🔴 En vivo ahora", "notice": "📢 Nuevo aviso", "prerec": "🎙 La inscripción a la pregrabación abre pronto", "vote": "🗳 La votación cierra pronto", "vote_body": "{name} — cierra {t} KST",
            "show": "📺 Empieza pronto", "show_body": "{t} KST {name}", "video": "🎬 Nuevo video", "video_more": "{title} y {n} más"},
-    "id": {"notice": "📢 Pengumuman baru", "prerec": "🎙 Pendaftaran pra-rekaman segera dibuka", "vote": "🗳 Voting segera ditutup", "vote_body": "{name} — tutup {t} KST",
+    "id": {"show_now": "🔴 Sedang live", "notice": "📢 Pengumuman baru", "prerec": "🎙 Pendaftaran pra-rekaman segera dibuka", "vote": "🗳 Voting segera ditutup", "vote_body": "{name} — tutup {t} KST",
            "show": "📺 Segera dimulai", "show_body": "{t} KST {name}", "video": "🎬 Video baru", "video_more": "{title} +{n} lainnya"},
-    "th": {"notice": "📢 ประกาศใหม่", "prerec": "🎙 ใกล้เปิดสมัครพรีเรคคอร์ด", "vote": "🗳 โหวตใกล้ปิด", "vote_body": "{name} — ปิด {t} KST",
+    "th": {"show_now": "🔴 กำลังออกอากาศสด", "notice": "📢 ประกาศใหม่", "prerec": "🎙 ใกล้เปิดสมัครพรีเรคคอร์ด", "vote": "🗳 โหวตใกล้ปิด", "vote_body": "{name} — ปิด {t} KST",
            "show": "📺 ใกล้เริ่มแล้ว", "show_body": "{t} KST {name}", "video": "🎬 วิดีโอใหม่", "video_more": "{title} และอีก {n} รายการ"},
-    "pt": {"notice": "📢 Novo aviso", "prerec": "🎙 Inscrição na pré-gravação abre em breve", "vote": "🗳 Votação fechando", "vote_body": "{name} — fecha {t} KST",
+    "pt": {"show_now": "🔴 Ao vivo agora", "notice": "📢 Novo aviso", "prerec": "🎙 Inscrição na pré-gravação abre em breve", "vote": "🗳 Votação fechando", "vote_body": "{name} — fecha {t} KST",
            "show": "📺 Começa em breve", "show_body": "{t} KST {name}", "video": "🎬 Novo vídeo", "video_more": "{title} +{n}"},
 }
 
@@ -81,12 +81,23 @@ def candidates(dash, site, now):
             name = " · ".join(x for x in [v.get("show"), v.get("title")] if x)
             out.append((f"vt|{v['end']}|{name}", "vote", "vote",
                         {"name": name, "t": v["end"][11:], "url": site + "#cheer", "parts": [v.get("show"), v.get("title")], "tr": tr}))
-    for e in dash.get("events") or []:  # 음방·라이브 1시간 전
-        if e.get("type") in ("음방", "라이브") and e.get("time") and re.fullmatch(r"\d{2}:\d{2}", e["time"]):
-            st = _kst(f"{e['date']} {e['time']}")
-            if timedelta(0) <= st - now <= timedelta(hours=1, minutes=10):
-                out.append((f"ev|{e['date']}|{e['time']}|{e['title']}", "show", "show",
-                            {"name": e["title"], "t": e["time"], "url": site, "parts": [e["title"]], "tr": tr}))
+    lives = (dash.get("info") or {}).get("show_live") or []
+    air = {}  # 일정에 시간이 없으면 투표 가이드의 방송 시간 ('화 18:00 · SBS Life')
+    for v in (dash.get("howto") or {}).get("voting") or []:
+        m = re.search(r"(\d{1,2}):(\d{2})", v.get("when") or "")
+        if m and v.get("show"):
+            air[v["show"]] = f"{int(m.group(1)):02d}:{m.group(2)}"
+    for e in dash.get("events") or []:  # 음방·라이브 1시간 전 ~ 시작 30분 뒤 (생방송 보기 링크로)
+        if e.get("type") not in ("음방", "라이브"):
+            continue
+        tm = e.get("time") or next((t for sh, t in air.items() if sh in (e.get("title") or "")), None)
+        if not (tm and re.fullmatch(r"\d{2}:\d{2}", tm)):
+            continue
+        st = _kst(f"{e['date']} {tm}")
+        if -timedelta(minutes=30) <= st - now <= timedelta(hours=1, minutes=10):
+            live = next((x for x in lives if x.get("show") and x["show"] in (e.get("title") or "")), None)
+            out.append((f"ev|{e['date']}|{tm}|{e['title']}", "show", "show",
+                        {"name": e["title"], "t": tm, "url": (live or {}).get("url") or site, "parts": [e["title"]], "tr": tr, "now": now >= st}))
     vids = [v for v in dash.get("videos") or [] if v.get("category") != "fancam" and v.get("published_at")
             and now - datetime.fromisoformat(v["published_at"].replace("Z", "+00:00")) < timedelta(hours=3)]
     for v in vids:  # 새 MV·무대 영상 (직캠은 많아서 뺌) — 같은 시간대 여러 개면 하나로 묶음
@@ -106,7 +117,7 @@ def compose(kind, data, lang, group=None):
         return m["vote"], m["vote_body"].format(name=name, t=data["t"]), data["url"]
     if kind == "show":
         name = trs(data["name"]) if lang != "ko" else data["name"]
-        return m["show"], m["show_body"].format(name=name, t=data["t"]), data["url"]
+        return (m["show_now"] if data.get("now") else m["show"]), m["show_body"].format(name=name, t=data["t"]), data["url"]
     if kind == "video":
         body = data["title"] if not group or len(group) < 2 else m["video_more"].format(title=data["title"], n=len(group) - 1)
         return m["video"], body, data["url"]
