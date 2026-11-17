@@ -2810,6 +2810,56 @@
     "android": "https://play.google.com/store/apps/details?id=im.bigc.lively",
     "ios": "https://apps.apple.com/app/id1575835045",
     "name": "빅크"
+   },
+   {
+    "android": "https://play.google.com/store/search?c=apps&q=Higher%20%ED%95%98%EC%9D%B4%EC%96%B4",
+    "ios": "https://apps.apple.com/app/id1672001935",
+    "name": "하이어"
+   },
+   {
+    "android": "https://play.google.com/store/search?c=apps&q=UPICK%20%EC%9C%A0%ED%94%BD",
+    "ios": "https://apps.apple.com/app/id6443780271",
+    "name": "유픽"
+   },
+   {
+    "android": "https://play.google.com/store/search?c=apps&q=IDOLCHAMP",
+    "ios": "https://apps.apple.com/app/id1185735018",
+    "name": "아이돌챔프"
+   },
+   {
+    "android": "https://play.google.com/store/search?c=apps&q=Mnet%20Plus",
+    "ios": "https://apps.apple.com/app/id6443405421",
+    "name": "엠넷플러스"
+   },
+   {
+    "android": "https://play.google.com/store/search?c=apps&q=Fancast%20%ED%8C%AC%EC%BA%90%EC%8A%A4%ED%8A%B8",
+    "ios": "https://apps.apple.com/app/id1641638840",
+    "name": "팬캐스트"
+   },
+   {
+    "android": "https://play.google.com/store/apps/details?id=com.tnk.muniverse",
+    "ios": "https://apps.apple.com/app/id6749677921",
+    "name": "뮤니버스"
+   },
+   {
+    "android": "https://play.google.com/store/search?c=apps&q=Mubeat",
+    "ios": "https://apps.apple.com/app/id1320789688",
+    "name": "뮤빗"
+   },
+   {
+    "android": "https://play.google.com/store/search?c=apps&q=LiNC%20%EB%A7%81%ED%81%AC",
+    "ios": "https://apps.apple.com/app/id6467824343",
+    "name": "LiNC"
+   },
+   {
+    "android": "https://play.google.com/store/search?c=apps&q=K%ED%83%91%EC%8A%A4%ED%83%80%20KTOPSTAR",
+    "ios": "https://apps.apple.com/app/id6503354936",
+    "name": "케이탑스타"
+   },
+   {
+    "android": "https://play.google.com/store/search?c=apps&q=%EB%A7%88%EC%9D%B4%EC%9B%90%ED%94%BD%20my1pick",
+    "ios": "https://apps.apple.com/app/id1496135213",
+    "name": "마이원픽"
    }
   ]
  },
