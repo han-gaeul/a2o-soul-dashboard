@@ -2445,6 +2445,42 @@
     "versions": []
    }
   ],
+  "chain_stores": [
+   {
+    "langs": [],
+    "name": "핫트랙스",
+    "note": "교보문고 안 음반 매장 · 전국",
+    "q": "핫트랙스"
+   },
+   {
+    "langs": [],
+    "name": "영풍문고",
+    "note": "음반 코너 · 전국",
+    "q": "영풍문고"
+   },
+   {
+    "langs": [],
+    "name": "신나라레코드",
+    "note": "음반 전문 매장",
+    "q": "신나라레코드"
+   },
+   {
+    "langs": [
+     "ja"
+    ],
+    "name": "TOWER RECORDS",
+    "note": "일본 전국",
+    "q": "タワーレコード"
+   },
+   {
+    "langs": [
+     "ja"
+    ],
+    "name": "HMV",
+    "note": "일본 전국",
+    "q": "HMV"
+   }
+  ],
   "fanchant_call": {
    "lines": [
     [
@@ -2493,88 +2529,150 @@
   ],
   "offline_stores": [
    {
+    "addr": "서울 강남구 학동로23길 29 메이크스타 B1",
+    "approx": false,
     "area": "서울 강남",
     "date": "2026-11-10",
     "handle": "MAKESTARSPACEGN",
     "langs": [],
+    "lat": 37.5150569,
+    "lng": 127.0274192,
     "name": "메이크스타 스페이스 강남",
+    "posts": [],
     "versions": "EP · CARABINER Ver."
    },
    {
+    "addr": "서울 마포구 양화로 188 AK플라자 2층",
+    "approx": false,
     "area": "서울 홍대",
     "date": "2026-11-12",
     "handle": "Withmuu_HD",
     "langs": [],
+    "lat": 37.5580134,
+    "lng": 126.9262356,
     "name": "위드뮤 홍대 AK PLAZA",
+    "posts": [],
     "versions": ""
    },
    {
+    "addr": "서울 송파구 올림픽로 240",
+    "approx": false,
     "area": "서울 잠실",
     "date": "2026-11-12",
     "handle": "Withmuu_JS",
     "langs": [],
+    "lat": 37.511712,
+    "lng": 127.0975149,
     "name": "위드뮤 잠실롯데점",
+    "posts": [],
     "versions": "SOUL · CONSTELLATION Ver."
    },
    {
+    "addr": "서울 용산구 한강대로23길 55 아이파크몰 리빙파크 6층",
+    "approx": false,
     "area": "서울 용산",
     "date": "2026-11-13",
     "handle": "Withmuu_ys",
     "langs": [],
+    "lat": 37.5293849,
+    "lng": 126.9638355,
     "name": "위드뮤 용산아이파크몰점",
+    "posts": [],
     "versions": "SOUL · CONSTELLATION Ver."
    },
    {
+    "addr": "서울 종로구 인사동길 49 3층",
+    "approx": false,
     "area": "서울 인사동",
     "date": "2026-11-10",
     "handle": "ktown4u_inso",
     "langs": [],
+    "lat": 37.5745514,
+    "lng": 126.9837955,
     "name": "케이타운포유 인사",
+    "posts": [],
     "versions": "랜덤 Ver."
    },
    {
+    "addr": "서울 강남구 영동대로 513 코엑스 아티움",
+    "approx": false,
     "area": "서울 삼성(코엑스)",
     "date": "2026-11-10",
     "handle": "Ktown4u_coex",
     "langs": [],
+    "lat": 37.5100538,
+    "lng": 127.061476,
     "name": "케이타운포유 코엑스",
+    "posts": [],
     "versions": "랜덤 Ver."
    },
    {
+    "addr": "경기 김포시 김포한강2로23번길 10",
+    "approx": false,
     "area": "경기 김포",
     "date": "2026-11-10",
     "handle": "ksendy_official",
     "langs": [],
+    "lat": 37.6420583,
+    "lng": 126.6785669,
     "name": "Ksendy 김포점",
+    "posts": [],
     "url": "https://x.com/ksendy_official/status/2120069914933567870",
     "versions": ""
    },
    {
+    "addr": "대전 서구 만년로67번길 36 1층",
+    "approx": false,
     "area": "대전",
     "date": "2026-11-12",
     "handle": "musicngallery",
     "langs": [],
+    "lat": 36.3692978,
+    "lng": 127.3805705,
     "name": "뮤직앤갤러리",
+    "posts": [],
     "url": "https://x.com/musicngallery/status/2120852632063635604",
     "versions": ""
    },
    {
+    "addr": "서울 서대문구 연세로 13 현대백화점 신촌점 유플렉스 지하2층",
+    "approx": false,
     "area": "서울 신촌",
     "date": "2026-11-10",
     "handle": "offik_official",
     "langs": [],
+    "lat": 37.5567414,
+    "lng": 126.9366004,
     "name": "오피크(OffiK) 신촌점",
+    "posts": [
+     {
+      "date": "2026-11-10",
+      "text": "",
+      "url": "https://x.com/offik_official/status/2120049140474478736"
+     }
+    ],
     "url": "https://x.com/offik_official/status/2120049140474478736",
     "versions": "CARABINER Ver."
    },
    {
+    "addr": "東京都渋谷区神南1-21-3 渋谷モディ5F・6F",
+    "approx": false,
     "area": "도쿄 시부야",
     "date": "2026-11-13",
     "handle": "HmvBooksShibuya",
     "langs": [
      "ja"
     ],
+    "lat": 35.6615867,
+    "lng": 139.7004778,
     "name": "HMV&BOOKS SHIBUYA",
+    "posts": [
+     {
+      "date": "2026-11-13",
+      "text": "",
+      "url": "https://x.com/HmvBooksShibuya/status/2121136111963803736"
+     }
+    ],
     "site": "https://www.hmv.co.jp/store/BTK/",
     "url": "https://x.com/HmvBooksShibuya/status/2121136111963803736",
     "versions": "선착 특전 포토카드"
@@ -6328,208 +6426,491 @@
   {
    "account": "x",
    "at": "2026-11-17 05:11",
+   "desc": "",
+   "facts": [
+    {
+     "range": "1~100",
+     "time": "05:30",
+     "type": "slot"
+    },
+    {
+     "range": "101~200",
+     "time": "06:30",
+     "type": "slot"
+    },
+    {
+     "range": "201~300",
+     "time": "07:30",
+     "type": "slot"
+    }
+   ],
    "images": [
     "https://pbs.twimg.com/media/HXRbyzRbYAAHHYi.jpg"
    ],
    "kind": "place",
    "text": "[📍]\n261117 (화) A2O SOUL SBS Life 더쇼 사전녹화에 참여하시는 분은 인원 체크 시간에 맞춰 사진 속 장소로 모여주시기 바랍니다🪩\n\n[인원 체크 시작 시간] \n1번 ~ 100번 - AM 5:30 (KST)\n101번 ~ 200번 - AM 6:30 (KST)\n201번 ~ 300번 - AM 7:30 (KST)\n\n#Dancing_in_the_Dark https://x.com/A2O_SOUL/status/2122422260208386097/photo/1",
+   "title": "11.17 (화) SBS Life 더쇼 사전녹화 집합",
    "url": "https://x.com/A2O_SOUL/status/2122422260208386097"
   },
   {
    "account": "x",
    "at": "2026-11-16 11:21",
+   "desc": "",
+   "facts": [
+    {
+     "label": "Mnet Plus",
+     "type": "link",
+     "url": "https://artist.mnetplus.world/main/stg/a2osoul/contents/6afa68918f3fbb2353c1ca2c"
+    }
+   ],
    "images": [],
    "kind": "prerec",
    "text": "[🔔]\n261118 ENA 케이팝업 차트쇼 사전녹화 참여자 안내\n\n🔗 https://artist.mnetplus.world/main/stg/a2osoul/contents/6afa68918f3fbb2353c1ca2c",
+   "title": "11.18 ENA 케이팝업 차트쇼 사전녹화 참여자 안내",
    "url": "https://x.com/A2O_SOUL/status/2122153033274712319"
   },
   {
    "account": "x",
    "at": "2026-11-16 06:07",
+   "desc": "",
+   "facts": [
+    {
+     "time": "06:30",
+     "type": "check"
+    }
+   ],
    "images": [
     "https://pbs.twimg.com/media/HXMe_kdawAEBN_A.jpg"
    ],
    "kind": "place",
    "text": "[📍]\n261116 (월) A2O SOUL 아리랑TV SHOW K-POP 사전녹화에 참여하시는 분은 인원 체크 시간에 맞춰 사진 속 장소로 모여주시기 바랍니다🪩\n\n인원 체크 시작 시간 - AM 6:30 (KST)",
+   "title": "11.16 (월) 아리랑TV SHOW K-POP 사전녹화 집합",
    "url": "https://x.com/A2O_SOUL/status/2122073933671535070"
   },
   {
    "account": "x",
    "at": "2026-11-15 17:14",
+   "desc": "",
+   "facts": [
+    {
+     "label": "Mnet Plus",
+     "type": "link",
+     "url": "https://artist.mnetplus.world/main/stg/a2osoul/contents/6af969c70a97884ab9090a8e"
+    }
+   ],
    "images": [],
    "kind": "prerec",
    "text": "[🔔]\n261117 SBS Life 더쇼 사전녹화 참여자 안내\n\n🔗 https://artist.mnetplus.world/main/stg/a2osoul/contents/6af969c70a97884ab9090a8e",
+   "title": "11.17 SBS Life 더쇼 사전녹화 참여자 안내",
    "url": "https://x.com/A2O_SOUL/status/2121879485410836933"
   },
   {
    "account": "x",
    "at": "2026-11-15 10:00",
+   "desc": "",
+   "facts": [
+    {
+     "label": "Mnet Plus",
+     "type": "link",
+     "url": "https://artist.mnetplus.world/main/stg/a2osoul/contents/6af88433fcbfd2033a1104ee"
+    }
+   ],
    "images": [],
    "kind": "prerec",
    "text": "[🔔]\n261116 아리랑TV SHOW K-POP 사전녹화 참여자 안내\n\n🔗 https://artist.mnetplus.world/main/stg/a2osoul/contents/6af88433fcbfd2033a1104ee",
+   "title": "11.16 아리랑TV SHOW K-POP 사전녹화 참여자 안내",
    "url": "https://x.com/A2O_SOUL/status/2121770155013202029"
   },
   {
    "account": "x",
    "at": "2026-11-15 03:38",
+   "desc": "",
+   "facts": [
+    {
+     "range": "1~100",
+     "time": "04:00",
+     "type": "slot"
+    },
+    {
+     "range": "101~200",
+     "time": "05:00",
+     "type": "slot"
+    },
+    {
+     "range": "201~",
+     "time": "06:00",
+     "type": "slot"
+    }
+   ],
    "images": [
     "https://pbs.twimg.com/media/HXGzeRxa4AASh1l.jpg"
    ],
    "kind": "place",
    "text": "[📍]\n261115 (일) A2O SOUL 인기가요 사전녹화에 참여하시는 분은 인원 체크 시간에 맞춰 사진 속 장소로 모여주시기 바랍니다🪩\n\n[인원 체크 시작 시간] \n1번 ~ 100번 - AM 4:00 (KST)\n101번 ~ 200번 - AM 5:00 (KST)\n201번 ~ - AM 6:00 (KST)",
+   "title": "11.15 (일) 인기가요 사전녹화 집합",
    "url": "https://x.com/A2O_SOUL/status/2121674241892561049"
   },
   {
    "account": "x",
    "at": "2026-11-14 13:00",
+   "desc": "",
+   "facts": [
+    {
+     "time": "13:30",
+     "type": "check"
+    }
+   ],
    "images": [
     "https://pbs.twimg.com/media/HXDngNKacAA5iJY.jpg"
    ],
    "kind": "place",
    "text": "[📍]\n261114 (토) A2O SOUL 쇼! 음악중심 생방송에 참여하시는 분은 인원 체크 시간에 맞춰 사진 속 장소로 모여주시기 바랍니다🪩\n\n인원 체크 시간 - PM 1:30 (KST)",
+   "title": "11.14 (토) 쇼! 음악중심 생방송 집합",
    "url": "https://x.com/A2O_SOUL/status/2121453071633183047"
   },
   {
    "account": "x",
    "at": "2026-11-13 18:44",
+   "desc": "",
+   "facts": [
+    {
+     "date": "11.13",
+     "from": "21:20",
+     "to": "21:30",
+     "type": "apply"
+    },
+    {
+     "label": "Mnet Plus",
+     "type": "link",
+     "url": "https://artist.mnetplus.world/main/stg/a2osoul/surveys/6af6dbb227f0386b83f4ba18"
+    }
+   ],
    "images": [],
    "kind": "prerec",
    "text": "[🔔]\n261118 ENA 케이팝업 차트쇼 사전녹화 참여\n\n✔️신청 기간 : 2026년 11월 13일 (금) PM 9:20 ~ PM 9:30 (KST)\n🔗신청 링크 : https://artist.mnetplus.world/main/stg/a2osoul/surveys/6af6dbb227f0386b83f4ba18",
+   "title": "11.18 ENA 케이팝업 차트쇼 사전녹화 참여",
    "url": "https://x.com/A2O_SOUL/status/2121177298196168939"
   },
   {
    "account": "x",
    "at": "2026-11-13 18:42",
+   "desc": "",
+   "facts": [
+    {
+     "date": "11.13",
+     "from": "21:00",
+     "to": "21:10",
+     "type": "apply"
+    },
+    {
+     "label": "Mnet Plus",
+     "type": "link",
+     "url": "https://artist.mnetplus.world/main/stg/a2osoul/surveys/6af6db5d27f0386b83f4ba0e"
+    }
+   ],
    "images": [],
    "kind": "prerec",
    "text": "[🔔]\n261116 아리랑TV SHOW K-POP 사전녹화 참여\n\n✔️신청 기간 : 2026년 11월 13일 (금) PM 9:00 ~ PM 9:10 (KST)\n🔗신청 링크 : https://artist.mnetplus.world/main/stg/a2osoul/surveys/6af6db5d27f0386b83f4ba0e",
+   "title": "11.16 아리랑TV SHOW K-POP 사전녹화 참여",
    "url": "https://x.com/A2O_SOUL/status/2121176770087207099"
   },
   {
    "account": "x",
    "at": "2026-11-13 18:42",
+   "desc": "",
+   "facts": [
+    {
+     "date": "11.13",
+     "from": "21:10",
+     "to": "21:20",
+     "type": "apply"
+    },
+    {
+     "label": "Mnet Plus",
+     "type": "link",
+     "url": "https://artist.mnetplus.world/main/stg/a2osoul/surveys/6af6db9327f0386b83f4ba13"
+    }
+   ],
    "images": [],
    "kind": "prerec",
    "text": "[🔔]\n261117 SBS Life 더쇼 사전녹화 참여\n\n✔️신청 기간 : 2026년 11월 13일 (금) PM 9:10 ~ PM 9:20 (KST)\n🔗신청 링크 : https://artist.mnetplus.world/main/stg/a2osoul/surveys/6af6db9327f0386b83f4ba13",
+   "title": "11.17 SBS Life 더쇼 사전녹화 참여",
    "url": "https://x.com/A2O_SOUL/status/2121176980028899663"
   },
   {
    "account": "x",
    "at": "2026-11-13 15:57",
+   "desc": "",
+   "facts": [
+    {
+     "label": "Mnet Plus",
+     "type": "link",
+     "url": "https://artist.mnetplus.world/main/stg/a2osoul/contents/6af6b4c96a500a4ca3d3ffc4"
+    }
+   ],
    "images": [],
    "kind": "prerec",
    "text": "[🔔]\n261115 SBS 인기가요 사전녹화 참여자 안내\n\n🔗 https://artist.mnetplus.world/main/stg/a2osoul/contents/6af6b4c96a500a4ca3d3ffc4",
+   "title": "11.15 SBS 인기가요 사전녹화 참여자 안내",
    "url": "https://x.com/A2O_SOUL/status/2121135379441123606"
   },
   {
    "account": "x",
    "at": "2026-11-13 09:46",
+   "desc": "",
+   "facts": [
+    {
+     "range": "1~100",
+     "time": "10:00",
+     "type": "slot"
+    },
+    {
+     "range": "101~200",
+     "time": "11:00",
+     "type": "slot"
+    },
+    {
+     "range": "201~300",
+     "time": "12:00",
+     "type": "slot"
+    }
+   ],
    "images": [
     "https://pbs.twimg.com/media/HW90VcybMAEe85C.jpg"
    ],
    "kind": "place",
    "text": "[📍]\n261113 (금) A2O SOUL 뮤직뱅크 사전녹화에 참여하시는 분은 인원 체크 시간에 맞춰 사진 속 장소로 모여주시기 바랍니다🪩\n\n[인원 체크 시작 시간] \n1번 ~ 100번 - AM 10:00 (KST)\n101번 ~ 200번 - AM 11:00 (KST)\n201번 ~ 300번 - PM 12:00 (KST)",
+   "title": "11.13 (금) 뮤직뱅크 사전녹화 집합",
    "url": "https://x.com/A2O_SOUL/status/2121041868079428050"
   },
   {
    "account": "x",
    "at": "2026-11-12 20:51",
+   "desc": "",
+   "facts": [
+    {
+     "date": "11.13",
+     "from": "09:30",
+     "to": "10:00",
+     "type": "apply"
+    },
+    {
+     "label": "Mnet Plus",
+     "type": "link",
+     "url": "https://artist.mnetplus.world/main/stg/a2osoul/surveys/6af5a831cf6f420480ba70b7"
+    }
+   ],
    "images": [],
    "kind": "prerec",
    "text": "[🔔]\n261115 SBS 인기가요 사전녹화 참여\n\n✔️신청 기간 : 2026년 11월 13일 (금) AM 9:30 ~ AM 10:00 (KST)\n🔗신청 링크 : https://artist.mnetplus.world/main/stg/a2osoul/surveys/6af5a831cf6f420480ba70b7",
+   "title": "11.15 SBS 인기가요 사전녹화 참여",
    "url": "https://x.com/A2O_SOUL/status/2120846973586817456"
   },
   {
    "account": "x",
    "at": "2026-11-12 10:00",
+   "desc": "",
+   "facts": [
+    {
+     "label": "Mnet Plus",
+     "type": "link",
+     "url": "https://artist.mnetplus.world/main/stg/a2osoul/contents/6af48e09a04ad16533117611"
+    }
+   ],
    "images": [],
    "kind": "prerec",
    "text": "[🔔]\n261113 KBS 뮤직뱅크 사전녹화 참여자 안내\n\n🔗 https://artist.mnetplus.world/main/stg/a2osoul/contents/6af48e09a04ad16533117611",
+   "title": "11.13 KBS 뮤직뱅크 사전녹화 참여자 안내",
    "url": "https://x.com/A2O_SOUL/status/2120683000728019234"
   },
   {
    "account": "x",
    "at": "2026-11-12 03:00",
+   "desc": "",
+   "facts": [
+    {
+     "range": "1~100",
+     "time": "03:30",
+     "type": "slot"
+    },
+    {
+     "range": "101~200",
+     "time": "04:30",
+     "type": "slot"
+    },
+    {
+     "range": "201~300",
+     "time": "05:30",
+     "type": "slot"
+    },
+    {
+     "range": "301~400",
+     "time": "06:30",
+     "type": "slot"
+    }
+   ],
    "images": [
     "https://pbs.twimg.com/media/HW3MmBTbgAAnU9v.jpg"
    ],
    "kind": "place",
    "text": "[📍]\n261112 (목) A2O SOUL 쇼! 음악중심 사전녹화에 참여하시는 분은 인원 체크 시간에 맞춰 사진 속 장소로 모여주시기 바랍니다🪩\n\n[인원 체크 시작 시간]\n1번 ~ 100번 - AM 3:30 (KST)\n101번 ~ 200번 - AM 4:30 (KST)\n201번 ~ 300번 - AM 5:30 (KST)\n301번 ~ 400번 - AM 6:30 (KST)",
+   "title": "11.12 (목) 쇼! 음악중심 사전녹화 집합",
    "url": "https://x.com/A2O_SOUL/status/2120577300970484178"
   },
   {
    "account": "x",
    "at": "2026-11-10 13:30",
+   "desc": "",
+   "facts": [],
    "images": [
     "https://pbs.twimg.com/media/HWvHHLFaQAAW-r3.jpg"
    ],
    "kind": "notice",
    "text": "[🔔]\nA2O SOUL 'Dancing in the Dark' Fanchant Guide",
+   "title": "'Dancing in the Dark' Fanchant Guide",
    "url": "https://x.com/A2O_SOUL/status/2120011066642166008"
   },
   {
    "account": "x",
    "at": "2026-11-01 07:17",
+   "desc": "",
+   "facts": [
+    {
+     "time": "07:30",
+     "type": "check"
+    }
+   ],
    "images": [
     "https://pbs.twimg.com/media/HV_fWiPbwAAcCZk.jpg"
    ],
    "kind": "place",
    "text": "[📍]\n261101 (일) A2O SOUL SBS 인기가요 사전녹화에 참여하시는 분은 인원 체크 시간에 맞춰 사진 속 장소로 모여주시기 바랍니다💫\n\n인원 체크 시작 시간 - AM 7:30 (KST)",
+   "title": "11.1 (일) SBS 인기가요 사전녹화 집합",
    "url": "https://x.com/A2O_SOUL/status/2116655935448076366"
   },
   {
    "account": "x",
    "at": "2026-10-30 06:14",
+   "desc": "",
+   "facts": [
+    {
+     "time": "06:30",
+     "type": "check"
+    }
+   ],
    "images": [
     "https://pbs.twimg.com/media/HV09m9ZasAAXhwA.jpg"
    ],
    "kind": "place",
    "text": "[📍]\n261030 (금) KBS 뮤직뱅크 사전녹화에 참여하시는 분은 인원 체크 시간에 맞춰 사진 속 장소로 모여주시기 바랍니다💫\n\n인원 체크 시작 시간 - AM 6:30",
+   "title": "10.30 (금) KBS 뮤직뱅크 사전녹화 집합",
    "url": "https://x.com/A2O_SOUL/status/2115915146224926834"
   },
   {
    "account": "x",
    "at": "2026-10-23 05:14",
+   "desc": "* 지각, 현장 참여자분들께서도 해당 장소로 모여주시기 바랍니다.",
+   "facts": [
+    {
+     "range": "201~300",
+     "time": "05:50",
+     "type": "slot"
+    }
+   ],
    "images": [
     "https://pbs.twimg.com/media/HVQs42hbUAA0Aqv.jpg"
    ],
    "kind": "place",
    "text": "[📍]\n261023 (금) KBS 뮤직뱅크 사전녹화에 참여하시는 분은 인원 체크 시간에 맞춰 사진 속 장소로 모여주시기 바랍니다💫\n\n[인원 체크 시작 시간] \n201번 ~ 300번 - AM 5:50 (KST)\n* 지각, 현장 참여자분들께서도 해당 장소로 모여주시기 바랍니다.",
+   "title": "10.23 (금) KBS 뮤직뱅크 사전녹화 집합",
    "url": "https://x.com/A2O_SOUL/status/2113363486810255713"
   },
   {
    "account": "x",
    "at": "2026-10-23 02:57",
+   "desc": "",
+   "facts": [
+    {
+     "range": "1~100",
+     "time": "03:50",
+     "type": "slot"
+    },
+    {
+     "range": "101~200",
+     "time": "04:50",
+     "type": "slot"
+    },
+    {
+     "range": "201~300",
+     "time": "05:50",
+     "type": "slot"
+    }
+   ],
    "images": [
     "https://pbs.twimg.com/media/HVQNfF9aEAAP_7i.jpg"
    ],
    "kind": "place",
    "text": "[📍]\n261023 (금) KBS 뮤직뱅크 사전녹화에 참여하시는 분은 인원 체크 시간에 맞춰 사진 속 장소로 모여주시기 바랍니다💫\n\n[인원 체크 시작 시간] \n1번 ~ 100번 - AM 3:50 (KST) 101번 ~ 200번 - AM 4:50 (KST)\n201번 ~ 300번 - AM 5:50 (KST)",
+   "title": "10.23 (금) KBS 뮤직뱅크 사전녹화 집합",
    "url": "https://x.com/A2O_SOUL/status/2113328962751578136"
   },
   {
    "account": "x",
    "at": "2026-10-22 15:29",
+   "desc": "",
+   "facts": [
+    {
+     "time": "16:00",
+     "type": "check"
+    }
+   ],
    "images": [
     "https://pbs.twimg.com/media/HVNv_ekagAEusuq.jpg"
    ],
    "kind": "place",
    "text": "[📍]\n261022 (목) A2O SOUL Mnet 엠카운트다운 생방송에 참여하시는 분은 인원 체크 시간에 맞춰 사진 속 장소로 모여주시기 바랍니다💫\n\n인원 체크 시작 시간 - PM 4:00 (KST)",
+   "title": "10.22 (목) Mnet 엠카운트다운 생방송 집합",
    "url": "https://x.com/A2O_SOUL/status/2113155792287547882"
   },
   {
    "account": "x",
    "at": "2026-10-22 05:06",
+   "desc": "",
+   "facts": [
+    {
+     "range": "1~100",
+     "time": "08:30",
+     "type": "slot"
+    },
+    {
+     "range": "101~200",
+     "time": "09:30",
+     "type": "slot"
+    },
+    {
+     "range": "201~300",
+     "time": "10:30",
+     "type": "slot"
+    },
+    {
+     "range": "301~",
+     "time": "11:30",
+     "type": "slot"
+    }
+   ],
    "images": [
     "https://pbs.twimg.com/media/HVLhSD5bYAAdy9R.jpg"
    ],
    "kind": "place",
    "text": "[📍]\n261022 (목) MBC 쇼! 음악중심 사전녹화에 참여하시는 분은 인원 체크 시간에 맞춰 사진 속 장소로 모여주시기 바랍니다💫\n\n[인원 체크 시간]\n1번 ~ 100번 - AM 8:30 (KST)\n101번 ~ 200번 - AM 9:30 (KST)\n201번 ~ 300번 - AM 10:30 (KST)\n301번 ~ - AM 11:30 (KST)",
+   "title": "10.22 (목) MBC 쇼! 음악중심 사전녹화 집합",
    "url": "https://x.com/A2O_SOUL/status/2112998882888253775"
   },
   {
    "account": "x",
    "at": "2026-10-21 15:21",
+   "desc": "➫ 2026.11.09 6PM (KST) 💿 PRE-ORDER 2026.10.21 3PM ~ 11.08 23:59PM (KST)",
+   "facts": [],
    "images": [
     "https://pbs.twimg.com/media/HVIiEm2bIAA0rf_.jpg",
     "https://pbs.twimg.com/media/HVIiEm4bMAAIwaR.jpg",
@@ -6537,97 +6918,173 @@
    ],
    "kind": "release",
    "text": "A2O SOUL EP [SUPERSTAR]\n➫ 2026.11.09 6PM (KST)\n\n🔗 https://t.co/K3lfyXfKBq\n\n💿 PRE-ORDER\n2026.10.21 3PM ~ 11.08 23:59PM (KST)\nhttps://t.co/WBFyxtyz7j",
+   "title": "EP [SUPERSTAR]",
    "url": "https://x.com/A2O_SOUL/status/2112791354405466503"
   },
   {
    "account": "x",
    "at": "2026-10-21 12:00",
+   "desc": "PRE-ORDER | 2026.10.21 3PM (KST) RELEASE | 2026.11.09 6PM (KST) 【ALBUM VERSIONS】 PHOTOBOOK • SOUL Ver. • CONSTELLATION Ver. PLATFORM ALBUM • Carabiner Ver.",
+   "facts": [],
    "images": [
     "https://pbs.twimg.com/media/HVHzOY-aQAEIEqX.jpg",
     "https://pbs.twimg.com/media/HVHzOY0bQAAGE5s.jpg"
    ],
    "kind": "release",
    "text": "A2O SOUL\nDEBUT EP ALBUM [SUPERSTAR]\n\nPRE-ORDER | 2026.10.21 3PM (KST)\nRELEASE | 2026.11.09 6PM (KST)\n\n【ALBUM VERSIONS】\n\nPHOTOBOOK\n• SOUL Ver.\n• CONSTELLATION Ver.\n\nPLATFORM ALBUM\n• Carabiner Ver.",
+   "title": "DEBUT EP ALBUM [SUPERSTAR]",
    "url": "https://x.com/A2O_SOUL/status/2112740668338852014"
   },
   {
    "account": "x",
    "at": "2026-10-21 09:40",
+   "desc": "",
+   "facts": [
+    {
+     "range": "1~100",
+     "time": "10:10",
+     "type": "slot"
+    },
+    {
+     "range": "101~220",
+     "time": "11:10",
+     "type": "slot"
+    }
+   ],
    "images": [
     "https://pbs.twimg.com/media/HVHL660b0AAsRSH.jpg"
    ],
    "kind": "place",
    "text": "[📍]\n261021 (수) A2O SOUL MBC M 쇼챔피언 사전녹화에 참여하시는 분은 인원 체크 시간에 맞춰 사진 속 장소로 모여주시기 바랍니다💫\n\n[인원 체크 시작 시간] \n1번 ~ 100번 - AM 10:10 (KST) 101번 ~ 220번 - AM 11:10 (KST)",
+   "title": "10.21 (수) MBC M 쇼챔피언 사전녹화 집합",
    "url": "https://x.com/A2O_SOUL/status/2112705425401401795"
   },
   {
    "account": "x",
    "at": "2026-10-20 08:17",
+   "desc": "",
+   "facts": [
+    {
+     "time": "08:30",
+     "type": "check"
+    }
+   ],
    "images": [
     "https://pbs.twimg.com/media/HVB5_zgaEAADROD.jpg"
    ],
    "kind": "place",
    "text": "[📍]\n261020 (화) A2O SOUL SBS Life 더쇼 사전녹화에 참여하시는 분은 인원 체크 시간에 맞춰 사진 속 장소로 모여주시기 바랍니다💫\n\n인원 체크 시작 시간 - AM 8:30 (KST)",
+   "title": "10.20 (화) SBS Life 더쇼 사전녹화 집합",
    "url": "https://x.com/A2O_SOUL/status/2112322368106561834"
   },
   {
    "account": "x",
    "at": "2026-10-19 06:15",
+   "desc": "",
+   "facts": [
+    {
+     "time": "06:40",
+     "type": "check"
+    }
+   ],
    "images": [
     "https://pbs.twimg.com/media/HU8UWfjaoAABqSU.jpg"
    ],
    "kind": "place",
    "text": "[📍]\n261019 (월) A2O SOUL 아리랑 TV SHOW K-POP 사전녹화에 참여하시는 분은 인원 체크 시간에 맞춰 사진 속 장소로 모여주시기 바랍니다💫\n\n인원 체크 시작 시간 - AM 6:40 (KST)",
+   "title": "10.19 (월) 아리랑 TV SHOW K-POP 사전녹화 집합",
    "url": "https://x.com/A2O_SOUL/status/2111929135065088014"
   },
   {
    "account": "x",
    "at": "2026-10-18 11:26",
+   "desc": "",
+   "facts": [
+    {
+     "time": "12:00",
+     "type": "check"
+    }
+   ],
    "images": [
     "https://pbs.twimg.com/media/HU4SE4kaUAESfeq.jpg"
    ],
    "kind": "place",
    "text": "[📍]\n261018 (일) A2O SOUL SBS 인기가요 사전녹화에 참여하시는 분은 인원 체크 시간에 맞춰 사진 속 장소로 모여주시기 바랍니다💫\n\n인원 체크 시작 시간 - PM 12:00 (KST)",
+   "title": "10.18 (일) SBS 인기가요 사전녹화 집합",
    "url": "https://x.com/A2O_SOUL/status/2111645157489819743"
   },
   {
    "account": "x",
    "at": "2026-10-15 18:00",
+   "desc": "",
+   "facts": [
+    {
+     "range": "1~100",
+     "time": "18:30",
+     "type": "slot"
+    },
+    {
+     "range": "101~",
+     "time": "19:10",
+     "type": "slot"
+    }
+   ],
    "images": [
     "https://pbs.twimg.com/media/HUqPV-YbYAALvFE.jpg"
    ],
    "kind": "place",
    "text": "[📍]\n261015 (목) A2O SOUL Mnet 엠카운트다운 사후녹화에 참여하시는 분은 인원 체크 시간에 맞춰 사진 속 장소로 모여주시기 바랍니다💫\n\n[인원 체크 시작 시간]\n1 ~ 100번 : PM 6:30 (KST)\n101번 ~ : PM 7:10 (KST)",
+   "title": "10.15 (목) Mnet 엠카운트다운 사후 녹화 집합",
    "url": "https://x.com/A2O_SOUL/status/2110656993606418523"
   },
   {
    "account": "x",
    "at": "2026-10-14 20:01",
+   "desc": "",
+   "facts": [],
    "images": [
     "https://pbs.twimg.com/media/HUlheHDbkAAN4LF.jpg"
    ],
    "kind": "notice",
    "text": "[🔔]\nA2O SOUL 'SUPERSTAR' Fanchant Guide",
+   "title": "'SUPERSTAR' Fanchant Guide",
    "url": "https://x.com/A2O_SOUL/status/2110325079192281560"
   },
   {
    "account": "x",
    "at": "2026-10-13 18:08",
+   "desc": "Check it through the link below!",
+   "facts": [],
    "images": [
     "https://pbs.twimg.com/media/HUf-CJubwAAdwcu.jpg"
    ],
    "kind": "release",
    "text": "A2O SOUL Debut Album Pre-Release Single \"SUPERSTAR\" is now available on @Spotify @SpotifyKR . \nCheck it through the link below!  \n\n🔗https://t.co/5qHgptuLs4",
+   "title": "Debut Album Pre-Release Single \"SUPERSTAR\" is now available on @Spotif",
    "url": "https://x.com/A2O_SOUL/status/2109934355435114773"
   },
   {
    "account": "x",
    "at": "2026-10-10 03:03",
+   "desc": "",
+   "facts": [
+    {
+     "range": "1~100",
+     "time": "03:30",
+     "type": "slot"
+    },
+    {
+     "range": "101~",
+     "time": "04:30",
+     "type": "slot"
+    }
+   ],
    "images": [
     "https://pbs.twimg.com/media/HUNSOlAbAAAbLYF.jpg"
    ],
    "kind": "place",
    "text": "[📍]\n261010 (토) A2O SOUL Mnet 엠카운트다운 사전녹화에 참여하시는 분은 인원 체크 시간에 맞춰 사진 속 장소로 모여주시기 바랍니다💫\n\n[인원 체크 시작 시간]\n1 ~ 100번 : AM 3:30 (KST)\n101번 ~ : AM 4:30 (KST)",
+   "title": "10.10 (토) Mnet 엠카운트다운 사전녹화 집합",
    "url": "https://x.com/A2O_SOUL/status/2108619470847750489"
   }
  ],
@@ -10460,6 +10917,15 @@
    "th": "เว็บไซต์ทางการ",
    "zh": "官方网站"
   },
+  "교보문고 안 음반 매장 · 전국": {
+   "en": "Inside Kyobo Book Centre · nationwide",
+   "es": "Dentro de Kyobo Book Centre · todo el país",
+   "id": "Di dalam Kyobo Book Centre · seluruh Korea",
+   "ja": "教保文庫内のCD売り場・全国",
+   "pt": "Dentro da Kyobo Book Centre · todo o país",
+   "th": "ในร้าน Kyobo Book Centre · ทั่วประเทศ",
+   "zh": "教保文库内唱片店 · 全国"
+  },
   "그런데도 무언가 비어 있다고 느낀 이들은, 사람을 살아 있게 하는 감정과 에너지 — 기쁨·사랑·설렘·열정, 곧 '소울(SOUL)'을 찾아 지구로 떠나요.": {
    "en": "Still feeling something missing, they set off for Earth to find the emotions and energy that make people feel alive — joy, love, excitement and passion: 'SOUL'.",
    "es": "Aun así sentían que algo faltaba, así que viajan a la Tierra en busca de las emociones y la energía que hacen sentir vivas a las personas —alegría, amor, emoción y pasión—: el 'SOUL'.",
@@ -11405,6 +11871,15 @@
    "th": "ชอบเดินเที่ยวในเมือง",
    "zh": "喜欢City Walk"
   },
+  "신나라레코드": {
+   "en": "Synnara Record",
+   "es": "Synnara Record",
+   "id": "Synnara Record",
+   "ja": "シンナラレコード",
+   "pt": "Synnara Record",
+   "th": "Synnara Record",
+   "zh": "Synnara 唱片"
+  },
   "신청곡 보내기 좋은 프로그램": {
    "en": "Good programs for song requests",
    "es": "Buenos programas para pedir canciones",
@@ -11566,6 +12041,15 @@
    "pt": "Videochamada",
    "th": "วิดีโอคอล",
    "zh": "视频签售"
+  },
+  "영풍문고": {
+   "en": "Youngpoong Bookstore",
+   "es": "Librería Youngpoong",
+   "id": "Toko Buku Youngpoong",
+   "ja": "永豊文庫",
+   "pt": "Livraria Youngpoong",
+   "th": "ร้านหนังสือยองพุง",
+   "zh": "永丰文库"
   },
   "영화 'The Marked Sheep'(2022) 조연": {
    "en": "Supporting role in the film 'The Marked Sheep' (2022)",
@@ -11738,6 +12222,24 @@
    "th": "แอป U+PICK",
    "zh": "U+PICK App"
   },
+  "음반 전문 매장": {
+   "en": "Record store",
+   "es": "Tienda de discos",
+   "id": "Toko rekaman",
+   "ja": "CD専門店",
+   "pt": "Loja de discos",
+   "th": "ร้านแผ่นเพลง",
+   "zh": "唱片专卖店"
+  },
+  "음반 코너 · 전국": {
+   "en": "Music section · nationwide",
+   "es": "Sección de música · todo el país",
+   "id": "Bagian musik · seluruh Korea",
+   "ja": "CDコーナー・全国",
+   "pt": "Seção de música · todo o país",
+   "th": "มุมเพลง · ทั่วประเทศ",
+   "zh": "唱片区 · 全国"
+  },
   "음방": {
    "en": "Music show",
    "es": "Programa musical",
@@ -11908,6 +12410,15 @@
    "pt": "Participou da categoria masculina da audição japonesa 'iCON Z'",
    "th": "เข้าร่วมออดิชันญี่ปุ่น 'iCON Z' ประเภทชาย",
    "zh": "参加日本选秀《iCON Z》男子组"
+  },
+  "일본 전국": {
+   "en": "Nationwide in Japan",
+   "es": "Todo Japón",
+   "id": "Seluruh Jepang",
+   "ja": "日本全国",
+   "pt": "Todo o Japão",
+   "th": "ทั่วญี่ปุ่น",
+   "zh": "日本全国"
   },
   "일본어·한국어·영어·중국어 4개 국어": {
    "en": "Speaks 4 languages: Japanese, Korean, English and Chinese",
@@ -12403,6 +12914,15 @@
    "pt": "Distribua os pedidos entre vários programas em vez de lotar um só",
    "th": "กระจายคำขอไปหลายรายการ อย่ารัวส่งรายการเดียว",
    "zh": "不要集中刷屏一个节目，分散到多个节目"
+  },
+  "핫트랙스": {
+   "en": "HOTTRACKS",
+   "es": "HOTTRACKS",
+   "id": "HOTTRACKS",
+   "ja": "HOTTRACKS（ホットトラックス）",
+   "pt": "HOTTRACKS",
+   "th": "HOTTRACKS",
+   "zh": "HOTTRACKS"
   },
   "해당 사이트 스트리밍 이용권으로 로그인한 상태에서 재생": {
    "en": "Play while logged in with a streaming pass for that site",
