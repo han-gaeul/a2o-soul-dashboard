@@ -2804,6 +2804,13 @@
     "show": "인기가요",
     "url": "https://www.sbs.co.kr/live/S01"
    }
+  ],
+  "vote_apps": [
+   {
+    "android": "https://play.google.com/store/apps/details?id=im.bigc.lively",
+    "ios": "https://apps.apple.com/app/id1575835045",
+    "name": "빅크"
+   }
   ]
  },
  "kpis": [
@@ -16110,6 +16117,7 @@
   {
    "app": "빅크(BIGC)",
    "end": "2026-11-17 19:00",
+   "in_app": true,
    "note": "404회 1위 후보 · 사전투표(~11/16 10:00) 중간 집계 1위 · 생방송 중 빅크 앱 실시간 투표 배너로",
    "show": "더쇼",
    "start": "2026-11-17 18:00",
