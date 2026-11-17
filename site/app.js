@@ -530,7 +530,15 @@ if ("serviceWorker" in navigator) {
         window.open(`https://x.com/intent/post?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(site)}`, "_blank", "noopener");
       });
       const watch = w.url || `https://www.youtube.com/results?search_query=${encodeURIComponent(`A2O SOUL ${w.show} 1위 앵콜`)}`;
-      const banner = el("section", { class: "win-hero", role: "status" },
+      // 공식 단체 사진 (info.yml wins.image) — 못 불러오면 사진 없이
+      let photo = null;
+      if (w.image) {
+        const img = el("img", { src: w.image, alt: "A2O SOUL", referrerpolicy: "no-referrer", decoding: "async" });
+        photo = w.image_post ? el("a", { class: "win-photo", href: w.image_post, target: "_blank", rel: "noopener" }, img) : el("div", { class: "win-photo" }, img);
+        img.addEventListener("error", () => { photo.remove(); banner.classList.remove("has-photo"); });
+      }
+      const banner = el("section", { class: `win-hero${photo ? " has-photo" : ""}`, role: "status" },
+        photo,
         el("div", { class: "win-confetti", "aria-hidden": "true" }, ...Array.from({ length: 28 }, (_, i) => el("i", { style: `--i:${i}` }))),
         el("div", { class: "win-trophy", "aria-hidden": "true" }, "🏆"),
         el("div", { class: "win-body" },

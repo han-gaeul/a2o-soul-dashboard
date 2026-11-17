@@ -845,3 +845,16 @@ dialog.dlg-full[open] { display: flex; flex-direction: column; }
 /* 기록: 1위는 금색 점 */
 .timeline .tl-win::before { background: #f7a928; width: 12px; height: 12px; left: -22px; }
 .timeline .tl-win { font-weight: 800; }
+/* 1위 배너 + 공식 단체 사진: PC는 오른쪽에 사진(왼쪽으로 녹아들게), 폰은 위에 사진 */
+.win-hero.has-photo { min-height: 230px; padding-right: 46%; }
+.win-photo { position: absolute; inset: 0 0 0 auto; width: 52%; z-index: 0; display: block; }
+.win-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 38%); mask-image: linear-gradient(to right, transparent 0%, #000 38%); }
+.win-hero.has-photo .win-confetti { z-index: 1; }
+@media (max-width: 640px) {
+  .win-hero.has-photo { padding: 0 16px 20px; min-height: 0; padding-right: 16px; }
+  .win-hero.has-photo .win-photo { position: relative; inset: auto; width: calc(100% + 32px); margin: 0 -16px 4px; aspect-ratio: 16 / 10; min-height: 0; overflow: hidden; flex: none; }
+  .win-hero.has-photo .win-photo img { position: absolute; inset: 0; }
+  .win-hero.has-photo .win-photo img { -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent 100%); mask-image: linear-gradient(to bottom, #000 60%, transparent 100%); }
+  .win-hero.has-photo .win-trophy { font-size: 44px; margin-top: -34px; }
+}
