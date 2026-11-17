@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
+      url: ${{ steps.deploy.outputs.page_url || steps.deploy_retry.outputs.page_url }}
     steps:
       # 대기열에서 기다리는 동안 다른 실행이 data를 커밋했을 수 있으니 트리거 시점이 아닌 최신 main으로
       - uses: actions/checkout@v4
@@ -122,5 +122,12 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
+      # 배포가 GitHub 쪽 일시 오류(아티팩트 조회 실패 등)로 실패하면 30초 뒤 한 번 더
       - id: deploy
+        uses: actions/deploy-pages@v4
+        continue-on-error: true
+      - if: steps.deploy.outcome == 'failure'
+        run: sleep 30
+      - id: deploy_retry
+        if: steps.deploy.outcome == 'failure'
         uses: actions/deploy-pages@v4
