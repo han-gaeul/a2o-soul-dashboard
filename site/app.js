@@ -685,12 +685,12 @@ if ("serviceWorker" in navigator) {
         const posts = (x.posts || []).filter((p) => p.url);
         const c = el("div", { class: "off-card", "data-name": x.name, tabindex: "0" },
           el("div", { class: "off-h" }, el("b", {}, tc(x.name)), inDate ? el("span", { class: "chip" }, inDate) : null),
-          el("div", { class: "muted small" }, [tc(x.area), x.addr].filter(Boolean).join(" · "), x.approx ? el("span", { class: "off-approx" }, ` · ${t("off_approx")}`) : null),
+          el("div", { class: "muted small" }, x.addr || tc(x.area), x.approx ? el("span", { class: "off-approx" }, ` · ${t("off_approx")}`) : null),
           x.versions ? el("div", {}, el("span", { class: "chip" }, tc(x.versions))) : null,
           posts.length ? el("div", { class: "off-posts" }, ...posts.map((p) => el("a", { href: p.url, target: "_blank", rel: "noopener" },
             el("span", { class: "muted" }, p.date ? p.date.slice(5).replace("-", ".") : ""), el("span", {}, `${p.text || t("off_post")} ↗`)))) : null,
           el("div", { class: "off-links" },
-            ext(mapSearch(x.addr || x.name), t("off_dir"), ""),
+            ext(mapSearch(x.name), t("off_dir"), ""),
             x.handle ? ext(`https://x.com/${x.handle}`, t("off_acct"), "") : null,
             x.site ? ext(x.site, t("off_site"), "") : null));
         c.addEventListener("click", (e) => { if (!e.target.closest("a")) pick(x); });
