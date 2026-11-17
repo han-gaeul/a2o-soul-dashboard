@@ -436,12 +436,16 @@ def notice_summary(kind, text):
     return {"title": title, "facts": facts[:6], "desc": " ".join(rest)[:160]}
 
 
+# 매체 글 중 논란·비판·가십 기사는 빼기 (콘텐츠만)
+MEDIA_SKIP = re.compile(r"논란|비판|비난|백래시|사과문|해명|의혹|갑론을박|네티즌|누리꾼|backlash|controvers|criticis|slammed|apologi[sz]e|netizens|sparks?\s+debate|under fire|outrage", re.I)
+
+
 def media_feed(cfg, state, limit=40):
     """매체·콘텐츠 계정의 A2O SOUL 글 → 최신순 [{url, at, handle, name, text, images, video}]."""
     names = {v["handle"].lower(): v["name"] for v in cfg["x_media"]}
     out = []
     for m in (state.get("posts") or {}).values():
-        if m.get("author", "").lower() not in names:  # 목록에서 뺀 계정은 바로 숨김
+        if m.get("author", "").lower() not in names or MEDIA_SKIP.search(m.get("caption") or ""):  # 목록에서 뺀 계정·논란 기사는 숨김
             continue
         text = re.sub(r"\s*https://t\.co/\w+\s*$", "", (m.get("caption") or "").strip())
         out.append({"url": m["permalink"], "at": kst_datetime(m.get("timestamp")), "handle": m["author"],
@@ -1146,7 +1150,7 @@ def collect(cfg, rescan=False):
             if got:
                 mst["since_id"] = max(got, key=lambda p_: int(p_["tweet_id"]))["tweet_id"]
             for p_ in got:
-                if A2O_MENTION.search(p_["caption"]):
+                if A2O_MENTION.search(p_["caption"]) and not MEDIA_SKIP.search(p_["caption"]):
                     mposts[p_["tweet_id"]] = {k: p_.get(k) for k in ("caption", "timestamp", "permalink", "author", "author_name", "images", "video")}
             cut = (now - timedelta(days=14)).isoformat()
             for k in [k for k, m in mposts.items() if (m.get("timestamp") or "") < cut]:

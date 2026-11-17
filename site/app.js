@@ -1322,9 +1322,8 @@ if ("serviceWorker" in navigator) {
       })) : null,
       el("div", { class: `fc-wrap${callBox || player ? "" : " solo"}` },
         el("a", { href: g.full || g.src, target: "_blank", rel: "noopener", class: "fc-img" }, img),
-        callBox || player ? el("div", { class: "fc-side" }, callBox, player,
-          el("div", { class: "fc-acts" }, ext(g.full || g.src, `🔍 ${t("chant_zoom")}`), g.post ? ext(g.post, `↗ ${t("chant_post")}`) : null)) : null),
-      callBox || player ? null : el("div", { class: "fc-acts" }, ext(g.full || g.src, `🔍 ${t("chant_zoom")}`), g.post ? ext(g.post, `↗ ${t("chant_post")}`) : null)].filter(Boolean));
+        el("div", { class: "fc-side" }, callBox, player,
+          el("div", { class: "fc-acts" }, ext(g.full || g.src, `🔍 ${t("chant_zoom")}`), g.post ? ext(g.post, `↗ ${t("chant_post")}`) : null)))].filter(Boolean));
   };
   if (guides.length) drawChant();
   else if (call && (call.lines || []).length) {
