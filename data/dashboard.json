@@ -2898,6 +2898,16 @@
     "ios": "https://apps.apple.com/app/id1496135213",
     "name": "마이원픽"
    }
+  ],
+  "wins": [
+   {
+    "date": "2026-11-17",
+    "ep": "404",
+    "image": "https://pbs.twimg.com/media/HWaKAPjaAAASLtT.jpg?name=large",
+    "image_post": "https://x.com/A2O_SOUL/status/2118538863505522863",
+    "show": "더쇼",
+    "url": ""
+   }
   ]
  },
  "kpis": [
@@ -10326,6 +10336,17 @@
  ],
  "supports": [],
  "timeline": [
+  {
+   "date": "2026-11-17",
+   "ep": "404",
+   "image": "https://pbs.twimg.com/media/HWaKAPjaAAASLtT.jpg?name=large",
+   "image_post": "https://x.com/A2O_SOUL/status/2118538863505522863",
+   "key": "tl_win",
+   "kind": "win",
+   "show": "더쇼",
+   "title": "더쇼 1위",
+   "url": ""
+  },
   {
    "date": "2026-11-16",
    "key": "tl_views",
