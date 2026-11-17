@@ -48,18 +48,27 @@ records: []
 #   handle: 매장 X 계정 (@ 없이) — 수집 때 그 계정의 A2O SOUL 입고 글을 찾아 '입고 확인' 날짜를 자동으로 갱신
 #   versions: 확인된 버전 / date: 입고 확인일 / url: 입고 글 / site: 매장 홈페이지(없으면 X 계정)
 offline_stores_credit: "@star_light_4u"
+# lat·lng: 지도 핀 위치 (approx: true = 동네 수준 대략 위치 → 정확한 좌표를 알면 고치고 approx 빼기)
 offline_stores:
-  - { name: 메이크스타 스페이스 강남, area: 서울 강남, handle: MAKESTARSPACEGN, versions: "EP · CARABINER Ver.", date: 2026-11-10 }
-  - { name: 위드뮤 홍대 AK PLAZA, area: 서울 홍대, handle: Withmuu_HD, versions: "", date: 2026-11-12 }
-  - { name: 위드뮤 잠실롯데점, area: 서울 잠실, handle: Withmuu_JS, versions: "SOUL · CONSTELLATION Ver.", date: 2026-11-12 }
-  - { name: 위드뮤 용산아이파크몰점, area: 서울 용산, handle: Withmuu_ys, versions: "SOUL · CONSTELLATION Ver.", date: 2026-11-13 }
-  - { name: 케이타운포유 인사, area: 서울 인사동, handle: ktown4u_inso, versions: "랜덤 Ver.", date: 2026-11-10 }
-  - { name: 케이타운포유 코엑스, area: 서울 삼성(코엑스), handle: Ktown4u_coex, versions: "랜덤 Ver.", date: 2026-11-10 }
-  - { name: Ksendy 김포점, area: 경기 김포, handle: ksendy_official, versions: "", date: 2026-11-10 }
-  - { name: 뮤직앤갤러리, area: 대전, handle: musicngallery, versions: "", date: 2026-11-12 }
-  - { name: 오피크(OffiK) 신촌점, area: 서울 신촌, handle: offik_official, versions: "CARABINER Ver.", date: 2026-11-10, url: "https://x.com/offik_official/status/2120049140474478736" }
+  - { name: 메이크스타 스페이스 강남, area: 서울 강남, lat: 37.4979, lng: 127.0276, approx: true, handle: MAKESTARSPACEGN, versions: "EP · CARABINER Ver.", date: 2026-11-10 }
+  - { name: 위드뮤 홍대 AK PLAZA, area: 서울 홍대, lat: 37.5573, lng: 126.9245, handle: Withmuu_HD, versions: "", date: 2026-11-12 }
+  - { name: 위드뮤 잠실롯데점, area: 서울 잠실, lat: 37.5113, lng: 127.0982, approx: true, handle: Withmuu_JS, versions: "SOUL · CONSTELLATION Ver.", date: 2026-11-12 }
+  - { name: 위드뮤 용산아이파크몰점, area: 서울 용산, lat: 37.5296, lng: 126.9646, handle: Withmuu_ys, versions: "SOUL · CONSTELLATION Ver.", date: 2026-11-13 }
+  - { name: 케이타운포유 인사, area: 서울 인사동, lat: 37.5741, lng: 126.9850, approx: true, handle: ktown4u_inso, versions: "랜덤 Ver.", date: 2026-11-10 }
+  - { name: 케이타운포유 코엑스, area: 서울 삼성(코엑스), lat: 37.5117, lng: 127.0592, handle: Ktown4u_coex, versions: "랜덤 Ver.", date: 2026-11-10 }
+  - { name: Ksendy 김포점, area: 경기 김포, lat: 37.6153, lng: 126.7156, approx: true, handle: ksendy_official, versions: "", date: 2026-11-10 }
+  - { name: 뮤직앤갤러리, area: 대전, lat: 36.3504, lng: 127.3845, approx: true, handle: musicngallery, versions: "", date: 2026-11-12 }
+  - { name: 오피크(OffiK) 신촌점, area: 서울 신촌, lat: 37.5559, lng: 126.9368, approx: true, handle: offik_official, versions: "CARABINER Ver.", date: 2026-11-10, url: "https://x.com/offik_official/status/2120049140474478736" }
   # 일본 (일본어 화면에서 먼저)
-  - { name: HMV&BOOKS SHIBUYA, area: 도쿄 시부야, handle: HmvBooksShibuya, versions: "선착 특전 포토카드", date: 2026-11-13, langs: [ja], url: "https://x.com/HmvBooksShibuya/status/2121136111963803736", site: "https://www.hmv.co.jp/store/BTK/" }
+  - { name: HMV&BOOKS SHIBUYA, area: 도쿄 시부야, lat: 35.6614, lng: 139.7010, handle: HmvBooksShibuya, versions: "선착 특전 포토카드", date: 2026-11-13, langs: [ja], url: "https://x.com/HmvBooksShibuya/status/2121136111963803736", site: "https://www.hmv.co.jp/store/BTK/" }
+
+# 어디서나 살 수 있는 체인 음반 매장 — 누르면 지도 앱에서 가까운 지점 검색 (q: 검색어)
+chain_stores:
+  - { name: 핫트랙스, note: "교보문고 안 음반 매장 · 전국", q: 핫트랙스 }
+  - { name: 영풍문고, note: "음반 코너 · 전국", q: 영풍문고 }
+  - { name: 신나라레코드, note: "음반 전문 매장", q: 신나라레코드 }
+  - { name: TOWER RECORDS, note: "일본 전국", q: タワーレコード, langs: [ja] }
+  - { name: HMV, note: "일본 전국", q: HMV, langs: [ja] }
 
 shops:
   - { label: Mnet Plus Merch (A2O), url: "https://mnetplusmerch.com/product/list.html?cate_no=374", note: "앨범·팬사인회·영상통화 이벤트", kind: 앨범 }
