@@ -589,3 +589,42 @@ details.howto { scroll-margin-top: 64px; }
 .off-name { font-weight: 700; font-size: 14px; min-width: 0; }
 .off-name a { color: inherit; }
 .off-meta { display: flex; gap: 6px; align-items: center; flex-shrink: 0; white-space: nowrap; }
+
+/* 응원 탭: 이번 주 음방 투표 (짧은 칸) */
+.wk-title, .gd-h { font-size: 14px; margin: 4px 0 8px; }
+.wk-grid { display: grid; gap: 4px; }
+.wk-day { position: relative; display: grid; justify-items: center; gap: 1px; padding: 6px 1px 5px; overflow: hidden; border: 1px solid var(--line); border-radius: 10px;
+  background: var(--card); color: inherit; font: inherit; cursor: pointer; min-width: 0; }
+.wk-day.today { border-color: var(--accent); background: var(--chip); }
+.wk-day.picked { box-shadow: inset 0 0 0 2px var(--accent); }
+.wk-wd { font-size: 11px; color: var(--muted); font-weight: 700; }
+.wk-day.today .wk-wd { color: var(--accent); }
+.wk-show { font-size: 12px; letter-spacing: -0.02em; font-weight: 800; line-height: 1.15; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+.wk-time { font-size: 10.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.wk-marks { display: flex; gap: 2px; margin-top: 1px; flex-wrap: nowrap; }
+.wk-marks i { font-style: normal; font-size: 8.5px; font-weight: 800; line-height: 1; padding: 2px 2px; white-space: nowrap; letter-spacing: -0.02em; border-radius: 4px; background: var(--chip); color: var(--chip-fg); }
+.wk-marks .wk-live { background: var(--accent-bg); color: #fff; }
+.wk-on { position: absolute; top: 4px; right: 4px; width: 7px; height: 7px; border-radius: 50%; background: #e5484d; }
+.wk-detail { margin-top: 8px; padding: 10px 12px; border-radius: 10px; background: var(--bg); display: grid; gap: 4px; font-size: 14px; }
+.wk-detail a { color: var(--accent); font-weight: 600; font-size: 13px; }
+/* 스밍·투표 방법 타일 */
+.gd { margin-top: 16px; }
+.gd-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+@media (min-width: 720px) { .gd-tiles { grid-template-columns: repeat(6, 1fr); } }
+.gd-tile { display: grid; justify-items: center; gap: 2px; padding: 9px 4px; border: 1px solid var(--line); border-radius: 12px; background: var(--card);
+  color: inherit; font: inherit; font-size: 12px; font-weight: 700; line-height: 1.25; cursor: pointer; word-break: keep-all; text-align: center; }
+.gd-tile.on { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.gd-icon { font-size: 22px; }
+.gd-panel:not(:empty) { margin-top: 8px; padding: 8px 12px; border-radius: 10px; background: var(--bg); }
+
+/* 포토카드: 멤버 전체 보기 */
+.pc-grid.pc-all { display: block; }
+.pc-group + .pc-group { margin-top: 12px; }
+.pc-group-h { font-size: 12px; color: var(--muted); margin: 0 0 6px; font-weight: 800; }
+
+/* 음방 회차: 썸네일 + 짧게 */
+.ep-sum { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.ep-thumb { width: 72px; height: 40px; object-fit: cover; border-radius: 6px; background: var(--line); flex-shrink: 0; }
+.ep-sum > span { display: grid; min-width: 0; }
+.ep-sub { font-weight: 400; }
+#epMore { margin-top: 8px; width: 100%; }

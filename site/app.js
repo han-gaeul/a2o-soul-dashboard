@@ -522,22 +522,66 @@ if ("serviceWorker" in navigator) {
     return raw.flatMap((a, i) => [i ? " · " : null, ext(appSearch(a.replace(/,.*\)/, ")")), label[i])]).filter(Boolean);
   };
   if ((howto.voting || []).length || (howto.streaming || []).length) {
-    if ((howto.voting || []).length) {
-      const box = el("details", { class: "howto", open: "" }, el("summary", {}, t("howto_voting")));
-      for (const v of howto.voting) {
-        box.append(el("div", { class: "howto-show" },
+    // ① 이번 주 음방 투표: 요일 칸(짧게) + 누른 방송의 앱·메모는 아래 한 줄로
+    const DAYS = "월화수목금토일";
+    const voting = (howto.voting || []).map((v) => ({ ...v, wd: DAYS.indexOf((v.when || "").trim()[0]) })).filter((v) => v.wd >= 0)
+      .sort((a, b) => a.wd - b.wd);
+    if (voting.length) {
+      const todayWd = (kstDate(todayKst).getUTCDay() + 6) % 7; // 월=0
+      const wdName = (i) => new Date(Date.UTC(2026, 10, 16 + i)).toLocaleDateString(LOCALES[LANG] || "en", { weekday: "short", timeZone: "UTC" });
+      const nowStr = new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Seoul", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" }).format(new Date());
+      const live = (show) => (data.votes || []).some((x) => x.show === show && (x.start || x.end) <= nowStr && nowStr <= x.end);
+      const pick = voting.find((v) => v.wd >= todayWd) || voting[0];
+      const detail = el("div", { class: "wk-detail" });
+      const showDetail = (v) => {
+        detail.replaceChildren(...[
           el("div", {}, el("b", {}, tc(v.show)), v.when ? el("span", { class: "muted" }, ` · ${tc(v.when)}`) : null),
           el("div", { class: "howto-apps" },
             v.pre ? el("span", {}, el("span", { class: "chip" }, t("howto_pre")), " ", ...appLinks(v.pre)) : null,
             v.live ? el("span", {}, el("span", { class: "chip chip-on" }, t("howto_live")), " ", ...appLinks(v.live)) : null),
           v.note ? el("div", { class: "muted small" }, tc(v.note)) : null,
-          v.url ? ext(v.url, "↗ link") : null));
-      }
-      $("howto").append(box);
+          v.url ? ext(v.url, "↗ link") : null].filter(Boolean));
+        grid.querySelectorAll(".wk-day").forEach((d) => d.classList.toggle("picked", d.dataset.show === v.show));
+      };
+      const grid = el("div", { class: "wk-grid", style: `grid-template-columns:repeat(${voting.length},1fr)` }, ...voting.map((v) => {
+        const time = (/(\d{1,2}:\d{2})/.exec(v.when || "") || [])[1] || "";
+        const b = el("button", { type: "button", class: `wk-day${v.wd === todayWd ? " today" : ""}`, "data-show": v.show },
+          el("span", { class: "wk-wd" }, wdName(v.wd)),
+          el("span", { class: "wk-show" }, short(v.show)),
+          el("span", { class: "wk-time" }, time || "\u00a0"),
+          el("span", { class: "wk-marks" }, v.pre ? el("i", { class: "wk-pre", title: t("howto_pre") }, t("wk_pre")) : null,
+            v.live ? el("i", { class: "wk-live", title: t("howto_live") }, "LIVE") : null),
+          live(v.show) ? el("span", { class: "wk-on", title: t("cheer_open", { n: 1 }) }) : null);
+        b.addEventListener("click", () => showDetail(v));
+        return b;
+      }));
+      $("howto").append(el("div", { class: "wk" }, el("h3", { class: "wk-title" }, t("howto_voting")), grid, detail));
+      showDetail(pick);
     }
-    for (const g of howto.streaming || []) {
-      $("howto").append(el("details", { class: "howto", ...(g.global && LANG !== "ko" ? { open: "" } : {}) }, el("summary", {}, tc(g.title)),
-        el("ol", { class: "howto-steps" }, ...g.steps.map((x) => el("li", {}, tc(x))))));
+    // 나머지 가이드: 아이콘 타일 → 누른 것만 펼치기
+    const ICON = [[/해외|global/i, "🌏"], [/음원|스밍/, "🎧"], [/유튜브|조회수/, "▶️"], [/라디오 신청/, "📻"], [/프로그램/, "🎙"], [/공통/, "✅"]];
+    const groups = howto.streaming || [];
+    if (groups.length) {
+      const panel = el("div", { class: "gd-panel" });
+      const tiles = el("div", { class: "gd-tiles" });
+      const open = (g, btn) => {
+        const was = btn.classList.contains("on");
+        tiles.querySelectorAll(".gd-tile").forEach((x) => x.classList.remove("on"));
+        if (was) { panel.replaceChildren(); return; }
+        btn.classList.add("on");
+        panel.replaceChildren(el("h3", { class: "gd-h" }, tc(g.title)), el("ol", { class: "howto-steps" }, ...g.steps.map((x) => el("li", {}, tc(x)))));
+      };
+      for (const g of groups) {
+        const icon = (ICON.find(([rx]) => rx.test(g.title)) || [0, "📖"])[1];
+        const label = tc(g.title).replace(/\s*\(.*?\)\s*/g, " ").trim();
+        const b = el("button", { type: "button", class: "gd-tile", "data-title": g.title },
+          el("span", { class: "gd-icon", "aria-hidden": "true" }, icon), el("span", {}, label));
+        b.addEventListener("click", () => open(g, b));
+        tiles.append(b);
+      }
+      $("howto").append(el("div", { class: "gd" }, tiles, panel));
+      const first = groups.findIndex((g) => g.global && LANG !== "ko");
+      if (first >= 0) tiles.children[first].click();
     }
     if (howto.checked) $("howtoChecked").textContent = t("howto_checked", { d: howto.checked.replaceAll("-", ".") });
   } else {
@@ -746,7 +790,7 @@ if ("serviceWorker" in navigator) {
   {
     const cnt = (id, sel) => ($(id) ? $(id).querySelectorAll(sel).length : 0);
     const rg = (data.howto?.streaming || []).find((g) => /라디오/.test(g.title));
-    const radio = rg && [...document.querySelectorAll("#howto details.howto")].find((d) => d.querySelector("summary")?.textContent === tc(rg.title));
+    const radio = rg && document.querySelector(`#howto .gd-tile[data-title="${CSS.escape(rg.title)}"]`);
     const tiles = [
       ["🎙", "prerec", "prerecSec", cnt("prerecs", ".vote"), true],
       ["🗳", "votes", "votesSec", cnt("votes", ".vote"), true],
@@ -767,6 +811,7 @@ if ("serviceWorker" in navigator) {
         counted ? el("span", { class: "cm-sub" }, n ? t("cheer_open", { n }) : t("cheer_none")) : null);
       b.addEventListener("click", () => {
         if (node.tagName === "DETAILS") node.open = true;
+        if (node.classList?.contains("gd-tile") && !node.classList.contains("on")) node.click();
         node.scrollIntoView({ behavior: "smooth", block: "start" });
       });
       return b;
@@ -1093,6 +1138,20 @@ if ("serviceWorker" in navigator) {
   if (chants.length) $("fanchants").append(...chants.map((v) => videoCard(v, v.song || null)));
   if (!chants.length && !guides.length) $("fanchantSec").remove();
 
+  // 같은 회차에 같은 멤버 직캠이 여러 개면 종류로 구분: 가로/세로, [MPD직캠]/[입덕직캠] 등
+  const camTag = (v) => ((/^\[([^\]]+)\]/.exec(v.title || "") || [])[1] || "").replace(/\b[48]K\b/gi, "").trim();
+  const camName = (v, all) => {
+    const same = all.filter((x) => x.member && x.member === v.member && x.category === "fancam");
+    if (same.length < 2) return v.member;
+    const tags = same.map(camTag);
+    const horiz = (tag) => /가로|horizontal/i.test(tag);
+    let label;
+    if (tags.some(horiz) && !tags.every(horiz)) label = horiz(camTag(v)) ? t("cam_h") : t("cam_v");
+    else if (new Set(tags).size === same.length) label = camTag(v) || "";
+    else label = `#${same.indexOf(v) + 1}`;
+    return label ? `${v.member} · ${label}` : v.member;
+  };
+
   // ---------- 음방 회차별 무대 (영상 탭) ----------
   const eps = data.episodes || [];
   // 영상 탭 위 음방별 탭 — 회차별 무대·전체 영상 둘 다 거름
@@ -1104,11 +1163,11 @@ if ("serviceWorker" in navigator) {
     const drawTabs = () => {
       $("showTabs").replaceChildren(...[["", t("show_all")], ...shows.map((x) => [x, tc(x)])].map(([k, label]) => {
         const n = k ? eps.filter((e) => e.show === k).length : eps.length;
-        const b = el("button", { type: "button", class: k === curShow ? "on" : "", "aria-pressed": String(k === curShow) }, n ? `${label} ${n}` : label);
+        const b = el("button", { type: "button", class: k === curShow ? "on" : "", "aria-pressed": String(k === curShow), "data-k": k }, n ? `${label} ${n}` : label);
         b.addEventListener("click", () => {
           curShow = k;
           drawTabs();
-          document.querySelectorAll("#episodes > details.ep").forEach((d) => { d.hidden = !!k && d.dataset.show !== k; });
+          epVisible();
           const sel = $("showSel");
           if (sel) { sel.value = k; sel.dispatchEvent(new Event("change")); }
         });
@@ -1117,14 +1176,34 @@ if ("serviceWorker" in navigator) {
     };
     if (shows.length) drawTabs(); else $("showTabs").remove();
   }
+  const EP_FIRST = 5; // 처음엔 최근 회차 몇 개만 — 나머지는 '이전 회차 더 보기'
+  let epAll = false;
+  const epVisible = () => {
+    const showSel = document.querySelector("#showTabs button.on");
+    const k = showSel && showSel.dataset.k ? showSel.dataset.k : "";
+    let shown = 0;
+    document.querySelectorAll("#episodes > details.ep").forEach((d) => {
+      const match = !k || d.dataset.show === k;
+      d.hidden = !match || (!k && !epAll && shown >= EP_FIRST);
+      if (match) shown += 1;
+    });
+    const rest = k ? 0 : Math.max(0, eps.length - EP_FIRST);
+    const mb = $("epMore");
+    if (mb) { mb.hidden = epAll || !rest; mb.textContent = `${t("ep_more")} (${rest}) ⌄`; }
+  };
   if (eps.length) {
     const wd = t("weekdays");
     for (const ep of eps) {
       const day = wd[new Date(`${ep.date}T12:00:00Z`).getUTCDay()];
       const grid = el("div", { class: "videos" });
+      const stage = ep.videos.find((v) => v.category !== "fancam") || ep.videos[0];
+      const nCam = ep.videos.filter((v) => v.category === "fancam").length;
+      const counts = [nCam < ep.videos.length ? t("ep_stage_n", { n: ep.videos.length - nCam }) : "", nCam ? t("ep_cam_n", { n: nCam }) : ""].filter(Boolean).join(" · ");
       const box = el("details", { class: "howto ep", id: `ep-${ep.date}-${ep.show}`, "data-show": ep.show },
-        el("summary", {}, el("span", {}, el("b", {}, `${ep.date.slice(5).replace("-", ".")} (${day}) ${tc(ep.show)}`),
-          el("span", { class: "muted" }, ` · ${ep.ep ? `EP.${ep.ep} · ` : ""}${t("videos_n", { n: ep.videos.length })}`))),
+        el("summary", {}, el("span", { class: "ep-sum" },
+          stage ? el("img", { class: "ep-thumb", src: thumbUrl(stage.id), alt: "", loading: "lazy", decoding: "async" }) : null,
+          el("span", {}, el("b", {}, `${ep.date.slice(5).replace("-", ".")} (${day}) ${tc(ep.show)}`),
+            el("span", { class: "muted small ep-sub" }, `${ep.ep ? `EP.${ep.ep} · ` : ""}${counts}`)))),
         grid);
       // 펼칠 때 카드 만들기 (썸네일을 한꺼번에 불러오지 않게)
       box.addEventListener("toggle", () => {
@@ -1136,10 +1215,14 @@ if ("serviceWorker" in navigator) {
           btn.addEventListener("click", () => openCompare(ep, cams));
           box.insertBefore(btn, grid);
         }
-        grid.append(...ep.videos.map((v) => videoCard(v, v.member || (v.category === "fancam" ? catLabel("fancam") : catLabel("stage")))));
+        grid.append(...ep.videos.map((v) => videoCard(v, v.member ? camName(v, ep.videos) : (v.category === "fancam" ? catLabel("fancam") : catLabel("stage")))));
       });
       $("episodes").append(box);
     }
+    const mb = el("button", { type: "button", class: "more", id: "epMore" });
+    mb.addEventListener("click", () => { epAll = true; epVisible(); });
+    $("episodes").after(mb);
+    epVisible();
   } else {
     $("episodesSec").remove();
   }
@@ -1158,7 +1241,7 @@ if ("serviceWorker" in navigator) {
     const embed = (id) => `https://www.youtube-nocookie.com/embed/${id}?playsinline=1&rel=0&modestbranding=1&autoplay=1&mute=1`;
     const want = [0, 1].map((i) => { const k = cams.findIndex((v) => v.member === pre[i]); return k >= 0 ? k : i; });
     const slots = [0, 1].map((i) => {
-      const sel = el("select", { class: "sel", "aria-label": `${t("cmp_open")} ${i + 1}` }, ...cams.map((v, j) => el("option", { value: j, ...(j === want[i] ? { selected: "" } : {}) }, v.member)));
+      const sel = el("select", { class: "sel", "aria-label": `${t("cmp_open")} ${i + 1}` }, ...cams.map((v, j) => el("option", { value: j, ...(j === want[i] ? { selected: "" } : {}) }, camName(v, cams))));
       const frame = el("div", { class: "cmp-frame" });
       const load = () => {
         const v = cams[+sel.value];
@@ -1527,12 +1610,26 @@ if ("serviceWorker" in navigator) {
       b.addEventListener("click", fn);
       return b;
     };
+    // 멤버를 고르면 '전체'(모든 버전을 버전별 묶음으로)가 기본 — 멤버 전체에서 '전체'는 너무 많아서 버전 하나씩
     const drawPc = () => {
       const inWho = pcs.filter((x) => !pcWho || x.member === pcWho);
-      $("pcTabs").replaceChildren(...versions.map((v) => btn(`${tc(v)} ${inWho.filter((x) => x.version === v).length}`, v === pcVer,
-        () => { pcVer = v; drawPc(); })));
+      if (!pcWho && pcVer === "") pcVer = versions[0];
+      $("pcTabs").replaceChildren(
+        ...(pcWho ? [btn(`${t("ev_all")} ${inWho.length}`, pcVer === "", () => { pcVer = ""; drawPc(); })] : []),
+        ...versions.map((v) => btn(`${tc(v)} ${inWho.filter((x) => x.version === v).length}`, v === pcVer,
+          () => { pcVer = v; drawPc(); })));
       $("pcMem").replaceChildren(btn(t("ev_all"), !pcWho, () => { pcWho = ""; drawPc(); }),
-        ...mems.map((m) => btn(m, m === pcWho, () => { pcWho = m; drawPc(); })));
+        ...mems.map((m) => btn(m, m === pcWho, () => { pcWho = m; pcVer = ""; drawPc(); })));
+      if (pcVer === "") {
+        $("pcGrid").replaceChildren(...versions.filter((v) => inWho.some((x) => x.version === v)).map((v) => {
+          const list = inWho.filter((x) => x.version === v);
+          return el("div", { class: "pc-group" }, el("h4", { class: "pc-group-h" }, tc(v)),
+            el("div", { class: "pc-grid" }, ...list.map((x, i) => pcCard(x, list, i))));
+        }));
+        $("pcGrid").classList.add("pc-all");
+        return;
+      }
+      $("pcGrid").classList.remove("pc-all");
       const list = inWho.filter((x) => x.version === pcVer);
       $("pcGrid").replaceChildren(...(list.length ? list.map((x, i) => pcCard(x, list, i)) : [el("p", { class: "muted" }, "—")]));
     };
