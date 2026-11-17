@@ -1566,14 +1566,16 @@
   }
  },
  "x_official_votes": {
-  "at": "2026-11-17T08:31+09:00",
+  "at": "2026-11-17T11:40+09:00",
   "deep": 1,
   "last": {
    "official": [],
-   "read": 0,
-   "verified": []
+   "read": 2,
+   "verified": [
+    "puppylhz:blue"
+   ]
   },
-  "since_id": "2122408843921490210",
+  "since_id": "2122506613601009809",
   "v": 2
  },
  "x_vendors": {
