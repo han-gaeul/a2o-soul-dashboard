@@ -58,6 +58,8 @@ offline_stores:
   - { name: Ksendy 김포점, area: 경기 김포, handle: ksendy_official, versions: "", date: 2026-11-10 }
   - { name: 뮤직앤갤러리, area: 대전, handle: musicngallery, versions: "", date: 2026-11-12 }
   - { name: OffiK, area: "", handle: "", versions: "CARABINER Ver.", date: 2026-11-10 }
+  # 일본 (일본어 화면에서 먼저)
+  - { name: HMV&BOOKS SHIBUYA, area: 도쿄 시부야, handle: HmvBooksShibuya, versions: "선착 특전 포토카드", date: 2026-11-13, langs: [ja], url: "https://x.com/HmvBooksShibuya/status/2121136111963803736" }
 
 shops:
   - { label: Mnet Plus Merch (A2O), url: "https://mnetplusmerch.com/product/list.html?cate_no=374", note: "앨범·팬사인회·영상통화 이벤트", kind: 앨범 }
@@ -69,6 +71,9 @@ shops:
   - { label: 점프업, url: "https://jumpupent.com/", note: "특전", kind: 앨범 }
   - { label: 팬플리, url: "https://fanplee.com", note: "세트 판매", kind: 앨범 }
   - { label: 올엠디, url: "https://allmd8838.cafe24.com/product/list.html?cate_no=3213", note: "공동구매·대량구매", kind: 앨범 }
+  # 일본 (일본어 화면에서 먼저) — 수입반
+  - { label: HMV&BOOKS online, url: "https://www.hmv.co.jp/news/article/261026129/", note: "일본 · 수입반 온라인", kind: 앨범, langs: [ja] }
+  - { label: TOWER RECORDS ONLINE, url: "https://tower.jp/artist/6440143", note: "일본 · 수입반 온라인", kind: 앨범, langs: [ja] }
 
 # 포토카드 (입덕 탭·멤버 창) — site/img/photocards/버전_라벨_멤버.webp
 #   @soultemplates 포카 리스트 템플릿에서 잘라 만듦: python3 collector/pc_crop.py 템플릿폴더

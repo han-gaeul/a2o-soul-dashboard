@@ -153,10 +153,12 @@ def load_fan_files(cfg):
         "photocard_order": [str(x) for x in info.get("photocard_order") or []],
         "records": [{"date": str(x["date"]), "title": str(x["title"]), "url": str(x.get("url") or "")}
                     for x in info.get("records") or [] if x.get("date") and x.get("title")],
-        "shops": [{"label": str(x["label"]), "url": str(x["url"]), "note": str(x.get("note") or ""), "kind": str(x.get("kind") or "")}
+        "shops": [{"label": str(x["label"]), "url": str(x["url"]), "note": str(x.get("note") or ""), "kind": str(x.get("kind") or ""),
+                   "langs": [str(l) for l in x.get("langs") or []]}
                   for x in info.get("shops") or [] if x.get("label") and str(x.get("url", "")).startswith("https://")],
         "offline_stores": [{"name": str(x["name"]), "area": str(x.get("area") or ""), "handle": str(x.get("handle") or "").lstrip("@"),
-                            "versions": str(x.get("versions") or ""), "date": str(x.get("date") or "")}
+                            "versions": str(x.get("versions") or ""), "date": str(x.get("date") or ""),
+                            "langs": [str(l) for l in x.get("langs") or []], **({"url": str(x["url"])} if x.get("url") else {})}
                            for x in info.get("offline_stores") or [] if isinstance(x, dict) and x.get("name")],
         "offline_stores_credit": str(info.get("offline_stores_credit") or ""),
     }
