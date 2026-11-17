@@ -2491,6 +2491,93 @@
    "그런데도 무언가 비어 있다고 느낀 이들은, 사람을 살아 있게 하는 감정과 에너지 — 기쁨·사랑·설렘·열정, 곧 '소울(SOUL)'을 찾아 지구로 떠나요.",
    "데뷔 앨범 'SUPERSTAR'가 그 이야기의 첫 번째 챕터. 그룹은 자신들의 음악을 'NEW SYNTHWAVE'라고 불러요."
   ],
+  "offline_stores": [
+   {
+    "area": "서울 강남",
+    "date": "2026-11-10",
+    "handle": "MAKESTARSPACEGN",
+    "langs": [],
+    "name": "메이크스타 스페이스 강남",
+    "versions": "EP · CARABINER Ver."
+   },
+   {
+    "area": "서울 홍대",
+    "date": "2026-11-12",
+    "handle": "Withmuu_HD",
+    "langs": [],
+    "name": "위드뮤 홍대 AK PLAZA",
+    "versions": ""
+   },
+   {
+    "area": "서울 잠실",
+    "date": "2026-11-12",
+    "handle": "Withmuu_JS",
+    "langs": [],
+    "name": "위드뮤 잠실롯데점",
+    "versions": "SOUL · CONSTELLATION Ver."
+   },
+   {
+    "area": "서울 용산",
+    "date": "2026-11-13",
+    "handle": "Withmuu_ys",
+    "langs": [],
+    "name": "위드뮤 용산아이파크몰점",
+    "versions": "SOUL · CONSTELLATION Ver."
+   },
+   {
+    "area": "서울 인사동",
+    "date": "2026-11-10",
+    "handle": "ktown4u_inso",
+    "langs": [],
+    "name": "케이타운포유 인사",
+    "versions": "랜덤 Ver."
+   },
+   {
+    "area": "서울 삼성(코엑스)",
+    "date": "2026-11-10",
+    "handle": "Ktown4u_coex",
+    "langs": [],
+    "name": "케이타운포유 코엑스",
+    "versions": "랜덤 Ver."
+   },
+   {
+    "area": "경기 김포",
+    "date": "2026-11-10",
+    "handle": "ksendy_official",
+    "langs": [],
+    "name": "Ksendy 김포점",
+    "versions": ""
+   },
+   {
+    "area": "대전",
+    "date": "2026-11-12",
+    "handle": "musicngallery",
+    "langs": [],
+    "name": "뮤직앤갤러리",
+    "versions": ""
+   },
+   {
+    "area": "",
+    "date": "2026-11-10",
+    "handle": "",
+    "langs": [],
+    "name": "OffiK",
+    "versions": "CARABINER Ver."
+   },
+   {
+    "area": "도쿄 시부야",
+    "date": "2026-11-13",
+    "handle": "HmvBooksShibuya",
+    "langs": [
+     "ja"
+    ],
+    "name": "HMV&BOOKS SHIBUYA",
+    "site": "https://www.hmv.co.jp/store/BTK/",
+    "url": "https://x.com/HmvBooksShibuya/status/2121136111963803736",
+    "versions": "선착 특전 포토카드"
+   }
+  ],
+  "offline_stores_credit": "@star_light_4u",
   "photo_labels": {
    "댄인닼": "Dancing in the Dark",
    "슈퍼스타": "SUPERSTAR"
@@ -2511,56 +2598,83 @@
    {
     "kind": "앨범",
     "label": "Mnet Plus Merch (A2O)",
+    "langs": [],
     "note": "앨범·팬사인회·영상통화 이벤트",
     "url": "https://mnetplusmerch.com/product/list.html?cate_no=374"
    },
    {
     "kind": "앨범",
     "label": "메이크스타",
+    "langs": [],
     "note": "팬사인회·영상통화, 미공개 셀카 포카",
     "url": "https://www.makestar.com/product/21531"
    },
    {
     "kind": "앨범",
     "label": "위드뮤",
+    "langs": [],
     "note": "팬사인회·영상통화, 단독 포카 15종",
     "url": "https://www.withmuu.com/"
    },
    {
     "kind": "앨범",
     "label": "뮤직아트",
+    "langs": [],
     "note": "팬사인회, 미공개 셀카 15종",
     "url": "https://musicart.kr/"
    },
    {
     "kind": "앨범",
     "label": "뮤직플랜트",
+    "langs": [],
     "note": "예약 특전 셀카 포토카드",
     "url": "https://www.musicplant.co.kr/"
    },
    {
     "kind": "앨범",
     "label": "애플뮤직",
+    "langs": [],
     "note": "팬사인회·특전",
     "url": "https://www.applemusic.co.kr/"
    },
    {
     "kind": "앨범",
     "label": "점프업",
+    "langs": [],
     "note": "특전",
     "url": "https://jumpupent.com/"
    },
    {
     "kind": "앨범",
     "label": "팬플리",
+    "langs": [],
     "note": "세트 판매",
     "url": "https://fanplee.com"
    },
    {
     "kind": "앨범",
     "label": "올엠디",
+    "langs": [],
     "note": "공동구매·대량구매",
     "url": "https://allmd8838.cafe24.com/product/list.html?cate_no=3213"
+   },
+   {
+    "kind": "앨범",
+    "label": "HMV&BOOKS online",
+    "langs": [
+     "ja"
+    ],
+    "note": "일본 · 수입반 온라인",
+    "url": "https://www.hmv.co.jp/news/article/261026129/"
+   },
+   {
+    "kind": "앨범",
+    "label": "TOWER RECORDS ONLINE",
+    "langs": [
+     "ja"
+    ],
+    "note": "일본 · 수입반 온라인",
+    "url": "https://tower.jp/artist/6440143"
    }
   ]
  },
@@ -10185,6 +10299,15 @@
    "th": "อย่าวน MV เดิมซ้ำๆ — สลับกับคลิปอื่น (เวที, แฟนแคม)",
    "zh": "不要只循环同一MV，中间穿插其他视频（舞台·直拍）"
   },
+  "경기 김포": {
+   "en": "Gimpo, Gyeonggi",
+   "es": "Gimpo, Gyeonggi",
+   "id": "Gimpo, Gyeonggi",
+   "ja": "京畿・金浦",
+   "pt": "Gimpo, Gyeonggi",
+   "th": "กิมโพ คยองกี",
+   "zh": "京畿 金浦"
+  },
   "경기소년소녀합창단 활동": {
    "en": "Member of the Gyeonggi Boys & Girls Choir",
    "es": "Miembro del coro infantil de Gyeonggi",
@@ -10328,6 +10451,15 @@
    "pt": "A maioria dos apps dá votos por missões e anúncios — junte com antecedência",
    "th": "แอปส่วนใหญ่ให้สิทธิ์โหวตจากภารกิจและโฆษณา — สะสมไว้ล่วงหน้า",
    "zh": "大多数App通过任务·广告获得投票券，记得提前攒"
+  },
+  "대전": {
+   "en": "Daejeon",
+   "es": "Daejeon",
+   "id": "Daejeon",
+   "ja": "大田",
+   "pt": "Daejeon",
+   "th": "แทจอน",
+   "zh": "大田"
   },
   "댄스": {
    "en": "Dance",
@@ -10473,6 +10605,15 @@
    "th": "นางฟ้าท่อนเปิด",
    "zh": "开场小精灵"
   },
+  "도쿄 시부야": {
+   "en": "Shibuya, Tokyo",
+   "es": "Shibuya, Tokio",
+   "id": "Shibuya, Tokyo",
+   "ja": "東京・渋谷",
+   "pt": "Shibuya, Tóquio",
+   "th": "ชิบูย่า โตเกียว",
+   "zh": "东京 涩谷"
+  },
   "두바이": {
    "en": "Dubai",
    "es": "Dubái",
@@ -10499,6 +10640,15 @@
    "pt": "Live",
    "th": "ไลฟ์",
    "zh": "直播"
+  },
+  "랜덤 Ver.": {
+   "en": "Random Ver.",
+   "es": "Ver. aleatoria",
+   "id": "Ver. acak",
+   "ja": "ランダム Ver.",
+   "pt": "Ver. aleatória",
+   "th": "Ver. สุ่ม",
+   "zh": "随机 Ver."
   },
   "랩, 댄스": {
    "en": "Rap, dance",
@@ -10950,6 +11100,60 @@
    "th": "โหวตสดเปิดเฉพาะช่วงออกอากาศ (KST) — ดูเวลาในปฏิทินหน้าหลัก",
    "zh": "直播投票只在播出时间（KST）开放 — 播出日程见首页日历"
   },
+  "서울 강남": {
+   "en": "Gangnam, Seoul",
+   "es": "Gangnam, Seúl",
+   "id": "Gangnam, Seoul",
+   "ja": "ソウル・江南",
+   "pt": "Gangnam, Seul",
+   "th": "คังนัม โซล",
+   "zh": "首尔 江南"
+  },
+  "서울 삼성(코엑스)": {
+   "en": "Samseong (COEX), Seoul",
+   "es": "Samseong (COEX), Seúl",
+   "id": "Samseong (COEX), Seoul",
+   "ja": "ソウル・三成(COEX)",
+   "pt": "Samseong (COEX), Seul",
+   "th": "ซัมซอง (COEX) โซล",
+   "zh": "首尔 三成(COEX)"
+  },
+  "서울 용산": {
+   "en": "Yongsan, Seoul",
+   "es": "Yongsan, Seúl",
+   "id": "Yongsan, Seoul",
+   "ja": "ソウル・龍山",
+   "pt": "Yongsan, Seul",
+   "th": "ยงซาน โซล",
+   "zh": "首尔 龙山"
+  },
+  "서울 인사동": {
+   "en": "Insadong, Seoul",
+   "es": "Insadong, Seúl",
+   "id": "Insadong, Seoul",
+   "ja": "ソウル・仁寺洞",
+   "pt": "Insadong, Seul",
+   "th": "อินซาดง โซล",
+   "zh": "首尔 仁寺洞"
+  },
+  "서울 잠실": {
+   "en": "Jamsil, Seoul",
+   "es": "Jamsil, Seúl",
+   "id": "Jamsil, Seoul",
+   "ja": "ソウル・蚕室",
+   "pt": "Jamsil, Seul",
+   "th": "จัมซิล โซล",
+   "zh": "首尔 蚕室"
+  },
+  "서울 홍대": {
+   "en": "Hongdae, Seoul",
+   "es": "Hongdae, Seúl",
+   "id": "Hongdae, Seoul",
+   "ja": "ソウル・弘大",
+   "pt": "Hongdae, Seul",
+   "th": "ฮงแด โซล",
+   "zh": "首尔 弘大"
+  },
   "선공개 싱글": {
    "en": "Pre-release single",
    "es": "Sencillo de prelanzamiento",
@@ -10967,6 +11171,15 @@
    "pt": "Single de pré-lançamento · música de debut",
    "th": "ซิงเกิลปล่อยล่วงหน้า · เพลงโปรโมตช่วงเดบิวต์",
    "zh": "先行单曲·出道主打"
+  },
+  "선착 특전 포토카드": {
+   "en": "First-come photocard",
+   "es": "Photocard para los primeros",
+   "id": "Photocard untuk pembeli awal",
+   "ja": "先着特典フォトカード",
+   "pt": "Photocard para os primeiros",
+   "th": "โฟโต้การ์ดสำหรับผู้ซื้อก่อน",
+   "zh": "先到先得小卡"
   },
   "세트 판매": {
    "en": "Set sales",
@@ -11579,6 +11792,15 @@
    "pt": "Dom 15:20 · SBS",
    "th": "อา. 15:20 · SBS",
    "zh": "周日 15:20 · SBS"
+  },
+  "일본 · 수입반 온라인": {
+   "en": "Japan · import, online",
+   "es": "Japón · importación, online",
+   "id": "Jepang · impor, online",
+   "ja": "日本・輸入盤 通販",
+   "pt": "Japão · importado, online",
+   "th": "ญี่ปุ่น · นำเข้า ออนไลน์",
+   "zh": "日本 · 进口版 网购"
   },
   "일본 오디션 'iCON Z' 남성 부문 참가": {
    "en": "Competed in the boys' division of Japanese audition 'iCON Z'",
