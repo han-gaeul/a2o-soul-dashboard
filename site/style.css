@@ -809,3 +809,10 @@ dialog.dlg-full[open] { display: flex; flex-direction: column; }
   .pl .links { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 2px; }
   .pl .links a { flex: none; }
 }
+
+/* 음방 생방송 보기 */
+.live-link { display: inline-block; margin-left: 6px; font-size: 12px; font-weight: 700; color: var(--hot); text-decoration: none; white-space: nowrap; }
+.live-link:hover { text-decoration: underline; }
+.wk-detail .live-link { margin-left: 0; }
+.live-bar { text-decoration: none; padding-right: 12px; }
+.live-bar .vb-go { font-size: 12px; opacity: .9; white-space: nowrap; }

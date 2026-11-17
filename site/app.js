@@ -83,6 +83,12 @@ if ("serviceWorker" in navigator) {
   const empty = (msg) => el("div", { class: "empty" }, msg);
   // 긴 목록 접기: 앞의 n개만 보이고 '더 보기 (+k)' — 폰에서 세로로 너무 길어지지 않게
   const MOBILE = window.matchMedia("(max-width: 720px)").matches;
+  // 음방 생방송 보는 곳 (info.yml show_live) — 제목에 방송 이름이 들어 있으면
+  const liveFor = (text) => (data.info?.show_live || []).find((x) => String(text || "").includes(x.show));
+  const liveLink = (text, cls = "live-link") => {
+    const x = liveFor(text);
+    return x ? el("a", { class: cls, href: x.url, target: "_blank", rel: "noopener", title: t("live_note") }, `${t("live_watch")} · ${x.label}`) : null;
+  };
   const fold = (box, n) => {
     if (!box) return;
     box.parentElement?.querySelector(`:scope > .fold-more[data-for="${box.id}"]`)?.remove();
@@ -321,7 +327,8 @@ if ("serviceWorker" in navigator) {
       title = e.url ? ext(e.url, tx(e)) : el("span", {}, tx(e));
     }
     title.classList.add("what");
-    return el("li", { class: `ev-${e.group}` }, whenEl, el("div", {}, e.type ? el("span", { class: "chip" }, tc(e.type)) : null, title));
+    const live = e.type === "음방" && e.date >= todayKst ? liveLink(e.title) : null;
+    return el("li", { class: `ev-${e.group}` }, whenEl, el("div", {}, e.type ? el("span", { class: "chip" }, tc(e.type)) : null, title, live));
   }
 
   function monthEvents(y, mo) {
@@ -493,6 +500,22 @@ if ("serviceWorker" in navigator) {
       $("tabs").before(bar);
     }
   }
+  // 상단 띠: 오늘 A2O SOUL이 나오는 음방 — 시작 1시간 반 전부터 끝날 무렵까지 '생방송 보기'
+  {
+    const nowMs = Date.now();
+    // 일정에 시간이 없으면 투표 가이드(howto.yml)의 방송 시간으로 ('화 18:00')
+    const airTime = (e) => e.time || (/(\d{1,2}:\d{2})/.exec(((data.howto?.voting || []).find((v) => liveFor(e.title)?.show && String(v.show).includes(liveFor(e.title).show)) || {}).when || "") || [])[1];
+    const onAir = (data.events || []).filter((e) => e.type === "음방" && e.date === todayKst && liveFor(e.title) && airTime(e))
+      .map((e) => ({ e: { ...e, time: airTime(e).padStart(5, "0") }, at: +kstDate(`${e.date} ${airTime(e).padStart(5, "0")}`) }))
+      .find(({ at }) => nowMs >= at - 90 * 60000 && nowMs <= at + 150 * 60000);
+    if (onAir) {
+      const x = liveFor(onAir.e.title);
+      const now = nowMs >= onAir.at;
+      $("tabs").before(el("a", { class: `vote-bar live-bar${now ? " urgent" : ""}`, href: x.url, target: "_blank", rel: "noopener", role: "status" },
+        el("span", { class: "vb-main" }, now ? t("live_now", { show: tc(x.show) }) : t("live_today", { t: onAir.e.time, show: tc(x.show) })),
+        el("span", { class: "vb-go" }, `${x.label} ↗`)));
+    }
+  }
   if (votes.length) {
     const sorted = [...votes].sort((a, b) => voteKey(a) - voteKey(b));
     const groups = [["", t("ev_all"), () => true],
@@ -591,6 +614,7 @@ if ("serviceWorker" in navigator) {
             v.pre ? el("span", {}, el("span", { class: "chip" }, t("howto_pre")), " ", ...appLinks(v.pre)) : null,
             v.live ? el("span", {}, el("span", { class: "chip chip-on" }, t("howto_live")), " ", ...appLinks(v.live)) : null),
           v.note ? el("div", { class: "muted small" }, tc(v.note)) : null,
+          liveLink(v.show),
           v.url ? ext(v.url, "↗ link") : null].filter(Boolean));
         grid.querySelectorAll(".wk-day").forEach((d) => d.classList.toggle("picked", d.dataset.show === v.show));
       };
