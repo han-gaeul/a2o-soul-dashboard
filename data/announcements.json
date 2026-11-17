@@ -747,6 +747,28 @@
    "permalink": "https://x.com/A2O_SOUL/status/2122608176965005709",
    "timestamp": "2026-11-17T08:30:00.000Z"
   },
+  "x:2122617284929982897": {
+   "caption": "[🗳]\nSBS Life '더쇼' 실시간 투표 안내\n팬 여러분의 많은 참여 부탁드립니다✨\n\n✔️투표 기간 : ~ 2026.11.17 PM 18:50 (KST)\n✔️투표 방법 : 빅크(BIGC) APP &gt; 어플 내 실시간 투표 페이지 A2O SOUL 'Dancing in the Dark' 투표\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark",
+   "excerpt": "[🗳]\nSBS Life '더쇼' 실시간 투표 안내\n팬 여러분의 많은 참여 부탁드립니다✨\n\n✔️투표 기간 : ~ 2026.11.17 PM 18:50 (KST)\n✔️투표 방법 : 빅크(BIGC) APP &gt; 어플 내 실시간 투표 페이지 A2O SOUL",
+   "items": [
+    {
+     "app": "빅크(BIGC)",
+     "confidence": 0.6,
+     "date": "2026-11-17",
+     "end": "2026-11-17 18:50",
+     "end_date": null,
+     "kind": "vote",
+     "place": null,
+     "show": "더쇼",
+     "start": "2026-11-17 00:00",
+     "time": "18:50",
+     "title": "더쇼 생방송 투표",
+     "url": null
+    }
+   ],
+   "permalink": "https://x.com/A2O_SOUL/status/2122617284929982897",
+   "timestamp": "2026-11-17T09:06:11.000Z"
+  },
   "xf:2121586007254708290": {
    "caption": "[📸] 261114 @A2O_SOUL \n\n2026.11.14\nMBC Show! Music Core\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2OSOULBASE/status/2121586007254708290/photo/1",
    "excerpt": "[📸] 261114 @A2O_SOUL \n\n2026.11.14\nMBC Show! Music Core\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2OSOULBASE/status/2121586007254708",
@@ -1683,7 +1705,7 @@
  "x": {
   "A2O_SOUL": {
    "id": "1986498790229262336",
-   "since_id": "2122608176965005709"
+   "since_id": "2122617284929982897"
   }
  },
  "x_fans": {
