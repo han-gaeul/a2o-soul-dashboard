@@ -526,11 +526,22 @@ if ("serviceWorker" in navigator) {
       const site = `${location.origin}${location.pathname}?win=${w.date.replaceAll("-", "")}`;
       const shareText = [t("win_share_text", { show }), w.tags].filter(Boolean).join(" ");
       const share = el("button", { type: "button", class: "win-btn" }, t("win_share"));
-      share.addEventListener("click", async () => {
-        // 문구와 주소를 한 메시지로 (카톡 등에서 말풍선이 나뉘지 않게)
-        if (navigator.share) { try { await navigator.share({ text: `${shareText}\n${site}` }); return; } catch { return; } }
-        window.open(`https://x.com/intent/post?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(site)}`, "_blank", "noopener");
+      // 폰: 공유 시트(카톡 등) / PC: X에 올리기 · 링크 복사 메뉴 (PC 공유 시트엔 X·카톡이 없어서)
+      const TOUCH = window.matchMedia("(pointer: coarse)").matches;
+      const xUrl = `https://x.com/intent/post?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(site)}`;
+      const menu = el("div", { class: "win-menu", hidden: "" },
+        el("a", { href: xUrl, target: "_blank", rel: "noopener" }, t("win_share_x")),
+        el("button", { type: "button" }, t("win_share_copy")));
+      menu.querySelector("button").addEventListener("click", async () => {
+        try { await navigator.clipboard.writeText(`${shareText}\n${site}`); toast(t("link_copied")); } catch (_) { prompt(t("link_copy"), `${shareText}\n${site}`); }
+        menu.hidden = true;
       });
+      share.addEventListener("click", async (e) => {
+        e.stopPropagation();
+        if (TOUCH && navigator.share) { try { await navigator.share({ text: `${shareText}\n${site}` }); } catch (_) { /* 취소 */ } return; }
+        menu.hidden = !menu.hidden;
+      });
+      document.addEventListener("click", (e) => { if (!menu.contains(e.target)) menu.hidden = true; });
       const watch = w.url || `https://www.youtube.com/results?search_query=${encodeURIComponent(`A2O SOUL ${w.show} 1위 앵콜`)}`;
       // 공식 단체 사진 (info.yml wins.image) — 못 불러오면 사진 없이
       let photo = null;
@@ -547,7 +558,8 @@ if ("serviceWorker" in navigator) {
           el("div", { class: "win-kicker" }, "A2O SOUL"),
           el("h2", { class: "win-title" }, first ? t("win_first", { show }) : t("win_n", { show })),
           el("div", { class: "win-sub" }, [`${show}${w.ep ? ` ${t("win_ep", { n: w.ep })}` : ""}`, w.date.replaceAll("-", "."), n > 0 ? t("win_days", { n }) : ""].filter(Boolean).join(" · ")),
-          el("div", { class: "win-acts" }, el("a", { class: "win-btn primary", href: watch, target: "_blank", rel: "noopener" }, t("win_watch")), share)));
+          el("div", { class: "win-acts" }, el("a", { class: "win-btn primary", href: watch, target: "_blank", rel: "noopener" }, t("win_watch")),
+            el("span", { class: "win-share" }, share, menu))));
       $("tabs").before(banner);
     }
   }
