@@ -24,9 +24,9 @@ def user_id(username):
     return _get(f"/users/by/username/{username}")["data"]["id"]
 
 
-def fetch_posts(uid, username, since_id=None, first_limit=20):
+def fetch_posts(uid, username, since_id=None, first_limit=20, exclude="replies,retweets"):
     """[{id, caption, timestamp, permalink}] (최신순). 처음엔 최근 first_limit개만, 이후엔 since_id 이후 새 글 전부."""
-    params = {"exclude": "replies,retweets", "tweet.fields": "created_at,note_tweet,entities,attachments",
+    params = {"exclude": exclude, "tweet.fields": "created_at,note_tweet,entities,attachments",
               "expansions": "attachments.media_keys", "media.fields": "type,url,preview_image_url"}
     if since_id:
         params.update(since_id=since_id, max_results=100)

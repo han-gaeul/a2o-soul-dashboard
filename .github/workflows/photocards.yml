@@ -1,0 +1,59 @@
+# @soultemplates 새 포카 템플릿 → 멤버별 카드로 잘라 PR (확인 후 머지)
+name: Photocards
+
+on:
+  schedule:
+    - cron: "41 */3 * * *"   # 3시간마다 (새 글만 읽어서 X 비용 거의 없음)
+  workflow_dispatch:
+    inputs:
+      backfill:
+        description: "최근 글 최대 100개 다시 훑기"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: photocards
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install OCR
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq tesseract-ocr > /dev/null
+          pip install -q pytesseract scipy numpy pillow requests
+      - name: Watch @soultemplates
+        env:
+          X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
+        run: python collector/pc_watch.py ${{ inputs.backfill && '--backfill' || '' }}
+      - name: Open PR or save state
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain site/img/photocards)" ]; then
+            BR=photocards-auto
+            git checkout -B "$BR"
+            git add site/img/photocards collector/pc_state.json
+            git commit -m "포카: @soultemplates 새 템플릿 반영"
+            git push -f origin "$BR"
+            NUM=$(gh pr list --head "$BR" --state open --json number --jq '.[0].number')
+            if [ -n "$NUM" ]; then gh pr edit "$NUM" --body-file pc_report.md
+            else gh pr create --head "$BR" --base main --title "포카: @soultemplates 새 템플릿" --body-file pc_report.md; fi
+          elif [ -n "$(git status --porcelain collector/pc_state.json)" ]; then
+            git add collector/pc_state.json
+            git commit -m "포카 확인 기준점 갱신"
+            for i in 1 2 3; do git pull --rebase -q && git push -q && break; sleep 5; done
+          fi
