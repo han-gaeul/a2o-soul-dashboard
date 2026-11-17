@@ -579,3 +579,11 @@ details.howto { scroll-margin-top: 64px; }
 .chip.fs-video { background: #e6f0ff; color: #1d5bd8; }
 .chip.fs-sign { background: #ffe9f0; color: #c2185b; }
 @media (prefers-color-scheme: dark) { .chip.fs-video { background: #1b2a44; color: #8db4ff; } .chip.fs-sign { background: #3a1a26; color: #ff8fb4; } }
+
+/* 오프라인 매장 */
+.off-title { font-size: 15px; margin: 16px 0 2px; }
+.off-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 6px 14px; margin-top: 8px; }
+.off-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+.off-name { font-weight: 700; font-size: 14px; min-width: 0; }
+.off-name a { color: inherit; }
+.off-meta { display: flex; gap: 6px; align-items: center; flex-shrink: 0; white-space: nowrap; }

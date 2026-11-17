@@ -155,6 +155,10 @@ def load_fan_files(cfg):
                     for x in info.get("records") or [] if x.get("date") and x.get("title")],
         "shops": [{"label": str(x["label"]), "url": str(x["url"]), "note": str(x.get("note") or ""), "kind": str(x.get("kind") or "")}
                   for x in info.get("shops") or [] if x.get("label") and str(x.get("url", "")).startswith("https://")],
+        "offline_stores": [{"name": str(x["name"]), "area": str(x.get("area") or ""), "handle": str(x.get("handle") or "").lstrip("@"),
+                            "versions": str(x.get("versions") or ""), "date": str(x.get("date") or "")}
+                           for x in info.get("offline_stores") or [] if isinstance(x, dict) and x.get("name")],
+        "offline_stores_credit": str(info.get("offline_stores_credit") or ""),
     }
     guide = read_yml("guide.yml")
     cfg["guide"] = {"course": [{"id": str(c["id"]), "note": str(c.get("note") or "")} for c in guide.get("course") or []],
@@ -1017,6 +1021,37 @@ def collect(cfg, rescan=False):
                                  lambda c, p_, t_, v=vendor: rules.fansign_items(c, p_, v), limit)
                     if post["id"] in store["posts"]:
                         store["posts"][post["id"]]["vendor"] = vendor
+        # 오프라인 음반 매장 — 'A2O SOUL + 입고' 글 검색(6시간마다): 아는 매장은 입고 확인 날짜 갱신, 모르는 계정은 새 매장 후보로
+        sst = store.setdefault("x_stores", {})
+        if not sst.get("at") or now - datetime.fromisoformat(sst["at"]) >= timedelta(hours=6):
+            query = ("(\"A2O SOUL\" OR A2OSOUL OR 에이투오소울 OR \"에이투오 소울\") "
+                     "(입고 OR 재입고 OR 신보 OR \"NEW RELEASE\" OR 매장) -from:A2O_SOUL -is:retweet -is:reply")
+            try:
+                posts = xposts.search_posts(query, since_id=sst.get("since_id"), max_results=100, pages=1 if sst.get("since_id") else 3)
+                sst["at"] = now.isoformat(timespec="minutes")
+                if posts:
+                    sst["since_id"] = max(posts, key=lambda p_: int(p_["tweet_id"]))["tweet_id"]
+                known = {str(x.get("handle") or "").lower() for x in cfg["info"].get("offline_stores") or []} - {""}
+                skip = {v["handle"].lower() for v in cfg.get("x_vendors") or []} | {u.lower() for u in cfg["x_fans"]}
+                seen, cands = sst.setdefault("seen", {}), sst.setdefault("candidates", {})
+                n_new = 0
+                for p_ in posts:
+                    if not re.search(r"입고|NEW\s?RELEASE|신보", p_["caption"], re.I):
+                        continue
+                    h, day = p_["author"], (kst_datetime(p_["timestamp"]) or "")[:10]
+                    if h.lower() in known:
+                        if day >= (seen.get(h.lower()) or {}).get("date", ""):
+                            seen[h.lower()] = {"date": day, "url": p_["permalink"]}
+                    elif h.lower() not in skip and h.lower() not in cands:
+                        cands[h.lower()] = {"handle": h, "name": p_.get("author_name") or h, "date": day, "url": p_["permalink"],
+                                            "text": re.sub(r"\s+", " ", p_["caption"])[:80]}
+                        n_new += 1
+                if len(cands) > 40:  # 오래된 후보부터 정리
+                    for k in sorted(cands, key=lambda k: cands[k]["date"])[:len(cands) - 40]:
+                        cands.pop(k)
+                print(f"[매장] 입고 글 검색 {len(posts)}개 · 새 매장 후보 {n_new}개")
+            except Exception as e:  # noqa: BLE001
+                print(f"[매장] 입고 글 검색 실패: {e}")
         # 음방·투표 앱 공식 계정 — 계정 목록 없이, A2O SOUL 투표·1위 후보 글 중 X 금색 인증(기관) 계정 글만 (3시간마다, 읽은 글 수만큼 과금)
         ost = store.setdefault("x_official_votes", {})
         if ost.get("v") != 2:  # 판별 방식이 바뀌어서 예전에 모은 공식 투표 글은 지우고 다시 검색
@@ -1124,7 +1159,7 @@ def write_pending(pending):
     path.write_text("\n".join(lines) + "\n", "utf-8")
 
 
-def write_health(cfg, videos, members, today, official=()):
+def write_health(cfg, videos, members, today, official=(), store_cands=None):
     """수집 점검 → data/health.md (워크플로가 '수집 점검' 이슈로 올림). 문제가 없으면 파일 삭제."""
     secs = []
     known = {m["name"] for m in cfg["members"]}
@@ -1173,6 +1208,11 @@ def write_health(cfg, videos, members, today, official=()):
     missing = sorted({x for x in texts if x and re.search(r"[가-힣]", x) and set(tr.get(x, {})) < {"en", "ja", "zh", "es", "id", "th", "pt"}})
     if missing:
         secs.append(("번역이 없는 문구", "`translations.yml`에 원문 그대로 추가 (en·ja·zh·es·id·th)", [f"- {x}" for x in missing]))
+    # 오프라인 매장 후보: 'A2O SOUL 입고' 글을 올린, 목록에 없는 계정
+    if store_cands:
+        rows = [f"- @{c['handle']} {c['name']} · {c['date']} · [글]({c['url']}) — {c['text']}"
+                for c in sorted(store_cands.values(), key=lambda c: c["date"], reverse=True)[:20]]
+        secs.append(("새 오프라인 매장 후보", "매장 공식 계정이 맞으면 `info.yml` offline_stores에 추가 (리셀러·팬 계정은 무시)", rows))
     # 5) 투표 가이드가 오래됨
     checked = cfg["howto"].get("checked") or ""
     if checked and (date.fromisoformat(today) - date.fromisoformat(checked[:10])).days > 60:
@@ -1429,6 +1469,7 @@ def build(cfg):
                     key=lambda v: v["published_at"] or "", reverse=True)[:12]
     today = datetime.now(KST).date().isoformat()
 
+    stores_state = load_json("announcements.json", {}).get("x_stores") or {}
     dashboard = {
         "updated_at": registry.get("collected_at"),
         "debut_date": cfg["debut_date"],
@@ -1462,7 +1503,10 @@ def build(cfg):
         "supports": sorted((x for x in cfg["supports"] if x["end"] >= today), key=lambda x: x["start"]),
         "howto": cfg["howto"],
         "tr": cfg["tr"],
-        "info": cfg["info"],
+        "info": {**cfg["info"], "offline_stores": [  # 입고 글이 더 최근에 잡혔으면 날짜·글 링크 갱신
+            {**x, **({"date": seen["date"], "url": seen["url"]} if (seen := (stores_state.get("seen") or {}).get(x["handle"].lower()))
+                      and seen["date"] >= x["date"] else {})}
+            for x in cfg["info"].get("offline_stores") or []]},
         "guide": {"course": [{**c, **{k: by_id[c["id"]][k] for k in slim}}
                              for c in cfg["guide"]["course"] if c["id"] in by_id],
                   "tips": cfg["guide"]["tips"], "beginner": cfg["guide"]["beginner"]},
@@ -1471,7 +1515,7 @@ def build(cfg):
     write_calendar(cfg, [e for e in all_events if e.get("auto") and not e.get("anniv") and not e.get("past")] + annivs)
     official = [(registry["channels"].get(channel_id(c), {}).get("title") or channel_id(c), channel_id(c))
                 for c in cfg["channels"] if (c.get("kpi") or c.get("mv")) and channel_id(c)]
-    write_health(cfg, videos, members, today, official)
+    write_health(cfg, videos, members, today, official, stores_state.get("candidates") or {})
     print(f"dashboard.json 생성: 영상 {len(videos)}개 (MV {len(mvs)}, 직캠 {len(fancams)}), 일정 {len(dashboard['events'])}개")
 
 

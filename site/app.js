@@ -579,6 +579,22 @@ if ("serviceWorker" in navigator) {
       return a;
     }));
     $("shopHome").hidden = false;
+    // 오프라인 매장: 최근 입고 확인 순 — 이름은 매장 계정/입고 글로
+    const offs = [...(data.info?.offline_stores || [])].sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+    if (offs.length) {
+      const credit = data.info?.offline_stores_credit;
+      $("offlineNote").textContent = [t("off_desc"), credit ? t("off_credit", { who: credit }) : ""].filter(Boolean).join(" · ");
+      $("offlineList").replaceChildren(...offs.map((x) => {
+        const href = x.url || (x.handle ? `https://x.com/${x.handle}` : "");
+        const name = href ? el("a", { href, target: "_blank", rel: "noopener" }, tc(x.name)) : el("span", {}, tc(x.name));
+        return el("div", { class: "off-row" },
+          el("div", { class: "off-name" }, name, x.area ? el("span", { class: "muted small" }, ` · ${tc(x.area)}`) : null),
+          el("div", { class: "off-meta" },
+            x.versions ? el("span", { class: "chip" }, tc(x.versions)) : null,
+            x.date ? el("span", { class: "muted small" }, t("off_in", { d: x.date.slice(5).replace("-", ".") })) : null));
+      }));
+      $("offlineStores").hidden = false;
+    }
   } else {
     $("shopHome").remove();
   }

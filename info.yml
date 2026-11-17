@@ -44,6 +44,21 @@ records: []
 
 # 음반·굿즈 판매처 (한눈에 탭 '음반 구매처' + 응원 탭) { label, url, note, kind }
 #   예) - { label: 공식 스토어, url: "https://...", note: "앨범·응원봉" }
+# 오프라인 음반 매장 (홈 '음반 구매처' 아래) — 정리 도움 @star_light_4u · 팬 제보
+#   handle: 매장 X 계정 (@ 없이) — 수집 때 그 계정의 A2O SOUL 입고 글을 찾아 '입고 확인' 날짜를 자동으로 갱신
+#   versions: 확인된 버전 / date: 입고 확인일
+offline_stores_credit: "@star_light_4u"
+offline_stores:
+  - { name: 메이크스타 스페이스 강남, area: 서울 강남, handle: MAKESTARSPACEGN, versions: "EP · CARABINER Ver.", date: 2026-11-10 }
+  - { name: 위드뮤 홍대 AK PLAZA, area: 서울 홍대, handle: Withmuu_HD, versions: "", date: 2026-11-12 }
+  - { name: 위드뮤 잠실롯데점, area: 서울 잠실, handle: Withmuu_JS, versions: "SOUL · CONSTELLATION Ver.", date: 2026-11-12 }
+  - { name: 위드뮤 용산아이파크몰점, area: 서울 용산, handle: Withmuu_ys, versions: "SOUL · CONSTELLATION Ver.", date: 2026-11-13 }
+  - { name: 케이타운포유 인사, area: 서울 인사동, handle: ktown4u_inso, versions: "랜덤 Ver.", date: 2026-11-10 }
+  - { name: 케이타운포유 코엑스, area: 서울 삼성(코엑스), handle: Ktown4u_coex, versions: "랜덤 Ver.", date: 2026-11-10 }
+  - { name: Ksendy 김포점, area: 경기 김포, handle: ksendy_official, versions: "", date: 2026-11-10 }
+  - { name: 뮤직앤갤러리, area: 대전, handle: musicngallery, versions: "", date: 2026-11-12 }
+  - { name: OffiK, area: "", handle: "", versions: "CARABINER Ver.", date: 2026-11-10 }
+
 shops:
   - { label: Mnet Plus Merch (A2O), url: "https://mnetplusmerch.com/product/list.html?cate_no=374", note: "앨범·팬사인회·영상통화 이벤트", kind: 앨범 }
   - { label: 메이크스타, url: "https://www.makestar.com/product/21531", note: "팬사인회·영상통화, 미공개 셀카 포카", kind: 앨범 }
