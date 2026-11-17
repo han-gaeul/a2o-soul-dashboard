@@ -57,6 +57,8 @@ def load_config():
     cfg["x_vendors"] = [{"handle": str(v["handle"]).lstrip("@"), "name": str(v.get("name") or v["handle"])}
                         for v in (cfg.get("x_vendors") or []) if isinstance(v, dict) and v.get("handle")]
     cfg["x_vote_accounts"] = [str(u).lstrip("@") for u in (cfg.get("x_vote_accounts") or [])]
+    cfg["x_media"] = [{"handle": str(v["handle"]).lstrip("@"), "name": str(v.get("name") or v["handle"])}
+                      for v in (cfg.get("x_media") or []) if isinstance(v, dict) and v.get("handle")]
     cfg["videos"] = cfg.get("videos") or []
     cfg["debut_date"] = str(cfg.get("debut_date") or "")
     # MV로 인정하는 채널 (mv: true). 그 밖의 채널에 올라온 MV는 콘텐츠로
@@ -362,6 +364,21 @@ def notice_feed(cfg, registry, store, limit=60):
         out.append({"url": url, "at": kst_datetime(m.get("timestamp")), "account": m["account"], "kind": kind,
                     "text": text[:600], "images": (m.get("images") or [])[:4]})
     out.sort(key=lambda x: x["at"], reverse=True)
+    return out[:limit]
+
+
+def media_feed(cfg, state, limit=40):
+    """매체·콘텐츠 계정의 A2O SOUL 글 → 최신순 [{url, at, handle, name, text, images, video}]."""
+    names = {v["handle"].lower(): v["name"] for v in cfg["x_media"]}
+    out = []
+    for m in (state.get("posts") or {}).values():
+        if m.get("author", "").lower() not in names:  # 목록에서 뺀 계정은 바로 숨김
+            continue
+        text = re.sub(r"\s*https://t\.co/\w+\s*$", "", (m.get("caption") or "").strip())
+        out.append({"url": m["permalink"], "at": kst_datetime(m.get("timestamp")), "handle": m["author"],
+                    "name": names[m["author"].lower()], "text": text[:400], "images": (m.get("images") or [])[:4],
+                    "video": bool(m.get("video"))})
+    out.sort(key=lambda x: x["at"] or "", reverse=True)
     return out[:limit]
 
 
@@ -1024,6 +1041,64 @@ def collect(cfg, rescan=False):
                                  lambda c, p_, t_, v=vendor: rules.fansign_items(c, p_, v), limit)
                     if post["id"] in store["posts"]:
                         store["posts"][post["id"]]["vendor"] = vendor
+        # 매체·콘텐츠 계정 — 목록 계정이 A2O SOUL을 언급한 글 (1시간마다, from: 검색이라 읽는 글 수가 적음)
+        mst = store.setdefault("x_media", {})
+        mposts = mst.setdefault("posts", {})
+        mcands = mst.setdefault("candidates", {})
+        mknown = {v["handle"].lower() for v in cfg["x_media"]}
+        if cfg["x_media"] and (not mst.get("checked") or now - datetime.fromisoformat(mst["checked"]) >= timedelta(days=1)):
+            try:  # 없는 아이디 확인 (하루 한 번)
+                ok = xposts.users_exist([v["handle"] for v in cfg["x_media"]])
+                mst["missing"] = sorted(v["handle"] for v in cfg["x_media"] if not ok.get(v["handle"].lower(), True))
+                mst["checked"] = now.isoformat(timespec="minutes")
+            except Exception as e:  # noqa: BLE001
+                print(f"[매체] 아이디 확인 실패: {e}")
+        if cfg["x_media"] and (not mst.get("at") or now - datetime.fromisoformat(mst["at"]) >= timedelta(hours=1)):
+            base = "(\"A2O SOUL\" OR A2OSOUL OR 에이투오소울 OR \"에이투오 소울\") "
+            live = [v["handle"] for v in cfg["x_media"] if v["handle"] not in (mst.get("missing") or [])]
+            groups, cur = [], []
+            for h in live:
+                if cur and len(base) + len(" OR ".join("from:" + x for x in cur + [h])) + 30 > 500:
+                    groups.append(cur)
+                    cur = []
+                cur.append(h)
+            if cur:
+                groups.append(cur)
+            got, failed = [], False
+            for g in groups:
+                try:
+                    got += xposts.search_posts(base + f"({' OR '.join('from:' + h for h in g)}) -is:retweet -is:reply",
+                                               since_id=mst.get("since_id"), max_results=100, media=True)
+                except Exception as e:  # noqa: BLE001
+                    failed = True
+                    print(f"[매체] 검색 실패: {e}")
+            if not failed:
+                mst["at"] = now.isoformat(timespec="minutes")
+            if got:
+                mst["since_id"] = max(got, key=lambda p_: int(p_["tweet_id"]))["tweet_id"]
+            for p_ in got:
+                if A2O_MENTION.search(p_["caption"]):
+                    mposts[p_["tweet_id"]] = {k: p_.get(k) for k in ("caption", "timestamp", "permalink", "author", "author_name", "images", "video")}
+            cut = (now - timedelta(days=14)).isoformat()
+            for k in [k for k, m in mposts.items() if (m.get("timestamp") or "") < cut]:
+                mposts.pop(k)
+            print(f"[매체] 새 글 {len(got)}개 · 보관 {len(mposts)}개")
+
+        def media_cand(p_):
+            """인증 기업 계정인데 목록에 없는 계정 → 새 매체 후보 (판매처·매장·투표 앱 제외)."""
+            h = p_["author"].lower()
+            if p_.get("verified_type") != "business" or h in mknown or h in mcands or h == "a2o_soul":
+                return
+            if h in {v["handle"].lower() for v in cfg.get("x_vendors") or []} | {u.lower() for u in cfg["x_vote_accounts"]} \
+                    | {str(x.get("handle") or "").lower() for x in cfg["info"].get("offline_stores") or []}:
+                return
+            mcands[h] = {"handle": p_["author"], "name": p_.get("author_name") or p_["author"],
+                         "date": (kst_datetime(p_["timestamp"]) or "")[:10], "url": p_["permalink"],
+                         "text": re.sub(r"\s+", " ", p_["caption"])[:80]}
+            if len(mcands) > 30:
+                for k in sorted(mcands, key=lambda k: mcands[k]["date"])[:len(mcands) - 30]:
+                    mcands.pop(k)
+
         # 오프라인 음반 매장 — 'A2O SOUL + 입고' 글 검색(6시간마다): 아는 매장은 입고 확인 날짜 갱신, 모르는 계정은 새 매장 후보로
         sst = store.setdefault("x_stores", {})
         if not sst.get("at") or now - datetime.fromisoformat(sst["at"]) >= timedelta(hours=6):
@@ -1041,6 +1116,7 @@ def collect(cfg, rescan=False):
                 seen, cands = sst.setdefault("seen", {}), sst.setdefault("candidates", {})
                 n_new = 0
                 for p_ in posts:
+                    media_cand(p_)
                     # '교복 입고 나와' 같은 팬 글이 섞이지 않게 매장 입고 공지 표현만 ('입고 공지·완료·안내·되었', 재입고, 신보 입고, NEW RELEASE)
                     if not re.search(r"(신보|음반|앨범|ALBUM)?\s*입고\s*(공지|완료|안내|소식|되었|됐|했)|재입고|신보\s*입고|NEW\s?RELEASE|IN\s?STOCK|RESTOCK",
                                      p_["caption"], re.I):
@@ -1086,6 +1162,8 @@ def collect(cfg, rescan=False):
                                "verified": sorted({f"{p_['author']}:{p_.get('verified_type')}" for p_ in posts if p_.get("verified_type") not in (None, "none")})[:30]}
                 if posts:
                     ost["since_id"] = max(posts, key=lambda p_: int(p_["tweet_id"]))["tweet_id"]
+                for p_ in posts:
+                    media_cand(p_)
                 for p_ in official:
                     p_["id"] = "xo:" + p_["tweet_id"]
                     p_["caption"] = f"{p_['caption']}\n\n— {p_.get('author_name') or p_['author']}"  # 계정 이름(예: THE SHOW)으로도 음방·앱 찾기
@@ -1166,7 +1244,7 @@ def write_pending(pending):
     path.write_text("\n".join(lines) + "\n", "utf-8")
 
 
-def write_health(cfg, videos, members, today, official=(), store_cands=None):
+def write_health(cfg, videos, members, today, official=(), store_cands=None, media_state=None):
     """수집 점검 → data/health.md (워크플로가 '수집 점검' 이슈로 올림). 문제가 없으면 파일 삭제."""
     secs = []
     known = {m["name"] for m in cfg["members"]}
@@ -1220,6 +1298,14 @@ def write_health(cfg, videos, members, today, official=(), store_cands=None):
         rows = [f"- @{c['handle']} {c['name']} · {c['date']} · [글]({c['url']}) — {c['text']}"
                 for c in sorted(store_cands.values(), key=lambda c: c["date"], reverse=True)[:20]]
         secs.append(("새 오프라인 매장 후보", "매장 공식 계정이 맞으면 `info.yml` offline_stores에 추가 (리셀러·팬 계정은 무시)", rows))
+    # 매체·콘텐츠: 없는 아이디, 새 후보
+    ms = media_state or {}
+    if ms.get("missing"):
+        secs.append(("없는 매체 아이디", "`targets.yml` x_media에서 고치거나 빼기 (바뀐 아이디일 수 있어요)", [f"- @{h}" for h in ms["missing"]]))
+    if ms.get("candidates"):
+        rows = [f"- @{c['handle']} {c['name']} · {c['date']} · [글]({c['url']}) — {c['text']}"
+                for c in sorted(ms["candidates"].values(), key=lambda c: c["date"], reverse=True)[:20]]
+        secs.append(("새 매체·콘텐츠 계정 후보", "A2O SOUL 글을 올린 인증 기업 계정 — 매체가 맞으면 `targets.yml` x_media에 추가", rows))
     # 5) 투표 가이드가 오래됨
     checked = cfg["howto"].get("checked") or ""
     if checked and (date.fromisoformat(today) - date.fromisoformat(checked[:10])).days > 60:
@@ -1477,6 +1563,7 @@ def build(cfg):
     today = datetime.now(KST).date().isoformat()
 
     stores_state = load_json("announcements.json", {}).get("x_stores") or {}
+    media_state = load_json("announcements.json", {}).get("x_media") or {}
     dashboard = {
         "updated_at": registry.get("collected_at"),
         "debut_date": cfg["debut_date"],
@@ -1485,6 +1572,7 @@ def build(cfg):
         "ig_feed": [x for x in feed_all if x["account"] != "x"][:15] + [x for x in feed_all if x["account"] == "x"][:15],
         "photos": photo_feed(cfg, registry, load_json("announcements.json", {})),
         "notice_posts": notice_feed(cfg, registry, load_json("announcements.json", {})),
+        "media_posts": media_feed(cfg, media_state),
         "mvs": mvs,
         "members": members,
         "group_links": cfg["group_links"],
@@ -1522,7 +1610,7 @@ def build(cfg):
     write_calendar(cfg, [e for e in all_events if e.get("auto") and not e.get("anniv") and not e.get("past")] + annivs)
     official = [(registry["channels"].get(channel_id(c), {}).get("title") or channel_id(c), channel_id(c))
                 for c in cfg["channels"] if (c.get("kpi") or c.get("mv")) and channel_id(c)]
-    write_health(cfg, videos, members, today, official, stores_state.get("candidates") or {})
+    write_health(cfg, videos, members, today, official, stores_state.get("candidates") or {}, media_state)
     print(f"dashboard.json 생성: 영상 {len(videos)}개 (MV {len(mvs)}, 직캠 {len(fancams)}), 일정 {len(dashboard['events'])}개")
 
 

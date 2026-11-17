@@ -739,6 +739,40 @@ if ("serviceWorker" in navigator) {
     $("noticePostsSec").append(empty(t("notice_none")));
   }
 
+  // ---------- 공지 탭: 매체·콘텐츠 계정의 A2O SOUL 글 ----------
+  const mposts = data.media_posts || [];
+  if (mposts.length) {
+    let acct = "";
+    const accts = [...new Map(mposts.map((x) => [x.handle, x.name])).entries()];
+    const draw = () => {
+      $("mediaAccts").replaceChildren(...(accts.length > 1 ? [["", t("ev_all")], ...accts] : []).map(([h, name]) => {
+        const b = el("button", { type: "button", class: h === acct ? "on" : "", "aria-pressed": String(h === acct) }, name);
+        b.addEventListener("click", () => { acct = h; draw(); });
+        return b;
+      }));
+      $("mediaPosts").replaceChildren(...mposts.filter((x) => !acct || x.handle === acct).map((x) => {
+        const iso = kstDate(x.at).toISOString();
+        const src = (x.images || [])[0];
+        let thumb = null;
+        if (src) {
+          const img = el("img", { src, alt: "", loading: "lazy", decoding: "async", referrerpolicy: "no-referrer" });
+          img.addEventListener("error", () => thumb.remove());
+          thumb = el("div", { class: "media-thumb" }, img, x.video ? el("span", { class: "media-play", "aria-label": t("media_video") }, "▶") : null);
+        }
+        return el("a", { class: "media-card", href: x.url, target: "_blank", rel: "noopener" },
+          thumb,
+          el("div", { class: "media-body" },
+            el("div", { class: "ig-meta" }, el("b", {}, x.name),
+              ageHours(iso) <= NEW_HOURS ? el("span", { class: "chip chip-on" }, "NEW") : null,
+              el("span", { class: "muted" }, when(iso))),
+            el("div", { class: "media-text" }, x.text)));
+      }));
+    };
+    draw();
+  } else {
+    $("mediaPostsSec").append(empty(t("media_none")));
+  }
+
   // ---------- 세계관·앨범 (입덕 탭) ----------
   const info = data.info || {};
   if ((info.lore || []).length) for (const p of info.lore) $("lore").append(el("p", {}, tc(p)));
