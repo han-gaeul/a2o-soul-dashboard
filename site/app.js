@@ -569,7 +569,10 @@ if ("serviceWorker" in navigator) {
     if (ga !== gb) return ga - gb;
     return ga === 1 ? _nk(b).localeCompare(_nk(a)) : _nk(a).localeCompare(_nk(b));
   });
-  const shops = data.info?.shops || [];
+  // 지금 언어 지역의 판매처(langs)를 먼저 — 예: 일본어 화면이면 일본 판매처가 위로
+  const mine = (x) => ((x.langs || []).includes(LANG) ? 0 : (x.langs || []).length ? 2 : 1);
+  // 지역 판매처(langs 지정)는 그 언어 화면에서만
+  const shops = [...(data.info?.shops || [])].filter((x) => mine(x) < 2).sort((a, b) => mine(a) - mine(b));
   // 한눈에 탭: 음반 구매처 한 번에
   if (shops.length) {
     $("shopGrid").replaceChildren(...shops.map((x) => {
@@ -579,6 +582,24 @@ if ("serviceWorker" in navigator) {
       return a;
     }));
     $("shopHome").hidden = false;
+    // 오프라인 매장: 최근 입고 확인 순 — 이름은 매장 계정/입고 글로
+    const offs = [...(data.info?.offline_stores || [])].filter((x) => mine(x) < 2).sort((a, b) => mine(a) - mine(b) || (b.date || "").localeCompare(a.date || ""));
+    if (offs.length) {
+      const credit = data.info?.offline_stores_credit;
+      $("offlineNote").textContent = [t("off_desc"), credit ? t("off_credit", { who: credit }) : ""].filter(Boolean).join(" · ");
+      $("offlineList").replaceChildren(...offs.map((x) => {
+        const href = x.site || (x.handle ? `https://x.com/${x.handle}` : "") || x.url || "";
+        const name = href ? el("a", { href, target: "_blank", rel: "noopener" }, tc(x.name)) : el("span", {}, tc(x.name));
+        const inDate = x.date ? t("off_in", { d: x.date.slice(5).replace("-", ".") }) : "";
+        return el("div", { class: "off-row" },
+          el("div", { class: "off-name" }, name, x.area ? el("span", { class: "muted small" }, ` · ${tc(x.area)}`) : null),
+          el("div", { class: "off-meta" },
+            x.versions ? el("span", { class: "chip" }, tc(x.versions)) : null,
+            inDate ? (x.url ? el("a", { class: "muted small", href: x.url, target: "_blank", rel: "noopener" }, `${inDate} ↗`)
+              : el("span", { class: "muted small" }, inDate)) : null));
+      }));
+      $("offlineStores").hidden = false;
+    }
   } else {
     $("shopHome").remove();
   }
