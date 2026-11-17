@@ -1653,6 +1653,28 @@
    "permalink": "https://x.com/muniverse_io/status/2122600639901442334",
    "timestamp": "2026-11-17T08:00:03.000Z"
   },
+  "xo:2122616986215862435": {
+   "caption": "🩵[THE SHOW] EP.404 실시간 투표🩵\n\n실시간 투표 오픈!🔥\n\nTHE SHOW 1위를 향한 실시간 투표가 시작됩니다! 👀✨\n최애를 위해 지금 바로 투표해 주세요!\n\n🏆 실시간 투표 후보\n🩵 #Dancing_in_the_Dark -  #A2OSOUL\n🩵 #NAGARI - #KEYVITUP (#키빗업)\n🩵 #BLOW_UP - #P1Harmony (#피원하모니)\n\n지금 바로 BIGC에서 투표하세요🎤\n\n🗳️https://t.co/zC253QrUbp\n\n#더쇼 #THESHOW #빅크 #BIGC\n@theshow_offcl @THEKPOP\n\n— 빅크 초이스 | BIGC CHOICE",
+   "excerpt": "🩵[THE SHOW] EP.404 실시간 투표🩵\n\n실시간 투표 오픈!🔥\n\nTHE SHOW 1위를 향한 실시간 투표가 시작됩니다! 👀✨\n최애를 위해 지금 바로 투표해 주세요!\n\n🏆 실시간 투표 후보\n🩵 #Dancing_in_the_Dark -  #A2O",
+   "items": [
+    {
+     "app": "빅크(BIGC)",
+     "confidence": 0.6,
+     "date": null,
+     "end": null,
+     "end_date": null,
+     "kind": "vote",
+     "place": null,
+     "show": "더쇼",
+     "start": null,
+     "time": null,
+     "title": "더쇼 생방송 투표",
+     "url": null
+    }
+   ],
+   "permalink": "https://x.com/BIGCChoice/status/2122616986215862435",
+   "timestamp": "2026-11-17T09:05:00.000Z"
+  },
   "xv:2119672177347981651": {
    "caption": "[💿] A2O SOUL DEBUT EP [SUPERSTAR]\n발매 기념 공개 팬사인회\n\n📢응모 마감 D-1‼️\n✨당일 공개 팬사인회에서 SPECIAL STAGE가 진행됩니다.\n\n📅2026.11.14 (토) 19:30 (KST)\n📍스타필드 수원 타워 아트리움\n\n[ONLINE] 뮤직아트 온라인몰\n🛒온라인 응모기간 : 2026.11.08 (일) 14:00 ~ 11.10 (화) 23:59 (KST)\n\n[OFFLINE] 영풍문고 스타필드수원점 내 음반매장\n🛒오프라인 응모기간 : 2026.11.08 (일) 14:00 ~ 11.10 (화) 21:00 (KST)\n\n🌠응모자 전원 미공개 셀카 포토카드 15종 중 1종 랜덤 증정\n\n🔗https://t.co/I1sj0S6DOk",
    "excerpt": "[💿] A2O SOUL DEBUT EP [SUPERSTAR]\n발매 기념 공개 팬사인회\n\n📢응모 마감 D-1‼️\n✨당일 공개 팬사인회에서 SPECIAL STAGE가 진행됩니다.\n\n📅2026.11.14 (토) 19:30 (KST)\n📍스타필드 수원 타워 아",
@@ -1902,21 +1924,32 @@
   "since_id": "2122618084649468286"
  },
  "x_official_votes": {
-  "at": "2026-11-17T17:50+09:00",
+  "at": "2026-11-17T20:50+09:00",
   "deep": 1,
   "last": {
    "official": [
-    "muniverse_io"
+    "BIGCChoice"
    ],
-   "read": 14,
+   "read": 57,
    "verified": [
+    "12O106:blue",
+    "A2OSOULBASE:blue",
     "A2OSOULPH:blue",
+    "BIGCChoice:blue",
+    "KshowAnalysis1:blue",
+    "LiIyhzt7:blue",
+    "MCBSkpopvotes:blue",
     "a2osoulvote:blue",
-    "itsmoonlights_:blue",
-    "muniverse_io:blue"
+    "dieoana2o:blue",
+    "helloitsfah:blue",
+    "listen2seohart:blue",
+    "mondleincamine:blue",
+    "moooon_hh:blue",
+    "onlyseeonee:blue",
+    "seohaloverz:blue"
    ]
   },
-  "since_id": "2122613350286946522",
+  "since_id": "2122657633127862374",
   "v": 2
  },
  "x_stores": {
