@@ -2920,7 +2920,9 @@
     "ep": "404",
     "image": "https://pbs.twimg.com/media/HWaKAPjaAAASLtT.jpg?name=large",
     "image_post": "https://x.com/A2O_SOUL/status/2118538863505522863",
+    "og": "img/og/win-20261117.png",
     "show": "더쇼",
+    "tags": "#A2OSOUL1stWin #DancingInTheDark1stWin",
     "url": ""
    }
   ]
@@ -10358,7 +10360,9 @@
    "image_post": "https://x.com/A2O_SOUL/status/2118538863505522863",
    "key": "tl_win",
    "kind": "win",
+   "og": "img/og/win-20261117.png",
    "show": "더쇼",
+   "tags": "#A2OSOUL1stWin #DancingInTheDark1stWin",
    "title": "더쇼 1위",
    "url": ""
   },
