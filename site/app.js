@@ -494,8 +494,11 @@ if ("serviceWorker" in navigator) {
       const v = soon[0];
       const close = el("button", { type: "button", class: "vb-x", "aria-label": "✕" }, "✕");
       const bar = el("div", { class: `vote-bar${kstDate(v.end) - Date.now() < 6 * 3600000 ? " urgent" : ""}`, role: "status" },
-        el("a", { href: "#cheer", class: "vb-main" }, `🗳 ${[tc(v.show), tc(v.title)].filter(Boolean).join(" · ")} — ${t("vote_ends", { t: duration(kstDate(v.end) - Date.now()) })}`,
-          soon.length > 1 ? el("span", { class: "vb-more" }, ` +${soon.length - 1}`) : null), close);
+        // 누르면 바로 투표 링크로 (없으면 투표 앱 찾기)
+        el("a", { href: v.url || (v.app ? appSearch(v.app) : "#cheer"), ...(v.url || v.app ? { target: "_blank", rel: "noopener" } : {}), class: "vb-main" },
+          `🗳 ${[tc(v.show), tc(v.title)].filter(Boolean).join(" · ")} — ${t("vote_ends", { t: duration(kstDate(v.end) - Date.now()) })}`,
+          soon.length > 1 ? el("span", { class: "vb-more" }, ` +${soon.length - 1}`) : null),
+        v.url || v.app ? el("a", { class: "vb-go", href: v.url || appSearch(v.app), target: "_blank", rel: "noopener" }, v.url ? t("vote_open") : t("vote_find_app", { app: tc(v.app) })) : null, close);
       close.addEventListener("click", () => { hidden.add(v.end + v.title); pref.set("voteBarHidden", [...hidden].slice(-30)); bar.remove(); });
       $("tabs").before(bar);
     }
@@ -1002,7 +1005,7 @@ if ("serviceWorker" in navigator) {
     const radio = rg && document.querySelector(`#howto .gd-tile[data-title="${CSS.escape(rg.title)}"]`);
     const tiles = [
       ["🎙", "prerec", "prerecSec", cnt("prerecs", ".vote"), true],
-      ["🗳", "votes", "votesSec", cnt("votes", ".vote"), true],
+      ["🗳", "votes", "votesSec", cnt("votes", ".vt"), true],
       ["🎧", "streaming", "streamSec"],
       ["📣", "fanchants", "fanchantSec"],
       ["📻", "cheer_radio", radio],

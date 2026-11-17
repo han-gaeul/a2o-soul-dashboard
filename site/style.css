@@ -815,4 +815,5 @@ dialog.dlg-full[open] { display: flex; flex-direction: column; }
 .live-link:hover { text-decoration: underline; }
 .wk-detail .live-link { margin-left: 0; }
 .live-bar { text-decoration: none; padding-right: 12px; }
-.live-bar .vb-go { font-size: 12px; opacity: .9; white-space: nowrap; }
+.vote-bar .vb-go { font-size: 12px; opacity: .9; white-space: nowrap; color: inherit; text-decoration: none; }
+.vote-bar .vb-go:empty { display: none; }
