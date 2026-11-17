@@ -147,7 +147,8 @@ def load_fan_files(cfg):
         "fanchant_call": {"song": str((info.get("fanchant_call") or {}).get("song") or ""),
                           "lines": [[str(x) for x in ln] for ln in (info.get("fanchant_call") or {}).get("lines") or []]}
         if info.get("fanchant_call") else None,
-        "fanchant_guides": [{"song": str(g.get("song") or ""), "src": str(g["src"])}
+        "fanchant_guides": [{"song": str(g.get("song") or ""), "src": str(g["src"]),
+                             **{k: str(g[k]) for k in ("full", "post", "video") if g.get(k)}}
                             for g in info.get("fanchant_guides") or [] if isinstance(g, dict) and g.get("src")],
         "photocard_credit": {str(k): str(v) for k, v in (info.get("photocard_credit") or {}).items()},
         "photocard_order": [str(x) for x in info.get("photocard_order") or []],
