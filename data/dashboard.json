@@ -2473,10 +2473,15 @@
   },
   "fanchant_guides": [
    {
+    "full": "https://pbs.twimg.com/media/HWvHHLFaQAAW-r3?format=jpg&name=orig",
+    "post": "https://x.com/A2O_SOUL/status/2120011066642166008",
     "song": "Dancing in the Dark",
-    "src": "img/fanchants/dancing-in-the-dark.webp"
+    "src": "img/fanchants/dancing-in-the-dark.webp",
+    "video": "https://youtu.be/23dgxvhaxnw"
    },
    {
+    "full": "https://pbs.twimg.com/media/HUlheHDbkAAN4LF?format=jpg&name=orig",
+    "post": "https://x.com/A2O_SOUL/status/2110325079192281560",
     "song": "SUPERSTAR",
     "src": "img/fanchants/superstar.webp"
    }
