@@ -3,7 +3,7 @@
 VAPID_PRIVATE_KEY   VAPID 비밀키(base64url, `npx web-push generate-vapid-keys`의 Private Key) — GitHub Secrets
 targets.yml push.api / push.vapid_public — 구독 저장 Worker 주소, 공개키
 
-주제(topic): notice 새 공지·사녹 신청 / vote 투표 마감 3시간 전 / show 음방·라이브 1시간 전 / video 새 MV·무대 영상
+주제(topic): notice 새 공지·사녹 신청 / vote 투표 마감 3시간 전 / show 음방·라이브 1시간 전 / video 새 MV·무대 영상 / birthday 멤버 생일 (그날 0시부터)
 처음 실행할 땐 지금 있는 것들을 '보낸 것'으로만 기록하고 보내지 않음 (구독 첫날 알림 폭탄 방지)
 """
 import base64
@@ -18,21 +18,21 @@ import requests
 KST = timezone(timedelta(hours=9))
 
 MSG = {
-    "ko": {"ev_show": "{show} 출연", "show_now": "🔴 지금 생방송 중", "notice": "📢 새 공지", "prerec": "🎙 사녹 신청 곧 시작", "vote": "🗳 투표 마감 임박", "vote_body": "{name} — {t} 마감",
+    "ko": {"birthday": "🎂 오늘은 {name} 생일", "birthday_body": "{name}의 생일을 함께 축하해요!", "ev_show": "{show} 출연", "show_now": "🔴 지금 생방송 중", "notice": "📢 새 공지", "prerec": "🎙 사녹 신청 곧 시작", "vote": "🗳 투표 마감 임박", "vote_body": "{name} — {t} 마감",
            "show": "📺 곧 시작", "show_body": "{t} {name}", "video": "🎬 새 영상", "video_more": "{title} 외 {n}개"},
-    "en": {"ev_show": "On {show}", "show_now": "🔴 Live now", "notice": "📢 New notice", "prerec": "🎙 Pre-recording sign-up opens soon", "vote": "🗳 Vote closing soon", "vote_body": "{name} — ends {t} KST",
+    "en": {"birthday": "🎂 Happy birthday, {name}!", "birthday_body": "Today is {name}'s birthday — celebrate together!", "ev_show": "On {show}", "show_now": "🔴 Live now", "notice": "📢 New notice", "prerec": "🎙 Pre-recording sign-up opens soon", "vote": "🗳 Vote closing soon", "vote_body": "{name} — ends {t} KST",
            "show": "📺 Starting soon", "show_body": "{t} KST {name}", "video": "🎬 New video", "video_more": "{title} +{n} more"},
-    "ja": {"ev_show": "{show} 出演", "show_now": "🔴 生放送中", "notice": "📢 新しいお知らせ", "prerec": "🎙 事前収録の応募がまもなく開始", "vote": "🗳 投票締切間近", "vote_body": "{name} — {t} 締切 (KST)",
+    "ja": {"birthday": "🎂 今日は{name}の誕生日", "birthday_body": "{name}の誕生日を一緒にお祝いしよう！", "ev_show": "{show} 出演", "show_now": "🔴 生放送中", "notice": "📢 新しいお知らせ", "prerec": "🎙 事前収録の応募がまもなく開始", "vote": "🗳 投票締切間近", "vote_body": "{name} — {t} 締切 (KST)",
            "show": "📺 まもなく開始", "show_body": "{t} (KST) {name}", "video": "🎬 新しい動画", "video_more": "{title} ほか{n}件"},
-    "zh": {"ev_show": "出演 {show}", "show_now": "🔴 正在直播", "notice": "📢 新公告", "prerec": "🎙 预录报名即将开始", "vote": "🗳 投票即将截止", "vote_body": "{name} — {t} 截止 (KST)",
+    "zh": {"birthday": "🎂 今天是{name}的生日", "birthday_body": "一起为{name}庆祝生日吧！", "ev_show": "出演 {show}", "show_now": "🔴 正在直播", "notice": "📢 新公告", "prerec": "🎙 预录报名即将开始", "vote": "🗳 投票即将截止", "vote_body": "{name} — {t} 截止 (KST)",
            "show": "📺 即将开始", "show_body": "{t} (KST) {name}", "video": "🎬 新视频", "video_more": "{title} 等 {n} 个"},
-    "es": {"ev_show": "En {show}", "show_now": "🔴 En vivo ahora", "notice": "📢 Nuevo aviso", "prerec": "🎙 La inscripción a la pregrabación abre pronto", "vote": "🗳 La votación cierra pronto", "vote_body": "{name} — cierra {t} KST",
+    "es": {"birthday": "🎂 ¡Feliz cumpleaños, {name}!", "birthday_body": "Hoy es el cumpleaños de {name}, ¡celebremos juntos!", "ev_show": "En {show}", "show_now": "🔴 En vivo ahora", "notice": "📢 Nuevo aviso", "prerec": "🎙 La inscripción a la pregrabación abre pronto", "vote": "🗳 La votación cierra pronto", "vote_body": "{name} — cierra {t} KST",
            "show": "📺 Empieza pronto", "show_body": "{t} KST {name}", "video": "🎬 Nuevo video", "video_more": "{title} y {n} más"},
-    "id": {"ev_show": "Tampil di {show}", "show_now": "🔴 Sedang live", "notice": "📢 Pengumuman baru", "prerec": "🎙 Pendaftaran pra-rekaman segera dibuka", "vote": "🗳 Voting segera ditutup", "vote_body": "{name} — tutup {t} KST",
+    "id": {"birthday": "🎂 Selamat ulang tahun, {name}!", "birthday_body": "Hari ini ulang tahun {name} — rayakan bersama!", "ev_show": "Tampil di {show}", "show_now": "🔴 Sedang live", "notice": "📢 Pengumuman baru", "prerec": "🎙 Pendaftaran pra-rekaman segera dibuka", "vote": "🗳 Voting segera ditutup", "vote_body": "{name} — tutup {t} KST",
            "show": "📺 Segera dimulai", "show_body": "{t} KST {name}", "video": "🎬 Video baru", "video_more": "{title} +{n} lainnya"},
-    "th": {"ev_show": "ออกรายการ {show}", "show_now": "🔴 กำลังออกอากาศสด", "notice": "📢 ประกาศใหม่", "prerec": "🎙 ใกล้เปิดสมัครพรีเรคคอร์ด", "vote": "🗳 โหวตใกล้ปิด", "vote_body": "{name} — ปิด {t} KST",
+    "th": {"birthday": "🎂 สุขสันต์วันเกิด {name}!", "birthday_body": "วันนี้วันเกิดของ {name} มาฉลองด้วยกันนะ!", "ev_show": "ออกรายการ {show}", "show_now": "🔴 กำลังออกอากาศสด", "notice": "📢 ประกาศใหม่", "prerec": "🎙 ใกล้เปิดสมัครพรีเรคคอร์ด", "vote": "🗳 โหวตใกล้ปิด", "vote_body": "{name} — ปิด {t} KST",
            "show": "📺 ใกล้เริ่มแล้ว", "show_body": "{t} KST {name}", "video": "🎬 วิดีโอใหม่", "video_more": "{title} และอีก {n} รายการ"},
-    "pt": {"ev_show": "No {show}", "show_now": "🔴 Ao vivo agora", "notice": "📢 Novo aviso", "prerec": "🎙 Inscrição na pré-gravação abre em breve", "vote": "🗳 Votação fechando", "vote_body": "{name} — fecha {t} KST",
+    "pt": {"birthday": "🎂 Feliz aniversário, {name}!", "birthday_body": "Hoje é aniversário de {name} — vamos comemorar juntos!", "ev_show": "No {show}", "show_now": "🔴 Ao vivo agora", "notice": "📢 Novo aviso", "prerec": "🎙 Inscrição na pré-gravação abre em breve", "vote": "🗳 Votação fechando", "vote_body": "{name} — fecha {t} KST",
            "show": "📺 Começa em breve", "show_body": "{t} KST {name}", "video": "🎬 Novo vídeo", "video_more": "{title} +{n}"},
 }
 
@@ -98,6 +98,11 @@ def candidates(dash, site, now):
             live = next((x for x in lives if x.get("show") and x["show"] in (e.get("title") or "")), None)
             out.append((f"ev|{e['date']}|{tm}|{e['title']}", "show", "show",
                         {"name": e["title"], "t": tm, "url": (live or {}).get("url") or site, "parts": [e["title"]], "tr": tr, "now": now >= st}))
+    today = now.strftime("%m-%d")
+    for m in dash.get("members") or []:  # 멤버 생일 당일 (KST 0시부터 하루 동안, 한 번만)
+        if m.get("birthday") == today:
+            out.append((f"bd|{now.year}|{m['name']}", "birthday", "birthday",
+                        {"name": m["name"], "ko": m.get("ko") or m["name"], "url": site + "#member/" + m["name"]}))
     vids = [v for v in dash.get("videos") or [] if v.get("category") != "fancam" and v.get("published_at")
             and now - datetime.fromisoformat(v["published_at"].replace("Z", "+00:00")) < timedelta(hours=3)]
     for v in vids:  # 새 MV·무대 영상 (직캠은 많아서 뺌) — 같은 시간대 여러 개면 하나로 묶음
@@ -121,6 +126,9 @@ def compose(kind, data, lang, group=None):
             mm = re.fullmatch(r"(.+?)\s*출연", name)
             name = m["ev_show"].format(show=trs(mm.group(1))) if mm else trs(name)
         return (m["show_now"] if data.get("now") else m["show"]), m["show_body"].format(name=name, t=data["t"]), data["url"]
+    if kind == "birthday":
+        name = data["ko"] if lang == "ko" else data["name"]
+        return m["birthday"].format(name=name), m["birthday_body"].format(name=name), data["url"]
     if kind == "video":
         body = data["title"] if not group or len(group) < 2 else m["video_more"].format(title=data["title"], n=len(group) - 1)
         return m["video"], body, data["url"]
