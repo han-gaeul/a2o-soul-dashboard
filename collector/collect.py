@@ -115,10 +115,18 @@ def load_fan_files(cfg):
                          "links": {str(k): str(u) for k, u in (x.get("links") or {}).items() if u}}
                         for x in votes.get("streaming") or []]
     sp = votes.get("stream_playlist") or {}
-    cfg["stream_playlist"] = {"title": str(sp.get("title") or ""), "desc": str(sp.get("desc") or ""),
-                              "tracks": [{"song": str(x["song"]), "title": bool(x.get("title"))} if x.get("song") else {"other": int(x.get("other") or 1)}
-                                         for x in sp.get("tracks") or [] if isinstance(x, dict)],
-                              "tips": [str(x) for x in sp.get("tips") or []]} if sp.get("tracks") else {}
+    songs = {str(k): {"title": bool(v.get("title")), "time": str(v.get("time") or ""),
+                      "ids": {p: str(v[p]) for p in ("melon", "genie", "bugs", "flo") if v.get(p)}}
+             for k, v in (sp.get("songs") or {}).items() if isinstance(v, dict)}
+    tracks = []
+    for x in sp.get("tracks") or []:
+        name = x if isinstance(x, str) else (x.get("song") if isinstance(x, dict) else None)
+        if name:
+            info = songs.get(str(name), {})
+            tracks.append({"song": str(name), "title": info.get("title", bool(isinstance(x, dict) and x.get("title"))),
+                           "time": info.get("time", ""), "ids": info.get("ids", {})})
+    cfg["stream_playlist"] = {"title": str(sp.get("title") or ""), "desc": str(sp.get("desc") or ""), "tracks": tracks,
+                              "tips": [str(x) for x in sp.get("tips") or []]} if tracks else {}
     cfg["charts"] = [{"song": str(c.get("song", "")), "service": str(c.get("service", "")), "type": str(c.get("type") or ""),
                       "ranks": sorted((str(d), int(r)) for d, r in (c.get("ranks") or {}).items())}
                      for c in read_yml("charts.yml").get("charts") or []]

@@ -31,15 +31,27 @@ votes:
 #   → 소울 곡만 순서대로 계속 반복하면 매시간 모든 곡이 한 번씩 반영됨. 활동곡이 바뀌면 순서만 바꾸기
 stream_playlist:
   title: 에투소 스밍 리스트
-  desc: 멜론 순위는 '24시간 동안 들은 사람 수'와 '1시간 이용량'을 반반 합쳐요. 1시간 이용량은 한 계정이 한 곡을 1시간에 1번만 세서, 소울 곡을 순서대로 계속 반복해 두면 매시간 모든 곡이 한 번씩 반영돼요.
+  desc: 다른 팬덤 음원총공팀처럼 소울 곡만으로 짜고 활동곡(Dancing in the Dark)을 자주 넣었어요. 아래 버튼으로 한 번에 담고 전체 반복으로 계속 틀어 주세요.
+  # 곡 정보 — 원클릭 담기에 쓰는 곡 번호(각 사이트 곡 주소 끝 숫자)와 재생시간(m:ss)
+  songs:
+    Dancing in the Dark: { title: true, time: "2:48", melon: "603877088", genie: "117647941", bugs: "6516227", flo: "616833384" }
+    Superstar: { title: true, time: "4:08", melon: "603382330", genie: "117256250", bugs: "6511884", flo: "611657166" }
+    While We're Young: { time: "3:18", melon: "603877089", genie: "117647942", bugs: "6516228", flo: "616833385" }
+    Very First Love: { time: "3:08", melon: "603877090", genie: "117647943", bugs: "6516229", flo: "616833386" }
+    Moonlight Shadow: { time: "3:28", melon: "603877091", genie: "117647944", bugs: "6516230", flo: "616833387" }
+  # 재생 순서 (같은 곡 여러 번 OK)
   tracks:
-    - { song: Dancing in the Dark, title: true }
-    - { song: Superstar, title: true }
-    - song: While We're Young
-    - song: Very First Love
-    - song: Moonlight Shadow
+    - Dancing in the Dark
+    - While We're Young
+    - Superstar
+    - Dancing in the Dark
+    - Very First Love
+    - Superstar
+    - Dancing in the Dark
+    - Moonlight Shadow
   tips:
-    - 이 5곡을 위 순서대로 반복 재생 (셔플 끄기) — 같은 곡만 연달아 틀면 그 시간엔 1번만 세요
+    - 담기 전에 재생목록을 비우고, 설정에서 '중복 곡 허용'을 켜 두기
+    - 전체 반복 켜기, 셔플 끄기
     - 스트리밍 이용권으로 로그인한 상태에서, 음소거·볼륨 0 말고 작게라도 소리 켜기
     - 곡마다 하트(좋아요) 누르기
     - 이용권이 있는 음원 사이트가 여러 개면 사이트마다 각각 — 가족·친구 계정도 큰 힘이 돼요 (들은 사람 수가 중요)
