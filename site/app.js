@@ -1949,7 +1949,7 @@ if ("serviceWorker" in navigator) {
     const ios = /iP(hone|ad|od)/.test(navigator.userAgent);
     const standalone = matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
     if (cfg.api && cfg.vapid_public && (supported || ios)) {
-      const TOPICS = ["notice", "vote", "show", "video"];
+      const TOPICS = ["notice", "vote", "show", "video", "birthday"];
       const dlg = $("pushDlg"), btn = $("pushBtn");
       const keyBytes = (b64) => Uint8Array.from(atob(b64.replace(/-/g, "+").replace(/_/g, "/") + "===".slice((b64.length + 3) % 4)), (c) => c.charCodeAt(0));
       const getSub = async () => (supported ? (await navigator.serviceWorker.ready).pushManager.getSubscription() : null);
