@@ -2343,9 +2343,12 @@ if ("serviceWorker" in navigator) {
       document.body.classList.remove("home-a", "home-b", "home-c");
       document.body.classList.add(`home-${s}`);
       document.body.classList.toggle("has-bias", data.members.some((x) => x.name === bias));
-      const sw = el("button", { type: "button", class: "hs-switch" }, `🎨 ${t("hs_title")} · ${t(`hs_${s}`)}`);
-      sw.onclick = () => openHomeStyle();
-      box.replaceChildren(...[pref.get("hsPicked", false) ? sw : chooser(pref.get("homeStyle", "")),
+      // PC: 탭 줄 오른쪽 끝에 '화면 스타일' 버튼 (따로 줄 차지 안 하게)
+      let sw = $("hsTabBtn");
+      if (!sw) { sw = el("button", { type: "button", class: "hs-switch", id: "hsTabBtn" }); sw.onclick = () => openHomeStyle(); $("tabs").append(sw); }
+      sw.textContent = `🎨 ${t("hs_title")} · ${t(`hs_${s}`)}`;
+      sw.hidden = !pref.get("hsPicked", false);
+      box.replaceChildren(...[pref.get("hsPicked", false) ? null : chooser(pref.get("homeStyle", "")),
         s === "a" ? todo() : s === "b" ? magazine() : biasHome()].filter(Boolean));
     };
     homeRender = render;
