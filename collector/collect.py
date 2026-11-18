@@ -224,7 +224,9 @@ def load_fan_files(cfg):
     cfg["guide"] = {"course": [{"id": str(c["id"]), "note": str(c.get("note") or "")} for c in guide.get("course") or []],
                     "tips": {str(k).upper(): str(v) for k, v in (guide.get("tips") or {}).items()},
                     "beginner": [{"title": str(b["title"]), "items": [str(x) for x in b.get("items") or []]}
-                                 for b in guide.get("beginner") or [] if b.get("title")]}
+                                 for b in guide.get("beginner") or [] if b.get("title")],
+                    "steps": [{k: str(x.get(k) or "") for k in ("icon", "title", "desc", "go")} for x in guide.get("steps") or [] if x.get("title")],
+                    "faq": [{"q": str(x["q"]), "a": str(x["a"])} for x in guide.get("faq") or [] if x.get("q") and x.get("a")]}
 
 
 def member_pattern(m):
@@ -385,6 +387,13 @@ def photo_feed(cfg, registry, store, limit=600):
         for i, src in enumerate(post.get("images") or []):
             out.append({"src": src, "url": post.get("permalink"), "at": kst_datetime(post.get("timestamp")), "account": "x",
                         "members": detect_members(cfg, text), "text": text.split("\n")[0][:80], "n": i})
+    # 음방·방송사 공식 계정 사진 (account: show, 출처는 계정 이름)
+    for pid, post in ((store.get("x_show_photos") or {}).get("posts") or {}).items():
+        text = (post.get("caption") or "").strip()
+        for i, src in enumerate(post.get("images") or []):
+            out.append({"src": src, "url": post.get("permalink"), "at": kst_datetime(post.get("timestamp")), "account": "show",
+                        "by": post.get("author_name") or post.get("author"), "members": detect_members(cfg, text),
+                        "text": text.split("\n")[0][:80], "n": i})
     out.sort(key=lambda x: (x["at"], -x["n"]), reverse=True)
     return out[:limit]
 
@@ -1230,6 +1239,34 @@ def collect(cfg, rescan=False):
                 mposts.pop(k)
             print(f"[매체] 새 글 {len(got)}개 · 보관 {len(mposts)}개")
 
+        # 음방 공식 사진 — 음방·방송사 인증 계정이 올린 A2O SOUL 무대·대기실 사진 (3시간마다, 음방 당일 방송 전후엔 1시간마다)
+        sst = store.setdefault("x_show_photos", {})
+        sposts = sst.setdefault("posts", {})
+        show_day = rules.SHOW_WEEKDAY and any(v == now.weekday() for v in rules.SHOW_WEEKDAY.values()) and 14 <= now.hour <= 21
+        if not sst.get("at") or now - datetime.fromisoformat(sst["at"]) >= (timedelta(hours=1) if show_day else timedelta(hours=3)):
+            q = ("(\"A2O SOUL\" OR A2OSOUL OR 에이투오소울 OR \"에이투오 소울\") "
+                 "(더쇼 OR THESHOW OR \"THE SHOW\" OR 쇼챔피언 OR 쇼챔 OR SHOWCHAMPION OR 엠카 OR 엠카운트다운 OR MCOUNTDOWN OR 뮤직뱅크 OR 뮤뱅 OR MUSICBANK "
+                 "OR 음악중심 OR 음중 OR MUSICCORE OR 인기가요 OR 인가 OR INKIGAYO) has:images -is:retweet -is:reply")
+            try:
+                got = xposts.search_posts(q, since_id=sst.get("since_id"), max_results=100, media=True)
+                sst["at"] = now.isoformat(timespec="minutes")
+                if got:
+                    sst["since_id"] = max(got, key=lambda p_: int(p_["tweet_id"]))["tweet_id"]
+                known = {u.lower() for u in cfg["x_vote_accounts"]} | {v["handle"].lower() for v in cfg["x_media"]}
+                n_new = 0
+                for p_ in got:
+                    official = p_.get("verified_type") in ("business", "government") or p_["author"].lower() in known
+                    if official and p_.get("images") and not p_.get("video") and A2O_MENTION.search(p_["caption"]) \
+                            and not re.search(r"투표|VOTE|VOTING|순위|RANKING|중간\s*집계", p_["caption"], re.I):
+                        sposts[p_["tweet_id"]] = {k: p_.get(k) for k in ("caption", "timestamp", "permalink", "author", "author_name", "images")}
+                        n_new += 1
+                cut = (now - timedelta(days=60)).isoformat()
+                for k in [k for k, m in sposts.items() if (m.get("timestamp") or "") < cut]:
+                    sposts.pop(k)
+                print(f"[음방 사진] 검색 {len(got)}개 · 새 공식 사진 글 {n_new}개 · 보관 {len(sposts)}개")
+            except Exception as e:  # noqa: BLE001
+                print(f"[음방 사진] 검색 실패: {e}")
+
         def media_cand(p_):
             """인증 기업 계정인데 목록에 없는 계정 → 새 매체 후보 (판매처·매장·투표 앱 제외)."""
             h = p_["author"].lower()
@@ -1449,6 +1486,7 @@ def write_health(cfg, videos, members, today, official=(), store_cands=None, med
     for b in cfg["guide"]["beginner"]:
         texts += [b["title"]] + b["items"]
     texts += [c["note"] for c in cfg["guide"]["course"]]
+    texts += [x for st in cfg["guide"]["steps"] for x in (st["title"], st["desc"])] + [x for f in cfg["guide"]["faq"] for x in (f["q"], f["a"])]
     missing = sorted({x for x in texts if x and re.search(r"[가-힣]", x) and set(tr.get(x, {})) < {"en", "ja", "zh", "es", "id", "th", "pt"}})
     if missing:
         secs.append(("번역이 없는 문구", "`translations.yml`에 원문 그대로 추가 (en·ja·zh·es·id·th)", [f"- {x}" for x in missing]))
@@ -1668,6 +1706,7 @@ def build(cfg):
             "instagram_posts": [str(u) for u in (m.get("instagram_posts") or [])],
             "ig_mentions": [{k: x[k] for k in ("at", "text", "more", "url")} for x in ig_feed if m["name"] in x["members"]][:10],
             "photo": local_img(m.get("photo")) or auto["photo"],
+            "color": str(m.get("color")) if re.fullmatch(r"#[0-9a-fA-F]{6}", str(m.get("color") or "")) else "",
             "signature": local_img(m.get("signature")) or auto["signature"],
             # 서명 여러 장: 파일 이름 앞 라벨(서명·사인)별 출처·날짜는 members.yml signature_sources
             "signatures": [{"src": rel, **({k: str(v) for k, v in (sign_src.get(label) or {}).items() if k in ("label", "url") and v})}
@@ -1753,7 +1792,7 @@ def build(cfg):
         "notices": sorted(notices, key=lambda x: (x.get("date") or "9999", x.get("time") or "99:99")),  # 가까운 날짜부터
         "categories": CATEGORIES,
         "feedback_url": str(cfg.get("feedback_url") or ""),
-        "push": {k: str(v) for k, v in (cfg.get("push") or {}).items() if k in ("api", "vapid_public") and v},
+        "push": {k: str(v) for k, v in (cfg.get("push") or {}).items() if k in ("api", "vapid_public", "google_client_id", "turnstile_sitekey") and v},
         "yt_channels": sorted(registry.get("channels") or {}),  # Cloudflare Worker가 YouTube 새 영상 즉시 알림(WebSub) 구독에 씀
         "votes": [v for v in cfg["votes"] if v["end"] >= now_kst_str()],
         "prerecs": prerecs,
@@ -1773,7 +1812,8 @@ def build(cfg):
             for x in cfg["info"].get("offline_stores") or []]},
         "guide": {"course": [{**c, **{k: by_id[c["id"]][k] for k in slim}}
                              for c in cfg["guide"]["course"] if c["id"] in by_id],
-                  "tips": cfg["guide"]["tips"], "beginner": cfg["guide"]["beginner"]},
+                  "tips": cfg["guide"]["tips"], "beginner": cfg["guide"]["beginner"],
+                  "steps": cfg["guide"]["steps"], "faq": cfg["guide"]["faq"]},
     }
     save_json("dashboard.json", dashboard)
     write_calendar(cfg, [e for e in all_events if e.get("auto") and not e.get("anniv") and not e.get("past")] + annivs)

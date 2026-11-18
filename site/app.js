@@ -1,5 +1,5 @@
 // ---------- 언어 ----------
-const LANGS = ["ko", "en", "ja", "zh", "es", "id", "th", "pt"];
+const LANGS = ["ko", "en", "ja", "zh", "es", "id", "th", "pt", "fil", "vi"];
 const LOCALES = { ko: "ko-KR", en: "en-US", ja: "ja-JP", zh: "zh-CN", es: "es-ES", id: "id-ID", th: "th-TH", pt: "pt-BR" };
 // 기기별 설정(최애·본 영상) — 막혀 있어도 사이트는 그대로 동작
 const pref = {
@@ -11,12 +11,13 @@ const LANG = (() => {
     const saved = localStorage.getItem("lang");
     if (LANGS.includes(saved)) return saved;
   } catch (_) { /* 저장소 막힘 */ }
-  const nav = (navigator.language || "ko").slice(0, 2);
+  const navFull = (navigator.language || "ko").toLowerCase();
+  const nav = navFull.startsWith("fil") || navFull.startsWith("tl") ? "fil" : navFull.slice(0, 2);
   return LANGS.includes(nav) ? nav : "en";
 })();
 function t(key, vars = {}) {
   const dict = window.I18N[LANG] || window.I18N.ko;
-  let s = dict[key] ?? window.I18N.ko[key] ?? key;
+  let s = dict[key] ?? (LANG !== "ko" ? window.I18N.en[key] : undefined) ?? window.I18N.ko[key] ?? key;  // 없는 문구는 영어 → 한국어
   if (typeof s !== "string") return s;
   for (const [k, v] of Object.entries(vars)) s = s.replaceAll(`{${k}}`, v);
   return s;
@@ -122,11 +123,11 @@ if ("serviceWorker" in navigator) {
   const kstDate = (s) => new Date(`${s.replace(" ", "T")}${s.length > 10 ? ":00" : "T00:00:00"}+09:00`); // "YYYY-MM-DD[ HH:MM]" KST
 
   // ---------- 탭 ----------
-  const tabs = ["overview", "notice", "cheer", "mv", "members", "fancams", "videos", "guide"];
+  const tabs = ["overview", "notice", "cheer", "mv", "members", "fancams", "videos", "guide", "community"];
   const drawn = new Set();
   const drawers = {};
   // 공유 링크: #member/MOON → 멤버 탭, #ep/날짜/방송 → 영상 탭, #cmp/날짜/방송/A/B → 직캠 탭
-  const ROUTE_TAB = { member: "members", ep: "videos", cmp: "fancams" };
+  const ROUTE_TAB = { member: "members", ep: "videos", cmp: "fancams", post: "community" };
   const route = () => decodeURIComponent(location.hash.slice(1)).split("/");
   function showTab() {
     const [head] = route();
@@ -1394,10 +1395,49 @@ if ("serviceWorker" in navigator) {
   for (const m of data.members) $("guideMembers").append(fancamCard(m));
   if (MOBILE) { fold($("members"), 6); fold($("guideMembers"), 6); }
 
-  // 처음 오셨나요? (첫 번째 카드만 펼쳐 둠)
+  // 덕질 처음이에요 — 5단계 (누르면 그곳으로, 체크는 이 브라우저에만) + 자주 묻는 것
+  {
+    const steps = data.guide?.steps || [], faq = data.guide?.faq || [];
+    const done = new Set(pref.get("guideSteps", []));
+    if (steps.length) {
+      const bar = el("div", { class: "gs-bar" }, el("span", {}));
+      const count = el("span", { class: "muted small" });
+      const paint = () => {
+        const n = steps.filter((x) => done.has(x.title)).length;
+        bar.firstChild.style.width = `${(n / steps.length) * 100}%`;
+        count.textContent = t("gs_count", { n, total: steps.length });
+      };
+      const go = (target) => {
+        if (target.startsWith("#")) {
+          const node = document.querySelector(target);
+          const tab = node?.closest("[data-tab]")?.dataset.tab;
+          if (tab) location.hash = tab;
+          setTimeout(() => (node?.tagName === "BUTTON" ? node.click() : node?.scrollIntoView({ behavior: "smooth", block: "start" })), 80);
+        } else { location.hash = target; window.scrollTo({ top: 0 }); }
+      };
+      const list = el("ol", { class: "gs-list" }, ...steps.map((x, i) => {
+        const cb = el("input", { type: "checkbox", "aria-label": tc(x.title), ...(done.has(x.title) ? { checked: "" } : {}) });
+        cb.addEventListener("change", () => { cb.checked ? done.add(x.title) : done.delete(x.title); pref.set("guideSteps", [...done]); li.classList.toggle("done", cb.checked); paint(); });
+        const btn = el("button", { type: "button", class: "gs-go" }, t("tour_go"));
+        btn.addEventListener("click", () => { cb.checked = true; cb.dispatchEvent(new Event("change")); go(x.go); });
+        const li = el("li", { class: done.has(x.title) ? "done" : "" },
+          el("span", { class: "gs-ico", "aria-hidden": "true" }, x.icon),
+          el("div", { class: "gs-text" }, el("b", {}, `${i + 1}. ${tc(x.title)}`), el("span", { class: "muted small" }, tc(x.desc)), x.go ? btn : null),
+          cb);
+        return li;
+      }));
+      paint();
+      $("beginner").append(el("div", { class: "gs" }, el("div", { class: "gs-head" }, el("b", {}, t("gs_title")), count), bar, list));
+    }
+    if (faq.length) {
+      $("beginner").append(el("details", { class: "howto" }, el("summary", {}, t("gs_faq")),
+        el("dl", { class: "gs-faq" }, ...faq.flatMap((x) => [el("dt", {}, tc(x.q)), el("dd", {}, tc(x.a))]))));
+    }
+  }
+  // 처음 오셨나요? (단계 카드가 있으면 접어 둠)
   const beg = data.guide?.beginner || [];
   if (beg.length) {
-    beg.forEach((b, i) => $("beginner").append(el("details", { class: "howto", ...(i === 0 ? { open: "" } : {}) },
+    beg.forEach((b, i) => $("beginner").append(el("details", { class: "howto", ...(i === 0 && !(data.guide?.steps || []).length ? { open: "" } : {}) },
       el("summary", {}, tc(b.title)), el("ol", { class: "howto-steps" }, ...b.items.map((x) => el("li", {}, tc(x)))))));
   } else {
     $("beginnerSec").remove();
@@ -1861,20 +1901,92 @@ if ("serviceWorker" in navigator) {
       if ((m.ig_mentions || []).length) body.push(el("div", { class: "ig-feed bias-ig" }, ...m.ig_mentions.slice(0, 2).map((x) => igPost(x, false))));
       const more = el("button", { class: "more", type: "button" }, t("profile_view"));
       more.addEventListener("click", () => openMember(m));
-      body.push(more);
+      const tg = el("label", { class: "bias-theme-tg small" }, el("input", { type: "checkbox", ...(themeOn() ? { checked: "" } : {}) }), ` ${t("bias_theme")}`);
+      tg.firstChild.addEventListener("change", (e) => { pref.set("biasTheme", e.target.checked); applyTheme(); });
+      // 테마 색 고르기: 자주 쓰는 색 + 직접 고르기 (이 브라우저에만 저장)
+      const cur = pref.get("biasColor", null);
+      const sw = (hex) => {
+        const b = el("button", { type: "button", class: `bias-sw${cur === hex ? " on" : ""}`, "aria-label": hex, style: `--c:${hex}` });
+        b.addEventListener("click", () => { pref.set("biasColor", hex); pref.set("biasTheme", true); renderBias(); applyTheme(); });
+        return b;
+      };
+      const reset = el("button", { type: "button", class: `bias-sw auto${cur === null ? " on" : ""}`, title: t("bias_color_auto") }, "A");
+      reset.addEventListener("click", () => { pref.set("biasColor", null); renderBias(); applyTheme(); });
+      const custom = el("input", { type: "color", class: "bias-pick", "aria-label": t("bias_color_pick"), value: cur || "#9b87f5" });
+      custom.addEventListener("input", (e) => { pref.set("biasColor", e.target.value); pref.set("biasTheme", true); applyTheme(); });
+      custom.addEventListener("change", () => renderBias());
+      body.push(el("div", { class: "bias-foot" }, more, tg),
+        themeOn() ? el("div", { class: "bias-colors" }, el("span", { class: "muted small" }, t("bias_color")), reset, ...PALETTE.slice(0, 10).map(sw),
+          el("label", { class: "bias-sw rainbow", title: t("bias_color_pick") }, custom)) : null);
     } else {
       body.push(el("p", { class: "note small" }, t("bias_desc")));
     }
     $("bias").replaceChildren(head, ...body);
   }
+  // 최애 테마: 멤버별 포인트 색 + 상단에 최애 사진 (끄기 가능)
+  // 파스텔 계열 15색 — 멤버 순서대로 기본 색, 사용자가 바꿀 수 있음
+  const PALETTE = ["#9b87f5", "#f4a3c0", "#7cc6e8", "#f6b38e", "#86cfae", "#c5a3f0", "#f0c674", "#8fa8f2", "#e88fa7", "#7fd1c7",
+    "#d9a6e8", "#a7c97f", "#f29e9e", "#9ec3e6", "#e4b48c"];
+  // #hex → 색상·채도 유지하고 밝기만 바꿔서 (검정을 섞으면 탁해져서 HSL로)
+  const toHsl = (hex) => {
+    const [r, g, b] = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255);
+    const mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 2, d = mx - mn;
+    const s = d ? d / (1 - Math.abs(2 * l - 1)) : 0;
+    const h = !d ? 0 : mx === r ? 60 * (((g - b) / d) % 6) : mx === g ? 60 * ((b - r) / d + 2) : 60 * ((r - g) / d + 4);
+    return [(h + 360) % 360, s * 100, l * 100];
+  };
+  const hsl = (h, s, l) => `hsl(${Math.round(h)} ${Math.round(s)}% ${Math.round(l)}%)`;
+  const lumHsl = (h, s, l) => {  // 상대 휘도 (흰 글씨 대비 확인용)
+    s /= 100; l /= 100;
+    const f = (n) => { const k = (n + h / 30) % 12; return l - s * Math.min(l, 1 - l) * Math.max(-1, Math.min(k - 3, 9 - k, 1)); };
+    return [f(0), f(8), f(4)].map((c) => (c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4)).reduce((a, c, i) => a + c * [0.2126, 0.7152, 0.0722][i], 0);
+  };
+  const tints = (hex) => {
+    const [h, s0] = toHsl(hex), s = Math.min(85, Math.max(s0, 55));
+    let l = 62;
+    while (lumHsl(h, s, l) > 0.26 && l > 30) l -= 2;  // 흰 글씨가 읽힐 만큼만 진하게
+    return { bg: hsl(h, s, l), text: hsl(h, Math.min(s, 60), Math.min(l, 38)), soft: hsl(h, Math.min(s + 10, 90), 95), deep: hsl(h, 35, 18), light: hsl(h, 75, 78) };
+  };
+
+  const themeOn = () => pref.get("biasTheme", true);
+  function applyTheme() {
+    const m = data.members.find((x) => x.name === bias);
+    const root = document.documentElement;
+    const badge = $("biasBadge");
+    if (!m || !themeOn() || !m.photo) {
+      ["--accent", "--accent-bg", "--chip", "--chip-fg"].forEach((k) => root.style.removeProperty(k));
+      document.body.classList.remove("bias-theme");
+      if (badge) badge.hidden = true;
+      return;
+    }
+    // 멤버별 색: members.yml color(색상 0~360)가 있으면 그것, 없으면 15명 순서대로 색상환을 고르게 나눈 색
+    const idx = data.members.indexOf(m);
+    // 고른 색(#hex) → 버튼·글씨·옅은 배경 색으로 (밝은 색은 흰 글씨가 보이게 어둡게)
+    const mine = pref.get("biasColor", null);
+    const base = /^#[0-9a-f]{6}$/i.test(mine || "") ? mine : /^#[0-9a-f]{6}$/i.test(m.color || "") ? m.color : PALETTE[data.members.indexOf(m) % PALETTE.length];
+    const pal = tints(base);
+    const dark = matchMedia("(prefers-color-scheme: dark)").matches;
+    root.style.setProperty("--accent", dark ? pal.light : pal.text);
+    root.style.setProperty("--accent-bg", pal.bg);
+    root.style.setProperty("--chip", dark ? pal.deep : pal.soft);
+    root.style.setProperty("--chip-fg", dark ? pal.light : pal.text);
+    document.body.classList.add("bias-theme");
+    if (badge) {
+      badge.hidden = false;
+      badge.replaceChildren(el("img", { src: m.photo, alt: "" }), el("span", {}, `♥ ${m.name}`));
+      badge.onclick = () => openMember(m);
+    }
+  }
   function setBias(name) {
     bias = name;
     pref.set("bias", name);
     renderBias();
+    applyTheme();
 
 
   }
   renderBias();
+  applyTheme();
 
   // ---------- 헤더 사진 띠 (15명, 누르면 프로필) ----------
   const withPhoto = data.members.filter((m) => m.photo);
@@ -1901,26 +2013,216 @@ if ("serviceWorker" in navigator) {
       return b;
     };
     const draw = () => {
+      const nShow = photos.filter((x) => x.account === "show").length;
       $("photoMem").replaceChildren(btn(t("ev_all"), !who, () => { who = ""; shown = 18; draw(); }),
+        nShow ? btn(`📺 ${t("photo_show")} ${nShow}`, who === "@show", () => { who = "@show"; shown = 18; draw(); }) : "",
         ...mems.map((n) => {
           const c = photos.filter((x) => (x.members || []).includes(n)).length;
           return btn(c ? `${n} ${c}` : n, n === who, () => { who = n; shown = 18; draw(); });
         }));
-      const list = photos.filter((x) => !who || (x.members || []).includes(who));
+      const list = photos.filter((x) => !who || (who === "@show" ? x.account === "show" : (x.members || []).includes(who)));
       if (!list.length) { $("photoGrid").replaceChildren(empty(t("photos_none"))); $("photoMore").hidden = true; return; }
-      $("photoGrid").replaceChildren(...list.slice(0, shown).map((x) => {
+      // 날짜별 — 그날 첫 사진에 날짜 표시 (줄을 나누면 세로로 너무 길어져서 격자는 그대로)
+      const dayFmt = new Intl.DateTimeFormat(LANG === "zh" ? "zh-CN" : LANG, { month: "numeric", day: "numeric", weekday: "short", timeZone: "UTC" });
+      const cells = [];
+      let day = "";
+      for (const x of list.slice(0, shown)) {
+        const d = (x.at || "").slice(0, 10);
+        const first = d && d !== day;
+        if (first) day = d;
         const img = el("img", { src: x.src, alt: x.text || "A2O SOUL", loading: "lazy", decoding: "async", referrerpolicy: "no-referrer" });
         const a = el("a", { href: x.url, target: "_blank", rel: "noopener", title: `${x.at} · ${x.text || ""}` }, img,
-          el("span", { class: `src src-${x.account}` }, x.account === "x" ? "X" : "IG"));
+          first ? el("span", { class: "ph-date" }, dayFmt.format(new Date(`${d}T00:00:00Z`))) : null,
+          el("span", { class: `src src-${x.account}` }, x.account === "show" ? `📺 ${x.by || ""}` : x.account === "x" ? "X" : "IG"));
         img.addEventListener("error", () => a.remove());  // 만료된 주소는 숨김
-        return a;
-      }));
+        cells.push(a);
+      }
+      $("photoGrid").replaceChildren(...cells);
       $("photoMore").hidden = list.length <= shown;
     };
     $("photoMore").onclick = () => { shown += 18; draw(); };
     draw();
   } else {
     $("photoSec").remove();
+  }
+
+  // ---------- 커뮤니티: 질문·정보(익명 가능) / 포카 교환(구글 로그인만, 익명은 안 보임) ----------
+  {
+    const API = ((data.push || {}).api || "").replace(/\/$/, "");
+    const GID = (data.push || {}).google_client_id || "";
+    const dev = (() => { let d = pref.get("dev", ""); if (!d) { d = crypto.getRandomValues(new Uint32Array(4)).join("-"); pref.set("dev", d); } return d; })();
+    let token = (() => { try { const x = JSON.parse(sessionStorage.getItem("gtoken") || "null"); return x && x.exp > Date.now() ? x.t : ""; } catch (_) { return ""; } })();
+    let me = { login: false, admin: false, banned: 0, boards: ["qna"] };
+    let board = "qna", cat = "", before = 0;
+    const CATS = { qna: ["질문", "정보", "후기"], trade: ["구해요", "드려요", "교환해요"] };
+    const api = async (path, opts = {}) => {
+      const r = await fetch(API + path, { ...opts, headers: { "Content-Type": "application/json", "X-Device": dev, ...(token ? { Authorization: `Bearer ${token}` } : {}), ...(opts.headers || {}) } });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(j.error === "login" ? t("cm_need_login") : j.error || r.status);
+      return j;
+    };
+    // 익명은 사람 확인(Cloudflare Turnstile) — 필요할 때만 체크박스가 보임
+    const TS = (data.push || {}).turnstile_sitekey || "";
+    const human = (box) => new Promise((ok, no) => {
+      if (me.login || !TS) return ok("");
+      const go = () => {
+        const slot = el("div", { class: "cm-ts" });
+        (box || $("cmBody")).append(slot);
+        turnstile.render(slot, { sitekey: TS, appearance: "interaction-only", language: LANG,
+          callback: (tok) => { ok(tok); setTimeout(() => slot.remove(), 300); }, "error-callback": () => no(new Error(t("cm_human_fail"))) });
+      };
+      if (window.turnstile) return go();
+      const sc = document.createElement("script");
+      sc.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"; sc.onload = go; sc.onerror = () => no(new Error(t("cm_human_fail")));
+      document.head.append(sc);
+    });
+    const post = async (path, body, box) => api(path, { method: "POST", body: JSON.stringify({ ...body, ts: await human(box) }) });
+    const ago = (ms) => { const m = (Date.now() - ms) / 6e4; return m < 1 ? t("just_now") : m < 60 ? `${Math.floor(m)}m` : m < 1440 ? t("hours_ago", { n: Math.floor(m / 60) }) : t("days_ago", { n: Math.floor(m / 1440) }); };
+    const dlg = $("cmDlg");
+    $("cmClose").onclick = () => dlg.close();
+    const open = (title, ...nodes) => { $("cmDlgTitle").textContent = title; $("cmBody").replaceChildren(...nodes); if (!dlg.open) dlg.showModal(); };
+    const err = (e) => el("p", { class: "cm-err small" }, String(e.message || e));
+
+    // 구글 로그인 (Google Identity Services) — 이메일은 서버에 저장하지 않음
+    const login = () => {
+      if (!GID) return alertBox(t("cm_login_soon"));
+      const go = () => { google.accounts.id.initialize({ client_id: GID, callback: (r) => {
+        const exp = JSON.parse(atob(r.credential.split(".")[1].replace(/-/g, "+").replace(/_/g, "/"))).exp * 1000;
+        token = r.credential; try { sessionStorage.setItem("gtoken", JSON.stringify({ t: token, exp })); } catch (_) {}
+        refresh();
+      } }); google.accounts.id.prompt(); };
+      if (window.google?.accounts) return go();
+      const sc = document.createElement("script"); sc.src = "https://accounts.google.com/gsi/client"; sc.onload = go; document.head.append(sc);
+    };
+    const alertBox = (msg) => open(t("cm_title"), el("p", {}, msg));
+    const logout = () => { token = ""; try { sessionStorage.removeItem("gtoken"); } catch (_) {} board = "qna"; refresh(); };
+
+    const drawHead = () => {
+      $("cmAuth").replaceChildren(me.login
+        ? el("span", { class: "small" }, me.admin ? "🛡 " : "", t("cm_logged"), " ", Object.assign(el("button", { type: "button", class: "linkbtn" }, t("cm_logout")), { onclick: logout }))
+        : Object.assign(el("button", { type: "button", class: "more" }, "G ", t("cm_login")), { onclick: login }));
+      $("cmBoards").replaceChildren(...me.boards.map((b) => Object.assign(el("button", { type: "button", class: b === board ? "on" : "" }, t(`cm_b_${b}`)),
+        { onclick: () => { board = b; cat = ""; refresh(); } })),
+        ...(me.login ? [] : [el("span", { class: "muted small" }, t("cm_more_login"))]));
+      $("cmWarn").hidden = board !== "trade";
+      $("cmWarn").textContent = t("cm_trade_warn");
+      $("cmCats").replaceChildren(...["", ...CATS[board]].map((c) => Object.assign(el("button", { type: "button", class: c === cat ? "on" : "" }, c ? tc(c) : t("ev_all")),
+        { onclick: () => { cat = c; load(true); drawHead(); } })));
+    };
+    const row = (x) => {
+      const li = el("li", { class: `cm-row${x.pinned ? " pin" : ""}${x.hidden ? " hid" : ""}` },
+        el("span", { class: "chip" }, x.pinned ? "📌" : tc(x.cat)),
+        el("div", { class: "cm-main" }, el("b", {}, x.title, x.img ? " 🖼" : "", x.comments ? el("span", { class: "cm-cn" }, ` [${x.comments}]`) : ""),
+          el("span", { class: "muted small" }, `${x.nick}${x.login ? " ✓" : ""} · ${ago(x.at)}${x.member ? ` · ${x.member}` : ""}`)));
+      li.onclick = () => view(x.id);
+      return li;
+    };
+    async function load(reset) {
+      if (reset) { before = 0; $("cmList").replaceChildren(); }
+      try {
+        const q = new URLSearchParams({ b: board, ...(cat ? { cat } : {}), ...(before ? { before } : {}) });
+        const j = await api(`/board/list?${q}`);
+        $("cmList").append(...(reset ? j.pins : []).map(row), ...j.posts.map(row));
+        if (reset && !j.pins.length && !j.posts.length) $("cmList").append(empty(t("cm_empty")));
+        before = j.posts.length ? j.posts[j.posts.length - 1].id : before;
+        $("cmMore").hidden = j.posts.length < 20;
+      } catch (e) { $("cmList").replaceChildren(err(e)); }
+    }
+    $("cmMore").onclick = () => load(false);
+
+    // 글 보기 + 댓글
+    async function view(id) {
+      open("…");
+      try {
+        const p = await api(`/board/post?id=${id}`);
+        history.replaceState(null, "", `#post/${id}`);
+        const delBtn = (target) => Object.assign(el("button", { type: "button", class: "linkbtn" }, t("cm_delete")), { onclick: async () => {
+          const pw = target.anonPw && !me.admin ? prompt(t("cm_pw")) : "";
+          if (pw === null) return;
+          try { await post("/board/delete", { ...target.ref, pw }); target.after(); } catch (e) { alert(e.message); }
+        } });
+        const repBtn = (ref) => Object.assign(el("button", { type: "button", class: "linkbtn" }, t("cm_report")), { onclick: async (ev) => {
+          if (!confirm(t("cm_report_q"))) return;
+          try { const r = await post("/board/report", ref); ev.target.textContent = r.hidden ? t("cm_reported_hidden") : t("cm_reported"); ev.target.disabled = true; } catch (e) { alert(e.message); }
+        } });
+        const adminBtns = (ref) => me.admin ? ["pin", "hide", "ban", "unban"].map((a) => Object.assign(el("button", { type: "button", class: "linkbtn" }, `🛡${a}`), { onclick: async () => { await post("/board/admin", { ...ref, action: a }); view(id); } })) : [];
+        const comments = el("ol", { class: "cm-comments" }, ...p.comments.map((c) => el("li", { class: c.hidden ? "hid" : "" },
+          el("div", { class: "muted small" }, `${c.nick}${c.login ? " ✓" : ""} · ${ago(c.at)}`), el("div", { class: "cm-text" }, c.body),
+          el("div", { class: "cm-acts" }, (c.mine || c.anonPw || me.admin) ? delBtn({ ref: { comment: c.id }, anonPw: c.anonPw, after: () => view(id) }) : "", c.mine ? "" : repBtn({ comment: c.id }), ...adminBtns({ id: c.id, comment: 1 })))));
+        const nick = el("input", { class: "cm-in", placeholder: t("cm_nick"), maxlength: 16, value: pref.get("cmNick", "") });
+        const pw = el("input", { class: "cm-in", type: "password", placeholder: t("cm_pw"), maxlength: 32 });
+        const text = el("textarea", { class: "cm-in", rows: 3, placeholder: t("cm_comment_ph"), maxlength: 1000 });
+        const msg = el("p", { class: "cm-err small" });
+        const send = el("button", { type: "button", class: "install" }, t("cm_send"));
+        send.onclick = async () => {
+          try { pref.set("cmNick", nick.value); await post("/board/comment", { post: id, body: text.value, nick: nick.value, pw: pw.value }); view(id); load(true); }
+          catch (e) { msg.textContent = e.message; }
+        };
+        open(p.title,
+          el("div", { class: "muted small" }, `${tc(p.cat)}${p.member ? ` · ${p.member}` : ""} · ${p.nick}${p.login ? " ✓" : ""} · ${ago(p.at)}${p.edited ? ` · ${t("cm_edited")}` : ""}`),
+          p.img ? el("img", { class: "cm-img", src: `${API}/board/img?id=${id}`, alt: "" }) : "",
+          el("div", { class: "cm-text cm-body" }, p.body),
+          el("div", { class: "cm-acts" }, (p.mine || p.anonPw || me.admin) ? delBtn({ ref: { id }, anonPw: p.anonPw, after: () => { dlg.close(); load(true); } }) : "",
+            p.mine ? Object.assign(el("button", { type: "button", class: "linkbtn" }, t("cm_edit")), { onclick: () => form(p) }) : "",
+            p.mine ? "" : repBtn({ id }), shareBtn(() => share(`post/${id}`, p.title)), ...adminBtns({ id })),
+          el("h3", {}, t("cm_comments", { n: p.comments.length })), comments,
+          me.banned ? el("p", { class: "cm-err small" }, t("cm_banned")) :
+            el("div", { class: "cm-form" }, me.login ? "" : el("div", { class: "cm-pair" }, nick, pw), text, msg, send));
+      } catch (e) { open(t("cm_title"), err(e)); }
+    }
+
+    // 글쓰기·수정
+    function form(edit) {
+      if (me.banned) return alertBox(t("cm_banned"));
+      const title = el("input", { class: "cm-in", placeholder: t("cm_t_ph"), maxlength: 80, value: edit?.title || "" });
+      const text = el("textarea", { class: "cm-in", rows: 8, placeholder: t(board === "trade" ? "cm_b_ph_trade" : "cm_b_ph"), maxlength: 3000 }, edit?.body || "");
+      const catSel = el("select", { class: "sel" }, ...CATS[board].map((c) => el("option", { value: c }, tc(c))));
+      const memSel = el("select", { class: "sel" }, el("option", { value: "" }, t("cm_member")), ...data.members.map((m) => el("option", { value: m.name }, m.name)));
+      const nick = el("input", { class: "cm-in", placeholder: t("cm_nick"), maxlength: 16, value: pref.get("cmNick", "") });
+      const pw = el("input", { class: "cm-in", type: "password", placeholder: t("cm_pw"), maxlength: 32 });
+      let image = "";
+      const file = el("input", { type: "file", accept: "image/*" });
+      file.onchange = () => {  // 긴 변 1080px JPEG로 줄여서
+        const f = file.files[0]; if (!f) return;
+        const img = new Image();
+        img.onload = () => { const k = Math.min(1, 1080 / Math.max(img.width, img.height)); const c = document.createElement("canvas");
+          c.width = img.width * k; c.height = img.height * k; c.getContext("2d").drawImage(img, 0, 0, c.width, c.height); image = c.toDataURL("image/jpeg", 0.82); };
+        img.src = URL.createObjectURL(f);
+      };
+      const msg = el("p", { class: "cm-err small" });
+      const send = el("button", { type: "button", class: "install" }, edit ? t("cm_save") : t("cm_send"));
+      send.onclick = async () => {
+        send.disabled = true;
+        try {
+          pref.set("cmNick", nick.value);
+          if (edit) { await post("/board/edit", { id: edit.id, title: title.value, body: text.value }); view(edit.id); }
+          else { const r = await post("/board/write", { board, cat: catSel.value, member: memSel.value, title: title.value, body: text.value, nick: nick.value, pw: pw.value, image }); view(r.id); }
+          load(true);
+        } catch (e) { msg.textContent = e.message; }
+        send.disabled = false;
+      };
+      open(edit ? t("cm_edit") : `${t(`cm_b_${board}`)} · ${t("cm_write")}`,
+        edit ? "" : el("div", { class: "cm-pair" }, catSel, memSel), title, text,
+        !edit && me.login ? el("label", { class: "small cm-file" }, "🖼 ", t("cm_photo"), " ", file) : "",
+        !edit && !me.login ? el("div", { class: "cm-pair" }, nick, pw) : "",
+        !me.login ? el("p", { class: "muted small" }, t("cm_anon_note")) : "",
+        board === "trade" ? el("p", { class: "cm-warn small" }, t("cm_trade_warn")) : "",
+        msg, send);
+    }
+    $("cmWrite").onclick = () => form(null);
+
+    async function refresh() {
+      if (!API) return;
+      try { me = await api("/board/me"); } catch (e) { me = { login: false, admin: false, banned: 0, boards: ["qna"] }; if (token) { token = ""; } }
+      if (!me.boards.includes(board)) board = "qna";
+      drawHead(); load(true);
+    }
+    let started = false;
+    const start = () => { if (!started && (location.hash.startsWith("#community") || location.hash.startsWith("#post/"))) { started = true; refresh(); } };
+    window.addEventListener("hashchange", start);
+    start();
+    const r0 = route();
+    if (r0[0] === "post" && r0[1]) setTimeout(() => view(Number(r0[1])), 300);
   }
 
   // ---------- 사이트 사용법: 입덕 탭 섹션 + 첫 방문 안내 + 하단 버튼 ----------

@@ -13,6 +13,7 @@
 //   GET/POST /yt-hook                        — YouTube WebSub 콜백
 //   GET  /yt-renew                           — YouTube 알림 구독 지금 갱신 (평소엔 하루 한 번 자동)
 //   POST /chart  {key, song, service, rank}  — 차트 순위 입력 (사이트 chart.html, 비밀 CHART_KEY) → 바로 수집 실행(알림)
+//   /board/*                                 — 커뮤니티 게시판 (아래 '커뮤니티 게시판' 참고, D1 바인딩 DB 필요)
 //   GET  /charts                             — 입력된 순위 목록 (수집용, 공개)
 const REPO = "han-gaeul/a2o-soul-dashboard";
 const WORKFLOW = "update.yml";
@@ -20,7 +21,7 @@ const SITE = "https://a2osoul-tracker.com";
 const HOOK = "https://push.a2osoul-tracker.com/yt-hook";
 const ORIGINS = [SITE, "http://localhost:8765"];
 const TOPICS = ["notice", "vote", "show", "video", "birthday"];
-const LANGS = ["ko", "en", "ja", "zh", "es", "id", "th", "pt"];
+const LANGS = ["ko", "en", "ja", "zh", "es", "id", "th", "pt", "fil", "vi"];
 const GROUP = /A2O\s?SOUL|A2OSOUL|에이투오\s?소울/i;
 const OWN_CHANNELS = ["UCAdLPETtxpZeRVqsq_QTneA", "UCn-SYb1TUz-1itK_uz4imUA"]; // A2O SOUL, A2O WORLD — 제목 상관없이 실행
 
@@ -35,7 +36,7 @@ function cors(req) {
   return {
     "Access-Control-Allow-Origin": ORIGINS.includes(o) ? o : ORIGINS[0],
     "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Device",
     "Vary": "Origin",
   };
 }
@@ -111,12 +112,230 @@ async function youtubeHook(req, env) {
   return new Response("ok");
 }
 
+// ---------- 커뮤니티 게시판 (D1 바인딩 DB) ----------
+// 게시판: qna(질문·정보, 익명 가능) / trade(포카 교환, 구글 로그인만 — 익명은 목록도 안 보임)
+// 익명은 닉네임+비밀번호. 신원: 구글 sub 해시 / 기기 ID 해시 (IP는 쓰지 않음, 화면엔 안 보임)
+// 익명 글·댓글·신고는 Cloudflare Turnstile(사람 확인)을 통과해야 함 → 매크로 도배 방지
+// 신고: 서로 다른 사람(계정·기기) 3명 → 글 숨김 + 쓴 사람(계정·기기) 30일 차단 (관리자가 풀 수 있음)
+// 설정: D1 바인딩 DB / 변수 GOOGLE_CLIENT_ID / 비밀 ADMIN_EMAILS(쉼표로) / 비밀 BOARD_SALT(아무 긴 문자열) / 비밀 TURNSTILE_SECRET
+const BOARDS = { qna: { cats: ["질문", "정보", "후기"], anon: true }, trade: { cats: ["구해요", "드려요", "교환해요"], anon: false } };
+const LIMIT = { anon: 5, user: 20 };
+const BAN_DAYS = 30;
+const PRIVATE = /(01[016789][-\s.]?\d{3,4}[-\s.]?\d{4})|(\d{2,6}[-\s]\d{2,6}[-\s]\d{2,8})|(카톡|카카오톡|오픈채팅|텔레|telegram|라인\s?아이디|line\s?id)\s*[:：]?\s*\S+|(계좌|입금|송금)/i;
+const LINK = /https?:\/\/|www\.|\.(com|net|kr|io|me|ly)\b/i;
+
+async function schema(env) {
+  await env.DB.batch([
+    env.DB.prepare(`CREATE TABLE IF NOT EXISTS posts (id INTEGER PRIMARY KEY AUTOINCREMENT, board TEXT, cat TEXT, member TEXT, title TEXT, body TEXT, nick TEXT,
+      pw TEXT, uid TEXT, ip TEXT, dev TEXT, img INTEGER DEFAULT 0, pinned INTEGER DEFAULT 0, hidden INTEGER DEFAULT 0, reports INTEGER DEFAULT 0,
+      comments INTEGER DEFAULT 0, at INTEGER, edited INTEGER)`),
+    env.DB.prepare(`CREATE TABLE IF NOT EXISTS comments (id INTEGER PRIMARY KEY AUTOINCREMENT, post INTEGER, body TEXT, nick TEXT, pw TEXT, uid TEXT, ip TEXT, dev TEXT,
+      hidden INTEGER DEFAULT 0, reports INTEGER DEFAULT 0, at INTEGER)`),
+    env.DB.prepare(`CREATE TABLE IF NOT EXISTS images (post INTEGER PRIMARY KEY, type TEXT, data BLOB)`),
+    env.DB.prepare(`CREATE TABLE IF NOT EXISTS reports (kind TEXT, target INTEGER, who TEXT, at INTEGER, PRIMARY KEY (kind, target, who))`),
+    env.DB.prepare(`CREATE TABLE IF NOT EXISTS bans (key TEXT PRIMARY KEY, until INTEGER, why TEXT)`),
+    env.DB.prepare(`CREATE INDEX IF NOT EXISTS posts_board ON posts (board, pinned, id)`),
+  ]);
+}
+const sha = async (s) => hex(await crypto.subtle.digest("SHA-256", enc.encode(s))).slice(0, 24);
+
+// 요청한 사람: 구글 로그인(ID 토큰 확인) 또는 익명 + IP·기기 해시
+async function who(req, env) {
+  const salt = env.BOARD_SALT || "a2o";
+  const dev = await sha(salt + "dev:" + (req.headers.get("X-Device") || "").slice(0, 64));
+  const m = (req.headers.get("Authorization") || "").match(/^Bearer (.+)$/);
+  let uid = null, admin = false;
+  if (m && env.GOOGLE_CLIENT_ID) {
+    const r = await fetch(`https://oauth2.googleapis.com/tokeninfo?id_token=${encodeURIComponent(m[1])}`);
+    if (r.ok) {
+      const t = await r.json();
+      if (t.aud === env.GOOGLE_CLIENT_ID && Number(t.exp) * 1000 > Date.now() && t.email_verified !== "false") {
+        uid = await sha(salt + "g:" + t.sub);
+        admin = (env.ADMIN_EMAILS || "").split(",").map((x) => x.trim().toLowerCase()).includes(String(t.email || "").toLowerCase());
+      }
+    }
+  }
+  const keys = [uid && `u:${uid}`, `d:${dev}`].filter(Boolean);
+  const ban = await env.DB.prepare(`SELECT until FROM bans WHERE key IN (${keys.map(() => "?").join(",")}) AND until > ? ORDER BY until DESC LIMIT 1`)
+    .bind(...keys, Date.now()).first();
+  return { uid, dev, admin, banned: ban ? ban.until : 0, keys };
+}
+const pwHash = (env, pw) => sha((env.BOARD_SALT || "a2o") + "pw:" + pw);
+const clean = (s, n) => String(s || "").replace(/[\u0000-\u0008\u000b-\u001f]/g, "").trim().slice(0, n);
+const pub = (p) => ({ id: p.id, board: p.board, cat: p.cat, member: p.member, title: p.title, nick: p.nick, login: !!p.uid,
+  img: !!p.img, pinned: !!p.pinned, hidden: !!p.hidden, comments: p.comments, at: p.at, edited: p.edited });
+
+async function banAuthor(env, row, why) {
+  const until = Date.now() + BAN_DAYS * 864e5;
+  const keys = [row.uid && `u:${row.uid}`, row.dev && `d:${row.dev}`].filter(Boolean);
+  await env.DB.batch(keys.map((k) => env.DB.prepare("INSERT OR REPLACE INTO bans (key, until, why) VALUES (?, ?, ?)").bind(k, until, why)));
+}
+
+async function board(req, env, url) {
+  if (!env.DB) return json(req, { error: "게시판 준비 중이에요" }, 503);
+  await schema(env);
+  const me = await who(req, env);
+  const p = url.pathname;
+  const body = req.method === "POST" ? await req.json().catch(() => ({})) : {};
+  const canSee = (b) => BOARDS[b] && (BOARDS[b].anon || me.uid);
+
+  if (p === "/board/me") return json(req, { login: !!me.uid, admin: me.admin, banned: me.banned, boards: Object.keys(BOARDS).filter(canSee) });
+
+  if (p === "/board/list") {
+    const b = url.searchParams.get("b");
+    if (!canSee(b)) return json(req, { error: "login" }, 401);
+    const before = Number(url.searchParams.get("before")) || 9e15;
+    const cat = url.searchParams.get("cat"), mem = url.searchParams.get("m");
+    let q = "SELECT * FROM posts WHERE board = ? AND id < ?", args = [b, before];
+    if (!me.admin) q += " AND hidden = 0";
+    if (cat) { q += " AND cat = ?"; args.push(cat); }
+    if (mem) { q += " AND member = ?"; args.push(mem); }
+    const pins = before === 9e15 ? (await env.DB.prepare("SELECT * FROM posts WHERE board = ? AND pinned = 1 AND hidden = 0 ORDER BY id DESC").bind(b).all()).results : [];
+    const rows = (await env.DB.prepare(q + " AND pinned = 0 ORDER BY id DESC LIMIT 20").bind(...args).all()).results;
+    return json(req, { pins: pins.map(pub), posts: rows.map(pub) });
+  }
+
+  if (p === "/board/post" && req.method === "GET") {
+    const row = await env.DB.prepare("SELECT * FROM posts WHERE id = ?").bind(Number(url.searchParams.get("id"))).first();
+    if (!row || !canSee(row.board) || (row.hidden && !me.admin)) return json(req, { error: "없는 글이에요" }, 404);
+    const cs = (await env.DB.prepare("SELECT * FROM comments WHERE post = ? ORDER BY id").bind(row.id).all()).results;
+    const mine = (x) => !!(me.uid && x.uid === me.uid);
+    return json(req, { ...pub(row), body: row.body, mine: mine(row), anonPw: !row.uid,
+      comments: cs.filter((c) => !c.hidden || me.admin).map((c) => ({ id: c.id, body: c.body, nick: c.nick, login: !!c.uid, at: c.at, hidden: !!c.hidden, mine: mine(c), anonPw: !c.uid })) });
+  }
+
+  if (p === "/board/img") {
+    const row = await env.DB.prepare("SELECT p.board, p.hidden, i.type, i.data FROM images i JOIN posts p ON p.id = i.post WHERE i.post = ?").bind(Number(url.searchParams.get("id"))).first();
+    if (!row || !canSee(row.board) || row.hidden) return new Response("not found", { status: 404, headers: cors(req) });
+    return new Response(new Uint8Array(row.data), { headers: { "Content-Type": row.type, "Cache-Control": "private, max-age=86400", ...cors(req) } });
+  }
+
+  if (req.method !== "POST") return json(req, { error: "not found" }, 404);
+  if (me.banned) return json(req, { error: `신고가 많아 ${new Date(me.banned + 9 * 36e5).toISOString().slice(0, 10)}까지 글을 쓸 수 없어요` }, 403);
+
+  // 하루 글·댓글 수 제한 (같은 IP·기기·계정 기준)
+  const day = Date.now() - 864e5;
+  const limitOk = async () => {
+    const n = await env.DB.prepare("SELECT (SELECT COUNT(*) FROM posts WHERE at > ? AND (dev = ? OR uid = ?)) + (SELECT COUNT(*) FROM comments WHERE at > ? AND (dev = ? OR uid = ?)) AS n")
+      .bind(day, me.dev, me.uid || "-", day, me.dev, me.uid || "-").first("n");
+    return n < (me.uid ? LIMIT.user : LIMIT.anon) * 2 || me.admin;
+  };
+  const checkText = (t) => {
+    if (PRIVATE.test(t)) return "전화번호·계좌·메신저 아이디 같은 개인정보는 쓸 수 없어요";
+    if (!me.uid && LINK.test(t)) return "링크는 구글 로그인 후 넣을 수 있어요";
+    return "";
+  };
+
+  // 익명은 사람 확인(Turnstile) 통과해야 글·댓글·신고 가능
+  if (!me.uid && ["/board/write", "/board/comment", "/board/report"].includes(p) && env.TURNSTILE_SECRET) {
+    const fd = new FormData();
+    fd.append("secret", env.TURNSTILE_SECRET);
+    fd.append("response", String(body.ts || ""));
+    const v = await (await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", { method: "POST", body: fd })).json().catch(() => ({}));
+    if (!v.success) return json(req, { error: "사람 확인을 다시 해 주세요" }, 400);
+  }
+
+  if (p === "/board/write") {
+    const b = body.board;
+    if (!BOARDS[b]) return json(req, { error: "게시판을 골라 주세요" }, 400);
+    if (!BOARDS[b].anon && !me.uid) return json(req, { error: "login" }, 401);
+    const cat = BOARDS[b].cats.includes(body.cat) ? body.cat : BOARDS[b].cats[0];
+    const title = clean(body.title, 80), text = clean(body.body, 3000), nick = clean(body.nick, 16) || "익명";
+    if (!title || !text) return json(req, { error: "제목과 내용을 써 주세요" }, 400);
+    const bad = checkText(title + "\n" + text);
+    if (bad) return json(req, { error: bad }, 400);
+    if (!me.uid && String(body.pw || "").length < 4) return json(req, { error: "비밀번호를 4자 이상 써 주세요" }, 400);
+    if (!(await limitOk())) return json(req, { error: "오늘은 더 쓸 수 없어요 (하루 제한)" }, 429);
+    let img = null;
+    if (body.image && me.uid) {
+      const m = String(body.image).match(/^data:(image\/(jpeg|png|webp));base64,(.+)$/);
+      if (!m) return json(req, { error: "사진 형식을 확인해 주세요" }, 400);
+      img = { type: m[1], data: Uint8Array.from(atob(m[3]), (c) => c.charCodeAt(0)) };
+      if (img.data.length > 700000) return json(req, { error: "사진이 너무 커요" }, 400);
+    }
+    const r = await env.DB.prepare(`INSERT INTO posts (board, cat, member, title, body, nick, pw, uid, ip, dev, img, at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`)
+      .bind(b, cat, clean(body.member, 12), title, text, nick, me.uid ? null : await pwHash(env, body.pw), me.uid, null, me.dev, img ? 1 : 0, Date.now()).run();
+    const id = r.meta.last_row_id;
+    if (img) await env.DB.prepare("INSERT INTO images (post, type, data) VALUES (?, ?, ?)").bind(id, img.type, img.data).run();
+    return json(req, { ok: true, id });
+  }
+
+  if (p === "/board/comment") {
+    const row = await env.DB.prepare("SELECT * FROM posts WHERE id = ? AND hidden = 0").bind(Number(body.post)).first();
+    if (!row || !canSee(row.board)) return json(req, { error: "login" }, 401);
+    const text = clean(body.body, 1000), nick = clean(body.nick, 16) || "익명";
+    if (!text) return json(req, { error: "내용을 써 주세요" }, 400);
+    const bad = checkText(text);
+    if (bad) return json(req, { error: bad }, 400);
+    if (!me.uid && String(body.pw || "").length < 4) return json(req, { error: "비밀번호를 4자 이상 써 주세요" }, 400);
+    if (!(await limitOk())) return json(req, { error: "오늘은 더 쓸 수 없어요 (하루 제한)" }, 429);
+    await env.DB.batch([
+      env.DB.prepare("INSERT INTO comments (post, body, nick, pw, uid, ip, dev, at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")
+        .bind(row.id, text, nick, me.uid ? null : await pwHash(env, body.pw), me.uid, null, me.dev, Date.now()),
+      env.DB.prepare("UPDATE posts SET comments = comments + 1 WHERE id = ?").bind(row.id),
+    ]);
+    return json(req, { ok: true });
+  }
+
+  if (p === "/board/edit") {
+    const row = await env.DB.prepare("SELECT * FROM posts WHERE id = ?").bind(Number(body.id)).first();
+    if (!row || !(me.admin || (me.uid && row.uid === me.uid))) return json(req, { error: "수정은 구글 로그인한 글쓴이만 할 수 있어요" }, 403);
+    const title = clean(body.title, 80), text = clean(body.body, 3000);
+    const bad = checkText(title + "\n" + text);
+    if (!title || !text || bad) return json(req, { error: bad || "제목과 내용을 써 주세요" }, 400);
+    await env.DB.prepare("UPDATE posts SET title = ?, body = ?, edited = ? WHERE id = ?").bind(title, text, Date.now(), row.id).run();
+    return json(req, { ok: true });
+  }
+
+  if (p === "/board/delete") {
+    const isC = !!body.comment, table = isC ? "comments" : "posts";
+    const row = await env.DB.prepare(`SELECT * FROM ${table} WHERE id = ?`).bind(Number(isC ? body.comment : body.id)).first();
+    if (!row) return json(req, { error: "없는 글이에요" }, 404);
+    const ok = me.admin || (me.uid && row.uid === me.uid) || (!row.uid && row.pw && row.pw === (await pwHash(env, String(body.pw || ""))));
+    if (!ok) return json(req, { error: "비밀번호가 달라요" }, 403);
+    if (isC) await env.DB.batch([env.DB.prepare("DELETE FROM comments WHERE id = ?").bind(row.id), env.DB.prepare("UPDATE posts SET comments = comments - 1 WHERE id = ?").bind(row.post)]);
+    else await env.DB.batch([env.DB.prepare("DELETE FROM posts WHERE id = ?").bind(row.id), env.DB.prepare("DELETE FROM comments WHERE post = ?").bind(row.id), env.DB.prepare("DELETE FROM images WHERE post = ?").bind(row.id)]);
+    return json(req, { ok: true });
+  }
+
+  if (p === "/board/report") {
+    const isC = !!body.comment, kind = isC ? "c" : "p", table = isC ? "comments" : "posts";
+    const id = Number(isC ? body.comment : body.id);
+    const row = await env.DB.prepare(`SELECT * FROM ${table} WHERE id = ?`).bind(id).first();
+    if (!row) return json(req, { error: "없는 글이에요" }, 404);
+    const reporter = me.uid ? `u:${me.uid}` : `d:${me.dev}`;  // 같은 사람(계정·기기) 신고는 한 번만
+    if ([row.uid && `u:${row.uid}`, `d:${row.dev}`].includes(reporter)) return json(req, { error: "내 글은 신고할 수 없어요" }, 400);
+    const r = await env.DB.prepare("INSERT OR IGNORE INTO reports (kind, target, who, at) VALUES (?, ?, ?, ?)").bind(kind, id, reporter, Date.now()).run();
+    if (!r.meta.changes) return json(req, { ok: true, already: true });
+    const n = await env.DB.prepare("SELECT COUNT(*) AS n FROM reports WHERE kind = ? AND target = ?").bind(kind, id).first("n");
+    await env.DB.prepare(`UPDATE ${table} SET reports = ? ${n >= 3 ? ", hidden = 1" : ""} WHERE id = ?`).bind(n, id).run();
+    if (n >= 3) await banAuthor(env, row, `신고 3회 (${kind}${id})`);
+    return json(req, { ok: true, hidden: n >= 3 });
+  }
+
+  if (p === "/board/admin") {
+    if (!me.admin) return json(req, { error: "forbidden" }, 403);
+    const id = Number(body.id), table = body.comment ? "comments" : "posts";
+    const row = id ? await env.DB.prepare(`SELECT * FROM ${table} WHERE id = ?`).bind(id).first() : null;
+    if (body.action === "pin" || body.action === "unpin") await env.DB.prepare("UPDATE posts SET pinned = ? WHERE id = ?").bind(body.action === "pin" ? 1 : 0, id).run();
+    else if (body.action === "hide" || body.action === "show") await env.DB.prepare(`UPDATE ${table} SET hidden = ? WHERE id = ?`).bind(body.action === "hide" ? 1 : 0, id).run();
+    else if (body.action === "ban" && row) await banAuthor(env, row, "관리자");
+    else if (body.action === "unban" && row) {
+      const keys = [row.uid && `u:${row.uid}`, `d:${row.dev}`].filter(Boolean);
+      await env.DB.prepare(`DELETE FROM bans WHERE key IN (${keys.map(() => "?").join(",")})`).bind(...keys).run();
+    } else return json(req, { error: "unknown action" }, 400);
+    return json(req, { ok: true });
+  }
+  return json(req, { error: "not found" }, 404);
+}
+
 export default {
   async fetch(req, env) {
     const url = new URL(req.url);
     if (req.method === "OPTIONS") return new Response(null, { headers: cors(req) });
 
     if (url.pathname === "/yt-hook") return youtubeHook(req, env);
+    if (url.pathname.startsWith("/board/")) return board(req, env, url);
     if (req.method === "GET" && url.pathname === "/yt-renew") { // 10분에 한 번만
       if (Date.now() - (Number(await env.SUBS.get("_renew_at")) || 0) < 600000) return json(req, { ok: true, skipped: "10분 안에 이미 갱신" });
       await env.SUBS.put("_renew_at", String(Date.now()), { expirationTtl: 3600 });
