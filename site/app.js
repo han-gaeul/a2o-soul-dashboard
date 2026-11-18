@@ -1900,20 +1900,92 @@ if ("serviceWorker" in navigator) {
       if ((m.ig_mentions || []).length) body.push(el("div", { class: "ig-feed bias-ig" }, ...m.ig_mentions.slice(0, 2).map((x) => igPost(x, false))));
       const more = el("button", { class: "more", type: "button" }, t("profile_view"));
       more.addEventListener("click", () => openMember(m));
-      body.push(more);
+      const tg = el("label", { class: "bias-theme-tg small" }, el("input", { type: "checkbox", ...(themeOn() ? { checked: "" } : {}) }), ` ${t("bias_theme")}`);
+      tg.firstChild.addEventListener("change", (e) => { pref.set("biasTheme", e.target.checked); applyTheme(); });
+      // 테마 색 고르기: 자주 쓰는 색 + 직접 고르기 (이 브라우저에만 저장)
+      const cur = pref.get("biasColor", null);
+      const sw = (hex) => {
+        const b = el("button", { type: "button", class: `bias-sw${cur === hex ? " on" : ""}`, "aria-label": hex, style: `--c:${hex}` });
+        b.addEventListener("click", () => { pref.set("biasColor", hex); pref.set("biasTheme", true); renderBias(); applyTheme(); });
+        return b;
+      };
+      const reset = el("button", { type: "button", class: `bias-sw auto${cur === null ? " on" : ""}`, title: t("bias_color_auto") }, "A");
+      reset.addEventListener("click", () => { pref.set("biasColor", null); renderBias(); applyTheme(); });
+      const custom = el("input", { type: "color", class: "bias-pick", "aria-label": t("bias_color_pick"), value: cur || "#9b87f5" });
+      custom.addEventListener("input", (e) => { pref.set("biasColor", e.target.value); pref.set("biasTheme", true); applyTheme(); });
+      custom.addEventListener("change", () => renderBias());
+      body.push(el("div", { class: "bias-foot" }, more, tg),
+        themeOn() ? el("div", { class: "bias-colors" }, el("span", { class: "muted small" }, t("bias_color")), reset, ...PALETTE.slice(0, 10).map(sw),
+          el("label", { class: "bias-sw rainbow", title: t("bias_color_pick") }, custom)) : null);
     } else {
       body.push(el("p", { class: "note small" }, t("bias_desc")));
     }
     $("bias").replaceChildren(head, ...body);
   }
+  // 최애 테마: 멤버별 포인트 색 + 상단에 최애 사진 (끄기 가능)
+  // 파스텔 계열 15색 — 멤버 순서대로 기본 색, 사용자가 바꿀 수 있음
+  const PALETTE = ["#9b87f5", "#f4a3c0", "#7cc6e8", "#f6b38e", "#86cfae", "#c5a3f0", "#f0c674", "#8fa8f2", "#e88fa7", "#7fd1c7",
+    "#d9a6e8", "#a7c97f", "#f29e9e", "#9ec3e6", "#e4b48c"];
+  // #hex → 색상·채도 유지하고 밝기만 바꿔서 (검정을 섞으면 탁해져서 HSL로)
+  const toHsl = (hex) => {
+    const [r, g, b] = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255);
+    const mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 2, d = mx - mn;
+    const s = d ? d / (1 - Math.abs(2 * l - 1)) : 0;
+    const h = !d ? 0 : mx === r ? 60 * (((g - b) / d) % 6) : mx === g ? 60 * ((b - r) / d + 2) : 60 * ((r - g) / d + 4);
+    return [(h + 360) % 360, s * 100, l * 100];
+  };
+  const hsl = (h, s, l) => `hsl(${Math.round(h)} ${Math.round(s)}% ${Math.round(l)}%)`;
+  const lumHsl = (h, s, l) => {  // 상대 휘도 (흰 글씨 대비 확인용)
+    s /= 100; l /= 100;
+    const f = (n) => { const k = (n + h / 30) % 12; return l - s * Math.min(l, 1 - l) * Math.max(-1, Math.min(k - 3, 9 - k, 1)); };
+    return [f(0), f(8), f(4)].map((c) => (c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4)).reduce((a, c, i) => a + c * [0.2126, 0.7152, 0.0722][i], 0);
+  };
+  const tints = (hex) => {
+    const [h, s0] = toHsl(hex), s = Math.min(85, Math.max(s0, 55));
+    let l = 62;
+    while (lumHsl(h, s, l) > 0.26 && l > 30) l -= 2;  // 흰 글씨가 읽힐 만큼만 진하게
+    return { bg: hsl(h, s, l), text: hsl(h, Math.min(s, 60), Math.min(l, 38)), soft: hsl(h, Math.min(s + 10, 90), 95), deep: hsl(h, 35, 18), light: hsl(h, 75, 78) };
+  };
+
+  const themeOn = () => pref.get("biasTheme", true);
+  function applyTheme() {
+    const m = data.members.find((x) => x.name === bias);
+    const root = document.documentElement;
+    const badge = $("biasBadge");
+    if (!m || !themeOn() || !m.photo) {
+      ["--accent", "--accent-bg", "--chip", "--chip-fg"].forEach((k) => root.style.removeProperty(k));
+      document.body.classList.remove("bias-theme");
+      if (badge) badge.hidden = true;
+      return;
+    }
+    // 멤버별 색: members.yml color(색상 0~360)가 있으면 그것, 없으면 15명 순서대로 색상환을 고르게 나눈 색
+    const idx = data.members.indexOf(m);
+    // 고른 색(#hex) → 버튼·글씨·옅은 배경 색으로 (밝은 색은 흰 글씨가 보이게 어둡게)
+    const mine = pref.get("biasColor", null);
+    const base = /^#[0-9a-f]{6}$/i.test(mine || "") ? mine : /^#[0-9a-f]{6}$/i.test(m.color || "") ? m.color : PALETTE[data.members.indexOf(m) % PALETTE.length];
+    const pal = tints(base);
+    const dark = matchMedia("(prefers-color-scheme: dark)").matches;
+    root.style.setProperty("--accent", dark ? pal.light : pal.text);
+    root.style.setProperty("--accent-bg", pal.bg);
+    root.style.setProperty("--chip", dark ? pal.deep : pal.soft);
+    root.style.setProperty("--chip-fg", dark ? pal.light : pal.text);
+    document.body.classList.add("bias-theme");
+    if (badge) {
+      badge.hidden = false;
+      badge.replaceChildren(el("img", { src: m.photo, alt: "" }), el("span", {}, `♥ ${m.name}`));
+      badge.onclick = () => openMember(m);
+    }
+  }
   function setBias(name) {
     bias = name;
     pref.set("bias", name);
     renderBias();
+    applyTheme();
 
 
   }
   renderBias();
+  applyTheme();
 
   // ---------- 헤더 사진 띠 (15명, 누르면 프로필) ----------
   const withPhoto = data.members.filter((m) => m.photo);
