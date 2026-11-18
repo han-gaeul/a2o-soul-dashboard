@@ -583,3 +583,32 @@ window.I18N = {
     nat: { "한국": "Hàn Quốc", "일본": "Nhật Bản", "중국": "Trung Quốc", "태국": "Thái Lan", "미국": "Mỹ" },
   },
 };
+
+// 한눈에 화면 스타일 (A 정리형 · B 매거진형 · C 최애 중심형)
+(() => {
+  const K = ["hs_title", "hs_desc", "hs_a", "hs_a_d", "hs_b", "hs_b_d", "hs_c", "hs_c_d", "hs_todo", "hs_todo_none", "hs_todo_cams", "hs_todo_stream",
+    "hs_mg_cams", "hs_mg_all", "hs_mg_mv", "hs_c_pick", "hs_c_my", "hs_c_cams", "hs_c_views", "hs_c_today"];
+  const V = {
+    ko: ["화면 스타일", "한눈에 탭을 어떻게 볼지 골라 주세요. 언제든 더보기에서 바꿀 수 있어요.", "정리형", "오늘 할 일부터 목록으로", "매거진형", "최근 무대를 크게", "최애 중심형", "내 최애가 맨 위에",
+      "✅ 오늘 할 일", "오늘은 급한 일이 없어요 🎉", "새 직캠 {n}개 안 봤어요", "8곡 원클릭 담기", "이 무대 직캠", "회차 전체 ›", "🎬 최신 MV", "💜 최애를 먼저 골라 주세요", "내 최애", "직캠", "직캠 조회수", "오늘"],
+    en: ["Home style", "Choose how your Home tab looks. You can change it anytime under More.", "Organized", "Today's to-dos first", "Magazine", "Latest stage, big", "Bias-first", "Your bias on top",
+      "✅ To do today", "Nothing urgent today 🎉", "{n} new fancams to watch", "Add 8 tracks in one tap", "Fancams from this stage", "Full episode ›", "🎬 Latest MV", "💜 Pick your bias first", "My bias", "Fancams", "Fancam views", "Today"],
+    ja: ["ホームのスタイル", "ホームの見え方を選んでください。「もっと見る」からいつでも変更できます。", "整理型", "今日やることから", "マガジン型", "最新ステージを大きく", "推し中心型", "推しがいちばん上に",
+      "✅ 今日やること", "今日は急ぎの用事はありません 🎉", "未視聴の新しい推しカメラ {n}本", "8曲をワンタップで追加", "このステージの推しカメラ", "回をすべて見る ›", "🎬 最新MV", "💜 まず推しを選んでください", "私の推し", "推しカメラ", "推しカメラ再生数", "今日"],
+    zh: ["首页样式", "选择首页的显示方式，随时可在“更多”中更改。", "整理型", "先看今日待办", "杂志型", "大图展示最新舞台", "本命型", "本命置顶",
+      "✅ 今日待办", "今天没有紧急事项 🎉", "{n} 个新直拍未看", "一键添加 8 首歌", "本场舞台直拍", "查看整期 ›", "🎬 最新 MV", "💜 请先选择本命", "我的本命", "直拍", "直拍播放量", "今日"],
+    es: ["Estilo de inicio", "Elige cómo se ve tu Inicio. Puedes cambiarlo cuando quieras en Más.", "Ordenado", "Primero lo de hoy", "Revista", "Último escenario en grande", "Bias primero", "Tu bias arriba",
+      "✅ Para hoy", "Nada urgente hoy 🎉", "{n} fancams nuevos sin ver", "Añade 8 canciones de un toque", "Fancams de este escenario", "Episodio completo ›", "🎬 Último MV", "💜 Elige primero a tu bias", "Mi bias", "Fancams", "Vistas de fancams", "Hoy"],
+    id: ["Gaya beranda", "Pilih tampilan Beranda. Bisa diubah kapan saja di Lainnya.", "Rapi", "Tugas hari ini dulu", "Majalah", "Panggung terbaru, besar", "Bias dulu", "Bias kamu di atas",
+      "✅ Tugas hari ini", "Tidak ada yang mendesak hari ini 🎉", "{n} fancam baru belum ditonton", "Tambah 8 lagu sekali ketuk", "Fancam panggung ini", "Satu episode ›", "🎬 MV terbaru", "💜 Pilih bias kamu dulu", "Bias saya", "Fancam", "Penayangan fancam", "Hari ini"],
+    th: ["รูปแบบหน้าแรก", "เลือกการแสดงหน้าแรก เปลี่ยนได้ทุกเมื่อที่เมนูเพิ่มเติม", "แบบจัดระเบียบ", "สิ่งที่ต้องทำวันนี้ก่อน", "แบบนิตยสาร", "เวทีล่าสุดแบบใหญ่", "เน้นเมน", "เมนของคุณอยู่บนสุด",
+      "✅ สิ่งที่ต้องทำวันนี้", "วันนี้ไม่มีเรื่องด่วน 🎉", "แฟนแคมใหม่ที่ยังไม่ดู {n} คลิป", "เพิ่ม 8 เพลงในแตะเดียว", "แฟนแคมเวทีนี้", "ดูทั้งตอน ›", "🎬 MV ล่าสุด", "💜 เลือกเมนก่อนนะ", "เมนของฉัน", "แฟนแคม", "ยอดวิวแฟนแคม", "วันนี้"],
+    pt: ["Estilo do início", "Escolha como o Início aparece. Dá para mudar quando quiser em Mais.", "Organizado", "Primeiro o que fazer hoje", "Revista", "Último palco em destaque", "Bias primeiro", "Seu bias no topo",
+      "✅ Para hoje", "Nada urgente hoje 🎉", "{n} fancams novas não vistas", "Adicione 8 faixas com um toque", "Fancams deste palco", "Episódio completo ›", "🎬 Último MV", "💜 Escolha seu bias primeiro", "Meu bias", "Fancams", "Views das fancams", "Hoje"],
+    fil: ["Estilo ng home", "Piliin kung paano lalabas ang Home. Puwedeng palitan anumang oras sa Iba pa.", "Maayos", "Mga gagawin ngayon muna", "Magazine", "Pinakabagong stage, malaki", "Bias muna", "Bias mo sa itaas",
+      "✅ Gagawin ngayon", "Walang urgent ngayon 🎉", "{n} bagong fancam na hindi pa napapanood", "Idagdag ang 8 kanta sa isang tap", "Mga fancam ng stage na ito", "Buong episode ›", "🎬 Pinakabagong MV", "💜 Piliin muna ang bias mo", "Bias ko", "Fancams", "Views ng fancam", "Ngayon"],
+    vi: ["Kiểu trang chủ", "Chọn cách hiển thị Trang chủ. Có thể đổi bất cứ lúc nào ở mục Thêm.", "Gọn gàng", "Việc hôm nay trước", "Tạp chí", "Sân khấu mới nhất, cỡ lớn", "Bias trước", "Bias của bạn ở trên cùng",
+      "✅ Việc hôm nay", "Hôm nay không có việc gấp 🎉", "{n} fancam mới chưa xem", "Thêm 8 bài chỉ một chạm", "Fancam sân khấu này", "Cả tập ›", "🎬 MV mới nhất", "💜 Hãy chọn bias trước", "Bias của tôi", "Fancam", "Lượt xem fancam", "Hôm nay"],
+  };
+  for (const [l, vals] of Object.entries(V)) if (window.I18N[l]) K.forEach((k, i) => { window.I18N[l][k] = vals[i]; });
+})();

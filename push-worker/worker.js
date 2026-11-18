@@ -385,6 +385,20 @@ export default {
       return json(req, (await env.SUBS.get("_charts", "json")) || []);
     }
 
+    // 한눈에 화면 스타일(A·B·C) 고른 횟수 — 누가 골랐는지는 저장 안 함
+    if (url.pathname === "/style") {
+      const ST = ["a", "b", "c"];
+      if (req.method === "POST") {
+        const { s } = await req.json().catch(() => ({}));
+        if (!ST.includes(s)) return json(req, { error: "bad style" }, 400);
+        const k = `_style:${s}`;
+        await env.SUBS.put(k, String((Number(await env.SUBS.get(k)) || 0) + 1));
+        return json(req, { ok: true });
+      }
+      const out = {};
+      for (const s of ST) out[s] = Number(await env.SUBS.get(`_style:${s}`)) || 0;
+      return json(req, out);
+    }
     if (req.method === "GET" && url.pathname === "/subs") {
       if (!(await isAdmin(req, env))) return json(req, { error: "forbidden" }, 403);
       const out = [];
