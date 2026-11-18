@@ -328,7 +328,12 @@ if ("serviceWorker" in navigator) {
     }
     title.classList.add("what");
     const live = e.type === "음방" && e.date >= todayKst ? liveLink(e.title) : null;
-    return el("li", { class: `ev-${e.group}` }, whenEl, el("div", {}, e.type ? el("span", { class: "chip" }, tc(e.type)) : null, title, live));
+    return el("li", { class: `ev-${e.group}` }, whenEl, el("div", {}, e.type ? el("span", { class: "chip" }, tc(e.type)) : null, title, live, tipBy(e)));
+  }
+
+  // 팬 제보 크레딧 — yml 항목의 credit: "@아이디" (의견·제보 폼에서 아이디를 적은 경우)
+  function tipBy(x) {
+    return x && x.credit ? el("div", { class: "muted small tip-by" }, t("tip_by", { who: x.credit })) : null;
   }
 
   function monthEvents(y, mo) {
@@ -490,6 +495,7 @@ if ("serviceWorker" in navigator) {
       el("div", { class: "vt-when muted" }, open ? t("vote_end_at", { t: v.end.slice(5).replace("-", ".") }) : `${v.start.slice(5).replace("-", ".")} ~ ${v.end.slice(v.end.slice(0, 10) === v.start.slice(0, 10) ? 11 : 5).replace("-", ".")}`,
         localOf(v.end.slice(0, 10), v.end.slice(11)) ? el("span", { class: "local-t" }, localOf(v.end.slice(0, 10), v.end.slice(11))) : null),
       full && v.note ? el("div", { class: "vt-note" }, tc(v.note)) : null,
+      full ? tipBy(v) : null,
       el("div", { class: "vt-go" }, href ? voteLabel(v) : ""));
     // 응원 탭: 앱으로 가는 타일엔 투표 안내 글 링크도 따로 (타일 밖 한 줄)
     if (full && v.url && href !== v.url) return el("div", { class: "vt-wrap" }, tile, ext(v.url, `↗ ${t("from_notice")}`));
@@ -1130,7 +1136,7 @@ if ("serviceWorker" in navigator) {
         el("div", {}, el("span", { class: `chip ${running ? "chip-on" : ""}` }, x.kind || "-"),
           el("b", {}, [x.member, x.title].filter(Boolean).join(" "))),
         el("div", { class: "muted" }, `${x.start.slice(5).replace("-", ".")} ~ ${x.end.slice(5).replace("-", ".")}`,
-          x.place ? ` · ${x.place}` : "", x.host ? ` · ${t("host", { v: x.host })}` : ""),
+          x.place ? ` · ${x.place}` : "", x.host ? ` · ${t("host", { v: x.host })}` : "", x.credit ? ` · ${t("tip_by", { who: x.credit })}` : ""),
         x.url ? ext(x.url, "↗") : null));
     }
   } else {

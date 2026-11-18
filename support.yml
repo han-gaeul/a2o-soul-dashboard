@@ -13,4 +13,5 @@
 #     place: 서울 마포구 ○○카페
 #     host: "@lucien_cafe"
 #     url: https://x.com/...
+#     credit: "@아이디"   # 선택 — 팬 제보로 넣었으면 '제보 @아이디'로 표시
 supports: []

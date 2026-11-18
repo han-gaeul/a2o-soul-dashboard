@@ -8,6 +8,7 @@
 #     type: 음방
 #     title: 뮤직뱅크 출연
 #     url: https://...
+#     credit: "@아이디"   # 선택 — 팬 제보로 넣었으면 '제보 @아이디'로 표시
 events:
   # 팬사인회·영통 (팬 계정 정리 기준 — 공식 공지 링크가 생기면 url에 넣기)
   - { date: 2026-11-14, time: "19:30", type: 행사, title: Musicart 팬사인회, short: 팬싸 }
