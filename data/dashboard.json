@@ -80,6 +80,7 @@
   "fancam": "직캠",
   "mv": "MV"
  },
+ "chart_moves": [],
  "charts": [],
  "debut_date": "2026-10-13",
  "episodes": [
@@ -6780,6 +6781,7 @@
    "views": 3620056
   }
  ],
+ "nominees": [],
  "notice_posts": [
   {
    "account": "x",
@@ -11839,6 +11841,24 @@
    "th": "เมนโวคอล",
    "zh": "主唱"
   },
+  "멜론 HOT100": {
+   "en": "Melon HOT100",
+   "es": "Melon HOT100",
+   "id": "Melon HOT100",
+   "ja": "Melon HOT100",
+   "pt": "Melon HOT100",
+   "th": "Melon HOT100",
+   "zh": "Melon HOT100"
+  },
+  "멜론 TOP100": {
+   "en": "Melon TOP100",
+   "es": "Melon TOP100",
+   "id": "Melon TOP100",
+   "ja": "Melon TOP100",
+   "pt": "Melon TOP100",
+   "th": "Melon TOP100",
+   "zh": "Melon TOP100"
+  },
   "멜론 순위는 '24시간 동안 들은 사람 수'와 '1시간 이용량'을 반반 합쳐요. 1시간 이용량은 한 계정이 한 곡을 1시간에 1번만 세서, 소울 곡을 순서대로 계속 반복해 두면 매시간 모든 곡이 한 번씩 반영돼요.": {
    "en": "Melon's ranking combines '24-hour unique listeners' and '1-hour plays' 50:50. In the 1-hour count each account counts once per song per hour, so looping the SOUL songs in order makes every song count once every hour.",
    "es": "El ranking de Melon combina 50:50 los 'oyentes únicos en 24 horas' y las 'reproducciones de 1 hora'. En la cuenta de 1 hora cada cuenta suma una vez por canción por hora, así que repetir las canciones de SOUL en orden hace que todas cuenten cada hora.",
@@ -11973,6 +11993,15 @@
    "pt": "Programas musicais",
    "th": "รายการเพลง",
    "zh": "打歌"
+  },
+  "벅스 실시간": {
+   "en": "Bugs Realtime",
+   "es": "Bugs Realtime",
+   "id": "Bugs Realtime",
+   "ja": "Bugs Realtime",
+   "pt": "Bugs Realtime",
+   "th": "Bugs Realtime",
+   "zh": "Bugs Realtime"
   },
   "보컬": {
    "en": "Vocal",
@@ -13045,6 +13074,15 @@
    "th": "ใส่เพลงโปรโมต Dancing in the Dark ไว้เป็นเพลงแรก จะได้ถูกเล่นทุกรอบ",
    "zh": "把当前主打 Dancing in the Dark 放在第一首 — 每循环一次都一定会播到"
   },
+  "지니 TOP200": {
+   "en": "Genie TOP200",
+   "es": "Genie TOP200",
+   "id": "Genie TOP200",
+   "ja": "Genie TOP200",
+   "pt": "Genie TOP200",
+   "th": "Genie TOP200",
+   "zh": "Genie TOP200"
+  },
   "지아이": {
    "en": "Jiayi",
    "es": "Jiayi",
@@ -13413,6 +13451,15 @@
    "pt": "PLUS CHAT — mensagens dos próprios membros (assinatura paga do Mnet Plus)",
    "th": "PLUS CHAT — ข้อความจากเมมเบอร์โดยตรง (สมัครแบบเสียเงินใน Mnet Plus)",
    "zh": "PLUS CHAT — 成员亲自发送的消息（Mnet Plus付费订阅）"
+  },
+  "플로 24시간": {
+   "en": "FLO 24H",
+   "es": "FLO 24H",
+   "id": "FLO 24H",
+   "ja": "FLO 24H",
+   "pt": "FLO 24H",
+   "th": "FLO 24H",
+   "zh": "FLO 24H"
   },
   "하이어(HIGHER)": {
    "en": "HIGHER",
