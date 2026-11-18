@@ -683,7 +683,7 @@ details.howto { scroll-margin-top: 64px; }
 .wk-day { display: grid; text-align: center; font-size: 12px; color: var(--muted); }
 .wk-day b { font-size: 15px; color: var(--text); }
 .wk-body .chip { margin-left: 6px; }
-.wk-on { background: #ffe4ec; color: #c81e43; }
+.wkc-appear { background: #ffe4ec; color: #c81e43; }
 .wk-nom { background: #fff3c4; color: #8a5a00; font-weight: 700; text-decoration: none; }
 .wk-vote { color: var(--chip-fg); font-size: 13px; }
 .wk-cal { margin: 10px 0 0; }
@@ -961,3 +961,51 @@ body.bias-theme header { background: linear-gradient(120deg, var(--chip), transp
 .cm-file input { font-size: 13px; }
 .cm-pair select.sel { width: 100%; max-width: none; }
 .cm-tools .era-row { margin: 0; }
+
+/* ---------- UI 정리 (공통) ---------- */
+h2 { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; }
+.small { font-size: 13px; }
+.card { border-radius: 18px; box-shadow: 0 6px 20px rgba(40, 20, 90, .04); }
+/* 1위: 한 줄 요약 + 펼치기 */
+.win-pill { display: none; width: 100%; align-items: center; gap: 10px; margin: 0 0 12px; padding: 10px 12px; border: 0; border-radius: 16px; cursor: pointer;
+  font: inherit; text-align: left; color: var(--text); background: linear-gradient(100deg, #ffe2ec, #efe6ff); }
+.win-pill img { width: 56px; height: 38px; border-radius: 8px; object-fit: cover; flex: none; }
+.win-pill .wp-tx { display: grid; gap: 1px; min-width: 0; }
+.win-pill b { font-size: 14px; } .win-pill small { font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.win-pill .wp-go { margin-left: auto; color: var(--muted); font-size: 18px; }
+@media (prefers-color-scheme: dark) { .win-pill { background: linear-gradient(100deg, #3a2033, #2a2246); } }
+/* 하단 탭바·더보기 (휴대폰) */
+.tabbar { display: none; }
+.sheet .more-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 4px 0 8px; }
+.more-item { display: grid; justify-items: center; gap: 6px; padding: 14px 6px; border: 1px solid var(--line); border-radius: 16px; background: var(--card);
+  color: var(--text); font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; }
+.more-item .mi-ico { font-size: 24px; }
+@media (max-width: 720px) {
+  .wrap { padding: 12px 14px 96px; }
+  header { align-items: center; margin-bottom: 10px; flex-wrap: nowrap; }
+  h1 { font-size: 21px; white-space: nowrap; }
+  header .meta, #updated { display: none; }
+  .head-right { gap: 0; }
+  .head-actions { gap: 6px; }
+  .head-actions .lang, #installBtn { display: none; }
+  .push-btn .hb-l { display: none; }
+  .push-btn { width: 38px; height: 38px; padding: 0; border-radius: 12px; display: grid; place-items: center; }
+  .bias-badge span { display: none; } .bias-badge { padding: 2px; }
+  body:not([data-cur="overview"]) #strip { display: none; }
+  .strip-m img { width: 46px; height: 46px; }
+  #tabs { display: none; }
+  .tabbar { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; justify-content: space-around;
+    padding: 6px 4px calc(8px + env(safe-area-inset-bottom)); background: color-mix(in srgb, var(--card) 92%, transparent);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-top: 1px solid var(--line); }
+  .tabbar a { position: relative; flex: 1; display: grid; justify-items: center; gap: 1px; padding: 4px 0; font-size: 11px; font-weight: 700; color: var(--muted); }
+  .tabbar a b { font-size: 21px; line-height: 1.1; filter: grayscale(1) opacity(.7); }
+  .tabbar a.on { color: var(--chip-fg); } .tabbar a.on b { filter: none; }
+  .tabbar .tab-dot { position: absolute; top: 0; left: calc(50% + 6px); }
+  .win-pill { display: flex; }
+  .win-hero { display: none; } .win-hero.open { display: flex; }
+  .sheet { margin: auto 0 0; width: 100%; max-width: 100%; border-radius: 20px 20px 0 0; }
+}
+@media (max-width: 720px) {
+  .vote-bar { font-size: 13px; padding: 9px 4px 9px 12px; border-radius: 14px; }
+  .vote-bar .vb-go { display: none; }
+}

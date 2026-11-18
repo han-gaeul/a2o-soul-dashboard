@@ -133,6 +133,8 @@ if ("serviceWorker" in navigator) {
     const [head] = route();
     const cur = tabs.includes(head) ? head : ROUTE_TAB[head] || "overview";
     document.querySelectorAll("[data-tab]").forEach((s) => (s.hidden = s.dataset.tab !== cur));
+    document.body.dataset.cur = cur;
+    document.querySelectorAll("#tabbar a").forEach((a) => a.classList.toggle("on", a.getAttribute("href") === `#${cur}` || !!(a.dataset.more && a.dataset.more.split(",").includes(cur))));
     document.querySelectorAll("#tabs a").forEach((a) => {
       const on = a.getAttribute("href") === `#${cur}`;
       a.classList.toggle("on", on);
@@ -567,7 +569,15 @@ if ("serviceWorker" in navigator) {
           el("div", { class: "win-sub" }, [`${show}${w.ep ? ` ${t("win_ep", { n: w.ep })}` : ""}`, w.date.replaceAll("-", "."), n > 0 ? t("win_days", { n }) : ""].filter(Boolean).join(" · ")),
           el("div", { class: "win-acts" }, el("a", { class: "win-btn primary", href: watch, target: "_blank", rel: "noopener" }, t("win_watch")),
             el("span", { class: "win-share" }, share, menu))));
-      $("tabs").before(banner);
+      // 한 줄 요약 (휴대폰 기본) — 누르면 큰 배너 펼침
+      const pill = el("button", { type: "button", class: "win-pill" },
+        w.image ? el("img", { src: w.image, alt: "", referrerpolicy: "no-referrer" }) : el("span", { class: "wp-ico" }, "🏆"),
+        el("span", { class: "wp-tx" }, el("b", {}, `🏆 ${first ? t("win_first", { show }) : t("win_n", { show })}`),
+          el("small", {}, `${show}${w.ep ? ` ${t("win_ep", { n: w.ep })}` : ""} · ${w.date.slice(5).replace("-", ".")} — ${t("win_tap")}`)),
+        el("span", { class: "wp-go" }, "›"));
+      pill.addEventListener("click", () => { banner.classList.add("open"); pill.hidden = true; });
+      const wrapWin = el("div", { class: "win-wrap" }, pill, banner);
+      $("tabs").before(wrapWin);
     }
   }
   // 상단 띠: 오늘 A2O SOUL이 나오는 음방 — 시작 1시간 반 전부터 끝날 무렵까지 '생방송 보기'
@@ -612,7 +622,7 @@ if ("serviceWorker" in navigator) {
           el("div", { class: "wk-body" },
             el("div", {}, el("b", {}, tc(r.show)), r.time ? el("span", { class: "muted small" }, ` ${r.time}`) : null,
               r.state === "today" ? el("span", { class: "chip chip-on" }, t("wk_today")) : null,
-              r.on ? el("span", { class: "chip wk-on" }, t("wk_on")) : null,
+              r.on ? el("span", { class: "chip wkc-appear" }, t("wk_on")) : null,
               r.nom ? el("a", { class: "chip wk-nom", href: r.nom.url || "#", target: "_blank", rel: "noopener" }, `🏆 ${t("wk_nom")}`) : null,
               r.state === "past" ? el("span", { class: "muted small" }, ` · ${t("wk_past")}`) : null),
             el("div", { class: "muted small" }, [r.v.pre ? `${t("wk_pre")} ${tc(r.v.pre)}` : "", r.v.live ? `${t("wk_live")} ${tc(r.v.live)}` : ""].filter(Boolean).join(" · ")),
@@ -2223,6 +2233,27 @@ if ("serviceWorker" in navigator) {
     start();
     const r0 = route();
     if (r0[0] === "post" && r0[1]) setTimeout(() => view(Number(r0[1])), 300);
+  }
+
+  // ---------- 휴대폰 하단 탭바: 더보기 시트 ----------
+  {
+    const more = $("moreDlg");
+    const go = (h) => { more.close(); location.hash = h; window.scrollTo({ top: 0 }); };
+    const item = (ico, label, fn) => { const b = el("button", { type: "button", class: "more-item" }, el("span", { class: "mi-ico" }, ico), el("span", {}, label)); b.onclick = fn; return b; };
+    const fresh = $("noticeTab").querySelector(".tab-dot");
+    $("moreList").replaceChildren(
+      item("📢", t("tab.notice"), () => go("notice")), item("🎬", t("tab.mv"), () => go("mv")), item("🎥", t("tab.fancams"), () => go("fancams")),
+      item("🔰", t("tab.guide"), () => go("guide")),
+      item("🔔", t("push_btn"), () => { more.close(); $("pushBtn").click(); }),
+      ...(!$("installBtn").hidden ? [item("📱", t("install"), () => { more.close(); $("installBtn").click(); })] : []),
+      item("🌐", t("lang"), () => $("moreList").replaceChildren(...LANGS.map((l) => item(l === LANG ? "✓" : "", window.I18N[l].lang, () => {
+        try { localStorage.setItem("lang", l); } catch (_) { /* 무시 */ }
+        location.reload();
+      })))));
+    if (fresh) $("tabMore").append(el("span", { class: "tab-dot" }, fresh.textContent));
+    $("tabMore").onclick = (e) => { e.preventDefault(); more.showModal(); };
+    $("moreClose").onclick = () => more.close();
+    more.onclick = (e) => { if (e.target === more) more.close(); };
   }
 
   // ---------- 사이트 사용법: 입덕 탭 섹션 + 첫 방문 안내 + 하단 버튼 ----------
