@@ -2728,3 +2728,12 @@
   id: "Tukar"
   th: "แลก"
   pt: "Troca"
+
+"사담":
+  en: "Chat"
+  ja: "雑談"
+  zh: "闲聊"
+  es: "Charla"
+  id: "Ngobrol"
+  th: "คุยเล่น"
+  pt: "Papo"

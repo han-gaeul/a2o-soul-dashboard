@@ -118,7 +118,7 @@ async function youtubeHook(req, env) {
 // 익명 글·댓글·신고는 Cloudflare Turnstile(사람 확인)을 통과해야 함 → 매크로 도배 방지
 // 신고: 서로 다른 사람(계정·기기) 3명 → 글 숨김 + 쓴 사람(계정·기기) 30일 차단 (관리자가 풀 수 있음)
 // 설정: D1 바인딩 DB / 변수 GOOGLE_CLIENT_ID / 비밀 ADMIN_EMAILS(쉼표로) / 비밀 BOARD_SALT(아무 긴 문자열) / 비밀 TURNSTILE_SECRET
-const BOARDS = { qna: { cats: ["질문", "정보", "후기"], anon: true }, trade: { cats: ["구해요", "드려요", "교환해요"], anon: false } };
+const BOARDS = { qna: { cats: ["질문", "정보", "후기", "사담"], anon: true }, trade: { cats: ["구해요", "드려요", "교환해요"], anon: false } };
 const LIMIT = { anon: 5, user: 20 };
 const BAN_DAYS = 30;
 const PRIVATE = /(01[016789][-\s.]?\d{3,4}[-\s.]?\d{4})|(\d{2,6}[-\s]\d{2,6}[-\s]\d{2,8})|(카톡|카카오톡|오픈채팅|텔레|telegram|라인\s?아이디|line\s?id)\s*[:：]?\s*\S+|(계좌|입금|송금)/i;

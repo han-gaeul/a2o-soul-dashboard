@@ -2054,7 +2054,7 @@ if ("serviceWorker" in navigator) {
     let token = (() => { try { const x = JSON.parse(sessionStorage.getItem("gtoken") || "null"); return x && x.exp > Date.now() ? x.t : ""; } catch (_) { return ""; } })();
     let me = { login: false, admin: false, banned: 0, boards: ["qna"] };
     let board = "qna", cat = "", before = 0;
-    const CATS = { qna: ["질문", "정보", "후기"], trade: ["구해요", "드려요", "교환해요"] };
+    const CATS = { qna: ["질문", "정보", "후기", "사담"], trade: ["구해요", "드려요", "교환해요"] };
     const api = async (path, opts = {}) => {
       const r = await fetch(API + path, { ...opts, headers: { "Content-Type": "application/json", "X-Device": dev, ...(token ? { Authorization: `Bearer ${token}` } : {}), ...(opts.headers || {}) } });
       const j = await r.json().catch(() => ({}));
