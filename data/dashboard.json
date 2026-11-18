@@ -3364,7 +3364,16 @@
      "photo": "img/members/슈퍼스타_문.webp"
     }
    ],
-   "signature": "img/members/서명_문.svg"
+   "signature": "img/members/사인_문.png",
+   "signatures": [
+    {
+     "label": "THE KPOP",
+     "src": "img/members/사인_문.png"
+    },
+    {
+     "src": "img/members/서명_문.svg"
+    }
+   ]
   },
   {
    "aliases": [],
@@ -3481,7 +3490,16 @@
      "photo": "img/members/슈퍼스타_소라.webp"
     }
    ],
-   "signature": "img/members/서명_소라.svg"
+   "signature": "img/members/사인_소라.png",
+   "signatures": [
+    {
+     "label": "THE KPOP",
+     "src": "img/members/사인_소라.png"
+    },
+    {
+     "src": "img/members/서명_소라.svg"
+    }
+   ]
   },
   {
    "aliases": [],
@@ -3610,7 +3628,16 @@
      "photo": "img/members/슈퍼스타_서하.webp"
     }
    ],
-   "signature": "img/members/서명_서하.svg"
+   "signature": "img/members/사인_서하.png",
+   "signatures": [
+    {
+     "label": "THE KPOP",
+     "src": "img/members/사인_서하.png"
+    },
+    {
+     "src": "img/members/서명_서하.svg"
+    }
+   ]
   },
   {
    "aliases": [],
@@ -3878,7 +3905,16 @@
      "photo": "img/members/슈퍼스타_테오.webp"
     }
    ],
-   "signature": "img/members/서명_테오.svg"
+   "signature": "img/members/사인_테오.png",
+   "signatures": [
+    {
+     "label": "THE KPOP",
+     "src": "img/members/사인_테오.png"
+    },
+    {
+     "src": "img/members/서명_테오.svg"
+    }
+   ]
   },
   {
    "aliases": [],
@@ -4202,7 +4238,16 @@
      "photo": "img/members/슈퍼스타_가쿠.webp"
     }
    ],
-   "signature": "img/members/서명_가쿠.svg"
+   "signature": "img/members/사인_가쿠.png",
+   "signatures": [
+    {
+     "label": "THE KPOP",
+     "src": "img/members/사인_가쿠.png"
+    },
+    {
+     "src": "img/members/서명_가쿠.svg"
+    }
+   ]
   },
   {
    "aliases": [
@@ -4384,7 +4429,16 @@
      "photo": "img/members/슈퍼스타_준.webp"
     }
    ],
-   "signature": "img/members/서명_준.svg"
+   "signature": "img/members/사인_준.png",
+   "signatures": [
+    {
+     "label": "THE KPOP",
+     "src": "img/members/사인_준.png"
+    },
+    {
+     "src": "img/members/서명_준.svg"
+    }
+   ]
   },
   {
    "aliases": [],
@@ -4454,7 +4508,16 @@
      "photo": "img/members/슈퍼스타_한성.webp"
     }
    ],
-   "signature": "img/members/서명_한성.svg"
+   "signature": "img/members/사인_한성.png",
+   "signatures": [
+    {
+     "label": "THE KPOP",
+     "src": "img/members/사인_한성.png"
+    },
+    {
+     "src": "img/members/서명_한성.svg"
+    }
+   ]
   },
   {
    "aliases": [],
@@ -4522,7 +4585,16 @@
      "photo": "img/members/슈퍼스타_루시엔.webp"
     }
    ],
-   "signature": "img/members/서명_루시엔.svg"
+   "signature": "img/members/사인_루시엔.png",
+   "signatures": [
+    {
+     "label": "THE KPOP",
+     "src": "img/members/사인_루시엔.png"
+    },
+    {
+     "src": "img/members/서명_루시엔.svg"
+    }
+   ]
   },
   {
    "aliases": [
@@ -4623,7 +4695,16 @@
      "photo": "img/members/슈퍼스타_시원.webp"
     }
    ],
-   "signature": "img/members/서명_시원.svg"
+   "signature": "img/members/사인_시원.png",
+   "signatures": [
+    {
+     "label": "THE KPOP",
+     "src": "img/members/사인_시원.png"
+    },
+    {
+     "src": "img/members/서명_시원.svg"
+    }
+   ]
   },
   {
    "aliases": [],
@@ -4694,7 +4775,16 @@
      "photo": "img/members/슈퍼스타_알루어.webp"
     }
    ],
-   "signature": "img/members/서명_알루어.svg"
+   "signature": "img/members/사인_알루어.png",
+   "signatures": [
+    {
+     "label": "THE KPOP",
+     "src": "img/members/사인_알루어.png"
+    },
+    {
+     "src": "img/members/서명_알루어.svg"
+    }
+   ]
   },
   {
    "aliases": [],
@@ -5139,7 +5229,16 @@
      "photo": "img/members/슈퍼스타_타이.webp"
     }
    ],
-   "signature": "img/members/서명_타이.svg"
+   "signature": "img/members/사인_타이.png",
+   "signatures": [
+    {
+     "label": "THE KPOP",
+     "src": "img/members/사인_타이.png"
+    },
+    {
+     "src": "img/members/서명_타이.svg"
+    }
+   ]
   },
   {
    "aliases": [],
@@ -5221,7 +5320,16 @@
      "photo": "img/members/슈퍼스타_소노.webp"
     }
    ],
-   "signature": "img/members/서명_소노.svg"
+   "signature": "img/members/사인_소노.png",
+   "signatures": [
+    {
+     "label": "THE KPOP",
+     "src": "img/members/사인_소노.png"
+    },
+    {
+     "src": "img/members/서명_소노.svg"
+    }
+   ]
   },
   {
    "aliases": [
@@ -5743,7 +5851,16 @@
      "photo": "img/members/슈퍼스타_자이.webp"
     }
    ],
-   "signature": "img/members/서명_자이.svg"
+   "signature": "img/members/사인_자이.png",
+   "signatures": [
+    {
+     "label": "THE KPOP",
+     "src": "img/members/사인_자이.png"
+    },
+    {
+     "src": "img/members/서명_자이.svg"
+    }
+   ]
   },
   {
    "aliases": [],
@@ -6144,7 +6261,16 @@
      "photo": "img/members/슈퍼스타_에이든.webp"
     }
    ],
-   "signature": "img/members/서명_에이든.svg"
+   "signature": "img/members/사인_에이든.png",
+   "signatures": [
+    {
+     "label": "THE KPOP",
+     "src": "img/members/사인_에이든.png"
+    },
+    {
+     "src": "img/members/서명_에이든.svg"
+    }
+   ]
   },
   {
    "aliases": [
@@ -6593,7 +6719,16 @@
      "photo": "img/members/슈퍼스타_제트.webp"
     }
    ],
-   "signature": "img/members/서명_제트.svg"
+   "signature": "img/members/사인_제트.png",
+   "signatures": [
+    {
+     "label": "THE KPOP",
+     "src": "img/members/사인_제트.png"
+    },
+    {
+     "src": "img/members/서명_제트.svg"
+    }
+   ]
   }
  ],
  "mvs": [
