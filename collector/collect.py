@@ -685,12 +685,14 @@ def build_timeline(cfg, videos, episodes, subs=()):
                 wins.add((i["date"], i.get("show")))
                 items.append({"date": i["date"], "kind": "win", "title": i["title"], "key": "tl_win", "show": i.get("show"),
                               "url": post.get("permalink")})
-    for w in cfg["info"]["wins"]:  # 직접 입력한 1위
-        if (w["date"], w["show"]) not in wins:
-            wins.add((w["date"], w["show"]))
-            items.append({"date": w["date"], "kind": "win", "title": f"{w['show']} 1위", "key": "tl_win", "show": w["show"],
-                          "ep": w["ep"], "url": w["url"], "image": w["image"], "image_post": w["image_post"],
-                          "tags": w["tags"], "og": w["og"]})
+    for w in cfg["info"]["wins"]:  # 직접 입력한 1위 — 공식 공지에서 이미 잡혔으면 그 항목에 사진·회차·해시태그 등을 합침
+        extra = {k: w[k] for k in ("ep", "url", "image", "image_post", "tags", "og") if w.get(k)}
+        same = next((x for x in items if x.get("kind") == "win" and x["date"] == w["date"] and x.get("show") == w["show"]), None)
+        if same:
+            same.update(extra)
+            continue
+        wins.add((w["date"], w["show"]))
+        items.append({"date": w["date"], "kind": "win", "title": f"{w['show']} 1위", "key": "tl_win", "show": w["show"], **extra})
     for x in cfg["info"]["records"]:
         items.append({"date": x["date"], "kind": "record", "title": x["title"], "url": x["url"]})
     seen, out = set(), []
