@@ -125,6 +125,12 @@ x_vendors:
 videos:
   - id: PbpHyIQerX8   # [핫클립/SUB] 정오의 희망곡 김신영입니다 (팬 제보)
     category: content
+  - id: 2QPN0tFcv6c   # [FAN PICK CAM 4K] SORA 'SUPERSTAR' THE SHOW 261020 (팬 제보 — 'FAN PICK CAM'이라 자동 분류 안 됨)
+    category: fancam
+    member: SORA
+  - id: GR0wz-I0Q3A   # SORA 'SUPERSTAR' THE SHOW 261020 [FAN PICK CAM 4K] (같은 이유)
+    category: fancam
+    member: SORA
 
 # 웹 푸시 알림 (사이트 '🔔 알림 받기') — 둘 다 있어야 버튼이 보임
 #   api: 구독 저장 Cloudflare Worker 주소 (push-worker/worker.js), vapid_public: VAPID 공개키
