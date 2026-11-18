@@ -1669,9 +1669,10 @@ def build(cfg):
             "ig_mentions": [{k: x[k] for k in ("at", "text", "more", "url")} for x in ig_feed if m["name"] in x["members"]][:10],
             "photo": local_img(m.get("photo")) or auto["photo"],
             "signature": local_img(m.get("signature")) or auto["signature"],
-            # 서명 여러 장: 파일 이름 앞 라벨(서명·사인)별 출처는 members.yml signature_sources
+            # 서명 여러 장: 파일 이름 앞 라벨(서명·사인)별 출처·날짜는 members.yml signature_sources
             "signatures": [{"src": rel, **({k: str(v) for k, v in (sign_src.get(label) or {}).items() if k in ("label", "url") and v})}
-                           for label, rel in sorted(auto["signs"], key=lambda x: (x[0] != "서명", x[1]))],
+                           # 최신순: signature_sources의 date가 늦은 것부터, 날짜 없는 것(처음 올린 서명)은 맨 뒤
+                           for label, rel in sorted(auto["signs"], key=lambda x: str((sign_src.get(x[0]) or {}).get("date") or ""), reverse=True)],
             "birthday": str(m.get("birthday") or ""),
             "profile_history": profile_history(m) + [{**x, "label": cfg["info"]["photo_labels"].get(x["label"], x["label"])}
                                                      for x in auto["extra"]

@@ -41,9 +41,9 @@ group_links:
 #   예) - "https://www.instagram.com/p/XXXXXXXXXXX/"
 group_posts: []
 
-# 서명 이미지 출처 — 파일 이름 앞 라벨별 (사인_문.png → 사인)
+# 서명 이미지 출처 — 파일 이름 앞 라벨별 (사인_문.png → 사인). date가 최신인 것부터 앞에
 signature_sources:
-  사인: { label: THE KPOP, url: "" }
+  사인: { label: THE KPOP, url: "", date: "2026-11-18" }
 
 members:
   - name: MOON
