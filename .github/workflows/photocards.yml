@@ -3,7 +3,7 @@ name: Photocards
 
 on:
   schedule:
-    - cron: "41 */3 * * *"   # 3시간마다 (새 글만 읽어서 X 비용 거의 없음)
+    - cron: "41 */3 * * *"   # 예비용 — 평소엔 Cloudflare Worker(push-worker)가 3시간마다 실행시킴 (새 글만 읽어서 X 비용 거의 없음)
   workflow_dispatch:
     inputs:
       backfill:

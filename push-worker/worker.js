@@ -57,15 +57,15 @@ async function isAdmin(req, env) {
 }
 
 // GitHub Actions 수집 실행 (같은 실행이 줄 서 있으면 GitHub가 하나로 합쳐 줌)
-async function dispatch(env, why) {
+async function dispatch(env, why, workflow = WORKFLOW) {
   if (!env.GH_TOKEN) return console.log("GH_TOKEN 없음");
-  const r = await fetch(`https://api.github.com/repos/${REPO}/actions/workflows/${WORKFLOW}/dispatches`, {
+  const r = await fetch(`https://api.github.com/repos/${REPO}/actions/workflows/${workflow}/dispatches`, {
     method: "POST",
     headers: { Authorization: `Bearer ${env.GH_TOKEN}`, Accept: "application/vnd.github+json", "User-Agent": "a2o-push-worker",
       "X-GitHub-Api-Version": "2022-11-28", "Content-Type": "application/json" },
     body: JSON.stringify({ ref: "main" }),
   });
-  console.log(`수집 실행 (${why}): ${r.status}`);
+  console.log(`${workflow} 실행 (${why}): ${r.status}`);
   return r.status;
 }
 
@@ -425,10 +425,12 @@ export default {
     return json(req, { ok: true, service: "a2o-soul-push" });
   },
 
-  // Cron Trigger (*/10 * * * *): 10분마다 수집 실행, 하루 한 번(KST 12시대) YouTube 알림 구독 갱신
+  // Cron Trigger (*/10 * * * *): 10분마다 수집 실행, 3시간마다 포카 확인, 하루 한 번(KST 12시대) YouTube 알림 구독 갱신
   async scheduled(event, env, ctx) {
     ctx.waitUntil(dispatch(env, "10분 정기"));
     const t = new Date(event.scheduledTime);
     if (t.getUTCHours() === 3 && t.getUTCMinutes() < 10) ctx.waitUntil(renewYoutube(env));
+    // 포카 템플릿 확인: 3시간마다 (GitHub 자체 예약 실행은 자주 밀리거나 건너뛰어서 여기서 깨움)
+    if (t.getUTCHours() % 3 === 0 && t.getUTCMinutes() >= 40 && t.getUTCMinutes() < 50) ctx.waitUntil(dispatch(env, "3시간 정기", "photocards.yml"));
   },
 };
