@@ -3138,13 +3138,23 @@
   "wins": [
    {
     "date": "2026-11-17",
+    "encore": [
+     {
+      "kind": "stage",
+      "url": "https://www.youtube.com/watch?v=e84FIWj4pOk"
+     },
+     {
+      "kind": "cam",
+      "url": "https://www.youtube.com/watch?v=0XcpB-PtUEk"
+     }
+    ],
     "ep": "404",
     "image": "https://pbs.twimg.com/media/HWaKAPjaAAASLtT.jpg?name=large",
     "image_post": "https://x.com/A2O_SOUL/status/2118538863505522863",
     "og": "img/og/win-20261117.png",
     "show": "더쇼",
     "tags": "#A2OSOUL1stWin #DancingInTheDark1stWin",
-    "url": ""
+    "url": "https://www.youtube.com/watch?v=e84FIWj4pOk"
    }
   ]
  },
@@ -10928,6 +10938,16 @@
  "timeline": [
   {
    "date": "2026-11-17",
+   "encore": [
+    {
+     "kind": "stage",
+     "url": "https://www.youtube.com/watch?v=e84FIWj4pOk"
+    },
+    {
+     "kind": "cam",
+     "url": "https://www.youtube.com/watch?v=0XcpB-PtUEk"
+    }
+   ],
    "ep": "404",
    "image": "https://pbs.twimg.com/media/HWaKAPjaAAASLtT.jpg?name=large",
    "image_post": "https://x.com/A2O_SOUL/status/2118538863505522863",
@@ -10937,7 +10957,7 @@
    "show": "더쇼",
    "tags": "#A2OSOUL1stWin #DancingInTheDark1stWin",
    "title": "더쇼 1위",
-   "url": "https://www.instagram.com/reel/Df18hGyS-fz/"
+   "url": "https://www.youtube.com/watch?v=e84FIWj4pOk"
   },
   {
    "date": "2026-11-16",
