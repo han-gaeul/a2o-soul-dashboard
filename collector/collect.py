@@ -127,6 +127,7 @@ def load_fan_files(cfg):
             tracks.append({"song": str(name), "title": info.get("title", bool(isinstance(x, dict) and x.get("title"))),
                            "time": info.get("time", ""), "ids": info.get("ids", {})})
     cfg["stream_playlist"] = {"title": str(sp.get("title") or ""), "desc": str(sp.get("desc") or ""), "tracks": tracks,
+                              "credit": {"label": str((sp.get("credit") or {}).get("label") or ""), "url": str((sp.get("credit") or {}).get("url") or "")},
                               "tips": [str(x) for x in sp.get("tips") or []]} if tracks else {}
     cfg["charts"] = [{"song": str(c.get("song", "")), "service": str(c.get("service", "")), "type": str(c.get("type") or ""),
                       "ranks": sorted((str(d), int(r)) for d, r in (c.get("ranks") or {}).items())}

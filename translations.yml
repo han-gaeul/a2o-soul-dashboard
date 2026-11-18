@@ -2487,14 +2487,16 @@
   id: "FLO 24H"
   th: "FLO 24H"
   pt: "FLO 24H"
-"다른 팬덤 음원총공팀처럼 소울 곡만으로 짜고 활동곡(Dancing in the Dark)을 자주 넣었어요. 아래 버튼으로 한 번에 담고 전체 반복으로 계속 틀어 주세요.":
-  en: "Like other fandoms' streaming teams, this list uses only SOUL songs and repeats the promo track (Dancing in the Dark). Add it all at once with the buttons below and keep it on repeat."
-  ja: "他のファンダムのストリーミングチームと同じく、SOULの曲だけで組み、活動曲（Dancing in the Dark）を多めに入れました。下のボタンで一度に追加して、全曲リピートで流し続けてください。"
-  zh: "和其他粉丝打榜组一样，只用 SOUL 的歌，并多放了活动曲（Dancing in the Dark）。用下面的按钮一次添加，开全部循环一直播放。"
-  es: "Como los equipos de streaming de otros fandoms, la lista usa solo canciones de SOUL y repite la canción promocional (Dancing in the Dark). Añádela de una vez con los botones y déjala en repetición."
-  id: "Seperti tim streaming fandom lain, daftar ini hanya berisi lagu SOUL dan lagu promosi (Dancing in the Dark) diputar lebih sering. Tambahkan sekaligus dengan tombol di bawah dan putar ulang terus."
-  th: "เหมือนทีมสตรีมของแฟนด้อมอื่น ลิสต์นี้มีแต่เพลงของ SOUL และใส่เพลงโปรโมต (Dancing in the Dark) บ่อยขึ้น กดปุ่มด้านล่างเพื่อเพิ่มทีเดียว แล้วเปิดวนทั้งหมด"
-  pt: "Como os times de streaming de outros fandoms, a lista usa só músicas do SOUL e repete a música de promoção (Dancing in the Dark). Adicione tudo de uma vez pelos botões abaixo e deixe no repetir."
+"에이투오소울 음원총공팀 권장 리스트예요 (약 1시간 한 바퀴). 아래 버튼으로 한 번에 담고 전체 반복으로 계속 틀어 주세요.":
+  en: "The recommended list from the A2O SOUL streaming team (about 1 hour per loop). Add it all at once with the buttons below and keep it on repeat."
+  ja: "A2O SOUL音源総攻チームのおすすめリストです（1周約1時間）。下のボタンで一度に追加して、全曲リピートで流し続けてください。"
+  zh: "这是 A2O SOUL 音源打榜组推荐的歌单（一轮约 1 小时）。用下面的按钮一次添加，开全部循环一直播放。"
+  es: "Lista recomendada por el equipo de streaming de A2O SOUL (cerca de 1 hora por vuelta). Añádela de una vez con los botones y déjala en repetición."
+  id: "Daftar rekomendasi dari tim streaming A2O SOUL (sekitar 1 jam per putaran). Tambahkan sekaligus dengan tombol di bawah dan putar ulang terus."
+  th: "ลิสต์แนะนำจากทีมสตรีมของ A2O SOUL (วนหนึ่งรอบประมาณ 1 ชั่วโมง) กดปุ่มด้านล่างเพื่อเพิ่มทีเดียว แล้วเปิดวนทั้งหมด"
+  pt: "Lista recomendada pelo time de streaming do A2O SOUL (cerca de 1 hora por volta). Adicione tudo de uma vez pelos botões abaixo e deixe no repetir."
+  fil: "Inirerekomendang listahan ng A2O SOUL streaming team (mga 1 oras bawat ikot). Idagdag lahat nang sabay gamit ang mga button sa ibaba at i-repeat."
+  vi: "Danh sách đề xuất của đội streaming A2O SOUL (khoảng 1 tiếng mỗi vòng). Thêm tất cả một lần bằng nút bên dưới và bật lặp lại."
 
 "담기 전에 재생목록을 비우고, 설정에서 '중복 곡 허용'을 켜 두기":
   en: "Before adding, clear your play queue and turn on 'allow duplicate songs' in settings"
