@@ -1883,6 +1883,17 @@
      "time": null,
      "title": "더쇼 생방송 투표",
      "url": null
+    },
+    {
+     "confidence": 0.9,
+     "date": "2026-11-17",
+     "end_date": null,
+     "kind": "nominee",
+     "place": null,
+     "show": "더쇼",
+     "time": null,
+     "title": "더쇼 1위 후보",
+     "url": null
     }
    ],
    "permalink": "https://x.com/BIGCChoice/status/2122616986215862435",
@@ -2024,7 +2035,7 @@
    "vendor": "Music Plant"
   }
  },
- "rules_version": 11,
+ "rules_version": 12,
  "x": {
   "A2O_SOUL": {
    "id": "1986498790229262336",
