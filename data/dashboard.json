@@ -1450,21 +1450,6 @@
     {
      "category": "content",
      "channel": "THE K-POP",
-     "delta": 1193,
-     "era": "Superstar",
-     "id": "2QPN0tFcv6c",
-     "member": "",
-     "predebut": false,
-     "published_at": "2026-10-20T14:15:21Z",
-     "series": "",
-     "short": false,
-     "show": "더쇼",
-     "title": "[FAN PICK CAM 4K] A2O SOUL - SORA 'SUPERSTAR’ [에이투오소울-소라] [THE SHOW] 261020 방송",
-     "views": 190074
-    },
-    {
-     "category": "content",
-     "channel": "THE K-POP",
      "delta": 1073,
      "era": "Superstar",
      "id": "l4uLSofAkZU",
@@ -1491,6 +1476,21 @@
      "show": "더쇼",
      "title": "[FAN CAM 4K] SUPERSTAR - A2O SOUL [THE SHOW]  261020 방송",
      "views": 127359
+    },
+    {
+     "category": "fancam",
+     "channel": "THE K-POP",
+     "delta": 1193,
+     "era": "Superstar",
+     "id": "2QPN0tFcv6c",
+     "member": "SORA",
+     "predebut": false,
+     "published_at": "2026-10-20T14:15:21Z",
+     "series": "",
+     "short": false,
+     "show": "더쇼",
+     "title": "[FAN PICK CAM 4K] A2O SOUL - SORA 'SUPERSTAR’ [에이투오소울-소라] [THE SHOW] 261020 방송",
+     "views": 190074
     }
    ]
   },
@@ -3104,12 +3104,12 @@
    "value": 8001066
   },
   {
-   "count": 82,
-   "delta": 71024,
+   "count": 84,
+   "delta": 74172,
    "key": "fancam_total",
    "label": "직캠 총 조회수",
-   "sub": "82개",
-   "value": 3746932
+   "sub": "84개",
+   "value": 4142579
   }
  ],
  "media_posts": [
@@ -3376,9 +3376,9 @@
     "댄스 학원 원데이 클래스 진행",
     "비공개 연습생으로 데뷔"
    ],
-   "fancam_count": 3,
-   "fancam_delta": 1102,
-   "fancam_views": 151481,
+   "fancam_count": 5,
+   "fancam_delta": 4250,
+   "fancam_views": 547128,
    "fancams": [
     {
      "category": "fancam",
@@ -3394,6 +3394,21 @@
      "show": "쇼챔피언",
      "title": "[쇼챔1분직캠] A2O SOUL SORA의 ＜SUPERSTAR＞♬ #A2OSOUL #SORA #SUPERSTAR",
      "views": 14129
+    },
+    {
+     "category": "fancam",
+     "channel": "THE K-POP",
+     "delta": 1955,
+     "era": "Superstar",
+     "id": "GR0wz-I0Q3A",
+     "member": "SORA",
+     "predebut": false,
+     "published_at": "2026-10-22T10:00:00Z",
+     "series": "",
+     "short": true,
+     "show": "더쇼",
+     "title": "A2O SOUL - SORA 'SUPERSTAR’ [에이투오소울-소라] [THE SHOW] 261020 방송 [FAN PICK CAM 4K]",
+     "views": 205573
     },
     {
      "category": "fancam",
@@ -3424,6 +3439,21 @@
      "show": "쇼챔피언",
      "title": "[쇼챔직캠 4K] A2O SOUL SORA - SUPERSTAR | Show Champion | EP.615 | 261021",
      "views": 33034
+    },
+    {
+     "category": "fancam",
+     "channel": "THE K-POP",
+     "delta": 1193,
+     "era": "Superstar",
+     "id": "2QPN0tFcv6c",
+     "member": "SORA",
+     "predebut": false,
+     "published_at": "2026-10-20T14:15:21Z",
+     "series": "",
+     "short": false,
+     "show": "더쇼",
+     "title": "[FAN PICK CAM 4K] A2O SOUL - SORA 'SUPERSTAR’ [에이투오소울-소라] [THE SHOW] 261020 방송",
+     "views": 190074
     }
    ],
    "ig_mentions": [],
@@ -15114,12 +15144,12 @@
    "views": 328731
   },
   {
-   "category": "content",
+   "category": "fancam",
    "channel": "THE K-POP",
    "delta": 1955,
    "era": "Superstar",
    "id": "GR0wz-I0Q3A",
-   "member": "",
+   "member": "SORA",
    "predebut": false,
    "published_at": "2026-10-22T10:00:00Z",
    "series": "",
@@ -15744,12 +15774,12 @@
    "views": 234409
   },
   {
-   "category": "content",
+   "category": "fancam",
    "channel": "THE K-POP",
    "delta": 1193,
    "era": "Superstar",
    "id": "2QPN0tFcv6c",
-   "member": "",
+   "member": "SORA",
    "predebut": false,
    "published_at": "2026-10-20T14:15:21Z",
    "series": "",
