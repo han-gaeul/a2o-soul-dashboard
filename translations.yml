@@ -2513,3 +2513,165 @@
   id: "Ulangi semua aktif, acak mati"
   th: "เปิดเล่นวนทั้งหมด ปิดสุ่ม"
   pt: "Repetir tudo ligado, aleatório desligado"
+
+"노래부터 들어 보기":
+  en: "Start with the songs"
+  ja: "まずは曲を聴こう"
+  zh: "先听歌"
+  es: "Empieza por las canciones"
+  id: "Mulai dari lagunya"
+  th: "เริ่มจากฟังเพลง"
+  pt: "Comece pelas músicas"
+
+"'SUPERSTAR'와 'Dancing in the Dark' 뮤직비디오 두 편이면 충분해요":
+  en: "The 'SUPERSTAR' and 'Dancing in the Dark' MVs are all you need"
+  ja: "「SUPERSTAR」と「Dancing in the Dark」のMV2本で十分"
+  zh: "看「SUPERSTAR」和「Dancing in the Dark」两支MV就够了"
+  es: "Con los MVs de 'SUPERSTAR' y 'Dancing in the Dark' basta"
+  id: "Cukup MV 'SUPERSTAR' dan 'Dancing in the Dark'"
+  th: "แค่ MV 'SUPERSTAR' กับ 'Dancing in the Dark' ก็พอ"
+  pt: "Os MVs de 'SUPERSTAR' e 'Dancing in the Dark' já bastam"
+
+"15명 얼굴 익히기":
+  en: "Learn the 15 faces"
+  ja: "15人の顔を覚えよう"
+  zh: "认识15位成员"
+  es: "Aprende las 15 caras"
+  id: "Kenali 15 wajah"
+  th: "จำหน้าทั้ง 15 คน"
+  pt: "Conheça os 15 rostos"
+
+"멤버 사진을 훑어보고, 퀴즈로 맞혀 보세요 — 틀려도 괜찮아요":
+  en: "Browse the member photos, then try the quiz — mistakes are fine"
+  ja: "メンバー写真を見て、クイズで当ててみよう — 間違えても大丈夫"
+  zh: "看看成员照片，再用测验猜一猜 — 猜错也没关系"
+  es: "Mira las fotos y prueba el quiz — equivocarse está bien"
+  id: "Lihat foto member lalu coba kuisnya — salah juga tidak apa-apa"
+  th: "ดูรูปเมมเบอร์แล้วลองเล่นควิซ — ผิดก็ไม่เป็นไร"
+  pt: "Veja as fotos e tente o quiz — errar não tem problema"
+
+"최애 정하기":
+  en: "Pick your bias"
+  ja: "推しを決めよう"
+  zh: "选出本命"
+  es: "Elige tu bias"
+  id: "Pilih bias"
+  th: "เลือกเมนของคุณ"
+  pt: "Escolha seu bias"
+
+"직캠을 보다가 눈이 가는 멤버의 ☆를 누르면 사이트가 그 멤버 위주로 바뀌어요":
+  en: "Watch fancams and tap ☆ on the member who catches your eye — the site will focus on them"
+  ja: "直カムを見て気になるメンバーの☆を押すと、サイトがその人中心に"
+  zh: "看直拍时点下心动成员的☆，网站就会以TA为主"
+  es: "Mira fancams y toca ☆ en quien te guste — el sitio se centrará en esa persona"
+  id: "Tonton fancam lalu ketuk ☆ di member yang menarik — situs akan fokus ke dia"
+  th: "ดูแฟนแคมแล้วกด ☆ ที่เมมเบอร์ที่สะดุดตา — เว็บจะเน้นคนนั้น"
+  pt: "Assista fancams e toque ☆ em quem chamar sua atenção — o site foca nessa pessoa"
+
+"놓치지 않게 알림 켜기":
+  en: "Turn on alerts"
+  ja: "通知をオンに"
+  zh: "打开通知"
+  es: "Activa las alertas"
+  id: "Nyalakan notifikasi"
+  th: "เปิดการแจ้งเตือน"
+  pt: "Ative os alertas"
+
+"위쪽 🔔 알림을 켜고 홈 화면에 설치하면 음방·투표를 알려 드려요":
+  en: "Turn on 🔔 at the top and add to your home screen to get show and vote alerts"
+  ja: "上の🔔をオンにしてホーム画面に追加すると、音楽番組・投票をお知らせ"
+  zh: "打开上方🔔并添加到主屏幕，音乐节目和投票会提醒你"
+  es: "Activa 🔔 arriba y añade a la pantalla de inicio para avisos de programas y votos"
+  id: "Nyalakan 🔔 di atas dan pasang ke layar utama untuk info acara & vote"
+  th: "เปิด 🔔 ด้านบนและเพิ่มลงหน้าจอหลัก จะได้แจ้งเตือนรายการเพลงและโหวต"
+  pt: "Ative 🔔 no topo e adicione à tela inicial para avisos de programas e votos"
+
+"응원 시작하기":
+  en: "Start supporting"
+  ja: "応援を始めよう"
+  zh: "开始应援"
+  es: "Empieza a apoyar"
+  id: "Mulai mendukung"
+  th: "เริ่มซัพพอร์ต"
+  pt: "Comece a apoiar"
+
+"응원 탭에서 스밍 리스트를 틀고, '이번 주 음방'에서 오늘 투표만 하면 돼요":
+  en: "Play the streaming list in the Cheer tab and just do today's votes in 'Music shows this week'"
+  ja: "応援タブでストリーミングリストを流し、「今週の音楽番組」で今日の投票だけすればOK"
+  zh: "在应援页播放打榜歌单，在「本周音乐节目」只投今天的票就好"
+  es: "Pon la lista en la pestaña Apoyo y haz solo los votos de hoy en 'Programas musicales esta semana'"
+  id: "Putar daftar streaming di tab Dukung dan cukup vote hari ini di 'Acara musik minggu ini'"
+  th: "เปิดลิสต์สตรีมในแท็บเชียร์ แล้วโหวตแค่ของวันนี้ใน 'รายการเพลงสัปดาห์นี้'"
+  pt: "Toque a lista na aba Apoio e faça só os votos de hoje em 'Programas musicais desta semana'"
+
+"돈을 꼭 써야 하나요?":
+  en: "Do I have to spend money?"
+  ja: "お金は必要？"
+  zh: "一定要花钱吗？"
+  es: "¿Tengo que gastar dinero?"
+  id: "Harus keluar uang?"
+  th: "ต้องเสียเงินไหม?"
+  pt: "Preciso gastar dinheiro?"
+
+"아니요. 영상 보기, 투표, 이 사이트는 모두 무료예요. 음원 스밍만 음원 사이트 이용권이 필요해요.":
+  en: "No. Watching videos, voting and this site are all free. Only music streaming needs a subscription."
+  ja: "いいえ。動画・投票・このサイトはすべて無料。音源ストリーミングだけ配信サイトの利用券が必要です。"
+  zh: "不用。看视频、投票、本网站都免费，只有音源打榜需要音乐平台会员。"
+  es: "No. Ver videos, votar y este sitio son gratis. Solo el streaming de música necesita suscripción."
+  id: "Tidak. Nonton video, vote, dan situs ini gratis. Hanya streaming musik yang perlu langganan."
+  th: "ไม่ต้อง ดูวิดีโอ โหวต และเว็บนี้ฟรีทั้งหมด มีแค่สตรีมเพลงที่ต้องสมัครสมาชิก"
+  pt: "Não. Ver vídeos, votar e este site são grátis. Só o streaming de música precisa de assinatura."
+
+"투표가 너무 많은데 다 해야 하나요?":
+  en: "There are so many votes — do I need to do them all?"
+  ja: "投票が多すぎる…全部やるべき？"
+  zh: "投票太多了，都要投吗？"
+  es: "Hay muchísimas votaciones, ¿tengo que hacerlas todas?"
+  id: "Vote-nya banyak sekali, harus semua?"
+  th: "โหวตเยอะมาก ต้องทำทั้งหมดไหม?"
+  pt: "São muitas votações, preciso fazer todas?"
+
+"아니요. 응원 탭 '이번 주 음방'에서 오늘 표시된 것만 해도 큰 힘이 돼요.":
+  en: "No. Just doing what's marked for today in 'Music shows this week' helps a lot."
+  ja: "いいえ。応援タブ「今週の音楽番組」で今日の分だけでも大きな力になります。"
+  zh: "不用。只投应援页「本周音乐节目」里今天的就很有帮助。"
+  es: "No. Con hacer solo lo de hoy en 'Programas musicales esta semana' ya ayudas mucho."
+  id: "Tidak. Cukup yang ditandai hari ini di 'Acara musik minggu ini' sudah sangat membantu."
+  th: "ไม่ต้อง แค่ทำของวันนี้ใน 'รายการเพลงสัปดาห์นี้' ก็ช่วยได้มาก"
+  pt: "Não. Só o que está marcado para hoje em 'Programas musicais desta semana' já ajuda muito."
+
+"한국어를 몰라도 되나요?":
+  en: "Do I need to know Korean?"
+  ja: "韓国語がわからなくても大丈夫？"
+  zh: "不懂韩语也可以吗？"
+  es: "¿Necesito saber coreano?"
+  id: "Harus bisa bahasa Korea?"
+  th: "ไม่รู้ภาษาเกาหลีได้ไหม?"
+  pt: "Preciso saber coreano?"
+
+"네. 사이트는 오른쪽 위에서 언어를 바꿀 수 있고, 투표 앱 대부분은 구글·애플 계정으로 해외에서도 가입돼요.":
+  en: "No. You can change the site language at the top right, and most voting apps let you sign up from abroad with Google or Apple."
+  ja: "大丈夫。サイトは右上で言語を変えられ、投票アプリの多くはGoogle・Appleアカウントで海外からも登録できます。"
+  zh: "可以。网站右上角可切换语言，大部分投票App可用Google或Apple账号在海外注册。"
+  es: "No. Puedes cambiar el idioma arriba a la derecha y la mayoría de apps de votación permiten registrarse desde el extranjero con Google o Apple."
+  id: "Tidak perlu. Bahasa situs bisa diganti di kanan atas, dan kebanyakan app vote bisa daftar dari luar negeri pakai Google atau Apple."
+  th: "ไม่ต้อง เปลี่ยนภาษาได้ที่มุมขวาบน และแอปโหวตส่วนใหญ่สมัครจากต่างประเทศด้วย Google หรือ Apple ได้"
+  pt: "Não. Dá para mudar o idioma no canto superior direito, e a maioria dos apps de votação aceita cadastro do exterior com Google ou Apple."
+
+"모르는 말이 나오면요?":
+  en: "What if I see a word I don't know?"
+  ja: "わからない言葉が出てきたら？"
+  zh: "看到不懂的词怎么办？"
+  es: "¿Y si veo una palabra que no entiendo?"
+  id: "Kalau ada istilah yang tidak tahu?"
+  th: "ถ้าเจอคำที่ไม่รู้ล่ะ?"
+  pt: "E se eu não entender alguma palavra?"
+
+"아래 '자주 쓰는 말'에 직캠·사녹·스밍 같은 말이 정리돼 있어요.":
+  en: "Check 'Common terms' below for words like fancam, pre-recording and streaming."
+  ja: "下の「よく使う言葉」に直カム・事前収録・ストリーミングなどをまとめています。"
+  zh: "下方「常用词」里整理了直拍、预录、打榜等词。"
+  es: "En 'Términos comunes' abajo están palabras como fancam, pregrabación y streaming."
+  id: "Lihat 'Istilah umum' di bawah untuk kata seperti fancam, pra-rekaman, streaming."
+  th: "ดู 'คำที่ใช้บ่อย' ด้านล่าง มีคำอย่างแฟนแคม พรีเรคคอร์ด สตรีม"
+  pt: "Veja 'Termos comuns' abaixo para palavras como fancam, pré-gravação e streaming."

@@ -1394,10 +1394,49 @@ if ("serviceWorker" in navigator) {
   for (const m of data.members) $("guideMembers").append(fancamCard(m));
   if (MOBILE) { fold($("members"), 6); fold($("guideMembers"), 6); }
 
-  // 처음 오셨나요? (첫 번째 카드만 펼쳐 둠)
+  // 덕질 처음이에요 — 5단계 (누르면 그곳으로, 체크는 이 브라우저에만) + 자주 묻는 것
+  {
+    const steps = data.guide?.steps || [], faq = data.guide?.faq || [];
+    const done = new Set(pref.get("guideSteps", []));
+    if (steps.length) {
+      const bar = el("div", { class: "gs-bar" }, el("span", {}));
+      const count = el("span", { class: "muted small" });
+      const paint = () => {
+        const n = steps.filter((x) => done.has(x.title)).length;
+        bar.firstChild.style.width = `${(n / steps.length) * 100}%`;
+        count.textContent = t("gs_count", { n, total: steps.length });
+      };
+      const go = (target) => {
+        if (target.startsWith("#")) {
+          const node = document.querySelector(target);
+          const tab = node?.closest("[data-tab]")?.dataset.tab;
+          if (tab) location.hash = tab;
+          setTimeout(() => (node?.tagName === "BUTTON" ? node.click() : node?.scrollIntoView({ behavior: "smooth", block: "start" })), 80);
+        } else { location.hash = target; window.scrollTo({ top: 0 }); }
+      };
+      const list = el("ol", { class: "gs-list" }, ...steps.map((x, i) => {
+        const cb = el("input", { type: "checkbox", "aria-label": tc(x.title), ...(done.has(x.title) ? { checked: "" } : {}) });
+        cb.addEventListener("change", () => { cb.checked ? done.add(x.title) : done.delete(x.title); pref.set("guideSteps", [...done]); li.classList.toggle("done", cb.checked); paint(); });
+        const btn = el("button", { type: "button", class: "gs-go" }, t("tour_go"));
+        btn.addEventListener("click", () => { cb.checked = true; cb.dispatchEvent(new Event("change")); go(x.go); });
+        const li = el("li", { class: done.has(x.title) ? "done" : "" },
+          el("span", { class: "gs-ico", "aria-hidden": "true" }, x.icon),
+          el("div", { class: "gs-text" }, el("b", {}, `${i + 1}. ${tc(x.title)}`), el("span", { class: "muted small" }, tc(x.desc)), x.go ? btn : null),
+          cb);
+        return li;
+      }));
+      paint();
+      $("beginner").append(el("div", { class: "gs" }, el("div", { class: "gs-head" }, el("b", {}, t("gs_title")), count), bar, list));
+    }
+    if (faq.length) {
+      $("beginner").append(el("details", { class: "howto" }, el("summary", {}, t("gs_faq")),
+        el("dl", { class: "gs-faq" }, ...faq.flatMap((x) => [el("dt", {}, tc(x.q)), el("dd", {}, tc(x.a))]))));
+    }
+  }
+  // 처음 오셨나요? (단계 카드가 있으면 접어 둠)
   const beg = data.guide?.beginner || [];
   if (beg.length) {
-    beg.forEach((b, i) => $("beginner").append(el("details", { class: "howto", ...(i === 0 ? { open: "" } : {}) },
+    beg.forEach((b, i) => $("beginner").append(el("details", { class: "howto", ...(i === 0 && !(data.guide?.steps || []).length ? { open: "" } : {}) },
       el("summary", {}, tc(b.title)), el("ol", { class: "howto-steps" }, ...b.items.map((x) => el("li", {}, tc(x)))))));
   } else {
     $("beginnerSec").remove();

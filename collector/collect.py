@@ -224,7 +224,9 @@ def load_fan_files(cfg):
     cfg["guide"] = {"course": [{"id": str(c["id"]), "note": str(c.get("note") or "")} for c in guide.get("course") or []],
                     "tips": {str(k).upper(): str(v) for k, v in (guide.get("tips") or {}).items()},
                     "beginner": [{"title": str(b["title"]), "items": [str(x) for x in b.get("items") or []]}
-                                 for b in guide.get("beginner") or [] if b.get("title")]}
+                                 for b in guide.get("beginner") or [] if b.get("title")],
+                    "steps": [{k: str(x.get(k) or "") for k in ("icon", "title", "desc", "go")} for x in guide.get("steps") or [] if x.get("title")],
+                    "faq": [{"q": str(x["q"]), "a": str(x["a"])} for x in guide.get("faq") or [] if x.get("q") and x.get("a")]}
 
 
 def member_pattern(m):
@@ -1449,6 +1451,7 @@ def write_health(cfg, videos, members, today, official=(), store_cands=None, med
     for b in cfg["guide"]["beginner"]:
         texts += [b["title"]] + b["items"]
     texts += [c["note"] for c in cfg["guide"]["course"]]
+    texts += [x for st in cfg["guide"]["steps"] for x in (st["title"], st["desc"])] + [x for f in cfg["guide"]["faq"] for x in (f["q"], f["a"])]
     missing = sorted({x for x in texts if x and re.search(r"[가-힣]", x) and set(tr.get(x, {})) < {"en", "ja", "zh", "es", "id", "th", "pt"}})
     if missing:
         secs.append(("번역이 없는 문구", "`translations.yml`에 원문 그대로 추가 (en·ja·zh·es·id·th)", [f"- {x}" for x in missing]))
@@ -1773,7 +1776,8 @@ def build(cfg):
             for x in cfg["info"].get("offline_stores") or []]},
         "guide": {"course": [{**c, **{k: by_id[c["id"]][k] for k in slim}}
                              for c in cfg["guide"]["course"] if c["id"] in by_id],
-                  "tips": cfg["guide"]["tips"], "beginner": cfg["guide"]["beginner"]},
+                  "tips": cfg["guide"]["tips"], "beginner": cfg["guide"]["beginner"],
+                  "steps": cfg["guide"]["steps"], "faq": cfg["guide"]["faq"]},
     }
     save_json("dashboard.json", dashboard)
     write_calendar(cfg, [e for e in all_events if e.get("auto") and not e.get("anniv") and not e.get("past")] + annivs)
