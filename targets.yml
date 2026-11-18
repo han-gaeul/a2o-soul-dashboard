@@ -138,6 +138,8 @@ videos:
 push:
   api: "https://push.a2osoul-tracker.com"
   vapid_public: "BPszmnnzF5KS8DntczISNMfwY2etOSx_oX7L38hORWSCX_mfJE2MzKSKralQ_Y3NcK1osX-iEArij0qscPlj1YU"
+  google_client_id: "978000846144-cjvbb56vp6vfj4psgj02tbnl7fgn551h.apps.googleusercontent.com"   # 커뮤니티 구글 로그인 — Google Cloud OAuth 웹 클라이언트 ID (공개돼도 되는 값)
+  turnstile_sitekey: "0x4AAAAAAGGgUGbNaZ3IKPVr"  # 커뮤니티 익명 글 사람 확인 — Cloudflare Turnstile 사이트 키 (공개 값, 비밀 키는 워커 TURNSTILE_SECRET)
 
 # 투표 앱·음방 공식 X 계정 (@ 없이) — 금색 인증(기관)이 아니라 자동 판별이 안 되는 계정만 적기
 #   이 계정들 글에 A2O SOUL + 투표 기간이 있으면 응원 탭 투표 칸에 바로 (팬 계정 표시 없이)

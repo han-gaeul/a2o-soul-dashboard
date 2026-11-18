@@ -935,3 +935,29 @@ body.bias-theme header { background: linear-gradient(120deg, var(--chip), transp
 .bias-sw.auto { background: var(--chip); color: var(--chip-fg); font-size: 11px; font-weight: 700; }
 .bias-sw.rainbow { background: conic-gradient(red, yellow, lime, cyan, blue, magenta, red); position: relative; overflow: hidden; }
 .bias-pick { position: absolute; inset: 0; opacity: 0; width: 100%; height: 100%; cursor: pointer; }
+/* 커뮤니티 */
+.cm-auth { display: flex; align-items: center; gap: 6px; }
+.cm-tools { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin: 8px 0; flex-wrap: wrap; }
+.cm-warn { background: #fff3c4; color: #7a5200; border-radius: 10px; padding: 8px 10px; margin: 8px 0; }
+@media (prefers-color-scheme: dark) { .cm-warn { background: #3a2f0b; color: #ffd98a; } }
+.cm-list { list-style: none; margin: 0; padding: 0; }
+.cm-row { display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: center; padding: 10px 2px; border-top: 1px solid var(--line); cursor: pointer; }
+.cm-row:first-child { border-top: 0; }
+.cm-row.pin { background: var(--chip); border-radius: 10px; padding: 10px 8px; }
+.cm-row.hid, .cm-comments li.hid { opacity: .45; }
+.cm-main { display: grid; gap: 2px; min-width: 0; }
+.cm-main b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cm-cn { color: var(--chip-fg); font-weight: 700; }
+.cm-text { white-space: pre-wrap; word-break: break-word; line-height: 1.6; }
+.cm-body { margin: 12px 0; }
+.cm-img { max-width: 100%; border-radius: 12px; margin-top: 10px; }
+.cm-acts { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 6px 0; }
+.cm-comments { list-style: none; margin: 0 0 12px; padding: 0; display: grid; gap: 10px; }
+.cm-comments li { border-top: 1px solid var(--line); padding-top: 8px; }
+.cm-form, #cmBody { display: grid; gap: 8px; }
+.cm-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.cm-in { font: inherit; font-size: 16px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); color: var(--text); width: 100%; }
+.cm-err { color: var(--hot); margin: 0; min-height: 1em; }
+.cm-file input { font-size: 13px; }
+.cm-pair select.sel { width: 100%; max-width: none; }
+.cm-tools .era-row { margin: 0; }

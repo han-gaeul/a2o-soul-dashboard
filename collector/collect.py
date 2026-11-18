@@ -1792,7 +1792,7 @@ def build(cfg):
         "notices": sorted(notices, key=lambda x: (x.get("date") or "9999", x.get("time") or "99:99")),  # 가까운 날짜부터
         "categories": CATEGORIES,
         "feedback_url": str(cfg.get("feedback_url") or ""),
-        "push": {k: str(v) for k, v in (cfg.get("push") or {}).items() if k in ("api", "vapid_public") and v},
+        "push": {k: str(v) for k, v in (cfg.get("push") or {}).items() if k in ("api", "vapid_public", "google_client_id", "turnstile_sitekey") and v},
         "yt_channels": sorted(registry.get("channels") or {}),  # Cloudflare Worker가 YouTube 새 영상 즉시 알림(WebSub) 구독에 씀
         "votes": [v for v in cfg["votes"] if v["end"] >= now_kst_str()],
         "prerecs": prerecs,
