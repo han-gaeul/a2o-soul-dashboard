@@ -1901,17 +1901,19 @@ if ("serviceWorker" in navigator) {
       return b;
     };
     const draw = () => {
+      const nShow = photos.filter((x) => x.account === "show").length;
       $("photoMem").replaceChildren(btn(t("ev_all"), !who, () => { who = ""; shown = 18; draw(); }),
+        nShow ? btn(`📺 ${t("photo_show")} ${nShow}`, who === "@show", () => { who = "@show"; shown = 18; draw(); }) : "",
         ...mems.map((n) => {
           const c = photos.filter((x) => (x.members || []).includes(n)).length;
           return btn(c ? `${n} ${c}` : n, n === who, () => { who = n; shown = 18; draw(); });
         }));
-      const list = photos.filter((x) => !who || (x.members || []).includes(who));
+      const list = photos.filter((x) => !who || (who === "@show" ? x.account === "show" : (x.members || []).includes(who)));
       if (!list.length) { $("photoGrid").replaceChildren(empty(t("photos_none"))); $("photoMore").hidden = true; return; }
       $("photoGrid").replaceChildren(...list.slice(0, shown).map((x) => {
         const img = el("img", { src: x.src, alt: x.text || "A2O SOUL", loading: "lazy", decoding: "async", referrerpolicy: "no-referrer" });
         const a = el("a", { href: x.url, target: "_blank", rel: "noopener", title: `${x.at} · ${x.text || ""}` }, img,
-          el("span", { class: `src src-${x.account}` }, x.account === "x" ? "X" : "IG"));
+          el("span", { class: `src src-${x.account}` }, x.account === "show" ? `📺 ${x.by || ""}` : x.account === "x" ? "X" : "IG"));
         img.addEventListener("error", () => a.remove());  // 만료된 주소는 숨김
         return a;
       }));
