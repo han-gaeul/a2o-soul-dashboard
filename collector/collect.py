@@ -1668,6 +1668,7 @@ def build(cfg):
             "instagram_posts": [str(u) for u in (m.get("instagram_posts") or [])],
             "ig_mentions": [{k: x[k] for k in ("at", "text", "more", "url")} for x in ig_feed if m["name"] in x["members"]][:10],
             "photo": local_img(m.get("photo")) or auto["photo"],
+            "color": m.get("color") if isinstance(m.get("color"), (int, float)) else "",
             "signature": local_img(m.get("signature")) or auto["signature"],
             # 서명 여러 장: 파일 이름 앞 라벨(서명·사인)별 출처·날짜는 members.yml signature_sources
             "signatures": [{"src": rel, **({k: str(v) for k, v in (sign_src.get(label) or {}).items() if k in ("label", "url") and v})}

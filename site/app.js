@@ -1861,20 +1861,52 @@ if ("serviceWorker" in navigator) {
       if ((m.ig_mentions || []).length) body.push(el("div", { class: "ig-feed bias-ig" }, ...m.ig_mentions.slice(0, 2).map((x) => igPost(x, false))));
       const more = el("button", { class: "more", type: "button" }, t("profile_view"));
       more.addEventListener("click", () => openMember(m));
-      body.push(more);
+      const tg = el("label", { class: "bias-theme-tg small" }, el("input", { type: "checkbox", ...(themeOn() ? { checked: "" } : {}) }), ` ${t("bias_theme")}`);
+      tg.firstChild.addEventListener("change", (e) => { pref.set("biasTheme", e.target.checked); applyTheme(); });
+      body.push(el("div", { class: "bias-foot" }, more, tg));
     } else {
       body.push(el("p", { class: "note small" }, t("bias_desc")));
     }
     $("bias").replaceChildren(head, ...body);
   }
+  // 최애 테마: 멤버별 포인트 색 + 상단에 최애 사진 (끄기 가능)
+  const themeOn = () => pref.get("biasTheme", true);
+  function applyTheme() {
+    const m = data.members.find((x) => x.name === bias);
+    const root = document.documentElement;
+    const badge = $("biasBadge");
+    if (!m || !themeOn() || !m.photo) {
+      ["--accent", "--accent-bg", "--chip", "--chip-fg"].forEach((k) => root.style.removeProperty(k));
+      document.body.classList.remove("bias-theme");
+      if (badge) badge.hidden = true;
+      return;
+    }
+    // 멤버별 색: members.yml color(색상 0~360)가 있으면 그것, 없으면 15명 순서대로 색상환을 고르게 나눈 색
+    const idx = data.members.indexOf(m);
+    const h = Number.isFinite(+m.color) && m.color !== "" ? +m.color : Math.round((idx * 360) / data.members.length + 250) % 360;
+    const dark = matchMedia("(prefers-color-scheme: dark)").matches;
+    const lo = h >= 40 && h <= 190 ? 14 : 0;  // 노랑·초록은 흰 글씨가 안 보여서 더 어둡게
+    root.style.setProperty("--accent", `hsl(${h} 70% ${dark ? 72 : 50 - lo}%)`);
+    root.style.setProperty("--accent-bg", `hsl(${h} 62% ${50 - lo}%)`);
+    root.style.setProperty("--chip", `hsl(${h} 75% ${dark ? 18 : 94}%)`);
+    root.style.setProperty("--chip-fg", `hsl(${h} 60% ${dark ? 72 : 36}%)`);
+    document.body.classList.add("bias-theme");
+    if (badge) {
+      badge.hidden = false;
+      badge.replaceChildren(el("img", { src: m.photo, alt: "" }), el("span", {}, `♥ ${m.name}`));
+      badge.onclick = () => openMember(m);
+    }
+  }
   function setBias(name) {
     bias = name;
     pref.set("bias", name);
     renderBias();
+    applyTheme();
 
 
   }
   renderBias();
+  applyTheme();
 
   // ---------- 헤더 사진 띠 (15명, 누르면 프로필) ----------
   const withPhoto = data.members.filter((m) => m.photo);
