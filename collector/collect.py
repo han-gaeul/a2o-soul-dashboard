@@ -1432,7 +1432,7 @@ def write_calendar(cfg, extra_events=()):
              "BEGIN:VTIMEZONE", "TZID:Asia/Seoul", "BEGIN:STANDARD", "DTSTART:19700101T000000",
              "TZOFFSETFROM:+0900", "TZOFFSETTO:+0900", "TZNAME:KST", "END:STANDARD", "END:VTIMEZONE"]
 
-    def event(uid, summary, start, end=None, all_day=False, rrule=None, url=None, desc=None):
+    def event(uid, summary, start, end=None, all_day=False, rrule=None, url=None, desc=None, alarms=()):
         lines.extend(["BEGIN:VEVENT", f"UID:{uid}@a2o-soul-tracker", f"DTSTAMP:{stamp}"])
         if all_day:
             lines.append(f"DTSTART;VALUE=DATE:{start.replace('-', '')}")
@@ -1449,6 +1449,8 @@ def write_calendar(cfg, extra_events=()):
             lines.append(f"URL:{url}")
         if desc:
             lines.append(f"DESCRIPTION:{_ics_escape(desc)}")
+        for mins in alarms:  # 마감 전 알림 (구독 캘린더에서 알림을 지원하는 앱만)
+            lines.extend(["BEGIN:VALARM", "ACTION:DISPLAY", f"DESCRIPTION:{_ics_escape(summary)}", f"TRIGGER:-PT{mins}M", "END:VALARM"])
         lines.append("END:VEVENT")
 
     for i, e in enumerate(list(cfg["events"]) + list(extra_events)):
@@ -1467,7 +1469,7 @@ def write_calendar(cfg, extra_events=()):
     for i, v in enumerate(cfg["votes"]):
         end = v["end"] if " " in v["end"] else v["end"] + " 23:59"
         event(f"vote-{i}-{end}", f"🗳 {v.get('show', '')} {v.get('title', '투표')} 마감".strip(), end, url=v.get("url"),
-              desc=f"앱: {v['app']}" if v.get("app") else None)
+              desc=f"앱: {v['app']}" if v.get("app") else None, alarms=(180, 30))
     for i, x in enumerate(cfg["supports"]):
         who = f"{x['member']} " if x.get("member") else ""
         event(f"support-{i}-{x['start']}", f"☕ {who}{x.get('kind', '')} {x.get('title', '')}".strip(),

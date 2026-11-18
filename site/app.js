@@ -579,6 +579,39 @@ if ("serviceWorker" in navigator) {
         el("span", { class: "vb-go" }, `${x.label} ↗`)));
     }
   }
+  // 이번 주 음방 체크리스트 — 월~일, 방송 요일·시간·투표 앱, 지난 날은 흐리게, 오늘은 강조
+  {
+    const DAYS = "월화수목금토일";
+    const base = new Date(`${todayKst}T00:00:00Z`); // 날짜 계산만 하려고 UTC 자정으로
+    const dow = (base.getUTCDay() + 6) % 7; // 월=0
+    const ymd = (d) => new Date(+base + (d - dow) * 864e5).toISOString().slice(0, 10);
+    const fmtDay = new Intl.DateTimeFormat(LANG === "zh" ? "zh-CN" : LANG, { weekday: "short", timeZone: "UTC" });
+    const rows = (data.howto?.voting || []).map((v) => {
+      const d = DAYS.indexOf(String(v.when || "").trim()[0]);
+      if (d < 0) return null;
+      const date = ymd(d), time = (/(\d{1,2}:\d{2})/.exec(v.when) || [])[1] || "";
+      const show = String(v.show), live = liveFor(show);
+      const on = (data.events || []).some((e) => e.type === "음방" && e.date === date && String(e.title).includes(show));
+      const open = votes.filter((x) => `${x.show} ${x.title}`.includes(show) && Date.now() < kstDate(x.end.includes(" ") ? x.end : `${x.end} 23:59`));
+      const state = date < todayKst ? "past" : date === todayKst ? "today" : "next";
+      return { d, date, time, show, v, live, on, open, state };
+    }).filter(Boolean).sort((a, b) => a.d - b.d);
+    if (rows.length) {
+      const box = el("div", { class: "wk" },
+        el("div", { class: "wk-head" }, el("b", {}, t("wk_title")), el("span", { class: "muted small" }, `${ymd(0).slice(5).replace("-", ".")} ~ ${ymd(6).slice(5).replace("-", ".")}`)),
+        ...rows.map((r) => el("div", { class: `wk-row ${r.state}` },
+          el("div", { class: "wk-day" }, el("b", {}, fmtDay.format(new Date(`${r.date}T00:00:00Z`))), el("span", {}, r.date.slice(5).replace("-", "."))),
+          el("div", { class: "wk-body" },
+            el("div", {}, el("b", {}, tc(r.show)), r.time ? el("span", { class: "muted small" }, ` ${r.time}`) : null,
+              r.state === "today" ? el("span", { class: "chip chip-on" }, t("wk_today")) : null,
+              r.on ? el("span", { class: "chip wk-on" }, t("wk_on")) : null,
+              r.state === "past" ? el("span", { class: "muted small" }, ` · ${t("wk_past")}`) : null),
+            el("div", { class: "muted small" }, [r.v.pre ? `${t("wk_pre")} ${tc(r.v.pre)}` : "", r.v.live ? `${t("wk_live")} ${tc(r.v.live)}` : ""].filter(Boolean).join(" · ")),
+            ...r.open.map((x) => el("div", { class: "small wk-vote" }, `🗳 ${tc(x.title)} · ${t("wk_until", { t: x.end.slice(5).replace("-", ".") })}`))),
+          r.state !== "past" && r.live ? ext(r.live.url, `${r.live.label} ↗`) : null)));
+      $("votes").parentNode.insertBefore(box, $("votes"));
+    }
+  }
   if (votes.length) {
     const sorted = [...votes].sort((a, b) => voteKey(a) - voteKey(b));
     const groups = [["", t("ev_all"), () => true],
@@ -1057,6 +1090,8 @@ if ("serviceWorker" in navigator) {
     try { await navigator.clipboard.writeText(icsUrl); copyBtn.textContent = t("copied"); } catch (_) { prompt("URL", icsUrl); }
   });
   $("calLinks").append(copyBtn);
+  $("votesSec").append(el("p", { class: "small wk-cal" }, `📅 ${t("wk_cal")} `,
+    el("a", { href: webcal }, t("cal_apple")), " · ", ext(`https://calendar.google.com/calendar/render?cid=${encodeURIComponent(webcal)}`, t("cal_google"))));
 
   // ---------- 응원 탭 맨 위 메뉴: 할 일을 타일로 한눈에, 누르면 해당 칸으로 ----------
   {
