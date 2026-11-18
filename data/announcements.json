@@ -1917,6 +1917,28 @@
    "permalink": "https://x.com/BIGCChoice/status/2122616986215862435",
    "timestamp": "2026-11-17T09:05:00.000Z"
   },
+  "xo:2122963267241083371": {
+   "caption": "🎧K-POP K탑 CHART\n\nK탑 K-POP 차트 투표가 오픈되었습니다!\n지금 바로 K탑스타에서 투표해 보세요 🤗\n\n✅ 투표 기간 : 11/18 17:00 - 11/23 17:00 [KST]\n\n1위 아티스트에게는 M/V 홍보를 위한\n앱 내 메인배너 광고 혜택을 드립니다 🙌\n\n#하츠투하츠 #엔플라잉 #엔시티위시 #플레이브 #A2OLITE #A2OSOUL #엔믹스 #아이브 #에이티즈 #베이비몬스터 #보이넥스트도어 #롱샷 #라이즈 #아일릿 #지수 #리센느 #투어스 #피원하모니 #언차일드 #엔시티드림 #이세계아이돌 #채령 #규현 #도경수 #씨엔블루 #솔라 #루시 #하이키\n\n— KTOPSTAR",
+   "excerpt": "🎧K-POP K탑 CHART\n\nK탑 K-POP 차트 투표가 오픈되었습니다!\n지금 바로 K탑스타에서 투표해 보세요 🤗\n\n✅ 투표 기간 : 11/18 17:00 - 11/23 17:00 [KST]\n\n1위 아티스트에게는 M/V 홍보를 위한\n앱 내 메인배너 ",
+   "items": [
+    {
+     "app": "",
+     "confidence": 0.6,
+     "date": null,
+     "end": null,
+     "end_date": null,
+     "kind": "vote",
+     "place": null,
+     "show": "",
+     "start": null,
+     "time": null,
+     "title": "🎧K-POP K탑 CHART",
+     "url": null
+    }
+   ],
+   "permalink": "https://x.com/KTOPSTAR_offcl/status/2122963267241083371",
+   "timestamp": "2026-11-18T08:01:00.000Z"
+  },
   "xv:2119672177347981651": {
    "caption": "[💿] A2O SOUL DEBUT EP [SUPERSTAR]\n발매 기념 공개 팬사인회\n\n📢응모 마감 D-1‼️\n✨당일 공개 팬사인회에서 SPECIAL STAGE가 진행됩니다.\n\n📅2026.11.14 (토) 19:30 (KST)\n📍스타필드 수원 타워 아트리움\n\n[ONLINE] 뮤직아트 온라인몰\n🛒온라인 응모기간 : 2026.11.08 (일) 14:00 ~ 11.10 (화) 23:59 (KST)\n\n[OFFLINE] 영풍문고 스타필드수원점 내 음반매장\n🛒오프라인 응모기간 : 2026.11.08 (일) 14:00 ~ 11.10 (화) 21:00 (KST)\n\n🌠응모자 전원 미공개 셀카 포토카드 15종 중 1종 랜덤 증정\n\n🔗https://t.co/I1sj0S6DOk",
    "excerpt": "[💿] A2O SOUL DEBUT EP [SUPERSTAR]\n발매 기념 공개 팬사인회\n\n📢응모 마감 D-1‼️\n✨당일 공개 팬사인회에서 SPECIAL STAGE가 진행됩니다.\n\n📅2026.11.14 (토) 19:30 (KST)\n📍스타필드 수원 타워 아",
@@ -2187,14 +2209,18 @@
   "since_id": "2122618084649468286"
  },
  "x_official_votes": {
-  "at": "2026-11-18T16:50+09:00",
+  "at": "2026-11-18T17:00+09:00",
   "deep": 1,
   "last": {
-   "official": [],
-   "read": 0,
-   "verified": []
+   "official": [
+    "KTOPSTAR_offcl"
+   ],
+   "read": 1,
+   "verified": [
+    "KTOPSTAR_offcl:blue"
+   ]
   },
-  "since_id": "2122951586830016521",
+  "since_id": "2122963267241083371",
   "v": 2
  },
  "x_show_photos": {
