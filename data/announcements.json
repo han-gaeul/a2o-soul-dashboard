@@ -893,6 +893,27 @@
    "permalink": "https://x.com/A2O_SOUL/status/2122705411576889753",
    "timestamp": "2026-11-17T14:56:22.000Z"
   },
+  "x:2122887531385835712": {
+   "caption": "[📍]\n261118 (수) A2O SOUL ENA 케이팝업 차트쇼 사전녹화에 참여하시는 분은 인원 체크 시간에 맞춰 사진 속 장소로 모여주시기 바랍니다🪩\n\n인원 체크 시작 시간 - PM 12:30 (KST)\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2O_SOUL/status/2122887531385835712/photo/1",
+   "excerpt": "[📍]\n261118 (수) A2O SOUL ENA 케이팝업 차트쇼 사전녹화에 참여하시는 분은 인원 체크 시간에 맞춰 사진 속 장소로 모여주시기 바랍니다🪩\n\n인원 체크 시작 시간 - PM 12:30 (KST)\n\n#A2O #A2OSOUL\n#Dancing_",
+   "images": [
+    "https://pbs.twimg.com/media/HXYBR0ubwAAsJna.jpg"
+   ],
+   "items": [
+    {
+     "confidence": 0.8,
+     "date": "2026-11-18",
+     "end_date": null,
+     "kind": "music_show",
+     "place": null,
+     "time": null,
+     "title": "케이팝업 차트쇼 출연",
+     "url": null
+    }
+   ],
+   "permalink": "https://x.com/A2O_SOUL/status/2122887531385835712",
+   "timestamp": "2026-11-18T03:00:03.000Z"
+  },
   "xf:2121586007254708290": {
    "caption": "[📸] 261114 @A2O_SOUL \n\n2026.11.14\nMBC Show! Music Core\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2OSOULBASE/status/2121586007254708290/photo/1",
    "excerpt": "[📸] 261114 @A2O_SOUL \n\n2026.11.14\nMBC Show! Music Core\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2OSOULBASE/status/2121586007254708",
@@ -1450,6 +1471,13 @@
    "permalink": "https://x.com/A2OSOULBASE/status/2122806215378149379",
    "timestamp": "2026-11-17T21:36:56.000Z"
   },
+  "xf:2122886838172213468": {
+   "caption": "♥️ 𝐖𝐞𝐥𝐜𝐨𝐦𝐞 𝐭𝐨 𝐀𝟐𝐎 𝐒𝐎𝐔𝐋 𝐁𝐀𝐒𝐄! 👻\n\n@A2O_SOUL\n#A2O #A2OSOUL \n#에이투오소울 https://x.com/A2OSOULBASE/status/2122886838172213468/photo/1",
+   "excerpt": "♥️ 𝐖𝐞𝐥𝐜𝐨𝐦𝐞 𝐭𝐨 𝐀𝟐𝐎 𝐒𝐎𝐔𝐋 𝐁𝐀𝐒𝐄! 👻\n\n@A2O_SOUL\n#A2O #A2OSOUL \n#에이투오소울 https://x.com/A2OSOULBASE/status/2122886838172213468/photo/1",
+   "items": [],
+   "permalink": "https://x.com/A2OSOULBASE/status/2122886838172213468",
+   "timestamp": "2026-11-18T02:57:18.000Z"
+  },
   "xo:2120350813545541722": {
    "caption": "한 달에 한 번 아티스트와 팬이\n함께 만들어가는 음악 차트쇼🎧 🎶\n\n<ENA 케이팝업 차트쇼 26회>\nENA SPECIAL CHOICE✔️\n\n🗓️투표 기간​\n˙ 2026.11.11(수) 12:00 ~ 11.15(일) 23:59 KST\n\n🎖️투표 리워드\n˙ 방송 내 단독 스페셜 코너\n˙ 구간 달성 시 촬영장 서포트 진행\n\n지금 바로 투표하고,\nENA 케이팝업 차트쇼 방청 이벤트에도 참여하세요🌟\n🔗 https://t.co/aSB6HzgFOD\n\n📍방청 이벤트 참여하기\n🔗https://t.co/zINsGWliSW\n\n#Kei #노이 #드래곤포니 #바이비 #싸이커스 #앰퍼샌드원 #에이투오소울 #엔탑 #오브코어 #이츠 #임영민 #키빗업 #피원하모니 #피크\n\n— 마이원픽",
    "excerpt": "한 달에 한 번 아티스트와 팬이\n함께 만들어가는 음악 차트쇼🎧 🎶\n\n<ENA 케이팝업 차트쇼 26회>\nENA SPECIAL CHOICE✔️\n\n🗓️투표 기간​\n˙ 2026.11.11(수) 12:00 ~ 11.15(일) 23:59 KST\n\n🎖️투표 리워드",
@@ -2000,13 +2028,13 @@
  "x": {
   "A2O_SOUL": {
    "id": "1986498790229262336",
-   "since_id": "2122705411576889753"
+   "since_id": "2122887531385835712"
   }
  },
  "x_fans": {
   "A2OSOULBASE": {
    "id": "1630504378468827137",
-   "since_id": "2122806215378149379"
+   "since_id": "2122886838172213468"
   }
  },
  "x_media": {
@@ -2109,14 +2137,16 @@
   "since_id": "2122618084649468286"
  },
  "x_official_votes": {
-  "at": "2026-11-18T09:00+09:00",
+  "at": "2026-11-18T12:00+09:00",
   "deep": 1,
   "last": {
    "official": [],
-   "read": 1,
-   "verified": []
+   "read": 4,
+   "verified": [
+    "a2osoulvote:blue"
+   ]
   },
-  "since_id": "2122840625834029275",
+  "since_id": "2122887289747787945",
   "v": 2
  },
  "x_stores": {
