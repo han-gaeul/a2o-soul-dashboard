@@ -133,6 +133,8 @@ if ("serviceWorker" in navigator) {
     const [head] = route();
     const cur = tabs.includes(head) ? head : ROUTE_TAB[head] || "overview";
     document.querySelectorAll("[data-tab]").forEach((s) => (s.hidden = s.dataset.tab !== cur));
+    document.body.dataset.cur = cur;
+    document.querySelectorAll("#tabbar a").forEach((a) => a.classList.toggle("on", a.getAttribute("href") === `#${cur}` || !!(a.dataset.more && a.dataset.more.split(",").includes(cur))));
     document.querySelectorAll("#tabs a").forEach((a) => {
       const on = a.getAttribute("href") === `#${cur}`;
       a.classList.toggle("on", on);
@@ -567,7 +569,15 @@ if ("serviceWorker" in navigator) {
           el("div", { class: "win-sub" }, [`${show}${w.ep ? ` ${t("win_ep", { n: w.ep })}` : ""}`, w.date.replaceAll("-", "."), n > 0 ? t("win_days", { n }) : ""].filter(Boolean).join(" · ")),
           el("div", { class: "win-acts" }, el("a", { class: "win-btn primary", href: watch, target: "_blank", rel: "noopener" }, t("win_watch")),
             el("span", { class: "win-share" }, share, menu))));
-      $("tabs").before(banner);
+      // 한 줄 요약 (휴대폰 기본) — 누르면 큰 배너 펼침
+      const pill = el("button", { type: "button", class: "win-pill" },
+        w.image ? el("img", { src: w.image, alt: "", referrerpolicy: "no-referrer" }) : el("span", { class: "wp-ico" }, "🏆"),
+        el("span", { class: "wp-tx" }, el("b", {}, `🏆 ${first ? t("win_first", { show }) : t("win_n", { show })}`),
+          el("small", {}, `${show}${w.ep ? ` ${t("win_ep", { n: w.ep })}` : ""} · ${w.date.slice(5).replace("-", ".")} — ${t("win_tap")}`)),
+        el("span", { class: "wp-go" }, "›"));
+      pill.addEventListener("click", () => { banner.classList.add("open"); pill.hidden = true; });
+      const wrapWin = el("div", { class: "win-wrap" }, pill, banner);
+      $("tabs").before(wrapWin);
     }
   }
   // 상단 띠: 오늘 A2O SOUL이 나오는 음방 — 시작 1시간 반 전부터 끝날 무렵까지 '생방송 보기'
@@ -612,7 +622,7 @@ if ("serviceWorker" in navigator) {
           el("div", { class: "wk-body" },
             el("div", {}, el("b", {}, tc(r.show)), r.time ? el("span", { class: "muted small" }, ` ${r.time}`) : null,
               r.state === "today" ? el("span", { class: "chip chip-on" }, t("wk_today")) : null,
-              r.on ? el("span", { class: "chip wk-on" }, t("wk_on")) : null,
+              r.on ? el("span", { class: "chip wkc-appear" }, t("wk_on")) : null,
               r.nom ? el("a", { class: "chip wk-nom", href: r.nom.url || "#", target: "_blank", rel: "noopener" }, `🏆 ${t("wk_nom")}`) : null,
               r.state === "past" ? el("span", { class: "muted small" }, ` · ${t("wk_past")}`) : null),
             el("div", { class: "muted small" }, [r.v.pre ? `${t("wk_pre")} ${tc(r.v.pre)}` : "", r.v.live ? `${t("wk_live")} ${tc(r.v.live)}` : ""].filter(Boolean).join(" · ")),
@@ -1884,6 +1894,8 @@ if ("serviceWorker" in navigator) {
   // ---------- 최애 (한눈에 맨 위) ----------
 
   let bias = pref.get("bias", "");
+  let homeRender = () => {};
+  let openHomeStyle = () => {};
   function renderBias() {
     const m = data.members.find((x) => x.name === bias);
     const sel = el("select", { class: "sel", "aria-label": t("bias_pick") },
@@ -1982,8 +1994,7 @@ if ("serviceWorker" in navigator) {
     pref.set("bias", name);
     renderBias();
     applyTheme();
-
-
+    homeRender();
   }
   renderBias();
   applyTheme();
@@ -2223,6 +2234,143 @@ if ("serviceWorker" in navigator) {
     start();
     const r0 = route();
     if (r0[0] === "post" && r0[1]) setTimeout(() => view(Number(r0[1])), 300);
+  }
+
+  // ---------- 한눈에 화면 스타일: A 정리형 · B 매거진형 · C 최애 중심형 (이 브라우저에만 저장) ----------
+  {
+    const box = $("homeStyle");
+    const api = ((data.push || {}).api || "").replace(/\/$/, "");
+    // 어떤 스타일을 많이 고르는지 세기만 함 (누가 골랐는지는 안 보냄)
+    const count = (s) => { if (api) fetch(`${api}/style`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ s }) }).catch(() => {}); };
+    const hqThumb = (id) => `https://i.ytimg.com/vi/${encodeURIComponent(id)}/hqdefault.jpg`;
+    const goStream = () => { location.hash = "cheer"; setTimeout(() => $("streamSec")?.scrollIntoView({ behavior: "smooth", block: "start" }), 80); };
+
+    const chooser = (cur) => {
+      const opt = (s, ico) => {
+        const b = el("button", { type: "button", class: `hs-opt${cur === s ? " on" : ""}` },
+          el("span", { class: "hs-ico" }, ico), el("b", {}, t(`hs_${s}`)), el("small", {}, t(`hs_${s}_d`)));
+        b.onclick = () => { if (cur !== s) count(s); pref.set("homeStyle", s); pref.set("hsPicked", true); render(); window.scrollTo({ top: 0 }); };
+        return b;
+      };
+      const x = el("button", { type: "button", class: "hs-x", "aria-label": "✕" }, "✕");
+      x.onclick = () => { pref.set("hsPicked", true); render(); };
+      return el("section", { class: "card hs-pick" },
+        el("div", { class: "sec-head" }, el("h2", {}, t("hs_title")), x),
+        el("p", { class: "muted small" }, t("hs_desc")),
+        el("div", { class: "hs-opts" }, opt("a", "🗂"), opt("b", "📰"), opt("c", "💜")));
+    };
+
+    // A 정리형: 오늘 할 일 목록
+    const todo = () => {
+      const now = Date.now(), rows = [];
+      const row = (ico, title, sub, href, hot, fn) => {
+        const a = el("a", { class: `td-row${hot ? " hot" : ""}`, href, ...(/^https?:/.test(href) ? { target: "_blank", rel: "noopener" } : {}) },
+          el("span", { class: "td-ico" }, ico), el("span", { class: "td-tx" }, el("b", {}, title), sub ? el("small", {}, sub) : null), el("span", { class: "td-go" }, "›"));
+        if (fn) a.onclick = (e) => { e.preventDefault(); fn(); };
+        rows.push(a);
+      };
+      votes.filter((v) => now >= kstDate(v.start)).sort((a, b) => kstDate(a.end) - kstDate(b.end)).slice(0, 3)
+        .forEach((v) => row("🗳", [tc(v.show), tc(v.title)].filter(Boolean).join(" · "), t("vote_left", { t: duration(kstDate(v.end) - now) }), voteHref(v) || "#cheer", kstDate(v.end) - now < 24 * 3600000));
+      (data.events || []).filter((e) => e.type === "음방" && e.date === todayKst)
+        .forEach((e) => { const l = liveFor(e.title); row("📺", tc(e.title), [e.time, l ? l.label : ""].filter(Boolean).join(" · "), l?.url || "#cheer"); });
+      const bm = data.members.find((x) => x.name === bias);
+      const bd = bm && upcomingBirthdays(7).find((b) => b.member === bm.name);
+      if (bd) row("🎂", bd.title, "", `#member/${encodeURIComponent(bm.name)}`);
+      const nf = allFancams.filter((v) => isNew(v) && !seen.has(v.id)).length;
+      if (nf) row("🎥", t("hs_todo_cams", { n: nf }), "", "#fancams");
+      if ((data.stream_playlist?.tracks || []).length) row("🎧", t("streaming"), t("hs_todo_stream"), "#cheer", false, goStream);
+      return el("section", { class: "card hs-todo" },
+        el("div", { class: "sec-head" }, el("h2", {}, t("hs_todo")), el("a", { class: "more", href: "#cheer" }, t("vote_more"))),
+        rows.length ? el("div", { class: "td-list" }, ...rows) : empty(t("hs_todo_none")));
+    };
+
+    // B 매거진형: 최근 무대 크게 + 그 무대 직캠 줄 + 최신 MV
+    const magazine = () => {
+      const ep = (data.episodes || []).find((e) => e.videos.some((v) => v.category === "fancam" && v.member)) || (data.episodes || [])[0];
+      const out = [];
+      if (ep) {
+        const cams = ep.videos.filter((v) => v.category === "fancam" && v.member);
+        const lead = ep.videos.find((v) => v.category !== "fancam" && !v.short && v.series !== "비하인드") || ep.videos.find((v) => v.category !== "fancam") || ep.videos[0];
+        out.push(el("a", { class: "mg-hero", href: ytUrl(lead.id), target: "_blank", rel: "noopener" },
+          el("img", { src: hqThumb(lead.id), alt: "", loading: "lazy" }),
+          el("div", { class: "mg-cap" }, el("span", { class: "mg-kick" }, `${tc(ep.show)} · ${ep.date.slice(5).replace("-", ".")}`),
+            el("b", {}, lead.title), el("small", {}, t("views", { v: fmt(lead.views) })))));
+        if (cams.length) out.push(el("div", { class: "mg-sub" }, el("b", {}, t("hs_mg_cams")), el("a", { class: "more", href: `#ep/${ep.date}/${encodeURIComponent(ep.show)}` }, t("hs_mg_all"))),
+          el("div", { class: "mg-row" }, ...cams.map((v) => el("a", { class: "mg-cam", href: ytUrl(v.id), target: "_blank", rel: "noopener" },
+            el("img", { src: thumbUrl(v.id), alt: "", loading: "lazy" }), el("span", {}, v.member)))));
+      }
+      if (mvs[0]) out.push(el("div", { class: "mg-sub" }, el("b", {}, t("hs_mg_mv")), el("a", { class: "more", href: "#mv" }, `${t("tab.mv")} ›`)),
+        el("a", { class: "mg-mv", href: ytUrl(mvs[0].id), target: "_blank", rel: "noopener" },
+          el("img", { src: thumbUrl(mvs[0].id), alt: "", loading: "lazy" }),
+          el("span", {}, el("b", {}, mvs[0].title), el("small", {}, t("views", { v: fmt(mvs[0].views) }), " ", deltaSpan(mvs[0].delta)))));
+      return el("section", { class: "card hs-mag" }, ...out);
+    };
+
+    // C 최애 중심형: 최애 프로필이 맨 위 (없으면 먼저 고르기)
+    const biasHome = () => {
+      const m = data.members.find((x) => x.name === bias);
+      if (!m) {
+        return el("section", { class: "card hs-bias-pick" }, el("h2", {}, t("hs_c_pick")), el("p", { class: "muted small" }, t("bias_desc")),
+          el("div", { class: "hb-grid" }, ...data.members.map((x) => {
+            const b = el("button", { type: "button", class: "hb-m" }, x.photo ? el("img", { src: x.photo, alt: "", loading: "lazy" }) : el("span", { class: "hb-ph" }, x.name[0]), el("span", {}, x.name));
+            b.onclick = () => setBias(x.name);
+            return b;
+          })));
+      }
+      const bd = upcomingBirthdays(60).find((b) => b.member === m.name);
+      const sel = el("select", { class: "sel", "aria-label": t("bias_pick") },
+        ...data.members.map((x) => el("option", { value: x.name, ...(x.name === bias ? { selected: "" } : {}) }, x.ko ? `${x.name} · ${x.ko}` : x.name)));
+      sel.onchange = () => setBias(sel.value);
+      const prof = el("button", { type: "button", class: "more" }, t("profile_view"));
+      prof.onclick = () => openMember(m);
+      const stat = (v, l) => el("div", { class: "hc-st" }, el("b", {}, v), el("small", {}, l));
+      const cams = (m.fancams || []).slice(0, 6);
+      return el("section", { class: "card hs-bias" },
+        el("div", { class: "hc-top" },
+          m.photo ? el("img", { class: "hc-ph", src: m.photo, alt: "" }) : null,
+          el("div", { class: "hc-id" }, el("small", { class: "muted" }, t("hs_c_my")), el("h2", {}, m.name),
+            el("div", { class: "muted small" }, [m.ko, tc(m.position)].filter(Boolean).join(" · ")),
+            bd ? el("span", { class: "chip hc-bd" }, bd.title) : null),
+          sel),
+        el("div", { class: "hc-stats" }, stat(fmt(m.fancam_count), t("hs_c_cams")), stat(kr(m.fancam_views), t("hs_c_views")), stat(m.fancam_delta ? `+${kr(m.fancam_delta)}` : "–", t("hs_c_today"))),
+        cams.length ? el("div", { class: "mg-row" }, ...cams.map((v) => el("a", { class: "mg-cam", href: ytUrl(v.id), target: "_blank", rel: "noopener" },
+          el("img", { src: thumbUrl(v.id), alt: "", loading: "lazy" }), el("span", {}, tc(v.show) || when(v.published_at))))) : empty(t("fancam_pending")),
+        el("div", { class: "hc-foot" }, prof));
+    };
+
+    const render = () => {
+      const s = ["a", "b", "c"].includes(pref.get("homeStyle", "")) ? pref.get("homeStyle", "") : "a";
+      document.body.classList.remove("home-a", "home-b", "home-c");
+      document.body.classList.add(`home-${s}`);
+      document.body.classList.toggle("has-bias", data.members.some((x) => x.name === bias));
+      box.replaceChildren(...[pref.get("hsPicked", false) ? null : chooser(pref.get("homeStyle", "")),
+        s === "a" ? todo() : s === "b" ? magazine() : biasHome()].filter(Boolean));
+    };
+    homeRender = render;
+    openHomeStyle = () => { pref.set("hsPicked", false); location.hash = "overview"; render(); window.scrollTo({ top: 0 }); };
+    render();
+  }
+
+  // ---------- 휴대폰 하단 탭바: 더보기 시트 ----------
+  {
+    const more = $("moreDlg");
+    const go = (h) => { more.close(); location.hash = h; window.scrollTo({ top: 0 }); };
+    const item = (ico, label, fn) => { const b = el("button", { type: "button", class: "more-item" }, el("span", { class: "mi-ico" }, ico), el("span", {}, label)); b.onclick = fn; return b; };
+    const fresh = $("noticeTab").querySelector(".tab-dot");
+    $("moreList").replaceChildren(
+      item("📢", t("tab.notice"), () => go("notice")), item("🎬", t("tab.mv"), () => go("mv")), item("🎥", t("tab.fancams"), () => go("fancams")),
+      item("🔰", t("tab.guide"), () => go("guide")),
+      item("🔔", t("push_btn"), () => { more.close(); $("pushBtn").click(); }),
+      item("🎨", t("hs_title"), () => { more.close(); openHomeStyle(); }),
+      ...(!$("installBtn").hidden ? [item("📱", t("install"), () => { more.close(); $("installBtn").click(); })] : []),
+      item("🌐", t("lang"), () => $("moreList").replaceChildren(...LANGS.map((l) => item(l === LANG ? "✓" : "", window.I18N[l].lang, () => {
+        try { localStorage.setItem("lang", l); } catch (_) { /* 무시 */ }
+        location.reload();
+      })))));
+    if (fresh) $("tabMore").append(el("span", { class: "tab-dot" }, fresh.textContent));
+    $("tabMore").onclick = (e) => { e.preventDefault(); more.showModal(); };
+    $("moreClose").onclick = () => more.close();
+    more.onclick = (e) => { if (e.target === more) more.close(); };
   }
 
   // ---------- 사이트 사용법: 입덕 탭 섹션 + 첫 방문 안내 + 하단 버튼 ----------

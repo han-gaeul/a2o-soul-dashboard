@@ -37,7 +37,7 @@
     <div class="head-right">
       <div class="head-actions">
         <select class="lang" id="lang" aria-label="Language"></select>
-        <button class="install push-btn" id="pushBtn" type="button" hidden>🔔 <span data-i18n="push_btn">알림</span></button>
+        <button class="install push-btn" id="pushBtn" type="button" hidden>🔔 <span class="hb-l" data-i18n="push_btn">알림</span></button>
         <button class="install" id="installBtn" type="button" hidden data-i18n="install">앱 설치</button>
       </div>
       <div class="meta" id="updated" data-i18n="loading">불러오는 중…</div>
@@ -57,8 +57,18 @@
     <a href="#community" data-i18n="tab.community">커뮤니티</a>
   </nav>
 
+  <nav class="tabbar" id="tabbar" aria-label="menu">
+    <a href="#overview"><b>🏠</b><span data-i18n="tab.overview">한눈에</span></a>
+    <a href="#cheer"><b>💜</b><span data-i18n="tab.cheer">응원</span></a>
+    <a href="#videos" data-more="mv,fancams"><b>🎬</b><span data-i18n="tab.videos">영상</span></a>
+    <a href="#members"><b>👥</b><span data-i18n="tab.members">멤버</span></a>
+    <a href="#community"><b>💬</b><span data-i18n="tab.community">커뮤니티</span></a>
+    <a href="#more" id="tabMore" data-more="notice,guide"><b>☰</b><span data-i18n="more_menu">더보기</span></a>
+  </nav>
+
   <!-- 한눈에 -->
   <div data-tab="overview">
+    <div id="homeStyle"></div>
     <div class="tour-tip" id="tourTip" hidden><button type="button" class="tour-open" id="tourOpen" data-i18n="tour_tip">👋 처음이세요? 30초 사용법</button><button type="button" class="tour-x" id="tourX" aria-label="✕">✕</button></div>
     <section class="card vote-home" id="voteHome" hidden>
       <div class="sec-head"><h2><span data-i18n="vote_home">🗳 진행 중인 투표</span> <span class="muted small" id="voteHomeCount"></span></h2><a class="more" href="#cheer" data-i18n="vote_more">응원 탭 ›</a></div>
@@ -351,6 +361,11 @@
 <dialog id="cmDlg" aria-labelledby="cmDlgTitle">
   <div class="dlg-head"><h2 id="cmDlgTitle"></h2><button class="dlg-close" id="cmClose" type="button" aria-label="✕">✕</button></div>
   <div id="cmBody"></div>
+</dialog>
+
+<dialog id="moreDlg" class="sheet" aria-label="menu">
+  <div class="dlg-head"><h2 data-i18n="more_menu">더보기</h2><button class="dlg-close" id="moreClose" type="button" aria-label="✕">✕</button></div>
+  <div class="more-grid" id="moreList"></div>
 </dialog>
 
 <dialog id="pushDlg" aria-labelledby="pushTitle">
