@@ -612,3 +612,12 @@ window.I18N = {
   };
   for (const [l, vals] of Object.entries(V)) if (window.I18N[l]) K.forEach((k, i) => { window.I18N[l][k] = vals[i]; });
 })();
+
+// 1위 앵콜 영상 고르기
+(() => {
+  const V = { ko: ["🎬 1위 앵콜 영상", "앵콜 무대", "앵콜 직캠"], en: ["🎬 Win encore", "Encore stage", "Encore fancam"], ja: ["🎬 1位アンコール", "アンコールステージ", "アンコール推しカメラ"],
+    zh: ["🎬 一位安可", "安可舞台", "安可直拍"], es: ["🎬 Encore del 1.er lugar", "Escenario encore", "Fancam encore"], id: ["🎬 Encore kemenangan", "Panggung encore", "Fancam encore"],
+    th: ["🎬 อังกอร์ที่ 1", "เวทีอังกอร์", "แฟนแคมอังกอร์"], pt: ["🎬 Encore do 1º lugar", "Palco do encore", "Fancam do encore"],
+    fil: ["🎬 Encore ng panalo", "Encore stage", "Encore fancam"], vi: ["🎬 Encore hạng 1", "Sân khấu encore", "Fancam encore"] };
+  for (const [l, v] of Object.entries(V)) if (window.I18N[l]) Object.assign(window.I18N[l], { win_enc_title: v[0], win_enc_stage: v[1], win_enc_cam: v[2] });
+})();

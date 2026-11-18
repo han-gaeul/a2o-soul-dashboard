@@ -194,7 +194,8 @@ def load_fan_files(cfg):
         "photocard_order": [str(x) for x in info.get("photocard_order") or []],
         "wins": [{"date": str(x["date"]), "show": str(x["show"]), "ep": str(x.get("ep") or ""), "url": str(x.get("url") or ""),
                   "image": str(x.get("image") or ""), "image_post": str(x.get("image_post") or ""),
-                  "tags": str(x.get("tags") or ""), "og": str(x.get("og") or "")}
+                  "tags": str(x.get("tags") or ""), "og": str(x.get("og") or ""),
+                  "encore": [{"kind": str(e.get("kind") or ""), "url": str(e["url"])} for e in x.get("encore") or [] if e.get("url")]}
                  for x in info.get("wins") or [] if x.get("date") and x.get("show")],
         "records": [{"date": str(x["date"]), "title": str(x["title"]), "url": str(x.get("url") or "")}
                     for x in info.get("records") or [] if x.get("date") and x.get("title")],
@@ -743,7 +744,7 @@ def build_timeline(cfg, videos, episodes, subs=()):
                 items.append({"date": i["date"], "kind": "win", "title": i["title"], "key": "tl_win", "show": i.get("show"),
                               "url": post.get("permalink")})
     for w in cfg["info"]["wins"]:  # 직접 입력한 1위 — 공식 공지에서 이미 잡혔으면 그 항목에 사진·회차·해시태그 등을 합침
-        extra = {k: w[k] for k in ("ep", "url", "image", "image_post", "tags", "og") if w.get(k)}
+        extra = {k: w[k] for k in ("ep", "url", "image", "image_post", "tags", "og", "encore") if w.get(k)}
         same = next((x for x in items if x.get("kind") == "win" and x["date"] == w["date"] and x.get("show") == w["show"]), None)
         if same:
             same.update(extra)

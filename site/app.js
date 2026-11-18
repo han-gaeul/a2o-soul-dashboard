@@ -552,6 +552,22 @@ if ("serviceWorker" in navigator) {
       });
       document.addEventListener("click", (e) => { if (!menu.contains(e.target)) menu.hidden = true; });
       const watch = w.url || `https://www.youtube.com/results?search_query=${encodeURIComponent(`A2O SOUL ${w.show} 1위 앵콜`)}`;
+      // 앵콜 영상이 여러 개(무대·직캠)면 창을 띄워 고르기
+      const enc = (w.encore || []).filter((x) => x.url);
+      const watchBtn = el("a", { class: "win-btn primary", href: enc[0]?.url || watch, target: "_blank", rel: "noopener" }, t("win_watch"));
+      if (enc.length > 1) {
+        const vid = (u) => (/(?:youtu\.be\/|v=|shorts\/)([\w-]{11})/.exec(u) || [])[1];
+        const close = el("button", { class: "dlg-close", type: "button", "aria-label": "✕" }, "✕");
+        const dlg = el("dialog", { class: "enc-dlg", "aria-label": t("win_enc_title") },
+          el("div", { class: "dlg-head" }, el("h2", {}, t("win_enc_title")), close),
+          el("div", { class: "enc-list" }, ...enc.map((x) => el("a", { class: "enc-opt", href: x.url, target: "_blank", rel: "noopener" },
+            vid(x.url) ? el("img", { src: `https://i.ytimg.com/vi/${vid(x.url)}/mqdefault.jpg`, alt: "", loading: "lazy" }) : null,
+            el("b", {}, t(`win_enc_${x.kind}`) || x.kind || t("win_watch"))))));
+        document.body.append(dlg);
+        close.onclick = () => dlg.close();
+        dlg.onclick = (e) => { if (e.target === dlg || e.target.closest(".enc-opt")) dlg.close(); };
+        watchBtn.addEventListener("click", (e) => { e.preventDefault(); dlg.showModal(); });
+      }
       // 공식 단체 사진 (info.yml wins.image) — 못 불러오면 사진 없이
       let photo = null;
       if (w.image) {
@@ -567,7 +583,7 @@ if ("serviceWorker" in navigator) {
           el("div", { class: "win-kicker" }, "A2O SOUL"),
           el("h2", { class: "win-title" }, first ? t("win_first", { show }) : t("win_n", { show })),
           el("div", { class: "win-sub" }, [`${show}${w.ep ? ` ${t("win_ep", { n: w.ep })}` : ""}`, w.date.replaceAll("-", "."), n > 0 ? t("win_days", { n }) : ""].filter(Boolean).join(" · ")),
-          el("div", { class: "win-acts" }, el("a", { class: "win-btn primary", href: watch, target: "_blank", rel: "noopener" }, t("win_watch")),
+          el("div", { class: "win-acts" }, watchBtn,
             el("span", { class: "win-share" }, share, menu))));
       // 한 줄 요약 (휴대폰 기본) — 누르면 큰 배너 펼침
       const pill = el("button", { type: "button", class: "win-pill" },
