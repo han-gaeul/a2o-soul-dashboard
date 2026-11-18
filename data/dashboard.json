@@ -2209,6 +2209,56 @@
     "views": 2161741
    }
   ],
+  "faq": [
+   {
+    "a": "아니요. 영상 보기, 투표, 이 사이트는 모두 무료예요. 음원 스밍만 음원 사이트 이용권이 필요해요.",
+    "q": "돈을 꼭 써야 하나요?"
+   },
+   {
+    "a": "아니요. 응원 탭 '이번 주 음방'에서 오늘 표시된 것만 해도 큰 힘이 돼요.",
+    "q": "투표가 너무 많은데 다 해야 하나요?"
+   },
+   {
+    "a": "네. 사이트는 오른쪽 위에서 언어를 바꿀 수 있고, 투표 앱 대부분은 구글·애플 계정으로 해외에서도 가입돼요.",
+    "q": "한국어를 몰라도 되나요?"
+   },
+   {
+    "a": "아래 '자주 쓰는 말'에 직캠·사녹·스밍 같은 말이 정리돼 있어요.",
+    "q": "모르는 말이 나오면요?"
+   }
+  ],
+  "steps": [
+   {
+    "desc": "'SUPERSTAR'와 'Dancing in the Dark' 뮤직비디오 두 편이면 충분해요",
+    "go": "#course",
+    "icon": "🎵",
+    "title": "노래부터 들어 보기"
+   },
+   {
+    "desc": "멤버 사진을 훑어보고, 퀴즈로 맞혀 보세요 — 틀려도 괜찮아요",
+    "go": "#quizSec",
+    "icon": "👀",
+    "title": "15명 얼굴 익히기"
+   },
+   {
+    "desc": "직캠을 보다가 눈이 가는 멤버의 ☆를 누르면 사이트가 그 멤버 위주로 바뀌어요",
+    "go": "fancams",
+    "icon": "⭐",
+    "title": "최애 정하기"
+   },
+   {
+    "desc": "위쪽 🔔 알림을 켜고 홈 화면에 설치하면 음방·투표를 알려 드려요",
+    "go": "#pushBtn",
+    "icon": "🔔",
+    "title": "놓치지 않게 알림 켜기"
+   },
+   {
+    "desc": "응원 탭에서 스밍 리스트를 틀고, '이번 주 음방'에서 오늘 투표만 하면 돼요",
+    "go": "cheer",
+    "icon": "💜",
+    "title": "응원 시작하기"
+   }
+  ],
   "tips": {}
  },
  "howto": {
@@ -3218,6 +3268,7 @@
     "창원 TNS보컬댄스학원 출신",
     "비공개 연습생으로 데뷔"
    ],
+   "color": "",
    "fancam_count": 9,
    "fancam_delta": 2132,
    "fancam_views": 181154,
@@ -3403,6 +3454,7 @@
     "댄스 학원 원데이 클래스 진행",
     "비공개 연습생으로 데뷔"
    ],
+   "color": "",
    "fancam_count": 5,
    "fancam_delta": 6420,
    "fancam_views": 549298,
@@ -3526,6 +3578,7 @@
     "경기소년소녀합창단 활동",
     "비공개 연습생으로 데뷔"
    ],
+   "color": "",
    "fancam_count": 6,
    "fancam_delta": 3448,
    "fancam_views": 198777,
@@ -3665,6 +3718,7 @@
     "다수 댄스 대회 수상",
     "A2O Rookies LTB(2024.10~) → HTB(2025.2~)"
    ],
+   "color": "",
    "fancam_count": 3,
    "fancam_delta": 474,
    "fancam_views": 35330,
@@ -3942,6 +3996,7 @@
     "A2O Rookies LTB(2024.10~) → HTB(2025.2~)",
     "HTB 'REVOLUTION', 'CHAMPAGNE' 참여"
    ],
+   "color": "",
    "fancam_count": 7,
    "fancam_delta": 3497,
    "fancam_views": 193537,
@@ -4275,6 +4330,7 @@
    "career": [
     "A2O Rookies HTB '쥔린(JUNLIN)' (2025.2~)"
    ],
+   "color": "",
    "fancam_count": 3,
    "fancam_delta": 181,
    "fancam_views": 21154,
@@ -4465,6 +4521,7 @@
     "POWERVOCAL Star Incubating Center 출신",
     "비공개 연습생으로 데뷔"
    ],
+   "color": "",
    "fancam_count": 2,
    "fancam_delta": 553,
    "fancam_views": 18268,
@@ -4544,6 +4601,7 @@
     "AJS·REDSTAGE 아카데미 출신",
     "비공개 연습생으로 데뷔"
    ],
+   "color": "",
    "fancam_count": 2,
    "fancam_delta": 360,
    "fancam_views": 22010,
@@ -4625,6 +4683,7 @@
     "댄스 보컬 아카데미 HIBEAT 출신",
     "전 JYP엔터테인먼트 연습생"
    ],
+   "color": "",
    "fancam_count": 4,
    "fancam_delta": 651,
    "fancam_views": 45860,
@@ -4732,6 +4791,7 @@
     "태국 One31 시트콤 'Ban Saran Land'(2018) 출연",
     "비공개 연습생으로 데뷔"
    ],
+   "color": "",
    "fancam_count": 2,
    "fancam_delta": 907,
    "fancam_views": 73093,
@@ -4812,6 +4872,7 @@
     "영화 'The Marked Sheep'(2022) 조연",
     "A2O Rookies LTB (2024.10~)"
    ],
+   "color": "",
    "fancam_count": 9,
    "fancam_delta": 4804,
    "fancam_views": 299840,
@@ -5264,6 +5325,7 @@
    "career": [
     "A2O Rookies LTB (2025.8~)"
    ],
+   "color": "",
    "fancam_count": 3,
    "fancam_delta": 2019,
    "fancam_views": 174533,
@@ -5358,6 +5420,7 @@
     "A2O Rookies LTB 'JIAYI' (2024.10~)",
     "제트와 같은 댄스 스튜디오 출신으로 약 4년간 함께 연습"
    ],
+   "color": "",
    "fancam_count": 8,
    "fancam_delta": 4939,
    "fancam_views": 257386,
@@ -5887,6 +5950,7 @@
     "A2O Rookies LTB (2024.10~)",
     "솔로 'Love Is Gone' Zal-Dance 영상(2025.4)"
    ],
+   "color": "",
    "fancam_count": 4,
    "fancam_delta": 1430,
    "fancam_views": 68421,
@@ -6299,6 +6363,7 @@
     "A2O Rookies LTB '한저(HANZE)' (2024.10~)",
     "솔로 'Palette' Zal-Dance 영상(2025.6)"
    ],
+   "color": "",
    "fancam_count": 7,
    "fancam_delta": 11575,
    "fancam_views": 497746,
@@ -10554,6 +10619,8 @@
  "prerecs": [],
  "push": {
   "api": "https://push.a2osoul-tracker.com",
+  "google_client_id": "978000846144-cjvbb56vp6vfj4psgj02tbnl7fgn551h.apps.googleusercontent.com",
+  "turnstile_sitekey": "0x4AAAAAAGGgUGbNaZ3IKPVr",
   "vapid_public": "BPszmnnzF5KS8DntczISNMfwY2etOSx_oX7L38hORWSCX_mfJE2MzKSKralQ_Y3NcK1osX-iEArij0qscPlj1YU"
  },
  "recent": [
@@ -10988,6 +11055,15 @@
    "th": "ร้องท่อนเสียงสูงใน 'SUPERSTAR'",
    "zh": "负责《SUPERSTAR》高音部分"
   },
+  "'SUPERSTAR'와 'Dancing in the Dark' 뮤직비디오 두 편이면 충분해요": {
+   "en": "The 'SUPERSTAR' and 'Dancing in the Dark' MVs are all you need",
+   "es": "Con los MVs de 'SUPERSTAR' y 'Dancing in the Dark' basta",
+   "id": "Cukup MV 'SUPERSTAR' dan 'Dancing in the Dark'",
+   "ja": "「SUPERSTAR」と「Dancing in the Dark」のMV2本で十分",
+   "pt": "Os MVs de 'SUPERSTAR' e 'Dancing in the Dark' já bastam",
+   "th": "แค่ MV 'SUPERSTAR' กับ 'Dancing in the Dark' ก็พอ",
+   "zh": "看「SUPERSTAR」和「Dancing in the Dark」两支MV就够了"
+  },
   "'SUPERSTAR'와 'Dancing in the Dark' 뮤직비디오 보기 (아래 입문 코스)": {
    "en": "Watch the 'SUPERSTAR' and 'Dancing in the Dark' MVs (beginner route below)",
    "es": "Mira los MV de 'SUPERSTAR' y 'Dancing in the Dark' (ruta de abajo)",
@@ -11014,6 +11090,15 @@
    "pt": "Os 15 dançando juntos — vídeo de performance",
    "th": "ดูทั้ง 15 คนเต้นพร้อมกัน — เพอร์ฟอร์แมนซ์วิดีโอ",
    "zh": "一眼看15人群舞 — 表演视频"
+  },
+  "15명 얼굴 익히기": {
+   "en": "Learn the 15 faces",
+   "es": "Aprende las 15 caras",
+   "id": "Kenali 15 wajah",
+   "ja": "15人の顔を覚えよう",
+   "pt": "Conheça os 15 rostos",
+   "th": "จำหน้าทั้ง 15 คน",
+   "zh": "认识15位成员"
   },
   "15명의 소년은 모든 것이 갖춰진 행성 SOULITE(소울라이트)에서 왔어요.": {
    "en": "The 15 boys come from SOULITE, a planet where everything is provided.",
@@ -11618,6 +11703,24 @@
    "th": "ในร้าน Kyobo Book Centre · ทั่วประเทศ",
    "zh": "教保文库内唱片店 · 全国"
   },
+  "교환해요": {
+   "en": "Trade",
+   "es": "Cambio",
+   "id": "Tukar",
+   "ja": "交換",
+   "pt": "Troca",
+   "th": "แลก",
+   "zh": "交换"
+  },
+  "구해요": {
+   "en": "Looking for",
+   "es": "Busco",
+   "id": "Cari",
+   "ja": "探してます",
+   "pt": "Procuro",
+   "th": "ตามหา",
+   "zh": "求"
+  },
   "그런데도 무언가 비어 있다고 느낀 이들은, 사람을 살아 있게 하는 감정과 에너지 — 기쁨·사랑·설렘·열정, 곧 '소울(SOUL)'을 찾아 지구로 떠나요.": {
    "en": "Still feeling something missing, they set off for Earth to find the emotions and energy that make people feel alive — joy, love, excitement and passion: 'SOUL'.",
    "es": "Aun así sentían que algo faltaba, así que viajan a la Tierra en busca de las emociones y la energía que hacen sentir vivas a las personas —alegría, amor, emoción y pasión—: el 'SOUL'.",
@@ -11663,6 +11766,15 @@
    "th": "เขียนอย่างจริงใจและเชื่อมกับชีวิตตัวเอง (ระหว่างไปทำงาน ช่วงสอบ เรื่องวันนี้) — อย่าก๊อปข้อความเดียวกัน",
    "zh": "结合自己的情况真诚地写（通勤路上·考试期间·今天发生的事等）— 避免复制粘贴相同内容"
   },
+  "네. 사이트는 오른쪽 위에서 언어를 바꿀 수 있고, 투표 앱 대부분은 구글·애플 계정으로 해외에서도 가입돼요.": {
+   "en": "No. You can change the site language at the top right, and most voting apps let you sign up from abroad with Google or Apple.",
+   "es": "No. Puedes cambiar el idioma arriba a la derecha y la mayoría de apps de votación permiten registrarse desde el extranjero con Google o Apple.",
+   "id": "Tidak perlu. Bahasa situs bisa diganti di kanan atas, dan kebanyakan app vote bisa daftar dari luar negeri pakai Google atau Apple.",
+   "ja": "大丈夫。サイトは右上で言語を変えられ、投票アプリの多くはGoogle・Appleアカウントで海外からも登録できます。",
+   "pt": "Não. Dá para mudar o idioma no canto superior direito, e a maioria dos apps de votação aceita cadastro do exterior com Google ou Apple.",
+   "th": "ไม่ต้อง เปลี่ยนภาษาได้ที่มุมขวาบน และแอปโหวตส่วนใหญ่สมัครจากต่างประเทศด้วย Google หรือ Apple ได้",
+   "zh": "可以。网站右上角可切换语言，大部分投票App可用Google或Apple账号在海外注册。"
+  },
   "네오 소울을 좋아함 (최애 아티스트 에리카 바두)": {
    "en": "Loves neo soul (favorite artist: Erykah Badu)",
    "es": "Le encanta el neo soul (artista favorita: Erykah Badu)",
@@ -11671,6 +11783,24 @@
    "pt": "Adora neo soul (artista favorita: Erykah Badu)",
    "th": "ชอบนีโอโซล (ศิลปินคนโปรด: Erykah Badu)",
    "zh": "喜欢新灵魂乐（最爱歌手Erykah Badu）"
+  },
+  "노래부터 들어 보기": {
+   "en": "Start with the songs",
+   "es": "Empieza por las canciones",
+   "id": "Mulai dari lagunya",
+   "ja": "まずは曲を聴こう",
+   "pt": "Comece pelas músicas",
+   "th": "เริ่มจากฟังเพลง",
+   "zh": "先听歌"
+  },
+  "놓치지 않게 알림 켜기": {
+   "en": "Turn on alerts",
+   "es": "Activa las alertas",
+   "id": "Nyalakan notifikasi",
+   "ja": "通知をオンに",
+   "pt": "Ative os alertas",
+   "th": "เปิดการแจ้งเตือน",
+   "zh": "打开通知"
   },
   "다른 팬덤 음원총공팀처럼 소울 곡만으로 짜고 활동곡(Dancing in the Dark)을 자주 넣었어요. 아래 버튼으로 한 번에 담고 전체 반복으로 계속 틀어 주세요.": {
    "en": "Like other fandoms' streaming teams, this list uses only SOUL songs and repeats the promo track (Dancing in the Dark). Add it all at once with the buttons below and keep it on repeat.",
@@ -11870,6 +12000,15 @@
    "th": "ชิบูย่า โตเกียว",
    "zh": "东京 涩谷"
   },
+  "돈을 꼭 써야 하나요?": {
+   "en": "Do I have to spend money?",
+   "es": "¿Tengo que gastar dinero?",
+   "id": "Harus keluar uang?",
+   "ja": "お金は必要？",
+   "pt": "Preciso gastar dinheiro?",
+   "th": "ต้องเสียเงินไหม?",
+   "zh": "一定要花钱吗？"
+  },
   "두바이": {
    "en": "Dubai",
    "es": "Dubái",
@@ -11878,6 +12017,15 @@
    "pt": "Dubai",
    "th": "ดูไบ",
    "zh": "迪拜"
+  },
+  "드려요": {
+   "en": "Giving away",
+   "es": "Regalo",
+   "id": "Kasih",
+   "ja": "譲ります",
+   "pt": "Dou",
+   "th": "ให้",
+   "zh": "出"
   },
   "라디오 신청곡 (가이드 도움 @star_light_4u)": {
    "en": "Radio song requests (guide help: @star_light_4u)",
@@ -12068,6 +12216,15 @@
    "th": "จำหน้าด้วยเกมทายเมมเบอร์",
    "zh": "用猜成员小测验记住大家"
   },
+  "멤버 사진을 훑어보고, 퀴즈로 맞혀 보세요 — 틀려도 괜찮아요": {
+   "en": "Browse the member photos, then try the quiz — mistakes are fine",
+   "es": "Mira las fotos y prueba el quiz — equivocarse está bien",
+   "id": "Lihat foto member lalu coba kuisnya — salah juga tidak apa-apa",
+   "ja": "メンバー写真を見て、クイズで当ててみよう — 間違えても大丈夫",
+   "pt": "Veja as fotos e tente o quiz — errar não tem problema",
+   "th": "ดูรูปเมมเบอร์แล้วลองเล่นควิซ — ผิดก็ไม่เป็นไร",
+   "zh": "看看成员照片，再用测验猜一猜 — 猜错也没关系"
+  },
   "멤버 소개 영상": {
    "en": "Member introduction video",
    "es": "Video de presentación de los miembros",
@@ -12085,6 +12242,15 @@
    "pt": "Veja fotos e perfis dos 15 membros na aba Membros",
    "th": "ดูรูปและโปรไฟล์ทั้ง 15 คนในแท็บเมมเบอร์",
    "zh": "在成员页浏览15位成员的照片和资料"
+  },
+  "모르는 말이 나오면요?": {
+   "en": "What if I see a word I don't know?",
+   "es": "¿Y si veo una palabra que no entiendo?",
+   "id": "Kalau ada istilah yang tidak tahu?",
+   "ja": "わからない言葉が出てきたら？",
+   "pt": "E se eu não entender alguma palavra?",
+   "th": "ถ้าเจอคำที่ไม่รู้ล่ะ?",
+   "zh": "看到不懂的词怎么办？"
   },
   "목 18:00 · Mnet": {
    "en": "Thu 18:00 · Mnet",
@@ -12644,6 +12810,33 @@
    "th": "นักร้องเสียงทองตัวน้อย",
    "zh": "小歌王"
   },
+  "아니요. 영상 보기, 투표, 이 사이트는 모두 무료예요. 음원 스밍만 음원 사이트 이용권이 필요해요.": {
+   "en": "No. Watching videos, voting and this site are all free. Only music streaming needs a subscription.",
+   "es": "No. Ver videos, votar y este sitio son gratis. Solo el streaming de música necesita suscripción.",
+   "id": "Tidak. Nonton video, vote, dan situs ini gratis. Hanya streaming musik yang perlu langganan.",
+   "ja": "いいえ。動画・投票・このサイトはすべて無料。音源ストリーミングだけ配信サイトの利用券が必要です。",
+   "pt": "Não. Ver vídeos, votar e este site são grátis. Só o streaming de música precisa de assinatura.",
+   "th": "ไม่ต้อง ดูวิดีโอ โหวต และเว็บนี้ฟรีทั้งหมด มีแค่สตรีมเพลงที่ต้องสมัครสมาชิก",
+   "zh": "不用。看视频、投票、本网站都免费，只有音源打榜需要音乐平台会员。"
+  },
+  "아니요. 응원 탭 '이번 주 음방'에서 오늘 표시된 것만 해도 큰 힘이 돼요.": {
+   "en": "No. Just doing what's marked for today in 'Music shows this week' helps a lot.",
+   "es": "No. Con hacer solo lo de hoy en 'Programas musicales esta semana' ya ayudas mucho.",
+   "id": "Tidak. Cukup yang ditandai hari ini di 'Acara musik minggu ini' sudah sangat membantu.",
+   "ja": "いいえ。応援タブ「今週の音楽番組」で今日の分だけでも大きな力になります。",
+   "pt": "Não. Só o que está marcado para hoje em 'Programas musicais desta semana' já ajuda muito.",
+   "th": "ไม่ต้อง แค่ทำของวันนี้ใน 'รายการเพลงสัปดาห์นี้' ก็ช่วยได้มาก",
+   "zh": "不用。只投应援页「本周音乐节目」里今天的就很有帮助。"
+  },
+  "아래 '자주 쓰는 말'에 직캠·사녹·스밍 같은 말이 정리돼 있어요.": {
+   "en": "Check 'Common terms' below for words like fancam, pre-recording and streaming.",
+   "es": "En 'Términos comunes' abajo están palabras como fancam, pregrabación y streaming.",
+   "id": "Lihat 'Istilah umum' di bawah untuk kata seperti fancam, pra-rekaman, streaming.",
+   "ja": "下の「よく使う言葉」に直カム・事前収録・ストリーミングなどをまとめています。",
+   "pt": "Veja 'Termos comuns' abaixo para palavras como fancam, pré-gravação e streaming.",
+   "th": "ดู 'คำที่ใช้บ่อย' ด้านล่าง มีคำอย่างแฟนแคม พรีเรคคอร์ด สตรีม",
+   "zh": "下方「常用词」里整理了直拍、预录、打榜等词。"
+  },
   "아이돌챔프(IDOLCHAMP)": {
    "en": "IDOLCHAMP",
    "es": "IDOLCHAMP",
@@ -12896,6 +13089,15 @@
    "th": "Withmuu",
    "zh": "Withmuu"
   },
+  "위쪽 🔔 알림을 켜고 홈 화면에 설치하면 음방·투표를 알려 드려요": {
+   "en": "Turn on 🔔 at the top and add to your home screen to get show and vote alerts",
+   "es": "Activa 🔔 arriba y añade a la pantalla de inicio para avisos de programas y votos",
+   "id": "Nyalakan 🔔 di atas dan pasang ke layar utama untuk info acara & vote",
+   "ja": "上の🔔をオンにしてホーム画面に追加すると、音楽番組・投票をお知らせ",
+   "pt": "Ative 🔔 no topo e adicione à tela inicial para avisos de programas e votos",
+   "th": "เปิด 🔔 ด้านบนและเพิ่มลงหน้าจอหลัก จะได้แจ้งเตือนรายการเพลงและโหวต",
+   "zh": "打开上方🔔并添加到主屏幕，音乐节目和投票会提醒你"
+  },
   "유튜브 A2O SOUL": {
    "en": "YouTube A2O SOUL",
    "es": "YouTube A2O SOUL",
@@ -13049,6 +13251,15 @@
    "th": "ชาร์ตเพลงเกาหลีดูว่ามีกี่คนฟังมากกว่าฟังกี่รอบ อย่าวนเพลงเดียว ให้เปิดเพลย์ลิสต์ 1 ชั่วโมงนี้ตามลำดับไปเรื่อยๆ",
    "zh": "韩国音源榜更看重“多少人听”而不是“听了几遍”。不要单曲循环，请按顺序一直播放这份1小时歌单。"
   },
+  "응원 시작하기": {
+   "en": "Start supporting",
+   "es": "Empieza a apoyar",
+   "id": "Mulai mendukung",
+   "ja": "応援を始めよう",
+   "pt": "Comece a apoiar",
+   "th": "เริ่มซัพพอร์ต",
+   "zh": "开始应援"
+  },
   "응원 탭 '투표'(또는 한눈에 탭 맨 위)에서 어떤 앱인지·마감 시간을 확인 — 사이트의 시간은 모두 한국 시간(KST)": {
    "en": "Check which app and the deadline under Votes in Support (or at the top of Home) — all times on this site are Korea time (KST)",
    "es": "Revisa la app y la fecha límite en Votaciones (Apoyo) o arriba en Inicio — todas las horas son de Corea (KST)",
@@ -13057,6 +13268,15 @@
    "pt": "Veja qual é o app e o prazo em 'Votações' na aba Apoio (ou no topo do Início) — todos os horários do site são de Coreia (KST)",
    "th": "ดูว่าใช้แอปไหนและปิดโหวตเมื่อไรที่ 'โหวต' ในแท็บซัพพอร์ต (หรือบนสุดของหน้าหลัก) — เวลาบนเว็บเป็นเวลาเกาหลี (KST)",
    "zh": "在「应援」的投票（或首页最上方）确认用哪个App和截止时间 — 本站时间均为韩国时间（KST）"
+  },
+  "응원 탭에서 스밍 리스트를 틀고, '이번 주 음방'에서 오늘 투표만 하면 돼요": {
+   "en": "Play the streaming list in the Cheer tab and just do today's votes in 'Music shows this week'",
+   "es": "Pon la lista en la pestaña Apoyo y haz solo los votos de hoy en 'Programas musicales esta semana'",
+   "id": "Putar daftar streaming di tab Dukung dan cukup vote hari ini di 'Acara musik minggu ini'",
+   "ja": "応援タブでストリーミングリストを流し、「今週の音楽番組」で今日の投票だけすればOK",
+   "pt": "Toque a lista na aba Apoio e faça só os votos de hoje em 'Programas musicais desta semana'",
+   "th": "เปิดลิสต์สตรีมในแท็บเชียร์ แล้วโหวตแค่ของวันนี้ใน 'รายการเพลงสัปดาห์นี้'",
+   "zh": "在应援页播放打榜歌单，在「本周音乐节目」只投今天的票就好"
   },
   "응원 탭에서 캘린더 구독 → 음방·투표 마감이 휴대폰 캘린더에": {
    "en": "Subscribe to the calendar in the Support tab → shows and vote deadlines on your phone",
@@ -13220,6 +13440,15 @@
    "th": "Jumpup",
    "zh": "Jumpup"
   },
+  "정보": {
+   "en": "Info",
+   "es": "Info",
+   "id": "Info",
+   "ja": "情報",
+   "pt": "Info",
+   "th": "ข้อมูล",
+   "zh": "资讯"
+  },
   "제트와 같은 댄스 스튜디오 출신으로 약 4년간 함께 연습": {
    "en": "From the same dance studio as ZET — trained together for about 4 years",
    "es": "Viene del mismo estudio de baile que ZET; entrenaron juntos unos 4 años",
@@ -13301,6 +13530,24 @@
    "th": "ดูแฟนแคมของคนที่สะดุดตา → ตั้งเป็นเมนในหน้าแรก",
    "zh": "在直拍页看喜欢的成员直拍 → 在首页设为本命"
   },
+  "직캠을 보다가 눈이 가는 멤버의 ☆를 누르면 사이트가 그 멤버 위주로 바뀌어요": {
+   "en": "Watch fancams and tap ☆ on the member who catches your eye — the site will focus on them",
+   "es": "Mira fancams y toca ☆ en quien te guste — el sitio se centrará en esa persona",
+   "id": "Tonton fancam lalu ketuk ☆ di member yang menarik — situs akan fokus ke dia",
+   "ja": "直カムを見て気になるメンバーの☆を押すと、サイトがその人中心に",
+   "pt": "Assista fancams e toque ☆ em quem chamar sua atenção — o site foca nessa pessoa",
+   "th": "ดูแฟนแคมแล้วกด ☆ ที่เมมเบอร์ที่สะดุดตา — เว็บจะเน้นคนนั้น",
+   "zh": "看直拍时点下心动成员的☆，网站就会以TA为主"
+  },
+  "질문": {
+   "en": "Question",
+   "es": "Pregunta",
+   "id": "Tanya",
+   "ja": "質問",
+   "pt": "Pergunta",
+   "th": "คำถาม",
+   "zh": "提问"
+  },
   "창원 TNS보컬댄스학원 출신": {
    "en": "Trained at TNS Vocal & Dance Academy, Changwon",
    "es": "Formado en TNS Vocal & Dance Academy (Changwon)",
@@ -13318,6 +13565,15 @@
    "pt": "Formou uma banda no ensino fundamental e lançou um single",
    "th": "ตั้งวงดนตรีตอนประถมและปล่อยซิงเกิล",
    "zh": "小学时组过乐队并发行单曲"
+  },
+  "최애 정하기": {
+   "en": "Pick your bias",
+   "es": "Elige tu bias",
+   "id": "Pilih bias",
+   "ja": "推しを決めよう",
+   "pt": "Escolha seu bias",
+   "th": "เลือกเมนของคุณ",
+   "zh": "选出本命"
   },
   "축구·농구를 좋아하는 운동파": {
    "en": "Sporty — loves soccer and basketball",
@@ -13435,6 +13691,15 @@
    "pt": "Os apps e as regras mudam bastante — confira também os avisos oficiais",
    "th": "แอปและกติกาโหวตเปลี่ยนบ่อย — ตรวจประกาศทางการด้วย",
    "zh": "投票App和规则常有变化，请同时查看官方公告"
+  },
+  "투표가 너무 많은데 다 해야 하나요?": {
+   "en": "There are so many votes — do I need to do them all?",
+   "es": "Hay muchísimas votaciones, ¿tengo que hacerlas todas?",
+   "id": "Vote-nya banyak sekali, harus semua?",
+   "ja": "投票が多すぎる…全部やるべき？",
+   "pt": "São muitas votações, preciso fazer todas?",
+   "th": "โหวตเยอะมาก ต้องทำทั้งหมดไหม?",
+   "zh": "投票太多了，都要投吗？"
   },
   "특전": {
    "en": "Benefits",
@@ -13679,6 +13944,15 @@
    "th": "กระจายคำขอไปหลายรายการ อย่ารัวส่งรายการเดียว",
    "zh": "不要集中刷屏一个节目，分散到多个节目"
   },
+  "한국어를 몰라도 되나요?": {
+   "en": "Do I need to know Korean?",
+   "es": "¿Necesito saber coreano?",
+   "id": "Harus bisa bahasa Korea?",
+   "ja": "韓国語がわからなくても大丈夫？",
+   "pt": "Preciso saber coreano?",
+   "th": "ไม่รู้ภาษาเกาหลีได้ไหม?",
+   "zh": "不懂韩语也可以吗？"
+  },
   "핫트랙스": {
    "en": "HOTTRACKS",
    "es": "HOTTRACKS",
@@ -13768,6 +14042,15 @@
    "pt": "Música de promoção — a que é apresentada nos programas musicais (agora 'Dancing in the Dark')",
    "th": "เพลงโปรโมต — เพลงที่ขึ้นแสดงในรายการเพลง (ตอนนี้คือ 'Dancing in the Dark')",
    "zh": "主打曲 — 打歌舞台上演唱的歌曲（现在是《Dancing in the Dark》）"
+  },
+  "후기": {
+   "en": "Review",
+   "es": "Reseña",
+   "id": "Ulasan",
+   "ja": "レビュー",
+   "pt": "Relato",
+   "th": "รีวิว",
+   "zh": "心得"
   },
   "💘 11월의 하이픽 아티스트 중간집계 D-13": {
    "en": "💘 November HIGHER Pick Artist — mid-count, D-13",
