@@ -17,7 +17,7 @@
 #     예) profile_history:
 #           - { label: 데뷔 프로필 (2026.10), photo: img/members/moon-2026-10.jpg }
 #           - { label: "'Dancing in the Dark' 콘셉트", instagram: "https://www.instagram.com/p/XXXX/" }
-#   color: 최애 테마 색 (색상환 각도 0~360, 예: 0 빨강·120 초록·220 파랑·300 보라). 없으면 순서대로 자동
+#   color: 최애 테마 기본 색 ("#f4a3c0" 같은 색 코드). 없으면 파스텔 15색 중 순서대로
 #   photo: site/img/members/ 에 올린 사진 파일 경로 (예: img/members/moon.jpg) → 멤버 카드 원형 아이콘·프로필에 표시
 #          사용 권한이 있는 이미지만. 없으면 이니셜 아이콘
 #   instagram_posts: 공식 계정(@a2o.soul 등) 인스타그램 게시물 URL 목록 → 프로필 팝업에 인스타그램 임베드로 표시
