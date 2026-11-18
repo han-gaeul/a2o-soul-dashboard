@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#6c4cf5">
+<title>개인정보처리방침 · SOUL Tracker</title>
+<link rel="icon" href="icons/favicon-32.png" sizes="32x32">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .pp { max-width: 720px; margin: 0 auto; padding: 24px 16px 48px; line-height: 1.7; }
+  .pp h1 { font-size: 22px; margin: 0 0 4px; }
+  .pp h2 { font-size: 17px; margin: 28px 0 8px; }
+  .pp table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .pp th, .pp td { border-bottom: 1px solid var(--line); padding: 8px 6px; text-align: left; vertical-align: top; }
+  .pp ul { padding-left: 20px; }
+  .pp hr { border: 0; border-top: 1px solid var(--line); margin: 36px 0; }
+</style>
+</head>
+<body>
+<main class="pp">
+  <h1>개인정보처리방침</h1>
+  <p class="muted small">SOUL Tracker (a2osoul-tracker.com) · 시행일 2026-11-18</p>
+  <p>SOUL Tracker는 A2O SOUL 팬이 만든 비공식 사이트입니다. 사이트 운영에 꼭 필요한 정보만 다루고, 판매하거나 광고에 쓰지 않습니다.</p>
+
+  <h2>1. 다루는 정보</h2>
+  <table>
+    <tr><th>무엇을</th><th>언제·왜</th><th>어떻게 보관</th></tr>
+    <tr><td>구글 계정 고유 번호</td><td>커뮤니티에 구글로 로그인할 때 — 내 글 확인·수정, 신고·차단</td><td>알아볼 수 없게 바꾼 값(해시)만 저장</td></tr>
+    <tr><td>구글 계정 이메일</td><td>로그인할 때 관리자인지 확인하는 데만</td><td>저장하지 않음</td></tr>
+    <tr><td>기기 ID</td><td>커뮤니티 신고·차단, 하루 글 수 제한</td><td>브라우저에 만든 무작위 번호를 해시로만 저장</td></tr>
+    <tr><td>닉네임·글·댓글·사진</td><td>커뮤니티에 직접 올린 내용</td><td>글을 지우면 함께 삭제</td></tr>
+    <tr><td>익명 글 비밀번호</td><td>익명 글을 지울 때 확인</td><td>해시로만 저장</td></tr>
+    <tr><td>알림 구독 정보</td><td>앱 알림을 켰을 때 — 브라우저가 주는 알림 주소, 고른 알림 종류·언어</td><td>알림을 끄면 삭제</td></tr>
+    <tr><td>최애·언어·본 영상 등 설정</td><td>사이트 편의 기능</td><td>내 브라우저에만 저장 (서버로 보내지 않음)</td></tr>
+  </table>
+  <p>IP 주소는 저장하지 않습니다. 익명으로 글을 쓸 때 Cloudflare Turnstile이 사람인지 확인하며, 이 과정은 <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare 개인정보처리방침</a>을 따릅니다.</p>
+
+  <h2>2. 보관 기간</h2>
+  <ul>
+    <li>글·댓글·사진: 직접 지우거나 운영자가 삭제할 때까지</li>
+    <li>신고로 인한 차단 기록: 30일</li>
+    <li>알림 구독: 알림을 끄거나 브라우저에서 구독이 만료될 때까지</li>
+  </ul>
+
+  <h2>3. 처리 위탁</h2>
+  <p>사이트는 GitHub Pages, 데이터·알림·커뮤니티는 Cloudflare(Workers·D1·KV)에서 운영됩니다. 구글 로그인은 Google Identity Services를 사용합니다.</p>
+
+  <h2>4. 요청·문의</h2>
+  <p>내 글 삭제, 차단 해제, 정보 삭제 요청은 <a href="https://docs.google.com/forms/d/e/1FAIpQLSf6AiaTcOE6EUweWYeOUyMpUUgS6CGLwwYTEDbbgDCgIt8xyg/viewform" target="_blank" rel="noopener">의견·제보 폼</a>으로 보내 주세요. 사진·이미지는 권리자가 요청하면 바로 내립니다.</p>
+
+  <hr>
+
+  <h1>Privacy Policy</h1>
+  <p class="muted small">SOUL Tracker (a2osoul-tracker.com) · Effective 2026-11-18</p>
+  <p>SOUL Tracker is an unofficial fan-made site for A2O SOUL. We handle only what the site needs to work, and never sell it or use it for ads.</p>
+  <ul>
+    <li><b>Google sign-in (community):</b> we store only a hashed form of your Google account ID. Your email is checked once to see if you're an admin and is not stored.</li>
+    <li><b>Device ID:</b> a random ID made in your browser, stored only as a hash, used for reports, bans and daily post limits.</li>
+    <li><b>Posts, comments, photos and nicknames</b> you submit are stored until you or the admin delete them. Anonymous post passwords are stored hashed.</li>
+    <li><b>Push alerts:</b> the endpoint your browser provides, plus your chosen topics and language — deleted when you turn alerts off.</li>
+    <li><b>Preferences</b> (bias, language, watched videos) stay in your browser only.</li>
+    <li>We do <b>not</b> store IP addresses. Anonymous posting uses Cloudflare Turnstile to check you're human.</li>
+    <li>Ban records from reports last 30 days.</li>
+    <li>Hosting: GitHub Pages and Cloudflare (Workers, D1, KV). Sign-in: Google Identity Services.</li>
+    <li>Requests (delete my posts or data, unban): use the <a href="https://docs.google.com/forms/d/e/1FAIpQLSf6AiaTcOE6EUweWYeOUyMpUUgS6CGLwwYTEDbbgDCgIt8xyg/viewform" target="_blank" rel="noopener">feedback form</a>.</li>
+  </ul>
+  <p><a href="./">← SOUL Tracker</a></p>
+</main>
+</body>
+</html>
