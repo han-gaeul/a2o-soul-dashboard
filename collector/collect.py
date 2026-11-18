@@ -20,6 +20,7 @@ import sys
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
+import requests
 import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -122,6 +123,34 @@ def load_fan_files(cfg):
     cfg["charts"] = [{"song": str(c.get("song", "")), "service": str(c.get("service", "")), "type": str(c.get("type") or ""),
                       "ranks": sorted((str(d), int(r)) for d, r in (c.get("ranks") or {}).items())}
                      for c in read_yml("charts.yml").get("charts") or []]
+    # 차트 입력 화면(chart.html)으로 들어온 순위 — 날짜별 마지막 순위로 그래프에 합침
+    by = {}
+    for x in load_json("chart_entries.json", []):
+        if x.get("song") and x.get("service") and x.get("at"):
+            by.setdefault((str(x["song"]), str(x["service"])), []).append(x)
+    for (song, service), xs in by.items():
+        xs.sort(key=lambda x: x["at"])
+        days = {}
+        for x in xs:
+            if x.get("rank"):
+                days[x["at"][:10]] = int(x["rank"])
+            else:
+                days.pop(x["at"][:10], None)
+        c = next((c for c in cfg["charts"] if c["song"] == song and c["service"] == service), None)
+        if not c:
+            c = {"song": song, "service": service, "type": "", "ranks": []}
+            cfg["charts"].append(c)
+        c["ranks"] = sorted({**dict(c["ranks"]), **days}.items())
+    # 알림용: 직전 입력과 비교해 첫 진입(차트 밖→순위)·10계단 이상 상승
+    cfg["chart_moves"] = []
+    for (song, service), xs in by.items():
+        for prev, cur in zip([None] + xs[:-1], xs):
+            if not cur.get("rank"):
+                continue
+            p_rank = (prev or {}).get("rank")
+            kind = "new" if not p_rank else "up" if p_rank - cur["rank"] >= 10 else None
+            if kind:
+                cfg["chart_moves"].append({"song": song, "service": service, "rank": cur["rank"], "prev": p_rank, "at": cur["at"], "kind": kind})
     cfg["supports"] = []
     for x in read_yml("support.yml").get("supports") or []:
         cfg["supports"].append({**{k: str(v) for k, v in x.items() if v is not None},
@@ -1719,6 +1748,7 @@ def build(cfg):
         "streaming": cfg["streaming"],
         "stream_playlist": cfg["stream_playlist"],
         "charts": cfg["charts"],
+        "chart_moves": cfg.get("chart_moves", [])[-30:],
         "supports": sorted((x for x in cfg["supports"] if x["end"] >= today), key=lambda x: x["start"]),
         "howto": cfg["howto"],
         "tr": cfg["tr"],
@@ -1747,6 +1777,14 @@ def main():
     cfg = load_config()
     if not args.build:
         collect(cfg, rescan=args.rescan)
+        api = (cfg.get("push") or {}).get("api")
+        if api:  # 총공팀이 입력한 차트 순위 (chart.html → Worker)
+            try:
+                r = requests.get(f"{api.rstrip('/')}/charts", timeout=20)
+                r.raise_for_status()
+                save_json("chart_entries.json", [x for x in r.json() if isinstance(x, dict)])
+            except Exception as e:  # noqa: BLE001
+                print(f"[차트] 입력 순위 못 받음: {e}")
     build(cfg)
     if not args.build:  # 매시간 수집 때만 (배포용 --build에선 안 보냄)
         try:

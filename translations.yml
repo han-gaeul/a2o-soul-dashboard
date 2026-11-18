@@ -2442,3 +2442,48 @@
   id: "Seluruh Jepang"
   th: "ทั่วญี่ปุ่น"
   pt: "Todo o Japão"
+
+"멜론 TOP100":
+  en: "Melon TOP100"
+  ja: "Melon TOP100"
+  zh: "Melon TOP100"
+  es: "Melon TOP100"
+  id: "Melon TOP100"
+  th: "Melon TOP100"
+  pt: "Melon TOP100"
+
+"멜론 HOT100":
+  en: "Melon HOT100"
+  ja: "Melon HOT100"
+  zh: "Melon HOT100"
+  es: "Melon HOT100"
+  id: "Melon HOT100"
+  th: "Melon HOT100"
+  pt: "Melon HOT100"
+
+"지니 TOP200":
+  en: "Genie TOP200"
+  ja: "Genie TOP200"
+  zh: "Genie TOP200"
+  es: "Genie TOP200"
+  id: "Genie TOP200"
+  th: "Genie TOP200"
+  pt: "Genie TOP200"
+
+"벅스 실시간":
+  en: "Bugs Realtime"
+  ja: "Bugs Realtime"
+  zh: "Bugs Realtime"
+  es: "Bugs Realtime"
+  id: "Bugs Realtime"
+  th: "Bugs Realtime"
+  pt: "Bugs Realtime"
+
+"플로 24시간":
+  en: "FLO 24H"
+  ja: "FLO 24H"
+  zh: "FLO 24H"
+  es: "FLO 24H"
+  id: "FLO 24H"
+  th: "FLO 24H"
+  pt: "FLO 24H"

@@ -3,6 +3,7 @@
 //  2) 10분마다 GitHub Actions 수집 실행 (Cron Trigger: */10 * * * *)
 //  3) YouTube 새 영상 즉시 알림(WebSub) 받으면 바로 수집 실행
 // 설정: KV 바인딩 SUBS / 변수 VAPID_PUBLIC (VAPID 공개키) / 비밀(Secret) GH_TOKEN (Actions 실행 권한만 있는 GitHub 토큰)
+//       비밀(Secret) CHART_KEY — 차트 순위 입력 비밀번호 (총공팀 차트 담당과만 공유)
 //
 // 엔드포인트
 //   POST /subscribe   {sub, topics, lang}   — 사이트에서 구독/설정 변경
@@ -11,6 +12,8 @@
 //   POST /prune       {ids}                  — 만료된 구독 삭제 (GitHub Actions만)
 //   GET/POST /yt-hook                        — YouTube WebSub 콜백
 //   GET  /yt-renew                           — YouTube 알림 구독 지금 갱신 (평소엔 하루 한 번 자동)
+//   POST /chart  {key, song, service, rank}  — 차트 순위 입력 (사이트 chart.html, 비밀 CHART_KEY) → 바로 수집 실행(알림)
+//   GET  /charts                             — 입력된 순위 목록 (수집용, 공개)
 const REPO = "han-gaeul/a2o-soul-dashboard";
 const WORKFLOW = "update.yml";
 const SITE = "https://a2osoul-tracker.com";
@@ -138,6 +141,29 @@ export default {
       const body = await req.json().catch(() => null);
       if (body && typeof body.endpoint === "string") await env.SUBS.delete(await idOf(body.endpoint));
       return json(req, { ok: true });
+    }
+
+    if (req.method === "POST" && url.pathname === "/chart") {
+      const b = await req.json().catch(() => ({}));
+      const keyOk = env.CHART_KEY && typeof b.key === "string" && b.key.length === env.CHART_KEY.length
+        && hex(await crypto.subtle.digest("SHA-256", enc.encode(b.key))) === hex(await crypto.subtle.digest("SHA-256", enc.encode(env.CHART_KEY)));
+      if (!keyOk) return json(req, { error: "비밀번호가 달라요" }, 403);
+      const song = String(b.song || "").slice(0, 60).trim(), service = String(b.service || "").slice(0, 30).trim();
+      const rank = b.rank === null ? null : Number(b.rank);
+      if (!song || !service || !(rank === null || (Number.isInteger(rank) && rank >= 1 && rank <= 300))) return json(req, { error: "곡·차트·순위를 확인해 주세요" }, 400);
+      const at = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 16).replace("T", " "); // KST
+      const list = (await env.SUBS.get("_charts", "json")) || [];
+      list.push({ song, service, rank, at });
+      await env.SUBS.put("_charts", JSON.stringify(list.slice(-2000)));
+      // 바로 수집 실행 → 알림 (2분에 한 번만)
+      if (Date.now() - (Number(await env.SUBS.get("_chart_dispatch")) || 0) > 120000) {
+        await env.SUBS.put("_chart_dispatch", String(Date.now()), { expirationTtl: 3600 });
+        await dispatch(env, "차트 입력");
+      }
+      return json(req, { ok: true, at });
+    }
+    if (req.method === "GET" && url.pathname === "/charts") {
+      return json(req, (await env.SUBS.get("_charts", "json")) || []);
     }
 
     if (req.method === "GET" && url.pathname === "/subs") {
