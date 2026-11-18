@@ -20,6 +20,7 @@ import sys
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
+import requests
 import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -130,6 +131,34 @@ def load_fan_files(cfg):
     cfg["charts"] = [{"song": str(c.get("song", "")), "service": str(c.get("service", "")), "type": str(c.get("type") or ""),
                       "ranks": sorted((str(d), int(r)) for d, r in (c.get("ranks") or {}).items())}
                      for c in read_yml("charts.yml").get("charts") or []]
+    # 차트 입력 화면(chart.html)으로 들어온 순위 — 날짜별 마지막 순위로 그래프에 합침
+    by = {}
+    for x in load_json("chart_entries.json", []):
+        if x.get("song") and x.get("service") and x.get("at"):
+            by.setdefault((str(x["song"]), str(x["service"])), []).append(x)
+    for (song, service), xs in by.items():
+        xs.sort(key=lambda x: x["at"])
+        days = {}
+        for x in xs:
+            if x.get("rank"):
+                days[x["at"][:10]] = int(x["rank"])
+            else:
+                days.pop(x["at"][:10], None)
+        c = next((c for c in cfg["charts"] if c["song"] == song and c["service"] == service), None)
+        if not c:
+            c = {"song": song, "service": service, "type": "", "ranks": []}
+            cfg["charts"].append(c)
+        c["ranks"] = sorted({**dict(c["ranks"]), **days}.items())
+    # 알림용: 직전 입력과 비교해 첫 진입(차트 밖→순위)·10계단 이상 상승
+    cfg["chart_moves"] = []
+    for (song, service), xs in by.items():
+        for prev, cur in zip([None] + xs[:-1], xs):
+            if not cur.get("rank"):
+                continue
+            p_rank = (prev or {}).get("rank")
+            kind = "new" if not p_rank else "up" if p_rank - cur["rank"] >= 10 else None
+            if kind:
+                cfg["chart_moves"].append({"song": song, "service": service, "rank": cur["rank"], "prev": p_rank, "at": cur["at"], "kind": kind})
     cfg["supports"] = []
     for x in read_yml("support.yml").get("supports") or []:
         cfg["supports"].append({**{k: str(v) for k, v in x.items() if v is not None},
@@ -492,7 +521,17 @@ def official_extract(caption, posted, today):
     if not A2O_MENTION.search(caption or "") or re.search(r"결과|RESULTS?\b|WINNERS?\b|발표합니다", head, re.I):
         return []  # A2O SOUL 없는 일반 투표, 첫 줄이 '결과 발표'인 글(이미 끝난 투표)은 빼기
     return [{**i, "confidence": max(i["confidence"], 0.9)} if i["kind"] == "vote" and i.get("end") else i
-            for i in rules.extract(caption, posted, today) if i["kind"] == "vote"]
+            for i in rules.extract(caption, posted, today) if i["kind"] in ("vote", "nominee")]
+
+def nominees(today):
+    """음방 1위 후보 (공식 글에서 자동, 최근 2주) — 이번 주 음방 표시·알림용"""
+    out = {}
+    for post in (load_json("announcements.json", {}).get("posts") or {}).values():
+        for i in post.get("items", []):
+            if i.get("kind") == "nominee" and i.get("date") and i.get("show") and i["date"] >= (date.fromisoformat(str(today)) - timedelta(days=14)).isoformat():
+                out.setdefault((i["date"], i["show"]), {"date": i["date"], "show": i["show"], "url": post.get("permalink")})
+    return sorted(out.values(), key=lambda x: x["date"])
+
 
 PAST_DAYS = 120  # 지난 일정을 달력에 남기는 기간
 IG_POST = re.compile(r"^https://(www\.)?instagram\.com/(p|reel)/[\w-]+/?")
@@ -816,6 +855,8 @@ def auto_items(today):
                     votes.append({"show": i.get("show") or "", "title": i["title"] if not i.get("show") else i["title"].replace(i["show"], "").strip(),
                                   "app": i.get("app") or "", "start": i.get("start") or i["end"], "end": i["end"],
                                   "url": i.get("url") or post.get("permalink"), "source": post.get("permalink"), "auto": True})
+                continue
+            if i["kind"] == "nominee":  # 1위 후보는 이번 주 음방 표시·알림으로만 (nominees())
                 continue
             past_from = (date.fromisoformat(today) - timedelta(days=PAST_DAYS)).isoformat()
             if i.get("date") and i["date"] >= past_from and (i["date"], i["title"]) not in seen_ev:
@@ -1252,7 +1293,13 @@ def collect(cfg, rescan=False):
                 store["posts"].pop(pid)
             ost.clear()
             ost["v"] = 2
-        if ost.get("deep") != 1 or not ost.get("at") or now - datetime.fromisoformat(ost["at"]) >= timedelta(hours=3):
+        # 음방 당일 방송 1시간 반 전 ~ 방송 1시간 뒤엔 10분마다 (1위 후보·실시간 투표 글을 바로 잡으려고, since_id라 새 글만 읽음)
+        air = {"더쇼": "18:00", "쇼챔피언": "18:00", "엠카운트다운": "18:00", "뮤직뱅크": "17:15", "음악중심": "15:15", "인기가요": "15:20"}
+        on_air = any(rules.SHOW_WEEKDAY.get(sh) == now.weekday()
+                     and -timedelta(minutes=90) <= now - datetime.strptime(f"{now:%Y-%m-%d} {tm}", "%Y-%m-%d %H:%M").replace(tzinfo=now.tzinfo) <= timedelta(hours=1)
+                     for sh, tm in air.items())
+        gap = timedelta(minutes=10) if on_air else timedelta(hours=3)
+        if ost.get("deep") != 1 or not ost.get("at") or now - datetime.fromisoformat(ost["at"]) >= gap:
             query = ("(\"A2O SOUL\" OR A2OSOUL OR 에이투오소울 OR \"에이투오 소울\") "
                      "(투표 OR 사전투표 OR 1위후보 OR \"1위 후보\" OR vote OR voting OR nominee OR nominees) "
                      "-from:A2O_SOUL -is:retweet -is:reply")
@@ -1704,10 +1751,12 @@ def build(cfg):
         "yt_channels": sorted(registry.get("channels") or {}),  # Cloudflare Worker가 YouTube 새 영상 즉시 알림(WebSub) 구독에 씀
         "votes": [v for v in cfg["votes"] if v["end"] >= now_kst_str()],
         "prerecs": prerecs,
+        "nominees": nominees(today),
         "photocards": photocards(cfg),
         "streaming": cfg["streaming"],
         "stream_playlist": cfg["stream_playlist"],
         "charts": cfg["charts"],
+        "chart_moves": cfg.get("chart_moves", [])[-30:],
         "supports": sorted((x for x in cfg["supports"] if x["end"] >= today), key=lambda x: x["start"]),
         "howto": cfg["howto"],
         "tr": cfg["tr"],
@@ -1736,6 +1785,14 @@ def main():
     cfg = load_config()
     if not args.build:
         collect(cfg, rescan=args.rescan)
+        api = (cfg.get("push") or {}).get("api")
+        if api:  # 총공팀이 입력한 차트 순위 (chart.html → Worker)
+            try:
+                r = requests.get(f"{api.rstrip('/')}/charts", timeout=20)
+                r.raise_for_status()
+                save_json("chart_entries.json", [x for x in r.json() if isinstance(x, dict)])
+            except Exception as e:  # noqa: BLE001
+                print(f"[차트] 입력 순위 못 받음: {e}")
     build(cfg)
     if not args.build:  # 매시간 수집 때만 (배포용 --build에선 안 보냄)
         try:

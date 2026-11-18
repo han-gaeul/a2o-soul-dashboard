@@ -3,7 +3,7 @@
 VAPID_PRIVATE_KEY   VAPID 비밀키(base64url, `npx web-push generate-vapid-keys`의 Private Key) — GitHub Secrets
 targets.yml push.api / push.vapid_public — 구독 저장 Worker 주소, 공개키
 
-주제(topic): notice 새 공지·사녹 신청 / vote 투표 마감 3시간 전 / show 음방·라이브 1시간 전 / video 새 MV·무대 영상 / birthday 멤버 생일 (그날 0시부터)
+주제(topic): notice 새 공지·사녹 신청·차트 진입·급상승 / vote 투표 마감 3시간 전·음방 1위 후보 / show 음방·라이브 1시간 전 / video 새 MV·무대 영상 / birthday 멤버 생일 (그날 0시부터)
 처음 실행할 땐 지금 있는 것들을 '보낸 것'으로만 기록하고 보내지 않음 (구독 첫날 알림 폭탄 방지)
 """
 import base64
@@ -18,21 +18,21 @@ import requests
 KST = timezone(timedelta(hours=9))
 
 MSG = {
-    "ko": {"birthday": "🎂 오늘은 {name} 생일", "birthday_body": "{name}의 생일을 함께 축하해요!", "ev_show": "{show} 출연", "show_now": "🔴 지금 생방송 중", "notice": "📢 새 공지", "prerec": "🎙 사녹 신청 곧 시작", "vote": "🗳 투표 마감 임박", "vote_body": "{name} — {t} 마감",
+    "ko": {"birthday": "🎂 오늘은 {name} 생일", "birthday_body": "{name}의 생일을 함께 축하해요!", "chart_new": "📈 {service} 진입!", "chart_up": "🚀 {service} 급상승", "chart_new_body": "{song} {rank}위", "chart_up_body": "{song} {rank}위 (↑{n})", "nominee": "🏆 에투소 {show} 1위 후보!", "nominee_body": "{t} 생방송 투표로 1위 만들어요", "ev_show": "{show} 출연", "show_now": "🔴 지금 생방송 중", "notice": "📢 새 공지", "prerec": "🎙 사녹 신청 곧 시작", "vote": "🗳 투표 마감 임박", "vote_body": "{name} — {t} 마감",
            "show": "📺 곧 시작", "show_body": "{t} {name}", "video": "🎬 새 영상", "video_more": "{title} 외 {n}개"},
-    "en": {"birthday": "🎂 Happy birthday, {name}!", "birthday_body": "Today is {name}'s birthday — celebrate together!", "ev_show": "On {show}", "show_now": "🔴 Live now", "notice": "📢 New notice", "prerec": "🎙 Pre-recording sign-up opens soon", "vote": "🗳 Vote closing soon", "vote_body": "{name} — ends {t} KST",
+    "en": {"birthday": "🎂 Happy birthday, {name}!", "birthday_body": "Today is {name}'s birthday — celebrate together!", "chart_new": "📈 Entered {service}!", "chart_up": "🚀 Rising on {service}", "chart_new_body": "{song} #{rank}", "chart_up_body": "{song} #{rank} (↑{n})", "nominee": "🏆 A2O SOUL is a #1 nominee on {show}!", "nominee_body": "Live vote at {t} KST — let's win", "ev_show": "On {show}", "show_now": "🔴 Live now", "notice": "📢 New notice", "prerec": "🎙 Pre-recording sign-up opens soon", "vote": "🗳 Vote closing soon", "vote_body": "{name} — ends {t} KST",
            "show": "📺 Starting soon", "show_body": "{t} KST {name}", "video": "🎬 New video", "video_more": "{title} +{n} more"},
-    "ja": {"birthday": "🎂 今日は{name}の誕生日", "birthday_body": "{name}の誕生日を一緒にお祝いしよう！", "ev_show": "{show} 出演", "show_now": "🔴 生放送中", "notice": "📢 新しいお知らせ", "prerec": "🎙 事前収録の応募がまもなく開始", "vote": "🗳 投票締切間近", "vote_body": "{name} — {t} 締切 (KST)",
+    "ja": {"birthday": "🎂 今日は{name}の誕生日", "birthday_body": "{name}の誕生日を一緒にお祝いしよう！", "chart_new": "📈 {service} チャートイン！", "chart_up": "🚀 {service} 急上昇", "chart_new_body": "{song} {rank}位", "chart_up_body": "{song} {rank}位 (↑{n})", "nominee": "🏆 A2O SOUL {show} 1位候補！", "nominee_body": "{t} (KST) 生放送投票で1位に", "ev_show": "{show} 出演", "show_now": "🔴 生放送中", "notice": "📢 新しいお知らせ", "prerec": "🎙 事前収録の応募がまもなく開始", "vote": "🗳 投票締切間近", "vote_body": "{name} — {t} 締切 (KST)",
            "show": "📺 まもなく開始", "show_body": "{t} (KST) {name}", "video": "🎬 新しい動画", "video_more": "{title} ほか{n}件"},
-    "zh": {"birthday": "🎂 今天是{name}的生日", "birthday_body": "一起为{name}庆祝生日吧！", "ev_show": "出演 {show}", "show_now": "🔴 正在直播", "notice": "📢 新公告", "prerec": "🎙 预录报名即将开始", "vote": "🗳 投票即将截止", "vote_body": "{name} — {t} 截止 (KST)",
+    "zh": {"birthday": "🎂 今天是{name}的生日", "birthday_body": "一起为{name}庆祝生日吧！", "chart_new": "📈 进入 {service}！", "chart_up": "🚀 {service} 急升", "chart_new_body": "{song} 第{rank}名", "chart_up_body": "{song} 第{rank}名 (↑{n})", "nominee": "🏆 A2O SOUL 入围 {show} 一位候补！", "nominee_body": "{t} (KST) 直播投票，一起拿一位", "ev_show": "出演 {show}", "show_now": "🔴 正在直播", "notice": "📢 新公告", "prerec": "🎙 预录报名即将开始", "vote": "🗳 投票即将截止", "vote_body": "{name} — {t} 截止 (KST)",
            "show": "📺 即将开始", "show_body": "{t} (KST) {name}", "video": "🎬 新视频", "video_more": "{title} 等 {n} 个"},
-    "es": {"birthday": "🎂 ¡Feliz cumpleaños, {name}!", "birthday_body": "Hoy es el cumpleaños de {name}, ¡celebremos juntos!", "ev_show": "En {show}", "show_now": "🔴 En vivo ahora", "notice": "📢 Nuevo aviso", "prerec": "🎙 La inscripción a la pregrabación abre pronto", "vote": "🗳 La votación cierra pronto", "vote_body": "{name} — cierra {t} KST",
+    "es": {"birthday": "🎂 ¡Feliz cumpleaños, {name}!", "birthday_body": "Hoy es el cumpleaños de {name}, ¡celebremos juntos!", "chart_new": "📈 ¡Entró en {service}!", "chart_up": "🚀 Subiendo en {service}", "chart_new_body": "{song} #{rank}", "chart_up_body": "{song} #{rank} (↑{n})", "nominee": "🏆 ¡A2O SOUL nominado al #1 en {show}!", "nominee_body": "Voto en vivo a las {t} KST — vamos por el #1", "ev_show": "En {show}", "show_now": "🔴 En vivo ahora", "notice": "📢 Nuevo aviso", "prerec": "🎙 La inscripción a la pregrabación abre pronto", "vote": "🗳 La votación cierra pronto", "vote_body": "{name} — cierra {t} KST",
            "show": "📺 Empieza pronto", "show_body": "{t} KST {name}", "video": "🎬 Nuevo video", "video_more": "{title} y {n} más"},
-    "id": {"birthday": "🎂 Selamat ulang tahun, {name}!", "birthday_body": "Hari ini ulang tahun {name} — rayakan bersama!", "ev_show": "Tampil di {show}", "show_now": "🔴 Sedang live", "notice": "📢 Pengumuman baru", "prerec": "🎙 Pendaftaran pra-rekaman segera dibuka", "vote": "🗳 Voting segera ditutup", "vote_body": "{name} — tutup {t} KST",
+    "id": {"birthday": "🎂 Selamat ulang tahun, {name}!", "birthday_body": "Hari ini ulang tahun {name} — rayakan bersama!", "chart_new": "📈 Masuk {service}!", "chart_up": "🚀 Naik di {service}", "chart_new_body": "{song} #{rank}", "chart_up_body": "{song} #{rank} (↑{n})", "nominee": "🏆 A2O SOUL nominasi #1 di {show}!", "nominee_body": "Vote live {t} KST — ayo menang", "ev_show": "Tampil di {show}", "show_now": "🔴 Sedang live", "notice": "📢 Pengumuman baru", "prerec": "🎙 Pendaftaran pra-rekaman segera dibuka", "vote": "🗳 Voting segera ditutup", "vote_body": "{name} — tutup {t} KST",
            "show": "📺 Segera dimulai", "show_body": "{t} KST {name}", "video": "🎬 Video baru", "video_more": "{title} +{n} lainnya"},
-    "th": {"birthday": "🎂 สุขสันต์วันเกิด {name}!", "birthday_body": "วันนี้วันเกิดของ {name} มาฉลองด้วยกันนะ!", "ev_show": "ออกรายการ {show}", "show_now": "🔴 กำลังออกอากาศสด", "notice": "📢 ประกาศใหม่", "prerec": "🎙 ใกล้เปิดสมัครพรีเรคคอร์ด", "vote": "🗳 โหวตใกล้ปิด", "vote_body": "{name} — ปิด {t} KST",
+    "th": {"birthday": "🎂 สุขสันต์วันเกิด {name}!", "birthday_body": "วันนี้วันเกิดของ {name} มาฉลองด้วยกันนะ!", "chart_new": "📈 ติดชาร์ต {service}!", "chart_up": "🚀 พุ่งขึ้นใน {service}", "chart_new_body": "{song} อันดับ {rank}", "chart_up_body": "{song} อันดับ {rank} (↑{n})", "nominee": "🏆 A2O SOUL เข้าชิงอันดับ 1 {show}!", "nominee_body": "โหวตสด {t} KST — ไปคว้าอันดับ 1 กัน", "ev_show": "ออกรายการ {show}", "show_now": "🔴 กำลังออกอากาศสด", "notice": "📢 ประกาศใหม่", "prerec": "🎙 ใกล้เปิดสมัครพรีเรคคอร์ด", "vote": "🗳 โหวตใกล้ปิด", "vote_body": "{name} — ปิด {t} KST",
            "show": "📺 ใกล้เริ่มแล้ว", "show_body": "{t} KST {name}", "video": "🎬 วิดีโอใหม่", "video_more": "{title} และอีก {n} รายการ"},
-    "pt": {"birthday": "🎂 Feliz aniversário, {name}!", "birthday_body": "Hoje é aniversário de {name} — vamos comemorar juntos!", "ev_show": "No {show}", "show_now": "🔴 Ao vivo agora", "notice": "📢 Novo aviso", "prerec": "🎙 Inscrição na pré-gravação abre em breve", "vote": "🗳 Votação fechando", "vote_body": "{name} — fecha {t} KST",
+    "pt": {"birthday": "🎂 Feliz aniversário, {name}!", "birthday_body": "Hoje é aniversário de {name} — vamos comemorar juntos!", "chart_new": "📈 Entrou no {service}!", "chart_up": "🚀 Subindo no {service}", "chart_new_body": "{song} #{rank}", "chart_up_body": "{song} #{rank} (↑{n})", "nominee": "🏆 A2O SOUL indicado ao #1 no {show}!", "nominee_body": "Voto ao vivo às {t} KST — vamos vencer", "ev_show": "No {show}", "show_now": "🔴 Ao vivo agora", "notice": "📢 Novo aviso", "prerec": "🎙 Inscrição na pré-gravação abre em breve", "vote": "🗳 Votação fechando", "vote_body": "{name} — fecha {t} KST",
            "show": "📺 Começa em breve", "show_body": "{t} KST {name}", "video": "🎬 Novo vídeo", "video_more": "{title} +{n}"},
 }
 
@@ -98,6 +98,16 @@ def candidates(dash, site, now):
             live = next((x for x in lives if x.get("show") and x["show"] in (e.get("title") or "")), None)
             out.append((f"ev|{e['date']}|{tm}|{e['title']}", "show", "show",
                         {"name": e["title"], "t": tm, "url": (live or {}).get("url") or site, "parts": [e["title"]], "tr": tr, "now": now >= st}))
+    for c in dash.get("chart_moves") or []:  # 차트 첫 진입·10계단 이상 상승 (입력 후 3시간 안)
+        if timedelta(0) <= now - _kst(c["at"]) <= timedelta(hours=3):
+            out.append((f"ch|{c['song']}|{c['service']}|{c['at']}", "notice", "chart", {**c, "url": site + "#cheer", "tr": tr}))
+    for n in dash.get("nominees") or []:  # 음방 1위 후보 — 방송 당일, 방송 끝나기 전까지
+        tm = air.get(n["show"]) or ""
+        end = _kst(f"{n['date']} {tm or '23:00'}") + timedelta(hours=1)
+        if n["date"] == now.strftime("%Y-%m-%d") and now <= end:
+            live = next((x for x in lives if x.get("show") and x["show"] in n["show"]), None)
+            out.append((f"nm|{n['date']}|{n['show']}", "vote", "nominee",
+                        {"show": n["show"], "t": tm or "", "url": (live or {}).get("url") or site + "#cheer", "tr": tr}))
     today = now.strftime("%m-%d")
     for m in dash.get("members") or []:  # 멤버 생일 당일 (KST 0시부터 하루 동안, 한 번만)
         if m.get("birthday") == today:
@@ -126,6 +136,14 @@ def compose(kind, data, lang, group=None):
             mm = re.fullmatch(r"(.+?)\s*출연", name)
             name = m["ev_show"].format(show=trs(mm.group(1))) if mm else trs(name)
         return (m["show_now"] if data.get("now") else m["show"]), m["show_body"].format(name=name, t=data["t"]), data["url"]
+    if kind == "chart":
+        svc = trs(data["service"])
+        if data["kind"] == "new":
+            return m["chart_new"].format(service=svc), m["chart_new_body"].format(song=data["song"], rank=data["rank"]), data["url"]
+        return m["chart_up"].format(service=svc), m["chart_up_body"].format(song=data["song"], rank=data["rank"], n=data["prev"] - data["rank"]), data["url"]
+    if kind == "nominee":
+        show = trs(data["show"])
+        return m["nominee"].format(show=show), (m["nominee_body"].format(t=data["t"]) if data["t"] else ""), data["url"]
     if kind == "birthday":
         name = data["ko"] if lang == "ko" else data["name"]
         return m["birthday"].format(name=name), m["birthday_body"].format(name=name), data["url"]

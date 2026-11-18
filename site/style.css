@@ -682,6 +682,7 @@ details.howto { scroll-margin-top: 64px; }
 .wk-day b { font-size: 15px; color: var(--text); }
 .wk-body .chip { margin-left: 6px; }
 .wk-on { background: #ffe4ec; color: #c81e43; }
+.wk-nom { background: #fff3c4; color: #8a5a00; font-weight: 700; text-decoration: none; }
 .wk-vote { color: var(--chip-fg); font-size: 13px; }
 .wk-cal { margin: 10px 0 0; }
 .wk-cal a { color: var(--chip-fg); }

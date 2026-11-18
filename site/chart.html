@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#6c4cf5">
+<meta name="robots" content="noindex">
+<title>차트 순위 입력 · SOUL Tracker</title>
+<link rel="icon" href="icons/favicon-32.png" sizes="32x32">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .ci { max-width: 460px; margin: 0 auto; padding: 20px 16px 40px; display: grid; gap: 14px; }
+  .ci h1 { font-size: 20px; margin: 0; }
+  .ci label { display: grid; gap: 6px; font-size: 13px; color: var(--muted); }
+  .ci input, .ci select { font: inherit; font-size: 16px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); color: var(--text); }
+  .ci .opts { display: flex; flex-wrap: wrap; gap: 6px; }
+  .ci .opts button { font: inherit; font-size: 14px; padding: 7px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--text); }
+  .ci .opts button.on { background: var(--accent-bg); border-color: var(--accent-bg); color: #fff; }
+  .ci .row { display: flex; gap: 8px; align-items: center; }
+  .ci .row input { flex: 1; }
+  .ci .submit { font: inherit; font-size: 16px; font-weight: 700; padding: 12px; border: 0; border-radius: 12px; background: var(--accent-bg); color: #fff; }
+  .ci .msg { font-size: 14px; min-height: 1.4em; margin: 0; }
+  .ci .msg.err { color: var(--hot); }
+  .ci ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; font-size: 13px; }
+  .ci li { display: flex; justify-content: space-between; gap: 8px; border-bottom: 1px solid var(--line); padding: 6px 0; }
+</style>
+</head>
+<body>
+<main class="ci">
+  <h1>📊 차트 순위 입력</h1>
+  <p class="muted small" style="margin:0">총공팀 차트 담당용 — 입력하면 그래프에 반영되고, 처음 진입하거나 10계단 이상 오르면 구독자에게 알림이 가요.</p>
+  <label>비밀번호 <input id="key" type="password" autocomplete="current-password"></label>
+  <label>곡 <div class="opts" id="songs"></div></label>
+  <label>차트 <div class="opts" id="services"></div></label>
+  <label>순위
+    <div class="row"><input id="rank" type="number" inputmode="numeric" min="1" max="300" placeholder="예) 87">
+      <div class="opts"><button type="button" id="out">차트 밖</button></div></div>
+  </label>
+  <button class="submit" id="send" type="button">입력</button>
+  <p class="msg" id="msg" role="status"></p>
+  <h2 style="font-size:15px;margin:8px 0 0">최근 입력</h2>
+  <ul id="recent"></ul>
+</main>
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const SERVICES = ["멜론 TOP100", "멜론 HOT100", "지니 TOP200", "벅스 실시간", "플로 24시간"];
+  const store = { get: (k) => { try { return localStorage.getItem(k) || ""; } catch (_) { return ""; } },
+    set: (k, v) => { try { localStorage.setItem(k, v); } catch (_) {} } };
+  let api = "", song = "", service = store.get("ci_service") || SERVICES[0], out = false;
+  const pick = (box, items, cur, onPick) => {
+    box.replaceChildren(...items.map((x) => {
+      const b = document.createElement("button");
+      b.type = "button"; b.textContent = x; b.className = x === cur ? "on" : "";
+      b.onclick = () => { [...box.children].forEach((c) => c.classList.toggle("on", c === b)); onPick(x); };
+      return b;
+    }));
+  };
+  const recent = async () => {
+    if (!api) return;
+    try {
+      const list = await (await fetch(`${api}/charts`)).json();
+      $("recent").replaceChildren(...list.slice(-12).reverse().map((x) => {
+        const li = document.createElement("li");
+        li.textContent = `${x.at.slice(5)} · ${x.service} · ${x.song}`;
+        const r = document.createElement("b"); r.textContent = x.rank ? `${x.rank}위` : "차트 밖";
+        li.append(r); return li;
+      }));
+    } catch (_) {}
+  };
+  $("key").value = store.get("ci_key");
+  $("out").onclick = () => { out = !out; $("out").classList.toggle("on", out); $("rank").disabled = out; };
+  pick($("services"), SERVICES, service, (x) => { service = x; store.set("ci_service", x); });
+  fetch("data/dashboard.json").then((r) => r.json()).then((d) => {
+    api = ((d.push || {}).api || "").replace(/\/$/, "");
+    const songs = [...new Set((d.stream_playlist?.tracks || []).map((x) => x.song).filter(Boolean))];
+    song = songs[0] || "";
+    pick($("songs"), songs, song, (x) => { song = x; });
+    recent();
+  });
+  $("send").onclick = async () => {
+    const rank = out ? null : Number($("rank").value);
+    const msg = $("msg");
+    msg.className = "msg";
+    if (!out && !(Number.isInteger(rank) && rank >= 1 && rank <= 300)) { msg.className = "msg err"; msg.textContent = "순위를 숫자로 적어 주세요"; return; }
+    $("send").disabled = true;
+    try {
+      const r = await fetch(`${api}/chart`, { method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ key: $("key").value, song, service, rank }) });
+      const j = await r.json();
+      if (!r.ok) throw new Error(j.error || r.status);
+      store.set("ci_key", $("key").value);
+      msg.textContent = `✅ ${service} · ${song} ${rank ? rank + "위" : "차트 밖"} 입력됐어요`;
+      $("rank").value = ""; recent();
+    } catch (e) { msg.className = "msg err"; msg.textContent = `입력 실패: ${e.message}`; }
+    $("send").disabled = false;
+  };
+})();
+</script>
+</body>
+</html>
