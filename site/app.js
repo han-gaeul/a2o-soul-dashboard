@@ -2343,12 +2343,16 @@ if ("serviceWorker" in navigator) {
       document.body.classList.remove("home-a", "home-b", "home-c");
       document.body.classList.add(`home-${s}`);
       document.body.classList.toggle("has-bias", data.members.some((x) => x.name === bias));
-      box.replaceChildren(...[pref.get("hsPicked", false) ? null : chooser(pref.get("homeStyle", "")),
+      const sw = el("button", { type: "button", class: "hs-switch" }, `🎨 ${t("hs_title")} · ${t(`hs_${s}`)}`);
+      sw.onclick = () => openHomeStyle();
+      box.replaceChildren(...[pref.get("hsPicked", false) ? sw : chooser(pref.get("homeStyle", "")),
         s === "a" ? todo() : s === "b" ? magazine() : biasHome()].filter(Boolean));
     };
     homeRender = render;
     openHomeStyle = () => { pref.set("hsPicked", false); location.hash = "overview"; render(); window.scrollTo({ top: 0 }); };
     render();
+    $("hsFoot").textContent = `🎨 ${t("hs_title")}`;
+    $("hsFoot").onclick = () => openHomeStyle();
   }
 
   // ---------- 휴대폰 하단 탭바: 더보기 시트 ----------
