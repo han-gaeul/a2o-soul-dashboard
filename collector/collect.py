@@ -484,7 +484,17 @@ def official_extract(caption, posted, today):
     if not A2O_MENTION.search(caption or "") or re.search(r"결과|RESULTS?\b|WINNERS?\b|발표합니다", head, re.I):
         return []  # A2O SOUL 없는 일반 투표, 첫 줄이 '결과 발표'인 글(이미 끝난 투표)은 빼기
     return [{**i, "confidence": max(i["confidence"], 0.9)} if i["kind"] == "vote" and i.get("end") else i
-            for i in rules.extract(caption, posted, today) if i["kind"] == "vote"]
+            for i in rules.extract(caption, posted, today) if i["kind"] in ("vote", "nominee")]
+
+def nominees(today):
+    """음방 1위 후보 (공식 글에서 자동, 최근 2주) — 이번 주 음방 표시·알림용"""
+    out = {}
+    for post in (load_json("announcements.json", {}).get("posts") or {}).values():
+        for i in post.get("items", []):
+            if i.get("kind") == "nominee" and i.get("date") and i.get("show") and i["date"] >= (date.fromisoformat(str(today)) - timedelta(days=14)).isoformat():
+                out.setdefault((i["date"], i["show"]), {"date": i["date"], "show": i["show"], "url": post.get("permalink")})
+    return sorted(out.values(), key=lambda x: x["date"])
+
 
 PAST_DAYS = 120  # 지난 일정을 달력에 남기는 기간
 IG_POST = re.compile(r"^https://(www\.)?instagram\.com/(p|reel)/[\w-]+/?")
@@ -808,6 +818,8 @@ def auto_items(today):
                     votes.append({"show": i.get("show") or "", "title": i["title"] if not i.get("show") else i["title"].replace(i["show"], "").strip(),
                                   "app": i.get("app") or "", "start": i.get("start") or i["end"], "end": i["end"],
                                   "url": i.get("url") or post.get("permalink"), "source": post.get("permalink"), "auto": True})
+                continue
+            if i["kind"] == "nominee":  # 1위 후보는 이번 주 음방 표시·알림으로만 (nominees())
                 continue
             past_from = (date.fromisoformat(today) - timedelta(days=PAST_DAYS)).isoformat()
             if i.get("date") and i["date"] >= past_from and (i["date"], i["title"]) not in seen_ev:
@@ -1244,7 +1256,13 @@ def collect(cfg, rescan=False):
                 store["posts"].pop(pid)
             ost.clear()
             ost["v"] = 2
-        if ost.get("deep") != 1 or not ost.get("at") or now - datetime.fromisoformat(ost["at"]) >= timedelta(hours=3):
+        # 음방 당일 방송 1시간 반 전 ~ 방송 1시간 뒤엔 10분마다 (1위 후보·실시간 투표 글을 바로 잡으려고, since_id라 새 글만 읽음)
+        air = {"더쇼": "18:00", "쇼챔피언": "18:00", "엠카운트다운": "18:00", "뮤직뱅크": "17:15", "음악중심": "15:15", "인기가요": "15:20"}
+        on_air = any(rules.SHOW_WEEKDAY.get(sh) == now.weekday()
+                     and -timedelta(minutes=90) <= now - datetime.strptime(f"{now:%Y-%m-%d} {tm}", "%Y-%m-%d %H:%M").replace(tzinfo=now.tzinfo) <= timedelta(hours=1)
+                     for sh, tm in air.items())
+        gap = timedelta(minutes=10) if on_air else timedelta(hours=3)
+        if ost.get("deep") != 1 or not ost.get("at") or now - datetime.fromisoformat(ost["at"]) >= gap:
             query = ("(\"A2O SOUL\" OR A2OSOUL OR 에이투오소울 OR \"에이투오 소울\") "
                      "(투표 OR 사전투표 OR 1위후보 OR \"1위 후보\" OR vote OR voting OR nominee OR nominees) "
                      "-from:A2O_SOUL -is:retweet -is:reply")
@@ -1696,6 +1714,7 @@ def build(cfg):
         "yt_channels": sorted(registry.get("channels") or {}),  # Cloudflare Worker가 YouTube 새 영상 즉시 알림(WebSub) 구독에 씀
         "votes": [v for v in cfg["votes"] if v["end"] >= now_kst_str()],
         "prerecs": prerecs,
+        "nominees": nominees(today),
         "photocards": photocards(cfg),
         "streaming": cfg["streaming"],
         "stream_playlist": cfg["stream_playlist"],

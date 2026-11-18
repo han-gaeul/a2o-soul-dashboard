@@ -592,9 +592,10 @@ if ("serviceWorker" in navigator) {
       const date = ymd(d), time = (/(\d{1,2}:\d{2})/.exec(v.when) || [])[1] || "";
       const show = String(v.show), live = liveFor(show);
       const on = (data.events || []).some((e) => e.type === "음방" && e.date === date && String(e.title).includes(show));
+      const nom = (data.nominees || []).find((n) => n.date === date && show.includes(n.show));
       const open = votes.filter((x) => `${x.show} ${x.title}`.includes(show) && Date.now() < kstDate(x.end.includes(" ") ? x.end : `${x.end} 23:59`));
       const state = date < todayKst ? "past" : date === todayKst ? "today" : "next";
-      return { d, date, time, show, v, live, on, open, state };
+      return { d, date, time, show, v, live, on, nom, open, state };
     }).filter(Boolean).sort((a, b) => a.d - b.d);
     if (rows.length) {
       const box = el("div", { class: "wk" },
@@ -605,6 +606,7 @@ if ("serviceWorker" in navigator) {
             el("div", {}, el("b", {}, tc(r.show)), r.time ? el("span", { class: "muted small" }, ` ${r.time}`) : null,
               r.state === "today" ? el("span", { class: "chip chip-on" }, t("wk_today")) : null,
               r.on ? el("span", { class: "chip wk-on" }, t("wk_on")) : null,
+              r.nom ? el("a", { class: "chip wk-nom", href: r.nom.url || "#", target: "_blank", rel: "noopener" }, `🏆 ${t("wk_nom")}`) : null,
               r.state === "past" ? el("span", { class: "muted small" }, ` · ${t("wk_past")}`) : null),
             el("div", { class: "muted small" }, [r.v.pre ? `${t("wk_pre")} ${tc(r.v.pre)}` : "", r.v.live ? `${t("wk_live")} ${tc(r.v.live)}` : ""].filter(Boolean).join(" · ")),
             ...r.open.map((x) => el("div", { class: "small wk-vote" }, `🗳 ${tc(x.title)} · ${t("wk_until", { t: x.end.slice(5).replace("-", ".") })}`))),

@@ -6,7 +6,7 @@
 import re
 from datetime import date, timedelta
 
-RULES_VERSION = 11  # 규칙을 바꾸면 올리기 → 다음 수집 때 최근 공지를 다시 읽어 일정을 새로 뽑음
+RULES_VERSION = 12  # 규칙을 바꾸면 올리기 → 다음 수집 때 최근 공지를 다시 읽어 일정을 새로 뽑음
 
 SHOWS = [
     ("더쇼", r"더\s?쇼(?!\s?챔)|THE\s?SHOW"),
@@ -123,6 +123,20 @@ def _item(kind, title, d, tm, conf, url=None):
 WIN = re.compile(r"(?<![\d.])1\s?위|1st\s?WIN|FIRST\s?WIN|\bNo\.?\s?1\b|🏆", re.I)
 NOT_WIN = re.compile(r"후보|NOMINEE|투표|VOT|사전|D-\d", re.I)
 
+# ---------- 음방 1위 후보 ----------
+# 방송 당일 글에서 '실시간 투표 후보' · '이번 주 1위 후보' · '1위 후보에 올' 등 (사전투표 안내는 출연자 전원이라 제외)
+NOMINEE = re.compile(r"(실시간|생방송|문자|LIVE)\s*투표\s*후보|1위\s*후보\s*(는|공개|발표|소개|에\s*올|[!:])|이번\s*주\s*1위\s*후보|1ST\s*PLACE\s*NOMINEES?|NOMINEES", re.I)
+NOMINEE_PRE = re.compile(r"사전\s*투표|PRE[- ]?VOT", re.I)
+
+
+def nominee_items(caption, pday, shows_all):
+    if not (shows_all and NOMINEE.search(caption) and not NOMINEE_PRE.search(caption)):
+        return []
+    show = shows_all[0]
+    if SHOW_WEEKDAY.get(show) not in (None, pday.weekday()):
+        return []  # 방송 요일이 아닌 날 글은 다른 주 이야기일 수 있어서 빼기
+    return [_item("nominee", f"{show} 1위 후보", pday, None, 0.9) | {"show": show}]
+
 # ---------- 투표 공지 ----------
 VOTE = re.compile(r"투표|VOTE|VOTING", re.I)
 VOTE_APPS = [
@@ -212,7 +226,7 @@ def extract(caption, posted, today):
                  "end_date": None, "place": None, "url": None, "confidence": 0.9}]
 
     # 0) 투표 안내 (기간·투표 링크)
-    votes = vote_items(caption, pday)
+    votes = vote_items(caption, pday) + nominee_items(caption, pday, shows_all)
     if votes:
         return votes
 
