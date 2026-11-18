@@ -114,9 +114,10 @@ async function youtubeHook(req, env) {
 
 // ---------- 커뮤니티 게시판 (D1 바인딩 DB) ----------
 // 게시판: qna(질문·정보, 익명 가능) / trade(포카 교환, 구글 로그인만 — 익명은 목록도 안 보임)
-// 익명은 닉네임+비밀번호. 신원: 구글 sub 해시 / IP 해시 / 기기 ID (화면엔 안 보임, 차단용)
-// 신고: 서로 다른 사람 3명 → 글 숨김 + 쓴 사람 30일 차단 (관리자가 풀 수 있음)
-// 설정: D1 바인딩 DB / 변수 GOOGLE_CLIENT_ID / 비밀 ADMIN_EMAILS(쉼표로) / 비밀 BOARD_SALT(아무 긴 문자열)
+// 익명은 닉네임+비밀번호. 신원: 구글 sub 해시 / 기기 ID 해시 (IP는 쓰지 않음, 화면엔 안 보임)
+// 익명 글·댓글·신고는 Cloudflare Turnstile(사람 확인)을 통과해야 함 → 매크로 도배 방지
+// 신고: 서로 다른 사람(계정·기기) 3명 → 글 숨김 + 쓴 사람(계정·기기) 30일 차단 (관리자가 풀 수 있음)
+// 설정: D1 바인딩 DB / 변수 GOOGLE_CLIENT_ID / 비밀 ADMIN_EMAILS(쉼표로) / 비밀 BOARD_SALT(아무 긴 문자열) / 비밀 TURNSTILE_SECRET
 const BOARDS = { qna: { cats: ["질문", "정보", "후기"], anon: true }, trade: { cats: ["구해요", "드려요", "교환해요"], anon: false } };
 const LIMIT = { anon: 5, user: 20 };
 const BAN_DAYS = 30;
@@ -141,7 +142,6 @@ const sha = async (s) => hex(await crypto.subtle.digest("SHA-256", enc.encode(s)
 // 요청한 사람: 구글 로그인(ID 토큰 확인) 또는 익명 + IP·기기 해시
 async function who(req, env) {
   const salt = env.BOARD_SALT || "a2o";
-  const ip = await sha(salt + "ip:" + (req.headers.get("CF-Connecting-IP") || ""));
   const dev = await sha(salt + "dev:" + (req.headers.get("X-Device") || "").slice(0, 64));
   const m = (req.headers.get("Authorization") || "").match(/^Bearer (.+)$/);
   let uid = null, admin = false;
@@ -155,10 +155,10 @@ async function who(req, env) {
       }
     }
   }
-  const keys = [uid && `u:${uid}`, `i:${ip}`, `d:${dev}`].filter(Boolean);
+  const keys = [uid && `u:${uid}`, `d:${dev}`].filter(Boolean);
   const ban = await env.DB.prepare(`SELECT until FROM bans WHERE key IN (${keys.map(() => "?").join(",")}) AND until > ? ORDER BY until DESC LIMIT 1`)
     .bind(...keys, Date.now()).first();
-  return { uid, ip, dev, admin, banned: ban ? ban.until : 0, keys };
+  return { uid, dev, admin, banned: ban ? ban.until : 0, keys };
 }
 const pwHash = (env, pw) => sha((env.BOARD_SALT || "a2o") + "pw:" + pw);
 const clean = (s, n) => String(s || "").replace(/[\u0000-\u0008\u000b-\u001f]/g, "").trim().slice(0, n);
@@ -167,7 +167,7 @@ const pub = (p) => ({ id: p.id, board: p.board, cat: p.cat, member: p.member, ti
 
 async function banAuthor(env, row, why) {
   const until = Date.now() + BAN_DAYS * 864e5;
-  const keys = [row.uid && `u:${row.uid}`, row.ip && `i:${row.ip}`, row.dev && `d:${row.dev}`].filter(Boolean);
+  const keys = [row.uid && `u:${row.uid}`, row.dev && `d:${row.dev}`].filter(Boolean);
   await env.DB.batch(keys.map((k) => env.DB.prepare("INSERT OR REPLACE INTO bans (key, until, why) VALUES (?, ?, ?)").bind(k, until, why)));
 }
 
@@ -216,8 +216,8 @@ async function board(req, env, url) {
   // 하루 글·댓글 수 제한 (같은 IP·기기·계정 기준)
   const day = Date.now() - 864e5;
   const limitOk = async () => {
-    const n = await env.DB.prepare("SELECT (SELECT COUNT(*) FROM posts WHERE at > ? AND (ip = ? OR dev = ? OR uid = ?)) + (SELECT COUNT(*) FROM comments WHERE at > ? AND (ip = ? OR dev = ? OR uid = ?)) AS n")
-      .bind(day, me.ip, me.dev, me.uid || "-", day, me.ip, me.dev, me.uid || "-").first("n");
+    const n = await env.DB.prepare("SELECT (SELECT COUNT(*) FROM posts WHERE at > ? AND (dev = ? OR uid = ?)) + (SELECT COUNT(*) FROM comments WHERE at > ? AND (dev = ? OR uid = ?)) AS n")
+      .bind(day, me.dev, me.uid || "-", day, me.dev, me.uid || "-").first("n");
     return n < (me.uid ? LIMIT.user : LIMIT.anon) * 2 || me.admin;
   };
   const checkText = (t) => {
@@ -225,6 +225,15 @@ async function board(req, env, url) {
     if (!me.uid && LINK.test(t)) return "링크는 구글 로그인 후 넣을 수 있어요";
     return "";
   };
+
+  // 익명은 사람 확인(Turnstile) 통과해야 글·댓글·신고 가능
+  if (!me.uid && ["/board/write", "/board/comment", "/board/report"].includes(p) && env.TURNSTILE_SECRET) {
+    const fd = new FormData();
+    fd.append("secret", env.TURNSTILE_SECRET);
+    fd.append("response", String(body.ts || ""));
+    const v = await (await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", { method: "POST", body: fd })).json().catch(() => ({}));
+    if (!v.success) return json(req, { error: "사람 확인을 다시 해 주세요" }, 400);
+  }
 
   if (p === "/board/write") {
     const b = body.board;
@@ -245,7 +254,7 @@ async function board(req, env, url) {
       if (img.data.length > 700000) return json(req, { error: "사진이 너무 커요" }, 400);
     }
     const r = await env.DB.prepare(`INSERT INTO posts (board, cat, member, title, body, nick, pw, uid, ip, dev, img, at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`)
-      .bind(b, cat, clean(body.member, 12), title, text, nick, me.uid ? null : await pwHash(env, body.pw), me.uid, me.ip, me.dev, img ? 1 : 0, Date.now()).run();
+      .bind(b, cat, clean(body.member, 12), title, text, nick, me.uid ? null : await pwHash(env, body.pw), me.uid, null, me.dev, img ? 1 : 0, Date.now()).run();
     const id = r.meta.last_row_id;
     if (img) await env.DB.prepare("INSERT INTO images (post, type, data) VALUES (?, ?, ?)").bind(id, img.type, img.data).run();
     return json(req, { ok: true, id });
@@ -262,7 +271,7 @@ async function board(req, env, url) {
     if (!(await limitOk())) return json(req, { error: "오늘은 더 쓸 수 없어요 (하루 제한)" }, 429);
     await env.DB.batch([
       env.DB.prepare("INSERT INTO comments (post, body, nick, pw, uid, ip, dev, at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")
-        .bind(row.id, text, nick, me.uid ? null : await pwHash(env, body.pw), me.uid, me.ip, me.dev, Date.now()),
+        .bind(row.id, text, nick, me.uid ? null : await pwHash(env, body.pw), me.uid, null, me.dev, Date.now()),
       env.DB.prepare("UPDATE posts SET comments = comments + 1 WHERE id = ?").bind(row.id),
     ]);
     return json(req, { ok: true });
@@ -294,8 +303,8 @@ async function board(req, env, url) {
     const id = Number(isC ? body.comment : body.id);
     const row = await env.DB.prepare(`SELECT * FROM ${table} WHERE id = ?`).bind(id).first();
     if (!row) return json(req, { error: "없는 글이에요" }, 404);
-    const reporter = me.uid ? `u:${me.uid}` : `i:${me.ip}`;  // 같은 사람(계정·IP) 신고는 한 번만
-    if ([row.uid && `u:${row.uid}`, `i:${row.ip}`].includes(reporter)) return json(req, { error: "내 글은 신고할 수 없어요" }, 400);
+    const reporter = me.uid ? `u:${me.uid}` : `d:${me.dev}`;  // 같은 사람(계정·기기) 신고는 한 번만
+    if ([row.uid && `u:${row.uid}`, `d:${row.dev}`].includes(reporter)) return json(req, { error: "내 글은 신고할 수 없어요" }, 400);
     const r = await env.DB.prepare("INSERT OR IGNORE INTO reports (kind, target, who, at) VALUES (?, ?, ?, ?)").bind(kind, id, reporter, Date.now()).run();
     if (!r.meta.changes) return json(req, { ok: true, already: true });
     const n = await env.DB.prepare("SELECT COUNT(*) AS n FROM reports WHERE kind = ? AND target = ?").bind(kind, id).first("n");
@@ -312,7 +321,7 @@ async function board(req, env, url) {
     else if (body.action === "hide" || body.action === "show") await env.DB.prepare(`UPDATE ${table} SET hidden = ? WHERE id = ?`).bind(body.action === "hide" ? 1 : 0, id).run();
     else if (body.action === "ban" && row) await banAuthor(env, row, "관리자");
     else if (body.action === "unban" && row) {
-      const keys = [row.uid && `u:${row.uid}`, `i:${row.ip}`, `d:${row.dev}`].filter(Boolean);
+      const keys = [row.uid && `u:${row.uid}`, `d:${row.dev}`].filter(Boolean);
       await env.DB.prepare(`DELETE FROM bans WHERE key IN (${keys.map(() => "?").join(",")})`).bind(...keys).run();
     } else return json(req, { error: "unknown action" }, 400);
     return json(req, { ok: true });

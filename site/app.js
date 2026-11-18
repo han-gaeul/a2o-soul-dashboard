@@ -1938,7 +1938,22 @@ if ("serviceWorker" in navigator) {
       if (!r.ok) throw new Error(j.error === "login" ? t("cm_need_login") : j.error || r.status);
       return j;
     };
-    const post = (path, body) => api(path, { method: "POST", body: JSON.stringify(body) });
+    // 익명은 사람 확인(Cloudflare Turnstile) — 필요할 때만 체크박스가 보임
+    const TS = (data.push || {}).turnstile_sitekey || "";
+    const human = (box) => new Promise((ok, no) => {
+      if (me.login || !TS) return ok("");
+      const go = () => {
+        const slot = el("div", { class: "cm-ts" });
+        (box || $("cmBody")).append(slot);
+        turnstile.render(slot, { sitekey: TS, appearance: "interaction-only", language: LANG,
+          callback: (tok) => { ok(tok); setTimeout(() => slot.remove(), 300); }, "error-callback": () => no(new Error(t("cm_human_fail"))) });
+      };
+      if (window.turnstile) return go();
+      const sc = document.createElement("script");
+      sc.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"; sc.onload = go; sc.onerror = () => no(new Error(t("cm_human_fail")));
+      document.head.append(sc);
+    });
+    const post = async (path, body, box) => api(path, { method: "POST", body: JSON.stringify({ ...body, ts: await human(box) }) });
     const ago = (ms) => { const m = (Date.now() - ms) / 6e4; return m < 1 ? t("just_now") : m < 60 ? `${Math.floor(m)}m` : m < 1440 ? t("hours_ago", { n: Math.floor(m / 60) }) : t("days_ago", { n: Math.floor(m / 1440) }); };
     const dlg = $("cmDlg");
     $("cmClose").onclick = () => dlg.close();
