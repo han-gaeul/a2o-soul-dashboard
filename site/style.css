@@ -910,3 +910,9 @@ body.bias-theme header { background: linear-gradient(120deg, var(--chip), transp
 .bias-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }
 .bias-theme-tg { display: inline-flex; align-items: center; gap: 4px; color: var(--muted); }
 .bias-theme-tg input { accent-color: var(--accent-bg); }
+.bias-colors { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 8px; }
+.bias-sw { width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--card); background: hsl(var(--h) 62% 50%); box-shadow: 0 0 0 1px var(--line); cursor: pointer; padding: 0; }
+.bias-sw.on { box-shadow: 0 0 0 2px var(--text); }
+.bias-sw.auto { background: var(--chip); color: var(--chip-fg); font-size: 11px; font-weight: 700; }
+.bias-sw.rainbow { background: conic-gradient(red, yellow, lime, cyan, blue, magenta, red); position: relative; overflow: hidden; }
+.bias-pick { position: absolute; inset: 0; opacity: 0; width: 100%; height: 100%; cursor: pointer; }

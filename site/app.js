@@ -1863,7 +1863,27 @@ if ("serviceWorker" in navigator) {
       more.addEventListener("click", () => openMember(m));
       const tg = el("label", { class: "bias-theme-tg small" }, el("input", { type: "checkbox", ...(themeOn() ? { checked: "" } : {}) }), ` ${t("bias_theme")}`);
       tg.firstChild.addEventListener("change", (e) => { pref.set("biasTheme", e.target.checked); applyTheme(); });
-      body.push(el("div", { class: "bias-foot" }, more, tg));
+      // 테마 색 고르기: 자주 쓰는 색 + 직접 고르기 (이 브라우저에만 저장)
+      const HUES = [350, 15, 40, 140, 175, 200, 225, 255, 280, 315];
+      const cur = pref.get("biasHue", null);
+      const sw = (h, label) => {
+        const b = el("button", { type: "button", class: `bias-sw${cur === h ? " on" : ""}`, "aria-label": label || `${h}°`, style: `--h:${h}` });
+        b.addEventListener("click", () => { pref.set("biasHue", h); pref.set("biasTheme", true); renderBias(); applyTheme(); });
+        return b;
+      };
+      const reset = el("button", { type: "button", class: `bias-sw auto${cur === null ? " on" : ""}`, title: t("bias_color_auto") }, "A");
+      reset.addEventListener("click", () => { pref.set("biasHue", null); renderBias(); applyTheme(); });
+      const custom = el("input", { type: "color", class: "bias-pick", "aria-label": t("bias_color_pick") });
+      custom.addEventListener("input", (e) => {
+        const [r, g, b] = [1, 3, 5].map((i) => parseInt(e.target.value.slice(i, i + 2), 16) / 255);
+        const mx = Math.max(r, g, b), mn = Math.min(r, g, b), d = mx - mn || 1;
+        let h = mx === r ? ((g - b) / d) % 6 : mx === g ? (b - r) / d + 2 : (r - g) / d + 4;
+        pref.set("biasHue", Math.round((h * 60 + 360) % 360)); pref.set("biasTheme", true); applyTheme();
+      });
+      custom.addEventListener("change", () => renderBias());
+      body.push(el("div", { class: "bias-foot" }, more, tg),
+        themeOn() ? el("div", { class: "bias-colors" }, el("span", { class: "muted small" }, t("bias_color")), reset, ...HUES.map((h) => sw(h)),
+          el("label", { class: "bias-sw rainbow", title: t("bias_color_pick") }, custom)) : null);
     } else {
       body.push(el("p", { class: "note small" }, t("bias_desc")));
     }
@@ -1883,7 +1903,9 @@ if ("serviceWorker" in navigator) {
     }
     // 멤버별 색: members.yml color(색상 0~360)가 있으면 그것, 없으면 15명 순서대로 색상환을 고르게 나눈 색
     const idx = data.members.indexOf(m);
-    const h = Number.isFinite(+m.color) && m.color !== "" ? +m.color : Math.round((idx * 360) / data.members.length + 250) % 360;
+    const auto = Number.isFinite(+m.color) && m.color !== "" ? +m.color : Math.round((idx * 360) / data.members.length + 250) % 360;
+    const mine = pref.get("biasHue", null);  // 사용자가 고른 색(색상 각도)이 있으면 그것
+    const h = Number.isFinite(mine) ? mine : auto;
     const dark = matchMedia("(prefers-color-scheme: dark)").matches;
     const lo = h >= 40 && h <= 190 ? 14 : 0;  // 노랑·초록은 흰 글씨가 안 보여서 더 어둡게
     root.style.setProperty("--accent", `hsl(${h} 70% ${dark ? 72 : 50 - lo}%)`);
