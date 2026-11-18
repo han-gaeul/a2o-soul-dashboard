@@ -20,7 +20,7 @@ const SITE = "https://a2osoul-tracker.com";
 const HOOK = "https://push.a2osoul-tracker.com/yt-hook";
 const ORIGINS = [SITE, "http://localhost:8765"];
 const TOPICS = ["notice", "vote", "show", "video", "birthday"];
-const LANGS = ["ko", "en", "ja", "zh", "es", "id", "th", "pt"];
+const LANGS = ["ko", "en", "ja", "zh", "es", "id", "th", "pt", "fil", "vi"];
 const GROUP = /A2O\s?SOUL|A2OSOUL|에이투오\s?소울/i;
 const OWN_CHANNELS = ["UCAdLPETtxpZeRVqsq_QTneA", "UCn-SYb1TUz-1itK_uz4imUA"]; // A2O SOUL, A2O WORLD — 제목 상관없이 실행
 

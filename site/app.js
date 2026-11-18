@@ -1,5 +1,5 @@
 // ---------- 언어 ----------
-const LANGS = ["ko", "en", "ja", "zh", "es", "id", "th", "pt"];
+const LANGS = ["ko", "en", "ja", "zh", "es", "id", "th", "pt", "fil", "vi"];
 const LOCALES = { ko: "ko-KR", en: "en-US", ja: "ja-JP", zh: "zh-CN", es: "es-ES", id: "id-ID", th: "th-TH", pt: "pt-BR" };
 // 기기별 설정(최애·본 영상) — 막혀 있어도 사이트는 그대로 동작
 const pref = {
@@ -11,12 +11,13 @@ const LANG = (() => {
     const saved = localStorage.getItem("lang");
     if (LANGS.includes(saved)) return saved;
   } catch (_) { /* 저장소 막힘 */ }
-  const nav = (navigator.language || "ko").slice(0, 2);
+  const navFull = (navigator.language || "ko").toLowerCase();
+  const nav = navFull.startsWith("fil") || navFull.startsWith("tl") ? "fil" : navFull.slice(0, 2);
   return LANGS.includes(nav) ? nav : "en";
 })();
 function t(key, vars = {}) {
   const dict = window.I18N[LANG] || window.I18N.ko;
-  let s = dict[key] ?? window.I18N.ko[key] ?? key;
+  let s = dict[key] ?? (LANG !== "ko" ? window.I18N.en[key] : undefined) ?? window.I18N.ko[key] ?? key;  // 없는 문구는 영어 → 한국어
   if (typeof s !== "string") return s;
   for (const [k, v] of Object.entries(vars)) s = s.replaceAll(`{${k}}`, v);
   return s;

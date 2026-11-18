@@ -34,6 +34,8 @@ MSG = {
            "show": "📺 ใกล้เริ่มแล้ว", "show_body": "{t} KST {name}", "video": "🎬 วิดีโอใหม่", "video_more": "{title} และอีก {n} รายการ"},
     "pt": {"birthday": "🎂 Feliz aniversário, {name}!", "birthday_body": "Hoje é aniversário de {name} — vamos comemorar juntos!", "chart_new": "📈 Entrou no {service}!", "chart_up": "🚀 Subindo no {service}", "chart_new_body": "{song} #{rank}", "chart_up_body": "{song} #{rank} (↑{n})", "nominee": "🏆 A2O SOUL indicado ao #1 no {show}!", "nominee_body": "Voto ao vivo às {t} KST — vamos vencer", "ev_show": "No {show}", "show_now": "🔴 Ao vivo agora", "notice": "📢 Novo aviso", "prerec": "🎙 Inscrição na pré-gravação abre em breve", "vote": "🗳 Votação fechando", "vote_body": "{name} — fecha {t} KST",
            "show": "📺 Começa em breve", "show_body": "{t} KST {name}", "video": "🎬 Novo vídeo", "video_more": "{title} +{n}"},
+    "fil": {"birthday": "🎂 Happy birthday, {name}!", "birthday_body": "Birthday ngayon ni {name} — sabay tayong magdiwang!", "chart_new": "📈 Pumasok sa {service}!", "chart_up": "🚀 Umaakyat sa {service}", "chart_new_body": "{song} #{rank}", "chart_up_body": "{song} #{rank} (↑{n})", "nominee": "🏆 #1 nominee ang A2O SOUL sa {show}!", "nominee_body": "Live vote sa {t} KST — manalo tayo", "ev_show": "Sa {show}", "show_now": "🔴 Live ngayon", "notice": "📢 Bagong anunsyo", "prerec": "🎙 Malapit nang magbukas ang pre-recording sign-up", "vote": "🗳 Malapit nang magsara ang boto", "vote_body": "{name} — magsasara {t} KST", "show": "📺 Malapit nang magsimula", "show_body": "{t} KST {name}", "video": "🎬 Bagong video", "video_more": "{title} +{n} pa"},
+    "vi": {"birthday": "🎂 Chúc mừng sinh nhật {name}!", "birthday_body": "Hôm nay là sinh nhật {name} — cùng chúc mừng nhé!", "chart_new": "📈 Lọt vào {service}!", "chart_up": "🚀 Tăng hạng trên {service}", "chart_new_body": "{song} hạng {rank}", "chart_up_body": "{song} hạng {rank} (↑{n})", "nominee": "🏆 A2O SOUL được đề cử hạng 1 {show}!", "nominee_body": "Bình chọn live lúc {t} KST — cùng giành chiến thắng", "ev_show": "Diễn tại {show}", "show_now": "🔴 Đang phát sóng", "notice": "📢 Thông báo mới", "prerec": "🎙 Sắp mở đăng ký ghi hình trước", "vote": "🗳 Bình chọn sắp đóng", "vote_body": "{name} — đóng lúc {t} KST", "show": "📺 Sắp bắt đầu", "show_body": "{t} KST {name}", "video": "🎬 Video mới", "video_more": "{title} và {n} video khác"},
 }
 
 
@@ -122,7 +124,7 @@ def candidates(dash, site, now):
 
 def compose(kind, data, lang, group=None):
     m = MSG.get(lang) or MSG["en"]
-    trs = lambda s: ((data.get("tr") or {}).get(s) or {}).get(lang) or s if s else s  # noqa: E731
+    trs = lambda s: (((data.get("tr") or {}).get(s) or {}).get(lang) or ((data.get("tr") or {}).get(s) or {}).get("en") or s) if s and lang != "ko" else s  # noqa: E731
     if kind == "notice":
         return m["notice"], data["body"], data["url"]
     if kind == "prerec":
