@@ -2187,19 +2187,14 @@
   "since_id": "2122618084649468286"
  },
  "x_official_votes": {
-  "at": "2026-11-18T15:00+09:00",
+  "at": "2026-11-18T16:30+09:00",
   "deep": 1,
   "last": {
    "official": [],
-   "read": 9,
-   "verified": [
-    "Daeman_771:blue",
-    "a2osoulmex:blue",
-    "helloitsfah:blue",
-    "ishkpopvotes:blue"
-   ]
+   "read": 5,
+   "verified": []
   },
-  "since_id": "2122922620312261087",
+  "since_id": "2122951586830016521",
   "v": 2
  },
  "x_show_photos": {
