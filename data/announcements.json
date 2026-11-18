@@ -914,6 +914,24 @@
    "permalink": "https://x.com/A2O_SOUL/status/2122887531385835712",
    "timestamp": "2026-11-18T03:00:03.000Z"
   },
+  "x:2122931219721801779": {
+   "caption": "[🔔]\n261120 KBS 뮤직뱅크 사전녹화 참여\n\n🔗 https://artist.mnetplus.world/main/stg/a2osoul/surveys/6afd3d5340c9202961689302\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark",
+   "excerpt": "[🔔]\n261120 KBS 뮤직뱅크 사전녹화 참여\n\n🔗 https://artist.mnetplus.world/main/stg/a2osoul/surveys/6afd3d5340c9202961689302\n\n#A2O #A2OSOUL\n#Dancing_in_th",
+   "items": [
+    {
+     "confidence": 0.85,
+     "date": "2026-11-20",
+     "end_date": null,
+     "kind": "music_show",
+     "place": null,
+     "time": null,
+     "title": "뮤직뱅크 출연",
+     "url": null
+    }
+   ],
+   "permalink": "https://x.com/A2O_SOUL/status/2122931219721801779",
+   "timestamp": "2026-11-18T05:53:39.000Z"
+  },
   "xf:2121586007254708290": {
    "caption": "[📸] 261114 @A2O_SOUL \n\n2026.11.14\nMBC Show! Music Core\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2OSOULBASE/status/2121586007254708290/photo/1",
    "excerpt": "[📸] 261114 @A2O_SOUL \n\n2026.11.14\nMBC Show! Music Core\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2OSOULBASE/status/2121586007254708",
@@ -2033,13 +2051,34 @@
    "permalink": "https://x.com/musicplant_kr/status/2122208044436127838",
    "timestamp": "2026-11-16T06:00:01.000Z",
    "vendor": "Music Plant"
+  },
+  "xv:2122932820913860808": {
+   "caption": "🖤 A2O SOUL DEBUT ALBUM [SUPERSTAR] MEET&amp;CALL EVENT 🖤\n\n🗓️ 이벤트 일시 : 11/29 (일) 18:00 (KST)\n🗓️ 응모 기간 : ~ 11/20 (금) 23:59 (KST)\n\n🤍 단체 영상통화 - 20명\n🤍 대면 - 30명\n\n#A2O #A2OSOUL\n#SUPERSTAR\n#Dancing_in_the_Dark https://x.com/JumpUp_ent/status/2122932820913860808/photo/1",
+   "excerpt": "🖤 A2O SOUL DEBUT ALBUM [SUPERSTAR] MEET&amp;CALL EVENT 🖤\n\n🗓️ 이벤트 일시 : 11/29 (일) 18:00 (KST)\n🗓️ 응모 기간 : ~ 11/20 (금) 23:59 (KST)\n\n🤍 단체 영상통화 - ",
+   "items": [
+    {
+     "apply_end": "2026-11-20 23:59",
+     "confidence": 0.85,
+     "date": "2026-11-29",
+     "end_date": null,
+     "kind": "event",
+     "place": null,
+     "short": "영통",
+     "time": "18:00",
+     "title": "Jumpup 영상통화 팬사인회",
+     "url": null
+    }
+   ],
+   "permalink": "https://x.com/JumpUp_ent/status/2122932820913860808",
+   "timestamp": "2026-11-18T06:00:01.000Z",
+   "vendor": "Jumpup"
   }
  },
  "rules_version": 12,
  "x": {
   "A2O_SOUL": {
    "id": "1986498790229262336",
-   "since_id": "2122887531385835712"
+   "since_id": "2122931219721801779"
   }
  },
  "x_fans": {
@@ -2148,16 +2187,19 @@
   "since_id": "2122618084649468286"
  },
  "x_official_votes": {
-  "at": "2026-11-18T12:00+09:00",
+  "at": "2026-11-18T15:00+09:00",
   "deep": 1,
   "last": {
    "official": [],
-   "read": 4,
+   "read": 9,
    "verified": [
-    "a2osoulvote:blue"
+    "Daeman_771:blue",
+    "a2osoulmex:blue",
+    "helloitsfah:blue",
+    "ishkpopvotes:blue"
    ]
   },
-  "since_id": "2122887289747787945",
+  "since_id": "2122922620312261087",
   "v": 2
  },
  "x_stores": {
@@ -2177,6 +2219,6 @@
   "v": 2
  },
  "x_vendors": {
-  "since_id": "2122208044436127838"
+  "since_id": "2122932820913860808"
  }
 }
