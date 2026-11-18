@@ -1901,12 +1901,14 @@ if ("serviceWorker" in navigator) {
       return b;
     };
     const draw = () => {
+      const nShow = photos.filter((x) => x.account === "show").length;
       $("photoMem").replaceChildren(btn(t("ev_all"), !who, () => { who = ""; shown = 18; draw(); }),
+        nShow ? btn(`📺 ${t("photo_show")} ${nShow}`, who === "@show", () => { who = "@show"; shown = 18; draw(); }) : "",
         ...mems.map((n) => {
           const c = photos.filter((x) => (x.members || []).includes(n)).length;
           return btn(c ? `${n} ${c}` : n, n === who, () => { who = n; shown = 18; draw(); });
         }));
-      const list = photos.filter((x) => !who || (x.members || []).includes(who));
+      const list = photos.filter((x) => !who || (who === "@show" ? x.account === "show" : (x.members || []).includes(who)));
       if (!list.length) { $("photoGrid").replaceChildren(empty(t("photos_none"))); $("photoMore").hidden = true; return; }
       // 날짜별 — 그날 첫 사진에 날짜 표시 (줄을 나누면 세로로 너무 길어져서 격자는 그대로)
       const dayFmt = new Intl.DateTimeFormat(LANG === "zh" ? "zh-CN" : LANG, { month: "numeric", day: "numeric", weekday: "short", timeZone: "UTC" });
@@ -1917,9 +1919,9 @@ if ("serviceWorker" in navigator) {
         const first = d && d !== day;
         if (first) day = d;
         const img = el("img", { src: x.src, alt: x.text || "A2O SOUL", loading: "lazy", decoding: "async", referrerpolicy: "no-referrer" });
-        const a = el("a", { href: x.url, target: "_blank", rel: "noopener", title: `${x.at} · ${x.text || ""}`, }, img,
+        const a = el("a", { href: x.url, target: "_blank", rel: "noopener", title: `${x.at} · ${x.text || ""}` }, img,
           first ? el("span", { class: "ph-date" }, dayFmt.format(new Date(`${d}T00:00:00Z`))) : null,
-          el("span", { class: `src src-${x.account}` }, x.account === "x" ? "X" : "IG"));
+          el("span", { class: `src src-${x.account}` }, x.account === "show" ? `📺 ${x.by || ""}` : x.account === "x" ? "X" : "IG"));
         img.addEventListener("error", () => a.remove());  // 만료된 주소는 숨김
         cells.push(a);
       }

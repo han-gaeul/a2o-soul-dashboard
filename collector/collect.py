@@ -385,6 +385,13 @@ def photo_feed(cfg, registry, store, limit=600):
         for i, src in enumerate(post.get("images") or []):
             out.append({"src": src, "url": post.get("permalink"), "at": kst_datetime(post.get("timestamp")), "account": "x",
                         "members": detect_members(cfg, text), "text": text.split("\n")[0][:80], "n": i})
+    # 음방·방송사 공식 계정 사진 (account: show, 출처는 계정 이름)
+    for pid, post in ((store.get("x_show_photos") or {}).get("posts") or {}).items():
+        text = (post.get("caption") or "").strip()
+        for i, src in enumerate(post.get("images") or []):
+            out.append({"src": src, "url": post.get("permalink"), "at": kst_datetime(post.get("timestamp")), "account": "show",
+                        "by": post.get("author_name") or post.get("author"), "members": detect_members(cfg, text),
+                        "text": text.split("\n")[0][:80], "n": i})
     out.sort(key=lambda x: (x["at"], -x["n"]), reverse=True)
     return out[:limit]
 
@@ -1229,6 +1236,34 @@ def collect(cfg, rescan=False):
             for k in [k for k, m in mposts.items() if (m.get("timestamp") or "") < cut]:
                 mposts.pop(k)
             print(f"[매체] 새 글 {len(got)}개 · 보관 {len(mposts)}개")
+
+        # 음방 공식 사진 — 음방·방송사 인증 계정이 올린 A2O SOUL 무대·대기실 사진 (3시간마다, 음방 당일 방송 전후엔 1시간마다)
+        sst = store.setdefault("x_show_photos", {})
+        sposts = sst.setdefault("posts", {})
+        show_day = rules.SHOW_WEEKDAY and any(v == now.weekday() for v in rules.SHOW_WEEKDAY.values()) and 14 <= now.hour <= 21
+        if not sst.get("at") or now - datetime.fromisoformat(sst["at"]) >= (timedelta(hours=1) if show_day else timedelta(hours=3)):
+            q = ("(\"A2O SOUL\" OR A2OSOUL OR 에이투오소울 OR \"에이투오 소울\") "
+                 "(더쇼 OR THESHOW OR \"THE SHOW\" OR 쇼챔피언 OR 쇼챔 OR SHOWCHAMPION OR 엠카 OR 엠카운트다운 OR MCOUNTDOWN OR 뮤직뱅크 OR 뮤뱅 OR MUSICBANK "
+                 "OR 음악중심 OR 음중 OR MUSICCORE OR 인기가요 OR 인가 OR INKIGAYO) has:images -is:retweet -is:reply")
+            try:
+                got = xposts.search_posts(q, since_id=sst.get("since_id"), max_results=100, media=True)
+                sst["at"] = now.isoformat(timespec="minutes")
+                if got:
+                    sst["since_id"] = max(got, key=lambda p_: int(p_["tweet_id"]))["tweet_id"]
+                known = {u.lower() for u in cfg["x_vote_accounts"]} | {v["handle"].lower() for v in cfg["x_media"]}
+                n_new = 0
+                for p_ in got:
+                    official = p_.get("verified_type") in ("business", "government") or p_["author"].lower() in known
+                    if official and p_.get("images") and not p_.get("video") and A2O_MENTION.search(p_["caption"]) \
+                            and not re.search(r"투표|VOTE|VOTING|순위|RANKING|중간\s*집계", p_["caption"], re.I):
+                        sposts[p_["tweet_id"]] = {k: p_.get(k) for k in ("caption", "timestamp", "permalink", "author", "author_name", "images")}
+                        n_new += 1
+                cut = (now - timedelta(days=60)).isoformat()
+                for k in [k for k, m in sposts.items() if (m.get("timestamp") or "") < cut]:
+                    sposts.pop(k)
+                print(f"[음방 사진] 검색 {len(got)}개 · 새 공식 사진 글 {n_new}개 · 보관 {len(sposts)}개")
+            except Exception as e:  # noqa: BLE001
+                print(f"[음방 사진] 검색 실패: {e}")
 
         def media_cand(p_):
             """인증 기업 계정인데 목록에 없는 계정 → 새 매체 후보 (판매처·매장·투표 앱 제외)."""
