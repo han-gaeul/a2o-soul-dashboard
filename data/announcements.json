@@ -2209,24 +2209,23 @@
   "since_id": "2122618084649468286"
  },
  "x_official_votes": {
-  "at": "2026-11-18T17:00+09:00",
+  "at": "2026-11-18T17:10+09:00",
   "deep": 1,
   "last": {
-   "official": [
-    "KTOPSTAR_offcl"
-   ],
-   "read": 1,
+   "official": [],
+   "read": 2,
    "verified": [
-    "KTOPSTAR_offcl:blue"
+    "onlyseeonee:blue",
+    "relifedrim:blue"
    ]
   },
-  "since_id": "2122963267241083371",
+  "since_id": "2122963933208424915",
   "v": 2
  },
  "x_show_photos": {
-  "at": "2026-11-18T16:09+09:00",
+  "at": "2026-11-18T17:10+09:00",
   "posts": {},
-  "since_id": "2122948688431788466"
+  "since_id": "2122963969610805524"
  },
  "x_stores": {
   "at": "2026-11-18T16:00+09:00",
