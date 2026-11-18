@@ -10546,9 +10546,10 @@
   }
  ],
  "stream_playlist": {
-  "desc": "멜론 순위는 '24시간 동안 들은 사람 수'와 '1시간 이용량'을 반반 합쳐요. 1시간 이용량은 한 계정이 한 곡을 1시간에 1번만 세서, 소울 곡을 순서대로 계속 반복해 두면 매시간 모든 곡이 한 번씩 반영돼요.",
+  "desc": "다른 팬덤 음원총공팀처럼 소울 곡만으로 짜고 활동곡(Dancing in the Dark)을 자주 넣었어요. 아래 버튼으로 한 번에 담고 전체 반복으로 계속 틀어 주세요.",
   "tips": [
-   "이 5곡을 위 순서대로 반복 재생 (셔플 끄기) — 같은 곡만 연달아 틀면 그 시간엔 1번만 세요",
+   "담기 전에 재생목록을 비우고, 설정에서 '중복 곡 허용'을 켜 두기",
+   "전체 반복 켜기, 셔플 끄기",
    "스트리밍 이용권으로 로그인한 상태에서, 음소거·볼륨 0 말고 작게라도 소리 켜기",
    "곡마다 하트(좋아요) 누르기",
    "이용권이 있는 음원 사이트가 여러 개면 사이트마다 각각 — 가족·친구 계정도 큰 힘이 돼요 (들은 사람 수가 중요)",
@@ -10557,23 +10558,91 @@
   "title": "에투소 스밍 리스트",
   "tracks": [
    {
+    "ids": {
+     "bugs": "6516227",
+     "flo": "616833384",
+     "genie": "117647941",
+     "melon": "603877088"
+    },
     "song": "Dancing in the Dark",
+    "time": "2:48",
     "title": true
    },
    {
-    "song": "Superstar",
-    "title": true
-   },
-   {
+    "ids": {
+     "bugs": "6516228",
+     "flo": "616833385",
+     "genie": "117647942",
+     "melon": "603877089"
+    },
     "song": "While We're Young",
+    "time": "3:18",
     "title": false
    },
    {
+    "ids": {
+     "bugs": "6511884",
+     "flo": "611657166",
+     "genie": "117256250",
+     "melon": "603382330"
+    },
+    "song": "Superstar",
+    "time": "4:08",
+    "title": true
+   },
+   {
+    "ids": {
+     "bugs": "6516227",
+     "flo": "616833384",
+     "genie": "117647941",
+     "melon": "603877088"
+    },
+    "song": "Dancing in the Dark",
+    "time": "2:48",
+    "title": true
+   },
+   {
+    "ids": {
+     "bugs": "6516229",
+     "flo": "616833386",
+     "genie": "117647943",
+     "melon": "603877090"
+    },
     "song": "Very First Love",
+    "time": "3:08",
     "title": false
    },
    {
+    "ids": {
+     "bugs": "6511884",
+     "flo": "611657166",
+     "genie": "117256250",
+     "melon": "603382330"
+    },
+    "song": "Superstar",
+    "time": "4:08",
+    "title": true
+   },
+   {
+    "ids": {
+     "bugs": "6516227",
+     "flo": "616833384",
+     "genie": "117647941",
+     "melon": "603877088"
+    },
+    "song": "Dancing in the Dark",
+    "time": "2:48",
+    "title": true
+   },
+   {
+    "ids": {
+     "bugs": "6516230",
+     "flo": "616833387",
+     "genie": "117647944",
+     "melon": "603877091"
+    },
     "song": "Moonlight Shadow",
+    "time": "3:28",
     "title": false
    }
   ]
@@ -11410,6 +11479,15 @@
    "th": "ชอบนีโอโซล (ศิลปินคนโปรด: Erykah Badu)",
    "zh": "喜欢新灵魂乐（最爱歌手Erykah Badu）"
   },
+  "다른 팬덤 음원총공팀처럼 소울 곡만으로 짜고 활동곡(Dancing in the Dark)을 자주 넣었어요. 아래 버튼으로 한 번에 담고 전체 반복으로 계속 틀어 주세요.": {
+   "en": "Like other fandoms' streaming teams, this list uses only SOUL songs and repeats the promo track (Dancing in the Dark). Add it all at once with the buttons below and keep it on repeat.",
+   "es": "Como los equipos de streaming de otros fandoms, la lista usa solo canciones de SOUL y repite la canción promocional (Dancing in the Dark). Añádela de una vez con los botones y déjala en repetición.",
+   "id": "Seperti tim streaming fandom lain, daftar ini hanya berisi lagu SOUL dan lagu promosi (Dancing in the Dark) diputar lebih sering. Tambahkan sekaligus dengan tombol di bawah dan putar ulang terus.",
+   "ja": "他のファンダムのストリーミングチームと同じく、SOULの曲だけで組み、活動曲（Dancing in the Dark）を多めに入れました。下のボタンで一度に追加して、全曲リピートで流し続けてください。",
+   "pt": "Como os times de streaming de outros fandoms, a lista usa só músicas do SOUL e repete a música de promoção (Dancing in the Dark). Adicione tudo de uma vez pelos botões abaixo e deixe no repetir.",
+   "th": "เหมือนทีมสตรีมของแฟนด้อมอื่น ลิสต์นี้มีแต่เพลงของ SOUL และใส่เพลงโปรโมต (Dancing in the Dark) บ่อยขึ้น กดปุ่มด้านล่างเพื่อเพิ่มทีเดียว แล้วเปิดวนทั้งหมด",
+   "zh": "和其他粉丝打榜组一样，只用 SOUL 的歌，并多放了活动曲（Dancing in the Dark）。用下面的按钮一次添加，开全部循环一直播放。"
+  },
   "다수 댄스 대회 수상": {
    "en": "Won multiple dance competitions",
    "es": "Ganó varias competencias de baile",
@@ -11418,6 +11496,15 @@
    "pt": "Venceu vários concursos de dança",
    "th": "ชนะการแข่งขันเต้นหลายรายการ",
    "zh": "多次获得舞蹈比赛奖项"
+  },
+  "담기 전에 재생목록을 비우고, 설정에서 '중복 곡 허용'을 켜 두기": {
+   "en": "Before adding, clear your play queue and turn on 'allow duplicate songs' in settings",
+   "es": "Antes de añadir, vacía la cola y activa 'permitir canciones duplicadas' en ajustes",
+   "id": "Sebelum menambah, kosongkan antrean dan aktifkan 'izinkan lagu duplikat' di pengaturan",
+   "ja": "追加する前に再生リストを空にして、設定で「重複曲を許可」をオンに",
+   "pt": "Antes de adicionar, limpe a fila e ative 'permitir músicas duplicadas' nas configurações",
+   "th": "ก่อนเพิ่ม ล้างรายการเล่น แล้วเปิด 'อนุญาตเพลงซ้ำ' ในการตั้งค่า",
+   "zh": "添加前先清空播放列表，并在设置里打开「允许重复歌曲」"
   },
   "대부분 앱 미션·광고로 투표권을 모으니 미리 모아 두기": {
    "en": "Most apps give votes through missions and ads — collect them in advance",
@@ -12894,6 +12981,15 @@
    "pt": "Ex-trainee da JYP Entertainment",
    "th": "อดีตเทรนนี JYP Entertainment",
    "zh": "前JYP娱乐练习生"
+  },
+  "전체 반복 켜기, 셔플 끄기": {
+   "en": "Repeat all on, shuffle off",
+   "es": "Repetir todo activado, aleatorio desactivado",
+   "id": "Ulangi semua aktif, acak mati",
+   "ja": "全曲リピートをオン、シャッフルをオフ",
+   "pt": "Repetir tudo ligado, aleatório desligado",
+   "th": "เปิดเล่นวนทั้งหมด ปิดสุ่ม",
+   "zh": "开全部循环，关随机播放"
   },
   "점프업": {
    "en": "Jumpup",
