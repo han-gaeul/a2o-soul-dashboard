@@ -644,35 +644,91 @@ if ("serviceWorker" in navigator) {
     $("voteHome").remove();
   }
 
-  // 에투소 1시간 스밍 리스트 — 소울 곡엔 음원 사이트 검색 버튼, 사이사이 다른 가수 곡 자리
+  // 에투소 스밍 리스트 — 원클릭 담기(앱 링크) + 곡별 검색 링크
   const sp = data.stream_playlist || {};
   if ((sp.tracks || []).length) {
     const q = (song) => encodeURIComponent(`A2O SOUL ${song}`);
     const ko = LANG === "ko";
     const kr = [[ko ? "멜론" : "Melon", (x) => `https://www.melon.com/search/total/index.htm?q=${q(x)}`], [ko ? "지니" : "Genie", (x) => `https://www.genie.co.kr/search/searchMain?query=${q(x)}`],
-      [ko ? "벅스" : "Bugs", (x) => `https://music.bugs.co.kr/search/integrated?q=${q(x)}`], ["FLO", (x) => `https://www.music-flo.com/search/all?keyword=${q(x)}`],
-      ["VIBE", (x) => `https://vibe.naver.com/search?query=${q(x)}`]];
+      [ko ? "벅스" : "Bugs", (x) => `https://music.bugs.co.kr/search/integrated?q=${q(x)}`], ["FLO", (x) => `https://www.music-flo.com/search/all?keyword=${q(x)}`]];
     const global = [["Spotify", (x) => `https://open.spotify.com/search/${q(x)}`], ["YouTube Music", (x) => `https://music.youtube.com/search?q=${q(x)}`]];
-    const sites = LANG === "ko" ? [...kr, ...global] : [...global, ...kr];
-    let n = 0;
-    const rows = sp.tracks.map((x) => {
-      if (x.song) {
-        n += 1;
-        return el("li", { class: "pl-song" }, el("span", { class: "pl-n" }, String(n)),
-          el("div", {}, el("b", {}, x.song), x.title ? el("span", { class: "chip chip-on focus" }, t("title_track")) : null,
-            el("div", { class: "links small" }, ...sites.map(([label, url]) => ext(url(x.song), label)))));
-      }
-      const from = n + 1;
-      n += x.other;
-      return el("li", { class: "pl-other muted" }, el("span", { class: "pl-n" }, x.other > 1 ? `${from}–${n}` : String(from)),
-        el("div", {}, t("stream_other", { n: x.other })));
-    });
+    const sites = ko ? [...kr, ...global] : [...global, ...kr];
+    const secs = (t) => { const m = /^(\d+):(\d{2})$/.exec(t || ""); return m ? +m[1] * 60 + +m[2] : 0; };
+    // 리스트 이미지 — 캔버스로 그려서 저장·공유 가능하게 (4:5)
+    const listImg = () => {
+      const W = 1080, H = 1350, c = document.createElement("canvas");
+      c.width = W; c.height = H;
+      const x = c.getContext("2d"), F = getComputedStyle(document.body).fontFamily;
+      const bg = x.createLinearGradient(0, 0, W, H);
+      bg.addColorStop(0, "#efeaff"); bg.addColorStop(1, "#ffe9f3");
+      x.fillStyle = bg; x.fillRect(0, 0, W, H);
+      x.fillStyle = "#6c4cf5"; x.font = `700 34px ${F}`; x.fillText("A2O SOUL", 90, 140);
+      x.fillStyle = "#16161d"; x.font = `800 72px ${F}`; x.fillText(ko ? "에투소 스밍 리스트" : "Streaming playlist", 90, 230);
+      const top = 320, rowH = (H - top - 170) / sp.tracks.length;
+      sp.tracks.forEach((t2, i) => {
+        const y = top + i * rowH;
+        x.fillStyle = "rgba(255,255,255,.75)";
+        x.beginPath(); x.roundRect(80, y + 8, W - 160, rowH - 16, 24); x.fill();
+        x.fillStyle = t2.title ? "#6c4cf5" : "#9a9aab"; x.font = `800 40px ${F}`; x.textAlign = "center";
+        x.fillText(String(i + 1), 150, y + rowH / 2 + 14); x.textAlign = "left";
+        x.fillStyle = "#16161d"; x.font = `${t2.title ? 800 : 600} 44px ${F}`; x.fillText(t2.song, 210, y + rowH / 2 + 15);
+        if (t2.time) { x.fillStyle = "#6b6b7b"; x.font = `500 32px ${F}`; x.textAlign = "right"; x.fillText(t2.time, W - 120, y + rowH / 2 + 12); x.textAlign = "left"; }
+      });
+      x.fillStyle = "#6b6b7b"; x.font = `500 30px ${F}`;
+      x.fillText(ko ? "↻ 전체 반복 · 셔플 끄기 · 중복 곡 허용" : "↻ Repeat all · Shuffle off · Allow duplicates", 90, H - 90);
+      x.textAlign = "right"; x.fillText("a2osoul-tracker.com", W - 90, H - 90);
+      return c.toDataURL("image/png");
+    };
+    const uniq = [...new Map(sp.tracks.map((x) => [x.song, x])).values()];
+    const songLinks = el("details", { class: "howto pl-find" }, el("summary", {}, t("oc_find")),
+      el("ul", { class: "howto-steps" }, ...uniq.map((x) => el("li", {}, el("b", {}, x.song), " ",
+        el("span", { class: "links small" }, ...sites.map(([label, url]) => ext(url(x.song), label)))))));
+    const total = sp.tracks.every((x) => secs(x.time)) ? sp.tracks.reduce((n, x) => n + secs(x.time), 0) : 0;
+
+    // 원클릭 담기 — 기기별 앱 링크 (sming-maker 방식). 멜론은 한 번에 같은 곡을 못 담아서 중복이 나오면 나눠 담기
+    const ua = navigator.userAgent;
+    const dev = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1) ? "ios"
+      : /Android/.test(ua) ? "android" : /Mac/.test(navigator.platform || ua) ? "mac" : "win";
+    const mobile = dev === "ios" || dev === "android";
+    const ids = (p) => sp.tracks.map((x) => (x.ids || {})[p]).filter(Boolean);
+    const melonParts = [];
+    for (const id of ids("melon")) {
+      const cur = melonParts[melonParts.length - 1];
+      if (!cur || cur.includes(id)) melonParts.push([id]); else cur.push(id);
+    }
+    const melonUrl = (l) => (dev === "win" ? `melonapp://play?cType=1&cList=${l}` : dev === "mac" ? `melonplayer://play?menuid=0&cflag=1&cid=${l}` : `melonapp://play?menuid=0&ctype=1&cid=${l}`);
+    const g = ids("genie"), bg = ids("bugs"), fl = ids("flo");
+    const btn = (href, label, cls = "") => el("a", { class: `oc-btn ${cls}`, href, ...(/^https?:/.test(href) ? { target: "_blank", rel: "noopener" } : {}) }, label);
+    const oneClick = [];
+    if (melonParts.length) {
+      oneClick.push(el("div", { class: "oc-row" }, el("b", { class: "oc-name melon" }, ko ? "멜론" : "Melon"),
+        ...melonParts.map((l, i) => {
+          const a = btn(melonUrl(l.join(",")), melonParts.length > 1 ? `${i + 1}${ko ? "차" : ""} (${l.length}${ko ? "곡" : ""})` : t("oc_add"));
+          a.addEventListener("click", () => a.classList.add("done"));
+          return a;
+        })));
+    }
+    if (g.length) oneClick.push(el("div", { class: "oc-row" }, el("b", { class: "oc-name genie" }, ko ? "지니" : "Genie"),
+      btn(dev === "ios" ? `ktolleh00167://landing/?landing_type=31&landing_target=${g.join(";")};` : dev === "android" ? `cromegenie://scan/?landing_type=31&landing_target=${g.join(";")};`
+        : `https://www.genie.co.kr/player/shareProcessV2?xgnm=${g.join(";")}`, t("oc_add"))));
+    if (bg.length) oneClick.push(el("div", { class: "oc-row" }, el("b", { class: "oc-name bugs" }, ko ? "벅스" : "Bugs"),
+      btn(mobile ? `bugs3://app/tracks/lists?title=${encodeURIComponent("에투소 스밍")}&miniplay=y&track_ids=${bg.join("|")}|` : `https://music.bugs.co.kr/newPlayer?trackId=${bg.join(",")}`, t("oc_add"))));
+    if (fl.length) oneClick.push(el("div", { class: "oc-row" }, el("b", { class: "oc-name flo" }, "FLO"),
+      mobile ? btn(`flomobile://play?trackId=${fl.join(",")}`, t("oc_add")) : el("span", { class: "muted small" }, t("oc_mobile_only"))));
+
     $("streaming").before(el("div", { class: "playlist" },
       el("h3", {}, tc(sp.title)), sp.desc ? el("p", { class: "muted small" }, tc(sp.desc)) : null,
-      el("ol", { class: "pl", id: "plList" }, ...rows, el("li", { class: "pl-other muted" }, el("span", { class: "pl-n" }, "↻"), el("div", {}, t("stream_repeat")))),
+      el("div", { class: "pl-grid" },
+      oneClick.length ? el("div", { class: "oneclick" },
+        el("div", { class: "oc-head" }, el("b", {}, t("oc_title")),
+          el("span", { class: "muted small" }, t("oc_info", { n: sp.tracks.length }) + (total ? ` · ${Math.floor(total / 60)}${ko ? "분" : " min"}` : ""))),
+        ...oneClick,
+        melonParts.length > 1 ? el("p", { class: "muted small oc-note" }, t("oc_melon_parts", { n: melonParts.length })) : null) : null,
+      (() => { const src = listImg(); return el("figure", { class: "pl-img" }, el("img", { src, alt: sp.tracks.map((x, i) => `${i + 1}. ${x.song}`).join(" / ") }),
+        el("a", { class: "share-btn", href: src, download: "a2osoul-streaming-list.png" }, t("oc_save"))); })(),
+      songLinks,
       (sp.tips || []).length ? el("details", { class: "howto", ...(MOBILE ? {} : { open: "" }) }, el("summary", {}, t("stream_tips")),
-        el("ul", { class: "howto-steps" }, ...sp.tips.map((x) => el("li", {}, tc(x))))) : null));
-    fold($("plList"), MOBILE ? 6 : 12);
+        el("ul", { class: "howto-steps" }, ...sp.tips.map((x) => el("li", {}, tc(x))))) : null)));
   }
   if ((data.streaming || []).length) {
     $("streaming").before(el("h3", { class: "pl-mv" }, t("stream_mv")));
