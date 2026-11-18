@@ -293,9 +293,9 @@ def auto_photos(m):
     (맥에서 올린 한글 파일명은 자모가 분리돼 있어서 NFC로 맞춰서 비교)"""
     folder = ROOT / "site" / "img" / "members"
     if not folder.is_dir():
-        return {"photo": "", "signature": "", "extra": []}
+        return {"photo": "", "signature": "", "signs": [], "extra": []}
     keys = {unicodedata.normalize("NFC", k).lower() for k in (m["name"], str(m.get("ko") or "")) if k}
-    out = {"photo": "", "signature": "", "extra": []}
+    out = {"photo": "", "signature": "", "signs": [], "extra": []}
     for f in sorted(folder.iterdir(), key=lambda f: unicodedata.normalize("NFC", f.name)):
         if f.suffix.lower() not in IMG_EXT + (".svg",):
             continue
@@ -306,6 +306,7 @@ def auto_photos(m):
         label = " ".join(x for x in parts if x not in keys)
         if label in SIGN_LABELS:
             out["signature"] = out["signature"] or rel
+            out["signs"].append((label, rel))
         elif not label and f.suffix.lower() != ".svg":
             out["photo"] = out["photo"] or rel
         elif f.suffix.lower() != ".svg":
@@ -1653,6 +1654,7 @@ def build(cfg):
     for m in cfg["members"]:
         mine = [v for v in fancams if v["member"] == m["name"]]
         auto = auto_photos(m)
+        sign_src = read_yml("members.yml").get("signature_sources") or {}
         members.append({
             "name": m["name"],
             "ko": m.get("ko", ""),
@@ -1667,6 +1669,9 @@ def build(cfg):
             "ig_mentions": [{k: x[k] for k in ("at", "text", "more", "url")} for x in ig_feed if m["name"] in x["members"]][:10],
             "photo": local_img(m.get("photo")) or auto["photo"],
             "signature": local_img(m.get("signature")) or auto["signature"],
+            # 서명 여러 장: 파일 이름 앞 라벨(서명·사인)별 출처는 members.yml signature_sources
+            "signatures": [{"src": rel, **({k: str(v) for k, v in (sign_src.get(label) or {}).items() if k in ("label", "url") and v})}
+                           for label, rel in sorted(auto["signs"], key=lambda x: (x[0] != "서명", x[1]))],
             "birthday": str(m.get("birthday") or ""),
             "profile_history": profile_history(m) + [{**x, "label": cfg["info"]["photo_labels"].get(x["label"], x["label"])}
                                                      for x in auto["extra"]

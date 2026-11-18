@@ -12,6 +12,7 @@
 #   미성년 멤버가 많아 활동 관련 정보만 — 본명·학교·가족·거주지·신체정보·출처 없는 소문은 넣지 않기
 #   birthday: "MM-DD" → 프로필에 표시, 다가오는 일정에 생일 D-day 자동 (30일 전부터)
 #   signature: site/img/ 아래 서명 이미지 경로 (예: img/members/moon-sign.png)
+#   서명 여러 장: site/img/members/ 에 '서명_이름' '사인_이름'처럼 올리면 모두 표시, 출처는 아래 signature_sources (라벨별)
 #   profile_history: 역대 프로필 사진 목록. 항목마다 photo(site/img/ 경로) 또는 instagram(게시물 URL) 중 하나
 #     예) profile_history:
 #           - { label: 데뷔 프로필 (2026.10), photo: img/members/moon-2026-10.jpg }
@@ -39,6 +40,10 @@ group_links:
 # 그룹 공식 게시물 (멤버 탭 '공식 게시물'에 인스타그램 임베드로 표시). 단체 사진 게시물은 여기에
 #   예) - "https://www.instagram.com/p/XXXXXXXXXXX/"
 group_posts: []
+
+# 서명 이미지 출처 — 파일 이름 앞 라벨별 (사인_문.png → 사인)
+signature_sources:
+  사인: { label: THE KPOP, url: "" }
 
 members:
   - name: MOON
