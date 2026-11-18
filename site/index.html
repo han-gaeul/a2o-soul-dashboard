@@ -54,6 +54,7 @@
     <a href="#fancams" data-i18n="tab.fancams">직캠</a>
     <a href="#videos" data-i18n="tab.videos">영상</a>
     <a href="#guide" data-i18n="tab.guide">가이드</a>
+    <a href="#community" data-i18n="tab.community">커뮤니티</a>
   </nav>
 
   <!-- 한눈에 -->
@@ -257,6 +258,18 @@
   </div>
 
   <!-- 입덕 가이드 -->
+  <div data-tab="community" hidden>
+    <section class="card" id="cmSec">
+      <div class="sec-head"><h2 data-i18n="cm_title">커뮤니티</h2><div class="cm-auth" id="cmAuth"></div></div>
+      <div class="filter-row era-row" id="cmBoards"></div>
+      <p class="cm-warn small" id="cmWarn" hidden></p>
+      <div class="cm-tools"><div class="filter-row era-row" id="cmCats"></div><button class="install" type="button" id="cmWrite" data-i18n="cm_write">글쓰기</button></div>
+      <ol class="cm-list" id="cmList"></ol>
+      <button class="more" type="button" id="cmMore" hidden data-i18n="more">더 보기</button>
+      <p class="muted small" id="cmRules" data-i18n="cm_rules"></p>
+    </section>
+  </div>
+
   <div data-tab="guide" hidden>
     <section class="card" id="tourSec">
       <h2 data-i18n="tour">사이트 사용법</h2>
@@ -333,6 +346,11 @@
   <div class="dlg-head"><h2 id="tourTitle" data-i18n="tour">사이트 사용법</h2><button class="dlg-close" id="tourClose" type="button" aria-label="✕">✕</button></div>
   <ol class="tour-list" id="tourDlgList"></ol>
   <p class="tour-never"><button type="button" class="more" id="tourNever" data-i18n="tour_never">다시 안 보기</button></p>
+</dialog>
+
+<dialog id="cmDlg" aria-labelledby="cmDlgTitle">
+  <div class="dlg-head"><h2 id="cmDlgTitle"></h2><button class="dlg-close" id="cmClose" type="button" aria-label="✕">✕</button></div>
+  <div id="cmBody"></div>
 </dialog>
 
 <dialog id="pushDlg" aria-labelledby="pushTitle">

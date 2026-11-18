@@ -122,11 +122,11 @@ if ("serviceWorker" in navigator) {
   const kstDate = (s) => new Date(`${s.replace(" ", "T")}${s.length > 10 ? ":00" : "T00:00:00"}+09:00`); // "YYYY-MM-DD[ HH:MM]" KST
 
   // ---------- 탭 ----------
-  const tabs = ["overview", "notice", "cheer", "mv", "members", "fancams", "videos", "guide"];
+  const tabs = ["overview", "notice", "cheer", "mv", "members", "fancams", "videos", "guide", "community"];
   const drawn = new Set();
   const drawers = {};
   // 공유 링크: #member/MOON → 멤버 탭, #ep/날짜/방송 → 영상 탭, #cmp/날짜/방송/A/B → 직캠 탭
-  const ROUTE_TAB = { member: "members", ep: "videos", cmp: "fancams" };
+  const ROUTE_TAB = { member: "members", ep: "videos", cmp: "fancams", post: "community" };
   const route = () => decodeURIComponent(location.hash.slice(1)).split("/");
   function showTab() {
     const [head] = route();
@@ -1921,6 +1921,170 @@ if ("serviceWorker" in navigator) {
     draw();
   } else {
     $("photoSec").remove();
+  }
+
+  // ---------- 커뮤니티: 질문·정보(익명 가능) / 포카 교환(구글 로그인만, 익명은 안 보임) ----------
+  {
+    const API = ((data.push || {}).api || "").replace(/\/$/, "");
+    const GID = (data.push || {}).google_client_id || "";
+    const dev = (() => { let d = pref.get("dev", ""); if (!d) { d = crypto.getRandomValues(new Uint32Array(4)).join("-"); pref.set("dev", d); } return d; })();
+    let token = (() => { try { const x = JSON.parse(sessionStorage.getItem("gtoken") || "null"); return x && x.exp > Date.now() ? x.t : ""; } catch (_) { return ""; } })();
+    let me = { login: false, admin: false, banned: 0, boards: ["qna"] };
+    let board = "qna", cat = "", before = 0;
+    const CATS = { qna: ["질문", "정보", "후기"], trade: ["구해요", "드려요", "교환해요"] };
+    const api = async (path, opts = {}) => {
+      const r = await fetch(API + path, { ...opts, headers: { "Content-Type": "application/json", "X-Device": dev, ...(token ? { Authorization: `Bearer ${token}` } : {}), ...(opts.headers || {}) } });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(j.error === "login" ? t("cm_need_login") : j.error || r.status);
+      return j;
+    };
+    const post = (path, body) => api(path, { method: "POST", body: JSON.stringify(body) });
+    const ago = (ms) => { const m = (Date.now() - ms) / 6e4; return m < 1 ? t("just_now") : m < 60 ? `${Math.floor(m)}m` : m < 1440 ? t("hours_ago", { n: Math.floor(m / 60) }) : t("days_ago", { n: Math.floor(m / 1440) }); };
+    const dlg = $("cmDlg");
+    $("cmClose").onclick = () => dlg.close();
+    const open = (title, ...nodes) => { $("cmDlgTitle").textContent = title; $("cmBody").replaceChildren(...nodes); if (!dlg.open) dlg.showModal(); };
+    const err = (e) => el("p", { class: "cm-err small" }, String(e.message || e));
+
+    // 구글 로그인 (Google Identity Services) — 이메일은 서버에 저장하지 않음
+    const login = () => {
+      if (!GID) return alertBox(t("cm_login_soon"));
+      const go = () => { google.accounts.id.initialize({ client_id: GID, callback: (r) => {
+        const exp = JSON.parse(atob(r.credential.split(".")[1].replace(/-/g, "+").replace(/_/g, "/"))).exp * 1000;
+        token = r.credential; try { sessionStorage.setItem("gtoken", JSON.stringify({ t: token, exp })); } catch (_) {}
+        refresh();
+      } }); google.accounts.id.prompt(); };
+      if (window.google?.accounts) return go();
+      const sc = document.createElement("script"); sc.src = "https://accounts.google.com/gsi/client"; sc.onload = go; document.head.append(sc);
+    };
+    const alertBox = (msg) => open(t("cm_title"), el("p", {}, msg));
+    const logout = () => { token = ""; try { sessionStorage.removeItem("gtoken"); } catch (_) {} board = "qna"; refresh(); };
+
+    const drawHead = () => {
+      $("cmAuth").replaceChildren(me.login
+        ? el("span", { class: "small" }, me.admin ? "🛡 " : "", t("cm_logged"), " ", Object.assign(el("button", { type: "button", class: "linkbtn" }, t("cm_logout")), { onclick: logout }))
+        : Object.assign(el("button", { type: "button", class: "more" }, "G ", t("cm_login")), { onclick: login }));
+      $("cmBoards").replaceChildren(...me.boards.map((b) => Object.assign(el("button", { type: "button", class: b === board ? "on" : "" }, t(`cm_b_${b}`)),
+        { onclick: () => { board = b; cat = ""; refresh(); } })),
+        ...(me.login ? [] : [el("span", { class: "muted small" }, t("cm_more_login"))]));
+      $("cmWarn").hidden = board !== "trade";
+      $("cmWarn").textContent = t("cm_trade_warn");
+      $("cmCats").replaceChildren(...["", ...CATS[board]].map((c) => Object.assign(el("button", { type: "button", class: c === cat ? "on" : "" }, c ? tc(c) : t("ev_all")),
+        { onclick: () => { cat = c; load(true); drawHead(); } })));
+    };
+    const row = (x) => {
+      const li = el("li", { class: `cm-row${x.pinned ? " pin" : ""}${x.hidden ? " hid" : ""}` },
+        el("span", { class: "chip" }, x.pinned ? "📌" : tc(x.cat)),
+        el("div", { class: "cm-main" }, el("b", {}, x.title, x.img ? " 🖼" : "", x.comments ? el("span", { class: "cm-cn" }, ` [${x.comments}]`) : ""),
+          el("span", { class: "muted small" }, `${x.nick}${x.login ? " ✓" : ""} · ${ago(x.at)}${x.member ? ` · ${x.member}` : ""}`)));
+      li.onclick = () => view(x.id);
+      return li;
+    };
+    async function load(reset) {
+      if (reset) { before = 0; $("cmList").replaceChildren(); }
+      try {
+        const q = new URLSearchParams({ b: board, ...(cat ? { cat } : {}), ...(before ? { before } : {}) });
+        const j = await api(`/board/list?${q}`);
+        $("cmList").append(...(reset ? j.pins : []).map(row), ...j.posts.map(row));
+        if (reset && !j.pins.length && !j.posts.length) $("cmList").append(empty(t("cm_empty")));
+        before = j.posts.length ? j.posts[j.posts.length - 1].id : before;
+        $("cmMore").hidden = j.posts.length < 20;
+      } catch (e) { $("cmList").replaceChildren(err(e)); }
+    }
+    $("cmMore").onclick = () => load(false);
+
+    // 글 보기 + 댓글
+    async function view(id) {
+      open("…");
+      try {
+        const p = await api(`/board/post?id=${id}`);
+        history.replaceState(null, "", `#post/${id}`);
+        const delBtn = (target) => Object.assign(el("button", { type: "button", class: "linkbtn" }, t("cm_delete")), { onclick: async () => {
+          const pw = target.anonPw && !me.admin ? prompt(t("cm_pw")) : "";
+          if (pw === null) return;
+          try { await post("/board/delete", { ...target.ref, pw }); target.after(); } catch (e) { alert(e.message); }
+        } });
+        const repBtn = (ref) => Object.assign(el("button", { type: "button", class: "linkbtn" }, t("cm_report")), { onclick: async (ev) => {
+          if (!confirm(t("cm_report_q"))) return;
+          try { const r = await post("/board/report", ref); ev.target.textContent = r.hidden ? t("cm_reported_hidden") : t("cm_reported"); ev.target.disabled = true; } catch (e) { alert(e.message); }
+        } });
+        const adminBtns = (ref) => me.admin ? ["pin", "hide", "ban", "unban"].map((a) => Object.assign(el("button", { type: "button", class: "linkbtn" }, `🛡${a}`), { onclick: async () => { await post("/board/admin", { ...ref, action: a }); view(id); } })) : [];
+        const comments = el("ol", { class: "cm-comments" }, ...p.comments.map((c) => el("li", { class: c.hidden ? "hid" : "" },
+          el("div", { class: "muted small" }, `${c.nick}${c.login ? " ✓" : ""} · ${ago(c.at)}`), el("div", { class: "cm-text" }, c.body),
+          el("div", { class: "cm-acts" }, (c.mine || c.anonPw || me.admin) ? delBtn({ ref: { comment: c.id }, anonPw: c.anonPw, after: () => view(id) }) : "", c.mine ? "" : repBtn({ comment: c.id }), ...adminBtns({ id: c.id, comment: 1 })))));
+        const nick = el("input", { class: "cm-in", placeholder: t("cm_nick"), maxlength: 16, value: pref.get("cmNick", "") });
+        const pw = el("input", { class: "cm-in", type: "password", placeholder: t("cm_pw"), maxlength: 32 });
+        const text = el("textarea", { class: "cm-in", rows: 3, placeholder: t("cm_comment_ph"), maxlength: 1000 });
+        const msg = el("p", { class: "cm-err small" });
+        const send = el("button", { type: "button", class: "install" }, t("cm_send"));
+        send.onclick = async () => {
+          try { pref.set("cmNick", nick.value); await post("/board/comment", { post: id, body: text.value, nick: nick.value, pw: pw.value }); view(id); load(true); }
+          catch (e) { msg.textContent = e.message; }
+        };
+        open(p.title,
+          el("div", { class: "muted small" }, `${tc(p.cat)}${p.member ? ` · ${p.member}` : ""} · ${p.nick}${p.login ? " ✓" : ""} · ${ago(p.at)}${p.edited ? ` · ${t("cm_edited")}` : ""}`),
+          p.img ? el("img", { class: "cm-img", src: `${API}/board/img?id=${id}`, alt: "" }) : "",
+          el("div", { class: "cm-text cm-body" }, p.body),
+          el("div", { class: "cm-acts" }, (p.mine || p.anonPw || me.admin) ? delBtn({ ref: { id }, anonPw: p.anonPw, after: () => { dlg.close(); load(true); } }) : "",
+            p.mine ? Object.assign(el("button", { type: "button", class: "linkbtn" }, t("cm_edit")), { onclick: () => form(p) }) : "",
+            p.mine ? "" : repBtn({ id }), shareBtn(() => share(`post/${id}`, p.title)), ...adminBtns({ id })),
+          el("h3", {}, t("cm_comments", { n: p.comments.length })), comments,
+          me.banned ? el("p", { class: "cm-err small" }, t("cm_banned")) :
+            el("div", { class: "cm-form" }, me.login ? "" : el("div", { class: "cm-pair" }, nick, pw), text, msg, send));
+      } catch (e) { open(t("cm_title"), err(e)); }
+    }
+
+    // 글쓰기·수정
+    function form(edit) {
+      if (me.banned) return alertBox(t("cm_banned"));
+      const title = el("input", { class: "cm-in", placeholder: t("cm_t_ph"), maxlength: 80, value: edit?.title || "" });
+      const text = el("textarea", { class: "cm-in", rows: 8, placeholder: t(board === "trade" ? "cm_b_ph_trade" : "cm_b_ph"), maxlength: 3000 }, edit?.body || "");
+      const catSel = el("select", { class: "sel" }, ...CATS[board].map((c) => el("option", { value: c }, tc(c))));
+      const memSel = el("select", { class: "sel" }, el("option", { value: "" }, t("cm_member")), ...data.members.map((m) => el("option", { value: m.name }, m.name)));
+      const nick = el("input", { class: "cm-in", placeholder: t("cm_nick"), maxlength: 16, value: pref.get("cmNick", "") });
+      const pw = el("input", { class: "cm-in", type: "password", placeholder: t("cm_pw"), maxlength: 32 });
+      let image = "";
+      const file = el("input", { type: "file", accept: "image/*" });
+      file.onchange = () => {  // 긴 변 1080px JPEG로 줄여서
+        const f = file.files[0]; if (!f) return;
+        const img = new Image();
+        img.onload = () => { const k = Math.min(1, 1080 / Math.max(img.width, img.height)); const c = document.createElement("canvas");
+          c.width = img.width * k; c.height = img.height * k; c.getContext("2d").drawImage(img, 0, 0, c.width, c.height); image = c.toDataURL("image/jpeg", 0.82); };
+        img.src = URL.createObjectURL(f);
+      };
+      const msg = el("p", { class: "cm-err small" });
+      const send = el("button", { type: "button", class: "install" }, edit ? t("cm_save") : t("cm_send"));
+      send.onclick = async () => {
+        send.disabled = true;
+        try {
+          pref.set("cmNick", nick.value);
+          if (edit) { await post("/board/edit", { id: edit.id, title: title.value, body: text.value }); view(edit.id); }
+          else { const r = await post("/board/write", { board, cat: catSel.value, member: memSel.value, title: title.value, body: text.value, nick: nick.value, pw: pw.value, image }); view(r.id); }
+          load(true);
+        } catch (e) { msg.textContent = e.message; }
+        send.disabled = false;
+      };
+      open(edit ? t("cm_edit") : `${t(`cm_b_${board}`)} · ${t("cm_write")}`,
+        edit ? "" : el("div", { class: "cm-pair" }, catSel, memSel), title, text,
+        !edit && me.login ? el("label", { class: "small cm-file" }, "🖼 ", t("cm_photo"), " ", file) : "",
+        !edit && !me.login ? el("div", { class: "cm-pair" }, nick, pw) : "",
+        !me.login ? el("p", { class: "muted small" }, t("cm_anon_note")) : "",
+        board === "trade" ? el("p", { class: "cm-warn small" }, t("cm_trade_warn")) : "",
+        msg, send);
+    }
+    $("cmWrite").onclick = () => form(null);
+
+    async function refresh() {
+      if (!API) return;
+      try { me = await api("/board/me"); } catch (e) { me = { login: false, admin: false, banned: 0, boards: ["qna"] }; if (token) { token = ""; } }
+      if (!me.boards.includes(board)) board = "qna";
+      drawHead(); load(true);
+    }
+    let started = false;
+    const start = () => { if (!started && (location.hash.startsWith("#community") || location.hash.startsWith("#post/"))) { started = true; refresh(); } };
+    window.addEventListener("hashchange", start);
+    start();
+    const r0 = route();
+    if (r0[0] === "post" && r0[1]) setTimeout(() => view(Number(r0[1])), 300);
   }
 
   // ---------- 사이트 사용법: 입덕 탭 섹션 + 첫 방문 안내 + 하단 버튼 ----------

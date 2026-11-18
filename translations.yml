@@ -2513,3 +2513,57 @@
   id: "Ulangi semua aktif, acak mati"
   th: "เปิดเล่นวนทั้งหมด ปิดสุ่ม"
   pt: "Repetir tudo ligado, aleatório desligado"
+
+"질문":
+  en: "Question"
+  ja: "質問"
+  zh: "提问"
+  es: "Pregunta"
+  id: "Tanya"
+  th: "คำถาม"
+  pt: "Pergunta"
+
+"정보":
+  en: "Info"
+  ja: "情報"
+  zh: "资讯"
+  es: "Info"
+  id: "Info"
+  th: "ข้อมูล"
+  pt: "Info"
+
+"후기":
+  en: "Review"
+  ja: "レビュー"
+  zh: "心得"
+  es: "Reseña"
+  id: "Ulasan"
+  th: "รีวิว"
+  pt: "Relato"
+
+"구해요":
+  en: "Looking for"
+  ja: "探してます"
+  zh: "求"
+  es: "Busco"
+  id: "Cari"
+  th: "ตามหา"
+  pt: "Procuro"
+
+"드려요":
+  en: "Giving away"
+  ja: "譲ります"
+  zh: "出"
+  es: "Regalo"
+  id: "Kasih"
+  th: "ให้"
+  pt: "Dou"
+
+"교환해요":
+  en: "Trade"
+  ja: "交換"
+  zh: "交换"
+  es: "Cambio"
+  id: "Tukar"
+  th: "แลก"
+  pt: "Troca"
