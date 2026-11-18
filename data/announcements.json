@@ -2325,16 +2325,17 @@
   "since_id": "2122618084649468286"
  },
  "x_official_votes": {
-  "at": "2026-11-19T00:50+09:00",
+  "at": "2026-11-19T03:50+09:00",
   "deep": 1,
   "last": {
    "official": [],
-   "read": 7,
+   "read": 6,
    "verified": [
+    "ZAIDORABLE:blue",
     "a2osoulvote:blue"
    ]
   },
-  "since_id": "2123081147810721951",
+  "since_id": "2123114944980025691",
   "v": 2
  },
  "x_show_photos": {
