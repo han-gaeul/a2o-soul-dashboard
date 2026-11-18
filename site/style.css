@@ -1078,3 +1078,6 @@ body.home-c:not(.has-bias) #bias { display: none; }
   .mg-hero { grid-row: 1 / span 4; margin: 0; border-radius: 14px; }
   .hs-mag .mg-row { min-width: 0; }
 }
+.hs-switch { display: block; margin: 0 0 10px auto; border: 1px solid var(--line); background: var(--card); color: var(--muted); font: inherit; font-size: 12.5px; padding: 5px 12px; border-radius: 999px; cursor: pointer; }
+.hs-switch:hover { color: var(--accent); border-color: var(--accent-bg); }
+@media (max-width: 720px) { .hs-switch { display: none; } }
