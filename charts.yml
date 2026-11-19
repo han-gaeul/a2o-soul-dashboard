@@ -7,4 +7,12 @@
 #     service: 멜론
 #     type: 일간
 #     ranks: { "2026-11-10": 82, "2026-11-11": 74 }
-charts: []
+charts:
+  - song: SUPERSTAR
+    service: 멜론
+    type: HOT100
+    ranks: { "2026-11-19": 76 }
+  - song: Dancing in the Dark
+    service: 멜론
+    type: HOT100
+    ranks: { "2026-11-19": 82 }
