@@ -621,3 +621,9 @@ window.I18N = {
     fil: ["🎬 Encore ng panalo", "Encore stage", "Encore fancam"], vi: ["🎬 Encore hạng 1", "Sân khấu encore", "Fancam encore"] };
   for (const [l, v] of Object.entries(V)) if (window.I18N[l]) Object.assign(window.I18N[l], { win_enc_title: v[0], win_enc_stage: v[1], win_enc_cam: v[2] });
 })();
+
+// 사전투표 기간
+(() => {
+  const V = { ko: "사전투표", en: "Pre-vote", ja: "事前投票", zh: "预投票", es: "Prevoto", id: "Pre-vote", th: "โหวตล่วงหน้า", pt: "Pré-votação", fil: "Pre-vote", vi: "Bình chọn trước" };
+  for (const [l, v] of Object.entries(V)) if (window.I18N[l]) window.I18N[l].prevote_win = v;
+})();

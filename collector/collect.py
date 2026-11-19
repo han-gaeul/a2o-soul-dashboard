@@ -168,7 +168,7 @@ def load_fan_files(cfg):
     tr = read_yml("translations.yml") or {}
     cfg["tr"] = {str(k): {str(l): str(x) for l, x in (v or {}).items() if x} for k, v in tr.items() if isinstance(v, dict)}
     howto = read_yml("howto.yml")
-    keep = ("show", "when", "pre", "live", "note", "url")
+    keep = ("show", "when", "pre", "live", "prevote", "note", "url")
     cfg["howto"] = {"checked": str(howto.get("checked") or ""),
                     "voting": [{k: str(v[k]) for k in keep if v.get(k)} for v in howto.get("voting") or [] if v.get("show")],
                     "streaming": [{"title": str(s["title"]), "steps": [str(x) for x in s.get("steps") or []],

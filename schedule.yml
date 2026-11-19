@@ -18,6 +18,9 @@ events:
   - { date: 2026-11-20, time: "20:00", type: 행사, title: Makestar 팬사인회, short: 팬싸 }
   - { date: 2026-11-21, time: "18:30", type: 행사, title: Withmuu 영상통화 팬사인회, short: 영통 }
   - { date: 2026-11-21, time: "20:30", type: 행사, title: Withmuu 팬사인회, short: 팬싸 }
+  # 해외 팬 스밍 (A2OSOULSTATION 제공) — notify: 1시간 전 알림·트윗 초안
+  - { date: 2026-11-23, time: "18:00", type: 행사, title: 스테이션헤드 합동 스밍 1부 (KO1KEYZ 스테이션), short: 스밍, url: "https://x.com/KO1KEYZ_STATION", notify: true, credit: "@a2osoulstation" }
+  - { date: 2026-11-23, time: "19:30", type: 행사, title: 스테이션헤드 합동 스밍 2부 (A2O SOUL 스테이션), short: 스밍, url: "https://www.stationhead.com/a2osoulstation", notify: true, credit: "@a2osoulstation" }
   # 공식 영상
   - { date: 2026-11-16, time: "18:00", type: 기타, title: Dancing in the Dark 퍼포먼스 비디오 공개, url: "https://youtu.be/RRfoJjvqr7k" }
   # 연말 무대

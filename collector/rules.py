@@ -141,7 +141,7 @@ def nominee_items(caption, pday, shows_all):
 VOTE = re.compile(r"투표|VOTE|VOTING", re.I)
 VOTE_APPS = [
     ("빅크(BIGC)", r"빅크|BIGC"), ("아이돌챔프(IDOLCHAMP)", r"아이돌\s?챔프|IDOL\s?CHAMP|최애돌"),
-    ("엠넷플러스(Mnet Plus)", r"엠넷\s?플러스|MNET\s?PLUS|mnetplus"), ("팬캐스트(FANCAST)", r"팬캐스트|FANCAST"),
+    ("엠넷플러스(Mnet Plus)", r"엠넷\s?플러스|MNET\s?PLUS|mnetplus"), ("쿠궁(COOGOONG)", r"쿠궁|COOGOONG|팬캐스트|FANCAST"), ("키윙(KIWING)", r"키윙|KIWING"),
     ("뮤니버스(MUNIVERSE)", r"뮤니버스|MUNIVERSE"), ("뮤빗(MUBEAT)", r"뮤빗|MUBEAT"), ("링크(LiNC)", r"\bLiNC\b|링크\s?앱"),
     ("하이어(HIGHER)", r"하이어|HIGHER"), ("유픽(U+PICK)", r"유픽|U\+?\s?PICK"), ("스타플래닛(STARPLANET)", r"스타플래닛|STAR\s?PLANET"),
     ("팬앤스타(FAN N STAR)", r"팬앤스타|FAN\s?N\s?STAR"), ("아이돌플러스(IDOLPLUS)", r"아이돌\s?플러스|IDOL\s?PLUS"),

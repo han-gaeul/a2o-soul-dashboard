@@ -90,7 +90,7 @@ def candidates(dash, site, now):
         if m and v.get("show"):
             air[v["show"]] = f"{int(m.group(1)):02d}:{m.group(2)}"
     for e in dash.get("events") or []:  # 음방·라이브 1시간 전 ~ 시작 30분 뒤 (생방송 보기 링크로)
-        if e.get("type") not in ("음방", "라이브"):
+        if e.get("type") not in ("음방", "라이브") and not e.get("notify"):  # notify: true면 행사도 1시간 전 알림
             continue
         tm = e.get("time") or next((t for sh, t in air.items() if sh in (e.get("title") or "")), None)
         if not (tm and re.fullmatch(r"\d{2}:\d{2}", tm)):

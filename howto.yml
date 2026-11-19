@@ -1,36 +1,50 @@
 # 응원 탭 '스밍·투표 방법' — 팬 누구나 GitHub 웹에서 고칠 수 있어요.
 # 음방 투표 앱·비율은 자주 바뀌어요. 바뀌면 고치고 checked 날짜도 바꿔 주세요.
-checked: 2026-11-12
+checked: 2026-11-19
 
 # 음방별 투표 (방송 순서대로)
 #   pre: 사전투표 앱, live: 생방송 투표 앱, note: 한 줄 메모, url: 앱·안내 링크(선택)
 #   모르는 칸은 비워 두면 안 보여요
 voting:
+  # prevote: 사전투표 기간 (KST, "요일 HH:MM~요일 HH:MM") — 투표팀 @A2OSOULSUPPORT_INA 타임라인 기준 (2026-11-19)
+  - show: SHOW K-POP
+    when: 월 18:00
+    pre: 뮤빗(MUBEAT) · 뮤니버스(MUNIVERSE)
+    live: 뮤빗(MUBEAT) · 뮤니버스(MUNIVERSE)
+    prevote: "목 12:00~토 12:00"
   - show: 더쇼
     when: 화 18:00 · SBS Life
     pre: 빅크(BIGC)
     live: 빅크(BIGC)
+    prevote: "금 16:00~월 09:00"
     note: 생방송 중 앱 실시간 투표 배너
   - show: 쇼챔피언
-    when: 수 · MBC M
+    when: 수 18:00 · MBC M
     pre: 아이돌챔프(IDOLCHAMP)
+    prevote: "금 20:00~월 14:00"
     note: 앱 미션·광고로 모은 재화로 투표
   - show: 엠카운트다운
     when: 목 18:00 · Mnet
     pre: 엠넷플러스(Mnet Plus)
     live: 엠넷플러스(Mnet Plus)
+    prevote: "금 23:00~화 23:59"
     note: 생방송 중 앱 실시간 투표 배너
   - show: 뮤직뱅크
     when: 금 17:15 · KBS2
-    pre: 팬캐스트(FANCAST)
+    pre: 쿠궁(COOGOONG)
+    prevote: "일 21:00~수 15:00"
+    note: 쿠궁은 예전 팬캐스트(FANCAST) 앱이 이름을 바꾼 것 · 1표 = 하트 50개
   - show: 음악중심
     when: 토 · MBC
     pre: 뮤니버스(MUNIVERSE) · 뮤빗(MUBEAT, 글로벌)
+    live: 뮤니버스(MUNIVERSE) · 뮤빗(MUBEAT)
+    prevote: "화 18:00~목 23:00"
   - show: 인기가요
     when: 일 15:20 · SBS
-    pre: 링크(LiNC)
+    pre: 링크(LiNC) · 틴(TIN)
     live: 하이어(HIGHER)
-    note: 생방송 투표는 계정당 최대 5표
+    prevote: "월 12:00~금 23:59"
+    note: 생방송 투표는 계정당 최대 5표 · 틴(TIN) 앱 포인트는 링크와 같은 계정으로
 
 # 스밍·조회수 방법 (위에서부터 순서대로, steps는 한 줄씩). global: true면 한국어 외 언어에서 펼쳐서 보여줌
 streaming:
@@ -42,6 +56,41 @@ streaming:
       - 출석·광고·미션으로 투표권을 미리 모아 두고, 투표 기간에 A2O SOUL에 투표
       - 생방송 투표는 방송 시간(KST)에만 열려요 — 방송 일정은 한눈에 탭 달력에서
       - 새 투표·사녹 공지는 사이트에 자동으로 올라와요. 홈 화면에 추가해 두고 자주 확인해 주세요
+  - title: "유튜브 MV 스밍 목표·규칙 (해외 팬 · 가이드 @a2osoulstation)"
+    global: true
+    steps:
+      - "목표: Dancing in the Dark MV 첫 24시간 100만 뷰 · 첫 주 250만 뷰 · 좋아요 10만"
+      - "시간당 목표: 첫날 5만 뷰, 2~7일차 4.5만 뷰 (하루 25만 뷰)"
+      - "MV만 반복하지 말고 사이에 다른 영상 2~3개(또는 팬 재생목록)를 섞기"
+      - "영상 볼륨은 50% 이상 — 소리를 줄이려면 유튜브 플레이어 말고 휴대폰·컴퓨터 볼륨으로"
+      - "480p 이상 화질로, 로그인한 계정으로 보기"
+  - title: "Spotify 스밍 목표·규칙 (해외 팬 · 가이드 @a2osoulstation)"
+    global: true
+    steps:
+      - "첫날 목표: Dancing in the Dark 10만 스트리밍 · SUPERSTAR EP 전체 20만"
+      - "1시간 재생목록: Dancing in the Dark 다음에 다른 곡 2개(수록곡 1 + 다른 가수 곡 1)를 넣는 순서로"
+      - "한 곡 반복·셔플은 끄고 재생목록 순서대로 듣기"
+      - "Spotify 앱 볼륨 50% 이상, 앱 음소거 금지 — 조용히 들으려면 이어폰으로"
+      - "한 시간에 한 번쯤 재생목록을 바꾸거나 곡을 직접 넘겨서 활동 중임을 보여 주기"
+      - "같은 계정으로 여러 기기에서 동시에 재생하지 않기"
+  - title: "Apple Music 스밍 규칙 (해외 팬 · 가이드 @a2osoulstation)"
+    global: true
+    steps:
+      - "유료 이용권이나 무료 체험 중인 계정으로 (아이폰·안드로이드·윈도우·웹 모두 OK) — 자동 재생(∞)은 끄기"
+      - "아이튠즈로 구매해서 내려받은 곡은 지우고 스트리밍으로 듣기"
+      - "한 곡 반복 금지 — 타이틀곡 사이에 다른 곡 2~3개(약 5~6분)를 넣은 1~2시간 재생목록으로"
+      - "예시 순서: Dancing in the Dark · SUPERSTAR · 짧은 다른 곡 · Dancing in the Dark · While We're Young · Very First Love · Dancing in the Dark · Moonlight Shadow · 다른 짧은 곡"
+      - "곡을 건너뛰거나 넘기지 말고 끝까지, 볼륨 50% 이상(또는 이어폰)"
+      - "VPN 금지, 한 IP에서 여러 계정 돌리지 않기"
+  - title: "Stationhead 함께 듣기 (해외 팬 · 가이드 @a2osoulstation)"
+    global: true
+    steps:
+      - "앱스토어·플레이스토어에서 Stationhead 앱을 받거나 stationhead.com에서 — 전화번호·이메일·구글로 가입"
+      - "Apple Music 또는 Spotify를 연결 — 유료(Premium) 계정이어야 스트리밍이 차트에 반영돼요"
+      - "검색에서 a2osoulstation을 찾아 들어가기 → 방송 중(ON AIR)일 때 'Start listening'"
+      - "알림을 허용하고 a2osoulstation을 팔로우하면 방송 시작 때 알림이 와요"
+      - "앱 안에서 음소거하지 말고 기기 볼륨을 줄이기, 채팅에 참여하고 링크 공유하기"
+      - "방송 소식은 X @a2osoulstation · @soulstation15에서"
   - title: 음원 사이트 (멜론·지니·벅스·FLO·바이브)
     steps:
       - 해당 사이트 스트리밍 이용권으로 로그인한 상태에서 재생
