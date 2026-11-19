@@ -31,8 +31,9 @@ voting:
     note: 생방송 중 앱 실시간 투표 배너
   - show: 뮤직뱅크
     when: 금 17:15 · KBS2
-    pre: 팬캐스트(FANCAST)
+    pre: 쿠궁(COOGOONG)
     prevote: "일 21:00~수 15:00"
+    note: 쿠궁은 예전 팬캐스트(FANCAST) 앱이 이름을 바꾼 것 · 1표 = 하트 50개
   - show: 음악중심
     when: 토 · MBC
     pre: 뮤니버스(MUNIVERSE) · 뮤빗(MUBEAT, 글로벌)
