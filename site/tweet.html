@@ -39,6 +39,11 @@
     <button type="button" id="notify">🔔 이 기기에서 초안 알림 받기</button>
     <button type="button" id="notifyOff" hidden>알림 끄기</button>
   </div>
+  <div class="row" id="acctRow" hidden>
+    <span class="muted small" id="acct"></span>
+    <button type="button" id="connect">X 계정 연결</button>
+    <button type="button" id="disconnect" hidden>연결 해제</button>
+  </div>
   <p class="msg" id="msg" role="status"></p>
   <div id="warn"></div>
   <div id="list" style="display:grid;gap:12px"></div>
@@ -110,10 +115,14 @@
       const j = await call("/tweet/list", {});
       store.set("tw_key", $("key").value);
       $("warn").replaceChildren();
-      if (!j.ready) { const w = document.createElement("div"); w.className = "warn"; w.textContent = "X 키가 아직 Cloudflare에 없어서 올리기는 안 돼요 (X_API_KEY · X_API_SECRET · X_ACCESS_TOKEN · X_ACCESS_SECRET)"; $("warn").append(w); }
+      $("acctRow").hidden = false;
+      $("acct").textContent = j.account ? `올릴 계정: @${j.account.replace(/^@/, "")}` : "올릴 계정: 없음";
+      $("connect").textContent = j.connected ? "다른 계정으로 바꾸기" : "X 계정 연결";
+      $("disconnect").hidden = !j.connected;
+      if (!j.ready) { const w = document.createElement("div"); w.className = "warn"; w.textContent = "X 계정이 아직 연결되지 않아서 올리기는 안 돼요 — 'X 계정 연결'을 눌러 올릴 계정으로 로그인해 주세요"; $("warn").append(w); }
       const ds = j.drafts || [];
       const pend = ds.filter((d) => d.status === "pending").length;
-      msg(ds.length ? `올릴 초안 ${pend}개` : "아직 초안이 없어요");
+      msg((back ? back + " · " : "") + (ds.length ? `올릴 초안 ${pend}개` : "아직 초안이 없어요"));
       $("list").replaceChildren(...ds.sort((a, b) => (a.status === "pending") === (b.status === "pending") ? b.at - a.at : a.status === "pending" ? -1 : 1).map(card));
     } catch (e) { msg(e.message, true); }
   };
@@ -134,6 +143,11 @@
     } catch (e) { msg(e.message, true); }
   };
 
+  // X 계정 연결: 누르면 X 로그인 → 허용 → 이 페이지로 돌아옴 (?x=결과)
+  $("connect").onclick = async () => { try { const j = await call("/tweet/connect", {}); location.href = j.url; } catch (e) { msg(e.message, true); } };
+  $("disconnect").onclick = async () => { try { await call("/tweet/disconnect", {}); msg("연결을 해제했어요"); load(); } catch (e) { msg(e.message, true); } };
+  const back = new URLSearchParams(location.search).get("x");
+  if (back) { history.replaceState(null, "", location.pathname); setTimeout(() => msg(back), 0); }
   $("key").value = store.get("tw_key");
   $("notifyOff").hidden = !store.get("tw_notify");
   $("load").onclick = load;

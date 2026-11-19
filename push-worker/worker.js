@@ -330,24 +330,63 @@ async function board(req, env, url) {
 }
 
 // ---------- X(트위터) 자동 글: 수집기가 초안을 만들고, 관리자가 tweet.html에서 확인 후 올림 ----------
-// secrets: TWEET_KEY(관리 비밀번호) · X_API_KEY · X_API_SECRET · X_ACCESS_TOKEN · X_ACCESS_SECRET
+// secrets: TWEET_KEY(관리 비밀번호) · X_API_KEY · X_API_SECRET (+ 올릴 계정은 tweet.html의 'X 계정 연결', 또는 X_ACCESS_TOKEN·X_ACCESS_SECRET)
 const sameKey = async (a, b) => typeof a === "string" && !!b && a.length === b.length
   && hex(await crypto.subtle.digest("SHA-256", enc.encode(a))) === hex(await crypto.subtle.digest("SHA-256", enc.encode(b)));
 const pct = (s) => encodeURIComponent(s).replace(/[!'()*]/g, (c) => "%" + c.charCodeAt(0).toString(16).toUpperCase());
 
-async function postTweet(env, text) {
-  const url = "https://api.x.com/2/tweets";
+// OAuth 1.0a 서명 헤더 (extra: oauth_callback·oauth_verifier 등, 본문이 JSON이면 서명에 안 들어감)
+async function oauthHeader(env, method, url, { token = "", tokenSecret = "", extra = {} } = {}) {
   const o = { oauth_consumer_key: env.X_API_KEY, oauth_nonce: crypto.randomUUID().replace(/-/g, ""), oauth_signature_method: "HMAC-SHA1",
-    oauth_timestamp: String(Math.floor(Date.now() / 1000)), oauth_token: env.X_ACCESS_TOKEN, oauth_version: "1.0" };
+    oauth_timestamp: String(Math.floor(Date.now() / 1000)), oauth_version: "1.0", ...(token ? { oauth_token: token } : {}), ...extra };
   const params = Object.keys(o).sort().map((k) => `${pct(k)}=${pct(o[k])}`).join("&");
-  const base = `POST&${pct(url)}&${pct(params)}`;
-  const key = await crypto.subtle.importKey("raw", enc.encode(`${pct(env.X_API_SECRET)}&${pct(env.X_ACCESS_SECRET)}`), { name: "HMAC", hash: "SHA-1" }, false, ["sign"]);
+  const base = `${method}&${pct(url)}&${pct(params)}`;
+  const key = await crypto.subtle.importKey("raw", enc.encode(`${pct(env.X_API_SECRET)}&${pct(tokenSecret)}`), { name: "HMAC", hash: "SHA-1" }, false, ["sign"]);
   o.oauth_signature = btoa(String.fromCharCode(...new Uint8Array(await crypto.subtle.sign("HMAC", key, enc.encode(base)))));
-  const auth = "OAuth " + Object.keys(o).sort().map((k) => `${pct(k)}="${pct(o[k])}"`).join(", ");
+  return "OAuth " + Object.keys(o).sort().map((k) => `${pct(k)}="${pct(o[k])}"`).join(", ");
+}
+// 글 올릴 계정: tweet.html에서 'X 계정 연결'로 저장한 계정 → 없으면 Cloudflare 시크릿(X_ACCESS_TOKEN·X_ACCESS_SECRET)
+async function xAccount(env) {
+  const a = await env.SUBS.get("_twacct", "json");
+  if (a && a.token && a.secret) return a;
+  return env.X_ACCESS_TOKEN && env.X_ACCESS_SECRET ? { token: env.X_ACCESS_TOKEN, secret: env.X_ACCESS_SECRET, screen_name: "" } : null;
+}
+
+async function postTweet(env, text) {
+  const acct = await xAccount(env);
+  if (!acct) throw new Error("연결된 X 계정이 없어요");
+  const url = "https://api.x.com/2/tweets";
+  const auth = await oauthHeader(env, "POST", url, { token: acct.token, tokenSecret: acct.secret });
   const r = await fetch(url, { method: "POST", headers: { Authorization: auth, "Content-Type": "application/json" }, body: JSON.stringify({ text }) });
   const j = await r.json().catch(() => ({}));
   if (!r.ok) throw new Error((j.detail || j.title || JSON.stringify(j)).slice(0, 200) || String(r.status));
   return j.data && j.data.id;
+}
+
+// X 계정 연결 (OAuth 1.0a 3-legged): /tweet/connect → X 로그인·허용 → /tweet/callback → 토큰을 KV에 저장
+async function xConnect(env, origin) {
+  const url = "https://api.x.com/oauth/request_token";
+  const auth = await oauthHeader(env, "POST", url, { extra: { oauth_callback: `${origin}/tweet/callback` } });
+  const r = await fetch(url, { method: "POST", headers: { Authorization: auth } });
+  const q = new URLSearchParams(await r.text());
+  if (!r.ok || !q.get("oauth_token")) throw new Error(`X 연결 시작 실패 (${r.status}) — 콜백 URI 등록을 확인해 주세요`);
+  await env.SUBS.put(`_twreq:${q.get("oauth_token")}`, q.get("oauth_token_secret") || "", { expirationTtl: 900 });
+  return `https://api.x.com/oauth/authorize?oauth_token=${encodeURIComponent(q.get("oauth_token"))}&force_login=true`;
+}
+async function xCallback(env, url) {
+  const back = (m) => Response.redirect(`https://a2osoul-tracker.com/tweet.html?x=${encodeURIComponent(m)}`, 302);
+  const tok = url.searchParams.get("oauth_token") || "", ver = url.searchParams.get("oauth_verifier") || "";
+  if (url.searchParams.get("denied")) return back("취소했어요");
+  const sec = await env.SUBS.get(`_twreq:${tok}`);
+  if (sec === null || !ver) return back("연결 시간이 지났어요. 다시 눌러 주세요");
+  await env.SUBS.delete(`_twreq:${tok}`);
+  const au = "https://api.x.com/oauth/access_token";
+  const auth = await oauthHeader(env, "POST", au, { token: tok, tokenSecret: sec, extra: { oauth_verifier: ver } });
+  const r = await fetch(au, { method: "POST", headers: { Authorization: auth } });
+  const q = new URLSearchParams(await r.text());
+  if (!r.ok || !q.get("oauth_token")) return back(`연결 실패 (${r.status})`);
+  await env.SUBS.put("_twacct", JSON.stringify({ token: q.get("oauth_token"), secret: q.get("oauth_token_secret"), screen_name: q.get("screen_name") || "", at: Date.now() }));
+  return back(`@${q.get("screen_name") || ""} 연결됐어요`);
 }
 
 async function tweets(req, env, url) {
@@ -366,8 +405,15 @@ async function tweets(req, env, url) {
     }
     return json(req, { ok: true, added });
   }
+  if (req.method === "GET" && p === "/tweet/callback") return xCallback(env, url);
   const b = req.method === "POST" ? await req.json().catch(() => ({})) : {};
   if (!(await sameKey(b.key, env.TWEET_KEY))) return json(req, { error: "비밀번호가 달라요" }, 403);
+  const appOk = !!(env.X_API_KEY && env.X_API_SECRET);
+  if (p === "/tweet/connect") {
+    if (!appOk) return json(req, { error: "X_API_KEY·X_API_SECRET이 아직 없어요" }, 503);
+    try { return json(req, { url: await xConnect(env, url.origin) }); } catch (e) { return json(req, { error: e.message }, 502); }
+  }
+  if (p === "/tweet/disconnect") { await env.SUBS.delete("_twacct"); return json(req, { ok: true }); }
   if (p === "/tweet/list") {
     const out = [];
     let cursor;
@@ -376,7 +422,9 @@ async function tweets(req, env, url) {
       for (const k of page.keys) { const v = await env.SUBS.get(k.name, "json"); if (v) out.push(v); }
       cursor = page.list_complete ? null : page.cursor;
     } while (cursor);
-    return json(req, { ready: !!(env.X_API_KEY && env.X_API_SECRET && env.X_ACCESS_TOKEN && env.X_ACCESS_SECRET), drafts: out.sort((a, c) => c.at - a.at) });
+    const acct = await xAccount(env);
+    return json(req, { ready: !!(appOk && acct), account: acct ? (acct.screen_name || "(시크릿에 넣은 계정)") : "", connected: !!(await env.SUBS.get("_twacct")),
+      drafts: out.sort((a, c) => c.at - a.at) });
   }
   const k = `_tw:${String(b.id || "").replace(/[^0-9a-f]/g, "")}`;
   const d = await env.SUBS.get(k, "json");
@@ -387,7 +435,7 @@ async function tweets(req, env, url) {
   }
   if (p === "/tweet/post") {
     if (d.status === "posted") return json(req, { error: "이미 올린 글이에요" }, 409);
-    if (!(env.X_API_KEY && env.X_API_SECRET && env.X_ACCESS_TOKEN && env.X_ACCESS_SECRET)) return json(req, { error: "X 키가 아직 없어요 (Cloudflare 시크릿)" }, 503);
+    if (!appOk || !(await xAccount(env))) return json(req, { error: "X 계정이 아직 연결되지 않았어요" }, 503);
     const text = typeof b.text === "string" && b.text.trim() ? b.text.trim().slice(0, 1000) : d.text;
     try {
       const tid = await postTweet(env, text);
