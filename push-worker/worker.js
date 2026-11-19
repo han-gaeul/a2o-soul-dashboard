@@ -380,11 +380,25 @@ async function xCallback(env, url) {
   const sec = await env.SUBS.get(`_twreq:${tok}`);
   if (sec === null || !ver) return back("연결 시간이 지났어요. 다시 눌러 주세요");
   await env.SUBS.delete(`_twreq:${tok}`);
-  const au = "https://api.x.com/oauth/access_token";
-  const auth = await oauthHeader(env, "POST", au, { token: tok, tokenSecret: sec, extra: { oauth_verifier: ver } });
-  const r = await fetch(au, { method: "POST", headers: { Authorization: auth } });
-  const q = new URLSearchParams(await r.text());
-  if (!r.ok || !q.get("oauth_token")) return back(`연결 실패 (${r.status})`);
+  // access_token 교환: X 문서 방식(쿼리에 oauth_token·oauth_verifier) → 안 되면 서명 헤더 방식, api.x.com → api.twitter.com 순서로 시도
+  let q = null, last = "";
+  for (const host of ["https://api.x.com", "https://api.twitter.com"]) {
+    const au = `${host}/oauth/access_token`;
+    const tries = [
+      () => fetch(`${au}?oauth_token=${encodeURIComponent(tok)}&oauth_verifier=${encodeURIComponent(ver)}`, { method: "POST" }),
+      async () => fetch(au, { method: "POST", headers: { Authorization: await oauthHeader(env, "POST", au, { token: tok, tokenSecret: sec, extra: { oauth_verifier: ver } }) } }),
+    ];
+    for (const go of tries) {
+      const r = await go();
+      const txt = await r.text();
+      const p = new URLSearchParams(txt);
+      if (r.ok && p.get("oauth_token") && p.get("oauth_token_secret")) { q = p; break; }
+      last = `${r.status} ${txt.replace(/\s+/g, " ").slice(0, 120)}`;
+      console.log(`access_token 실패 ${host}: ${last}`);
+    }
+    if (q) break;
+  }
+  if (!q) return back(`연결 실패 (${last}) — 다시 눌러 주세요`);
   await env.SUBS.put("_twacct", JSON.stringify({ token: q.get("oauth_token"), secret: q.get("oauth_token_secret"), screen_name: q.get("screen_name") || "", at: Date.now() }));
   return back(`@${q.get("screen_name") || ""} 연결됐어요`);
 }
