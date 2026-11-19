@@ -2418,16 +2418,16 @@
   "since_id": "2123340513831170203"
  },
  "x_official_votes": {
-  "at": "2026-11-19T18:50+09:00",
+  "at": "2026-11-19T21:50+09:00",
   "deep": 1,
   "last": {
    "official": [],
-   "read": 1,
+   "read": 5,
    "verified": [
-    "a2osoulstation:blue"
+    "a2osoulvote:blue"
    ]
   },
-  "since_id": "2123352055750574224",
+  "since_id": "2123391063570485400",
   "v": 2
  },
  "x_show_photos": {
