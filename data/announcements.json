@@ -2265,7 +2265,7 @@
   }
  },
  "x_media": {
-  "at": "2026-11-19T16:30+09:00",
+  "at": "2026-11-19T17:30+09:00",
   "candidates": {},
   "checked": "2026-11-19T16:40+09:00",
   "missing": [
@@ -2359,19 +2359,32 @@
     "permalink": "https://x.com/myidolmiim/status/2122618084649468286",
     "timestamp": "2026-11-17T09:09:22.000Z",
     "video": false
+   },
+   "2123325622814724228": {
+    "author": "myidolmiim",
+    "author_name": "miim miim",
+    "caption": "[EXCLUSIVE] A2O SOUL 소노의 치이카와 체조 시작 🐹\n\n완벽하게 빙의했습니다 💯\n무한 반복하게 되는 영상으로 등극 🔁\n\n🔗 https://www.instagram.com/reel/Df6mfZ4BJqB\n\n✔️ 밈 팔로우 하고 A2O SOUL 독점 콘텐츠 미리 보기 😁\n\n#A2OSOUL #에이투오소울 #A2O\n#소노 #SONO\n#MIIM #마이밈 #KPOP https://x.com/myidolmiim/status/2123325622814724228/photo/1",
+    "images": [
+     "https://pbs.twimg.com/media/HXeRZlvagAAVESJ.jpg"
+    ],
+    "permalink": "https://x.com/myidolmiim/status/2123325622814724228",
+    "timestamp": "2026-11-19T08:00:52.000Z",
+    "video": false
    }
   },
-  "since_id": "2122618084649468286"
+  "since_id": "2123325622814724228"
  },
  "x_official_votes": {
-  "at": "2026-11-19T17:20+09:00",
+  "at": "2026-11-19T17:30+09:00",
   "deep": 1,
   "last": {
    "official": [],
-   "read": 0,
-   "verified": []
+   "read": 1,
+   "verified": [
+    "THEK___KING:blue"
+   ]
   },
-  "since_id": "2123324545977426233",
+  "since_id": "2123332954655236274",
   "v": 2
  },
  "x_show_photos": {
