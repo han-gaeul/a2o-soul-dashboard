@@ -2265,7 +2265,7 @@
   }
  },
  "x_media": {
-  "at": "2026-11-19T17:30+09:00",
+  "at": "2026-11-19T18:31+09:00",
   "candidates": {},
   "checked": "2026-11-19T16:40+09:00",
   "missing": [
@@ -2370,16 +2370,27 @@
     "permalink": "https://x.com/myidolmiim/status/2123325622814724228",
     "timestamp": "2026-11-19T08:00:52.000Z",
     "video": false
+   },
+   "2123340513831170203": {
+    "author": "M2MPD",
+    "author_name": "MPD(엠피디)",
+    "caption": "오늘부터 제 SOUL 메이트는 1위 가수 A2O SOUL의 댄인닼 릴댄이요🥳🥳 #릴레이댄스 #A2OSOUL #Dancing_in_the_Dark @A2O_SOUL #RelayDance\n\n▶ https://youtu.be/qxaN2rw20U4 https://x.com/M2MPD/status/2123340513831170203/photo/1",
+    "images": [
+     "https://pbs.twimg.com/media/HXdGJgYaQAAAsU2.jpg"
+    ],
+    "permalink": "https://x.com/M2MPD/status/2123340513831170203",
+    "timestamp": "2026-11-19T09:00:02.000Z",
+    "video": false
    }
   },
-  "since_id": "2123325622814724228"
+  "since_id": "2123340513831170203"
  },
  "x_official_votes": {
-  "at": "2026-11-19T18:21+09:00",
+  "at": "2026-11-19T18:31+09:00",
   "deep": 1,
   "last": {
    "official": [],
-   "read": 2,
+   "read": 0,
    "verified": []
   },
   "since_id": "2123344238083703037",
