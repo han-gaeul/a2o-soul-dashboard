@@ -1089,3 +1089,4 @@ body:not([data-cur="overview"]) .hs-switch, .hs-switch[hidden] { display: none; 
 .enc-opt img { width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 12px; }
 .enc-opt b { font-size: 14px; }
 .enc-opt:hover img { outline: 2px solid var(--accent-bg); outline-offset: 2px; }
+@media (max-width: 420px) { .oc-n { display: none; } }

@@ -2487,14 +2487,16 @@
   id: "FLO 24H"
   th: "FLO 24H"
   pt: "FLO 24H"
-"다른 팬덤 음원총공팀처럼 소울 곡만으로 짜고 활동곡(Dancing in the Dark)을 자주 넣었어요. 아래 버튼으로 한 번에 담고 전체 반복으로 계속 틀어 주세요.":
-  en: "Like other fandoms' streaming teams, this list uses only SOUL songs and repeats the promo track (Dancing in the Dark). Add it all at once with the buttons below and keep it on repeat."
-  ja: "他のファンダムのストリーミングチームと同じく、SOULの曲だけで組み、活動曲（Dancing in the Dark）を多めに入れました。下のボタンで一度に追加して、全曲リピートで流し続けてください。"
-  zh: "和其他粉丝打榜组一样，只用 SOUL 的歌，并多放了活动曲（Dancing in the Dark）。用下面的按钮一次添加，开全部循环一直播放。"
-  es: "Como los equipos de streaming de otros fandoms, la lista usa solo canciones de SOUL y repite la canción promocional (Dancing in the Dark). Añádela de una vez con los botones y déjala en repetición."
-  id: "Seperti tim streaming fandom lain, daftar ini hanya berisi lagu SOUL dan lagu promosi (Dancing in the Dark) diputar lebih sering. Tambahkan sekaligus dengan tombol di bawah dan putar ulang terus."
-  th: "เหมือนทีมสตรีมของแฟนด้อมอื่น ลิสต์นี้มีแต่เพลงของ SOUL และใส่เพลงโปรโมต (Dancing in the Dark) บ่อยขึ้น กดปุ่มด้านล่างเพื่อเพิ่มทีเดียว แล้วเปิดวนทั้งหมด"
-  pt: "Como os times de streaming de outros fandoms, a lista usa só músicas do SOUL e repete a música de promoção (Dancing in the Dark). Adicione tudo de uma vez pelos botões abaixo e deixe no repetir."
+"한 바퀴 약 1시간 리스트예요. 아래 버튼으로 한 번에 담고 전체 반복으로 계속 틀어 주세요.":
+  en: "One loop is about 1 hour. Add it all at once with the buttons below and keep it on repeat."
+  ja: "1周約1時間のリストです。下のボタンで一度に追加して、全曲リピートで流し続けてください。"
+  zh: "一轮约 1 小时的歌单。用下面的按钮一次添加，开全部循环一直播放。"
+  es: "Una vuelta dura cerca de 1 hora. Añádela de una vez con los botones y déjala en repetición."
+  id: "Satu putaran sekitar 1 jam. Tambahkan sekaligus dengan tombol di bawah dan putar ulang terus."
+  th: "ลิสต์วนหนึ่งรอบประมาณ 1 ชั่วโมง กดปุ่มด้านล่างเพื่อเพิ่มทีเดียว แล้วเปิดวนทั้งหมด"
+  pt: "Uma volta dura cerca de 1 hora. Adicione tudo de uma vez pelos botões abaixo e deixe no repetir."
+  fil: "Mga 1 oras ang isang ikot. Idagdag lahat nang sabay gamit ang mga button sa ibaba at i-repeat."
+  vi: "Một vòng khoảng 1 tiếng. Thêm tất cả một lần bằng nút bên dưới và bật lặp lại."
 
 "담기 전에 재생목록을 비우고, 설정에서 '중복 곡 허용'을 켜 두기":
   en: "Before adding, clear your play queue and turn on 'allow duplicate songs' in settings"

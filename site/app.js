@@ -697,16 +697,24 @@ if ("serviceWorker" in navigator) {
       x.fillStyle = bg; x.fillRect(0, 0, W, H);
       x.fillStyle = "#6c4cf5"; x.font = `700 34px ${F}`; x.fillText("A2O SOUL", 90, 140);
       x.fillStyle = "#16161d"; x.font = `800 72px ${F}`; x.fillText(ko ? "에투소 스밍 리스트" : "Streaming playlist", 90, 230);
-      const top = 320, rowH = (H - top - 170) / sp.tracks.length;
+      // 곡이 많으면(11곡 이상) 두 줄로
+      const cols = sp.tracks.length > 10 ? 2 : 1, per = Math.ceil(sp.tracks.length / cols), gap = 24;
+      const top = 320, rowH = (H - top - 190) / per, colW = (W - 160 - gap * (cols - 1)) / cols;
+      const fs = cols > 1 ? [32, 32, 24] : [40, 44, 32];
       sp.tracks.forEach((t2, i) => {
-        const y = top + i * rowH;
-        x.fillStyle = "rgba(255,255,255,.75)";
-        x.beginPath(); x.roundRect(80, y + 8, W - 160, rowH - 16, 24); x.fill();
-        x.fillStyle = t2.title ? "#6c4cf5" : "#9a9aab"; x.font = `800 40px ${F}`; x.textAlign = "center";
-        x.fillText(String(i + 1), 150, y + rowH / 2 + 14); x.textAlign = "left";
-        x.fillStyle = "#16161d"; x.font = `${t2.title ? 800 : 600} 44px ${F}`; x.fillText(t2.song, 210, y + rowH / 2 + 15);
-        if (t2.time) { x.fillStyle = "#6b6b7b"; x.font = `500 32px ${F}`; x.textAlign = "right"; x.fillText(t2.time, W - 120, y + rowH / 2 + 12); x.textAlign = "left"; }
+        const cx = 80 + Math.floor(i / per) * (colW + gap), y = top + (i % per) * rowH, mid = y + rowH / 2;
+        x.fillStyle = t2.title ? "rgba(255,255,255,.95)" : "rgba(255,255,255,.7)";
+        x.beginPath(); x.roundRect(cx, y + 6, colW, rowH - 12, cols > 1 ? 18 : 24); x.fill();
+        x.fillStyle = t2.title ? "#6c4cf5" : "#9a9aab"; x.font = `800 ${fs[0]}px ${F}`; x.textAlign = "center";
+        x.fillText(String(i + 1), cx + (cols > 1 ? 44 : 70), mid + fs[0] * 0.35); x.textAlign = "left";
+        // 곡명이 재생시간과 겹치지 않게 글자 크기 줄이기
+        const sx = cx + (cols > 1 ? 84 : 130), room = colW - (sx - cx) - (cols > 1 ? 20 : 40) - (t2.time ? fs[2] * 2.6 + 14 : 0);
+        let f1 = fs[1];
+        do { x.font = `${t2.title ? 800 : 600} ${f1}px ${F}`; } while (x.measureText(t2.song).width > room && --f1 > 18);
+        x.fillStyle = "#16161d"; x.fillText(t2.song, sx, mid + f1 * 0.35);
+        if (t2.time) { x.fillStyle = "#6b6b7b"; x.font = `500 ${fs[2]}px ${F}`; x.textAlign = "right"; x.fillText(t2.time, cx + colW - (cols > 1 ? 20 : 40), mid + fs[2] * 0.35); x.textAlign = "left"; }
       });
+      if (sp.credit?.label) { x.fillStyle = "#6c4cf5"; x.font = `600 28px ${F}`; x.fillText(`${ko ? "출처" : "Source"} · ${sp.credit.label}`, 90, H - 140); }
       x.fillStyle = "#6b6b7b"; x.font = `500 30px ${F}`;
       x.fillText(ko ? "↻ 전체 반복 · 셔플 끄기 · 중복 곡 허용" : "↻ Repeat all · Shuffle off · Allow duplicates", 90, H - 90);
       x.textAlign = "right"; x.fillText("a2osoul-tracker.com", W - 90, H - 90);
@@ -736,7 +744,8 @@ if ("serviceWorker" in navigator) {
     if (melonParts.length) {
       oneClick.push(el("div", { class: "oc-row" }, el("b", { class: "oc-name melon" }, ko ? "멜론" : "Melon"),
         ...melonParts.map((l, i) => {
-          const a = btn(melonUrl(l.join(",")), melonParts.length > 1 ? `${i + 1}${ko ? "차" : ""} (${l.length}${ko ? "곡" : ""})` : t("oc_add"));
+          const a = btn(melonUrl(l.join(",")), melonParts.length > 1 ? `${i + 1}${ko ? "차" : ""}` : t("oc_add"));
+          if (melonParts.length > 1) a.append(el("span", { class: "oc-n" }, ` (${l.length}${ko ? "곡" : ""})`));
           a.addEventListener("click", () => a.classList.add("done"));
           return a;
         })));
@@ -751,6 +760,7 @@ if ("serviceWorker" in navigator) {
 
     $("streaming").before(el("div", { class: "playlist" },
       el("h3", {}, tc(sp.title)), sp.desc ? el("p", { class: "muted small" }, tc(sp.desc)) : null,
+      sp.credit?.label ? el("p", { class: "muted small pl-credit" }, `${LANG === "ko" ? "출처" : "Source"} · `, sp.credit.url ? ext(sp.credit.url, `${sp.credit.label} ↗`) : sp.credit.label) : null,
       el("div", { class: "pl-grid" },
       oneClick.length ? el("div", { class: "oneclick" },
         el("div", { class: "oc-head" }, el("b", {}, t("oc_title")),

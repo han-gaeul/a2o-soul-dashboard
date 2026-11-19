@@ -32,7 +32,7 @@ votes:
 #   → 소울 곡만 순서대로 계속 반복하면 매시간 모든 곡이 한 번씩 반영됨. 활동곡이 바뀌면 순서만 바꾸기
 stream_playlist:
   title: 에투소 스밍 리스트
-  desc: 다른 팬덤 음원총공팀처럼 소울 곡만으로 짜고 활동곡(Dancing in the Dark)을 자주 넣었어요. 아래 버튼으로 한 번에 담고 전체 반복으로 계속 틀어 주세요.
+  desc: 한 바퀴 약 1시간 리스트예요. 아래 버튼으로 한 번에 담고 전체 반복으로 계속 틀어 주세요.
   # 곡 정보 — 원클릭 담기에 쓰는 곡 번호(각 사이트 곡 주소 끝 숫자)와 재생시간(m:ss)
   songs:
     Dancing in the Dark: { title: true, time: "2:48", melon: "603877088", genie: "117647941", bugs: "6516227", flo: "616833384" }
@@ -41,15 +41,25 @@ stream_playlist:
     Very First Love: { time: "3:08", melon: "603877090", genie: "117647943", bugs: "6516229", flo: "616833386" }
     Moonlight Shadow: { time: "3:28", melon: "603877091", genie: "117647944", bugs: "6516230", flo: "616833387" }
   # 재생 순서 (같은 곡 여러 번 OK)
-  tracks:
+  tracks:   # 18곡 · 약 1시간 (활동곡 5 · Superstar 4 · 수록곡 각 3, 같은 곡 연달아 X)
     - Dancing in the Dark
+    - Superstar
     - While We're Young
-    - Superstar
-    - Dancing in the Dark
     - Very First Love
-    - Superstar
     - Dancing in the Dark
     - Moonlight Shadow
+    - Superstar
+    - Dancing in the Dark
+    - While We're Young
+    - Very First Love
+    - Moonlight Shadow
+    - Dancing in the Dark
+    - Superstar
+    - While We're Young
+    - Dancing in the Dark
+    - Very First Love
+    - Moonlight Shadow
+    - Superstar
   tips:
     - 담기 전에 재생목록을 비우고, 설정에서 '중복 곡 허용'을 켜 두기
     - 전체 반복 켜기, 셔플 끄기
