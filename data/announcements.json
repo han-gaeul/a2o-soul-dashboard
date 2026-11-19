@@ -2325,17 +2325,14 @@
   "since_id": "2122618084649468286"
  },
  "x_official_votes": {
-  "at": "2026-11-19T06:50+09:00",
+  "at": "2026-11-19T09:50+09:00",
   "deep": 1,
   "last": {
    "official": [],
-   "read": 3,
-   "verified": [
-    "chixiitai:blue",
-    "seohaloverz:blue"
-   ]
+   "read": 1,
+   "verified": []
   },
-  "since_id": "2123171714494283849",
+  "since_id": "2123190547305415137",
   "v": 2
  },
  "x_show_photos": {
