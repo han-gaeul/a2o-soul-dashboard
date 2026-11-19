@@ -336,10 +336,11 @@ const sameKey = async (a, b) => typeof a === "string" && !!b && a.length === b.l
 const pct = (s) => encodeURIComponent(s).replace(/[!'()*]/g, (c) => "%" + c.charCodeAt(0).toString(16).toUpperCase());
 
 // OAuth 1.0a 서명 헤더 (extra: oauth_callback·oauth_verifier 등, 본문이 JSON이면 서명에 안 들어감)
-async function oauthHeader(env, method, url, { token = "", tokenSecret = "", extra = {} } = {}) {
+async function oauthHeader(env, method, url, { token = "", tokenSecret = "", extra = {}, body = {} } = {}) {
   const o = { oauth_consumer_key: env.X_API_KEY, oauth_nonce: crypto.randomUUID().replace(/-/g, ""), oauth_signature_method: "HMAC-SHA1",
     oauth_timestamp: String(Math.floor(Date.now() / 1000)), oauth_version: "1.0", ...(token ? { oauth_token: token } : {}), ...extra };
-  const params = Object.keys(o).sort().map((k) => `${pct(k)}=${pct(o[k])}`).join("&");
+  const all = { ...o, ...body };  // 폼 본문 파라미터도 서명에 포함 (헤더엔 안 넣음)
+  const params = Object.keys(all).sort().map((k) => `${pct(k)}=${pct(all[k])}`).join("&");
   const base = `${method}&${pct(url)}&${pct(params)}`;
   const key = await crypto.subtle.importKey("raw", enc.encode(`${pct(env.X_API_SECRET)}&${pct(tokenSecret)}`), { name: "HMAC", hash: "SHA-1" }, false, ["sign"]);
   o.oauth_signature = btoa(String.fromCharCode(...new Uint8Array(await crypto.subtle.sign("HMAC", key, enc.encode(base)))));
@@ -384,21 +385,28 @@ async function xCallback(env, url) {
   let q = null, last = "";
   for (const host of ["https://api.x.com", "https://api.twitter.com"]) {
     const au = `${host}/oauth/access_token`;
+    const form = { "Content-Type": "application/x-www-form-urlencoded", "User-Agent": "a2osoul-tracker/1.0" };
     const tries = [
-      () => fetch(`${au}?oauth_token=${encodeURIComponent(tok)}&oauth_verifier=${encodeURIComponent(ver)}`, { method: "POST" }),
-      async () => fetch(au, { method: "POST", headers: { Authorization: await oauthHeader(env, "POST", au, { token: tok, tokenSecret: sec, extra: { oauth_verifier: ver } }) } }),
+      // ① 서명 헤더 + 본문에 oauth_verifier (가장 흔한 라이브러리 방식)
+      ["form", async () => fetch(au, { method: "POST", body: `oauth_verifier=${pct(ver)}`,
+        headers: { ...form, Authorization: await oauthHeader(env, "POST", au, { token: tok, tokenSecret: sec, body: { oauth_verifier: ver } }) } })],
+      // ② X 문서 예시 (쿼리)
+      ["query", () => fetch(`${au}?oauth_token=${encodeURIComponent(tok)}&oauth_verifier=${encodeURIComponent(ver)}`, { method: "POST", headers: form })],
+      // ③ 서명 헤더만
+      ["header", async () => fetch(au, { method: "POST", headers: { ...form, Authorization: await oauthHeader(env, "POST", au, { token: tok, tokenSecret: sec, extra: { oauth_verifier: ver } }) } })],
     ];
-    for (const go of tries) {
+    for (const [name, go] of tries) {
       const r = await go();
       const txt = await r.text();
       const p = new URLSearchParams(txt);
       if (r.ok && p.get("oauth_token") && p.get("oauth_token_secret")) { q = p; break; }
-      last = `${r.status} ${txt.replace(/\s+/g, " ").slice(0, 120)}`;
-      console.log(`access_token 실패 ${host}: ${last}`);
+      const why = /<html/i.test(txt) ? "X 오류 페이지" : txt.replace(/\s+/g, " ").slice(0, 80);
+      last += `${last ? " / " : ""}${host.replace("https://", "")} ${name} ${r.status} ${why}`;
+      console.log(`access_token 실패 ${host} ${name}: ${r.status} ${txt.slice(0, 300)}`);
     }
     if (q) break;
   }
-  if (!q) return back(`연결 실패 (${last}) — 다시 눌러 주세요`);
+  if (!q) return back(`연결 실패 — ${last.slice(0, 400)}`);
   await env.SUBS.put("_twacct", JSON.stringify({ token: q.get("oauth_token"), secret: q.get("oauth_token_secret"), screen_name: q.get("screen_name") || "", at: Date.now() }));
   return back(`@${q.get("screen_name") || ""} 연결됐어요`);
 }
