@@ -11332,7 +11332,11 @@
   }
  ],
  "stream_playlist": {
-  "desc": "다른 팬덤 음원총공팀처럼 소울 곡만으로 짜고 활동곡(Dancing in the Dark)을 자주 넣었어요. 아래 버튼으로 한 번에 담고 전체 반복으로 계속 틀어 주세요.",
+  "credit": {
+   "label": "",
+   "url": ""
+  },
+  "desc": "한 바퀴 약 1시간 리스트예요. 아래 버튼으로 한 번에 담고 전체 반복으로 계속 틀어 주세요.",
   "tips": [
    "담기 전에 재생목록을 비우고, 설정에서 '중복 곡 허용'을 켜 두기",
    "전체 반복 켜기, 셔플 끄기",
@@ -11343,6 +11347,83 @@
   ],
   "title": "에투소 스밍 리스트",
   "tracks": [
+   {
+    "ids": {
+     "bugs": "6516227",
+     "flo": "616833384",
+     "genie": "117647941",
+     "melon": "603877088"
+    },
+    "song": "Dancing in the Dark",
+    "time": "2:48",
+    "title": true
+   },
+   {
+    "ids": {
+     "bugs": "6511884",
+     "flo": "611657166",
+     "genie": "117256250",
+     "melon": "603382330"
+    },
+    "song": "Superstar",
+    "time": "4:08",
+    "title": true
+   },
+   {
+    "ids": {
+     "bugs": "6516228",
+     "flo": "616833385",
+     "genie": "117647942",
+     "melon": "603877089"
+    },
+    "song": "While We're Young",
+    "time": "3:18",
+    "title": false
+   },
+   {
+    "ids": {
+     "bugs": "6516229",
+     "flo": "616833386",
+     "genie": "117647943",
+     "melon": "603877090"
+    },
+    "song": "Very First Love",
+    "time": "3:08",
+    "title": false
+   },
+   {
+    "ids": {
+     "bugs": "6516227",
+     "flo": "616833384",
+     "genie": "117647941",
+     "melon": "603877088"
+    },
+    "song": "Dancing in the Dark",
+    "time": "2:48",
+    "title": true
+   },
+   {
+    "ids": {
+     "bugs": "6516230",
+     "flo": "616833387",
+     "genie": "117647944",
+     "melon": "603877091"
+    },
+    "song": "Moonlight Shadow",
+    "time": "3:28",
+    "title": false
+   },
+   {
+    "ids": {
+     "bugs": "6511884",
+     "flo": "611657166",
+     "genie": "117256250",
+     "melon": "603382330"
+    },
+    "song": "Superstar",
+    "time": "4:08",
+    "title": true
+   },
    {
     "ids": {
      "bugs": "6516227",
@@ -11367,6 +11448,39 @@
    },
    {
     "ids": {
+     "bugs": "6516229",
+     "flo": "616833386",
+     "genie": "117647943",
+     "melon": "603877090"
+    },
+    "song": "Very First Love",
+    "time": "3:08",
+    "title": false
+   },
+   {
+    "ids": {
+     "bugs": "6516230",
+     "flo": "616833387",
+     "genie": "117647944",
+     "melon": "603877091"
+    },
+    "song": "Moonlight Shadow",
+    "time": "3:28",
+    "title": false
+   },
+   {
+    "ids": {
+     "bugs": "6516227",
+     "flo": "616833384",
+     "genie": "117647941",
+     "melon": "603877088"
+    },
+    "song": "Dancing in the Dark",
+    "time": "2:48",
+    "title": true
+   },
+   {
+    "ids": {
      "bugs": "6511884",
      "flo": "611657166",
      "genie": "117256250",
@@ -11375,6 +11489,17 @@
     "song": "Superstar",
     "time": "4:08",
     "title": true
+   },
+   {
+    "ids": {
+     "bugs": "6516228",
+     "flo": "616833385",
+     "genie": "117647942",
+     "melon": "603877089"
+    },
+    "song": "While We're Young",
+    "time": "3:18",
+    "title": false
    },
    {
     "ids": {
@@ -11400,28 +11525,6 @@
    },
    {
     "ids": {
-     "bugs": "6511884",
-     "flo": "611657166",
-     "genie": "117256250",
-     "melon": "603382330"
-    },
-    "song": "Superstar",
-    "time": "4:08",
-    "title": true
-   },
-   {
-    "ids": {
-     "bugs": "6516227",
-     "flo": "616833384",
-     "genie": "117647941",
-     "melon": "603877088"
-    },
-    "song": "Dancing in the Dark",
-    "time": "2:48",
-    "title": true
-   },
-   {
-    "ids": {
      "bugs": "6516230",
      "flo": "616833387",
      "genie": "117647944",
@@ -11430,6 +11533,17 @@
     "song": "Moonlight Shadow",
     "time": "3:28",
     "title": false
+   },
+   {
+    "ids": {
+     "bugs": "6511884",
+     "flo": "611657166",
+     "genie": "117256250",
+     "melon": "603382330"
+    },
+    "song": "Superstar",
+    "time": "4:08",
+    "title": true
    }
   ]
  },
@@ -12337,15 +12451,6 @@
    "pt": "Ative os alertas",
    "th": "เปิดการแจ้งเตือน",
    "zh": "打开通知"
-  },
-  "다른 팬덤 음원총공팀처럼 소울 곡만으로 짜고 활동곡(Dancing in the Dark)을 자주 넣었어요. 아래 버튼으로 한 번에 담고 전체 반복으로 계속 틀어 주세요.": {
-   "en": "Like other fandoms' streaming teams, this list uses only SOUL songs and repeats the promo track (Dancing in the Dark). Add it all at once with the buttons below and keep it on repeat.",
-   "es": "Como los equipos de streaming de otros fandoms, la lista usa solo canciones de SOUL y repite la canción promocional (Dancing in the Dark). Añádela de una vez con los botones y déjala en repetición.",
-   "id": "Seperti tim streaming fandom lain, daftar ini hanya berisi lagu SOUL dan lagu promosi (Dancing in the Dark) diputar lebih sering. Tambahkan sekaligus dengan tombol di bawah dan putar ulang terus.",
-   "ja": "他のファンダムのストリーミングチームと同じく、SOULの曲だけで組み、活動曲（Dancing in the Dark）を多めに入れました。下のボタンで一度に追加して、全曲リピートで流し続けてください。",
-   "pt": "Como os times de streaming de outros fandoms, a lista usa só músicas do SOUL e repete a música de promoção (Dancing in the Dark). Adicione tudo de uma vez pelos botões abaixo e deixe no repetir.",
-   "th": "เหมือนทีมสตรีมของแฟนด้อมอื่น ลิสต์นี้มีแต่เพลงของ SOUL และใส่เพลงโปรโมต (Dancing in the Dark) บ่อยขึ้น กดปุ่มด้านล่างเพื่อเพิ่มทีเดียว แล้วเปิดวนทั้งหมด",
-   "zh": "和其他粉丝打榜组一样，只用 SOUL 的歌，并多放了活动曲（Dancing in the Dark）。用下面的按钮一次添加，开全部循环一直播放。"
   },
   "다수 댄스 대회 수상": {
    "en": "Won multiple dance competitions",
@@ -14479,6 +14584,17 @@
    "pt": "Use uma playlist com outras músicas em vez de repetir uma só (veja a lista de streaming na aba Apoio)",
    "th": "ใช้เพลย์ลิสต์ที่สลับกับเพลงอื่น แทนการวนเพลงเดียว (ดูเพลย์ลิสต์สตรีมในแท็บซัพพอร์ต)",
    "zh": "比起单曲循环，用混合其他歌曲的歌单（参考应援页的打榜歌单）"
+  },
+  "한 바퀴 약 1시간 리스트예요. 아래 버튼으로 한 번에 담고 전체 반복으로 계속 틀어 주세요.": {
+   "en": "One loop is about 1 hour. Add it all at once with the buttons below and keep it on repeat.",
+   "es": "Una vuelta dura cerca de 1 hora. Añádela de una vez con los botones y déjala en repetición.",
+   "fil": "Mga 1 oras ang isang ikot. Idagdag lahat nang sabay gamit ang mga button sa ibaba at i-repeat.",
+   "id": "Satu putaran sekitar 1 jam. Tambahkan sekaligus dengan tombol di bawah dan putar ulang terus.",
+   "ja": "1周約1時間のリストです。下のボタンで一度に追加して、全曲リピートで流し続けてください。",
+   "pt": "Uma volta dura cerca de 1 hora. Adicione tudo de uma vez pelos botões abaixo e deixe no repetir.",
+   "th": "ลิสต์วนหนึ่งรอบประมาณ 1 ชั่วโมง กดปุ่มด้านล่างเพื่อเพิ่มทีเดียว แล้วเปิดวนทั้งหมด",
+   "vi": "Một vòng khoảng 1 tiếng. Thêm tất cả một lần bằng nút bên dưới và bật lặp lại.",
+   "zh": "一轮约 1 小时的歌单。用下面的按钮一次添加，开全部循环一直播放。"
   },
   "한 프로그램에 몰아서 도배하지 말고 여러 프로그램에 나눠서": {
    "en": "Spread requests across several programs instead of flooding one",
