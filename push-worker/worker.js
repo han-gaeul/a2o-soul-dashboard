@@ -329,6 +329,77 @@ async function board(req, env, url) {
   return json(req, { error: "not found" }, 404);
 }
 
+// ---------- X(트위터) 자동 글: 수집기가 초안을 만들고, 관리자가 tweet.html에서 확인 후 올림 ----------
+// secrets: TWEET_KEY(관리 비밀번호) · X_API_KEY · X_API_SECRET · X_ACCESS_TOKEN · X_ACCESS_SECRET
+const sameKey = async (a, b) => typeof a === "string" && !!b && a.length === b.length
+  && hex(await crypto.subtle.digest("SHA-256", enc.encode(a))) === hex(await crypto.subtle.digest("SHA-256", enc.encode(b)));
+const pct = (s) => encodeURIComponent(s).replace(/[!'()*]/g, (c) => "%" + c.charCodeAt(0).toString(16).toUpperCase());
+
+async function postTweet(env, text) {
+  const url = "https://api.x.com/2/tweets";
+  const o = { oauth_consumer_key: env.X_API_KEY, oauth_nonce: crypto.randomUUID().replace(/-/g, ""), oauth_signature_method: "HMAC-SHA1",
+    oauth_timestamp: String(Math.floor(Date.now() / 1000)), oauth_token: env.X_ACCESS_TOKEN, oauth_version: "1.0" };
+  const params = Object.keys(o).sort().map((k) => `${pct(k)}=${pct(o[k])}`).join("&");
+  const base = `POST&${pct(url)}&${pct(params)}`;
+  const key = await crypto.subtle.importKey("raw", enc.encode(`${pct(env.X_API_SECRET)}&${pct(env.X_ACCESS_SECRET)}`), { name: "HMAC", hash: "SHA-1" }, false, ["sign"]);
+  o.oauth_signature = btoa(String.fromCharCode(...new Uint8Array(await crypto.subtle.sign("HMAC", key, enc.encode(base)))));
+  const auth = "OAuth " + Object.keys(o).sort().map((k) => `${pct(k)}="${pct(o[k])}"`).join(", ");
+  const r = await fetch(url, { method: "POST", headers: { Authorization: auth, "Content-Type": "application/json" }, body: JSON.stringify({ text }) });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error((j.detail || j.title || JSON.stringify(j)).slice(0, 200) || String(r.status));
+  return j.data && j.data.id;
+}
+
+async function tweets(req, env, url) {
+  const p = url.pathname;
+  if (req.method === "POST" && p === "/tweet/drafts") { // 수집기(GitHub Actions)만
+    if (!(await isAdmin(req, env))) return json(req, { error: "forbidden" }, 403);
+    const b = await req.json().catch(() => ({}));
+    let added = 0;
+    for (const d of (b.drafts || []).slice(0, 20)) {
+      if (!d || typeof d.text !== "string" || !d.key) continue;
+      const id = (await sha("tw:" + d.key)).slice(0, 16);
+      if (await env.SUBS.get(`_tw:${id}`)) continue;
+      await env.SUBS.put(`_tw:${id}`, JSON.stringify({ id, key: String(d.key).slice(0, 120), kind: String(d.kind || ""), text: d.text.slice(0, 1000),
+        status: "pending", at: Date.now() }), { expirationTtl: 3 * 86400 });
+      added++;
+    }
+    return json(req, { ok: true, added });
+  }
+  const b = req.method === "POST" ? await req.json().catch(() => ({})) : {};
+  if (!(await sameKey(b.key, env.TWEET_KEY))) return json(req, { error: "비밀번호가 달라요" }, 403);
+  if (p === "/tweet/list") {
+    const out = [];
+    let cursor;
+    do {
+      const page = await env.SUBS.list({ prefix: "_tw:", cursor });
+      for (const k of page.keys) { const v = await env.SUBS.get(k.name, "json"); if (v) out.push(v); }
+      cursor = page.list_complete ? null : page.cursor;
+    } while (cursor);
+    return json(req, { ready: !!(env.X_API_KEY && env.X_API_SECRET && env.X_ACCESS_TOKEN && env.X_ACCESS_SECRET), drafts: out.sort((a, c) => c.at - a.at) });
+  }
+  const k = `_tw:${String(b.id || "").replace(/[^0-9a-f]/g, "")}`;
+  const d = await env.SUBS.get(k, "json");
+  if (!d) return json(req, { error: "이미 지났거나 없는 초안이에요" }, 404);
+  if (p === "/tweet/skip") {
+    await env.SUBS.put(k, JSON.stringify({ ...d, status: "skipped" }), { expirationTtl: 86400 });
+    return json(req, { ok: true });
+  }
+  if (p === "/tweet/post") {
+    if (d.status === "posted") return json(req, { error: "이미 올린 글이에요" }, 409);
+    if (!(env.X_API_KEY && env.X_API_SECRET && env.X_ACCESS_TOKEN && env.X_ACCESS_SECRET)) return json(req, { error: "X 키가 아직 없어요 (Cloudflare 시크릿)" }, 503);
+    const text = typeof b.text === "string" && b.text.trim() ? b.text.trim().slice(0, 1000) : d.text;
+    try {
+      const tid = await postTweet(env, text);
+      await env.SUBS.put(k, JSON.stringify({ ...d, text, status: "posted", tweet: tid, posted: Date.now() }), { expirationTtl: 3 * 86400 });
+      return json(req, { ok: true, tweet: tid });
+    } catch (e) {
+      return json(req, { error: `X 올리기 실패: ${e.message}` }, 502);
+    }
+  }
+  return json(req, { error: "not found" }, 404);
+}
+
 export default {
   async fetch(req, env) {
     const url = new URL(req.url);
@@ -336,6 +407,7 @@ export default {
 
     if (url.pathname === "/yt-hook") return youtubeHook(req, env);
     if (url.pathname.startsWith("/board/")) return board(req, env, url);
+    if (url.pathname.startsWith("/tweet/")) return tweets(req, env, url);
     if (req.method === "GET" && url.pathname === "/yt-renew") { // 10분에 한 번만
       if (Date.now() - (Number(await env.SUBS.get("_renew_at")) || 0) < 600000) return json(req, { ok: true, skipped: "10분 안에 이미 갱신" });
       await env.SUBS.put("_renew_at", String(Date.now()), { expirationTtl: 3600 });
@@ -349,9 +421,21 @@ export default {
           || !sub.keys || typeof sub.keys.p256dh !== "string" || typeof sub.keys.auth !== "string") {
         return json(req, { error: "bad subscription" }, 400);
       }
-      const topics = (Array.isArray(body.topics) ? body.topics : TOPICS).filter((t) => TOPICS.includes(t));
-      const lang = LANGS.includes(body.lang) ? body.lang : "en";
+      let topics = (Array.isArray(body.topics) ? body.topics : TOPICS).filter((t) => TOPICS.includes(t));
+      let lang = LANGS.includes(body.lang) ? body.lang : "en";
       const id = await idOf(sub.endpoint);
+      // 트윗 초안 알림(tweet): tweet.html에서 관리 비밀번호가 맞을 때만 켜짐. 기존 알림 주제는 그대로 두고 더하기만,
+      // 사이트에서 알림 주제를 바꿀 때도 유지 (tweetOff로만 끔)
+      const prev = await env.SUBS.get(id, "json");
+      if (Array.isArray(body.topics) && body.topics.includes("tweet")) {
+        if (!(await sameKey(body.key, env.TWEET_KEY))) return json(req, { error: "비밀번호가 달라요" }, 403);
+        topics = [...new Set([...((prev && prev.topics) || []), "tweet"])];
+        lang = (prev && prev.lang) || lang;
+      } else if (body.tweetOff) {
+        if (!(await sameKey(body.key, env.TWEET_KEY))) return json(req, { error: "비밀번호가 달라요" }, 403);
+        topics = ((prev && prev.topics) || []).filter((t) => t !== "tweet");
+        lang = (prev && prev.lang) || lang;
+      } else if (prev && (prev.topics || []).includes("tweet")) topics.push("tweet");
       await env.SUBS.put(id, JSON.stringify({ sub: { endpoint: sub.endpoint, keys: { p256dh: sub.keys.p256dh, auth: sub.keys.auth } }, topics, lang, at: Date.now() }));
       return json(req, { ok: true, id });
     }

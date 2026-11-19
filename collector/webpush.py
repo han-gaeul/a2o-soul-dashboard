@@ -165,6 +165,33 @@ def compose(kind, data, lang, group=None):
     return "A2O SOUL", "", data.get("url")
 
 
+TAGS = "#A2OSOUL #에이투오소울"
+
+
+def tweet_text(kind, data):
+    """알림 내용 → X 글 초안 (한국어, 링크·해시태그 포함). 관리자가 tweet.html에서 고쳐서 올릴 수 있음."""
+    title, body, url = compose(kind, data, "ko")
+    if kind == "birthday":
+        body = f"{data['ko']}의 생일을 함께 축하해요 💜 #Happy{data['name'].replace(' ', '')}Day"
+    lines = [title, body, "", f"👉 {url}" if url else "", "", TAGS]
+    return re.sub(r"\n{3,}", "\n\n", "\n".join(x for x in lines if x is not None)).strip()
+
+
+def drafts(api, priv, new, site):
+    """새 알림 후보 → 트윗 초안을 Worker에 저장. 저장된 개수를 돌려줌."""
+    items = [{"key": key, "kind": kind, "text": tweet_text(kind, data)} for key, topic, kind, data in new if kind not in ("notice",)]
+    if not items:
+        return 0
+    try:
+        r = requests.post(api.rstrip("/") + "/tweet/drafts", json={"drafts": items[:20]}, timeout=20,
+                          headers={"Authorization": f"Bearer {_admin_token(priv)}"})
+        r.raise_for_status()
+        return r.json().get("added", 0)
+    except Exception as e:  # noqa: BLE001
+        print(f"[트윗] 초안 저장 실패: {type(e).__name__} {e}")
+        return 0
+
+
 def run(dash, cfg, state, site="https://a2osoul-tracker.com/"):
     """state: {'sent': [...]} — 바뀐 state를 돌려줌."""
     push = cfg.get("push") or {}
@@ -191,10 +218,20 @@ def run(dash, cfg, state, site="https://a2osoul-tracker.com/"):
     except Exception as e:  # noqa: BLE001
         print(f"[푸시] 구독 목록 실패: {type(e).__name__} {e}")
         return state
+    added = drafts(push["api"], priv, new, site)  # 확인 후 올릴 X 글 초안
+    if added:
+        print(f"[트윗] 초안 {added}개")
     videos = [c for c in new if c[2] == "video"]
     msgs = [c for c in new if c[2] != "video"] + ([videos[0]] if videos else [])
     dead, ok = [], 0
     for s in subs:
+        if added and "tweet" in (s.get("topics") or []):  # 관리자: 올릴 트윗 초안이 생겼다고 알림
+            try:
+                webpush(subscription_info=s["sub"], data=json.dumps({"title": f"✍️ 올릴 트윗 초안 {added}개", "body": "눌러서 확인하고 올리기",
+                        "url": site + "tweet.html", "tag": "tweet-drafts"}, ensure_ascii=False),
+                        vapid_private_key=priv, vapid_claims={"sub": "https://a2osoul-tracker.com"}, ttl=6 * 3600, timeout=15)
+            except Exception as e:  # noqa: BLE001
+                print(f"[트윗] 관리자 알림 실패: {type(e).__name__}")
         for key, topic, kind, data in msgs[:5]:  # 한 번에 최대 5개
             if topic not in (s.get("topics") or []):
                 continue
