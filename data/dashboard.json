@@ -89,7 +89,30 @@
   "mv": "MV"
  },
  "chart_moves": [],
- "charts": [],
+ "charts": [
+  {
+   "ranks": [
+    [
+     "2026-11-19",
+     76
+    ]
+   ],
+   "service": "멜론",
+   "song": "SUPERSTAR",
+   "type": "HOT100"
+  },
+  {
+   "ranks": [
+    [
+     "2026-11-19",
+     82
+    ]
+   ],
+   "service": "멜론",
+   "song": "Dancing in the Dark",
+   "type": "HOT100"
+  }
+ ],
  "debut_date": "2026-10-13",
  "episodes": [
   {
