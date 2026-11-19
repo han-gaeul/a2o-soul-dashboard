@@ -2375,14 +2375,16 @@
   "since_id": "2123325622814724228"
  },
  "x_official_votes": {
-  "at": "2026-11-19T17:40+09:00",
+  "at": "2026-11-19T17:50+09:00",
   "deep": 1,
   "last": {
    "official": [],
-   "read": 0,
-   "verified": []
+   "read": 1,
+   "verified": [
+    "kiwing_official:blue"
+   ]
   },
-  "since_id": "2123332954655236274",
+  "since_id": "2123337854822879262",
   "v": 2
  },
  "x_show_photos": {
