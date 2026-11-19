@@ -2375,14 +2375,12 @@
   "since_id": "2123325622814724228"
  },
  "x_official_votes": {
-  "at": "2026-11-19T17:30+09:00",
+  "at": "2026-11-19T17:40+09:00",
   "deep": 1,
   "last": {
    "official": [],
-   "read": 1,
-   "verified": [
-    "THEK___KING:blue"
-   ]
+   "read": 0,
+   "verified": []
   },
   "since_id": "2123332954655236274",
   "v": 2
