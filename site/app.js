@@ -262,6 +262,9 @@ if ("serviceWorker" in navigator) {
     "SHOW K-POP": "쇼K팝", "케이팝업 차트쇼": "케팝업", "KBS 가요대축제": "가요대축제", "SBS 가요대전": "가요대전" };
   const SHORT_EN = { 뮤직뱅크: "MBank", 인기가요: "Inki", 음악중심: "MCore", 엠카운트다운: "MCD", 쇼챔피언: "SChamp", 더쇼: "TheShow",
     "SHOW K-POP": "SKPop", "케이팝업 차트쇼": "KPopUp", "KBS 가요대축제": "KBS SF", "SBS 가요대전": "SBS GD" };
+  // 영상·음원 링크 버튼 순서: MV 먼저, 그다음 해외 음원·Stationhead (JSON이 이름순으로 섞어서)
+  const LINK_ORDER = ["MV", "INFINITE MV", "멜론", "지니", "벅스", "FLO", "Spotify", "Apple Music", "YouTube Music", "Stationhead"];
+  const linkRank = (k) => { const i = LINK_ORDER.indexOf(k); return i < 0 ? 99 : i; };
   const short = (show) => (!show ? "" : LANG === "ko" ? SHORT_KO[show] || show : SHORT_EN[show] || tc(show));
   const shortOf = (e) => {
     if (e.short) return tc(e.short);
@@ -778,7 +781,8 @@ if ("serviceWorker" in navigator) {
     for (const s of data.streaming) {
       $("streaming").append(el("li", {},
         el("div", {}, el("b", {}, s.title), s.note ? el("span", { class: "muted" }, ` · ${tc(s.note)}`) : null),
-        Object.keys(s.links).length ? el("div", { class: "links small" }, ...Object.entries(s.links).map(([k, u]) => ext(u, k))) : null));
+        Object.keys(s.links).length ? el("div", { class: "links small" }, ...Object.entries(s.links)
+          .sort(([a], [b]) => linkRank(a) - linkRank(b)).map(([k, u]) => ext(u, k))) : null));
     }
     fold($("streaming"), MOBILE ? 4 : 8);
   } else if (!(sp.tracks || []).length) {
