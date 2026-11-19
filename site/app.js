@@ -850,21 +850,51 @@ if ("serviceWorker" in navigator) {
     $("howtoSec").remove();
   }
 
-  if ((data.charts || []).length) {
-    for (const c of data.charts) {
-      const last = c.ranks[c.ranks.length - 1];
-      const prev = c.ranks[c.ranks.length - 2];
-      const move = last && prev ? prev[1] - last[1] : 0;
-      const box = el("div", { class: "chart-row" },
-        el("div", { class: "chart-meta" },
-          el("b", {}, c.song), el("span", { class: "muted" }, ` · ${[c.service, c.type].filter(Boolean).join(" ")}`),
-          last ? el("span", { class: "rank" }, t("rank", { n: last[1] })) : null,
-          move ? el("span", { class: move > 0 ? "up" : "down" }, move > 0 ? ` ▲${move}` : ` ▼${-move}`) : null),
-        c.ranks.length > 1 ? el("div", { class: "chart-box small-chart" }, el("canvas", {})) : null);
-      $("charts").append(box);
+  const renderCharts = () => {
+    $("charts").replaceChildren();
+    if ((data.charts || []).length) {
+      for (const c of data.charts) {
+        const last = c.ranks[c.ranks.length - 1];
+        const prev = c.ranks[c.ranks.length - 2];
+        const move = last && prev ? prev[1] - last[1] : 0;
+        const box = el("div", { class: "chart-row" },
+          el("div", { class: "chart-meta" },
+            el("b", {}, c.song), el("span", { class: "muted" }, ` · ${[c.service, c.type].filter(Boolean).join(" ")}`),
+            last ? el("span", { class: "rank" }, t("rank", { n: last[1] })) : null,
+            move ? el("span", { class: move > 0 ? "up" : "down" }, move > 0 ? ` ▲${move}` : ` ▼${-move}`) : null),
+          c.ranks.length > 1 ? el("div", { class: "chart-box small-chart" }, el("canvas", {})) : null);
+        $("charts").append(box);
+      }
+    } else {
+      $("charts").append(empty(t("no_charts")));
     }
-  } else {
-    $("charts").append(empty(t("no_charts")));
+  };
+  renderCharts();
+  // chart.html로 방금 입력한 순위도 바로 보이게: 워커에서 입력 목록을 받아 날짜별 마지막 순위로 합침
+  {
+    const api = ((data.push || {}).api || "").replace(/\/$/, "");
+    if (api) fetch(`${api}/charts`).then((r) => (r.ok ? r.json() : [])).then((list) => {
+      const by = new Map();
+      for (const x of Array.isArray(list) ? list : []) {
+        if (x && x.song && x.service && x.at) { const k = `${x.song}\u0000${x.service}`; if (!by.has(k)) by.set(k, []); by.get(k).push(x); }
+      }
+      if (!by.size) return;
+      let changed = false;
+      data.charts = data.charts || [];
+      for (const [k, xs] of by) {
+        const [song, service] = k.split("\u0000");
+        xs.sort((a, b) => (a.at < b.at ? -1 : 1));
+        const days = {};
+        for (const x of xs) { const d = String(x.at).slice(0, 10); if (x.rank) days[d] = Number(x.rank); else delete days[d]; }
+        let c = data.charts.find((c) => c.song === song && c.service === service);
+        if (!c) { c = { song, service, type: "", ranks: [] }; data.charts.push(c); }
+        const merged = Object.entries({ ...Object.fromEntries(c.ranks), ...days }).sort((a, b) => (a[0] < b[0] ? -1 : 1));
+        if (JSON.stringify(merged) !== JSON.stringify(c.ranks)) { c.ranks = merged; changed = true; }
+      }
+      if (!changed) return;
+      renderCharts();
+      if (drawn.has("cheer") && window.Chart) rankCharts();
+    }).catch(() => {});
   }
 
   // 정렬: 다가오는(진행 중 포함) 일정 날짜·시간 빠른 순 → 지난 일정 최근 순 → 날짜 없는 공지
