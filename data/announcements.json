@@ -2364,14 +2364,12 @@
   "since_id": "2122618084649468286"
  },
  "x_official_votes": {
-  "at": "2026-11-19T17:00+09:00",
+  "at": "2026-11-19T17:10+09:00",
   "deep": 1,
   "last": {
    "official": [],
-   "read": 1,
-   "verified": [
-    "kiwing_official:blue"
-   ]
+   "read": 0,
+   "verified": []
   },
   "since_id": "2123324545977426233",
   "v": 2
