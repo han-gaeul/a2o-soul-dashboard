@@ -2028,6 +2028,26 @@
    "url": "https://abit.ly/fifjxyl"
   },
   {
+   "credit": "@a2osoulstation",
+   "date": "2026-11-23",
+   "notify": true,
+   "short": "스밍",
+   "time": "18:00",
+   "title": "스테이션헤드 합동 스밍 1부 (KO1KEYZ 스테이션)",
+   "type": "행사",
+   "url": "https://x.com/KO1KEYZ_STATION"
+  },
+  {
+   "credit": "@a2osoulstation",
+   "date": "2026-11-23",
+   "notify": true,
+   "short": "스밍",
+   "time": "19:30",
+   "title": "스테이션헤드 합동 스밍 2부 (A2O SOUL 스테이션)",
+   "type": "행사",
+   "url": "https://www.stationhead.com/a2osoulstation"
+  },
+  {
    "auto": true,
    "date": "2026-11-25",
    "short": "영통",
@@ -2339,7 +2359,7 @@
   "tips": {}
  },
  "howto": {
-  "checked": "2026-11-12",
+  "checked": "2026-11-19",
   "streaming": [
    {
     "global": true,
@@ -2351,6 +2371,53 @@
      "새 투표·사녹 공지는 사이트에 자동으로 올라와요. 홈 화면에 추가해 두고 자주 확인해 주세요"
     ],
     "title": "해외 팬 투표 시작하기"
+   },
+   {
+    "global": true,
+    "steps": [
+     "목표: Dancing in the Dark MV 첫 24시간 100만 뷰 · 첫 주 250만 뷰 · 좋아요 10만",
+     "시간당 목표: 첫날 5만 뷰, 2~7일차 4.5만 뷰 (하루 25만 뷰)",
+     "MV만 반복하지 말고 사이에 다른 영상 2~3개(또는 팬 재생목록)를 섞기",
+     "영상 볼륨은 50% 이상 — 소리를 줄이려면 유튜브 플레이어 말고 휴대폰·컴퓨터 볼륨으로",
+     "480p 이상 화질로, 로그인한 계정으로 보기"
+    ],
+    "title": "유튜브 MV 스밍 목표·규칙 (해외 팬 · 가이드 @a2osoulstation)"
+   },
+   {
+    "global": true,
+    "steps": [
+     "첫날 목표: Dancing in the Dark 10만 스트리밍 · SUPERSTAR EP 전체 20만",
+     "1시간 재생목록: Dancing in the Dark 다음에 다른 곡 2개(수록곡 1 + 다른 가수 곡 1)를 넣는 순서로",
+     "한 곡 반복·셔플은 끄고 재생목록 순서대로 듣기",
+     "Spotify 앱 볼륨 50% 이상, 앱 음소거 금지 — 조용히 들으려면 이어폰으로",
+     "한 시간에 한 번쯤 재생목록을 바꾸거나 곡을 직접 넘겨서 활동 중임을 보여 주기",
+     "같은 계정으로 여러 기기에서 동시에 재생하지 않기"
+    ],
+    "title": "Spotify 스밍 목표·규칙 (해외 팬 · 가이드 @a2osoulstation)"
+   },
+   {
+    "global": true,
+    "steps": [
+     "유료 이용권이나 무료 체험 중인 계정으로 (아이폰·안드로이드·윈도우·웹 모두 OK) — 자동 재생(∞)은 끄기",
+     "아이튠즈로 구매해서 내려받은 곡은 지우고 스트리밍으로 듣기",
+     "한 곡 반복 금지 — 타이틀곡 사이에 다른 곡 2~3개(약 5~6분)를 넣은 1~2시간 재생목록으로",
+     "예시 순서: Dancing in the Dark · SUPERSTAR · 짧은 다른 곡 · Dancing in the Dark · While We're Young · Very First Love · Dancing in the Dark · Moonlight Shadow · 다른 짧은 곡",
+     "곡을 건너뛰거나 넘기지 말고 끝까지, 볼륨 50% 이상(또는 이어폰)",
+     "VPN 금지, 한 IP에서 여러 계정 돌리지 않기"
+    ],
+    "title": "Apple Music 스밍 규칙 (해외 팬 · 가이드 @a2osoulstation)"
+   },
+   {
+    "global": true,
+    "steps": [
+     "앱스토어·플레이스토어에서 Stationhead 앱을 받거나 stationhead.com에서 — 전화번호·이메일·구글로 가입",
+     "Apple Music 또는 Spotify를 연결 — 유료(Premium) 계정이어야 스트리밍이 차트에 반영돼요",
+     "검색에서 a2osoulstation을 찾아 들어가기 → 방송 중(ON AIR)일 때 'Start listening'",
+     "알림을 허용하고 a2osoulstation을 팔로우하면 방송 시작 때 알림이 와요",
+     "앱 안에서 음소거하지 말고 기기 볼륨을 줄이기, 채팅에 참여하고 링크 공유하기",
+     "방송 소식은 X @a2osoulstation · @soulstation15에서"
+    ],
+    "title": "Stationhead 함께 듣기 (해외 팬 · 가이드 @a2osoulstation)"
    },
    {
     "steps": [
@@ -2404,39 +2471,54 @@
   ],
   "voting": [
    {
+    "live": "뮤빗(MUBEAT) · 뮤니버스(MUNIVERSE)",
+    "pre": "뮤빗(MUBEAT) · 뮤니버스(MUNIVERSE)",
+    "prevote": "목 12:00~토 12:00",
+    "show": "SHOW K-POP",
+    "when": "월 18:00"
+   },
+   {
     "live": "빅크(BIGC)",
     "note": "생방송 중 앱 실시간 투표 배너",
     "pre": "빅크(BIGC)",
+    "prevote": "금 16:00~월 09:00",
     "show": "더쇼",
     "when": "화 18:00 · SBS Life"
    },
    {
     "note": "앱 미션·광고로 모은 재화로 투표",
     "pre": "아이돌챔프(IDOLCHAMP)",
+    "prevote": "금 20:00~월 14:00",
     "show": "쇼챔피언",
-    "when": "수 · MBC M"
+    "when": "수 18:00 · MBC M"
    },
    {
     "live": "엠넷플러스(Mnet Plus)",
     "note": "생방송 중 앱 실시간 투표 배너",
     "pre": "엠넷플러스(Mnet Plus)",
+    "prevote": "금 23:00~화 23:59",
     "show": "엠카운트다운",
     "when": "목 18:00 · Mnet"
    },
    {
-    "pre": "팬캐스트(FANCAST)",
+    "note": "쿠궁은 예전 팬캐스트(FANCAST) 앱이 이름을 바꾼 것 · 1표 = 하트 50개",
+    "pre": "쿠궁(COOGOONG)",
+    "prevote": "일 21:00~수 15:00",
     "show": "뮤직뱅크",
     "when": "금 17:15 · KBS2"
    },
    {
+    "live": "뮤니버스(MUNIVERSE) · 뮤빗(MUBEAT)",
     "pre": "뮤니버스(MUNIVERSE) · 뮤빗(MUBEAT, 글로벌)",
+    "prevote": "화 18:00~목 23:00",
     "show": "음악중심",
     "when": "토 · MBC"
    },
    {
     "live": "하이어(HIGHER)",
-    "note": "생방송 투표는 계정당 최대 5표",
-    "pre": "링크(LiNC)",
+    "note": "생방송 투표는 계정당 최대 5표 · 틴(TIN) 앱 포인트는 링크와 같은 계정으로",
+    "pre": "링크(LiNC) · 틴(TIN)",
+    "prevote": "월 12:00~금 23:59",
     "show": "인기가요",
     "when": "일 15:20 · SBS"
    }
@@ -3200,9 +3282,18 @@
     "name": "엠넷플러스"
    },
    {
-    "android": "https://play.google.com/store/search?c=apps&q=Fancast%20%ED%8C%AC%EC%BA%90%EC%8A%A4%ED%8A%B8",
+    "android": "https://play.google.com/store/apps/details?id=com.contentsmadang.fancast",
+    "ios": "https://apps.apple.com/app/id1641638840",
+    "name": "쿠궁"
+   },
+   {
+    "android": "https://play.google.com/store/apps/details?id=com.contentsmadang.fancast",
     "ios": "https://apps.apple.com/app/id1641638840",
     "name": "팬캐스트"
+   },
+   {
+    "android": "https://play.google.com/store/search?c=apps&q=KIWING%20%ED%82%A4%EC%9C%99",
+    "name": "키윙"
    },
    {
     "android": "https://play.google.com/store/apps/details?id=com.tnk.muniverse",
@@ -11627,7 +11718,10 @@
  "streaming": [
   {
    "links": {
-    "MV": "https://youtu.be/JPJokqIoIJI"
+    "Apple Music": "https://music.apple.com/album/superstar-ep/6830057356",
+    "MV": "https://youtu.be/JPJokqIoIJI",
+    "Spotify": "https://open.spotify.com/album/6yXPYq0Iz38xI9BMByyMV4",
+    "Stationhead": "https://www.stationhead.com/a2osoulstation"
    },
    "note": "더블 타이틀 · 지금 활동곡",
    "title": "Dancing in the Dark"
@@ -11800,6 +11894,17 @@
    "th": "ดู MV 'SUPERSTAR' และ 'Dancing in the Dark' (คอร์สเริ่มต้นด้านล่าง)",
    "zh": "观看《SUPERSTAR》和《Dancing in the Dark》MV（下方入门路线）"
   },
+  "100% 팬 투표 · 남자 18팀 중 상위 5팀이 결선(12/9~12/22) 진출": {
+   "en": "100% fan vote · top 5 of 18 male teams advance to the final (12/9–12/22)",
+   "es": "100% voto de fans · los 5 primeros de 18 grupos masculinos pasan a la final (9/12–22/12)",
+   "fil": "100% fan vote · top 5 sa 18 male teams ang aabante sa final (12/9–12/22)",
+   "id": "100% vote fans · 5 besar dari 18 grup pria lolos ke final (9/12–22/12)",
+   "ja": "100%ファン投票・男性18組のうち上位5組が決選（12/9〜12/22）へ",
+   "pt": "100% voto dos fãs · os 5 primeiros de 18 grupos masculinos vão à final (9/12–22/12)",
+   "th": "โหวตจากแฟน 100% · 5 อันดับแรกจาก 18 ทีมชายเข้ารอบชิง (9/12–22/12)",
+   "vi": "100% bình chọn của fan · top 5 trong 18 nhóm nam vào chung kết (9/12–22/12)",
+   "zh": "100% 粉丝投票 · 男子 18 组中前 5 名进入决赛（12/9～12/22）"
+  },
   "11월 이달의 픽 · 루키 남자 (제트·서하 후보)": {
    "en": "November Pick of the Month · Rookie Male (ZET & SEOHA nominated)",
    "es": "Pick del mes de noviembre · Novato masculino (nominados ZET y SEOHA)",
@@ -11836,6 +11941,17 @@
    "th": "เด็กหนุ่มทั้ง 15 คนมาจาก SOULITE ดาวที่มีทุกอย่างพร้อมสรรพ",
    "zh": "15位少年来自应有尽有的星球SOULITE。"
   },
+  "1시간 재생목록: Dancing in the Dark 다음에 다른 곡 2개(수록곡 1 + 다른 가수 곡 1)를 넣는 순서로": {
+   "en": "1-hour playlist: after each Dancing in the Dark, add 2 different songs (1 EP B-side + 1 song by another artist)",
+   "es": "Playlist de 1 hora: después de cada Dancing in the Dark, 2 canciones distintas (1 del EP + 1 de otro artista)",
+   "fil": "1-hour playlist: pagkatapos ng bawat Dancing in the Dark, 2 ibang kanta (1 EP B-side + 1 kanta ng ibang artist)",
+   "id": "Playlist 1 jam: setiap setelah Dancing in the Dark, tambahkan 2 lagu berbeda (1 B-side EP + 1 lagu artis lain)",
+   "ja": "1時間の再生リスト：Dancing in the Darkの後に別の曲を2曲（収録曲1＋他アーティストの曲1）",
+   "pt": "Playlist de 1 hora: depois de cada Dancing in the Dark, 2 músicas diferentes (1 do EP + 1 de outro artista)",
+   "th": "เพลย์ลิสต์ 1 ชม.: หลัง Dancing in the Dark แต่ละครั้ง ใส่เพลงอื่น 2 เพลง (B-side ใน EP 1 + เพลงศิลปินอื่น 1)",
+   "vi": "Playlist 1 giờ: sau mỗi lần Dancing in the Dark, thêm 2 bài khác (1 B-side trong EP + 1 bài của nghệ sĩ khác)",
+   "zh": "1 小时歌单：每首 Dancing in the Dark 之后放 2 首不同的歌（1 首收录曲 + 1 首其他歌手的歌）"
+  },
   "1위 후보 — 음방에서 그 주 1위를 다투는 곡 (투표가 점수에 들어가요)": {
    "en": "1st-place nominee — a song competing for the weekly win on a music show (votes count)",
    "es": "Nominado al 1.er lugar — canción que compite por ganar esa semana (los votos cuentan)",
@@ -11845,6 +11961,17 @@
    "th": "ผู้เข้าชิงอันดับ 1 — เพลงที่ชิงอันดับ 1 ประจำสัปดาห์ของรายการเพลง (โหวตมีผลต่อคะแนน)",
    "zh": "一位候补 — 打歌节目当周争夺一位的歌曲（投票计入分数）"
   },
+  "2027 D AWARDS 베스트 라이징 스타(남자) 본선": {
+   "en": "2027 D AWARDS Best Rising Star (Male) — main round",
+   "es": "2027 D AWARDS Best Rising Star (Masculino) — ronda principal",
+   "fil": "2027 D AWARDS Best Rising Star (Male) — main round",
+   "id": "2027 D AWARDS Best Rising Star (Pria) — babak utama",
+   "ja": "2027 D AWARDS ベストライジングスター（男性）本選",
+   "pt": "2027 D AWARDS Best Rising Star (Masculino) — rodada principal",
+   "th": "2027 D AWARDS Best Rising Star (ชาย) รอบหลัก",
+   "vi": "2027 D AWARDS Best Rising Star (Nam) — vòng chính",
+   "zh": "2027 D AWARDS 最佳新星（男）正赛"
+  },
   "404회 1위 후보 · 사전투표(~11/16 10:00) 중간 집계 1위 · 생방송 중 빅크 앱 실시간 투표 배너로": {
    "en": "Ep. 404 1st place nominee · #1 in the mid-point pre-vote ranking (until 11/16 10:00) · vote via the live banner in the BIGC app during the broadcast",
    "es": "Ep. 404 nominado al 1.er lugar · 1.º en el conteo parcial de la prevotación (hasta 11/16 10:00) · vota en el banner en vivo de BIGC durante la emisión",
@@ -11853,6 +11980,17 @@
    "pt": "Ep. 404 indicado ao 1º lugar · 1º na parcial da pré-votação (até 11/16 10:00) · vote pelo banner ao vivo no app BIGC durante a transmissão",
    "th": "EP.404 ผู้เข้าชิงอันดับ 1 · อันดับ 1 คะแนนโหวตล่วงหน้าช่วงกลาง (ถึง 11/16 10:00) · โหวตผ่านแบนเนอร์สดในแอป BIGC ระหว่างออกอากาศ",
    "zh": "第404期一位候选 · 预投票（至11/16 10:00）中间排名第一 · 直播中通过BIGC App实时投票横幅投票"
+  },
+  "480p 이상 화질로, 로그인한 계정으로 보기": {
+   "en": "Watch in 480p or higher while logged in",
+   "es": "Mira en 480p o más con tu cuenta iniciada",
+   "fil": "Manood sa 480p pataas habang naka-log in",
+   "id": "Tonton di kualitas 480p ke atas dan dalam keadaan login",
+   "ja": "480p以上の画質で、ログインした状態で見る",
+   "pt": "Assista em 480p ou mais com a conta logada",
+   "th": "ดูที่ความละเอียด 480p ขึ้นไป และล็อกอินบัญชีไว้",
+   "vi": "Xem ở chất lượng 480p trở lên và đăng nhập tài khoản",
+   "zh": "用 480p 以上画质、登录账号观看"
   },
   "A2O Rookies HTB '쥔린(JUNLIN)' (2025.2~)": {
    "en": "A2O Rookies HTB as 'JUNLIN' (Feb 2025–)",
@@ -11943,6 +12081,28 @@
    "pt": "Fansign ALLMD",
    "th": "แฟนไซน์ ALLMD",
    "zh": "ALLMD 签售会"
+  },
+  "Apple Music 또는 Spotify를 연결 — 유료(Premium) 계정이어야 스트리밍이 차트에 반영돼요": {
+   "en": "Connect Apple Music or Spotify — you need a paid (Premium) account for streams to count on charts",
+   "es": "Conecta Apple Music o Spotify — necesitas una cuenta de pago (Premium) para que cuenten en las listas",
+   "fil": "I-connect ang Apple Music o Spotify — kailangan ng paid (Premium) account para mabilang sa charts",
+   "id": "Hubungkan Apple Music atau Spotify — harus akun berbayar (Premium) agar stream masuk chart",
+   "ja": "Apple MusicかSpotifyを連携。チャートに反映されるのは有料（Premium）アカウントのみ",
+   "pt": "Conecte Apple Music ou Spotify — precisa de conta paga (Premium) para os streams contarem nas paradas",
+   "th": "เชื่อม Apple Music หรือ Spotify — ต้องเป็นบัญชีแบบเสียเงิน (Premium) สตรีมถึงจะนับในชาร์ต",
+   "vi": "Kết nối Apple Music hoặc Spotify — cần tài khoản trả phí (Premium) thì lượt stream mới được tính vào BXH",
+   "zh": "连接 Apple Music 或 Spotify — 需要付费（Premium）账号播放才会计入榜单"
+  },
+  "Apple Music 스밍 규칙 (해외 팬 · 가이드 @a2osoulstation)": {
+   "en": "Apple Music streaming rules (global fans · guide by @a2osoulstation)",
+   "es": "Reglas de streaming en Apple Music (fans internacionales · guía de @a2osoulstation)",
+   "fil": "Apple Music streaming rules (global fans · gabay ng @a2osoulstation)",
+   "id": "Aturan streaming Apple Music (fans global · panduan @a2osoulstation)",
+   "ja": "Apple Musicストリーミングのルール（海外ファン・ガイド @a2osoulstation）",
+   "pt": "Regras de streaming no Apple Music (fãs internacionais · guia de @a2osoulstation)",
+   "th": "กฎการสตรีม Apple Music (แฟนต่างประเทศ · ไกด์โดย @a2osoulstation)",
+   "vi": "Quy tắc stream Apple Music (fan quốc tế · hướng dẫn của @a2osoulstation)",
+   "zh": "Apple Music 播放规则（海外粉丝 · 指南 @a2osoulstation）"
   },
   "Apple Music 영상통화 팬사인회": {
    "en": "Apple Music video call fansign",
@@ -12114,6 +12274,17 @@
    "pt": "MBC FM4U: Good Morning FM",
    "th": "MBC FM4U: Good Morning FM",
    "zh": "MBC FM4U：Good Morning FM"
+  },
+  "MV만 반복하지 말고 사이에 다른 영상 2~3개(또는 팬 재생목록)를 섞기": {
+   "en": "Don't loop the MV — watch 2–3 other videos (or a fan playlist) in between",
+   "es": "No repitas el MV en bucle — mira 2–3 videos distintos (o una playlist de fans) entre medias",
+   "fil": "Huwag i-loop ang MV — manood ng 2–3 ibang video (o fan playlist) sa pagitan",
+   "id": "Jangan loop MV — tonton 2–3 video lain (atau playlist fans) di antaranya",
+   "ja": "MVだけを繰り返さず、間に他の動画を2〜3本（またはファンの再生リスト）挟む",
+   "pt": "Não deixe o MV em loop — assista 2–3 outros vídeos (ou uma playlist de fãs) entre uma vez e outra",
+   "th": "อย่าวน MV ซ้ำ — ดูวิดีโออื่น 2–3 คลิป (หรือเพลย์ลิสต์ของแฟน) คั่นระหว่างรอบ",
+   "vi": "Đừng lặp MV liên tục — xem 2–3 video khác (hoặc playlist của fan) xen giữa",
+   "zh": "不要只循环 MV — 中间穿插 2～3 个其他视频（或粉丝歌单）"
   },
   "Makestar 영상통화 팬사인회": {
    "en": "Makestar video call fansign",
@@ -12295,6 +12466,39 @@
    "th": "แฟนไซน์ Soundwave",
    "zh": "Soundwave 签售会"
   },
+  "Spotify 스밍 목표·규칙 (해외 팬 · 가이드 @a2osoulstation)": {
+   "en": "Spotify streaming goals & rules (global fans · guide by @a2osoulstation)",
+   "es": "Metas y reglas de streaming en Spotify (fans internacionales · guía de @a2osoulstation)",
+   "fil": "Spotify streaming goals at rules (global fans · gabay ng @a2osoulstation)",
+   "id": "Target & aturan streaming Spotify (fans global · panduan @a2osoulstation)",
+   "ja": "Spotifyストリーミングの目標とルール（海外ファン・ガイド @a2osoulstation）",
+   "pt": "Metas e regras de streaming no Spotify (fãs internacionais · guia de @a2osoulstation)",
+   "th": "เป้าหมายและกฎการสตรีม Spotify (แฟนต่างประเทศ · ไกด์โดย @a2osoulstation)",
+   "vi": "Mục tiêu & quy tắc stream Spotify (fan quốc tế · hướng dẫn của @a2osoulstation)",
+   "zh": "Spotify 播放目标与规则（海外粉丝 · 指南 @a2osoulstation）"
+  },
+  "Spotify 앱 볼륨 50% 이상, 앱 음소거 금지 — 조용히 들으려면 이어폰으로": {
+   "en": "Keep the Spotify app volume above 50% and never mute the app — use headphones if you need quiet",
+   "es": "Mantén el volumen de la app de Spotify por encima del 50% y no la silencies — usa auriculares si necesitas silencio",
+   "fil": "Panatilihing higit 50% ang volume ng Spotify app at huwag i-mute — gumamit ng headphones kung kailangan ng tahimik",
+   "id": "Volume aplikasi Spotify di atas 50% dan jangan di-mute — pakai earphone kalau perlu senyap",
+   "ja": "Spotifyアプリの音量は50%以上、アプリのミュートは禁止。静かにしたい時はイヤホンで",
+   "pt": "Deixe o volume do app do Spotify acima de 50% e nunca silencie o app — use fones se precisar de silêncio",
+   "th": "ตั้งเสียงแอป Spotify เกิน 50% และห้ามปิดเสียงแอป — ถ้าอยากเงียบให้ใช้หูฟัง",
+   "vi": "Giữ âm lượng app Spotify trên 50% và không tắt tiếng app — cần yên lặng thì dùng tai nghe",
+   "zh": "Spotify 应用音量保持 50% 以上，不要静音应用 — 想安静就戴耳机"
+  },
+  "Stationhead 함께 듣기 (해외 팬 · 가이드 @a2osoulstation)": {
+   "en": "Listen together on Stationhead (global fans · guide by @a2osoulstation)",
+   "es": "Escuchar juntos en Stationhead (fans internacionales · guía de @a2osoulstation)",
+   "fil": "Sabay na makinig sa Stationhead (global fans · gabay ng @a2osoulstation)",
+   "id": "Dengar bareng di Stationhead (fans global · panduan @a2osoulstation)",
+   "ja": "Stationheadで一緒に聴く（海外ファン・ガイド @a2osoulstation）",
+   "pt": "Ouvir junto no Stationhead (fãs internacionais · guia de @a2osoulstation)",
+   "th": "ฟังด้วยกันบน Stationhead (แฟนต่างประเทศ · ไกด์โดย @a2osoulstation)",
+   "vi": "Nghe cùng nhau trên Stationhead (fan quốc tế · hướng dẫn của @a2osoulstation)",
+   "zh": "在 Stationhead 一起听（海外粉丝 · 指南 @a2osoulstation）"
+  },
   "URIZIP KPOP ACADEMY 출신": {
    "en": "Trained at URIZIP KPOP ACADEMY",
    "es": "Formado en URIZIP KPOP ACADEMY",
@@ -12303,6 +12507,17 @@
    "pt": "Treinou na URIZIP KPOP ACADEMY",
    "th": "เคยฝึกที่ URIZIP KPOP ACADEMY",
    "zh": "出身URIZIP KPOP ACADEMY"
+  },
+  "VPN 금지, 한 IP에서 여러 계정 돌리지 않기": {
+   "en": "No VPN, and don't run multiple accounts on one IP",
+   "es": "Nada de VPN, y no uses varias cuentas desde una misma IP",
+   "fil": "Bawal ang VPN, at huwag gumamit ng maraming account sa iisang IP",
+   "id": "Jangan pakai VPN, dan jangan jalankan banyak akun dari satu IP",
+   "ja": "VPNは使わず、1つのIPで複数アカウントを回さない",
+   "pt": "Sem VPN, e não use várias contas no mesmo IP",
+   "th": "ห้ามใช้ VPN และอย่าใช้หลายบัญชีจาก IP เดียว",
+   "vi": "Không dùng VPN, không chạy nhiều tài khoản trên một IP",
+   "zh": "不要用 VPN，也不要在同一 IP 下用多个账号"
   },
   "Withmuu 영상통화 팬사인회": {
    "en": "Withmuu video call fansign",
@@ -12339,6 +12554,28 @@
    "pt": "Não repita o mesmo MV sem parar — intercale outros vídeos (apresentações, fancams)",
    "th": "อย่าวน MV เดิมซ้ำๆ — สลับกับคลิปอื่น (เวที, แฟนแคม)",
    "zh": "不要只循环同一MV，中间穿插其他视频（舞台·直拍）"
+  },
+  "같은 계정으로 여러 기기에서 동시에 재생하지 않기": {
+   "en": "Don't play on multiple devices with the same account at the same time",
+   "es": "No reproduzcas con la misma cuenta en varios dispositivos a la vez",
+   "fil": "Huwag magpatugtog gamit ang parehong account sa maraming device nang sabay",
+   "id": "Jangan putar dengan akun yang sama di beberapa perangkat sekaligus",
+   "ja": "同じアカウントで複数の端末から同時に再生しない",
+   "pt": "Não toque com a mesma conta em vários aparelhos ao mesmo tempo",
+   "th": "อย่าเล่นด้วยบัญชีเดียวกันบนหลายเครื่องพร้อมกัน",
+   "vi": "Không phát cùng một tài khoản trên nhiều thiết bị cùng lúc",
+   "zh": "不要用同一账号在多台设备上同时播放"
+  },
+  "검색에서 a2osoulstation을 찾아 들어가기 → 방송 중(ON AIR)일 때 'Start listening'": {
+   "en": "Search for a2osoulstation → when it's ON AIR, tap 'Start listening'",
+   "es": "Busca a2osoulstation → cuando esté ON AIR, toca 'Start listening'",
+   "fil": "Hanapin ang a2osoulstation → kapag ON AIR, i-tap ang 'Start listening'",
+   "id": "Cari a2osoulstation → saat ON AIR, ketuk 'Start listening'",
+   "ja": "検索で a2osoulstation を探す → 放送中（ON AIR）なら「Start listening」",
+   "pt": "Procure a2osoulstation → quando estiver ON AIR, toque em 'Start listening'",
+   "th": "ค้นหา a2osoulstation → ตอนที่ ON AIR กด 'Start listening'",
+   "vi": "Tìm a2osoulstation → khi đang ON AIR, bấm 'Start listening'",
+   "zh": "搜索 a2osoulstation → 直播中（ON AIR）时点「Start listening」"
   },
   "경기 김포": {
    "en": "Gimpo, Gyeonggi",
@@ -12384,6 +12621,17 @@
    "pt": "Escreva artista e título exatos, como 'A2O SOUL - título' (Superstar · While We're Young · Very First Love · Moonlight Shadow etc.)",
    "th": "เขียนชื่อศิลปินและชื่อเพลงให้ถูกต้อง เช่น 'A2O SOUL - ชื่อเพลง' (Superstar · While We're Young · Very First Love · Moonlight Shadow ฯลฯ)",
    "zh": "按“A2O SOUL - 歌名”准确写出歌手和歌名（Superstar·While We're Young·Very First Love·Moonlight Shadow等）"
+  },
+  "곡을 건너뛰거나 넘기지 말고 끝까지, 볼륨 50% 이상(또는 이어폰)": {
+   "en": "Play each track to the end without skipping or scrubbing, with volume above 50% (or earphones)",
+   "es": "Escucha cada canción completa sin saltar ni adelantar, con el volumen por encima del 50% (o auriculares)",
+   "fil": "Patugtugin hanggang dulo nang walang skip o scrub, volume higit 50% (o earphones)",
+   "id": "Putar sampai habis tanpa skip atau geser, volume di atas 50% (atau pakai earphone)",
+   "ja": "飛ばしたりシークしたりせず最後まで、音量は50%以上（またはイヤホン）",
+   "pt": "Ouça cada faixa até o fim sem pular nem avançar, com volume acima de 50% (ou fones)",
+   "th": "ฟังจนจบเพลงโดยไม่ข้ามหรือเลื่อน ตั้งเสียงเกิน 50% (หรือใช้หูฟัง)",
+   "vi": "Nghe hết mỗi bài, không bỏ qua hay tua, âm lượng trên 50% (hoặc dùng tai nghe)",
+   "zh": "每首歌完整播放，不要跳过或拖动进度，音量 50% 以上（或戴耳机）"
   },
   "공동구매·대량구매": {
    "en": "Group & bulk orders",
@@ -12745,6 +12993,17 @@
    "th": "ให้",
    "zh": "出"
   },
+  "디어워즈": {
+   "en": "D AWARDS",
+   "es": "D AWARDS",
+   "fil": "D AWARDS",
+   "id": "D AWARDS",
+   "ja": "D AWARDS",
+   "pt": "D AWARDS",
+   "th": "D AWARDS",
+   "vi": "D AWARDS",
+   "zh": "D AWARDS"
+  },
   "라디오 신청곡 (가이드 도움 @star_light_4u)": {
    "en": "Radio song requests (guide help: @star_light_4u)",
    "es": "Pedir canciones en la radio (guía con ayuda de @star_light_4u)",
@@ -12852,6 +13111,17 @@
    "pt": "LiNC",
    "th": "LiNC",
    "zh": "LiNC"
+  },
+  "링크(LiNC) · 틴(TIN)": {
+   "en": "LiNC · TIN",
+   "es": "LiNC · TIN",
+   "fil": "LiNC · TIN",
+   "id": "LiNC · TIN",
+   "ja": "LiNC · TIN",
+   "pt": "LiNC · TIN",
+   "th": "LiNC · TIN",
+   "vi": "LiNC · TIN",
+   "zh": "LiNC · TIN"
   },
   "링크는 멤버 탭 맨 위 '공식 채널'에 모여 있어요": {
    "en": "All links are in 'Official channels' at the top of the Members tab",
@@ -12979,6 +13249,17 @@
    "th": "พฤ. 18:00 · Mnet",
    "zh": "周四 18:00 · Mnet"
   },
+  "목표: Dancing in the Dark MV 첫 24시간 100만 뷰 · 첫 주 250만 뷰 · 좋아요 10만": {
+   "en": "Goals: Dancing in the Dark MV — 1M views in the first 24 hours · 2.5M in the first week · 100K likes",
+   "es": "Metas: MV de Dancing in the Dark — 1M de vistas en 24 h · 2,5M en la primera semana · 100K likes",
+   "fil": "Goals: Dancing in the Dark MV — 1M views sa unang 24 oras · 2.5M sa unang linggo · 100K likes",
+   "id": "Target: MV Dancing in the Dark — 1 juta views dalam 24 jam pertama · 2,5 juta di minggu pertama · 100 ribu likes",
+   "ja": "目標：Dancing in the Dark MV 最初の24時間で100万回・1週間で250万回・高評価10万",
+   "pt": "Metas: MV de Dancing in the Dark — 1M de views nas primeiras 24 h · 2,5M na primeira semana · 100K likes",
+   "th": "เป้าหมาย: MV Dancing in the Dark 1 ล้านวิวใน 24 ชม.แรก · 2.5 ล้านวิวในสัปดาห์แรก · 100K ไลก์",
+   "vi": "Mục tiêu: MV Dancing in the Dark — 1 triệu view trong 24 giờ đầu · 2,5 triệu trong tuần đầu · 100K lượt thích",
+   "zh": "目标：Dancing in the Dark MV 首 24 小时 100 万播放 · 首周 250 万 · 点赞 10 万"
+  },
   "무표정과 웃는 얼굴의 반전 매력": {
    "en": "Charming contrast between his poker face and his smile",
    "es": "Encanto del contraste entre su cara seria y su sonrisa",
@@ -12997,6 +13278,17 @@
    "th": "ข้อความ (มีค่าใช้จ่าย เบอร์เกาหลี): ส่งไปที่เบอร์ที่ดีเจแจ้งระหว่างออกอากาศ — เช่น SBS Power FM #1077 · KBS Cool FM #8910 · MBC FM4U #8000 · CBS Music FM #9390 (สั้น ₩50, ยาว/รูป ₩100)",
    "zh": "短信（收费·韩国手机）：发到直播中DJ公布的号码 — 例）SBS Power FM #1077 · KBS Cool FM #8910 · MBC FM4U #8000 · CBS 音乐FM #9390（短信50韩元，长信·图片100韩元）"
   },
+  "뮤니버스(MUNIVERSE) · 뮤빗(MUBEAT)": {
+   "en": "MUNIVERSE · MUBEAT",
+   "es": "MUNIVERSE · MUBEAT",
+   "fil": "MUNIVERSE · MUBEAT",
+   "id": "MUNIVERSE · MUBEAT",
+   "ja": "MUNIVERSE · MUBEAT",
+   "pt": "MUNIVERSE · MUBEAT",
+   "th": "MUNIVERSE · MUBEAT",
+   "vi": "MUNIVERSE · MUBEAT",
+   "zh": "MUNIVERSE · MUBEAT"
+  },
   "뮤니버스(MUNIVERSE) · 뮤빗(MUBEAT, 글로벌)": {
    "en": "MUNIVERSE · MUBEAT (global)",
    "es": "MUNIVERSE · MUBEAT (global)",
@@ -13005,6 +13297,17 @@
    "pt": "MUNIVERSE · MUBEAT (global)",
    "th": "MUNIVERSE · MUBEAT (โกลบอล)",
    "zh": "MUNIVERSE · MUBEAT（全球）"
+  },
+  "뮤빗(MUBEAT) · 뮤니버스(MUNIVERSE)": {
+   "en": "MUBEAT · MUNIVERSE",
+   "es": "MUBEAT · MUNIVERSE",
+   "fil": "MUBEAT · MUNIVERSE",
+   "id": "MUBEAT · MUNIVERSE",
+   "ja": "MUBEAT · MUNIVERSE",
+   "pt": "MUBEAT · MUNIVERSE",
+   "th": "MUBEAT · MUNIVERSE",
+   "vi": "MUBEAT · MUNIVERSE",
+   "zh": "MUBEAT · MUNIVERSE"
   },
   "뮤직뱅크": {
    "en": "Music Bank",
@@ -13068,6 +13371,17 @@
    "pt": "Programas musicais",
    "th": "รายการเพลง",
    "zh": "打歌"
+  },
+  "방송 소식은 X @a2osoulstation · @soulstation15에서": {
+   "en": "Streaming updates on X: @a2osoulstation · @soulstation15",
+   "es": "Novedades en X: @a2osoulstation · @soulstation15",
+   "fil": "Updates sa X: @a2osoulstation · @soulstation15",
+   "id": "Info siaran di X: @a2osoulstation · @soulstation15",
+   "ja": "放送のお知らせは X @a2osoulstation・@soulstation15 で",
+   "pt": "Novidades no X: @a2osoulstation · @soulstation15",
+   "th": "ติดตามข่าวการสตรีมทาง X: @a2osoulstation · @soulstation15",
+   "vi": "Cập nhật trên X: @a2osoulstation · @soulstation15",
+   "zh": "直播消息请看 X @a2osoulstation · @soulstation15"
   },
   "벅스 실시간": {
    "en": "Bugs Realtime",
@@ -13267,6 +13581,17 @@
    "th": "โหวตสด: สูงสุด 5 โหวตต่อบัญชี",
    "zh": "直播投票每个账号最多5票"
   },
+  "생방송 투표는 계정당 최대 5표 · 틴(TIN) 앱 포인트는 링크와 같은 계정으로": {
+   "en": "Live vote: up to 5 votes per account · TIN app points need the same account as LiNC",
+   "es": "Voto en vivo: máx. 5 votos por cuenta · los puntos de TIN deben usar la misma cuenta que LiNC",
+   "fil": "Live vote: hanggang 5 boto bawat account · ang TIN points ay dapat parehong account sa LiNC",
+   "id": "Vote live maks 5 suara per akun · poin aplikasi TIN harus pakai akun yang sama dengan LiNC",
+   "ja": "生放送投票は1アカウント最大5票・TINアプリのポイントはLiNCと同じアカウントで",
+   "pt": "Voto ao vivo: até 5 votos por conta · os pontos do TIN precisam da mesma conta do LiNC",
+   "th": "โหวตสดได้สูงสุด 5 โหวตต่อบัญชี · แต้มในแอป TIN ต้องใช้บัญชีเดียวกับ LiNC",
+   "vi": "Bình chọn trực tiếp tối đa 5 phiếu mỗi tài khoản · điểm app TIN phải dùng cùng tài khoản với LiNC",
+   "zh": "直播投票每个账号最多 5 票 · TIN 应用积分需与 LiNC 使用同一账号"
+  },
   "생방송 투표는 방송 시간(KST)에만 열려요 — 방송 일정은 한눈에 탭 달력에서": {
    "en": "Live votes only open during the broadcast (KST) — see the calendar on Home for show times",
    "es": "La votación en vivo solo se abre durante la emisión (KST) — mira el calendario en Inicio",
@@ -13438,6 +13763,17 @@
    "th": "Show Champion",
    "zh": "Show Champion"
   },
+  "수 18:00 · MBC M": {
+   "en": "Wed 18:00 · MBC M",
+   "es": "Wed 18:00 · MBC M",
+   "fil": "Wed 18:00 · MBC M",
+   "id": "Wed 18:00 · MBC M",
+   "ja": "水 18:00 · MBC M",
+   "pt": "Wed 18:00 · MBC M",
+   "th": "พ. 18:00 · MBC M",
+   "vi": "T4 18:00 · MBC M",
+   "zh": "周三 18:00 · MBC M"
+  },
   "수 · MBC M": {
    "en": "Wed · MBC M",
    "es": "Mié · MBC M",
@@ -13474,6 +13810,28 @@
    "th": "แนะนำตัวว่าเป็น 'ออลราวด์เดอร์สีทอง'",
    "zh": "自称“黄金全能型”"
   },
+  "스테이션헤드 합동 스밍 1부 (KO1KEYZ 스테이션)": {
+   "en": "Stationhead joint streaming party Part 1 (KO1KEYZ Station)",
+   "es": "Fiesta de streaming en Stationhead, parte 1 (KO1KEYZ Station)",
+   "fil": "Stationhead joint streaming party Part 1 (KO1KEYZ Station)",
+   "id": "Streaming party bareng di Stationhead bagian 1 (KO1KEYZ Station)",
+   "ja": "Stationhead合同ストリーミング 第1部（KO1KEYZ Station）",
+   "pt": "Festa de streaming no Stationhead, parte 1 (KO1KEYZ Station)",
+   "th": "ปาร์ตี้สตรีมร่วม Stationhead ช่วงที่ 1 (KO1KEYZ Station)",
+   "vi": "Tiệc streaming chung trên Stationhead phần 1 (KO1KEYZ Station)",
+   "zh": "Stationhead 联合打榜 第1部分（KO1KEYZ Station）"
+  },
+  "스테이션헤드 합동 스밍 2부 (A2O SOUL 스테이션)": {
+   "en": "Stationhead joint streaming party Part 2 (A2O SOUL Station)",
+   "es": "Fiesta de streaming en Stationhead, parte 2 (A2O SOUL Station)",
+   "fil": "Stationhead joint streaming party Part 2 (A2O SOUL Station)",
+   "id": "Streaming party bareng di Stationhead bagian 2 (A2O SOUL Station)",
+   "ja": "Stationhead合同ストリーミング 第2部（A2O SOUL Station）",
+   "pt": "Festa de streaming no Stationhead, parte 2 (A2O SOUL Station)",
+   "th": "ปาร์ตี้สตรีมร่วม Stationhead ช่วงที่ 2 (A2O SOUL Station)",
+   "vi": "Tiệc streaming chung trên Stationhead phần 2 (A2O SOUL Station)",
+   "zh": "Stationhead 联合打榜 第2部分（A2O SOUL Station）"
+  },
   "스트리밍 이용권으로 로그인한 상태에서, 음소거·볼륨 0 말고 작게라도 소리 켜기": {
    "en": "Log in with a streaming pass, and keep the sound on (not muted or at 0), even if quiet",
    "es": "Inicia sesión con tu suscripción y mantén el sonido encendido (ni silencio ni volumen 0), aunque sea bajo",
@@ -13482,6 +13840,17 @@
    "pt": "Entre com uma assinatura de streaming e mantenha o som ligado (sem mudo ou volume 0), mesmo baixo",
    "th": "ล็อกอินด้วยแพ็กเกจสตรีม และเปิดเสียงไว้ (ไม่ปิดเสียง/ไม่เป็น 0) ถึงจะเบาก็ได้",
    "zh": "用流媒体会员登录，不要静音或音量0，小声也要开着"
+  },
+  "시간당 목표: 첫날 5만 뷰, 2~7일차 4.5만 뷰 (하루 25만 뷰)": {
+   "en": "Hourly goal: 50K views/hour on day 1, 45K/hour on days 2–7 (250K a day)",
+   "es": "Meta por hora: 50K vistas/hora el día 1, 45K/hora los días 2–7 (250K al día)",
+   "fil": "Hourly goal: 50K views/oras sa day 1, 45K/oras sa day 2–7 (250K kada araw)",
+   "id": "Target per jam: 50 ribu views/jam di hari 1, 45 ribu/jam di hari 2–7 (250 ribu sehari)",
+   "ja": "1時間の目標：初日5万回、2〜7日目4.5万回（1日25万回）",
+   "pt": "Meta por hora: 50K views/hora no dia 1, 45K/hora nos dias 2–7 (250K por dia)",
+   "th": "เป้าหมายรายชั่วโมง: วันแรก 50K วิว/ชม. วันที่ 2–7 45K วิว/ชม. (วันละ 250K)",
+   "vi": "Mục tiêu mỗi giờ: ngày 1 là 50K view/giờ, ngày 2–7 là 45K/giờ (250K mỗi ngày)",
+   "zh": "每小时目标：首日 5 万，第 2～7 天 4.5 万（每天 25 万）"
   },
   "시원시원한 큰 춤선": {
    "en": "Big, bold dance lines",
@@ -13573,6 +13942,28 @@
    "th": "IDOLCHAMP",
    "zh": "IDOLCHAMP"
   },
+  "아이튠즈로 구매해서 내려받은 곡은 지우고 스트리밍으로 듣기": {
+   "en": "Delete purchased iTunes downloads and stream instead",
+   "es": "Borra las descargas compradas en iTunes y escucha por streaming",
+   "fil": "Burahin ang mga biniling iTunes download at mag-stream na lang",
+   "id": "Hapus lagu yang dibeli & diunduh dari iTunes, lalu streaming",
+   "ja": "iTunesで購入してダウンロードした曲は削除して、ストリーミングで聴く",
+   "pt": "Apague as músicas compradas e baixadas no iTunes e ouça por streaming",
+   "th": "ลบเพลงที่ซื้อและดาวน์โหลดจาก iTunes แล้วฟังแบบสตรีมแทน",
+   "vi": "Xóa bài đã mua và tải về từ iTunes rồi nghe bằng streaming",
+   "zh": "删除在 iTunes 购买下载的歌曲，用流媒体播放"
+  },
+  "알림을 허용하고 a2osoulstation을 팔로우하면 방송 시작 때 알림이 와요": {
+   "en": "Allow notifications and follow a2osoulstation to get notified when they go on air",
+   "es": "Activa las notificaciones y sigue a a2osoulstation para enterarte cuando salgan al aire",
+   "fil": "I-allow ang notifications at i-follow ang a2osoulstation para ma-notify kapag on air na",
+   "id": "Izinkan notifikasi dan follow a2osoulstation supaya dapat notif saat siaran dimulai",
+   "ja": "通知を許可して a2osoulstation をフォローすると放送開始時に通知が来ます",
+   "pt": "Ative as notificações e siga a2osoulstation para ser avisado quando entrarem no ar",
+   "th": "เปิดการแจ้งเตือนและฟอลโลว์ a2osoulstation จะได้รู้ตอนเริ่มออนแอร์",
+   "vi": "Bật thông báo và theo dõi a2osoulstation để nhận thông báo khi lên sóng",
+   "zh": "允许通知并关注 a2osoulstation，开播时会收到提醒"
+  },
   "애플뮤직": {
    "en": "Apple Music (KR)",
    "es": "Apple Music (KR)",
@@ -13618,6 +14009,17 @@
    "th": "โหวตด้วยแต้มที่ได้จากภารกิจและโฆษณาในแอป",
    "zh": "用App任务·广告获得的道具投票"
   },
+  "앱 안에서 음소거하지 말고 기기 볼륨을 줄이기, 채팅에 참여하고 링크 공유하기": {
+   "en": "Don't mute inside the app — lower your device volume instead; join the chat and share the link",
+   "es": "No silencies la app — baja el volumen del dispositivo; participa en el chat y comparte el enlace",
+   "fil": "Huwag i-mute sa loob ng app — hinaan ang volume ng device; sumali sa chat at i-share ang link",
+   "id": "Jangan mute di dalam aplikasi — kecilkan volume perangkat; ikut chat dan bagikan link",
+   "ja": "アプリ内でミュートせず端末の音量を下げる。チャットに参加してリンクを拡散",
+   "pt": "Não silencie dentro do app — abaixe o volume do aparelho; participe do chat e compartilhe o link",
+   "th": "อย่าปิดเสียงในแอป — ให้ลดเสียงเครื่องแทน ร่วมแชทและแชร์ลิงก์",
+   "vi": "Đừng tắt tiếng trong app — hãy giảm âm lượng thiết bị; tham gia chat và chia sẻ link",
+   "zh": "不要在应用内静音，调低设备音量；参与聊天并分享链接"
+  },
   "앱(무료·추천): SBS 고릴라 · KBS 콩 · MBC 미니 · CBS 레인보우 — 생방송을 들으면서 게시판(채팅창)에 사연과 신청곡": {
    "en": "Apps (free, recommended): SBS Gorealra · KBS Kong · MBC mini · CBS Rainbow — listen live and post your story and request on the board (chat)",
    "es": "Apps (gratis, recomendado): SBS Gorealra · KBS Kong · MBC mini · CBS Rainbow — escucha en directo y deja tu historia y pedido en el tablón (chat)",
@@ -13626,6 +14028,17 @@
    "pt": "Apps (grátis, recomendado): SBS Gorealra · KBS Kong · MBC mini · CBS Rainbow — ouça ao vivo e deixe sua história e pedido no mural (chat)",
    "th": "แอป (ฟรี แนะนำ): SBS Gorealra · KBS Kong · MBC mini · CBS Rainbow — ฟังสดแล้วเขียนเรื่องเล่าและขอเพลงในบอร์ด (แชท)",
    "zh": "App（免费·推荐）：SBS Gorealra · KBS Kong · MBC mini · CBS Rainbow — 边听直播边在留言板（聊天窗）写小故事和点歌"
+  },
+  "앱스토어·플레이스토어에서 Stationhead 앱을 받거나 stationhead.com에서 — 전화번호·이메일·구글로 가입": {
+   "en": "Get the Stationhead app (App Store / Play Store) or use stationhead.com — sign up with phone, email or Google",
+   "es": "Descarga la app de Stationhead (App Store / Play Store) o entra en stationhead.com — regístrate con teléfono, correo o Google",
+   "fil": "I-download ang Stationhead app (App Store / Play Store) o pumunta sa stationhead.com — mag-sign up gamit ang phone, email o Google",
+   "id": "Unduh aplikasi Stationhead (App Store / Play Store) atau buka stationhead.com — daftar dengan nomor HP, email, atau Google",
+   "ja": "App Store・Play StoreでStationheadアプリを入れるか stationhead.com から。電話番号・メール・Googleで登録",
+   "pt": "Baixe o app do Stationhead (App Store / Play Store) ou use stationhead.com — cadastre-se com telefone, e-mail ou Google",
+   "th": "โหลดแอป Stationhead (App Store / Play Store) หรือเข้า stationhead.com — สมัครด้วยเบอร์โทร อีเมล หรือ Google",
+   "vi": "Tải app Stationhead (App Store / Play Store) hoặc vào stationhead.com — đăng ký bằng số điện thoại, email hoặc Google",
+   "zh": "在 App Store / Play 商店下载 Stationhead，或用 stationhead.com — 用手机号、邮箱或谷歌注册"
   },
   "에투소 1시간 스밍 리스트": {
    "en": "A2O SOUL 1-hour streaming playlist",
@@ -13690,6 +14103,17 @@
    "th": "พื้นฐานสตรีทแดนซ์แน่นหลายแนว",
    "zh": "扎实的街舞基本功，驾驭多种风格"
   },
+  "영상 볼륨은 50% 이상 — 소리를 줄이려면 유튜브 플레이어 말고 휴대폰·컴퓨터 볼륨으로": {
+   "en": "Keep the video volume above 50% — to keep it quiet, lower your phone/computer volume, not the YouTube player",
+   "es": "Mantén el volumen del video por encima del 50% — para silenciar, baja el volumen del móvil/PC, no el del reproductor",
+   "fil": "Panatilihing higit 50% ang volume ng video — kung gusto ng tahimik, hinaan ang phone/computer, hindi ang YouTube player",
+   "id": "Volume video di atas 50% — kalau mau senyap, kecilkan volume HP/komputer, bukan pemutar YouTube",
+   "ja": "動画の音量は50%以上に。静かにしたい時はYouTubeプレーヤーではなく端末の音量を下げる",
+   "pt": "Deixe o volume do vídeo acima de 50% — para ficar em silêncio, abaixe o volume do celular/PC, não o do player",
+   "th": "ตั้งเสียงวิดีโอเกิน 50% — ถ้าอยากให้เงียบ ให้ลดเสียงที่มือถือ/คอมแทน ไม่ใช่ที่เพลเยอร์ YouTube",
+   "vi": "Giữ âm lượng video trên 50% — muốn yên lặng thì giảm âm lượng điện thoại/máy tính, không phải trình phát YouTube",
+   "zh": "视频音量保持在 50% 以上 — 想安静就调低手机/电脑音量，而不是 YouTube 播放器"
+  },
   "영통": {
    "en": "Video call",
    "es": "Videollamada",
@@ -13725,6 +14149,17 @@
    "pt": "Variedades e rádio",
    "th": "วาไรตี้·วิทยุ",
    "zh": "综艺·电台"
+  },
+  "예시 순서: Dancing in the Dark · SUPERSTAR · 짧은 다른 곡 · Dancing in the Dark · While We're Young · Very First Love · Dancing in the Dark · Moonlight Shadow · 다른 짧은 곡": {
+   "en": "Sample order: Dancing in the Dark · SUPERSTAR · short filler · Dancing in the Dark · While We're Young · Very First Love · Dancing in the Dark · Moonlight Shadow · another short filler",
+   "es": "Orden de ejemplo: Dancing in the Dark · SUPERSTAR · relleno corto · Dancing in the Dark · While We're Young · Very First Love · Dancing in the Dark · Moonlight Shadow · otro relleno corto",
+   "fil": "Halimbawang order: Dancing in the Dark · SUPERSTAR · maikling filler · Dancing in the Dark · While We're Young · Very First Love · Dancing in the Dark · Moonlight Shadow · ibang maikling filler",
+   "id": "Contoh urutan: Dancing in the Dark · SUPERSTAR · lagu pendek lain · Dancing in the Dark · While We're Young · Very First Love · Dancing in the Dark · Moonlight Shadow · lagu pendek lain",
+   "ja": "順番の例：Dancing in the Dark・SUPERSTAR・短い他の曲・Dancing in the Dark・While We're Young・Very First Love・Dancing in the Dark・Moonlight Shadow・別の短い曲",
+   "pt": "Ordem de exemplo: Dancing in the Dark · SUPERSTAR · música curta · Dancing in the Dark · While We're Young · Very First Love · Dancing in the Dark · Moonlight Shadow · outra música curta",
+   "th": "ตัวอย่างลำดับ: Dancing in the Dark · SUPERSTAR · เพลงสั้นอื่น · Dancing in the Dark · While We're Young · Very First Love · Dancing in the Dark · Moonlight Shadow · เพลงสั้นอื่นอีกเพลง",
+   "vi": "Thứ tự mẫu: Dancing in the Dark · SUPERSTAR · bài ngắn khác · Dancing in the Dark · While We're Young · Very First Love · Dancing in the Dark · Moonlight Shadow · một bài ngắn khác",
+   "zh": "顺序示例：Dancing in the Dark · SUPERSTAR · 短的其他歌 · Dancing in the Dark · While We're Young · Very First Love · Dancing in the Dark · Moonlight Shadow · 另一首短歌"
   },
   "예약 특전 셀카 포토카드": {
    "en": "Pre-order selfie photocard",
@@ -13789,6 +14224,17 @@
    "th": "ALLMD",
    "zh": "ALLMD"
   },
+  "월 18:00": {
+   "en": "Mon 18:00",
+   "es": "Mon 18:00",
+   "fil": "Mon 18:00",
+   "id": "Mon 18:00",
+   "ja": "月 18:00",
+   "pt": "Mon 18:00",
+   "th": "จ. 18:00",
+   "vi": "T2 18:00",
+   "zh": "周一 18:00"
+  },
   "웰컴 투 소울라이트": {
    "en": "Welcome to SOULITE",
    "es": "Bienvenidos a SOULITE",
@@ -13825,6 +14271,17 @@
    "th": "เปิด 🔔 ด้านบนและเพิ่มลงหน้าจอหลัก จะได้แจ้งเตือนรายการเพลงและโหวต",
    "zh": "打开上方🔔并添加到主屏幕，音乐节目和投票会提醒你"
   },
+  "유료 이용권이나 무료 체험 중인 계정으로 (아이폰·안드로이드·윈도우·웹 모두 OK) — 자동 재생(∞)은 끄기": {
+   "en": "Use a paid plan or free trial (iPhone, Android, Windows or web all work) — turn off Autoplay (∞)",
+   "es": "Usa un plan de pago o la prueba gratis (iPhone, Android, Windows o web) — desactiva la reproducción automática (∞)",
+   "fil": "Gumamit ng paid plan o free trial (iPhone, Android, Windows o web) — i-off ang Autoplay (∞)",
+   "id": "Pakai paket berbayar atau uji coba gratis (iPhone, Android, Windows, atau web) — matikan Autoplay (∞)",
+   "ja": "有料プランか無料トライアル中のアカウントで（iPhone・Android・Windows・Web可）。自動再生(∞)はオフ",
+   "pt": "Use um plano pago ou o teste grátis (iPhone, Android, Windows ou web) — desligue a reprodução automática (∞)",
+   "th": "ใช้แพ็กเกจแบบเสียเงินหรือช่วงทดลองฟรี (iPhone, Android, Windows หรือเว็บ) — ปิดเล่นอัตโนมัติ (∞)",
+   "vi": "Dùng gói trả phí hoặc dùng thử miễn phí (iPhone, Android, Windows hoặc web) — tắt Tự động phát (∞)",
+   "zh": "使用付费会员或免费试用账号（iPhone、安卓、Windows、网页均可）— 关闭自动播放（∞）"
+  },
   "유튜브 A2O SOUL": {
    "en": "YouTube A2O SOUL",
    "es": "YouTube A2O SOUL",
@@ -13860,6 +14317,17 @@
    "pt": "YouTube A2O WORLD — canal da agência (vídeos da época de trainee também)",
    "th": "YouTube A2O WORLD — ช่องของค่าย (มีคลิปเทรนนีก่อนเดบิวต์ด้วย)",
    "zh": "YouTube A2O WORLD — 公司频道（出道前练习生视频也在这）"
+  },
+  "유튜브 MV 스밍 목표·규칙 (해외 팬 · 가이드 @a2osoulstation)": {
+   "en": "YouTube MV streaming goals & rules (global fans · guide by @a2osoulstation)",
+   "es": "Metas y reglas para el MV en YouTube (fans internacionales · guía de @a2osoulstation)",
+   "fil": "YouTube MV streaming goals at rules (global fans · gabay ng @a2osoulstation)",
+   "id": "Target & aturan streaming MV YouTube (fans global · panduan @a2osoulstation)",
+   "ja": "YouTube MV再生の目標とルール（海外ファン・ガイド @a2osoulstation）",
+   "pt": "Metas e regras do MV no YouTube (fãs internacionais · guia de @a2osoulstation)",
+   "th": "เป้าหมายและกฎการสตรีม MV บน YouTube (แฟนต่างประเทศ · ไกด์โดย @a2osoulstation)",
+   "vi": "Mục tiêu & quy tắc xem MV trên YouTube (fan quốc tế · hướng dẫn của @a2osoulstation)",
+   "zh": "YouTube MV 播放目标与规则（海外粉丝 · 指南 @a2osoulstation）"
   },
   "유튜브 뮤직비디오 조회수": {
    "en": "YouTube MV views",
@@ -14284,6 +14752,17 @@
    "th": "เคยฝึกที่ TNS Vocal & Dance Academy ชางวอน",
    "zh": "出身昌原TNS声乐舞蹈学院"
   },
+  "첫날 목표: Dancing in the Dark 10만 스트리밍 · SUPERSTAR EP 전체 20만": {
+   "en": "Day 1 goals: 100K streams for Dancing in the Dark · 200K for the whole SUPERSTAR EP",
+   "es": "Metas del día 1: 100K streams de Dancing in the Dark · 200K para todo el EP SUPERSTAR",
+   "fil": "Day 1 goals: 100K streams para sa Dancing in the Dark · 200K para sa buong SUPERSTAR EP",
+   "id": "Target hari 1: 100 ribu stream Dancing in the Dark · 200 ribu untuk seluruh EP SUPERSTAR",
+   "ja": "初日の目標：Dancing in the Dark 10万回・SUPERSTAR EP全体で20万回",
+   "pt": "Metas do dia 1: 100K streams de Dancing in the Dark · 200K no EP SUPERSTAR inteiro",
+   "th": "เป้าหมายวันแรก: Dancing in the Dark 100K สตรีม · ทั้ง EP SUPERSTAR 200K",
+   "vi": "Mục tiêu ngày 1: Dancing in the Dark 100K lượt stream · cả EP SUPERSTAR 200K",
+   "zh": "首日目标：Dancing in the Dark 10 万播放 · SUPERSTAR EP 合计 20 万"
+  },
   "초등학생 때 밴드를 결성해 싱글 발매": {
    "en": "Formed a band in elementary school and released a single",
    "es": "Formó una banda en primaria y lanzó un sencillo",
@@ -14337,6 +14816,39 @@
    "pt": "Centro conceitual, dançarino principal",
    "th": "คอนเซ็ปต์เซ็นเตอร์, เมนแดนเซอร์",
    "zh": "概念C位、主舞"
+  },
+  "쿠궁(COOGOONG)": {
+   "en": "COOGOONG",
+   "es": "COOGOONG",
+   "fil": "COOGOONG",
+   "id": "COOGOONG",
+   "ja": "COOGOONG",
+   "pt": "COOGOONG",
+   "th": "COOGOONG",
+   "vi": "COOGOONG",
+   "zh": "COOGOONG"
+  },
+  "쿠궁은 예전 팬캐스트(FANCAST) 앱이 이름을 바꾼 것 · 1표 = 하트 50개": {
+   "en": "COOGOONG is the renamed FANCAST app · 1 vote = 50 hearts",
+   "es": "COOGOONG es la antigua app FANCAST · 1 voto = 50 corazones",
+   "fil": "Ang COOGOONG ay ang dating FANCAST app · 1 boto = 50 hearts",
+   "id": "COOGOONG adalah aplikasi FANCAST yang ganti nama · 1 vote = 50 hati",
+   "ja": "COOGOONGは旧FANCASTアプリ・1票＝ハート50個",
+   "pt": "COOGOONG é o antigo app FANCAST · 1 voto = 50 corações",
+   "th": "COOGOONG คือแอป FANCAST ที่เปลี่ยนชื่อ · 1 โหวต = 50 หัวใจ",
+   "vi": "COOGOONG là app FANCAST đổi tên · 1 phiếu = 50 trái tim",
+   "zh": "COOGOONG 就是改名后的 FANCAST · 1 票 = 50 颗心"
+  },
+  "키윙(KIWING)": {
+   "en": "KIWING",
+   "es": "KIWING",
+   "fil": "KIWING",
+   "id": "KIWING",
+   "ja": "KIWING",
+   "pt": "KIWING",
+   "th": "KIWING",
+   "vi": "KIWING",
+   "zh": "KIWING"
   },
   "키즈·틴즈 댄스 배틀 'THE FUTURE' 키즈 부문 준우승 2회, 그랜드 챔피언 대회 키즈 부문 우승": {
    "en": "Kids/teens dance battle 'THE FUTURE': kids runner-up twice, kids winner at the grand championship",
@@ -14653,6 +15165,28 @@
    "th": "HIGHER",
    "zh": "HIGHER"
   },
+  "한 곡 반복 금지 — 타이틀곡 사이에 다른 곡 2~3개(약 5~6분)를 넣은 1~2시간 재생목록으로": {
+   "en": "Never loop one song — use a 1–2 hour playlist with 2–3 other songs (about 5–6 minutes) between title-track plays",
+   "es": "Nunca repitas una canción — usa una playlist de 1–2 horas con 2–3 canciones distintas (unos 5–6 minutos) entre cada title track",
+   "fil": "Huwag i-loop ang isang kanta — gumamit ng 1–2 oras na playlist na may 2–3 ibang kanta (mga 5–6 minuto) sa pagitan ng title track",
+   "id": "Jangan loop satu lagu — pakai playlist 1–2 jam dengan 2–3 lagu lain (sekitar 5–6 menit) di antara title track",
+   "ja": "1曲リピート禁止。タイトル曲の間に他の曲を2〜3曲（約5〜6分）挟んだ1〜2時間の再生リストで",
+   "pt": "Nunca deixe uma música em loop — use uma playlist de 1–2 horas com 2–3 outras músicas (uns 5–6 minutos) entre cada faixa-título",
+   "th": "ห้ามวนเพลงเดียว — ใช้เพลย์ลิสต์ 1–2 ชม. ที่มีเพลงอื่น 2–3 เพลง (ราว 5–6 นาที) คั่นระหว่างเพลงหลัก",
+   "vi": "Không lặp một bài — dùng playlist 1–2 giờ, xen 2–3 bài khác (khoảng 5–6 phút) giữa các lần phát bài chủ đề",
+   "zh": "不要单曲循环 — 用 1～2 小时的歌单，每首主打之间放 2～3 首其他歌（约 5～6 分钟）"
+  },
+  "한 곡 반복·셔플은 끄고 재생목록 순서대로 듣기": {
+   "en": "Turn off single-song repeat and shuffle — play the playlist in order",
+   "es": "Desactiva la repetición de una canción y el aleatorio — reproduce la playlist en orden",
+   "fil": "I-off ang single-song repeat at shuffle — patugtugin ang playlist nang sunod-sunod",
+   "id": "Matikan repeat satu lagu dan shuffle — putar playlist sesuai urutan",
+   "ja": "1曲リピートとシャッフルはオフにして、再生リスト順に聴く",
+   "pt": "Desligue a repetição de uma música e o aleatório — toque a playlist em ordem",
+   "th": "ปิดเล่นซ้ำเพลงเดียวและสุ่มเพลง — เล่นตามลำดับเพลย์ลิสต์",
+   "vi": "Tắt lặp một bài và phát ngẫu nhiên — nghe playlist theo thứ tự",
+   "zh": "关闭单曲循环和随机播放 — 按歌单顺序播放"
+  },
   "한 곡 반복보다 다른 곡을 섞은 재생목록으로 (응원 탭 스밍 리스트 참고)": {
    "en": "Use a playlist mixed with other songs instead of repeating one track (see the streaming list in the Support tab)",
    "es": "Usa una lista con otras canciones en vez de repetir una (mira la lista de streaming en Apoyo)",
@@ -14672,6 +15206,17 @@
    "th": "ลิสต์วนหนึ่งรอบประมาณ 1 ชั่วโมง กดปุ่มด้านล่างเพื่อเพิ่มทีเดียว แล้วเปิดวนทั้งหมด",
    "vi": "Một vòng khoảng 1 tiếng. Thêm tất cả một lần bằng nút bên dưới và bật lặp lại.",
    "zh": "一轮约 1 小时的歌单。用下面的按钮一次添加，开全部循环一直播放。"
+  },
+  "한 시간에 한 번쯤 재생목록을 바꾸거나 곡을 직접 넘겨서 활동 중임을 보여 주기": {
+   "en": "About once an hour, switch playlists or skip a track manually so you're not flagged as a bot",
+   "es": "Más o menos cada hora, cambia de playlist o salta una canción a mano para que no te marquen como bot",
+   "fil": "Mga isang beses kada oras, magpalit ng playlist o mag-skip ng kanta nang manual para hindi ma-flag bilang bot",
+   "id": "Kira-kira sejam sekali, ganti playlist atau skip lagu secara manual supaya tidak dianggap bot",
+   "ja": "1時間に1回くらい再生リストを変えたり手動で曲を飛ばしたりして、操作していることを示す",
+   "pt": "Mais ou menos uma vez por hora, troque de playlist ou pule uma música manualmente para não ser marcado como bot",
+   "th": "ประมาณชั่วโมงละครั้ง ให้เปลี่ยนเพลย์ลิสต์หรือกดข้ามเพลงเอง จะได้ไม่ถูกมองว่าเป็นบอต",
+   "vi": "Khoảng mỗi giờ một lần, đổi playlist hoặc tự bấm chuyển bài để không bị coi là bot",
+   "zh": "大约每小时切换一次歌单或手动切歌，避免被判定为机器人"
   },
   "한 프로그램에 몰아서 도배하지 말고 여러 프로그램에 나눠서": {
    "en": "Spread requests across several programs instead of flooding one",
@@ -18285,6 +18830,16 @@
    "show": "유픽",
    "start": "2026-11-01 00:00",
    "title": "11월 이달의 픽 · 루키 남자 (제트·서하 후보)"
+  },
+  {
+   "app": "키윙(KIWING)",
+   "end": "2026-12-08 16:00",
+   "in_app": true,
+   "note": "100% 팬 투표 · 남자 18팀 중 상위 5팀이 결선(12/9~12/22) 진출",
+   "show": "디어워즈",
+   "start": "2026-11-18 11:00",
+   "title": "2027 D AWARDS 베스트 라이징 스타(남자) 본선",
+   "url": "https://sports.khan.co.kr/en/article/202611171532017/"
   },
   {
    "app": "하이어(HIGHER)",
