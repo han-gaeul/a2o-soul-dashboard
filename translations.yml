@@ -2487,16 +2487,16 @@
   id: "FLO 24H"
   th: "FLO 24H"
   pt: "FLO 24H"
-"다른 팬덤 음원총공 리스트처럼 한 바퀴를 약 1시간에 맞추고, 활동곡(Dancing in the Dark)을 3~4곡마다 넣었어요. 같은 곡이 연달아 나오지 않게 섞었어요. 아래 버튼으로 한 번에 담고 전체 반복으로 계속 틀어 주세요.":
-  en: "Like other fandoms' streaming lists, one loop is about 1 hour, with the promo track (Dancing in the Dark) every 3–4 songs and no song played twice in a row. Add it all at once with the buttons below and keep it on repeat."
-  ja: "他のファンダムのストリーミングリストと同じく、1周を約1時間にし、活動曲（Dancing in the Dark）を3〜4曲ごとに入れました。同じ曲が続かないように並べています。下のボタンで一度に追加して、全曲リピートで流し続けてください。"
-  zh: "和其他粉丝的打榜歌单一样，一轮约 1 小时，每隔 3～4 首放一次活动曲（Dancing in the Dark），同一首歌不会连着播放。用下面的按钮一次添加，开全部循环一直播放。"
-  es: "Como las listas de streaming de otros fandoms, una vuelta dura cerca de 1 hora, con la canción promocional (Dancing in the Dark) cada 3–4 canciones y sin repetir la misma seguida. Añádela de una vez con los botones y déjala en repetición."
-  id: "Seperti daftar streaming fandom lain, satu putaran sekitar 1 jam, lagu promosi (Dancing in the Dark) muncul tiap 3–4 lagu dan tidak ada lagu yang sama berurutan. Tambahkan sekaligus dengan tombol di bawah dan putar ulang terus."
-  th: "เหมือนลิสต์สตรีมของแฟนด้อมอื่น วนหนึ่งรอบประมาณ 1 ชั่วโมง ใส่เพลงโปรโมต (Dancing in the Dark) ทุก 3–4 เพลง และไม่มีเพลงซ้ำติดกัน กดปุ่มด้านล่างเพื่อเพิ่มทีเดียว แล้วเปิดวนทั้งหมด"
-  pt: "Como as listas de streaming de outros fandoms, uma volta dura cerca de 1 hora, com a música de promoção (Dancing in the Dark) a cada 3–4 faixas e sem repetir a mesma em seguida. Adicione tudo de uma vez pelos botões abaixo e deixe no repetir."
-  fil: "Gaya ng streaming list ng ibang fandom, mga 1 oras ang isang ikot, may promo track (Dancing in the Dark) bawat 3–4 na kanta at walang magkasunod na parehong kanta. Idagdag lahat nang sabay gamit ang mga button sa ibaba at i-repeat."
-  vi: "Giống danh sách streaming của các fandom khác, một vòng khoảng 1 tiếng, bài quảng bá (Dancing in the Dark) xuất hiện mỗi 3–4 bài và không có bài nào lặp liền nhau. Thêm tất cả một lần bằng nút bên dưới và bật lặp lại."
+"한 바퀴 약 1시간 리스트예요. 아래 버튼으로 한 번에 담고 전체 반복으로 계속 틀어 주세요.":
+  en: "One loop is about 1 hour. Add it all at once with the buttons below and keep it on repeat."
+  ja: "1周約1時間のリストです。下のボタンで一度に追加して、全曲リピートで流し続けてください。"
+  zh: "一轮约 1 小时的歌单。用下面的按钮一次添加，开全部循环一直播放。"
+  es: "Una vuelta dura cerca de 1 hora. Añádela de una vez con los botones y déjala en repetición."
+  id: "Satu putaran sekitar 1 jam. Tambahkan sekaligus dengan tombol di bawah dan putar ulang terus."
+  th: "ลิสต์วนหนึ่งรอบประมาณ 1 ชั่วโมง กดปุ่มด้านล่างเพื่อเพิ่มทีเดียว แล้วเปิดวนทั้งหมด"
+  pt: "Uma volta dura cerca de 1 hora. Adicione tudo de uma vez pelos botões abaixo e deixe no repetir."
+  fil: "Mga 1 oras ang isang ikot. Idagdag lahat nang sabay gamit ang mga button sa ibaba at i-repeat."
+  vi: "Một vòng khoảng 1 tiếng. Thêm tất cả một lần bằng nút bên dưới và bật lặp lại."
 
 "담기 전에 재생목록을 비우고, 설정에서 '중복 곡 허용'을 켜 두기":
   en: "Before adding, clear your play queue and turn on 'allow duplicate songs' in settings"
