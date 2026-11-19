@@ -3060,3 +3060,69 @@
   fil: "Updates sa X: @a2osoulstation · @soulstation15"
   vi: "Cập nhật trên X: @a2osoulstation · @soulstation15"
 
+"월 18:00":
+  en: "Mon 18:00"
+  es: "Mon 18:00"
+  id: "Mon 18:00"
+  pt: "Mon 18:00"
+  fil: "Mon 18:00"
+  ja: "月 18:00"
+  zh: "周一 18:00"
+  th: "จ. 18:00"
+  vi: "T2 18:00"
+
+"수 18:00 · MBC M":
+  en: "Wed 18:00 · MBC M"
+  es: "Wed 18:00 · MBC M"
+  id: "Wed 18:00 · MBC M"
+  pt: "Wed 18:00 · MBC M"
+  fil: "Wed 18:00 · MBC M"
+  ja: "水 18:00 · MBC M"
+  zh: "周三 18:00 · MBC M"
+  th: "พ. 18:00 · MBC M"
+  vi: "T4 18:00 · MBC M"
+
+"뮤빗(MUBEAT) · 뮤니버스(MUNIVERSE)":
+  en: "MUBEAT · MUNIVERSE"
+  ja: "MUBEAT · MUNIVERSE"
+  zh: "MUBEAT · MUNIVERSE"
+  es: "MUBEAT · MUNIVERSE"
+  id: "MUBEAT · MUNIVERSE"
+  th: "MUBEAT · MUNIVERSE"
+  pt: "MUBEAT · MUNIVERSE"
+  fil: "MUBEAT · MUNIVERSE"
+  vi: "MUBEAT · MUNIVERSE"
+
+"뮤니버스(MUNIVERSE) · 뮤빗(MUBEAT)":
+  en: "MUNIVERSE · MUBEAT"
+  ja: "MUNIVERSE · MUBEAT"
+  zh: "MUNIVERSE · MUBEAT"
+  es: "MUNIVERSE · MUBEAT"
+  id: "MUNIVERSE · MUBEAT"
+  th: "MUNIVERSE · MUBEAT"
+  pt: "MUNIVERSE · MUBEAT"
+  fil: "MUNIVERSE · MUBEAT"
+  vi: "MUNIVERSE · MUBEAT"
+
+"링크(LiNC) · 틴(TIN)":
+  en: "LiNC · TIN"
+  ja: "LiNC · TIN"
+  zh: "LiNC · TIN"
+  es: "LiNC · TIN"
+  id: "LiNC · TIN"
+  th: "LiNC · TIN"
+  pt: "LiNC · TIN"
+  fil: "LiNC · TIN"
+  vi: "LiNC · TIN"
+
+"생방송 투표는 계정당 최대 5표 · 틴(TIN) 앱 포인트는 링크와 같은 계정으로":
+  en: "Live vote: up to 5 votes per account · TIN app points need the same account as LiNC"
+  ja: "生放送投票は1アカウント最大5票・TINアプリのポイントはLiNCと同じアカウントで"
+  zh: "直播投票每个账号最多 5 票 · TIN 应用积分需与 LiNC 使用同一账号"
+  es: "Voto en vivo: máx. 5 votos por cuenta · los puntos de TIN deben usar la misma cuenta que LiNC"
+  id: "Vote live maks 5 suara per akun · poin aplikasi TIN harus pakai akun yang sama dengan LiNC"
+  th: "โหวตสดได้สูงสุด 5 โหวตต่อบัญชี · แต้มในแอป TIN ต้องใช้บัญชีเดียวกับ LiNC"
+  pt: "Voto ao vivo: até 5 votos por conta · os pontos do TIN precisam da mesma conta do LiNC"
+  fil: "Live vote: hanggang 5 boto bawat account · ang TIN points ay dapat parehong account sa LiNC"
+  vi: "Bình chọn trực tiếp tối đa 5 phiếu mỗi tài khoản · điểm app TIN phải dùng cùng tài khoản với LiNC"
+

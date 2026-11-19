@@ -810,6 +810,9 @@ if ("serviceWorker" in navigator) {
           el("div", { class: "howto-apps" },
             v.pre ? el("span", {}, el("span", { class: "chip" }, t("howto_pre")), " ", ...appLinks(v.pre)) : null,
             v.live ? el("span", {}, el("span", { class: "chip chip-on" }, t("howto_live")), " ", ...appLinks(v.live)) : null),
+          // 사전투표 기간: "금 16:00~월 09:00" → 요일을 언어에 맞게
+          v.prevote ? el("div", { class: "small" }, el("b", {}, `${t("prevote_win")} `),
+            v.prevote.replace(/([월화수목금토일])\s*/g, (_, d) => `${wdName(DAYS.indexOf(d))} `).replace("~", " ~ "), " KST") : null,
           v.note ? el("div", { class: "muted small" }, tc(v.note)) : null,
           liveLink(v.show),
           v.url ? ext(v.url, "↗ link") : null].filter(Boolean));
