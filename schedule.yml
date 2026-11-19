@@ -23,3 +23,14 @@ events:
   # 연말 무대
   - { date: 2026-12-18, type: 음방, title: KBS 가요대축제 출연 }
   - { date: 2026-12-25, type: 음방, title: SBS 가요대전 출연 }
+
+# 팬싸·영통 공지 카드(공지 탭) 손보기
+#   fix: 제목에 match가 들어간 공지의 당첨 발표일(announce)·응모 기간 등을 고침 (같은 판매처가 여러 날이면 date로 구분)
+#   add: 공지에서 자동으로 못 읽은 일정 추가 (지나면 자동으로 빠짐)
+fansign:
+  fix:
+    - { match: Withmuu, announce: "2026-11-17" }
+    - { match: Music Plant, announce: "2026-11-19 15:00" }
+    - { match: Jumpup, apply_start: "2026-11-18 15:00", apply_end: "2026-11-20 23:59", announce: "2026-11-21 15:00" }
+  add:
+    - { date: 2026-11-29, time: "20:00", title: Jumpup 팬사인회, short: 팬싸, apply_start: "2026-11-18 15:00", apply_end: "2026-11-20 23:59", announce: "2026-11-21 15:00", post: "https://x.com/JumpUp_ent/status/2122932820913860808" }

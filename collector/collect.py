@@ -1740,6 +1740,24 @@ def build(cfg):
     by_id = {v["id"]: v for v in videos}
     today = datetime.now(KST).date().isoformat()
     auto_events, notices, pending, auto_votes, prerecs = auto_items(today)
+    # schedule.yml fansign: 자동으로 읽은 팬싸·영통 공지 고치기(fix)·못 읽은 일정 추가(add)
+    fs = read_yml("schedule.yml").get("fansign") or {}
+    keys = ("date", "time", "apply_start", "apply_end", "announce", "url", "post")
+    for f in fs.get("fix") or []:
+        for n in notices:
+            if f.get("match") and str(f["match"]) in n["title"] and (not f.get("date") or str(f["date"]) == n.get("date")):
+                n.update({k: str(f[k]) for k in keys if f.get(k)})
+    for a in fs.get("add") or []:
+        if not (a.get("date") and a.get("title")) or str(a["date"]) < today:
+            continue
+        row = {"date": str(a["date"]), "time": str(a.get("time") or ""), "title": str(a["title"]), "short": str(a.get("short") or ""),
+               "kind": "event", "label": announce.KINDS.get("event", "행사"), "post": str(a.get("post") or a.get("url") or ""),
+               "key": f"manual|{a['date']}|{a['title']}", **{k: str(a[k]) for k in ("apply_start", "apply_end", "announce", "url") if a.get(k)}}
+        if not any(n.get("date") == row["date"] and n["title"] == row["title"] for n in notices):
+            notices.append(row)
+        if not any(e["date"] == row["date"] and e["title"] == row["title"] for e in cfg["events"]):
+            cfg["events"].append({"date": row["date"], "time": row["time"] or None, "type": "행사", "title": row["title"],
+                                  "url": row["post"] or None, **({"short": row["short"]} if row["short"] else {})})
     have = {(v["end"], v.get("show", ""), v.get("title", "")) for v in cfg["votes"]}
     have_app = {(v["end"][:10], v.get("app", "")) for v in cfg["votes"] if v.get("app")}
     cfg["votes"] += [v for v in auto_votes if (v["end"], v["show"], v["title"]) not in have

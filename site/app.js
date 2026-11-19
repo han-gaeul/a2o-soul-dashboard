@@ -1027,7 +1027,8 @@ if ("serviceWorker" in navigator) {
       if (end && st && now < st) [cls, label, text] = ["soon", t("fs_ap_soon"), t("fs_ap_from", { t: md(x.apply_start) })];
       else if (end && now < end) [cls, label, text] = [x.apply_end.slice(0, 10) === todayKst ? "today" : "open",
         x.apply_end.slice(0, 10) === todayKst ? t("fs_ap_today") : t("fs_ap_open"), t("fs_ap_until", { t: md(x.apply_end) })];
-      else [cls, label, text] = ["closed", t("fs_ap_closed"), x.announce ? t("fs_announce", { d: x.announce.slice(5).replace("-", ".") }) : ""];
+      // 응모 끝: 당첨 발표일이 아직이면 날짜 표시, 지났으면 숨김
+      else [cls, label, text] = ["closed", t("fs_ap_closed"), x.announce && x.announce.slice(0, 10) >= todayKst ? t("fs_announce", { d: x.announce.slice(5, 10).replace("-", ".") }) : ""];
       const pct = end && st && now >= st && now < end ? Math.max(4, ((now - st) / (end - st)) * 100) : 0;
       return el("span", { class: `fs-apply ap-${cls}` }, el("span", { class: "ap-chip" }, label), el("span", {}, text),
         pct ? el("span", { class: "ap-bar" }, el("i", { style: `width:${pct.toFixed(0)}%` })) : null);
