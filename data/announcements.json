@@ -2386,14 +2386,16 @@
   "since_id": "2123340513831170203"
  },
  "x_official_votes": {
-  "at": "2026-11-19T18:31+09:00",
+  "at": "2026-11-19T18:50+09:00",
   "deep": 1,
   "last": {
    "official": [],
-   "read": 0,
-   "verified": []
+   "read": 1,
+   "verified": [
+    "a2osoulstation:blue"
+   ]
   },
-  "since_id": "2123344238083703037",
+  "since_id": "2123352055750574224",
   "v": 2
  },
  "x_show_photos": {
