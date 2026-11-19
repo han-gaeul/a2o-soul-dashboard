@@ -72,7 +72,7 @@ stream_playlist:
 streaming:
   - title: Dancing in the Dark
     note: 더블 타이틀 · 지금 활동곡
-    links: { MV: "https://youtu.be/JPJokqIoIJI" }   # 예) 멜론: "https://...", Spotify: "https://..."
+    links: { MV: "https://youtu.be/JPJokqIoIJI", Spotify: "https://open.spotify.com/album/6yXPYq0Iz38xI9BMByyMV4", Apple Music: "https://music.apple.com/album/superstar-ep/6830057356", Stationhead: "https://www.stationhead.com/a2osoulstation" }   # 예) 멜론: "https://...", Spotify: "https://..."
   - title: SUPERSTAR
     note: 더블 타이틀 · 선공개 싱글
     links: { MV: "https://youtu.be/IAURqrShEUQ", "INFINITE MV": "https://youtu.be/B5Aa4gnnt9I" }
