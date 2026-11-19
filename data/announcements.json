@@ -2267,7 +2267,7 @@
  "x_media": {
   "at": "2026-11-19T16:30+09:00",
   "candidates": {},
-  "checked": "2026-11-18T16:40+09:00",
+  "checked": "2026-11-19T16:40+09:00",
   "missing": [
    "cosmopolitan_kr",
    "esquirekorea",
@@ -2364,16 +2364,14 @@
   "since_id": "2122618084649468286"
  },
  "x_official_votes": {
-  "at": "2026-11-19T16:30+09:00",
+  "at": "2026-11-19T16:40+09:00",
   "deep": 1,
   "last": {
    "official": [],
-   "read": 3,
-   "verified": [
-    "a2osoulvote:blue"
-   ]
+   "read": 1,
+   "verified": []
   },
-  "since_id": "2123314916740440145",
+  "since_id": "2123318624408543273",
   "v": 2
  },
  "x_show_photos": {
