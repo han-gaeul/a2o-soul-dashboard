@@ -2983,3 +2983,80 @@
   fil: "Bawal ang VPN, at huwag gumamit ng maraming account sa iisang IP"
   vi: "Không dùng VPN, không chạy nhiều tài khoản trên một IP"
 
+"Stationhead 함께 듣기 (해외 팬 · 가이드 @a2osoulstation)":
+  en: "Listen together on Stationhead (global fans · guide by @a2osoulstation)"
+  ja: "Stationheadで一緒に聴く（海外ファン・ガイド @a2osoulstation）"
+  zh: "在 Stationhead 一起听（海外粉丝 · 指南 @a2osoulstation）"
+  es: "Escuchar juntos en Stationhead (fans internacionales · guía de @a2osoulstation)"
+  id: "Dengar bareng di Stationhead (fans global · panduan @a2osoulstation)"
+  th: "ฟังด้วยกันบน Stationhead (แฟนต่างประเทศ · ไกด์โดย @a2osoulstation)"
+  pt: "Ouvir junto no Stationhead (fãs internacionais · guia de @a2osoulstation)"
+  fil: "Sabay na makinig sa Stationhead (global fans · gabay ng @a2osoulstation)"
+  vi: "Nghe cùng nhau trên Stationhead (fan quốc tế · hướng dẫn của @a2osoulstation)"
+
+"앱스토어·플레이스토어에서 Stationhead 앱을 받거나 stationhead.com에서 — 전화번호·이메일·구글로 가입":
+  en: "Get the Stationhead app (App Store / Play Store) or use stationhead.com — sign up with phone, email or Google"
+  ja: "App Store・Play StoreでStationheadアプリを入れるか stationhead.com から。電話番号・メール・Googleで登録"
+  zh: "在 App Store / Play 商店下载 Stationhead，或用 stationhead.com — 用手机号、邮箱或谷歌注册"
+  es: "Descarga la app de Stationhead (App Store / Play Store) o entra en stationhead.com — regístrate con teléfono, correo o Google"
+  id: "Unduh aplikasi Stationhead (App Store / Play Store) atau buka stationhead.com — daftar dengan nomor HP, email, atau Google"
+  th: "โหลดแอป Stationhead (App Store / Play Store) หรือเข้า stationhead.com — สมัครด้วยเบอร์โทร อีเมล หรือ Google"
+  pt: "Baixe o app do Stationhead (App Store / Play Store) ou use stationhead.com — cadastre-se com telefone, e-mail ou Google"
+  fil: "I-download ang Stationhead app (App Store / Play Store) o pumunta sa stationhead.com — mag-sign up gamit ang phone, email o Google"
+  vi: "Tải app Stationhead (App Store / Play Store) hoặc vào stationhead.com — đăng ký bằng số điện thoại, email hoặc Google"
+
+"Apple Music 또는 Spotify를 연결 — 유료(Premium) 계정이어야 스트리밍이 차트에 반영돼요":
+  en: "Connect Apple Music or Spotify — you need a paid (Premium) account for streams to count on charts"
+  ja: "Apple MusicかSpotifyを連携。チャートに反映されるのは有料（Premium）アカウントのみ"
+  zh: "连接 Apple Music 或 Spotify — 需要付费（Premium）账号播放才会计入榜单"
+  es: "Conecta Apple Music o Spotify — necesitas una cuenta de pago (Premium) para que cuenten en las listas"
+  id: "Hubungkan Apple Music atau Spotify — harus akun berbayar (Premium) agar stream masuk chart"
+  th: "เชื่อม Apple Music หรือ Spotify — ต้องเป็นบัญชีแบบเสียเงิน (Premium) สตรีมถึงจะนับในชาร์ต"
+  pt: "Conecte Apple Music ou Spotify — precisa de conta paga (Premium) para os streams contarem nas paradas"
+  fil: "I-connect ang Apple Music o Spotify — kailangan ng paid (Premium) account para mabilang sa charts"
+  vi: "Kết nối Apple Music hoặc Spotify — cần tài khoản trả phí (Premium) thì lượt stream mới được tính vào BXH"
+
+"검색에서 a2osoulstation을 찾아 들어가기 → 방송 중(ON AIR)일 때 'Start listening'":
+  en: "Search for a2osoulstation → when it's ON AIR, tap 'Start listening'"
+  ja: "検索で a2osoulstation を探す → 放送中（ON AIR）なら「Start listening」"
+  zh: "搜索 a2osoulstation → 直播中（ON AIR）时点「Start listening」"
+  es: "Busca a2osoulstation → cuando esté ON AIR, toca 'Start listening'"
+  id: "Cari a2osoulstation → saat ON AIR, ketuk 'Start listening'"
+  th: "ค้นหา a2osoulstation → ตอนที่ ON AIR กด 'Start listening'"
+  pt: "Procure a2osoulstation → quando estiver ON AIR, toque em 'Start listening'"
+  fil: "Hanapin ang a2osoulstation → kapag ON AIR, i-tap ang 'Start listening'"
+  vi: "Tìm a2osoulstation → khi đang ON AIR, bấm 'Start listening'"
+
+"알림을 허용하고 a2osoulstation을 팔로우하면 방송 시작 때 알림이 와요":
+  en: "Allow notifications and follow a2osoulstation to get notified when they go on air"
+  ja: "通知を許可して a2osoulstation をフォローすると放送開始時に通知が来ます"
+  zh: "允许通知并关注 a2osoulstation，开播时会收到提醒"
+  es: "Activa las notificaciones y sigue a a2osoulstation para enterarte cuando salgan al aire"
+  id: "Izinkan notifikasi dan follow a2osoulstation supaya dapat notif saat siaran dimulai"
+  th: "เปิดการแจ้งเตือนและฟอลโลว์ a2osoulstation จะได้รู้ตอนเริ่มออนแอร์"
+  pt: "Ative as notificações e siga a2osoulstation para ser avisado quando entrarem no ar"
+  fil: "I-allow ang notifications at i-follow ang a2osoulstation para ma-notify kapag on air na"
+  vi: "Bật thông báo và theo dõi a2osoulstation để nhận thông báo khi lên sóng"
+
+"앱 안에서 음소거하지 말고 기기 볼륨을 줄이기, 채팅에 참여하고 링크 공유하기":
+  en: "Don't mute inside the app — lower your device volume instead; join the chat and share the link"
+  ja: "アプリ内でミュートせず端末の音量を下げる。チャットに参加してリンクを拡散"
+  zh: "不要在应用内静音，调低设备音量；参与聊天并分享链接"
+  es: "No silencies la app — baja el volumen del dispositivo; participa en el chat y comparte el enlace"
+  id: "Jangan mute di dalam aplikasi — kecilkan volume perangkat; ikut chat dan bagikan link"
+  th: "อย่าปิดเสียงในแอป — ให้ลดเสียงเครื่องแทน ร่วมแชทและแชร์ลิงก์"
+  pt: "Não silencie dentro do app — abaixe o volume do aparelho; participe do chat e compartilhe o link"
+  fil: "Huwag i-mute sa loob ng app — hinaan ang volume ng device; sumali sa chat at i-share ang link"
+  vi: "Đừng tắt tiếng trong app — hãy giảm âm lượng thiết bị; tham gia chat và chia sẻ link"
+
+"방송 소식은 X @a2osoulstation · @soulstation15에서":
+  en: "Streaming updates on X: @a2osoulstation · @soulstation15"
+  ja: "放送のお知らせは X @a2osoulstation・@soulstation15 で"
+  zh: "直播消息请看 X @a2osoulstation · @soulstation15"
+  es: "Novedades en X: @a2osoulstation · @soulstation15"
+  id: "Info siaran di X: @a2osoulstation · @soulstation15"
+  th: "ติดตามข่าวการสตรีมทาง X: @a2osoulstation · @soulstation15"
+  pt: "Novidades no X: @a2osoulstation · @soulstation15"
+  fil: "Updates sa X: @a2osoulstation · @soulstation15"
+  vi: "Cập nhật trên X: @a2osoulstation · @soulstation15"
+
