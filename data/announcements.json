@@ -1744,6 +1744,35 @@
    "permalink": "https://x.com/A2OSOULBASE/status/2123407796914045120",
    "timestamp": "2026-11-19T13:27:24.000Z"
   },
+  "xf:2123686397811060881": {
+   "caption": "[📢]\n\nPlease prepare and join today's MASS STREAMING PARTY MV <Dancing In The Dark>\n\nALL UNITED ACROSS BORDERS,  FOR A2O SOUL!\n\n4M Now Lets Crushed Tonight Road To 4.5M 💪 \n\nHashtags party at 6:15 KST!\n\nFROM THE DARK TO THE TOP\n#️⃣DancingInTheDark4M5\n#️⃣A2OSOUL\n\n@A2OSOULBASE\n@A2OSOUL_INTL \n@a2osoulvote\n@A2OSOULPH\n@A2OSOULBRASIL\n@a2osoulmex\n@A2OSOUL_INA\n@A2OSOUL_BASEJP\n@A2OSOULPROTECT\n@A2OSOULFRANCE \n@A2OSOUL_PERU \n@a2osoul_news \n@a2oclock",
+   "excerpt": "[📢]\n\nPlease prepare and join today's MASS STREAMING PARTY MV <Dancing In The Dark>\n\nALL UNITED ACROSS BORDERS,  FOR A2O SOUL!\n\n4M Now Lets C",
+   "items": [
+    {
+     "app": "",
+     "confidence": 0.6,
+     "date": null,
+     "end": null,
+     "end_date": null,
+     "kind": "vote",
+     "place": null,
+     "show": "",
+     "start": null,
+     "time": null,
+     "title": "[팬 계정] Please prepare and join today's MASS STREAMING PARTY MV <Dan",
+     "url": null
+    }
+   ],
+   "permalink": "https://x.com/A2OSOULBASE/status/2123686397811060881",
+   "timestamp": "2026-11-20T07:54:28.000Z"
+  },
+  "xf:2123687790978252876": {
+   "caption": "[🎥] 261120 In The Studio | A2O SOUL Coming Soon!\n\n#인더스튜디오 #In_The_Studio \n#A2O #A2OSOUL #Dancing_in_the_Dark\n#SUPERSTAR #ZalphaPop https://twitter.com/i/status/2123612310531154245",
+   "excerpt": "[🎥] 261120 In The Studio | A2O SOUL Coming Soon!\n\n#인더스튜디오 #In_The_Studio \n#A2O #A2OSOUL #Dancing_in_the_Dark\n#SUPERSTAR #ZalphaPop https://t",
+   "items": [],
+   "permalink": "https://x.com/A2OSOULBASE/status/2123687790978252876",
+   "timestamp": "2026-11-20T08:00:00.000Z"
+  },
   "xo:2120350813545541722": {
    "caption": "한 달에 한 번 아티스트와 팬이\n함께 만들어가는 음악 차트쇼🎧 🎶\n\n<ENA 케이팝업 차트쇼 26회>\nENA SPECIAL CHOICE✔️\n\n🗓️투표 기간​\n˙ 2026.11.11(수) 12:00 ~ 11.15(일) 23:59 KST\n\n🎖️투표 리워드\n˙ 방송 내 단독 스페셜 코너\n˙ 구간 달성 시 촬영장 서포트 진행\n\n지금 바로 투표하고,\nENA 케이팝업 차트쇼 방청 이벤트에도 참여하세요🌟\n🔗 https://t.co/aSB6HzgFOD\n\n📍방청 이벤트 참여하기\n🔗https://t.co/zINsGWliSW\n\n#Kei #노이 #드래곤포니 #바이비 #싸이커스 #앰퍼샌드원 #에이투오소울 #엔탑 #오브코어 #이츠 #임영민 #키빗업 #피원하모니 #피크\n\n— 마이원픽",
    "excerpt": "한 달에 한 번 아티스트와 팬이\n함께 만들어가는 음악 차트쇼🎧 🎶\n\n<ENA 케이팝업 차트쇼 26회>\nENA SPECIAL CHOICE✔️\n\n🗓️투표 기간​\n˙ 2026.11.11(수) 12:00 ~ 11.15(일) 23:59 KST\n\n🎖️투표 리워드",
@@ -2398,12 +2427,12 @@
  "x_fans": {
   "A2OSOULBASE": {
    "id": "1630504378468827137",
-   "since_id": "2123407796914045120"
+   "since_id": "2123687790978252876"
   }
  },
  "x_media": {
-  "at": "2026-11-20T16:50+09:00",
-  "auto_since": "2123684616599187706",
+  "at": "2026-11-20T17:00+09:00",
+  "auto_since": "2123687985464136108",
   "candidates": {},
   "checked": "2026-11-20T16:40+09:00",
   "missing": [],
@@ -2542,7 +2571,7 @@
   "since_id": "2123657863491108968"
  },
  "x_official_votes": {
-  "at": "2026-11-20T16:50+09:00",
+  "at": "2026-11-20T17:00+09:00",
   "deep": 1,
   "last": {
    "official": [],
@@ -2553,7 +2582,7 @@
   "v": 2
  },
  "x_show_photos": {
-  "at": "2026-11-20T16:00+09:00",
+  "at": "2026-11-20T17:00+09:00",
   "posts": {
    "2123249908413268001": {
     "author": "BIGCChoice",
@@ -2589,7 +2618,7 @@
     "timestamp": "2026-11-19T10:00:02.000Z"
    }
   },
-  "since_id": "2123664740773945614"
+  "since_id": "2123681194881765572"
  },
  "x_stores": {
   "at": "2026-11-20T16:00+09:00",
