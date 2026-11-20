@@ -26,13 +26,18 @@ import xposts  # noqa: E402
 
 ACCOUNT = "soultemplates"
 # 템플릿 계정 말고도 X 검색으로 새 포카 글 후보를 모아 이슈로 알려 줌 (자동으로 올리진 않음 — 확인·허락 후 직접 추가)
-SEARCH = ('(에이투오소울 OR 에투소 OR "A2O SOUL" OR A2OSOUL) '
-          '(포카 OR 포토카드 OR 미공포 OR 특전 OR 럭드 OR 럭키드로우 '          # 한국어
-          'OR photocard OR photocards OR pc OR pcs OR POB OR "lucky draw" '     # 영어 (+스페인어·포르투갈어·인니 등도 대부분 영어 표기)
-          'OR トレカ OR フォトカード OR 特典 OR ラキドロ '                       # 일본어
-          'OR 小卡 OR 特典卡 OR 签售卡 '                                        # 중국어
-          'OR โฟโต้การ์ด OR การ์ด OR "kartu foto") '                           # 태국어·인니어
-          'has:images -is:retweet -is:reply -from:soultemplates')
+GROUP_Q = '(에이투오소울 OR 에투소 OR "A2O SOUL" OR A2OSOUL OR "에이투오 소울") '
+TAIL_Q = ' has:images -is:retweet -is:reply -from:soultemplates'
+SEARCHES = [
+    # 포카 단어 (여러 언어)
+    GROUP_Q + '(포카 OR 포토카드 OR 미공포 OR 앨포 OR 공방포카 OR 특전 OR 럭드 OR 럭키드로우 OR 미공개 OR 양도 OR 교환 '
+              'OR photocard OR photocards OR pc OR pcs OR POB OR "lucky draw" OR WTT OR WTS OR trade '
+              'OR トレカ OR フォトカード OR 特典 OR ラキドロ OR 小卡 OR 特典卡 OR 签售卡 OR โฟโต้การ์ด OR การ์ด OR "kartu foto")' + TAIL_Q,
+    # 판매처·행사 이름 (특전 포카 사진이 이 이름과 같이 올라옴)
+    GROUP_Q + '(위드뮤 OR Withmuu OR 메이크스타 OR Makestar OR 뮤직아트 OR Musicart OR 뮤직플랜트 OR "Music Plant" OR 애플뮤직 '
+              'OR 점프업 OR Jumpup OR 엠넷플러스 OR "Mnet Plus" OR 올리브영 OR 사운드웨이브 OR Soundwave OR 케타포 OR Ktown4u '
+              'OR 팬싸 OR 영통 OR 팬사인회 OR 공방 OR 럭키)' + TAIL_Q,
+]
 CAND = Path(__file__).resolve().parent.parent / "pc_candidates.md"
 STATE = Path(__file__).resolve().parent / "pc_state.json"
 REPORT = Path(__file__).resolve().parent.parent / "pc_report.md"
@@ -70,24 +75,38 @@ def template_name(img):
 
 
 def search_candidates(state):
-    """X 검색 → 새 포카 글 후보 마크다운 (없으면 None). 처음엔 최근 20개만, 이후엔 since_id 이후 새 글만."""
-    since = state.get("search_since")
-    try:
-        posts = xposts.search_posts(SEARCH, since_id=since, max_results=20 if not since else 50, media=True)
-    except Exception as e:  # noqa: BLE001
-        print(f"[포카 검색] 실패: {type(e).__name__} {e}")
-        return None
-    if posts:
-        state["search_since"] = max(posts, key=lambda p: int(p["tweet_id"]))["tweet_id"]
+    """X 검색(여러 묶음) → 새 포카 글 후보 마크다운 (없으면 None).
+    처음 한 번은 최근 7일을 깊게(묶음마다 최대 300개), 이후엔 since_id 이후 새 글을 묶음마다 최대 200개."""
+    deep = state.get("search_v") != 2
+    if deep:
+        state.pop("search_since", None)
+    found = {}
+    for i, q in enumerate(SEARCHES):
+        key = f"search_since_{i}"
+        since = None if deep else state.get(key)
+        try:
+            got = xposts.search_posts(q, since_id=since, max_results=100, pages=3 if deep else 2, media=True)
+        except Exception as e:  # noqa: BLE001
+            print(f"[포카 검색 {i}] 실패: {type(e).__name__} {e}")
+            continue
+        if got:
+            state[key] = max(got, key=lambda p: int(p["tweet_id"]))["tweet_id"]
+        for p in got:
+            found.setdefault(p["tweet_id"], p)
+    state["search_v"] = 2
+    posts = sorted(found.values(), key=lambda p: int(p["tweet_id"]), reverse=True)
     posts = [p for p in posts if p.get("images")]
     print(f"[포카 검색] 후보 {len(posts)}개")
     if not posts:
         return None
     out = [f"### 🔎 X에서 찾은 포카 글 {len(posts)}개", "", "새 버전이면 원본 글 확인 → 필요하면 작성자에게 허락받고 `site/img/photocards/`에 추가해 주세요.", ""]
-    for p in posts:
+    more = max(0, len(posts) - 80)  # 이슈 댓글 길이 제한 — 최신 80개만, 나머진 개수만
+    for p in posts[:80]:
         cap = re.sub(r"\s+", " ", re.sub(r"https?://\S+", "", p["caption"])).strip()[:120]
         out.append(f"- **@{p['author']}** · {p['timestamp'][:10]} — {cap} ([원본]({p['permalink']}))")
         out.append("  " + " ".join(f'<img src="{u}?name=small" width="120">' for u in p["images"][:4]))
+    if more:
+        out.append(f"\n…외 {more}개 (오래된 글)")
     return "\n".join(out) + "\n"
 
 
