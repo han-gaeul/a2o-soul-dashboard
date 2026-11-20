@@ -10,44 +10,85 @@
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
-  .tw { max-width: 560px; margin: 0 auto; padding: 20px 16px 48px; display: grid; gap: 14px; }
-  .tw h1 { font-size: 20px; margin: 0; }
-  .tw label { display: grid; gap: 6px; font-size: 13px; color: var(--muted); }
-  .tw input, .tw textarea { font: inherit; font-size: 15px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); color: var(--text); }
-  .tw textarea { min-height: 150px; resize: vertical; line-height: 1.5; }
-  .tw .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-  .tw button { font: inherit; font-size: 14px; font-weight: 700; padding: 9px 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: var(--text); cursor: pointer; }
-  .tw button.go { background: var(--accent-bg); border-color: var(--accent-bg); color: #fff; }
-  .tw button.go.sure { background: #c81e43; border-color: #c81e43; }
+  body { background: var(--bg); }
+  .tw { max-width: 600px; margin: 0 auto; padding: 20px 16px 56px; display: grid; gap: 16px; }
+  .tw-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .tw h1 { font-size: 22px; margin: 0; }
+  .tw .sub { margin: 4px 0 0; font-size: 13px; color: var(--muted); }
+  .tw button, .tw .btn { font: inherit; font-size: 14px; font-weight: 700; padding: 9px 14px; border-radius: 10px; border: 1px solid var(--line);
+    background: var(--card); color: var(--text); cursor: pointer; white-space: nowrap; }
   .tw button:disabled { opacity: .5; cursor: default; }
-  .tw .msg { font-size: 14px; margin: 0; min-height: 1.3em; }
-  .tw .msg.err { color: var(--hot); }
-  .tw .card { display: grid; gap: 8px; }
-  .tw .card.done { opacity: .55; }
-  .tw .meta { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); }
-  .tw .cnt.over { color: #c81e43; font-weight: 700; }
-  .tw .acct { font-size: 13px; font-weight: 700; padding: 6px 10px; border-radius: 8px; }
-  .tw .acct.ok { background: #e6f7ec; color: #17733a; }
-  .tw .acct.warn2 { background: #fff4e5; color: #8a4b00; }
-  .tw .acct.no { background: #fde8ec; color: #c81e43; }
-  .tw .warn { background: #fff4e5; color: #8a4b00; border-radius: 10px; padding: 10px 12px; font-size: 13px; }
+  .tw .go { background: var(--accent-bg); border-color: var(--accent-bg); color: #fff; }
+  .tw .go.sure { background: #c81e43; border-color: #c81e43; }
+  .tw .ghost { border-color: transparent; background: transparent; color: var(--muted); padding: 6px 8px; font-size: 13px; }
+  .tw .ghost:hover { color: var(--text); }
+  .icon { width: 40px; height: 40px; padding: 0 !important; display: grid; place-items: center; font-size: 18px !important; }
+  /* 패널 */
+  .panel { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 14px 16px; display: grid; gap: 12px; }
+  .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .grow { flex: 1; min-width: 0; }
+  .tw input, .tw textarea { font: inherit; font-size: 15px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px;
+    background: var(--bg); color: var(--text); width: 100%; box-sizing: border-box; }
+  .tw textarea { min-height: 140px; resize: vertical; line-height: 1.55; background: var(--card); }
+  .lbl { font-size: 12px; font-weight: 700; color: var(--muted); }
+  /* 계정·알림 상태 */
+  .stat { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: center; }
+  .dot { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-size: 16px; background: var(--chip); }
+  .stat b { display: block; font-size: 14px; }
+  .stat small { display: block; font-size: 12px; color: var(--muted); margin-top: 1px; }
+  .ok .dot { background: #e6f7ec; } .warn2 .dot { background: #fff4e5; } .no .dot { background: #fde8ec; }
+  .sep { height: 1px; background: var(--line); margin: 0 -16px; }
+  .msg { font-size: 14px; margin: 0; }
+  .msg:empty, #warn:empty { display: none; }
+  .msg.err { color: var(--hot); }
+  .warn { background: #fff4e5; color: #8a4b00; border-radius: 12px; padding: 10px 12px; font-size: 13px; }
+  /* 초안 */
+  .sec-h { display: flex; align-items: baseline; gap: 8px; margin: 4px 2px 0; }
+  .sec-h h2 { font-size: 16px; margin: 0; }
+  .badge { font-size: 12px; font-weight: 800; padding: 2px 8px; border-radius: 99px; background: var(--chip); color: var(--chip-fg); }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 14px; display: grid; gap: 10px; }
+  .meta { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--muted); }
+  .kind { font-weight: 800; color: var(--text); font-size: 13px; }
+  .cnt.over { color: #c81e43; font-weight: 700; }
+  .acts { display: flex; gap: 8px; justify-content: flex-end; }
+  .empty { text-align: center; color: var(--muted); font-size: 14px; padding: 22px 0; background: var(--card); border: 1px dashed var(--line); border-radius: 16px; }
+  /* 지난 초안: 한 줄씩 */
+  details.past { background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+  details.past summary { cursor: pointer; padding: 12px 16px; font-weight: 800; font-size: 14px; list-style: none; display: flex; gap: 8px; align-items: center; }
+  details.past summary::-webkit-details-marker { display: none; }
+  details.past summary::after { content: "▾"; margin-left: auto; color: var(--muted); }
+  details.past[open] summary::after { content: "▴"; }
+  .li { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: center; padding: 10px 16px; border-top: 1px solid var(--line); font-size: 13px; }
+  .li .txt { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .li .st { font-size: 12px; color: var(--muted); }
+  .li a { font-size: 12px; font-weight: 700; color: var(--accent); text-decoration: none; white-space: nowrap; }
 </style>
 </head>
 <body>
 <main class="tw">
-  <h1>✍️ 트윗 초안</h1>
-  <p class="muted small" style="margin:0">투표 마감·음방·차트·새 영상 등 알림이 생기면 초안이 여기 쌓여요. 확인하고 고쳐서 올리거나 버리세요. 초안은 3일 뒤 사라져요.</p>
-  <label>관리 비밀번호 <input id="key" type="password" autocomplete="current-password"></label>
-  <div class="row">
-    <button type="button" id="load">불러오기</button>
-    <button type="button" id="notify">🔔 이 기기에서 초안 알림 받기</button>
-    <button type="button" id="notifyOff" hidden>알림 끄기</button>
+  <div class="tw-top">
+    <div>
+      <h1>✍️ 트윗 초안</h1>
+      <p class="sub">알림이 생기면 초안이 쌓여요 · 고쳐서 올리거나 버리기 · 3일 뒤 사라짐</p>
+    </div>
+    <button type="button" id="load" class="icon" title="새로고침" aria-label="새로고침">↻</button>
   </div>
-  <div class="row" id="acctRow" hidden>
-    <span id="acct"></span>
-    <button type="button" id="connect">X 계정 연결</button>
-    <button type="button" id="disconnect" hidden>연결 해제</button>
-  </div>
+
+  <!-- 로그인 전: 비밀번호만 -->
+  <form class="panel" id="login">
+    <label class="lbl" for="key">관리 비밀번호</label>
+    <div class="row"><input id="key" class="grow" type="password" autocomplete="current-password"><button type="submit" class="go">불러오기</button></div>
+  </form>
+
+  <!-- 로그인 후: 계정·알림 상태 -->
+  <section class="panel" id="status" hidden>
+    <div class="stat" id="acct"><span class="dot"></span><span><b></b><small></small></span>
+      <span class="row"><button type="button" id="connect" class="ghost">연결</button><button type="button" id="disconnect" class="ghost" hidden>해제</button></span></div>
+    <div class="sep"></div>
+    <div class="stat" id="noti"><span class="dot">🔔</span><span><b></b><small>새 초안이 생기면 이 기기로 알림</small></span>
+      <span class="row"><button type="button" id="notify" class="ghost">켜기</button><button type="button" id="notifyOff" class="ghost" hidden>끄기</button></span></div>
+  </section>
+
   <p class="msg" id="msg" role="status"></p>
   <div id="warn"></div>
   <div id="list" style="display:grid;gap:12px"></div>
@@ -77,63 +118,92 @@
   };
   const KIND = { vote: "🗳 투표", show: "📺 음방·라이브", nominee: "🏆 1위 후보", chart: "📈 차트", views: "🎉 조회수", subs: "🎉 구독자",
     birthday: "🎂 생일", video: "🎬 새 영상", prerec: "🎙 사녹" };
-  const STATUS = { pending: "", posted: "✅ 올림", skipped: "버림" };
   const when = (ms) => new Date(ms).toLocaleString("ko-KR", { month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit", timeZone: "Asia/Seoul" });
 
+  const meta = (d, right) => {
+    const m = document.createElement("div"); m.className = "meta";
+    const l = document.createElement("span"); l.innerHTML = `<span class="kind"></span> · ${when(d.at)}`;
+    l.querySelector(".kind").textContent = KIND[d.kind] || d.kind;
+    m.append(l, right);
+    return m;
+  };
+  // 올릴 초안: 편집 카드
   const card = (d) => {
-    const done = d.status !== "pending";
-    const ta = document.createElement("textarea"); ta.value = d.text; ta.disabled = done;
+    const ta = document.createElement("textarea"); ta.value = d.text;
     const cnt = document.createElement("span"); cnt.className = "cnt";
-    const upd = () => { const w = weight(ta.value); cnt.textContent = `${w}/280`; cnt.classList.toggle("over", w > 280); };
-    ta.oninput = upd; upd();
-    const meta = document.createElement("div"); meta.className = "meta";
-    const l = document.createElement("span"); l.textContent = `${KIND[d.kind] || d.kind} · ${when(d.at)} ${STATUS[d.status] || ""}`;
-    meta.append(l, cnt);
-    const box = document.createElement("div"); box.className = "card" + (done ? " done" : "");
-    box.append(meta, ta);
-    if (d.status === "posted" && d.tweet) {
-      const a = document.createElement("a"); a.href = `https://x.com/i/status/${d.tweet}`; a.target = "_blank"; a.rel = "noopener"; a.textContent = "올린 글 보기 ↗";
-      box.append(a);
-    }
-    if (!done) {
-      const go = document.createElement("button"); go.type = "button"; go.className = "go"; go.textContent = "올리기";
-      const skip = document.createElement("button"); skip.type = "button"; skip.textContent = "버리기";
-      let sure = false;
-      go.onclick = async () => {
-        if (weight(ta.value) > 280) return msg("280자를 넘었어요", true);
-        if (!sure) { sure = true; go.classList.add("sure"); go.textContent = "한 번 더 누르면 올라가요"; setTimeout(() => { sure = false; go.classList.remove("sure"); go.textContent = "올리기"; }, 4000); return; }
-        go.disabled = skip.disabled = true;
-        try { await call("/tweet/post", { id: d.id, text: ta.value }); msg("✅ 올렸어요"); load(); }
-        catch (e) { msg(e.message, true); go.disabled = skip.disabled = false; }
-      };
-      skip.onclick = async () => { skip.disabled = true; try { await call("/tweet/skip", { id: d.id }); load(); } catch (e) { msg(e.message, true); skip.disabled = false; } };
-      const row = document.createElement("div"); row.className = "row"; row.append(go, skip);
-      box.append(row);
-    }
+    const fit = () => { ta.style.height = "auto"; ta.style.height = ta.scrollHeight + 2 + "px"; }; // 글 길이에 맞춰 높이
+    const upd = () => { const w = weight(ta.value); cnt.textContent = `${w}/280`; cnt.classList.toggle("over", w > 280); fit(); };
+    ta.oninput = upd; upd(); requestAnimationFrame(fit);
+    const go = document.createElement("button"); go.type = "button"; go.className = "go"; go.textContent = "올리기";
+    const skip = document.createElement("button"); skip.type = "button"; skip.textContent = "버리기";
+    let sure = false;
+    go.onclick = async () => {
+      if (weight(ta.value) > 280) return msg("280자를 넘었어요", true);
+      if (!sure) { sure = true; go.classList.add("sure"); go.textContent = "한 번 더 누르면 올라가요"; setTimeout(() => { sure = false; go.classList.remove("sure"); go.textContent = "올리기"; }, 4000); return; }
+      go.disabled = skip.disabled = true;
+      try { await call("/tweet/post", { id: d.id, text: ta.value }); msg("✅ 올렸어요"); load(); }
+      catch (e) { msg(e.message, true); go.disabled = skip.disabled = false; }
+    };
+    skip.onclick = async () => { skip.disabled = true; try { await call("/tweet/skip", { id: d.id }); load(); } catch (e) { msg(e.message, true); skip.disabled = false; } };
+    const acts = document.createElement("div"); acts.className = "acts"; acts.append(skip, go);
+    const box = document.createElement("div"); box.className = "card";
+    box.append(meta(d, cnt), ta, acts);
     return box;
+  };
+  // 지난 초안: 한 줄
+  const line = (d) => {
+    const li = document.createElement("div"); li.className = "li";
+    const st = document.createElement("span"); st.className = "st"; st.textContent = d.status === "posted" ? "✅" : "🗑";
+    const tx = document.createElement("span"); tx.className = "txt"; tx.textContent = d.text.split("\n").filter((x) => x.trim()).slice(0, 2).join(" · ");
+    li.append(st, tx);
+    if (d.status === "posted" && d.tweet) {
+      const a = document.createElement("a"); a.href = `https://x.com/i/status/${d.tweet}`; a.target = "_blank"; a.rel = "noopener"; a.textContent = "보기 ↗";
+      li.append(a);
+    } else { const w = document.createElement("span"); w.className = "st"; w.textContent = when(d.at); li.append(w); }
+    return li;
+  };
+  const setStat = (id, cls, icon, title, sub) => {
+    const el = $(id); el.className = "stat " + cls;
+    el.querySelector(".dot").textContent = icon; el.querySelector("b").textContent = title;
+    if (sub != null) el.querySelector("small").textContent = sub;
+  };
+  const notiState = () => {
+    const on = !!store.get("tw_notify");
+    setStat("noti", on ? "ok" : "", "🔔", on ? "초안 알림 켜짐" : "초안 알림 꺼짐", null);
+    $("notify").hidden = on; $("notifyOff").hidden = !on;
   };
 
   const load = async () => {
-    if (!api) return;
+    if (!api || !$("key").value) return;
     try {
       const j = await call("/tweet/list", {});
       store.set("tw_key", $("key").value);
+      $("login").hidden = true; $("status").hidden = false;
       $("warn").replaceChildren();
-      $("acctRow").hidden = false;
       // 연결 상태: ✅ 새 계정 연결됨 / ⚠️ Cloudflare 시크릿 토큰 계정으로 올라감 / ❌ 없음
-      const st = $("acct");
-      st.className = "acct " + (j.connected ? "ok" : j.account ? "warn2" : "no");
-      st.textContent = j.connected ? `✅ @${j.account.replace(/^@/, "")} 연결됨 — 이 계정으로 올라가요`
-        : j.account ? "⚠️ 연결된 계정 없음 — 지금은 Cloudflare에 넣은 토큰 계정(X_ACCESS_TOKEN)으로 올라가요"
-        : "❌ 연결된 계정 없음 — 'X 계정 연결'을 눌러 주세요";
-      $("connect").textContent = j.connected ? "다른 계정으로 바꾸기" : "X 계정 연결";
+      if (j.connected) setStat("acct", "ok", "✅", `@${j.account.replace(/^@/, "")}`, "이 계정으로 올라가요");
+      else if (j.account) setStat("acct", "warn2", "⚠️", "연결된 계정 없음", "Cloudflare에 넣은 토큰 계정(X_ACCESS_TOKEN)으로 올라가요");
+      else setStat("acct", "no", "❌", "연결된 계정 없음", "'연결'을 눌러 올릴 계정으로 로그인해 주세요");
+      $("connect").textContent = j.connected ? "바꾸기" : "연결";
       $("disconnect").hidden = !j.connected;
-      if (!j.ready) { const w = document.createElement("div"); w.className = "warn"; w.textContent = "X 계정이 아직 연결되지 않아서 올리기는 안 돼요 — 'X 계정 연결'을 눌러 올릴 계정으로 로그인해 주세요"; $("warn").append(w); }
-      const ds = j.drafts || [];
-      const pend = ds.filter((d) => d.status === "pending").length;
-      msg((back ? back + " · " : "") + (ds.length ? `올릴 초안 ${pend}개` : "아직 초안이 없어요"));
-      $("list").replaceChildren(...ds.sort((a, b) => (a.status === "pending") === (b.status === "pending") ? b.at - a.at : a.status === "pending" ? -1 : 1).map(card));
-    } catch (e) { msg(e.message, true); }
+      notiState();
+      if (!j.ready) { const w = document.createElement("div"); w.className = "warn"; w.textContent = "X 계정이 아직 연결되지 않아서 올리기는 안 돼요 — '연결'을 눌러 올릴 계정으로 로그인해 주세요"; $("warn").append(w); }
+      const ds = (j.drafts || []).sort((a, b) => b.at - a.at);
+      const pend = ds.filter((d) => d.status === "pending"), past = ds.filter((d) => d.status !== "pending");
+      msg(back || "");
+      const h = document.createElement("div"); h.className = "sec-h";
+      h.innerHTML = `<h2>올릴 초안</h2><span class="badge">${pend.length}</span>`;
+      const out = [h];
+      if (pend.length) out.push(...pend.map(card));
+      else { const e = document.createElement("div"); e.className = "empty"; e.textContent = "지금은 올릴 초안이 없어요 🙌"; out.push(e); }
+      if (past.length) {
+        const det = document.createElement("details"); det.className = "past";
+        det.innerHTML = `<summary>지난 초안 <span class="badge">${past.length}</span></summary>`;
+        det.append(...past.map(line));
+        out.push(det);
+      }
+      $("list").replaceChildren(...out);
+    } catch (e) { msg(e.message, true); $("login").hidden = false; }
   };
 
   const keyBytes = (b64) => { const s = atob((b64 + "===".slice((b64.length + 3) % 4)).replace(/-/g, "+").replace(/_/g, "/")); return Uint8Array.from(s, (c) => c.charCodeAt(0)); };
@@ -147,7 +217,7 @@
       if (!sub) return msg("알림이 꺼져 있어요");
       await call("/subscribe", off ? { sub: sub.toJSON(), tweetOff: true } : { sub: sub.toJSON(), topics: ["tweet"] });
       store.set("tw_notify", off ? "" : "1");
-      $("notifyOff").hidden = !!off;
+      notiState();
       msg(off ? "초안 알림을 껐어요" : "🔔 이 기기로 초안 알림이 와요");
     } catch (e) { msg(e.message, true); }
   };
@@ -158,9 +228,8 @@
   const back = new URLSearchParams(location.search).get("x");
   if (back) { history.replaceState(null, "", location.pathname); setTimeout(() => msg(back), 0); }
   $("key").value = store.get("tw_key");
-  $("notifyOff").hidden = !store.get("tw_notify");
   $("load").onclick = load;
-  $("key").onkeydown = (e) => { if (e.key === "Enter") load(); };
+  $("login").onsubmit = (e) => { e.preventDefault(); load(); };
   $("notify").onclick = () => subscribe(false);
   $("notifyOff").onclick = () => subscribe(true);
   fetch("data/dashboard.json").then((r) => r.json()).then((d) => {
