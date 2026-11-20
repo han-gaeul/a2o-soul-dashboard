@@ -101,6 +101,10 @@ def candidates(dash, site, now):
             out.append((f"ev|{e['date']}|{tm}|{e['title']}", "show", "show",
                         {"name": e["title"], "t": tm, "url": (live or {}).get("url") or site, "parts": [e["title"]], "tr": tr, "now": now >= st,
                          "credit": e.get("credit") or ""}))
+            if timedelta(0) <= now - st <= timedelta(minutes=30):  # 방송 시작 → 트윗 초안 하나 더 (푸시는 1시간 전 것만)
+                out.append((f"ev|{e['date']}|{tm}|{e['title']}|live", "show", "show",
+                            {"name": e["title"], "t": tm, "url": (live or {}).get("url") or site, "parts": [e["title"]], "tr": tr, "now": True,
+                             "credit": e.get("credit") or "", "draft_only": True}))
     for c in dash.get("chart_moves") or []:  # 차트 첫 진입·10계단 이상 상승 (입력 후 3시간 안)
         if timedelta(0) <= now - _kst(c["at"]) <= timedelta(hours=3):
             out.append((f"ch|{c['song']}|{c['service']}|{c['at']}", "notice", "chart", {**c, "url": site + "#cheer", "tr": tr}))
@@ -206,6 +210,12 @@ def tweet_text(kind, data):
     en = ""
     if kind == "media":  # 매체 글은 초안 페이지에서 리트윗 (본문은 미리보기용)
         title, body, url = f"📸 {data['name']} 새 콘텐츠", data["title"], data["url"]
+    elif kind == "show" and data.get("now"):  # 방송 시작: '🔴 지금 뮤직뱅크 생방송 중!'
+        mm = re.fullmatch(r"(.+?)\s*출연", data["name"])
+        show = mm.group(1) if mm else data["name"]
+        show_en = (((data.get("tr") or {}).get(show) or {}).get("en")) or show
+        title, body, url = f"🔴 지금 {show} 생방송 중!", "A2O SOUL 무대 같이 봐요 💜", data["url"]
+        en = f"🔴 {show_en} is LIVE now — watch A2O SOUL!"
     else:
         title, body, url = compose(kind, data, "ko")
         t2, b2, _ = compose(kind, data, "en")
@@ -280,7 +290,7 @@ def run(dash, cfg, state, site="https://a2osoul-tracker.com/"):
     if added:
         print(f"[트윗] 초안 {added}개")
     videos = [c for c in new if c[2] == "video"]
-    msgs = [c for c in new if c[2] not in ("video", "media")] + ([videos[0]] if videos else [])  # media는 초안 전용
+    msgs = [c for c in new if c[2] not in ("video", "media") and not c[3].get("draft_only")] + ([videos[0]] if videos else [])  # media는 초안 전용
     dead, ok = [], 0
     for s in subs:
         if added and "tweet" in (s.get("topics") or []):  # 관리자: 올릴 트윗 초안이 생겼다고 알림
