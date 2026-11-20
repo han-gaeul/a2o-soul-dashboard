@@ -2147,6 +2147,28 @@
    "permalink": "https://x.com/KTOPSTAR_offcl/status/2122963267241083371",
    "timestamp": "2026-11-18T08:01:00.000Z"
   },
+  "xo:2123597613920641200": {
+   "caption": "❤ November Monthly Pick\nD-DAY Vote closes at 3PM today\n🗂#ROOKIE ARTIST(B)\n🔗https://t.co/Wz7Yomf3W8\n\n#ALPHADRIVEONE #SANGWON #알파드라이브원 #상원\n#A20SOUL #ZET #에이투오소울 #제트\n#ZEROBASEONE #KIMJIWOONG #제로베이스원 #김지웅\n#CORTIS #KEONHO #코르티스 #건호\n#LNGSHOT #OHYUL #롱샷 #오율\n#AHOF #JL #아홉 #제이엘\n\n🏆COEX Media Tower\n🗓~11/20 3PM KST\n\n— UPICK 유픽",
+   "excerpt": "❤ November Monthly Pick\nD-DAY Vote closes at 3PM today\n🗂#ROOKIE ARTIST(B)\n🔗https://t.co/Wz7Yomf3W8\n\n#ALPHADRIVEONE #SANGWON #알파드라이브원 #상원\n#A2",
+   "items": [
+    {
+     "app": "유픽(U+PICK)",
+     "confidence": 0.9,
+     "date": "2026-11-20",
+     "end": "2026-11-20 15:00",
+     "end_date": null,
+     "kind": "vote",
+     "place": null,
+     "show": "",
+     "start": "2026-11-20 00:00",
+     "time": "15:00",
+     "title": "❤ November Monthly Pick",
+     "url": null
+    }
+   ],
+   "permalink": "https://x.com/UPICK_twt/status/2123597613920641200",
+   "timestamp": "2026-11-20T02:01:40.000Z"
+  },
   "xv:2119672177347981651": {
    "caption": "[💿] A2O SOUL DEBUT EP [SUPERSTAR]\n발매 기념 공개 팬사인회\n\n📢응모 마감 D-1‼️\n✨당일 공개 팬사인회에서 SPECIAL STAGE가 진행됩니다.\n\n📅2026.11.14 (토) 19:30 (KST)\n📍스타필드 수원 타워 아트리움\n\n[ONLINE] 뮤직아트 온라인몰\n🛒온라인 응모기간 : 2026.11.08 (일) 14:00 ~ 11.10 (화) 23:59 (KST)\n\n[OFFLINE] 영풍문고 스타필드수원점 내 음반매장\n🛒오프라인 응모기간 : 2026.11.08 (일) 14:00 ~ 11.10 (화) 21:00 (KST)\n\n🌠응모자 전원 미공개 셀카 포토카드 15종 중 1종 랜덤 증정\n\n🔗https://t.co/I1sj0S6DOk",
    "excerpt": "[💿] A2O SOUL DEBUT EP [SUPERSTAR]\n발매 기념 공개 팬사인회\n\n📢응모 마감 D-1‼️\n✨당일 공개 팬사인회에서 SPECIAL STAGE가 진행됩니다.\n\n📅2026.11.14 (토) 19:30 (KST)\n📍스타필드 수원 타워 아",
@@ -2439,16 +2461,20 @@
   "since_id": "2123340513831170203"
  },
  "x_official_votes": {
-  "at": "2026-11-20T09:50+09:00",
+  "at": "2026-11-20T12:50+09:00",
   "deep": 1,
   "last": {
-   "official": [],
-   "read": 3,
+   "official": [
+    "UPICK_twt"
+   ],
+   "read": 10,
    "verified": [
-    "ishkpopvotes:blue"
+    "ForA2OSOUL:blue",
+    "UPICK_twt:blue",
+    "a2osoulvote:blue"
    ]
   },
-  "since_id": "2123548952096338414",
+  "since_id": "2123623670837096489",
   "v": 2
  },
  "x_show_photos": {
