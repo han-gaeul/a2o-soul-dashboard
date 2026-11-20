@@ -71,11 +71,32 @@ def store_label(t):
     return " ".join([store] + ([m.group(1)] if m else [])) + (f" ({'·'.join(kinds)})" if kinds else "")
 
 
+ONLY_NEW = False  # True: 이미 있는 카드(같은 버전·판매처·멤버)는 건드리지 않고 새 카드만 추가 — 드라이브 자동 확인용
+
+
+def base(label):
+    """'Makestar A (Photobook)' → 'Makestar A' — 단체 템플릿에서 괄호 없이 들어간 카드와 같은 카드로 봄
+    ('Withmuu (Photobook)'과 'Withmuu (Carabiner)'는 서로 다른 카드로 남음)"""
+    return re.sub(r"\s*\(.*?\)\s*$", "", label).strip()
+
+
+def existing():
+    out = set()
+    for f in OUT.glob("*.webp"):
+        parts = unicodedata.normalize("NFC", f.stem).split("_")
+        if len(parts) >= 3:
+            out.add((parts[0], "_".join(parts[1:-1]), parts[-1]))
+    return out
+
+
 def save(img, c, version, label, member, seen):
     key = (version, label, member)
     if key in seen:
         return
     seen.add(key)
+    have = existing() if ONLY_NEW else set()
+    if (version, label, member) in have or (version, base(label), member) in have:
+        return
     y, x, w, h, _ = c
     name = f"{version}_{label}_{member}.webp".replace("/", "·")
     img.crop((x + 1, y + 1, x + w - 1, y + h - 1)).save(OUT / name, "WEBP", quality=92, method=6)
