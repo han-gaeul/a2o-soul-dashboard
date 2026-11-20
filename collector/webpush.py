@@ -100,7 +100,14 @@ def candidates(dash, site, now):
             live = next((x for x in lives if x.get("show") and x["show"] in (e.get("title") or "")), None)
             out.append((f"ev|{e['date']}|{tm}|{e['title']}", "show", "show",
                         {"name": e["title"], "t": tm, "url": (live or {}).get("url") or site, "parts": [e["title"]], "tr": tr, "now": now >= st,
-                         "credit": e.get("credit") or ""}))
+                         "credit": e.get("credit") or "", "no_draft": True}))  # 1시간 전은 푸시만
+            # 트윗 초안: 방송 5분 전 · 시작 10분 뒤 (수집이 10분마다라 창을 조금 넓게)
+            base = {"name": e["title"], "t": tm, "url": (live or {}).get("url") or site, "parts": [e["title"]], "tr": tr,
+                    "credit": e.get("credit") or "", "draft_only": True}
+            if timedelta(0) < st - now <= timedelta(minutes=12):
+                out.append((f"ev|{e['date']}|{tm}|{e['title']}|pre5", "show", "show", {**base, "soon": True}))
+            if timedelta(minutes=8) <= now - st <= timedelta(minutes=30):
+                out.append((f"ev|{e['date']}|{tm}|{e['title']}|live", "show", "show", {**base, "now": True}))
     for c in dash.get("chart_moves") or []:  # 차트 첫 진입·10계단 이상 상승 (입력 후 3시간 안)
         if timedelta(0) <= now - _kst(c["at"]) <= timedelta(hours=3):
             out.append((f"ch|{c['song']}|{c['service']}|{c['at']}", "notice", "chart", {**c, "url": site + "#cheer", "tr": tr}))
@@ -189,7 +196,10 @@ def compose(kind, data, lang, group=None):
 # 트윗 초안 해시태그 — 공식 계정·유통사(STONE MUSIC)가 쓰는 표기에 맞춤
 TAGS = "#A2OSOUL #A2O #에이투오소울 #에투소"
 SONG_TAGS = {"Dancing in the Dark": "#Dancing_in_the_Dark", "SUPERSTAR": "#SUPERSTAR"}  # 글에 곡 이름이 있으면
-ERA_TAGS = "#SUPERSTAR #ZalphaPop"  # 지금 활동(앨범·레이블) — 활동이 바뀌면 고치기
+ACTIVE_TAG = "#Dancing_in_the_Dark"  # 지금 활동곡 — 모든 초안에 항상 (활동이 바뀌면 고치기)
+ERA_TAGS = "#SUPERSTAR #ZalphaPop"  # 지금 활동(앨범·레이블) — 280자 넘으면 빠짐
+# 확실한 정보라 확인 없이 바로 올리는 종류 (일정·생일·조회수처럼 데이터에서 그대로 나오는 것)
+AUTO_POST = {"show", "birthday", "views", "subs"}
 
 
 def x_weight(s):
@@ -203,9 +213,22 @@ def x_weight(s):
 
 def tweet_text(kind, data):
     """알림 내용 → X 글 초안: 한국어 + 영어 한 줄 + 링크 + 해시태그(그룹·곡·활동·멤버). 280자 넘으면 활동 태그 → 영어 줄 순서로 뺌."""
-    en = ""
+    en, links = "", []
     if kind == "media":  # 매체 글은 초안 페이지에서 리트윗 (본문은 미리보기용)
         title, body, url = f"📸 {data['name']} 새 콘텐츠", data["title"], data["url"]
+    elif kind == "show" and (data.get("now") or data.get("soon")):  # 방송 5분 전 / 시작 뒤
+        mm = re.fullmatch(r"(.+?)\s*출연", data["name"])
+        show = mm.group(1) if mm else data["name"]
+        show_en = (((data.get("tr") or {}).get(show) or {}).get("en")) or show
+        if data.get("soon"):
+            title, body = f"⏰ 곧 {show} 생방송!", f"{data['t']} 시작 — A2O SOUL 무대 함께 봐요 💜"
+            en = f"⏰ {show_en} starts soon ({data['t']} KST)"
+        else:
+            title, body = f"🔴 지금 {show} 생방송 중!", "A2O SOUL 무대 같이 봐요 💜"
+            en = f"🔴 {show_en} is LIVE now — watch A2O SOUL!"
+        url = data["url"]
+        site_cheer = "https://a2osoul-tracker.com/#cheer"
+        links = [f"📺 생방송 {url}", f"💜 응원법·투표 {site_cheer}"]  # 방송 보기 + 사이트(응원법·투표) 링크 둘 다
     else:
         title, body, url = compose(kind, data, "ko")
         t2, b2, _ = compose(kind, data, "en")
@@ -216,14 +239,14 @@ def tweet_text(kind, data):
         body = f"{data['ko']}의 생일을 함께 축하해요 💜 #Happy{data['name'].replace(' ', '')}Day"
     tags = TAGS
     text_all = f"{title} {body} {data.get('name', '')} {data.get('title', '')}"
-    song = " ".join(t for k, t in SONG_TAGS.items() if k.lower() in text_all.lower() and t not in ERA_TAGS)
+    song = " ".join(t for k, t in SONG_TAGS.items() if k.lower() in text_all.lower() and t not in ERA_TAGS and t != ACTIVE_TAG)
     mems = data.get("members") or ([(data["name"], data.get("ko"))] if kind == "birthday" else [])
     for m_en, m_ko in mems:  # 멤버 개인 게시글이면 이름 해시태그 (한글·영어)
         tags += f" #{m_ko} #{re.sub(r'[^A-Za-z0-9]', '', m_en)}" if m_ko else f" #{re.sub(r'[^A-Za-z0-9]', '', m_en)}"
 
     def build(with_en, with_era):
-        tag2 = " ".join(x for x in (song, ERA_TAGS if with_era else "") if x)
-        lines = [title] + ([body] if body else []) + ([en] if with_en and en else []) + ["", f"👉 {url}" if url else "", "", tags, tag2]
+        tag2 = " ".join(x for x in (ACTIVE_TAG, song, ERA_TAGS if with_era else "") if x)
+        lines = [title] + ([body] if body else []) + ([en] if with_en and en else []) + [""] + (links or [f"👉 {url}" if url else ""]) + ["", tags, tag2]
         return re.sub(r"\n{3,}", "\n\n", "\n".join(x for x in lines if x is not None)).strip()
 
     for opt in ((True, True), (True, False), (False, False)):
@@ -236,15 +259,18 @@ def tweet_text(kind, data):
 def drafts(api, priv, new, site):
     """새 알림 후보 → 트윗 초안을 Worker에 저장. 저장된 개수를 돌려줌."""
     # 팬 계정이 주최하는 행사(credit 있음)는 초안 안 만듦 — 그쪽 공지를 리트윗하는 게 맞음
-    items = [{"key": key, "kind": kind, "text": tweet_text(kind, data)} for key, topic, kind, data in new
-             if kind not in ("notice",) and not data.get("credit")]
+    items = [{"key": key, "kind": kind, "text": tweet_text(kind, data), "auto": kind in AUTO_POST} for key, topic, kind, data in new
+             if kind not in ("notice",) and not data.get("credit") and not data.get("no_draft")]
     if not items:
         return 0
     try:
         r = requests.post(api.rstrip("/") + "/tweet/drafts", json={"drafts": items[:20]}, timeout=20,
                           headers={"Authorization": f"Bearer {_admin_token(priv)}"})
         r.raise_for_status()
-        return r.json().get("added", 0)
+        j = r.json()
+        if j.get("posted"):
+            print(f"[트윗] 바로 올림 {j['posted']}개")
+        return j.get("added", 0)  # 확인이 필요한(아직 안 올린) 초안 수 — 관리자 알림용
     except Exception as e:  # noqa: BLE001
         print(f"[트윗] 초안 저장 실패: {type(e).__name__} {e}")
         return 0
@@ -280,7 +306,7 @@ def run(dash, cfg, state, site="https://a2osoul-tracker.com/"):
     if added:
         print(f"[트윗] 초안 {added}개")
     videos = [c for c in new if c[2] == "video"]
-    msgs = [c for c in new if c[2] not in ("video", "media")] + ([videos[0]] if videos else [])  # media는 초안 전용
+    msgs = [c for c in new if c[2] not in ("video", "media") and not c[3].get("draft_only")] + ([videos[0]] if videos else [])  # media는 초안 전용
     dead, ok = [], 0
     for s in subs:
         if added and "tweet" in (s.get("topics") or []):  # 관리자: 올릴 트윗 초안이 생겼다고 알림

@@ -181,7 +181,7 @@
   // 지난 초안: 한 줄
   const line = (d) => {
     const li = document.createElement("div"); li.className = "li";
-    const st = document.createElement("span"); st.className = "st"; st.textContent = d.status === "posted" ? (d.retweet ? "🔁" : "✅") : "🗑";
+    const st = document.createElement("span"); st.className = "st"; st.textContent = d.status === "posted" ? (d.retweet ? "🔁" : d.auto ? "⚡" : "✅") : "🗑";
     const tx = document.createElement("span"); tx.className = "txt"; tx.textContent = d.text.split("\n").filter((x) => x.trim()).slice(0, 2).join(" · ");
     li.append(st, tx);
     if (d.status === "posted" && d.tweet) {
