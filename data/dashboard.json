@@ -130,6 +130,15 @@
    "title": "스테이션헤드 합동 스밍 1부",
    "url": "https://www.stationhead.com/ko1keyzstation2",
    "with": "KO1KEYZ 스테이션"
+  },
+  {
+   "date": "2026-11-25",
+   "host": "@a2osoulstation · @NNStation · @yizhuodaily",
+   "note": "자세한 공지는 11/22(일) 주최 계정에 올라와요",
+   "time": "20:00",
+   "title": "스테이션헤드 콜라보 (~23:00)",
+   "url": "https://x.com/a2osoulstation",
+   "with": "NINGNING 스테이션"
   }
  ],
  "debut_date": "2026-10-13",
@@ -12475,6 +12484,15 @@
    "th": "แฟนไซน์ Musicart",
    "zh": "Musicart 签售会"
   },
+  "NINGNING 스테이션": {
+   "en": "NINGNING station",
+   "es": "Estación de NINGNING",
+   "id": "Stasiun NINGNING",
+   "ja": "NINGNING ステーション",
+   "pt": "Estação da NINGNING",
+   "th": "สถานี NINGNING",
+   "zh": "NINGNING 电台"
+  },
   "Nemoz 영상통화 팬사인회": {
    "en": "Nemoz video call fansign",
    "es": "Videollamada Nemoz",
@@ -13918,6 +13936,15 @@
    "th": "แนะนำตัวว่าเป็น 'ออลราวด์เดอร์สีทอง'",
    "zh": "自称“黄金全能型”"
   },
+  "스테이션헤드 콜라보 (~23:00)": {
+   "en": "Stationhead collab (until 23:00)",
+   "es": "Collab en Stationhead (hasta las 23:00)",
+   "id": "Kolab Stationhead (sampai 23:00)",
+   "ja": "Stationhead コラボ（〜23:00）",
+   "pt": "Collab no Stationhead (até 23:00)",
+   "th": "คอลแลบ Stationhead (ถึง 23:00)",
+   "zh": "Stationhead 联动（至23:00）"
+  },
   "스테이션헤드 합동 스밍 1부": {
    "en": "Stationhead joint streaming, part 1",
    "es": "Streaming conjunto en Stationhead, parte 1",
@@ -14697,6 +14724,15 @@
    "pt": "Fala 4 idiomas: japonês, coreano, inglês e chinês",
    "th": "พูดได้ 4 ภาษา: ญี่ปุ่น เกาหลี อังกฤษ จีน",
    "zh": "会日语、韩语、英语、中文四种语言"
+  },
+  "자세한 공지는 11/22(일) 주최 계정에 올라와요": {
+   "en": "Full details will be posted by the hosts on Sun 11/22",
+   "es": "Los detalles los publicarán los organizadores el dom 22/11",
+   "id": "Detail lengkap akan diumumkan penyelenggara pada Minggu 22/11",
+   "ja": "詳しい告知は11/22（日）に主催アカウントで公開されます",
+   "pt": "Os detalhes serão publicados pelos organizadores no dom 22/11",
+   "th": "รายละเอียดจะประกาศโดยผู้จัดในวันอาทิตย์ 22/11",
+   "zh": "详细公告将于11/22（周日）在主办账号发布"
   },
   "자주 쓰는 말": {
    "en": "Fandom terms",
