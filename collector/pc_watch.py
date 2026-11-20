@@ -64,7 +64,7 @@ def banner_text(img):
 def template_name(img):
     t = banner_text(img)
     m = re.search(r"\[([^\]]+)\]", t)
-    if not m or "PHOTOCARD" not in t and "LUCKY" not in t:
+    if not m or "PHOTOCARD" not in t and "LUCKY" not in t and "POB" not in t:
         return None, t
     album = re.sub(r"[^A-Z0-9]+", "", m.group(1).split()[0] if "DANCING" in m.group(1) else m.group(1)) or "ALBUM"
     head = t[:m.start()].strip()
@@ -77,6 +77,12 @@ def template_name(img):
         return "SUPERSTAR_CARABINER", t
     if "OLIVE" in t:
         return "SUPERSTAR_OLIVEYOUNG", t
+    if "APPLE" in t and "LUCKY" in t:
+        return "SUPERSTAR_LD-APPLEMUSIC", t
+    if "POB" in t:  # 'A2O SOUL [SUPERSTAR] NEMOZ POB' → 판매처 특전 단체 템플릿
+        store = next((k for k in sorted(pc_crop.STORES, key=len, reverse=True) if k in t[m.end():]), None)
+        if store:
+            return f"SUPERSTAR_POB-{store.replace(' ', '')}", t
     if "BROADCAST" in t:
         return ("SUPERSTAR_BROADCAST-DITD" if "DANCING" in m.group(1) else "SUPERSTAR_BROADCAST-SUPERSTAR"), t
     return None, t
