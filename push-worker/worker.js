@@ -40,6 +40,20 @@ function cors(req) {
     "Vary": "Origin",
   };
 }
+// KV 무료 한도(읽기 하루 10만) 아끼기: 사이트 방문마다 읽던 차트 입력 목록은 엣지 캐시에 5분 보관
+const CHART_CACHE = "https://push.a2osoul-tracker.com/_cache/charts";
+async function chartsBody(env) {
+  const hit = await caches.default.match(CHART_CACHE);
+  if (hit) return hit.text();
+  const body = (await env.SUBS.get("_charts")) || "[]";
+  await caches.default.put(CHART_CACHE, new Response(body, { headers: { "Cache-Control": "public, max-age=300" } }));
+  return body;
+}
+// 구독 정보를 키 메타데이터(1KB까지)에도 넣어 두면 /subs에서 목록만 읽고 끝 (구독자 수만큼 읽기 안 함)
+function subMeta(v) {
+  const m = { e: v.sub.endpoint, p: v.sub.keys.p256dh, a: v.sub.keys.auth, t: v.topics, l: v.lang, at: v.at };
+  return JSON.stringify(m).length <= 1000 ? m : undefined;
+}
 const json = (req, body, status = 200) => new Response(JSON.stringify(body), { status, headers: { "Content-Type": "application/json", ...cors(req) } });
 
 // GitHub Actions가 VAPID 비밀키로 서명한 ES256 토큰 확인 (공유 비밀번호 없이)
@@ -608,7 +622,8 @@ export default {
         topics = ((prev && prev.topics) || []).filter((t) => t !== "tweet");
         lang = (prev && prev.lang) || lang;
       } else if (prev && (prev.topics || []).includes("tweet")) topics.push("tweet");
-      await env.SUBS.put(id, JSON.stringify({ sub: { endpoint: sub.endpoint, keys: { p256dh: sub.keys.p256dh, auth: sub.keys.auth } }, topics, lang, at: Date.now() }));
+      const val = { sub: { endpoint: sub.endpoint, keys: { p256dh: sub.keys.p256dh, auth: sub.keys.auth } }, topics, lang, at: Date.now() };
+      await env.SUBS.put(id, JSON.stringify(val), { metadata: subMeta(val) });
       return json(req, { ok: true, id });
     }
 
@@ -633,6 +648,7 @@ export default {
       const list = (await env.SUBS.get("_charts", "json")) || [];
       list.push(okStreams ? { song, service, streams, at, ...(b.date && /^\d{4}-\d{2}-\d{2}$/.test(b.date) ? { date: b.date } : {}) } : { song, service, rank, at });
       await env.SUBS.put("_charts", JSON.stringify(list.slice(-2000)));
+      await caches.default.delete(CHART_CACHE);
       // 바로 수집 실행 → 알림 (2분에 한 번만)
       if (Date.now() - (Number(await env.SUBS.get("_chart_dispatch")) || 0) > 120000) {
         await env.SUBS.put("_chart_dispatch", String(Date.now()), { expirationTtl: 3600 });
@@ -641,7 +657,7 @@ export default {
       return json(req, { ok: true, at });
     }
     if (req.method === "GET" && url.pathname === "/charts") {
-      return json(req, (await env.SUBS.get("_charts", "json")) || []);
+      return new Response(await chartsBody(env), { headers: { "Content-Type": "application/json", "Cache-Control": "public, max-age=60", ...cors(req) } });
     }
 
     // 한눈에 화면 스타일(A·B·C) 고른 횟수 — 누가 골랐는지는 저장 안 함
@@ -661,13 +677,17 @@ export default {
     if (req.method === "GET" && url.pathname === "/subs") {
       if (!(await isAdmin(req, env))) return json(req, { error: "forbidden" }, 403);
       const out = [];
-      let cursor;
+      let cursor, moved = 0;
       do {
         const page = await env.SUBS.list({ cursor });
         for (const k of page.keys) {
           if (k.name.startsWith("_")) continue; // 내부용 키
-          const v = await env.SUBS.get(k.name, "json");
-          if (v) out.push({ id: k.name, ...v });
+          const m = k.metadata;
+          if (m && m.e) { out.push({ id: k.name, sub: { endpoint: m.e, keys: { p256dh: m.p, auth: m.a } }, topics: m.t, lang: m.l, at: m.at }); continue; }
+          const v = await env.SUBS.get(k.name, "json");  // 예전 구독 — 한 번에 100개까지 메타데이터로 옮김
+          if (!v) continue;
+          out.push({ id: k.name, ...v });
+          if (moved < 100 && subMeta(v)) { await env.SUBS.put(k.name, JSON.stringify(v), { metadata: subMeta(v) }); moved++; }
         }
         cursor = page.list_complete ? null : page.cursor;
       } while (cursor);
