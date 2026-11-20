@@ -2340,7 +2340,8 @@
   }
  },
  "x_media": {
-  "at": "2026-11-20T11:58+09:00",
+  "at": "2026-11-20T13:01+09:00",
+  "auto_since": "2123626895162151304",
   "candidates": {},
   "checked": "2026-11-19T16:40+09:00",
   "missing": [
@@ -2456,9 +2457,20 @@
     "permalink": "https://x.com/M2MPD/status/2123340513831170203",
     "timestamp": "2026-11-19T09:00:02.000Z",
     "video": false
+   },
+   "2123612310531154245": {
+    "author": "StoneMusicEnt",
+    "author_name": "STONE MUSIC",
+    "caption": "[In The Studio] A2O SOUL Coming Soon!\n\n#인더스튜디오 #In_The_Studio \n#A2O #A2OSOUL #Dancing_in_the_Dark\n#SUPERSTAR #ZalphaPop https://x.com/StoneMusicEnt/status/2123612310531154245/video/1",
+    "images": [
+     "https://pbs.twimg.com/media/HXh8ilobgAAjOvi.jpg"
+    ],
+    "permalink": "https://x.com/StoneMusicEnt/status/2123612310531154245",
+    "timestamp": "2026-11-20T03:00:04.000Z",
+    "video": true
    }
   },
-  "since_id": "2123340513831170203"
+  "since_id": "2123612310531154245"
  },
  "x_official_votes": {
   "at": "2026-11-20T12:50+09:00",
