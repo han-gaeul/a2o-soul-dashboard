@@ -506,14 +506,14 @@ def media_feed(cfg, state, limit=40):
     names = {v["handle"].lower(): v["name"] for v in cfg["x_media"]}
     out = []
     for m in (state.get("posts") or {}).values():
-        if m.get("author", "").lower() not in names or MEDIA_SKIP.search(m.get("caption") or ""):  # 목록에서 뺀 계정·논란 기사는 숨김
+        if (m.get("author", "").lower() not in names and not m.get("auto")) or MEDIA_SKIP.search(m.get("caption") or ""):  # 목록에서 뺀 계정·논란 기사는 숨김
             continue
         text = re.sub(r"\s*https://(t\.co/\w+|x\.com/\S+/photo/\d)\s*$", "", (m.get("caption") or "").strip())
         imgs = (m.get("images") or [])[:4]
         if not imgs and (yt := re.search(r"(?:youtu\.be/|youtube\.com/(?:watch\?v=|shorts/))([\w-]{11})", text)):
             imgs = [f"https://i.ytimg.com/vi/{yt.group(1)}/hqdefault.jpg"]  # 사진 없는 글은 유튜브 링크 썸네일로
         out.append({"url": m["permalink"], "at": kst_datetime(m.get("timestamp")), "handle": m["author"],
-                    "name": names[m["author"].lower()], "text": text[:400], "images": imgs,
+                    "name": names.get(m["author"].lower()) or m.get("author_name") or m["author"], "text": text[:400], "images": imgs,
                     "video": bool(m.get("video"))})
     out.sort(key=lambda x: x["at"] or "", reverse=True)
     return out[:limit]
@@ -1240,6 +1240,24 @@ def collect(cfg, rescan=False):
             for k in [k for k, m in mposts.items() if (m.get("timestamp") or "") < cut]:
                 mposts.pop(k)
             print(f"[매체] 새 글 {len(got)}개 · 보관 {len(mposts)}개")
+            # 목록에 없는 계정도: 인증 기업·기관 계정(금색·회색 체크)이 A2O SOUL을 언급한 글이면 자동으로 (유통사·방송사·매거진 등)
+            #   판매처·매장·투표 앱·공식 계정은 다른 칸에서 보여 주니 뺌. is:verified로 검색해 읽는 글 수를 줄임
+            skip = ({"a2o_soul"} | mknown | {v["handle"].lower() for v in cfg.get("x_vendors") or []} | {u.lower() for u in cfg["x_vote_accounts"]}
+                    | {str(x.get("handle") or "").lower() for x in cfg["info"].get("offline_stores") or []})
+            try:
+                auto = xposts.search_posts(base + "is:verified -from:A2O_SOUL -is:retweet -is:reply",
+                                           since_id=mst.get("auto_since"), max_results=100, media=True)
+                if auto:
+                    mst["auto_since"] = max(auto, key=lambda p_: int(p_["tweet_id"]))["tweet_id"]
+                n_auto = 0
+                for p_ in auto:
+                    if p_.get("verified_type") in ("business", "government") and p_["author"].lower() not in skip \
+                            and A2O_MENTION.search(p_["caption"]) and not MEDIA_SKIP.search(p_["caption"]):
+                        mposts[p_["tweet_id"]] = {**{k: p_.get(k) for k in ("caption", "timestamp", "permalink", "author", "author_name", "images", "video")}, "auto": True}
+                        n_auto += 1
+                print(f"[매체] 인증 계정 검색 {len(auto)}개 · 자동 추가 {n_auto}개")
+            except Exception as e:  # noqa: BLE001
+                print(f"[매체] 인증 계정 검색 실패: {e}")
 
         # 음방 공식 사진 — 음방·방송사 인증 계정이 올린 A2O SOUL 무대·대기실 사진 (3시간마다, 음방 당일 방송 전후엔 1시간마다)
         sst = store.setdefault("x_show_photos", {})
