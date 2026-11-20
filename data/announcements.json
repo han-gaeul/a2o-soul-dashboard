@@ -2190,6 +2190,28 @@
    "permalink": "https://x.com/UPICK_twt/status/2123597613920641200",
    "timestamp": "2026-11-20T02:01:40.000Z"
   },
+  "xo:2123657601548443893": {
+   "caption": "26. 11. 22 이번 주 #인기가요 1332회 라인업을 공개합니다 📢\n\nA2O SOUL / ADAP (에이댑) / 앰퍼샌드원 (AMPERS&ONE) / Baby DONT Cry / BESTie (베스티) / 채령 (ITZY) / CODE ZiGU (코드지구) / 피스트범프 / H1-KEY (하이키) / HEART OF WOMAN (하트오브우먼) / Kei (케이) / Keyveatz / KEYVITUP (키빗업) / 김장훈 / LNGSHOT / 엔탑 (https://t.co/FpR8rBFhov) / NCT DREAM / 투모로우바이투게더 / UNCHILD / xikers (싸이커스)\n\n🌟 생방송 종료 후, 이번 주 가장 빛났던 무대를 뽑는 'HOT STAGE' 투표가 시작됩니다!\n내 최애의 무대를 더욱 특별하게 만들어줄 준비! 지금부터 시작해볼까요? 💖\n\n💎 다이아몬드 충전 바로가기 👉 https://t.co/WhYfuRg87F\n\n📸 HOT STAGE 투표 후 발급되는 ‘투표 인증서’도 꼭 확인하세요!\n투표 인증 참여 시 방청권 추첨 기회 제공✨\n이벤트 참여하기 👉 https://x.com/HIGHER_twt/status/2122917723063611839/\n\n#A2OSOUL #ADAP #AMERSANDONE #BabyDONTCry #BESTie #CHAERYEONG #CODEZiGU #FISTBUMP #H1KEY #HEARTOFWOMAN #Kei #KEYVITUP #Keyveatz #KimJangHoon #LNGSHOT #NCTDREAM #NTOP #TOMORROW_X_TOGETHER #UNCHILD #xikers #김장훈 #롱샷 #베스티 #베이비돈크라이 #싸이커스 #언차일드 #앰퍼샌드원 #에이댑 #에이투오소울 #엔시티드림 #엔탑 #채령 #케이 #코드지구 #키비츠 #키빗업 #투모로우바이투게더 #피스트범프 #하이키 #하트오브우먼\n\n— HIGHER",
+   "excerpt": "26. 11. 22 이번 주 #인기가요 1332회 라인업을 공개합니다 📢\n\nA2O SOUL / ADAP (에이댑) / 앰퍼샌드원 (AMPERS&ONE) / Baby DONT Cry / BESTie (베스티) / 채령 (ITZY) / CODE ZiGU ",
+   "items": [
+    {
+     "app": "하이어(HIGHER)",
+     "confidence": 0.6,
+     "date": null,
+     "end": null,
+     "end_date": null,
+     "kind": "vote",
+     "place": null,
+     "show": "인기가요",
+     "start": null,
+     "time": null,
+     "title": "인기가요 HOT STAGE 투표",
+     "url": null
+    }
+   ],
+   "permalink": "https://x.com/HIGHER_twt/status/2123657601548443893",
+   "timestamp": "2026-11-20T06:00:02.000Z"
+  },
   "xv:2119672177347981651": {
    "caption": "[💿] A2O SOUL DEBUT EP [SUPERSTAR]\n발매 기념 공개 팬사인회\n\n📢응모 마감 D-1‼️\n✨당일 공개 팬사인회에서 SPECIAL STAGE가 진행됩니다.\n\n📅2026.11.14 (토) 19:30 (KST)\n📍스타필드 수원 타워 아트리움\n\n[ONLINE] 뮤직아트 온라인몰\n🛒온라인 응모기간 : 2026.11.08 (일) 14:00 ~ 11.10 (화) 23:59 (KST)\n\n[OFFLINE] 영풍문고 스타필드수원점 내 음반매장\n🛒오프라인 응모기간 : 2026.11.08 (일) 14:00 ~ 11.10 (화) 21:00 (KST)\n\n🌠응모자 전원 미공개 셀카 포토카드 15종 중 1종 랜덤 증정\n\n🔗https://t.co/I1sj0S6DOk",
    "excerpt": "[💿] A2O SOUL DEBUT EP [SUPERSTAR]\n발매 기념 공개 팬사인회\n\n📢응모 마감 D-1‼️\n✨당일 공개 팬사인회에서 SPECIAL STAGE가 진행됩니다.\n\n📅2026.11.14 (토) 19:30 (KST)\n📍스타필드 수원 타워 아",
@@ -2361,8 +2383,8 @@
   }
  },
  "x_media": {
-  "at": "2026-11-20T15:10+09:00",
-  "auto_since": "2123659949616308269",
+  "at": "2026-11-20T15:50+09:00",
+  "auto_since": "2123669887490937271",
   "candidates": {},
   "checked": "2026-11-19T16:40+09:00",
   "missing": [
@@ -2505,20 +2527,18 @@
   "since_id": "2123657863491108968"
  },
  "x_official_votes": {
-  "at": "2026-11-20T12:50+09:00",
+  "at": "2026-11-20T15:50+09:00",
   "deep": 1,
   "last": {
    "official": [
-    "UPICK_twt"
+    "HIGHER_twt"
    ],
-   "read": 10,
+   "read": 4,
    "verified": [
-    "ForA2OSOUL:blue",
-    "UPICK_twt:blue",
-    "a2osoulvote:blue"
+    "HIGHER_twt:business"
    ]
   },
-  "since_id": "2123623670837096489",
+  "since_id": "2123670185756459228",
   "v": 2
  },
  "x_show_photos": {
