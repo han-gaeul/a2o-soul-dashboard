@@ -2384,15 +2384,11 @@
   }
  },
  "x_media": {
-  "at": "2026-11-20T16:30+09:00",
-  "auto_since": "2123679750551912665",
+  "at": "2026-11-20T16:40+09:00",
+  "auto_since": "2123682522760712670",
   "candidates": {},
-  "checked": "2026-11-19T16:40+09:00",
-  "missing": [
-   "cosmopolitan_kr",
-   "esquirekorea",
-   "harpersbazaarkr"
-  ],
+  "checked": "2026-11-20T16:40+09:00",
+  "missing": [],
   "posts": {
    "2120834126207160775": {
     "author": "myidolmiim",
@@ -2528,7 +2524,7 @@
   "since_id": "2123657863491108968"
  },
  "x_official_votes": {
-  "at": "2026-11-20T16:30+09:00",
+  "at": "2026-11-20T16:40+09:00",
   "deep": 1,
   "last": {
    "official": [],
