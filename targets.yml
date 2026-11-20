@@ -147,6 +147,7 @@ push:
 # 콘텐츠(챌린지·화보·인터뷰·무대)만 — 가십성 뉴스 계정은 넣지 않기. 논란·비판 기사는 걸러냄
 # 없는 아이디는 하루 한 번 확인해서 '수집 점검' 이슈에 알려줘요. 새 매체 후보도 거기에
 x_media:
+  - { handle: StoneMusicEnt, name: STONE MUSIC }   # 유통사 — 인더스튜디오 등 자체 콘텐츠 예고
   - { handle: myidolmiim, name: miim }
   - { handle: 1theK, name: 1theK }
   - { handle: StudioK_twt, name: KBS Kpop }
