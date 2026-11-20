@@ -179,7 +179,8 @@ def load_fan_files(cfg):
                     "voting": [{k: str(v[k]) for k in keep if v.get(k)} for v in howto.get("voting") or [] if v.get("show")],
                     "streaming": [{"title": str(s["title"]), "steps": [str(x) for x in s.get("steps") or []],
                                    **({"global": True} if s.get("global") else {})}
-                                  for s in howto.get("streaming") or [] if s.get("title")]}
+                                  for s in howto.get("streaming") or [] if s.get("title")],
+                    "radio": howto.get("radio") or {}}
     info = read_yml("info.yml")
     cfg["info"] = {
         "lore": [str(x) for x in info.get("lore") or []],
@@ -1531,6 +1532,9 @@ def write_health(cfg, videos, members, today, official=(), store_cands=None, med
     texts += [x["note"] for x in cfg["streaming"]] + [str(v.get(k) or "") for v in cfg["votes"] for k in ("show", "app", "title", "note")]
     for v in cfg["howto"]["voting"]:
         texts += [v.get(k, "") for k in ("when", "pre", "live", "note")]
+    rd = cfg["howto"].get("radio") or {}
+    texts += [str(x.get("note") or "") for x in rd.get("programs") or []]  # 프로그램·방송사 이름은 고유명사, 신청 문구는 한국어로 보내는 거라 번역 안 함
+    texts += [str(x.get("label") or "") for x in rd.get("situations") or []]
     for g in cfg["howto"]["streaming"]:
         texts += [g["title"]] + g["steps"]
     for b in cfg["guide"]["beginner"]:
