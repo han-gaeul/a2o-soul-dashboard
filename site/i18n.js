@@ -665,3 +665,31 @@ window.I18N = {
   };
   for (const [l, v] of Object.entries(V)) if (window.I18N[l]) K.forEach((k, i) => { window.I18N[l][k] = v[i]; });
 })();
+
+// 콜라보 탭
+(() => {
+  const K = ["tab.collab", "collab_title", "collab_desc", "collab_with", "collab_host", "collab_go", "collab_none", "collab_past"];
+  const V = {
+    ko: ["콜라보", "🤝 팬 콜라보", "다른 팬덤·스테이션과 함께하는 팬 주최 이벤트예요. SOUL Tracker는 일정만 옮겨 두고 알림은 보내지 않아요 — 자세한 내용은 주최 계정 공지를 확인해 주세요.",
+      "{who}와 함께", "주최 {who}", "주최 공지·참여 ↗", "지금 예정된 콜라보가 없어요", "지난 콜라보 {n}개"],
+    en: ["Collabs", "🤝 Fan collabs", "Fan-hosted events together with other fandoms and stations. SOUL Tracker only lists the schedule and doesn't send alerts — check the host's post for details.",
+      "with {who}", "Hosted by {who}", "Host's post · join ↗", "No collabs scheduled right now", "{n} past collabs"],
+    ja: ["コラボ", "🤝 ファンコラボ", "他のファンダム・ステーションと一緒に行うファン主催イベントです。SOUL Trackerは日程を載せるだけで通知は送りません — 詳しくは主催アカウントの告知をご確認ください。",
+      "{who}と一緒に", "主催 {who}", "主催の告知・参加 ↗", "予定されているコラボはありません", "過去のコラボ {n}件"],
+    zh: ["联动", "🤝 粉丝联动", "与其他粉丝团·电台一起举办的粉丝活动。SOUL Tracker 只整理日程，不发送提醒 — 详情请看主办账号的公告。",
+      "与 {who}", "主办 {who}", "主办公告·参与 ↗", "目前没有安排的联动", "过去的联动 {n} 个"],
+    es: ["Collabs", "🤝 Collabs de fans", "Eventos organizados por fans junto con otros fandoms y estaciones. SOUL Tracker solo muestra la fecha y no envía alertas: revisa el post del organizador.",
+      "con {who}", "Organiza {who}", "Post del organizador · unirse ↗", "No hay collabs programadas", "{n} collabs pasadas"],
+    id: ["Kolab", "🤝 Kolab fans", "Acara fans bersama fandom dan stasiun lain. SOUL Tracker hanya mencantumkan jadwal dan tidak mengirim notifikasi — cek postingan penyelenggara untuk detailnya.",
+      "bersama {who}", "Penyelenggara {who}", "Postingan penyelenggara · ikut ↗", "Belum ada kolab terjadwal", "{n} kolab sebelumnya"],
+    th: ["คอลแลบ", "🤝 คอลแลบแฟนๆ", "อีเวนต์ที่แฟนจัดร่วมกับแฟนด้อมและสถานีอื่น SOUL Tracker แค่ลงตารางไว้และไม่ส่งแจ้งเตือน — ดูรายละเอียดจากโพสต์ของผู้จัด",
+      "ร่วมกับ {who}", "ผู้จัด {who}", "โพสต์ผู้จัด · เข้าร่วม ↗", "ตอนนี้ยังไม่มีคอลแลบ", "คอลแลบที่ผ่านมา {n} รายการ"],
+    pt: ["Collabs", "🤝 Collabs de fãs", "Eventos organizados por fãs com outros fandoms e estações. O SOUL Tracker só mostra a data e não envia alertas — veja o post do organizador.",
+      "com {who}", "Organização {who}", "Post do organizador · participar ↗", "Nenhuma collab agendada agora", "{n} collabs anteriores"],
+    fil: ["Collab", "🤝 Fan collab", "Mga event na hino-host ng fans kasama ang ibang fandom at station. Schedule lang ang inilalagay ng SOUL Tracker at walang alert — tingnan ang post ng host.",
+      "kasama ang {who}", "Host: {who}", "Post ng host · sumali ↗", "Walang naka-schedule na collab ngayon", "{n} nakaraang collab"],
+    vi: ["Collab", "🤝 Fan collab", "Sự kiện do fan tổ chức cùng các fandom và trạm khác. SOUL Tracker chỉ ghi lịch, không gửi thông báo — xem chi tiết ở bài đăng của bên tổ chức.",
+      "cùng {who}", "Tổ chức: {who}", "Bài đăng · tham gia ↗", "Hiện chưa có collab nào", "{n} collab đã qua"],
+  };
+  for (const [l, v] of Object.entries(V)) if (window.I18N[l]) K.forEach((k, i) => { window.I18N[l][k] = v[i]; });
+})();

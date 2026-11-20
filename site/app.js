@@ -127,7 +127,7 @@ if ("serviceWorker" in navigator) {
   const kstDate = (s) => new Date(`${s.replace(" ", "T")}${s.length > 10 ? ":00" : "T00:00:00"}+09:00`); // "YYYY-MM-DD[ HH:MM]" KST
 
   // ---------- 탭 ----------
-  const tabs = ["overview", "notice", "cheer", "mv", "members", "fancams", "videos", "guide", "community"];
+  const tabs = ["overview", "notice", "cheer", "collab", "mv", "members", "fancams", "videos", "guide", "community"];
   const drawn = new Set();
   const drawers = {};
   // 공유 링크: #member/MOON → 멤버 탭, #ep/날짜/방송 → 영상 탭, #cmp/날짜/방송/A/B → 직캠 탭
@@ -486,7 +486,9 @@ if ("serviceWorker" in navigator) {
   };
   // 투표 버튼이 갈 곳: 투표는 앱 안에서 하니 앱(스토어, 설치돼 있으면 '열기')이 먼저, 앱을 모르면 투표 링크 → 앱 검색
   const voteHref = (v) => appStore(v.app) || v.url || (v.app ? appSearch(v.app) : "");
-  const voteLabel = (v) => (voteHref(v) === appStore(v.app) ? t("vote_in_app", { app: tc(v.app) }) : v.url ? t("vote_open") : t("vote_find_app", { app: tc(v.app) }));
+  // 버튼 문구 안에 이미 '앱'이 있으니 앱 이름만 ('U+PICK app' → 'U+PICK', 중복 'app app' 방지)
+  const appOnly = (a) => tc(a).replace(/\s*(\bapp\b|\bapps\b|aplikasi|アプリ|แอป|앱)\s*/gi, " ").trim() || tc(a);
+  const voteLabel = (v) => (voteHref(v) === appStore(v.app) ? t("vote_in_app", { app: appOnly(v.app) }) : v.url ? t("vote_open") : t("vote_find_app", { app: appOnly(v.app) }));
   const voteTile = (v, full) => {
     const start = kstDate(v.start), end = kstDate(v.end), now = Date.now();
     const open = now >= start;
@@ -1151,6 +1153,29 @@ if ("serviceWorker" in navigator) {
     draw();
   } else {
     $("noticePostsSec").append(empty(t("notice_none")));
+  }
+
+  // ---------- 콜라보 탭: 다른 팬덤·스테이션과 함께하는 팬 주최 이벤트 (정보만, 알림 없음) ----------
+  {
+    const list = data.collabs || [];
+    const card = (c, past) => el("div", { class: `collab${past ? " past" : ""}` },
+      el("div", { class: "cl-when" },
+        el("b", {}, `${c.date.slice(5).replace("-", ".")} (${new Date(`${c.date}T12:00:00+09:00`).toLocaleDateString(locale || "en", { weekday: "short", timeZone: "Asia/Seoul" })})`),
+        c.time ? el("span", {}, ` ${c.time} KST`) : null,
+        c.time && localOf(c.date, c.time) ? el("span", { class: "muted small" }, ` · ${localOf(c.date, c.time)}`) : null),
+      el("div", { class: "cl-title" }, tc(c.title)),
+      el("div", { class: "cl-meta" },
+        c.with ? el("span", { class: "chip" }, `🤝 ${t("collab_with", { who: tc(c.with) })}`) : null,
+        c.host ? el("span", { class: "muted small" }, t("collab_host", { who: c.host })) : null),
+      c.note ? el("p", { class: "muted small cl-note" }, tc(c.note)) : null,
+      c.url && !past ? el("div", { class: "vote-links" }, ext(c.url, t("collab_go"))) : null);
+    const up = list.filter((c) => c.date >= todayKst), past = list.filter((c) => c.date < todayKst).reverse().slice(0, 10);
+    const out = up.length ? up.map((c) => card(c, false)) : [empty(t("collab_none"))];
+    if (past.length) {
+      const det = el("details", { class: "cl-past" }, el("summary", {}, t("collab_past", { n: past.length })), ...past.map((c) => card(c, true)));
+      out.push(det);
+    }
+    $("collabs").replaceChildren(...out);
   }
 
   // ---------- 공지 탭: 사녹 신청 제출 시간 확인 (submissionId 앞 8글자 = 제출 시각, 기기 안에서만 계산) ----------
@@ -2472,6 +2497,7 @@ if ("serviceWorker" in navigator) {
     $("moreList").replaceChildren(
       item("📢", t("tab.notice"), () => go("notice")), item("🎬", t("tab.mv"), () => go("mv")), item("🎥", t("tab.fancams"), () => go("fancams")),
       item("🔰", t("tab.guide"), () => go("guide")),
+      item("🤝", t("tab.collab"), () => go("collab")),
       item("🔔", t("push_btn"), () => { more.close(); $("pushBtn").click(); }),
       item("🎨", t("hs_title"), () => { more.close(); openHomeStyle(); }),
       ...(!$("installBtn").hidden ? [item("📱", t("install"), () => { more.close(); $("installBtn").click(); })] : []),

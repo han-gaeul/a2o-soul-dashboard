@@ -1101,3 +1101,15 @@ body:not([data-cur="overview"]) .hs-switch, .hs-switch[hidden] { display: none; 
 .pcheck-diff { font-weight: 700; color: var(--accent); }
 .pcheck-bad { margin: 0; color: var(--hot); font-size: 14px; }
 .pcheck-out p { margin: 0; }
+
+/* 콜라보 탭 */
+.collabs { display: grid; gap: 10px; margin-top: 10px; }
+.collab { border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; display: grid; gap: 6px; background: var(--card); }
+.collab.past { opacity: .6; }
+.cl-when { font-size: 14px; }
+.cl-title { font-size: 16px; font-weight: 800; }
+.cl-meta { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.cl-note { margin: 0; }
+.cl-past { margin-top: 4px; }
+.cl-past summary { cursor: pointer; font-size: 13px; font-weight: 700; color: var(--muted); padding: 6px 0; }
+.cl-past .collab { margin-top: 8px; }

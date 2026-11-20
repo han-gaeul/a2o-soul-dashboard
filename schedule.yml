@@ -18,9 +18,8 @@ events:
   - { date: 2026-11-20, time: "20:00", type: 행사, title: Makestar 팬사인회, short: 팬싸 }
   - { date: 2026-11-21, time: "18:30", type: 행사, title: Withmuu 영상통화 팬사인회, short: 영통 }
   - { date: 2026-11-21, time: "20:30", type: 행사, title: Withmuu 팬사인회, short: 팬싸 }
-  # 해외 팬 스밍 (A2OSOULSTATION 제공) — notify: 1시간 전 알림·트윗 초안
+  # 해외 팬 스밍 (A2OSOULSTATION 제공) — notify: 1시간 전 알림·트윗 초안 (다른 팬덤과 함께하는 건 아래 collabs:로)
   - { date: 2026-11-20, time: "19:00", type: 행사, title: "Dancing in the Dark MV 단체 스밍 (~23:00) · 목표 450만 뷰 #DancingInTheDark4M5", short: 스밍, url: "https://youtu.be/JPJokqIoIJI", notify: true, credit: "@a2osoulstation" }
-  - { date: 2026-11-23, time: "18:00", type: 행사, title: 스테이션헤드 합동 스밍 1부 (KO1KEYZ 스테이션), short: 스밍, url: "https://www.stationhead.com/ko1keyzstation2", notify: true, credit: "@a2osoulstation" }
   - { date: 2026-11-23, time: "19:30", type: 행사, title: 스테이션헤드 합동 스밍 2부 (A2O SOUL 스테이션), short: 스밍, url: "https://www.stationhead.com/a2osoulstation", notify: true, credit: "@a2osoulstation" }
   # 공식 영상
   - { date: 2026-11-16, time: "18:00", type: 기타, title: Dancing in the Dark 퍼포먼스 비디오 공개, url: "https://youtu.be/RRfoJjvqr7k" }
@@ -38,3 +37,8 @@ fansign:
     - { match: Jumpup, apply_start: "2026-11-18 15:00", apply_end: "2026-11-20 23:59", announce: "2026-11-21 15:00" }
   add:
     - { date: 2026-11-29, time: "20:00", title: Jumpup 팬사인회, short: 팬싸, apply_start: "2026-11-18 15:00", apply_end: "2026-11-20 23:59", announce: "2026-11-21 15:00", post: "https://x.com/JumpUp_ent/status/2122932820913860808" }
+
+# 팬 콜라보 — 다른 팬덤·스테이션과 함께하는 팬 주최 이벤트 (사이트 '콜라보' 탭에만, 일정·알림·트윗 초안엔 안 넣음)
+#   date, time(KST), title, with(함께하는 쪽), host(주최 계정), url(주최 공지·참여 링크), note(선택)
+collabs:
+  - { date: 2026-11-23, time: "18:00", title: 스테이션헤드 합동 스밍 1부, with: KO1KEYZ 스테이션, host: "@a2osoulstation", url: "https://www.stationhead.com/ko1keyzstation2", note: "19:30 2부는 A2O SOUL 스테이션에서 (일정 탭)" }
