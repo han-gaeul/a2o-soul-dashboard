@@ -34,16 +34,17 @@ SEARCHES = [
               'OR photocard OR photocards OR pc OR pcs OR POB OR "lucky draw" OR WTT OR WTS OR trade '
               'OR トレカ OR フォトカード OR 特典 OR ラキドロ OR 小卡 OR 特典卡 OR 签售卡 OR โฟโต้การ์ด OR การ์ด OR "kartu foto")' + TAIL_Q,
     # 판매처·행사 이름 (특전 포카 사진이 이 이름과 같이 올라옴)
-    GROUP_Q + '(위드뮤 OR Withmuu OR 메이크스타 OR Makestar OR 뮤직아트 OR Musicart OR 뮤직플랜트 OR "Music Plant" OR 애플뮤직 '
-              'OR 점프업 OR Jumpup OR 엠넷플러스 OR "Mnet Plus" OR 올리브영 OR 사운드웨이브 OR Soundwave OR 케타포 OR Ktown4u '
+    GROUP_Q + '(위드뮤 OR 위뮤 OR Withmuu OR 메이크스타 OR 메스 OR Makestar OR 뮤직아트 OR 뮤아 OR Musicart OR 뮤직플랜트 OR 뮤플 OR 애플뮤직 OR 애뮤 '
+              'OR 점프업 OR 점업 OR Jumpup OR 엠넷플러스 OR 엠플 OR 올리브영 OR 올영 OR 사운드웨이브 OR 사웨 OR 케타포 OR Ktown4u '
               'OR 팬싸 OR 영통 OR 팬사인회 OR 공방 OR 럭키)' + TAIL_Q,
     # 그룹명 없는 글: 멤버 이름 + 포카 단어 (한 글자 이름 문·준은 오탐이 많아 영문만)
     '(서하 OR 소라 OR 테오 OR 가쿠 OR 한성 OR 루시엔 OR 시원 OR 알루어 OR 타이 OR 소노 OR 자이 OR 에이든 OR 제트 '
     'OR MOON OR SORA OR SEOHA OR TEO OR GAKU OR JUNE OR HANSUNG OR LUCIEN OR SEEONE OR ALURE OR TAI OR SONO OR ZAI OR AYDEN OR ZET) '
     '(포카 OR 미공포 OR 앨포 OR 특전포카 OR 럭드 OR photocard OR トレカ)' + TAIL_Q,
     # 그룹명·멤버명 둘 다 없는 글: 지금 A2O SOUL 특전을 하는 판매처 + 특전 포카 (다른 그룹 글도 섞일 수 있음)
-    '(위드뮤 OR Withmuu OR 뮤직플랜트 OR 뮤플 OR 뮤직아트 OR Musicart OR 메이크스타 OR 점프업 OR 애플뮤직 OR 엠플) '
-    '(특전 OR 미공포 OR 드볼 OR 럭드) (포카 OR 포토카드 OR pc)' + TAIL_Q,
+    '(위드뮤 OR 위뮤 OR Withmuu OR 뮤직플랜트 OR 뮤플 OR 뮤직아트 OR 뮤아 OR Musicart OR 메이크스타 OR 메스 OR Makestar '
+    'OR 점프업 OR 점업 OR Jumpup OR 애플뮤직 OR 애뮤 OR 엠넷플러스 OR 엠플 OR 사운드웨이브 OR 사웨 OR 케타포 OR 올리브영 OR 올영) '
+    '(특전 OR 미공포 OR 드볼 OR 럭드 OR 럭키드로우 OR 앨포 OR 팬싸 OR 영통) (포카 OR 포토카드 OR 미공포 OR pc)' + TAIL_Q,
 ]
 CAND = Path(__file__).resolve().parent.parent / "pc_candidates.md"
 STATE = Path(__file__).resolve().parent / "pc_state.json"
