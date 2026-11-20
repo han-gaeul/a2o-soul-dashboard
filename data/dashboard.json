@@ -2428,32 +2428,52 @@
    "credit": "@star_light_4u",
    "programs": [
     {
+     "dj": "박승화",
+     "end": "18:00",
      "name": "가요속으로",
      "note": "신청곡 비중이 커서 특히 추천",
+     "start": "16:00",
      "station": "CBS 음악FM"
     },
     {
+     "dj": "김태균",
+     "end": "16:00",
      "name": "두시탈출 컬투쇼",
+     "start": "14:00",
      "station": "SBS 파워FM"
     },
     {
-     "name": "파워FM (아침)",
+     "dj": "김영철",
+     "end": "09:00",
+     "name": "김영철의 파워FM",
+     "start": "07:00",
      "station": "SBS 파워FM"
     },
     {
+     "dj": "폴킴",
+     "end": "14:00",
      "name": "가요광장",
+     "start": "12:00",
      "station": "KBS 쿨FM"
     },
     {
+     "dj": "가비",
+     "end": "16:00",
      "name": "슈퍼라디오",
+     "start": "14:00",
      "station": "KBS 쿨FM"
     },
     {
+     "dj": "오마이걸 효정",
+     "end": "22:00",
      "name": "볼륨을 높여요",
+     "start": "20:00",
      "station": "KBS 쿨FM"
     },
     {
+     "end": "09:00",
      "name": "굿모닝FM",
+     "start": "07:00",
      "station": "MBC FM4U"
     }
    ],
