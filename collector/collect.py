@@ -392,12 +392,23 @@ def photo_feed(cfg, registry, store, limit=600):
     # 음방·방송사 공식 계정 사진 (account: show, 출처는 계정 이름)
     for pid, post in ((store.get("x_show_photos") or {}).get("posts") or {}).items():
         text = (post.get("caption") or "").strip()
+        if not show_photo_ok(cfg, post):  # 투표 앱 홍보·라인업·이벤트 이미지는 멤버 사진이 아님
+            continue
         for i, src in enumerate(post.get("images") or []):
             out.append({"src": src, "url": post.get("permalink"), "at": kst_datetime(post.get("timestamp")), "account": "show",
                         "by": post.get("author_name") or post.get("author"), "members": detect_members(cfg, text),
                         "text": text.split("\n")[0][:80], "n": i})
     out.sort(key=lambda x: (x["at"], -x["n"]), reverse=True)
     return out[:limit]
+
+
+SHOW_PHOTO_SKIP = re.compile(r"라인업|LINE-?UP|Cheer\s*Up|응원\s*(메시지|메세지|광고)|이벤트|리워드|EVENT|REWARD|MESSAGE|광고|투표|VOTE|VOTING|순위|RANKING|중간\s*집계", re.I)
+
+
+def show_photo_ok(cfg, post):
+    """음방 공식 사진으로 쓸 글인지: 투표 앱 계정(홍보 이미지 위주)·라인업·응원/이벤트 글은 빼기."""
+    return (post.get("author") or "").lower() not in {u.lower() for u in cfg.get("x_vote_accounts") or []} \
+        and not SHOW_PHOTO_SKIP.search(post.get("caption") or "")
 
 
 NOTICE_KIND = [("place", re.compile(r"^\s*\[📍\]|인원 체크")),
@@ -1276,8 +1287,7 @@ def collect(cfg, rescan=False):
                 n_new = 0
                 for p_ in got:
                     official = p_.get("verified_type") in ("business", "government") or p_["author"].lower() in known
-                    if official and p_.get("images") and not p_.get("video") and A2O_MENTION.search(p_["caption"]) \
-                            and not re.search(r"투표|VOTE|VOTING|순위|RANKING|중간\s*집계", p_["caption"], re.I):
+                    if official and p_.get("images") and not p_.get("video") and A2O_MENTION.search(p_["caption"]) and show_photo_ok(cfg, p_):
                         sposts[p_["tweet_id"]] = {k: p_.get(k) for k in ("caption", "timestamp", "permalink", "author", "author_name", "images")}
                         n_new += 1
                 cut = (now - timedelta(days=60)).isoformat()
