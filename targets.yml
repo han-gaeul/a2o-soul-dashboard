@@ -170,12 +170,9 @@ x_media:
   - { handle: ellekorea, name: ELLE Korea }
   - { handle: wkorea, name: W Korea }
   - { handle: allurekorea, name: Allure Korea }
-  - { handle: esquirekorea, name: Esquire Korea }
   - { handle: GQKorea, name: GQ Korea }
-  - { handle: harpersbazaarkr, name: Harper's BAZAAR Korea }
   - { handle: VogueKorea, name: VOGUE Korea }
   - { handle: marieclairekr, name: marie claire Korea }
-  - { handle: cosmopolitan_kr, name: COSMOPOLITAN Korea }
 
 x_vote_accounts:
   - BIGCChoice       # 빅크 초이스 (더쇼)
