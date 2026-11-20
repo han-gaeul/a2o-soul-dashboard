@@ -27,7 +27,9 @@ STORES = {"APPLEMUSIC": "Apple Music", "APPLE MUSIC": "Apple Music", "MUSIC PLAN
 KINDS = {"PHOTOBOOK": "Photobook", "PB": "Photobook", "CARABINER": "Carabiner", "FANSIGN": "Fansign",
          "VIDEOCALL": "Videocall", "VC": "Videocall", "FS": "Fansign"}
 GROUP = {"CARABINER": ("앨범", "CARABINER Ver."), "BROADCAST-SUPERSTAR": ("방송", "SUPERSTAR"),
-         "BROADCAST-DITD": ("방송", "Dancing in the Dark"), "OLIVEYOUNG": ("럭키드로우", "Olive Young")}
+         "BROADCAST-DITD": ("방송", "Dancing in the Dark"), "OLIVEYOUNG": ("럭키드로우", "Olive Young"),
+         "LD-APPLEMUSIC": ("럭키드로우", "Apple Music")}
+# 판매처 단체 템플릿 'POB-<판매처>' (예: SUPERSTAR_POB-NEMOZ) → 예판 특전. 카드가 30장이면 앞 15장 A, 뒤 15장 B 버전
 
 
 def cards(img):
@@ -89,14 +91,21 @@ def main(src):
         stem = unicodedata.normalize("NFC", f.stem).upper()
         g = next((k for k in GROUP if k in stem.replace("_", "-").replace(" ", "-")
                   or k.replace("-", "") in stem.replace("_", "").replace("-", "")), None)
-        if not g:
+        pob = re.search(r"POB-([A-Z0-9 ]+)", stem.replace("_", "-"))
+        store = pob and next((v for k, v in STORES.items() if k.replace(" ", "") == pob.group(1).replace(" ", "")), None)
+        if not g and not store:
             continue
         img = Image.open(f).convert("RGB")
         cs, _ = cards(img)
         print(f.name, len(cs))
-        for c, member in zip(cs, MEMBERS):
-            if not c[4]:
-                save(img, c, *GROUP[g], member, seen)
+        if g:
+            sets = [GROUP[g]]
+        else:
+            sets = [("예판 특전", f"{store} {ab}") for ab in "AB"] if len(cs) >= 2 * len(MEMBERS) else [("예판 특전", store)]
+        for i, (version, label) in enumerate(sets):
+            for c, member in zip(cs[i * len(MEMBERS):(i + 1) * len(MEMBERS)], MEMBERS):
+                if not c[4]:
+                    save(img, c, version, label, member, seen)
     for f in files:
         stem = unicodedata.normalize("NFC", f.stem).upper()
         member = next((m for m in MEMBERS if stem.endswith(m) or stem.endswith(m.replace("-", ""))), None)

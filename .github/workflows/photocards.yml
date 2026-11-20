@@ -44,9 +44,11 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           NUM=$(gh issue list --state open --search "in:title 포카 후보" --json number --jq '.[0].number')
-          if [ -n "$NUM" ]; then gh issue comment "$NUM" --body-file pc_candidates.md
-          else gh issue create --title "📸 포카 후보 (X 검색)" --body-file pc_candidates.md; fi
-          rm -f pc_candidates.md
+          if [ -z "$NUM" ]; then NUM=$(gh issue create --title "📸 포카 후보 (X 검색)" --body "X 검색으로 찾은 포카 글을 댓글로 모아요." | grep -o '[0-9]*$'); fi
+          for f in pc_candidates.md pc_candidates_*.md; do  # 100개씩 나눈 댓글 전부
+            [ -f "$f" ] && gh issue comment "$NUM" --body-file "$f" && sleep 2
+          done
+          rm -f pc_candidates*.md
       - name: Open PR or save state
         env:
           GH_TOKEN: ${{ github.token }}
