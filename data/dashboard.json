@@ -2424,6 +2424,96 @@
  },
  "howto": {
   "checked": "2026-11-19",
+  "radio": {
+   "credit": "@star_light_4u",
+   "programs": [
+    {
+     "name": "가요속으로",
+     "note": "신청곡 비중이 커서 특히 추천",
+     "station": "CBS 음악FM"
+    },
+    {
+     "name": "두시탈출 컬투쇼",
+     "station": "SBS 파워FM"
+    },
+    {
+     "name": "파워FM (아침)",
+     "station": "SBS 파워FM"
+    },
+    {
+     "name": "가요광장",
+     "station": "KBS 쿨FM"
+    },
+    {
+     "name": "슈퍼라디오",
+     "station": "KBS 쿨FM"
+    },
+    {
+     "name": "볼륨을 높여요",
+     "station": "KBS 쿨FM"
+    },
+    {
+     "name": "굿모닝FM",
+     "station": "MBC FM4U"
+    }
+   ],
+   "situations": [
+    {
+     "label": "출근·등교길",
+     "line": "출근길(등교길)에 이 노래 들으면 하루가 가벼워져요. 오늘도 힘내라고 같이 들어요!"
+    },
+    {
+     "label": "공부·일하는 중",
+     "line": "요즘 시험(일) 때문에 지쳤는데 이 노래 들으면서 버티고 있어요. 저처럼 힘든 분들께 들려드리고 싶어요."
+    },
+    {
+     "label": "퇴근·하교길",
+     "line": "오늘 하루 고생한 저한테 주는 선물로 이 노래 신청해요. 모두 수고 많으셨어요!"
+    },
+    {
+     "label": "운동·산책",
+     "line": "요즘 산책(운동)할 때 꼭 듣는 노래예요. 신나서 발걸음이 빨라져요!"
+    },
+    {
+     "label": "잠들기 전",
+     "line": "잠들기 전에 이 노래 들으면 마음이 편해져요. 오늘 밤 다 같이 들어요."
+    },
+    {
+     "label": "그냥 좋아서",
+     "line": "우연히 듣고 계속 반복 중인 노래예요. 아직 모르는 분들도 꼭 한번 들어 보셨으면 해요!"
+    }
+   ],
+   "songs": [
+    "Dancing in the Dark",
+    "Superstar",
+    "While We're Young",
+    "Very First Love",
+    "Moonlight Shadow"
+   ],
+   "stations": [
+    {
+     "app": "SBS 고릴라",
+     "name": "SBS 파워FM",
+     "sms": "#1077"
+    },
+    {
+     "app": "KBS 콩",
+     "name": "KBS 쿨FM",
+     "sms": "#8910"
+    },
+    {
+     "app": "MBC 미니",
+     "name": "MBC FM4U",
+     "sms": "#8000"
+    },
+    {
+     "app": "CBS 레인보우",
+     "ios": "https://apps.apple.com/app/id432866707",
+     "name": "CBS 음악FM",
+     "sms": "#9390"
+    }
+   ]
+  },
   "streaming": [
    {
     "global": true,
@@ -13165,6 +13255,15 @@
    "th": "สั่งรวม·สั่งจำนวนมาก",
    "zh": "团购·批量购买"
   },
+  "공부·일하는 중": {
+   "en": "Studying / working",
+   "es": "Estudiando / trabajando",
+   "id": "Sedang belajar / kerja",
+   "ja": "勉強・仕事中",
+   "pt": "Estudando / trabalhando",
+   "th": "ระหว่างเรียน/ทำงาน",
+   "zh": "学习·工作中"
+  },
   "공식 정보는 여기서": {
    "en": "Where to find official info",
    "es": "Dónde ver la info oficial",
@@ -13218,6 +13317,15 @@
    "pt": "Procuro",
    "th": "ตามหา",
    "zh": "求"
+  },
+  "그냥 좋아서": {
+   "en": "Just because I love it",
+   "es": "Simplemente me encanta",
+   "id": "Suka aja",
+   "ja": "ただ好きだから",
+   "pt": "Só porque amo",
+   "th": "ชอบเฉยๆ",
+   "zh": "就是喜欢"
   },
   "그런데도 무언가 비어 있다고 느낀 이들은, 사람을 살아 있게 하는 감정과 에너지 — 기쁨·사랑·설렘·열정, 곧 '소울(SOUL)'을 찾아 지구로 떠나요.": {
    "en": "Still feeling something missing, they set off for Earth to find the emotions and energy that make people feel alive — joy, love, excitement and passion: 'SOUL'.",
@@ -14438,6 +14546,15 @@
    "th": "รายการที่เหมาะกับการขอเพลง",
    "zh": "适合点歌的节目"
   },
+  "신청곡 비중이 커서 특히 추천": {
+   "en": "Plays lots of listener requests — highly recommended",
+   "es": "Pone muchas peticiones — muy recomendado",
+   "id": "Banyak memutar request — sangat disarankan",
+   "ja": "リクエスト曲が多く特におすすめ",
+   "pt": "Toca muitos pedidos — muito recomendado",
+   "th": "เปิดเพลงที่ขอเยอะ แนะนำมาก",
+   "zh": "点歌比重大，特别推荐"
+  },
   "실물 앨범 2026-11-10 출시": {
    "en": "Physical album released Nov 10, 2026",
    "es": "Álbum físico a la venta el 10 de noviembre de 2026",
@@ -14773,6 +14890,15 @@
    "pt": "ALLMD",
    "th": "ALLMD",
    "zh": "ALLMD"
+  },
+  "운동·산책": {
+   "en": "Workout / walk",
+   "es": "Ejercicio / paseo",
+   "id": "Olahraga / jalan-jalan",
+   "ja": "運動・散歩",
+   "pt": "Treino / caminhada",
+   "th": "ออกกำลังกาย/เดินเล่น",
+   "zh": "运动·散步"
   },
   "월 18:00": {
    "en": "Mon 18:00",
@@ -15158,6 +15284,15 @@
    "th": "คำติดปากคือ \"Lit!\"",
    "zh": "口头禅是“Lit!”"
   },
+  "잠들기 전": {
+   "en": "Before bed",
+   "es": "Antes de dormir",
+   "id": "Sebelum tidur",
+   "ja": "寝る前",
+   "pt": "Antes de dormir",
+   "th": "ก่อนนอน",
+   "zh": "睡前"
+  },
   "재생목록은 공식 채널 영상 위주로": {
    "en": "Build playlists mainly from official channel videos",
    "es": "Arma listas sobre todo con videos de canales oficiales",
@@ -15349,6 +15484,15 @@
    "th": "สายกีฬา ชอบฟุตบอลและบาสเกตบอล",
    "zh": "运动派，喜欢足球和篮球"
   },
+  "출근·등교길": {
+   "en": "Commute to work/school",
+   "es": "Camino al trabajo/escuela",
+   "id": "Berangkat kerja/sekolah",
+   "ja": "通勤・通学",
+   "pt": "Indo ao trabalho/escola",
+   "th": "ระหว่างไปทำงาน/โรงเรียน",
+   "zh": "上班·上学路上"
+  },
   "출근길·퇴근길": {
    "en": "Commute",
    "es": "Llegadas y salidas",
@@ -15480,6 +15624,15 @@
    "pt": "Tomate",
    "th": "มะเขือเทศ",
    "zh": "番茄"
+  },
+  "퇴근·하교길": {
+   "en": "Heading home",
+   "es": "De regreso a casa",
+   "id": "Pulang kerja/sekolah",
+   "ja": "帰り道",
+   "pt": "Voltando para casa",
+   "th": "ระหว่างกลับบ้าน",
+   "zh": "下班·放学路上"
   },
   "투표 기간은 응원 탭 '투표'에서 확인 (마감 임박하면 빨갛게 표시)": {
    "en": "Check voting periods under 'Votes' in the Support tab (shown in red when closing soon)",
