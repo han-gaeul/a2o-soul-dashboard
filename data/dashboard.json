@@ -13073,6 +13073,15 @@
    "vi": "D AWARDS",
    "zh": "D AWARDS"
   },
+  "라디오": {
+   "en": "Radio",
+   "es": "Radio",
+   "id": "Radio",
+   "ja": "ラジオ",
+   "pt": "Rádio",
+   "th": "วิทยุ",
+   "zh": "电台"
+  },
   "라디오 신청곡 (가이드 도움 @star_light_4u)": {
    "en": "Radio song requests (guide help: @star_light_4u)",
    "es": "Pedir canciones en la radio (guía con ayuda de @star_light_4u)",
@@ -14859,6 +14868,15 @@
    "th": "สายกีฬา ชอบฟุตบอลและบาสเกตบอล",
    "zh": "运动派，喜欢足球和篮球"
   },
+  "출근길·퇴근길": {
+   "en": "Commute",
+   "es": "Llegadas y salidas",
+   "id": "Commute",
+   "ja": "出勤・退勤",
+   "pt": "Chegadas e saídas",
+   "th": "เดินทางไป-กลับงาน",
+   "zh": "上下班路透"
+  },
   "출석·광고·미션으로 투표권을 미리 모아 두고, 투표 기간에 A2O SOUL에 투표": {
    "en": "Collect votes in advance through check-ins, ads and missions, then vote for A2O SOUL during the voting period",
    "es": "Junta votos antes con asistencias, anuncios y misiones, y vota por A2O SOUL durante el periodo",
@@ -15412,6 +15430,15 @@
    "pt": "💘 Artista HIGHER Pick de novembro — parcial, D-13",
    "th": "💘 ศิลปิน HIGHER Pick เดือนพฤศจิกายน — นับคะแนนกลาง D-13",
    "zh": "💘 11月HIGHER PICK艺人 中间统计 D-13"
+  },
+  "📻 라디오": {
+   "en": "📻 Radio",
+   "es": "📻 Radio",
+   "id": "📻 Radio",
+   "ja": "📻 ラジオ",
+   "pt": "📻 Rádio",
+   "th": "📻 วิทยุ",
+   "zh": "📻 电台"
   },
   "🫂 척하면 척! 팀워크가 돋보이는 아이돌 그룹은? 투표 OPEN!": {
    "en": "🫂 In Sync! Which K-pop group shows the best teamwork? Vote OPEN!",
