@@ -1077,6 +1077,27 @@
    "permalink": "https://x.com/A2O_SOUL/status/2123395867646251056",
    "timestamp": "2026-11-19T12:40:00.000Z"
   },
+  "x:2123629694474199269": {
+   "caption": "[📍]\n261120 (금) A2O SOUL KBS 뮤직뱅크 사전녹화에 참여하시는 분은 인원 체크 시간에 맞춰 사진 속 장소로 모여주시기 바랍니다🪩\n\n인원 체크 시작 시간 - PM 1:20 (KST)\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2O_SOUL/status/2123629694474199269/photo/1",
+   "excerpt": "[📍]\n261120 (금) A2O SOUL KBS 뮤직뱅크 사전녹화에 참여하시는 분은 인원 체크 시간에 맞춰 사진 속 장소로 모여주시기 바랍니다🪩\n\n인원 체크 시작 시간 - PM 1:20 (KST)\n\n#A2O #A2OSOUL\n#Dancing_in_th",
+   "images": [
+    "https://pbs.twimg.com/media/HXil8ita0AARJZJ.jpg"
+   ],
+   "items": [
+    {
+     "confidence": 0.85,
+     "date": "2026-11-20",
+     "end_date": null,
+     "kind": "music_show",
+     "place": null,
+     "time": null,
+     "title": "뮤직뱅크 출연",
+     "url": null
+    }
+   ],
+   "permalink": "https://x.com/A2O_SOUL/status/2123629694474199269",
+   "timestamp": "2026-11-20T04:09:08.000Z"
+  },
   "xf:2121586007254708290": {
    "caption": "[📸] 261114 @A2O_SOUL \n\n2026.11.14\nMBC Show! Music Core\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2OSOULBASE/status/2121586007254708290/photo/1",
    "excerpt": "[📸] 261114 @A2O_SOUL \n\n2026.11.14\nMBC Show! Music Core\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2OSOULBASE/status/2121586007254708",
@@ -2330,7 +2351,7 @@
  "x": {
   "A2O_SOUL": {
    "id": "1986498790229262336",
-   "since_id": "2123395867646251056"
+   "since_id": "2123629694474199269"
   }
  },
  "x_fans": {
