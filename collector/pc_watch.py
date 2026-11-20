@@ -108,8 +108,11 @@ def search_candidates(state):
         for p in got:
             found.setdefault(p["tweet_id"], p)
     state["search_v"] = 3
+    # 이미 이슈에 올린(확인한) 글은 다시 안 올림 — 최근 3000개 기억
+    seen = set(state.get("pc_seen") or [])
     posts = sorted(found.values(), key=lambda p: int(p["tweet_id"]), reverse=True)
-    posts = [p for p in posts if p.get("images")]
+    posts = [p for p in posts if p.get("images") and p["tweet_id"] not in seen]
+    state["pc_seen"] = (list(state.get("pc_seen") or []) + [p["tweet_id"] for p in posts])[-3000:]
     print(f"[포카 검색] 후보 {len(posts)}개")
     if not posts:
         return None
