@@ -122,7 +122,21 @@ def candidates(dash, site, now):
     vids = [v for v in dash.get("videos") or [] if v.get("category") != "fancam" and v.get("published_at")
             and now - datetime.fromisoformat(v["published_at"].replace("Z", "+00:00")) < timedelta(hours=3)]
     for v in vids:  # 새 MV·무대 영상 (직캠은 많아서 뺌) — 같은 시간대 여러 개면 하나로 묶음
-        out.append((f"vd|{v['id']}", "video", "video", {"title": v["title"][:90], "url": f"https://youtu.be/{v['id']}"}))
+        out.append((f"vd|{v['id']}", "video", "video", {"title": v["title"][:90], "url": f"https://youtu.be/{v['id']}",
+                                                         "members": _members_in(v, dash.get("members") or [])}))
+    return out
+
+
+def _members_in(v, members):
+    """영상에 나온 멤버 [(영문, 한글)] — member 필드 + 제목 속 이름 (한 글자 한글 이름은 오탐이 많아 필드로만)."""
+    title = v.get("title") or ""
+    out = []
+    for m in members:
+        en, ko = m["name"], m.get("ko") or ""
+        hit = v.get("member") == en or re.search(rf"(?<![A-Za-z]){re.escape(en)}(?![A-Za-z])", title) \
+            or (len(ko) >= 2 and ko in title)
+        if hit:
+            out.append((en, ko))
     return out
 
 
@@ -173,7 +187,11 @@ def tweet_text(kind, data):
     title, body, url = compose(kind, data, "ko")
     if kind == "birthday":
         body = f"{data['ko']}의 생일을 함께 축하해요 💜 #Happy{data['name'].replace(' ', '')}Day"
-    lines = [title, body, "", f"👉 {url}" if url else "", "", TAGS]
+    tags = TAGS
+    mems = data.get("members") or ([(data["name"], data.get("ko"))] if kind == "birthday" else [])
+    for en, ko in mems:  # 멤버 개인 게시글이면 이름 해시태그 (한글·영어)
+        tags += f" #{ko} #{re.sub(r'[^A-Za-z0-9]', '', en)}" if ko else f" #{re.sub(r'[^A-Za-z0-9]', '', en)}"
+    lines = [title, body, "", f"👉 {url}" if url else "", "", tags]
     return re.sub(r"\n{3,}", "\n\n", "\n".join(x for x in lines if x is not None)).strip()
 
 
