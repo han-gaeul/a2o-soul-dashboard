@@ -11,7 +11,16 @@
 <link rel="stylesheet" href="style.css">
 <style>
   body { background: var(--bg); }
-  .tw { max-width: 600px; margin: 0 auto; padding: 20px 16px 56px; display: grid; gap: 16px; }
+  .tw { max-width: 1180px; margin: 0 auto; padding: 20px 16px 56px; display: grid; gap: 16px; }
+  /* 넓은 화면: 위는 계정·알림 2칸, 초안은 여러 칸으로 (세로로 길어지지 않게) */
+  .grid-c { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 12px; align-items: start; }
+  @media (min-width: 760px) {
+    #status { grid-template-columns: 1fr 1fr; } #status .sep { display: none; }
+    #status .stat + .sep + .stat { border-left: 1px solid var(--line); padding-left: 16px; }
+    #login { max-width: 560px; }
+  }
+  .past-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+  .past-grid .li { border-right: 1px solid var(--line); }
   .tw-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
   .tw h1 { font-size: 22px; margin: 0; }
   .tw .sub { margin: 4px 0 0; font-size: 13px; color: var(--muted); }
@@ -252,13 +261,13 @@
       const h = document.createElement("div"); h.className = "sec-h";
       h.innerHTML = `<h2>올릴 초안</h2><span class="badge">${pend.length}</span>`;
       const out = [chips, h];
-      if (pend.length) out.push(...pend.map(card));
+      if (pend.length) { const g = document.createElement("div"); g.className = "grid-c"; g.append(...pend.map(card)); out.push(g); }
       else { const e = document.createElement("div"); e.className = "empty"; e.textContent = "지금은 올릴 초안이 없어요 🙌"; out.push(e); }
       if (past.length) {
         const det = document.createElement("details"); det.className = "past";
         det.open = !!tab;  // 탭을 고르면 지난 초안도 펼쳐서
         det.innerHTML = `<summary>지난 초안 <span class="badge">${past.length}</span></summary>`;
-        det.append(...past.map(line));
+        const pg = document.createElement("div"); pg.className = "past-grid"; pg.append(...past.map(line)); det.append(pg);
         out.push(det);
       }
       $("list").replaceChildren(...out);
