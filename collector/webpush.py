@@ -124,6 +124,12 @@ def candidates(dash, site, now):
     for v in vids:  # 새 MV·무대 영상 (직캠은 많아서 뺌) — 같은 시간대 여러 개면 하나로 묶음
         out.append((f"vd|{v['id']}", "video", "video", {"title": v["title"][:90], "url": f"https://youtu.be/{v['id']}",
                                                          "members": _members_in(v, dash.get("members") or [])}))
+    for x in dash.get("media_posts") or []:  # 매체·콘텐츠 계정 새 글 (3시간 안) — 트윗 초안만, 푸시는 안 보냄
+        if x.get("at") and timedelta(0) <= now - _kst(x["at"]) < timedelta(hours=3):
+            head = next((ln for ln in (x.get("text") or "").splitlines() if re.sub(r"#\S+|https?://\S+", "", ln).strip()), "")
+            head = re.sub(r"\s*https?://\S+", "", head).strip()[:100]
+            out.append((f"md|{x['url']}", "media", "media", {"name": x.get("name") or x.get("handle") or "", "title": head, "url": x["url"],
+                                                            "members": _members_in({"title": x.get("text") or ""}, dash.get("members") or [])}))
     return out
 
 
@@ -184,7 +190,10 @@ TAGS = "#A2OSOUL #에이투오소울"
 
 def tweet_text(kind, data):
     """알림 내용 → X 글 초안 (한국어, 링크·해시태그 포함). 관리자가 tweet.html에서 고쳐서 올릴 수 있음."""
-    title, body, url = compose(kind, data, "ko")
+    if kind == "media":  # 매체 글은 인용(링크)로 — X가 원문을 카드로 붙여 줌
+        title, body, url = f"📸 {data['name']} 새 콘텐츠", data["title"], data["url"]
+    else:
+        title, body, url = compose(kind, data, "ko")
     if kind == "birthday":
         body = f"{data['ko']}의 생일을 함께 축하해요 💜 #Happy{data['name'].replace(' ', '')}Day"
     tags = TAGS
@@ -240,7 +249,7 @@ def run(dash, cfg, state, site="https://a2osoul-tracker.com/"):
     if added:
         print(f"[트윗] 초안 {added}개")
     videos = [c for c in new if c[2] == "video"]
-    msgs = [c for c in new if c[2] != "video"] + ([videos[0]] if videos else [])
+    msgs = [c for c in new if c[2] not in ("video", "media")] + ([videos[0]] if videos else [])  # media는 초안 전용
     dead, ok = [], 0
     for s in subs:
         if added and "tweet" in (s.get("topics") or []):  # 관리자: 올릴 트윗 초안이 생겼다고 알림

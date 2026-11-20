@@ -50,6 +50,8 @@
   .meta { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--muted); }
   .kind { font-weight: 800; color: var(--text); font-size: 13px; }
   .cnt.over { color: #c81e43; font-weight: 700; }
+  .rt-body { white-space: pre-line; font-size: 15px; line-height: 1.55; padding: 10px 12px; border-left: 3px solid var(--accent); background: var(--bg); border-radius: 8px; }
+  .meta a { font-weight: 700; color: var(--accent); text-decoration: none; }
   .acts { display: flex; gap: 8px; justify-content: flex-end; }
   .empty { text-align: center; color: var(--muted); font-size: 14px; padding: 22px 0; background: var(--card); border: 1px dashed var(--line); border-radius: 16px; }
   /* 지난 초안: 한 줄씩 */
@@ -117,7 +119,7 @@
     return n;
   };
   const KIND = { vote: "🗳 투표", show: "📺 음방·라이브", nominee: "🏆 1위 후보", chart: "📈 차트", views: "🎉 조회수", subs: "🎉 구독자",
-    birthday: "🎂 생일", video: "🎬 새 영상", prerec: "🎙 사녹" };
+    birthday: "🎂 생일", video: "🎬 새 영상", prerec: "🎙 사녹", media: "📸 매체" };
   const when = (ms) => new Date(ms).toLocaleString("ko-KR", { month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit", timeZone: "Asia/Seoul" });
 
   const meta = (d, right) => {
@@ -127,8 +129,34 @@
     m.append(l, right);
     return m;
   };
+  // 매체 글: 새 글 대신 원문 리트윗 (버튼 한 번)
+  const rtCard = (d) => {
+    const ref = (String(d.key || d.text).match(/status\/(\d+)/) || [])[1];
+    const body = document.createElement("div"); body.className = "rt-body";
+    body.textContent = d.text.split("\n").filter((x) => x.trim() && !/^#|^👉/.test(x.trim())).join("\n");
+    const open = document.createElement("a"); open.href = `https://x.com/i/status/${ref}`; open.target = "_blank"; open.rel = "noopener"; open.textContent = "원문 보기 ↗";
+    const go = document.createElement("button"); go.type = "button"; go.className = "go"; go.textContent = "🔁 리트윗";
+    const skip = document.createElement("button"); skip.type = "button"; skip.textContent = "버리기";
+    let sure = false;
+    go.onclick = async () => {
+      if (!sure) { sure = true; go.classList.add("sure"); go.textContent = "한 번 더 누르면 리트윗"; setTimeout(() => { sure = false; go.classList.remove("sure"); go.textContent = "🔁 리트윗"; }, 4000); return; }
+      go.disabled = skip.disabled = true;
+      try { await call("/tweet/retweet", { id: d.id }); msg("🔁 리트윗했어요"); load(); }
+      catch (e) {
+        if (/not found|404/.test(e.message)) { window.open(`https://x.com/intent/retweet?tweet_id=${ref}`, "_blank", "noopener"); msg("워커가 아직 예전 버전이라 X 앱에서 리트윗을 열었어요"); }
+        else msg(e.message, true);
+        go.disabled = skip.disabled = false;
+      }
+    };
+    skip.onclick = async () => { skip.disabled = true; try { await call("/tweet/skip", { id: d.id }); load(); } catch (e) { msg(e.message, true); skip.disabled = false; } };
+    const acts = document.createElement("div"); acts.className = "acts"; acts.append(skip, go);
+    const box = document.createElement("div"); box.className = "card";
+    box.append(meta(d, open), body, acts);
+    return box;
+  };
   // 올릴 초안: 편집 카드
   const card = (d) => {
+    if (d.kind === "media") return rtCard(d);
     const ta = document.createElement("textarea"); ta.value = d.text;
     const cnt = document.createElement("span"); cnt.className = "cnt";
     const fit = () => { ta.style.height = "auto"; ta.style.height = ta.scrollHeight + 2 + "px"; }; // 글 길이에 맞춰 높이
@@ -153,7 +181,7 @@
   // 지난 초안: 한 줄
   const line = (d) => {
     const li = document.createElement("div"); li.className = "li";
-    const st = document.createElement("span"); st.className = "st"; st.textContent = d.status === "posted" ? "✅" : "🗑";
+    const st = document.createElement("span"); st.className = "st"; st.textContent = d.status === "posted" ? (d.retweet ? "🔁" : "✅") : "🗑";
     const tx = document.createElement("span"); tx.className = "txt"; tx.textContent = d.text.split("\n").filter((x) => x.trim()).slice(0, 2).join(" · ");
     li.append(st, tx);
     if (d.status === "posted" && d.tweet) {

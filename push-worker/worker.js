@@ -408,6 +408,24 @@ async function postTweet(env, text) {
   return j.data && j.data.id;
 }
 
+// 리트윗: 매체 글 초안은 새 글 대신 원문을 그대로 리트윗 (트래커 계정 = 연결된 계정)
+async function xAuth(env, acct, method, url) {
+  return acct.v === 2 ? `Bearer ${(await x2Fresh(env, acct)).access}` : await oauthHeader(env, method, url, { token: acct.token, tokenSecret: acct.secret });
+}
+async function retweet(env, tweetId) {
+  const acct = await xAccount(env);
+  if (!acct) throw new Error("연결된 X 계정이 없어요");
+  const meUrl = "https://api.x.com/2/users/me";
+  const me = await (await fetch(meUrl, { headers: { Authorization: await xAuth(env, acct, "GET", meUrl) } })).json().catch(() => ({}));
+  if (!me.data || !me.data.id) throw new Error("내 계정 정보를 못 읽었어요");
+  const url = `https://api.x.com/2/users/${me.data.id}/retweets`;
+  const r = await fetch(url, { method: "POST", headers: { Authorization: await xAuth(env, acct, "POST", url), "Content-Type": "application/json" },
+    body: JSON.stringify({ tweet_id: tweetId }) });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error((j.detail || j.title || JSON.stringify(j)).slice(0, 200) || String(r.status));
+  return tweetId;
+}
+
 // X 계정 연결 (OAuth 1.0a 3-legged): /tweet/connect → X 로그인·허용 → /tweet/callback → 토큰을 KV에 저장
 async function xConnect(env, origin) {
   const url = "https://api.x.com/oauth/request_token";
@@ -500,6 +518,18 @@ async function tweets(req, env, url) {
   if (p === "/tweet/skip") {
     await env.SUBS.put(k, JSON.stringify({ ...d, status: "skipped" }), { expirationTtl: 86400 });
     return json(req, { ok: true });
+  }
+  if (p === "/tweet/retweet") {
+    const ref = (String(d.key).match(/status\/(\d+)/) || [])[1];
+    if (!ref) return json(req, { error: "리트윗할 원문을 못 찾았어요" }, 400);
+    if (d.status === "posted") return json(req, { error: "이미 처리한 초안이에요" }, 409);
+    try {
+      await retweet(env, ref);
+      await env.SUBS.put(k, JSON.stringify({ ...d, status: "posted", tweet: ref, retweet: true, posted: Date.now() }), { expirationTtl: 3 * 86400 });
+      return json(req, { ok: true, tweet: ref });
+    } catch (e) {
+      return json(req, { error: `리트윗 실패: ${e.message}` }, 502);
+    }
   }
   if (p === "/tweet/post") {
     if (d.status === "posted") return json(req, { error: "이미 올린 글이에요" }, 409);

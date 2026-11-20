@@ -1227,7 +1227,7 @@ def collect(cfg, rescan=False):
                                  lambda c, p_, t_, v=vendor: rules.fansign_items(c, p_, v), limit)
                     if post["id"] in store["posts"]:
                         store["posts"][post["id"]]["vendor"] = vendor
-        # 매체·콘텐츠 계정 — 목록 계정이 A2O SOUL을 언급한 글 (1시간마다, from: 검색이라 읽는 글 수가 적음)
+        # 매체·콘텐츠 계정 — 목록 계정이 A2O SOUL을 언급한 글 (10분마다, from: 검색이라 읽는 글 수가 적음)
         mst = store.setdefault("x_media", {})
         mposts = mst.setdefault("posts", {})
         mcands = mst.setdefault("candidates", {})
@@ -1239,7 +1239,8 @@ def collect(cfg, rescan=False):
                 mst["checked"] = now.isoformat(timespec="minutes")
             except Exception as e:  # noqa: BLE001
                 print(f"[매체] 아이디 확인 실패: {e}")
-        if cfg["x_media"] and (not mst.get("at") or now - datetime.fromisoformat(mst["at"]) >= timedelta(hours=1)):
+        # 매 수집(약 10분마다) — since_id로 새 글만 읽어서 비용 적음. 매체 콘텐츠는 빨리 퍼 나르는 게 중요
+        if cfg["x_media"] and (not mst.get("at") or now - datetime.fromisoformat(mst["at"]) >= timedelta(minutes=8)):
             base = "(\"A2O SOUL\" OR A2OSOUL OR 에이투오소울 OR \"에이투오 소울\") "
             live = [v["handle"] for v in cfg["x_media"] if v["handle"] not in (mst.get("missing") or [])]
             groups, cur = [], []

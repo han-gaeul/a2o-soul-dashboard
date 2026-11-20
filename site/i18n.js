@@ -693,3 +693,18 @@ window.I18N = {
   };
   for (const [l, v] of Object.entries(V)) if (window.I18N[l]) K.forEach((k, i) => { window.I18N[l][k] = v[i]; });
 })();
+
+// 매체·콘텐츠: 10분마다 수집
+(() => {
+  const V = { ko: "방송사·매거진·콘텐츠 채널이 올린 A2O SOUL 글 — 최근 2주, 10분마다 자동으로 모아요",
+    en: "A2O SOUL posts from broadcasters, magazines and content channels — last 2 weeks, updated every 10 minutes",
+    ja: "放送局・雑誌・コンテンツチャンネルのA2O SOUL投稿 — 直近2週間・10分ごとに自動収集",
+    zh: "电视台、杂志、内容频道发布的 A2O SOUL 帖子 — 最近两周，每10分钟自动收集",
+    es: "Publicaciones sobre A2O SOUL de cadenas, revistas y canales — últimas 2 semanas, cada 10 minutos",
+    id: "Postingan A2O SOUL dari stasiun TV, majalah, dan kanal konten — 2 minggu terakhir, diperbarui tiap 10 menit",
+    th: "โพสต์ A2O SOUL จากสถานี นิตยสาร และช่องคอนเทนต์ — 2 สัปดาห์ล่าสุด อัปเดตทุก 10 นาที",
+    pt: "Posts sobre A2O SOUL de emissoras, revistas e canais — últimas 2 semanas, a cada 10 minutos",
+    fil: "Mga post tungkol sa A2O SOUL mula sa broadcasters, magazine at content channels — huling 2 linggo, bawat 10 minuto",
+    vi: "Bài đăng về A2O SOUL từ đài, tạp chí và kênh nội dung — 2 tuần gần đây, cập nhật mỗi 10 phút" };
+  for (const [l, v] of Object.entries(V)) if (window.I18N[l]) window.I18N[l].media_posts_desc = v;
+})();
