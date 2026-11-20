@@ -99,7 +99,8 @@ def candidates(dash, site, now):
         if -timedelta(minutes=30) <= st - now <= timedelta(hours=1, minutes=10):
             live = next((x for x in lives if x.get("show") and x["show"] in (e.get("title") or "")), None)
             out.append((f"ev|{e['date']}|{tm}|{e['title']}", "show", "show",
-                        {"name": e["title"], "t": tm, "url": (live or {}).get("url") or site, "parts": [e["title"]], "tr": tr, "now": now >= st}))
+                        {"name": e["title"], "t": tm, "url": (live or {}).get("url") or site, "parts": [e["title"]], "tr": tr, "now": now >= st,
+                         "credit": e.get("credit") or ""}))
     for c in dash.get("chart_moves") or []:  # 차트 첫 진입·10계단 이상 상승 (입력 후 3시간 안)
         if timedelta(0) <= now - _kst(c["at"]) <= timedelta(hours=3):
             out.append((f"ch|{c['song']}|{c['service']}|{c['at']}", "notice", "chart", {**c, "url": site + "#cheer", "tr": tr}))
@@ -185,28 +186,58 @@ def compose(kind, data, lang, group=None):
     return "A2O SOUL", "", data.get("url")
 
 
-TAGS = "#A2OSOUL #에이투오소울"
+# 트윗 초안 해시태그 — 공식 계정·유통사(STONE MUSIC)가 쓰는 표기에 맞춤
+TAGS = "#A2OSOUL #A2O #에이투오소울 #에투소"
+SONG_TAGS = {"Dancing in the Dark": "#Dancing_in_the_Dark", "SUPERSTAR": "#SUPERSTAR"}  # 글에 곡 이름이 있으면
+ERA_TAGS = "#SUPERSTAR #ZalphaPop"  # 지금 활동(앨범·레이블) — 활동이 바뀌면 고치기
+
+
+def x_weight(s):
+    """X 글자 수: 링크 23, 한글·한자·이모지 2, 나머지 1 (최대 280)."""
+    n = 23 * len(re.findall(r"https?://\S+", s))
+    for ch in re.sub(r"https?://\S+", "", s):
+        c = ord(ch)
+        n += 1 if (c <= 4351 or 8192 <= c <= 8205 or 8208 <= c <= 8223 or 8242 <= c <= 8247) else 2
+    return n
 
 
 def tweet_text(kind, data):
-    """알림 내용 → X 글 초안 (한국어, 링크·해시태그 포함). 관리자가 tweet.html에서 고쳐서 올릴 수 있음."""
-    if kind == "media":  # 매체 글은 인용(링크)로 — X가 원문을 카드로 붙여 줌
+    """알림 내용 → X 글 초안: 한국어 + 영어 한 줄 + 링크 + 해시태그(그룹·곡·활동·멤버). 280자 넘으면 활동 태그 → 영어 줄 순서로 뺌."""
+    en = ""
+    if kind == "media":  # 매체 글은 초안 페이지에서 리트윗 (본문은 미리보기용)
         title, body, url = f"📸 {data['name']} 새 콘텐츠", data["title"], data["url"]
     else:
         title, body, url = compose(kind, data, "ko")
+        t2, b2, _ = compose(kind, data, "en")
+        en = (t2 if b2 == body or not b2 else f"{t2} {b2}").strip() if kind not in ("show",) else ""  # 본문이 원문 그대로면 영어는 제목만
+        if kind in ("views", "subs"):
+            title = title.replace("🎉 ", "🎉 A2O SOUL ", 1) if "A2O SOUL" not in title else title
     if kind == "birthday":
         body = f"{data['ko']}의 생일을 함께 축하해요 💜 #Happy{data['name'].replace(' ', '')}Day"
     tags = TAGS
+    text_all = f"{title} {body} {data.get('name', '')} {data.get('title', '')}"
+    song = " ".join(t for k, t in SONG_TAGS.items() if k.lower() in text_all.lower() and t not in ERA_TAGS)
     mems = data.get("members") or ([(data["name"], data.get("ko"))] if kind == "birthday" else [])
-    for en, ko in mems:  # 멤버 개인 게시글이면 이름 해시태그 (한글·영어)
-        tags += f" #{ko} #{re.sub(r'[^A-Za-z0-9]', '', en)}" if ko else f" #{re.sub(r'[^A-Za-z0-9]', '', en)}"
-    lines = [title, body, "", f"👉 {url}" if url else "", "", tags]
-    return re.sub(r"\n{3,}", "\n\n", "\n".join(x for x in lines if x is not None)).strip()
+    for m_en, m_ko in mems:  # 멤버 개인 게시글이면 이름 해시태그 (한글·영어)
+        tags += f" #{m_ko} #{re.sub(r'[^A-Za-z0-9]', '', m_en)}" if m_ko else f" #{re.sub(r'[^A-Za-z0-9]', '', m_en)}"
+
+    def build(with_en, with_era):
+        tag2 = " ".join(x for x in (song, ERA_TAGS if with_era else "") if x)
+        lines = [title] + ([body] if body else []) + ([en] if with_en and en else []) + ["", f"👉 {url}" if url else "", "", tags, tag2]
+        return re.sub(r"\n{3,}", "\n\n", "\n".join(x for x in lines if x is not None)).strip()
+
+    for opt in ((True, True), (True, False), (False, False)):
+        out = build(*opt)
+        if x_weight(out) <= 280:
+            return out
+    return out
 
 
 def drafts(api, priv, new, site):
     """새 알림 후보 → 트윗 초안을 Worker에 저장. 저장된 개수를 돌려줌."""
-    items = [{"key": key, "kind": kind, "text": tweet_text(kind, data)} for key, topic, kind, data in new if kind not in ("notice",)]
+    # 팬 계정이 주최하는 행사(credit 있음)는 초안 안 만듦 — 그쪽 공지를 리트윗하는 게 맞음
+    items = [{"key": key, "kind": kind, "text": tweet_text(kind, data)} for key, topic, kind, data in new
+             if kind not in ("notice",) and not data.get("credit")]
     if not items:
         return 0
     try:
