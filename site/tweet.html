@@ -11,7 +11,16 @@
 <link rel="stylesheet" href="style.css">
 <style>
   body { background: var(--bg); }
-  .tw { max-width: 600px; margin: 0 auto; padding: 20px 16px 56px; display: grid; gap: 16px; }
+  .tw { max-width: 1180px; margin: 0 auto; padding: 20px 16px 56px; display: grid; gap: 16px; }
+  /* 넓은 화면: 위는 계정·알림 2칸, 초안은 여러 칸으로 (세로로 길어지지 않게) */
+  .grid-c { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 12px; align-items: start; }
+  @media (min-width: 760px) {
+    #status { grid-template-columns: 1fr 1fr; } #status .sep { display: none; }
+    #status .stat + .sep + .stat { border-left: 1px solid var(--line); padding-left: 16px; }
+    #login { max-width: 560px; }
+  }
+  .past-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+  .past-grid .li { border-right: 1px solid var(--line); }
   .tw-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
   .tw h1 { font-size: 22px; margin: 0; }
   .tw .sub { margin: 4px 0 0; font-size: 13px; color: var(--muted); }
@@ -43,6 +52,11 @@
   .msg.err { color: var(--hot); }
   .warn { background: #fff4e5; color: #8a4b00; border-radius: 12px; padding: 10px 12px; font-size: 13px; }
   /* 초안 */
+  .tabs-k { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 2px; scrollbar-width: none; }
+  .tabs-k::-webkit-scrollbar { display: none; }
+  .tabs-k button { flex: none; padding: 7px 12px !important; border-radius: 999px !important; font-size: 13px !important; }
+  .tabs-k button.on { background: var(--accent-bg); border-color: var(--accent-bg); color: #fff; }
+  .tabs-k i { font-style: normal; font-size: 11px; font-weight: 800; background: #c81e43; color: #fff; border-radius: 99px; padding: 1px 6px; margin-left: 2px; }
   .sec-h { display: flex; align-items: baseline; gap: 8px; margin: 4px 2px 0; }
   .sec-h h2 { font-size: 16px; margin: 0; }
   .badge { font-size: 12px; font-weight: 800; padding: 2px 8px; border-radius: 99px; background: var(--chip); color: var(--chip-fg); }
@@ -219,22 +233,44 @@
       $("disconnect").hidden = !j.connected;
       notiState();
       if (!j.ready) { const w = document.createElement("div"); w.className = "warn"; w.textContent = "X 계정이 아직 연결되지 않아서 올리기는 안 돼요 — '연결'을 눌러 올릴 계정으로 로그인해 주세요"; $("warn").append(w); }
-      const ds = (j.drafts || []).sort((a, b) => b.at - a.at);
-      const pend = ds.filter((d) => d.status === "pending"), past = ds.filter((d) => d.status !== "pending");
+      all = (j.drafts || []).sort((a, b) => b.at - a.at);
       msg(back || "");
+      draw();
+    } catch (e) { msg(e.message, true); $("login").hidden = false; }
+  };
+
+  // 종류별 탭 (전체 · 음방 · 영상 · 매체 …) — 고른 탭은 기억
+  let all = [], tab = store.get("tw_tab") || "";
+  const GROUPS = [["", "전체"], ["show", "📺 음방·라이브"], ["video", "🎬 영상"], ["media", "📸 매체"], ["vote", "🗳 투표"],
+    ["record", "🎉 기록", ["views", "subs"]], ["chart", "📈 차트"], ["birthday", "🎂 생일"], ["etc", "기타"]];
+  const known = GROUPS.flatMap(([k, , ks]) => ks || (k ? [k] : []));
+  const inTab = (d, k) => !k || (k === "record" ? ["views", "subs"].includes(d.kind) : k === "etc" ? !known.includes(d.kind) : d.kind === k);
+  const draw = () => {
+    if (!GROUPS.some(([k]) => k === tab) || (tab && !all.some((d) => inTab(d, tab)))) tab = "";
+    const chips = document.createElement("div"); chips.className = "tabs-k";
+    for (const [k, label] of GROUPS) {
+      const n = all.filter((d) => inTab(d, k)).length, np = all.filter((d) => inTab(d, k) && d.status === "pending").length;
+      if (k && !n) continue;
+      const b = document.createElement("button"); b.type = "button"; b.className = k === tab ? "on" : "";
+      b.innerHTML = `${label}${np ? ` <i>${np}</i>` : ""}`;
+      b.onclick = () => { tab = k; store.set("tw_tab", k); draw(); };
+      chips.append(b);
+    }
+    const ds = all.filter((d) => inTab(d, tab));
+    const pend = ds.filter((d) => d.status === "pending"), past = ds.filter((d) => d.status !== "pending");
       const h = document.createElement("div"); h.className = "sec-h";
       h.innerHTML = `<h2>올릴 초안</h2><span class="badge">${pend.length}</span>`;
-      const out = [h];
-      if (pend.length) out.push(...pend.map(card));
+      const out = [chips, h];
+      if (pend.length) { const g = document.createElement("div"); g.className = "grid-c"; g.append(...pend.map(card)); out.push(g); }
       else { const e = document.createElement("div"); e.className = "empty"; e.textContent = "지금은 올릴 초안이 없어요 🙌"; out.push(e); }
       if (past.length) {
         const det = document.createElement("details"); det.className = "past";
+        det.open = !!tab;  // 탭을 고르면 지난 초안도 펼쳐서
         det.innerHTML = `<summary>지난 초안 <span class="badge">${past.length}</span></summary>`;
-        det.append(...past.map(line));
+        const pg = document.createElement("div"); pg.className = "past-grid"; pg.append(...past.map(line)); det.append(pg);
         out.push(det);
       }
       $("list").replaceChildren(...out);
-    } catch (e) { msg(e.message, true); $("login").hidden = false; }
   };
 
   const keyBytes = (b64) => { const s = atob((b64 + "===".slice((b64.length + 3) % 4)).replace(/-/g, "+").replace(/_/g, "/")); return Uint8Array.from(s, (c) => c.charCodeAt(0)); };
