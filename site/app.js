@@ -8,6 +8,10 @@ const pref = {
 };
 const LANG = (() => {
   try {
+    const q = new URLSearchParams(location.search).get("lang");  // 공유 링크 ?lang=en 등
+    if (LANGS.includes(q)) { localStorage.setItem("lang", q); return q; }
+  } catch (_) { /* 무시 */ }
+  try {
     const saved = localStorage.getItem("lang");
     if (LANGS.includes(saved)) return saved;
   } catch (_) { /* 저장소 막힘 */ }
