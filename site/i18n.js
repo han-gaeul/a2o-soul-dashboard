@@ -726,3 +726,20 @@ window.I18N = {
   };
   for (const [l, v] of Object.entries(V)) if (window.I18N[l]) K.forEach((k, i) => { window.I18N[l][k] = v[i]; });
 })();
+
+// 차트: 일간 스트리밍 수
+(() => {
+  const V = { ko: "하루 {n}회", en: "{n} streams/day", ja: "1日 {n}回", zh: "日播放 {n} 次", es: "{n} reproducciones/día", id: "{n} stream/hari",
+    th: "{n} สตรีม/วัน", pt: "{n} streams/dia", fil: "{n} streams/araw", vi: "{n} lượt nghe/ngày" };
+  for (const [l, v] of Object.entries(V)) if (window.I18N[l]) window.I18N[l].streams_n = v;
+})();
+
+// 라디오: 지금 방송 중 · 평일 기준
+(() => {
+  const V = { ko: ["🔴 지금 방송 중", "시간은 평일 기준(KST)이에요. 주말·특집 땐 달라질 수 있어요."], en: ["🔴 On air now", "Times are weekdays (KST); weekends and specials may differ."],
+    ja: ["🔴 放送中", "時間は平日基準（KST）。週末・特番は変わることがあります。"], zh: ["🔴 正在直播", "时间为工作日（KST），周末和特别节目可能不同。"],
+    es: ["🔴 Al aire ahora", "Horarios de lunes a viernes (KST); fines de semana pueden cambiar."], id: ["🔴 Sedang siaran", "Jam hari kerja (KST); akhir pekan bisa berbeda."],
+    th: ["🔴 กำลังออกอากาศ", "เวลาวันธรรมดา (KST) วันหยุดอาจต่างไป"], pt: ["🔴 No ar agora", "Horários de dias úteis (KST); fins de semana podem mudar."],
+    fil: ["🔴 Live ngayon", "Oras sa weekdays (KST); maaaring iba tuwing weekend."], vi: ["🔴 Đang phát sóng", "Giờ ngày thường (KST); cuối tuần có thể khác."] };
+  for (const [l, [a, b]] of Object.entries(V)) if (window.I18N[l]) Object.assign(window.I18N[l], { radio_live: a, radio_wkday: b });
+})();

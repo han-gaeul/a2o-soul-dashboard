@@ -624,11 +624,14 @@ export default {
         && hex(await crypto.subtle.digest("SHA-256", enc.encode(b.key))) === hex(await crypto.subtle.digest("SHA-256", enc.encode(env.CHART_KEY)));
       if (!keyOk) return json(req, { error: "비밀번호가 달라요" }, 403);
       const song = String(b.song || "").slice(0, 60).trim(), service = String(b.service || "").slice(0, 30).trim();
-      const rank = b.rank === null ? null : Number(b.rank);
-      if (!song || !service || !(rank === null || (Number.isInteger(rank) && rank >= 1 && rank <= 300))) return json(req, { error: "곡·차트·순위를 확인해 주세요" }, 400);
+      // 순위 또는 스트리밍 수(Spotify 일간 등) — 스트리밍 수면 streams만
+      const streams = b.streams == null ? null : Number(b.streams);
+      const rank = streams != null ? null : b.rank === null ? null : Number(b.rank);
+      const okStreams = streams != null && Number.isInteger(streams) && streams >= 0 && streams <= 1e9;
+      if (!song || !service || !(okStreams || rank === null || (Number.isInteger(rank) && rank >= 1 && rank <= 300))) return json(req, { error: "곡·차트·순위(또는 스트리밍 수)를 확인해 주세요" }, 400);
       const at = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 16).replace("T", " "); // KST
       const list = (await env.SUBS.get("_charts", "json")) || [];
-      list.push({ song, service, rank, at });
+      list.push(okStreams ? { song, service, streams, at, ...(b.date && /^\d{4}-\d{2}-\d{2}$/.test(b.date) ? { date: b.date } : {}) } : { song, service, rank, at });
       await env.SUBS.put("_charts", JSON.stringify(list.slice(-2000)));
       // 바로 수집 실행 → 알림 (2분에 한 번만)
       if (Date.now() - (Number(await env.SUBS.get("_chart_dispatch")) || 0) > 120000) {

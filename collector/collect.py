@@ -136,13 +136,25 @@ def load_fan_files(cfg):
                               "credit": {"label": str((sp.get("credit") or {}).get("label") or ""), "url": str((sp.get("credit") or {}).get("url") or "")},
                               "tips": [str(x) for x in sp.get("tips") or []]} if tracks else {}
     cfg["charts"] = [{"song": str(c.get("song", "")), "service": str(c.get("service", "")), "type": str(c.get("type") or ""),
-                      "ranks": sorted((str(d), int(r)) for d, r in (c.get("ranks") or {}).items())}
+                      "ranks": sorted((str(d), int(r)) for d, r in (c.get("ranks") or {}).items()),
+                      # 순위 대신 재생 수 (Spotify 일간 스트리밍 등): { "YYYY-MM-DD": 12345 }
+                      **({"streams": sorted((str(d), int(n)) for d, n in (c.get("streams") or {}).items())} if c.get("streams") else {})}
                      for c in read_yml("charts.yml").get("charts") or []]
     # 차트 입력 화면(chart.html)으로 들어온 순위 — 날짜별 마지막 순위로 그래프에 합침
     by = {}
+    sby = {}
     for x in load_json("chart_entries.json", []):
         if x.get("song") and x.get("service") and x.get("at"):
+            if x.get("streams") is not None:  # 재생 수 입력은 순위와 따로
+                sby.setdefault((str(x["song"]), str(x["service"])), {})[str(x.get("date") or x["at"][:10])] = int(x["streams"])
+                continue
             by.setdefault((str(x["song"]), str(x["service"])), []).append(x)
+    for (song, service), days in sby.items():
+        c = next((c for c in cfg["charts"] if c["song"] == song and c["service"] == service), None)
+        if not c:
+            c = {"song": song, "service": service, "type": "", "ranks": []}
+            cfg["charts"].append(c)
+        c["streams"] = sorted({**dict(c.get("streams") or []), **days}.items())
     for (song, service), xs in by.items():
         xs.sort(key=lambda x: x["at"])
         days = {}
@@ -1297,7 +1309,7 @@ def collect(cfg, rescan=False):
         if not sst.get("at") or now - datetime.fromisoformat(sst["at"]) >= (timedelta(hours=1) if show_day else timedelta(hours=3)):
             q = ("(\"A2O SOUL\" OR A2OSOUL OR 에이투오소울 OR \"에이투오 소울\") "
                  "(더쇼 OR THESHOW OR \"THE SHOW\" OR 쇼챔피언 OR 쇼챔 OR SHOWCHAMPION OR 엠카 OR 엠카운트다운 OR MCOUNTDOWN OR 뮤직뱅크 OR 뮤뱅 OR MUSICBANK "
-                 "OR 음악중심 OR 음중 OR MUSICCORE OR 인기가요 OR 인가 OR INKIGAYO) has:images -is:retweet -is:reply")
+                 "OR 음악중심 OR 음중 OR MUSICCORE OR 인기가요 OR 인가 OR INKIGAYO) has:images is:verified -is:retweet -is:reply")  # 공식(인증) 계정 사진만 쓰니 검색부터 인증 계정만
             try:
                 got = xposts.search_posts(q, since_id=sst.get("since_id"), max_results=100, media=True)
                 sst["at"] = now.isoformat(timespec="minutes")
@@ -1391,12 +1403,14 @@ def collect(cfg, rescan=False):
             query = ("(\"A2O SOUL\" OR A2OSOUL OR 에이투오소울 OR \"에이투오 소울\") "
                      "(투표 OR 사전투표 OR 1위후보 OR \"1위 후보\" OR vote OR voting OR nominee OR nominees "
                      "OR 라디오 OR RADIO OR 보이는라디오 OR 희망곡 OR 컬투쇼 OR 영스트리트 OR 러브게임 OR 가요광장 OR FM4U OR 파워FM OR 쿨FM) "
+                     # X 비용 아끼기: 인증 계정 글만 (투표 앱·방송사는 다 인증) + 인증이 없을 수 있는 투표 앱 계정
+                     f"(is:verified OR {' OR '.join('from:' + u for u in cfg['x_vote_accounts'])}) "
                      "-from:A2O_SOUL -is:retweet -is:reply")
             try:
                 # 팬 글이 많아서 최신 50개만 보면 며칠 전 공식 글을 놓침 → 처음 한 번은 최근 7일을 5쪽(최대 500개)까지
                 deep = ost.get("deep") != 1
                 posts = xposts.search_posts(query, since_id=None if deep else ost.get("since_id"),
-                                            max_results=100, pages=5 if deep else 2)
+                                            max_results=100, pages=5 if deep else 1)
                 ost["at"] = now.isoformat(timespec="minutes")
                 ost["deep"] = 1
                 vend = {v["handle"].lower() for v in cfg.get("x_vendors") or []} | {u.lower() for u in cfg["x_fans"]}

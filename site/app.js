@@ -877,6 +877,18 @@ if ("serviceWorker" in navigator) {
     $("charts").replaceChildren();
     if ((data.charts || []).length) {
       for (const c of data.charts) {
+        if (c.streams && c.streams.length) {  // 재생 수 차트 (Spotify 일간 등)
+          const sl = c.streams[c.streams.length - 1], sp = c.streams[c.streams.length - 2];
+          const d = sl && sp ? sl[1] - sp[1] : 0;
+          $("charts").append(el("div", { class: "chart-row" },
+            el("div", { class: "chart-meta" },
+              el("b", {}, c.song), el("span", { class: "muted" }, ` · ${[c.service, c.type].filter(Boolean).join(" ")}`),
+              el("span", { class: "rank" }, t("streams_n", { n: Number(sl[1]).toLocaleString(locale) })),
+              d ? el("span", { class: d > 0 ? "up" : "down" }, ` ${d > 0 ? "▲" : "▼"}${Math.abs(d).toLocaleString(locale)}`) : null,
+              el("span", { class: "muted small" }, ` (${sl[0].slice(5).replace("-", ".")})`)),
+            c.streams.length > 1 ? el("div", { class: "chart-box small-chart" }, el("canvas", { "data-streams": "1" })) : null));
+          if (!c.ranks.length) continue;
+        }
         const last = c.ranks[c.ranks.length - 1];
         const prev = c.ranks[c.ranks.length - 2];
         const move = last && prev ? prev[1] - last[1] : 0;
@@ -898,11 +910,18 @@ if ("serviceWorker" in navigator) {
     const api = ((data.push || {}).api || "").replace(/\/$/, "");
     if (api) fetch(`${api}/charts`).then((r) => (r.ok ? r.json() : [])).then((list) => {
       const by = new Map();
+      let sChanged = false;
       for (const x of Array.isArray(list) ? list : []) {
+        if (x && x.song && x.service && x.at && x.streams != null) {  // 재생 수
+          let c = (data.charts = data.charts || []).find((c) => c.song === x.song && c.service === x.service);
+          if (!c) { c = { song: x.song, service: x.service, type: "", ranks: [] }; data.charts.push(c); }
+          const m = Object.fromEntries(c.streams || []); const d = x.date || String(x.at).slice(0, 10);
+          if (m[d] !== Number(x.streams)) { m[d] = Number(x.streams); c.streams = Object.entries(m).sort((a, b) => (a[0] < b[0] ? -1 : 1)); sChanged = true; }
+          continue;
+        }
         if (x && x.song && x.service && x.at) { const k = `${x.song}\u0000${x.service}`; if (!by.has(k)) by.set(k, []); by.get(k).push(x); }
       }
-      if (!by.size) return;
-      let changed = false;
+      let changed = sChanged;
       data.charts = data.charts || [];
       for (const [k, xs] of by) {
         const [song, service] = k.split("\u0000");
@@ -1308,8 +1327,14 @@ if ("serviceWorker" in navigator) {
       // 오늘 추천: 날짜마다 돌아가며 2개 (한 프로그램에 몰리지 않게)
       const day = Math.floor(Date.now() / 864e5);
       const today = progs.length ? [progs[day % progs.length], progs[(day + 3) % progs.length]].filter((x, i, a) => a.indexOf(x) === i) : [];
-      if (today.length) box.append(el("div", { class: "rd-today" }, el("b", {}, t("radio_today")),
-        ...today.map((x) => el("span", { class: "chip" }, `${x.name} · ${x.station}`))));
+      // 지금 방송 중 (평일 편성 기준, KST)
+      const kst = new Date(Date.now() + 9 * 3600e3), hm = kst.toISOString().slice(11, 16), wd = kst.getUTCDay();
+      const onAir = wd >= 1 && wd <= 5 ? progs.filter((x) => x.start && x.end && x.start <= hm && hm < x.end) : [];
+      if (onAir.length) box.append(el("div", { class: "rd-today rd-live" }, el("b", {}, t("radio_live")),
+        ...onAir.map((x) => el("span", { class: "chip" }, `${x.name} · ${x.station}`))));
+      const todayRest = today.filter((x) => !onAir.includes(x));  // 지금 방송 중인 건 위에 이미 보여서 빼기
+      if (todayRest.length) box.append(el("div", { class: "rd-today" }, el("b", {}, t("radio_today")),
+        ...todayRest.map((x) => el("span", { class: "chip" }, `${x.name} · ${x.station}${x.start ? ` ${x.start}` : ""}`))));
       // 문구 만들기
       let song = songs[0], sit = sits[0];
       const out = el("textarea", { class: "rd-out", rows: "4", "aria-label": t("radio_make") });
@@ -1330,7 +1355,10 @@ if ("serviceWorker" in navigator) {
       box.append(el("h3", {}, t("radio_where")), el("div", { class: "rd-sts" }, ...sts.map((s) => el("div", { class: "rd-st" },
         el("b", {}, s.name),
         el("div", { class: "rd-meta" }, ext(appLink(s), `📱 ${s.app}`), s.sms ? el("span", {}, `✉️ ${s.sms}`) : null),
-        el("div", { class: "muted small" }, progs.filter((p) => p.station === s.name).map((p) => p.name).join(" · "))))),
+        el("div", { class: "rd-progs" }, ...progs.filter((p) => p.station === s.name).sort((a, b) => (a.start || "") < (b.start || "") ? -1 : 1)
+          .map((p) => el("div", {}, p.start ? el("span", { class: "rd-time" }, `${p.start}–${p.end || ""}`) : null, ` ${p.name}`,
+            p.dj ? el("span", { class: "muted" }, ` · ${p.dj}`) : null)))))),
+        el("p", { class: "muted small" }, t("radio_wkday")),
         el("p", { class: "muted small" }, t("radio_sms_note")),
         rd.credit ? el("p", { class: "pf-src" }, t("radio_credit", { who: rd.credit })) : null);
     }
@@ -2750,7 +2778,18 @@ if ("serviceWorker" in navigator) {
   }
 
   function rankCharts() {
-    const canvases = [...$("charts").querySelectorAll("canvas")];
+    const sc = [...$("charts").querySelectorAll("canvas[data-streams]")];
+    (data.charts || []).filter((c) => (c.streams || []).length > 1).forEach((c, i) => {
+      new Chart(sc[i], {
+        type: "line",
+        data: { labels: c.streams.map((r) => r[0].slice(5)),
+                datasets: [{ data: c.streams.map((r) => r[1]), borderColor: "#1db954", backgroundColor: "#1db954", tension: 0.2, pointRadius: 2 }] },
+        options: { maintainAspectRatio: false, plugins: { legend: { display: false },
+                   tooltip: { callbacks: { label: (x) => t("streams_n", { n: x.parsed.y.toLocaleString(locale) }) } } },
+                   scales: { y: { ticks: { callback: (v) => compact.format(v) } } } },
+      });
+    });
+    const canvases = [...$("charts").querySelectorAll("canvas:not([data-streams])")];
     (data.charts || []).filter((c) => c.ranks.length > 1).forEach((c, i) => {
       new Chart(canvases[i], {
         type: "line",
