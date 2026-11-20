@@ -1116,3 +1116,21 @@ body:not([data-cur="overview"]) .hs-switch, .hs-switch[hidden] { display: none; 
 .cl-past { margin-top: 4px; }
 .cl-past summary { cursor: pointer; font-size: 13px; font-weight: 700; color: var(--muted); padding: 6px 0; }
 .cl-past .collab { margin-top: 8px; }
+
+/* 라디오 신청 */
+.rd-today { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 10px 0 4px; font-size: 13px; }
+.rd-today b { margin-right: 4px; }
+.rd-make { margin-top: 12px; padding: 14px; border: 1px solid var(--line); border-radius: 14px; display: grid; gap: 10px; }
+.rd-make h3, #radioSec h3 { margin: 0; font-size: 15px; }
+#radioSec > div > h3 { margin: 16px 0 8px; }
+.rd-pick { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.rd-lbl { font-size: 12px; font-weight: 800; color: var(--muted); min-width: 34px; }
+.rd-pick button { border: 1px solid var(--line); background: var(--card); color: var(--text); border-radius: 999px; padding: 5px 11px; font: inherit; font-size: 12px; cursor: pointer; }
+.rd-pick button.on { background: var(--accent-bg); border-color: var(--accent-bg); color: #fff; }
+.rd-out { width: 100%; box-sizing: border-box; font: inherit; font-size: 14px; line-height: 1.55; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--text); resize: vertical; }
+.rd-row { display: flex; gap: 10px; align-items: center; justify-content: space-between; }
+.rd-row p { margin: 0; }
+.rd-copy { flex: none; border: 0; background: var(--accent-bg); color: #fff; font: inherit; font-weight: 700; padding: 8px 16px; border-radius: 10px; cursor: pointer; }
+.rd-sts { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; }
+.rd-st { border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; display: grid; gap: 4px; }
+.rd-meta { display: flex; gap: 10px; flex-wrap: wrap; font-size: 13px; }

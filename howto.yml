@@ -125,3 +125,29 @@ streaming:
       - 투표 기간은 응원 탭 '투표'에서 확인 (마감 임박하면 빨갛게 표시)
       - 대부분 앱 미션·광고로 투표권을 모으니 미리 모아 두기
       - 투표 앱·방식이 자주 바뀌니 공식 공지도 같이 확인
+
+# 응원 탭 '📻 라디오 신청' — 방송사·앱·문자 번호, 신청 잘 받아주는 프로그램, 문구 만들기 (가이드 도움 @star_light_4u)
+#   프로그램·DJ는 자주 바뀌니 가끔 앱 편성표로 확인. 문구는 그대로 복붙하지 말고 내 이야기로 고쳐 쓰게 안내
+radio:
+  credit: "@star_light_4u"
+  stations:
+    - { name: SBS 파워FM, app: SBS 고릴라, sms: "#1077" }
+    - { name: KBS 쿨FM, app: KBS 콩, sms: "#8910" }
+    - { name: MBC FM4U, app: MBC 미니, sms: "#8000" }
+    - { name: CBS 음악FM, app: CBS 레인보우, sms: "#9390", ios: "https://apps.apple.com/app/id432866707" }
+  programs:
+    - { name: 가요속으로, station: CBS 음악FM, note: 신청곡 비중이 커서 특히 추천 }
+    - { name: 두시탈출 컬투쇼, station: SBS 파워FM }
+    - { name: 파워FM (아침), station: SBS 파워FM }
+    - { name: 가요광장, station: KBS 쿨FM }
+    - { name: 슈퍼라디오, station: KBS 쿨FM }
+    - { name: 볼륨을 높여요, station: KBS 쿨FM }
+    - { name: 굿모닝FM, station: MBC FM4U }
+  songs: [Dancing in the Dark, Superstar, "While We're Young", Very First Love, Moonlight Shadow]
+  situations:
+    - { label: 출근·등교길, line: "출근길(등교길)에 이 노래 들으면 하루가 가벼워져요. 오늘도 힘내라고 같이 들어요!" }
+    - { label: 공부·일하는 중, line: "요즘 시험(일) 때문에 지쳤는데 이 노래 들으면서 버티고 있어요. 저처럼 힘든 분들께 들려드리고 싶어요." }
+    - { label: 퇴근·하교길, line: "오늘 하루 고생한 저한테 주는 선물로 이 노래 신청해요. 모두 수고 많으셨어요!" }
+    - { label: 운동·산책, line: "요즘 산책(운동)할 때 꼭 듣는 노래예요. 신나서 발걸음이 빨라져요!" }
+    - { label: 잠들기 전, line: "잠들기 전에 이 노래 들으면 마음이 편해져요. 오늘 밤 다 같이 들어요." }
+    - { label: 그냥 좋아서, line: "우연히 듣고 계속 반복 중인 노래예요. 아직 모르는 분들도 꼭 한번 들어 보셨으면 해요!" }

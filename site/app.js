@@ -1298,6 +1298,44 @@ if ("serviceWorker" in navigator) {
   $("votesSec").append(el("p", { class: "small wk-cal" }, `📅 ${t("wk_cal")} `,
     el("a", { href: webcal }, t("cal_apple")), " · ", ext(`https://calendar.google.com/calendar/render?cid=${encodeURIComponent(webcal)}`, t("cal_google"))));
 
+  // ---------- 응원 탭: 라디오 신청 (오늘 추천 · 문구 만들기 · 보내는 곳) ----------
+  {
+    const rd = data.howto?.radio || {};
+    const progs = rd.programs || [], sts = rd.stations || [], songs = rd.songs || [], sits = rd.situations || [];
+    if (!sts.length) $("radioSec")?.remove();
+    else {
+      const box = $("radio");
+      // 오늘 추천: 날짜마다 돌아가며 2개 (한 프로그램에 몰리지 않게)
+      const day = Math.floor(Date.now() / 864e5);
+      const today = progs.length ? [progs[day % progs.length], progs[(day + 3) % progs.length]].filter((x, i, a) => a.indexOf(x) === i) : [];
+      if (today.length) box.append(el("div", { class: "rd-today" }, el("b", {}, t("radio_today")),
+        ...today.map((x) => el("span", { class: "chip" }, `${x.name} · ${x.station}`))));
+      // 문구 만들기
+      let song = songs[0], sit = sits[0];
+      const out = el("textarea", { class: "rd-out", rows: "4", "aria-label": t("radio_make") });
+      const gen = () => { out.value = `${sit ? sit.line : ""}\n\n신청곡: A2O SOUL - ${song}`; };
+      const pick = (list, cur, label, fn) => el("div", { class: "rd-pick" }, el("span", { class: "rd-lbl" }, label),
+        ...list.map((x) => { const b = el("button", { type: "button", class: x === cur ? "on" : "" }, typeof x === "string" ? x : tc(x.label));
+          b.onclick = () => { fn(x); b.parentNode.querySelectorAll("button").forEach((y) => y.classList.toggle("on", y === b)); gen(); }; return b; }));
+      const copy = el("button", { type: "button", class: "rd-copy" }, t("radio_copy"));
+      copy.onclick = async () => { try { await navigator.clipboard.writeText(out.value); toast(t("radio_copied")); } catch (_) { out.select(); } };
+      box.append(el("div", { class: "rd-make" }, el("h3", {}, t("radio_make")),
+        pick(songs, song, t("radio_song"), (x) => { song = x; }),
+        pick(sits, sit, t("radio_mood"), (x) => { sit = x; }),
+        out, el("div", { class: "rd-row" }, el("p", { class: "muted small" }, t("radio_tip")), copy)));
+      gen();
+      // 보내는 곳: 방송사별 앱·문자 번호·추천 프로그램
+      const appLink = (s) => s.ios && IOS ? s.ios : IOS ? `https://www.google.com/search?q=${encodeURIComponent(s.app + " 앱")}`
+        : `https://play.google.com/store/search?q=${encodeURIComponent(s.app)}&c=apps`;
+      box.append(el("h3", {}, t("radio_where")), el("div", { class: "rd-sts" }, ...sts.map((s) => el("div", { class: "rd-st" },
+        el("b", {}, s.name),
+        el("div", { class: "rd-meta" }, ext(appLink(s), `📱 ${s.app}`), s.sms ? el("span", {}, `✉️ ${s.sms}`) : null),
+        el("div", { class: "muted small" }, progs.filter((p) => p.station === s.name).map((p) => p.name).join(" · "))))),
+        el("p", { class: "muted small" }, t("radio_sms_note")),
+        rd.credit ? el("p", { class: "pf-src" }, t("radio_credit", { who: rd.credit })) : null);
+    }
+  }
+
   // ---------- 응원 탭 맨 위 메뉴: 할 일을 타일로 한눈에, 누르면 해당 칸으로 ----------
   {
     const cnt = (id, sel) => ($(id) ? $(id).querySelectorAll(sel).length : 0);
@@ -1308,7 +1346,7 @@ if ("serviceWorker" in navigator) {
       ["🗳", "votes", "votesSec", cnt("votes", ".vt"), true],
       ["🎧", "streaming", "streamSec"],
       ["📣", "fanchants", "fanchantSec"],
-      ["📻", "cheer_radio", radio],
+      ["📻", "cheer_radio", $("radioSec") || radio],
       ["📖", "howto", "howtoSec"],
       ["📊", "charts", "chartsSec"],
       ["🎂", "supports", "supportsSec", cnt("supports", ".support"), true],
