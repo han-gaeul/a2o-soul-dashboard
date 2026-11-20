@@ -83,9 +83,9 @@ def template_name(img):
 
 
 def search_candidates(state):
-    """X 검색(여러 묶음) → 새 포카 글 후보 마크다운 (없으면 None).
+    """X 검색(여러 묶음) → 새 포카 글 후보 마크다운 목록(댓글 하나씩, 없으면 None).
     처음 한 번은 최근 7일을 깊게(묶음마다 최대 300개), 이후엔 since_id 이후 새 글을 묶음마다 최대 200개."""
-    deep = state.get("search_v") != 2
+    deep = state.get("search_v") != 3  # 3: 한 번 더 7일치 다시 (예전엔 80개만 보여서 나머지가 안 보였음)
     if deep:
         state.pop("search_since", None)
     found = {}
@@ -101,21 +101,25 @@ def search_candidates(state):
             state[key] = max(got, key=lambda p: int(p["tweet_id"]))["tweet_id"]
         for p in got:
             found.setdefault(p["tweet_id"], p)
-    state["search_v"] = 2
+    state["search_v"] = 3
     posts = sorted(found.values(), key=lambda p: int(p["tweet_id"]), reverse=True)
     posts = [p for p in posts if p.get("images")]
     print(f"[포카 검색] 후보 {len(posts)}개")
     if not posts:
         return None
-    out = [f"### 🔎 X에서 찾은 포카 글 {len(posts)}개", "", "새 버전이면 원본 글 확인 → 필요하면 작성자에게 허락받고 `site/img/photocards/`에 추가해 주세요.", ""]
-    more = max(0, len(posts) - 80)  # 이슈 댓글 길이 제한 — 최신 80개만, 나머진 개수만
-    for p in posts[:80]:
-        cap = re.sub(r"\s+", " ", re.sub(r"https?://\S+", "", p["caption"])).strip()[:120]
-        out.append(f"- **@{p['author']}** · {p['timestamp'][:10]} — {cap} ([원본]({p['permalink']}))")
-        out.append("  " + " ".join(f'<img src="{u}?name=small" width="120">' for u in p["images"][:4]))
-    if more:
-        out.append(f"\n…외 {more}개 (오래된 글)")
-    return "\n".join(out) + "\n"
+    # 이슈 댓글 하나에 다 안 들어가서(65,536자) 100개씩 나눠 여러 댓글로 — 전부 보이게
+    per = 100
+    parts = []
+    for i in range(0, len(posts), per):
+        chunk = posts[i:i + per]
+        head = (f"### 🔎 X에서 찾은 포카 글 {len(posts)}개" + (f" ({i // per + 1}/{-(-len(posts) // per)})" if len(posts) > per else ""))
+        out = [head, ""] + (["새 버전이면 원본 글 확인 → 필요하면 작성자에게 허락받고 `site/img/photocards/`에 추가해 주세요.", ""] if i == 0 else [])
+        for p in chunk:
+            cap = re.sub(r"\s+", " ", re.sub(r"https?://\S+", "", p["caption"])).strip()[:100]
+            out.append(f"- **@{p['author']}** · {p['timestamp'][:10]} — {cap} ([원본]({p['permalink']}))")
+            out.append("  " + " ".join(f'<img src="{u}?name=small" width="110">' for u in p["images"][:4]))
+        parts.append("\n".join(out) + "\n")
+    return parts
 
 
 def main(backfill=False):
@@ -151,9 +155,8 @@ def main(backfill=False):
         if found:
             pc_crop.main(tmp)
     if not backfill:
-        cand = search_candidates(state)
-        if cand:
-            CAND.write_text(cand)
+        for i, part in enumerate(search_candidates(state) or []):
+            (CAND if i == 0 else CAND.with_name(f"pc_candidates_{i + 1:02d}.md")).write_text(part)
     STATE.write_text(json.dumps(state, indent=1))
     if found:
         lines = ["@soultemplates 새 포카 템플릿을 멤버별로 잘랐어요. **Files changed**에서 잘린 카드와 라벨(파일 이름)을 확인하고 머지해 주세요.", "",
