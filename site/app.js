@@ -1153,6 +1153,43 @@ if ("serviceWorker" in navigator) {
     $("noticePostsSec").append(empty(t("notice_none")));
   }
 
+  // ---------- 공지 탭: 사녹 신청 제출 시간 확인 (submissionId 앞 8글자 = 제출 시각, 기기 안에서만 계산) ----------
+  {
+    const hexTime = (h) => new Date(parseInt(h.slice(0, 8), 16) * 1000);
+    const fmt = (d, sec = true) => d.toLocaleString(locale || "en", { timeZone: "Asia/Seoul", month: "numeric", day: "numeric", weekday: "short",
+      hour: "2-digit", minute: "2-digit", ...(sec ? { second: "2-digit" } : {}), hourCycle: "h23" });
+    const hm = (d) => d.toLocaleTimeString("en-GB", { timeZone: "Asia/Seoul", hour: "2-digit", minute: "2-digit" });
+    const diff = (s) => (s >= 60 ? `+${Math.floor(s / 60)}${t("pcheck_min")} ${s % 60}${t("pcheck_sec")}` : `+${s}${t("pcheck_sec")}`);
+    // 공식 공지에서 이 설문의 음방 이름·신청 오픈 시각 찾기 ("신청 기간 : 2026년 11월 13일 (금) PM 9:10 ~")
+    const findPost = (survey) => nposts.find((x) => (x.facts || []).some((f) => (f.url || "").includes(survey)) || (x.text || "").includes(survey));
+    const openTime = (post) => {
+      const m = (post?.text || "").match(/(\d{4})년\s*(\d+)월\s*(\d+)일[^\n~]*?(AM|PM)\s*(\d+):(\d+)/);
+      if (!m) return null;
+      const h = (+m[5] % 12) + (m[4] === "PM" ? 12 : 0);
+      return kstDate(`${m[1]}-${m[2].padStart(2, "0")}-${m[3].padStart(2, "0")} ${String(h).padStart(2, "0")}:${m[6]}`);
+    };
+    $("pcheckIn").placeholder = "https://artist.mnetplus.world/…?submissionId=…";
+    $("pcheck").onsubmit = (e) => {
+      e.preventDefault();
+      const out = $("pcheckOut");
+      const v = $("pcheckIn").value.trim();
+      const sub = (v.match(/submissionId=([0-9a-f]{24})/i) || v.match(/^([0-9a-f]{24})$/i) || [])[1];
+      const survey = (v.match(/surveys\/([0-9a-f]{24})/i) || [])[1];
+      if (!sub) { out.replaceChildren(el("p", { class: "pcheck-bad" }, survey ? t("pcheck_nosub") : t("pcheck_bad"))); return; }
+      const at = hexTime(sub);
+      const post = survey && findPost(survey);
+      const open = openTime(post);
+      let base = open && at >= open && at - open < 3600000 ? open : null, guess = false;
+      if (!base) { base = new Date(Math.floor(at / 600000) * 600000); guess = true; } // 오픈 시각 모르면 직전 10분 단위(:00 :10 :20…) 기준
+      const sec = Math.round((at - base) / 1000);
+      out.replaceChildren(
+        el("div", { class: "pcheck-at" }, fmt(at)),
+        post ? el("div", { class: "pcheck-show" }, "📺 " + tc(post.title)) : null,
+        el("div", { class: "pcheck-diff" }, t(guess ? "pcheck_guess" : "pcheck_open", { t: hm(base), d: diff(sec) })),
+        survey ? el("p", { class: "muted small" }, t("pcheck_made", { t: fmt(hexTime(survey), false) })) : null);
+    };
+  }
+
   // ---------- 공지 탭: 매체·콘텐츠 계정의 A2O SOUL 글 ----------
   const mposts = data.media_posts || [];
   if (mposts.length) {
