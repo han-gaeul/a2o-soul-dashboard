@@ -14,6 +14,7 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  issues: write
 
 concurrency:
   group: photocards
@@ -37,6 +38,15 @@ jobs:
         env:
           X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
         run: python collector/pc_watch.py ${{ inputs.backfill && '--backfill' || '' }}
+      - name: X 검색 포카 후보 → 이슈에 댓글
+        if: hashFiles('pc_candidates.md') != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          NUM=$(gh issue list --state open --search "in:title 포카 후보" --json number --jq '.[0].number')
+          if [ -n "$NUM" ]; then gh issue comment "$NUM" --body-file pc_candidates.md
+          else gh issue create --title "📸 포카 후보 (X 검색)" --body-file pc_candidates.md; fi
+          rm -f pc_candidates.md
       - name: Open PR or save state
         env:
           GH_TOKEN: ${{ github.token }}

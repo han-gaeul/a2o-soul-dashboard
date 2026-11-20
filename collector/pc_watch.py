@@ -25,6 +25,10 @@ import pc_crop  # noqa: E402
 import xposts  # noqa: E402
 
 ACCOUNT = "soultemplates"
+# 템플릿 계정 말고도 X 검색으로 새 포카 글 후보를 모아 이슈로 알려 줌 (자동으로 올리진 않음 — 확인·허락 후 직접 추가)
+SEARCH = ('(에이투오소울 OR 에투소 OR "A2O SOUL" OR A2OSOUL) (포카 OR 포토카드 OR 미공포 OR 특전 OR 럭드 OR 럭키드로우 '
+          'OR photocard OR POB OR "lucky draw") has:images -is:retweet -is:reply -from:soultemplates')
+CAND = Path(__file__).resolve().parent.parent / "pc_candidates.md"
 STATE = Path(__file__).resolve().parent / "pc_state.json"
 REPORT = Path(__file__).resolve().parent.parent / "pc_report.md"
 
@@ -60,6 +64,28 @@ def template_name(img):
     return None, t
 
 
+def search_candidates(state):
+    """X 검색 → 새 포카 글 후보 마크다운 (없으면 None). 처음엔 최근 20개만, 이후엔 since_id 이후 새 글만."""
+    since = state.get("search_since")
+    try:
+        posts = xposts.search_posts(SEARCH, since_id=since, max_results=20 if not since else 50, media=True)
+    except Exception as e:  # noqa: BLE001
+        print(f"[포카 검색] 실패: {type(e).__name__} {e}")
+        return None
+    if posts:
+        state["search_since"] = max(posts, key=lambda p: int(p["tweet_id"]))["tweet_id"]
+    posts = [p for p in posts if p.get("images")]
+    print(f"[포카 검색] 후보 {len(posts)}개")
+    if not posts:
+        return None
+    out = [f"### 🔎 X에서 찾은 포카 글 {len(posts)}개", "", "새 버전이면 원본 글 확인 → 필요하면 작성자에게 허락받고 `site/img/photocards/`에 추가해 주세요.", ""]
+    for p in posts:
+        cap = re.sub(r"\s+", " ", re.sub(r"https?://\S+", "", p["caption"])).strip()[:120]
+        out.append(f"- **@{p['author']}** · {p['timestamp'][:10]} — {cap} ([원본]({p['permalink']}))")
+        out.append("  " + " ".join(f'<img src="{u}?name=small" width="120">' for u in p["images"][:4]))
+    return "\n".join(out) + "\n"
+
+
 def main(backfill=False):
     state = json.loads(STATE.read_text()) if STATE.exists() else {}
     if not xposts.enabled():
@@ -92,6 +118,10 @@ def main(backfill=False):
                     found.append((name, p["permalink"]))
         if found:
             pc_crop.main(tmp)
+    if not backfill:
+        cand = search_candidates(state)
+        if cand:
+            CAND.write_text(cand)
     STATE.write_text(json.dumps(state, indent=1))
     if found:
         lines = ["@soultemplates 새 포카 템플릿을 멤버별로 잘랐어요. **Files changed**에서 잘린 카드와 라벨(파일 이름)을 확인하고 머지해 주세요.", "",
