@@ -12,7 +12,7 @@ import requests
 
 API = "https://api.anthropic.com/v1/messages"
 KINDS = {
-    "music_show": "음방", "broadcast": "방송", "live": "라이브", "release": "발매", "concert": "공연",
+    "music_show": "음방", "radio": "라디오", "broadcast": "방송", "live": "라이브", "release": "발매", "concert": "공연",
     "fanmeeting": "팬미팅", "ticket": "티켓", "merch": "굿즈", "vote": "투표", "prerec": "사녹 신청", "event": "행사", "win": "1위", "nominee": "1위 후보", "other": "기타",
 }
 AUTO_CONFIDENCE = 0.8  # 이 이상이면 자동 반영

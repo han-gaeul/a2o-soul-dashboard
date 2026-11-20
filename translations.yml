@@ -114,6 +114,22 @@
   id: "Live"
   th: "ไลฟ์"
   pt: "Live"
+"라디오":
+  en: "Radio"
+  ja: "ラジオ"
+  zh: "电台"
+  es: "Radio"
+  id: "Radio"
+  th: "วิทยุ"
+  pt: "Rádio"
+"📻 라디오":
+  en: "📻 Radio"
+  ja: "📻 ラジオ"
+  zh: "📻 电台"
+  es: "📻 Radio"
+  id: "📻 Radio"
+  th: "📻 วิทยุ"
+  pt: "📻 Rádio"
 "발매":
   en: "Release"
   ja: "リリース"

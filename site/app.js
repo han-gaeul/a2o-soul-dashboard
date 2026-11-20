@@ -289,7 +289,7 @@ if ("serviceWorker" in navigator) {
   }));
   // 일정 구분: 방송(음방·라이브) / 기념일(생일·데뷔 기념일) / 기타(투표 마감·서포트·발매 등)
   const groupOf = (e) => (e.member || e.anniv || e.type === "기념일" ? "anniv"
-    : ["음방", "라이브"].includes(e.type) || /출연$/.test(e.title || "") ? "show" : "etc");
+    : ["음방", "라이브", "라디오"].includes(e.type) || /출연$/.test(e.title || "") ? "show" : "etc");
   // 시간이 없는 음방 일정은 투표 가이드의 방송 시간(예: '금 17:15 · KBS2')으로 채우기
   const showTime = {};
   for (const v of data.howto?.voting || []) { const m = /(\d{1,2}:\d{2})/.exec(v.when || ""); if (m) showTime[v.show] = m[1]; }

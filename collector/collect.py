@@ -544,7 +544,7 @@ def official_extract(caption, posted, today):
     if not A2O_MENTION.search(caption or "") or re.search(r"결과|RESULTS?\b|WINNERS?\b|발표합니다", head, re.I):
         return []  # A2O SOUL 없는 일반 투표, 첫 줄이 '결과 발표'인 글(이미 끝난 투표)은 빼기
     return [{**i, "confidence": max(i["confidence"], 0.9)} if i["kind"] == "vote" and i.get("end") else i
-            for i in rules.extract(caption, posted, today) if i["kind"] in ("vote", "nominee")]
+            for i in rules.extract(caption, posted, today) if i["kind"] in ("vote", "nominee", "radio")]
 
 def nominees(today):
     """음방 1위 후보 (공식 글에서 자동, 최근 2주) — 이번 주 음방 표시·알림용"""
@@ -1381,7 +1381,8 @@ def collect(cfg, rescan=False):
         gap = timedelta(minutes=10) if on_air else timedelta(hours=3)
         if ost.get("deep") != 1 or not ost.get("at") or now - datetime.fromisoformat(ost["at"]) >= gap:
             query = ("(\"A2O SOUL\" OR A2OSOUL OR 에이투오소울 OR \"에이투오 소울\") "
-                     "(투표 OR 사전투표 OR 1위후보 OR \"1위 후보\" OR vote OR voting OR nominee OR nominees) "
+                     "(투표 OR 사전투표 OR 1위후보 OR \"1위 후보\" OR vote OR voting OR nominee OR nominees "
+                     "OR 라디오 OR RADIO OR 보이는라디오 OR 희망곡 OR 컬투쇼 OR 영스트리트 OR 러브게임 OR 가요광장 OR FM4U OR 파워FM OR 쿨FM) "
                      "-from:A2O_SOUL -is:retweet -is:reply")
             try:
                 # 팬 글이 많아서 최신 50개만 보면 며칠 전 공식 글을 놓침 → 처음 한 번은 최근 7일을 5쪽(최대 500개)까지

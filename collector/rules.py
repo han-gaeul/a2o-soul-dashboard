@@ -6,7 +6,7 @@
 import re
 from datetime import date, timedelta
 
-RULES_VERSION = 12  # 규칙을 바꾸면 올리기 → 다음 수집 때 최근 공지를 다시 읽어 일정을 새로 뽑음
+RULES_VERSION = 13  # 규칙을 바꾸면 올리기 → 다음 수집 때 최근 공지를 다시 읽어 일정을 새로 뽑음
 
 SHOWS = [
     ("더쇼", r"더\s?쇼(?!\s?챔)|THE\s?SHOW"),
@@ -21,6 +21,34 @@ SHOWS = [
 # 매주 방송 요일 (월=0) — 사전녹화 날짜에서 방송일 계산
 SHOW_WEEKDAY = {"더쇼": 1, "쇼챔피언": 2, "엠카운트다운": 3, "뮤직뱅크": 4, "음악중심": 5, "인기가요": 6}
 SHOW_RE = [(name, re.compile(p, re.I)) for name, p in SHOWS]
+
+# 라디오 출연 — 프로그램 이름(있으면 제목에), 없으면 '라디오 출연'
+RADIO_PROGRAMS = [
+    ("정오의 희망곡", r"정오의\s?희망곡|희망곡"), ("두시의 데이트", r"두시의\s?데이트"), ("아이돌 라디오", r"아이돌\s?라디오|IDOL\s?RADIO"),
+    ("두시탈출 컬투쇼", r"컬투쇼|두시\s?탈출"), ("웬디의 영스트리트", r"영스트리트|YOUNG\s?STREET"), ("박소현의 러브게임", r"러브\s?게임"),
+    ("볼륨을 높여요", r"볼륨을\s?높여요|볼륨\s?업"), ("가요광장", r"가요\s?광장"), ("키스 더 라디오", r"키스\s?더\s?라디오|KISS\s?THE\s?RADIO|키스라"),
+    ("굿모닝FM", r"굿모닝\s?FM"), ("배철수의 음악캠프", r"음악\s?캠프"),
+]
+RADIO_PROGRAMS_RE = [(n, re.compile(p_, re.I)) for n, p_ in RADIO_PROGRAMS]
+RADIO = re.compile(r"라디오|RADIO|FM4U|파워\s?FM|러브\s?FM|쿨\s?FM|COOL\s?FM|POWER\s?FM|보이는\s?라디오|" +
+                   "|".join(p_ for _, p_ in RADIO_PROGRAMS), re.I)
+
+
+def radio_items(caption, pday, today=None):
+    """라디오 출연 안내 → [{kind: radio, title: '📻 정오의 희망곡 출연', date, time}] (날짜를 못 읽으면 빈 배열)."""
+    caption = caption or ""
+    if not RADIO.search(caption) or RECAP.search(caption) or re.search(r"다시\s?듣기|VOD|클립|CLIP", caption, re.I):
+        return []
+    ds = _dates(caption, pday)
+    d = ds[0] if ds else _rel(caption, pday)
+    if not d or d < pday:
+        return []
+    prog = next((n for n, rx in RADIO_PROGRAMS_RE if rx.search(caption)), None)
+    tm = _time(caption)
+    if tm and int(tm[:2]) < 12 and re.search(r"(밤|저녁)\s*\d{1,2}\s*시", caption):
+        tm = f"{int(tm[:2]) + 12:02d}{tm[2:]}"  # '밤 10시' → 22:00
+    return [_item("radio", f"📻 {prog} 출연" if prog else "📻 라디오 출연", d, tm, 0.9 if (ds and tm) else 0.8)]
+
 
 # 음방 외 공지 — 날짜가 있을 때만 '확인 필요'로
 OTHER = [
@@ -259,6 +287,10 @@ def extract(caption, posted, today):
                                       "confidence": 0.9 if url else 0.6})
                     break
         return items if head or items else []
+
+    # 1.5) 라디오 출연 (음방 이름이 없는 글만)
+    if not shows_all and (radio := radio_items(caption, pday)):
+        return radio
 
     # 2) 방송 직전·당일 안내: '잠시 후, 5시 10분 뮤직뱅크에 출연합니다'
     if shows_all and SOON.search(caption) and not RECAP.search(caption):
