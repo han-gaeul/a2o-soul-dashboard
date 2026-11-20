@@ -1099,6 +1099,24 @@
    "permalink": "https://x.com/A2O_SOUL/status/2123629694474199269",
    "timestamp": "2026-11-20T04:09:08.000Z"
   },
+  "x:2123684016645619994": {
+   "caption": "[#뮤직뱅크]\n잠시 후, 5시 15분 '뮤직뱅크'에 A2O SOUL이 출연합니다.\n팬 여러분의 많은 시청 부탁드립니다.\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark",
+   "excerpt": "[#뮤직뱅크]\n잠시 후, 5시 15분 '뮤직뱅크'에 A2O SOUL이 출연합니다.\n팬 여러분의 많은 시청 부탁드립니다.\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark",
+   "items": [
+    {
+     "confidence": 0.9,
+     "date": "2026-11-20",
+     "end_date": null,
+     "kind": "music_show",
+     "place": null,
+     "time": "17:15",
+     "title": "뮤직뱅크 출연",
+     "url": null
+    }
+   ],
+   "permalink": "https://x.com/A2O_SOUL/status/2123684016645619994",
+   "timestamp": "2026-11-20T07:45:00.000Z"
+  },
   "xf:2121586007254708290": {
    "caption": "[📸] 261114 @A2O_SOUL \n\n2026.11.14\nMBC Show! Music Core\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2OSOULBASE/status/2121586007254708290/photo/1",
    "excerpt": "[📸] 261114 @A2O_SOUL \n\n2026.11.14\nMBC Show! Music Core\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2OSOULBASE/status/2121586007254708",
@@ -2374,7 +2392,7 @@
  "x": {
   "A2O_SOUL": {
    "id": "1986498790229262336",
-   "since_id": "2123629694474199269"
+   "since_id": "2123684016645619994"
   }
  },
  "x_fans": {
@@ -2384,8 +2402,8 @@
   }
  },
  "x_media": {
-  "at": "2026-11-20T16:40+09:00",
-  "auto_since": "2123682522760712670",
+  "at": "2026-11-20T16:50+09:00",
+  "auto_since": "2123684616599187706",
   "candidates": {},
   "checked": "2026-11-20T16:40+09:00",
   "missing": [],
@@ -2524,7 +2542,7 @@
   "since_id": "2123657863491108968"
  },
  "x_official_votes": {
-  "at": "2026-11-20T16:40+09:00",
+  "at": "2026-11-20T16:50+09:00",
   "deep": 1,
   "last": {
    "official": [],
