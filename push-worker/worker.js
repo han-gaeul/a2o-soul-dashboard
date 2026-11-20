@@ -478,16 +478,22 @@ async function tweets(req, env, url) {
   if (req.method === "POST" && p === "/tweet/drafts") { // 수집기(GitHub Actions)만
     if (!(await isAdmin(req, env))) return json(req, { error: "forbidden" }, 403);
     const b = await req.json().catch(() => ({}));
-    let added = 0;
+    let added = 0, posted = 0;
+    const acct = await xAccount(env);
+    const canPost = !!(acct && (acct.v === 2 || (env.X_API_KEY && env.X_API_SECRET)));
     for (const d of (b.drafts || []).slice(0, 20)) {
       if (!d || typeof d.text !== "string" || !d.key) continue;
       const id = (await sha("tw:" + d.key)).slice(0, 16);
       if (await env.SUBS.get(`_tw:${id}`)) continue;
-      await env.SUBS.put(`_tw:${id}`, JSON.stringify({ id, key: String(d.key).slice(0, 120), kind: String(d.kind || ""), text: d.text.slice(0, 1000),
-        status: "pending", at: Date.now() }), { expirationTtl: 3 * 86400 });
-      added++;
+      const rec = { id, key: String(d.key).slice(0, 120), kind: String(d.kind || ""), text: d.text.slice(0, 1000), status: "pending", at: Date.now() };
+      if (d.auto && canPost) {  // 확실한 정보(일정·생일·조회수)는 확인 없이 바로 올림 — 실패하면 초안으로 남김
+        try { rec.tweet = await postTweet(env, rec.text); rec.status = "posted"; rec.auto = true; rec.posted = Date.now(); posted++; }
+        catch (e) { rec.error = String(e.message || e).slice(0, 200); }
+      }
+      await env.SUBS.put(`_tw:${id}`, JSON.stringify(rec), { expirationTtl: 3 * 86400 });
+      if (rec.status === "pending") added++;
     }
-    return json(req, { ok: true, added });
+    return json(req, { ok: true, added, posted });
   }
   if (req.method === "GET" && p === "/tweet/callback") return xCallback(env, url);
   if (req.method === "GET" && p === "/tweet/callback2") return x2Callback(env, url);

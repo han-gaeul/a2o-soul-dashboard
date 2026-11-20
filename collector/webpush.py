@@ -196,7 +196,10 @@ def compose(kind, data, lang, group=None):
 # 트윗 초안 해시태그 — 공식 계정·유통사(STONE MUSIC)가 쓰는 표기에 맞춤
 TAGS = "#A2OSOUL #A2O #에이투오소울 #에투소"
 SONG_TAGS = {"Dancing in the Dark": "#Dancing_in_the_Dark", "SUPERSTAR": "#SUPERSTAR"}  # 글에 곡 이름이 있으면
-ERA_TAGS = "#SUPERSTAR #ZalphaPop"  # 지금 활동(앨범·레이블) — 활동이 바뀌면 고치기
+ACTIVE_TAG = "#Dancing_in_the_Dark"  # 지금 활동곡 — 모든 초안에 항상 (활동이 바뀌면 고치기)
+ERA_TAGS = "#SUPERSTAR #ZalphaPop"  # 지금 활동(앨범·레이블) — 280자 넘으면 빠짐
+# 확실한 정보라 확인 없이 바로 올리는 종류 (일정·생일·조회수처럼 데이터에서 그대로 나오는 것)
+AUTO_POST = {"show", "birthday", "views", "subs"}
 
 
 def x_weight(s):
@@ -236,13 +239,13 @@ def tweet_text(kind, data):
         body = f"{data['ko']}의 생일을 함께 축하해요 💜 #Happy{data['name'].replace(' ', '')}Day"
     tags = TAGS
     text_all = f"{title} {body} {data.get('name', '')} {data.get('title', '')}"
-    song = " ".join(t for k, t in SONG_TAGS.items() if k.lower() in text_all.lower() and t not in ERA_TAGS)
+    song = " ".join(t for k, t in SONG_TAGS.items() if k.lower() in text_all.lower() and t not in ERA_TAGS and t != ACTIVE_TAG)
     mems = data.get("members") or ([(data["name"], data.get("ko"))] if kind == "birthday" else [])
     for m_en, m_ko in mems:  # 멤버 개인 게시글이면 이름 해시태그 (한글·영어)
         tags += f" #{m_ko} #{re.sub(r'[^A-Za-z0-9]', '', m_en)}" if m_ko else f" #{re.sub(r'[^A-Za-z0-9]', '', m_en)}"
 
     def build(with_en, with_era):
-        tag2 = " ".join(x for x in (song, ERA_TAGS if with_era else "") if x)
+        tag2 = " ".join(x for x in (ACTIVE_TAG, song, ERA_TAGS if with_era else "") if x)
         lines = [title] + ([body] if body else []) + ([en] if with_en and en else []) + [""] + (links or [f"👉 {url}" if url else ""]) + ["", tags, tag2]
         return re.sub(r"\n{3,}", "\n\n", "\n".join(x for x in lines if x is not None)).strip()
 
@@ -256,7 +259,7 @@ def tweet_text(kind, data):
 def drafts(api, priv, new, site):
     """새 알림 후보 → 트윗 초안을 Worker에 저장. 저장된 개수를 돌려줌."""
     # 팬 계정이 주최하는 행사(credit 있음)는 초안 안 만듦 — 그쪽 공지를 리트윗하는 게 맞음
-    items = [{"key": key, "kind": kind, "text": tweet_text(kind, data)} for key, topic, kind, data in new
+    items = [{"key": key, "kind": kind, "text": tweet_text(kind, data), "auto": kind in AUTO_POST} for key, topic, kind, data in new
              if kind not in ("notice",) and not data.get("credit") and not data.get("no_draft")]
     if not items:
         return 0
@@ -264,7 +267,10 @@ def drafts(api, priv, new, site):
         r = requests.post(api.rstrip("/") + "/tweet/drafts", json={"drafts": items[:20]}, timeout=20,
                           headers={"Authorization": f"Bearer {_admin_token(priv)}"})
         r.raise_for_status()
-        return r.json().get("added", 0)
+        j = r.json()
+        if j.get("posted"):
+            print(f"[트윗] 바로 올림 {j['posted']}개")
+        return j.get("added", 0)  # 확인이 필요한(아직 안 올린) 초안 수 — 관리자 알림용
     except Exception as e:  # noqa: BLE001
         print(f"[트윗] 초안 저장 실패: {type(e).__name__} {e}")
         return 0
