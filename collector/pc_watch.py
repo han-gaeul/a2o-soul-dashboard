@@ -9,7 +9,11 @@
   'A2O SOUL [DANCING IN THE DARK] BROADCAST ...'    → SUPERSTAR_BROADCAST-DITD
   'A2O SOUL [SUPERSTAR] OLIVE YOUNG LUCKY DRAW'     → SUPERSTAR_OLIVEYOUNG
 A2O SOUL 템플릿이 아니면(다른 그룹) 건너뜀. 필요: X_BEARER_TOKEN, tesseract, pytesseract, scipy, Pillow
+
+@soultemplates는 트윗 없이 구글 드라이브 폴더의 템플릿만 고치기도 해서(‘?’ 카드 공개 등) 드라이브 폴더도 매번 확인함.
+드라이브에서 바뀐 템플릿은 **새 카드만** 추가 (이미 확인·수정한 카드는 덮어쓰지 않음). X 크레딧 안 씀.
 """
+import hashlib
 import io
 import json
 import re
@@ -46,6 +50,7 @@ SEARCHES = [
     'OR 점프업 OR 점업 OR Jumpup OR 애플뮤직 OR 애뮤 OR 엠넷플러스 OR 엠플 OR 앰플 OR 사운드웨이브 OR 사웨 OR 케타포 OR 올리브영 OR 올영) '
     '(특전 OR 미공포 OR 드볼 OR 럭드 OR 럭키드로우 OR 앨포 OR 팬싸 OR 영통) (포카 OR 포토카드 OR 미공포 OR pc)' + TAIL_Q,
 ]
+DRIVE_FOLDER = "1_0U3zTDV2WDvJc3R8auhuenZF_oYTw1r"  # @soultemplates 공개 드라이브 (트윗에 링크된 폴더)
 CAND = Path(__file__).resolve().parent.parent / "pc_candidates.md"
 STATE = Path(__file__).resolve().parent / "pc_state.json"
 REPORT = Path(__file__).resolve().parent.parent / "pc_report.md"
@@ -86,6 +91,45 @@ def template_name(img):
     if "BROADCAST" in t:
         return ("SUPERSTAR_BROADCAST-DITD" if "DANCING" in m.group(1) else "SUPERSTAR_BROADCAST-SUPERSTAR"), t
     return None, t
+
+
+def drive_templates(state, tmp):
+    """공개 드라이브 폴더 목록 → 바뀐(또는 처음 보는) 템플릿만 내려받아 tmp/<템플릿이름>.png 로. [(이름, 링크)]"""
+    try:
+        html = requests.get(f"https://drive.google.com/embeddedfolderview?id={DRIVE_FOLDER}", timeout=30).text
+    except Exception as e:  # noqa: BLE001
+        print(f"[드라이브] 목록 실패: {e}")
+        return []
+    entries = re.findall(r'id="entry-([\w-]+)".*?<img src="([^"]+)".*?flip-entry-title">([^<]+)<.*?flip-entry-last-modified"?[^>]*>(?:<div>)?([^<]*)', html, re.S)
+    if not entries:  # 목록 모양이 바뀌었을 때 — id·제목만이라도
+        entries = [(i, "", t, "") for i, t in re.findall(r'id="entry-([\w-]+)".*?flip-entry-title">([^<]+)<', html, re.S)]
+    seen = state.setdefault("drive", {})
+    out = []
+    import html as _h
+    for fid, thumb, title, date in entries:
+        title = _h.unescape(title)
+        if not re.search(r"\.(png|jpe?g|webp)$", title, re.I):
+            continue
+        old = seen.get(fid, {})
+        mark = f"{thumb.split('=')[0]}|{date.strip()}"
+        if old.get("mark") == mark and thumb:
+            continue  # 목록상 그대로
+        try:
+            raw = requests.get(f"https://drive.usercontent.google.com/download?id={fid}&export=download&confirm=t", timeout=60).content
+            img = Image.open(io.BytesIO(raw)).convert("RGB")
+        except Exception as e:  # noqa: BLE001
+            print(f"[드라이브] {title} 받기 실패: {e}")
+            continue
+        sha = hashlib.sha1(raw).hexdigest()
+        seen[fid] = {"title": title, "mark": mark, "sha": sha}
+        if old.get("sha") == sha:
+            continue  # 내용 그대로
+        name, text = template_name(img)
+        print(f"[드라이브] {title}: {text[:60]!r} → {name}")
+        if name:
+            img.save(Path(tmp) / f"{name}.png")
+            out.append((name, f"https://drive.google.com/file/d/{fid}/view"))
+    return out
 
 
 def search_candidates(state):
@@ -137,8 +181,17 @@ def search_candidates(state):
 
 def main(backfill=False):
     state = json.loads(STATE.read_text()) if STATE.exists() else {}
+    drive_found = []
+    with tempfile.TemporaryDirectory() as tmp:
+        drive_found = drive_templates(state, tmp)
+        if drive_found:
+            pc_crop.ONLY_NEW = True  # 드라이브 쪽은 새 카드만
+            pc_crop.main(tmp)
+            pc_crop.ONLY_NEW = False
     if not xposts.enabled():
-        print("[포카] X 토큰 없음 — 건너뜀")
+        print("[포카] X 토큰 없음 — X 확인은 건너뜀")
+        STATE.write_text(json.dumps(state, indent=1))
+        report(drive_found)
         return
     uid = state.get("uid") or xposts.user_id(ACCOUNT)
     state["uid"] = uid
@@ -171,13 +224,19 @@ def main(backfill=False):
         for i, part in enumerate(search_candidates(state) or []):
             (CAND if i == 0 else CAND.with_name(f"pc_candidates_{i + 1:02d}.md")).write_text(part)
     STATE.write_text(json.dumps(state, indent=1))
-    if found:
-        lines = ["@soultemplates 새 포카 템플릿을 멤버별로 잘랐어요. **Files changed**에서 잘린 카드와 라벨(파일 이름)을 확인하고 머지해 주세요.", "",
-                 "| 템플릿 | 원본 글 |", "|---|---|"]
-        lines += [f"| {n} | {u} |" for n, u in dict(found).items()]
-        lines += ["", "출처 @soultemplates — 허락받음(원본 글 링크 표시 조건)"]
-        REPORT.write_text("\n".join(lines) + "\n")
-    print(f"[포카] 새 글 {len(posts)}개 · 템플릿 {len(found)}장")
+    report(found + drive_found)
+    print(f"[포카] 새 글 {len(posts)}개 · 템플릿 {len(found)}장 · 드라이브 {len(drive_found)}장")
+
+
+def report(found):
+    if not found:
+        return
+    lines = ["@soultemplates 새 포카 템플릿을 멤버별로 잘랐어요. **Files changed**에서 잘린 카드와 라벨(파일 이름)을 확인하고 머지해 주세요.",
+             "드라이브에서 바뀐 템플릿은 사이트에 없던 카드만 추가했어요.", "",
+             "| 템플릿 | 원본 |", "|---|---|"]
+    lines += [f"| {n} | {u} |" for n, u in dict(found).items()]
+    lines += ["", "출처 @soultemplates — 허락받음(원본 글 링크 표시 조건)"]
+    REPORT.write_text("\n".join(lines) + "\n")
 
 
 if __name__ == "__main__":
