@@ -26,8 +26,13 @@ import xposts  # noqa: E402
 
 ACCOUNT = "soultemplates"
 # 템플릿 계정 말고도 X 검색으로 새 포카 글 후보를 모아 이슈로 알려 줌 (자동으로 올리진 않음 — 확인·허락 후 직접 추가)
-SEARCH = ('(에이투오소울 OR 에투소 OR "A2O SOUL" OR A2OSOUL) (포카 OR 포토카드 OR 미공포 OR 특전 OR 럭드 OR 럭키드로우 '
-          'OR photocard OR POB OR "lucky draw") has:images -is:retweet -is:reply -from:soultemplates')
+SEARCH = ('(에이투오소울 OR 에투소 OR "A2O SOUL" OR A2OSOUL) '
+          '(포카 OR 포토카드 OR 미공포 OR 특전 OR 럭드 OR 럭키드로우 '          # 한국어
+          'OR photocard OR photocards OR pc OR pcs OR POB OR "lucky draw" '     # 영어 (+스페인어·포르투갈어·인니 등도 대부분 영어 표기)
+          'OR トレカ OR フォトカード OR 特典 OR ラキドロ '                       # 일본어
+          'OR 小卡 OR 特典卡 OR 签售卡 '                                        # 중국어
+          'OR โฟโต้การ์ด OR การ์ด OR "kartu foto") '                           # 태국어·인니어
+          'has:images -is:retweet -is:reply -from:soultemplates')
 CAND = Path(__file__).resolve().parent.parent / "pc_candidates.md"
 STATE = Path(__file__).resolve().parent / "pc_state.json"
 REPORT = Path(__file__).resolve().parent.parent / "pc_report.md"
