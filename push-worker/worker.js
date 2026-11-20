@@ -362,7 +362,7 @@ async function x2Connect(env, origin) {
   const state = b64url(crypto.getRandomValues(new Uint8Array(16)));
   await env.SUBS.put(`_tw2:${state}`, verifier, { expirationTtl: 900 });
   const q = new URLSearchParams({ response_type: "code", client_id: env.X_CLIENT_ID, redirect_uri: `${origin}/tweet/callback2`,
-    scope: "tweet.read tweet.write users.read offline.access", state, code_challenge: b64url(await crypto.subtle.digest("SHA-256", enc.encode(verifier))),
+    scope: "tweet.read tweet.write users.read media.write offline.access", state, code_challenge: b64url(await crypto.subtle.digest("SHA-256", enc.encode(verifier))),
     code_challenge_method: "S256" });
   return `https://x.com/i/oauth2/authorize?${q}`;
 }
@@ -397,12 +397,29 @@ async function x2Fresh(env, acct) {
   return x2Save(env, j, acct.screen_name);
 }
 
-async function postTweet(env, text) {
+// 사진 올리기 (OAuth 2.0 + media.write 권한) → media id. 실패하면 null (글만 올림)
+async function uploadImage(env, acct, imageUrl) {
+  try {
+    if (acct.v !== 2 || !/^https:\/\/a2osoul-tracker\.com\//.test(imageUrl || "")) return null;
+    const img = await fetch(imageUrl);
+    if (!img.ok) return null;
+    const fd = new FormData();
+    fd.append("media", new Blob([await img.arrayBuffer()], { type: img.headers.get("content-type") || "image/jpeg" }), "image.jpg");
+    fd.append("media_category", "tweet_image");
+    const r = await fetch("https://api.x.com/2/media/upload", { method: "POST", headers: { Authorization: `Bearer ${(await x2Fresh(env, acct)).access}` }, body: fd });
+    const j = await r.json().catch(() => ({}));
+    return (j.data && (j.data.id || j.data.media_id)) || null;
+  } catch (_) { return null; }
+}
+
+async function postTweet(env, text, imageUrl) {
   const acct = await xAccount(env);
   if (!acct) throw new Error("연결된 X 계정이 없어요");
   const url = "https://api.x.com/2/tweets";
+  const mediaId = imageUrl ? await uploadImage(env, acct, imageUrl) : null;
   const auth = acct.v === 2 ? `Bearer ${(await x2Fresh(env, acct)).access}` : await oauthHeader(env, "POST", url, { token: acct.token, tokenSecret: acct.secret });
-  const r = await fetch(url, { method: "POST", headers: { Authorization: auth, "Content-Type": "application/json" }, body: JSON.stringify({ text }) });
+  const r = await fetch(url, { method: "POST", headers: { Authorization: auth, "Content-Type": "application/json" },
+    body: JSON.stringify(mediaId ? { text, media: { media_ids: [String(mediaId)] } } : { text }) });
   const j = await r.json().catch(() => ({}));
   if (!r.ok) throw new Error((j.detail || j.title || JSON.stringify(j)).slice(0, 200) || String(r.status));
   return j.data && j.data.id;
@@ -485,9 +502,10 @@ async function tweets(req, env, url) {
       if (!d || typeof d.text !== "string" || !d.key) continue;
       const id = (await sha("tw:" + d.key)).slice(0, 16);
       if (await env.SUBS.get(`_tw:${id}`)) continue;
-      const rec = { id, key: String(d.key).slice(0, 120), kind: String(d.kind || ""), text: d.text.slice(0, 1000), status: "pending", at: Date.now() };
+      const rec = { id, key: String(d.key).slice(0, 120), kind: String(d.kind || ""), text: d.text.slice(0, 1000), status: "pending", at: Date.now(),
+        ...(typeof d.image === "string" && /^https:\/\/a2osoul-tracker\.com\//.test(d.image) ? { image: d.image } : {}) };
       if (d.auto && canPost) {  // 확실한 정보(일정·생일·조회수)는 확인 없이 바로 올림 — 실패하면 초안으로 남김
-        try { rec.tweet = await postTweet(env, rec.text); rec.status = "posted"; rec.auto = true; rec.posted = Date.now(); posted++; }
+        try { rec.tweet = await postTweet(env, rec.text, rec.image); rec.status = "posted"; rec.auto = true; rec.posted = Date.now(); posted++; }
         catch (e) { rec.error = String(e.message || e).slice(0, 200); }
       }
       await env.SUBS.put(`_tw:${id}`, JSON.stringify(rec), { expirationTtl: 3 * 86400 });
@@ -543,7 +561,7 @@ async function tweets(req, env, url) {
     if (!ac || (ac.v !== 2 && !appOk)) return json(req, { error: "X 계정이 아직 연결되지 않았어요" }, 503);
     const text = typeof b.text === "string" && b.text.trim() ? b.text.trim().slice(0, 1000) : d.text;
     try {
-      const tid = await postTweet(env, text);
+      const tid = await postTweet(env, text, b.noImage ? null : d.image);
       await env.SUBS.put(k, JSON.stringify({ ...d, text, status: "posted", tweet: tid, posted: Date.now() }), { expirationTtl: 3 * 86400 });
       return json(req, { ok: true, tweet: tid });
     } catch (e) {

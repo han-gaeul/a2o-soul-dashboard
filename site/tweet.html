@@ -52,6 +52,7 @@
   .cnt.over { color: #c81e43; font-weight: 700; }
   .rt-body { white-space: pre-line; font-size: 15px; line-height: 1.55; padding: 10px 12px; border-left: 3px solid var(--accent); background: var(--bg); border-radius: 8px; }
   .meta a { font-weight: 700; color: var(--accent); text-decoration: none; }
+  .tw-img { width: 100%; border-radius: 12px; border: 1px solid var(--line); display: block; }
   .acts { display: flex; gap: 8px; justify-content: flex-end; }
   .empty { text-align: center; color: var(--muted); font-size: 14px; padding: 22px 0; background: var(--card); border: 1px dashed var(--line); border-radius: 16px; }
   /* 지난 초안: 한 줄씩 */
@@ -175,7 +176,9 @@
     skip.onclick = async () => { skip.disabled = true; try { await call("/tweet/skip", { id: d.id }); load(); } catch (e) { msg(e.message, true); skip.disabled = false; } };
     const acts = document.createElement("div"); acts.className = "acts"; acts.append(skip, go);
     const box = document.createElement("div"); box.className = "card";
-    box.append(meta(d, cnt), ta, acts);
+    box.append(meta(d, cnt), ta);
+    if (d.image) { const im = document.createElement("img"); im.src = d.image; im.alt = ""; im.className = "tw-img"; box.append(im); }  // 같이 올라갈 사진
+    box.append(acts);
     return box;
   };
   // 지난 초안: 한 줄

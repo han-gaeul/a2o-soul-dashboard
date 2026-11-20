@@ -256,10 +256,23 @@ def tweet_text(kind, data):
     return out
 
 
+LIVE_IMG = {"더쇼": "theshow", "쇼챔피언": "showchampion", "엠카운트다운": "mcountdown", "뮤직뱅크": "musicbank", "음악중심": "musiccore", "인기가요": "inkigayo"}
+
+
+def tweet_image(kind, data, site):
+    """트윗에 붙일 사진 (사이트에 있는 것만): 음방 '곧 시작'·'생방송 중' 카드 — site/img/live/<방송>-soon|live.jpg"""
+    if kind == "show" and (data.get("soon") or data.get("now")):
+        slug = next((v for k, v in LIVE_IMG.items() if k in data.get("name", "")), None)
+        if slug:
+            return f"{site.rstrip('/')}/img/live/{slug}-{'live' if data.get('now') else 'soon'}.jpg"
+    return None
+
+
 def drafts(api, priv, new, site):
     """새 알림 후보 → 트윗 초안을 Worker에 저장. 저장된 개수를 돌려줌."""
     # 팬 계정이 주최하는 행사(credit 있음)는 초안 안 만듦 — 그쪽 공지를 리트윗하는 게 맞음
-    items = [{"key": key, "kind": kind, "text": tweet_text(kind, data), "auto": kind in AUTO_POST} for key, topic, kind, data in new
+    items = [{"key": key, "kind": kind, "text": tweet_text(kind, data), "auto": kind in AUTO_POST, **({"image": tweet_image(kind, data, site)} if tweet_image(kind, data, site) else {})}
+             for key, topic, kind, data in new
              if kind not in ("notice",) and not data.get("credit") and not data.get("no_draft")]
     if not items:
         return 0
