@@ -349,15 +349,59 @@ async function oauthHeader(env, method, url, { token = "", tokenSecret = "", ext
 // 글 올릴 계정: tweet.html에서 'X 계정 연결'로 저장한 계정 → 없으면 Cloudflare 시크릿(X_ACCESS_TOKEN·X_ACCESS_SECRET)
 async function xAccount(env) {
   const a = await env.SUBS.get("_twacct", "json");
-  if (a && a.token && a.secret) return a;
+  if (a && ((a.token && a.secret) || (a.v === 2 && a.refresh))) return a;
   return env.X_ACCESS_TOKEN && env.X_ACCESS_SECRET ? { token: env.X_ACCESS_TOKEN, secret: env.X_ACCESS_SECRET, screen_name: "" } : null;
+}
+
+// ---- OAuth 2.0 (PKCE) 연결: OAuth 1.0a 교환이 X 쪽 500으로 막혀서 대신 씀 ----
+// 변수 X_CLIENT_ID · 비밀 X_CLIENT_SECRET (X 콘솔 → 앱 → OAuth 2.0 키), 콜백 https://push.a2osoul-tracker.com/tweet/callback2
+const b64url = (buf) => btoa(String.fromCharCode(...new Uint8Array(buf))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+const o2Auth = (env) => ({ Authorization: "Basic " + btoa(`${env.X_CLIENT_ID}:${env.X_CLIENT_SECRET || ""}`), "Content-Type": "application/x-www-form-urlencoded" });
+async function x2Connect(env, origin) {
+  const verifier = b64url(crypto.getRandomValues(new Uint8Array(48)));
+  const state = b64url(crypto.getRandomValues(new Uint8Array(16)));
+  await env.SUBS.put(`_tw2:${state}`, verifier, { expirationTtl: 900 });
+  const q = new URLSearchParams({ response_type: "code", client_id: env.X_CLIENT_ID, redirect_uri: `${origin}/tweet/callback2`,
+    scope: "tweet.read tweet.write users.read offline.access", state, code_challenge: b64url(await crypto.subtle.digest("SHA-256", enc.encode(verifier))),
+    code_challenge_method: "S256" });
+  return `https://x.com/i/oauth2/authorize?${q}`;
+}
+async function x2Save(env, j, screen_name) {
+  const acct = { v: 2, access: j.access_token, refresh: j.refresh_token, exp: Date.now() + (Number(j.expires_in) || 7200) * 1000 - 60000, screen_name, at: Date.now() };
+  await env.SUBS.put("_twacct", JSON.stringify(acct));
+  return acct;
+}
+async function x2Callback(env, url) {
+  const back = (m) => Response.redirect(`https://a2osoul-tracker.com/tweet.html?x=${encodeURIComponent(m)}`, 302);
+  if (url.searchParams.get("error")) return back("취소했어요");
+  const state = url.searchParams.get("state") || "", code = url.searchParams.get("code") || "";
+  const verifier = await env.SUBS.get(`_tw2:${state}`);
+  if (!verifier || !code) return back("연결 시간이 지났어요. 다시 눌러 주세요");
+  await env.SUBS.delete(`_tw2:${state}`);
+  const r = await fetch("https://api.x.com/2/oauth2/token", { method: "POST", headers: o2Auth(env),
+    body: new URLSearchParams({ grant_type: "authorization_code", code, redirect_uri: `${url.origin}/tweet/callback2`, code_verifier: verifier, client_id: env.X_CLIENT_ID }) });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok || !j.access_token) return back(`연결 실패 (OAuth2 ${r.status} ${(j.error_description || j.error || "").slice(0, 120)})`);
+  let name = "";
+  try { name = ((await (await fetch("https://api.x.com/2/users/me", { headers: { Authorization: `Bearer ${j.access_token}` } })).json()).data || {}).username || ""; } catch (_) {}
+  await x2Save(env, j, name);
+  return back(`@${name} 연결됐어요`);
+}
+// OAuth2 토큰은 2시간이면 만료 → 올릴 때 새로 받기 (refresh token은 쓸 때마다 바뀌어서 같이 저장)
+async function x2Fresh(env, acct) {
+  if (acct.exp > Date.now()) return acct;
+  const r = await fetch("https://api.x.com/2/oauth2/token", { method: "POST", headers: o2Auth(env),
+    body: new URLSearchParams({ grant_type: "refresh_token", refresh_token: acct.refresh, client_id: env.X_CLIENT_ID }) });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok || !j.access_token) throw new Error(`X 로그인이 만료됐어요 — 'X 계정 연결'을 다시 눌러 주세요 (${r.status})`);
+  return x2Save(env, j, acct.screen_name);
 }
 
 async function postTweet(env, text) {
   const acct = await xAccount(env);
   if (!acct) throw new Error("연결된 X 계정이 없어요");
   const url = "https://api.x.com/2/tweets";
-  const auth = await oauthHeader(env, "POST", url, { token: acct.token, tokenSecret: acct.secret });
+  const auth = acct.v === 2 ? `Bearer ${(await x2Fresh(env, acct)).access}` : await oauthHeader(env, "POST", url, { token: acct.token, tokenSecret: acct.secret });
   const r = await fetch(url, { method: "POST", headers: { Authorization: auth, "Content-Type": "application/json" }, body: JSON.stringify({ text }) });
   const j = await r.json().catch(() => ({}));
   if (!r.ok) throw new Error((j.detail || j.title || JSON.stringify(j)).slice(0, 200) || String(r.status));
@@ -428,11 +472,13 @@ async function tweets(req, env, url) {
     return json(req, { ok: true, added });
   }
   if (req.method === "GET" && p === "/tweet/callback") return xCallback(env, url);
+  if (req.method === "GET" && p === "/tweet/callback2") return x2Callback(env, url);
   const b = req.method === "POST" ? await req.json().catch(() => ({})) : {};
   if (!(await sameKey(b.key, env.TWEET_KEY))) return json(req, { error: "비밀번호가 달라요" }, 403);
   const appOk = !!(env.X_API_KEY && env.X_API_SECRET);
   if (p === "/tweet/connect") {
-    if (!appOk) return json(req, { error: "X_API_KEY·X_API_SECRET이 아직 없어요" }, 503);
+    if (!appOk && !env.X_CLIENT_ID) return json(req, { error: "X_API_KEY·X_API_SECRET이 아직 없어요" }, 503);
+    if (env.X_CLIENT_ID) return json(req, { url: await x2Connect(env, url.origin) });  // OAuth 2.0 우선
     try { return json(req, { url: await xConnect(env, url.origin) }); } catch (e) { return json(req, { error: e.message }, 502); }
   }
   if (p === "/tweet/disconnect") { await env.SUBS.delete("_twacct"); return json(req, { ok: true }); }
@@ -445,7 +491,7 @@ async function tweets(req, env, url) {
       cursor = page.list_complete ? null : page.cursor;
     } while (cursor);
     const acct = await xAccount(env);
-    return json(req, { ready: !!(appOk && acct), account: acct ? (acct.screen_name || "(시크릿에 넣은 계정)") : "", connected: !!(await env.SUBS.get("_twacct")),
+    return json(req, { ready: !!(acct && (acct.v === 2 || appOk)), account: acct ? (acct.screen_name || "(시크릿에 넣은 계정)") : "", connected: !!(await env.SUBS.get("_twacct")),
       drafts: out.sort((a, c) => c.at - a.at) });
   }
   const k = `_tw:${String(b.id || "").replace(/[^0-9a-f]/g, "")}`;
@@ -457,7 +503,8 @@ async function tweets(req, env, url) {
   }
   if (p === "/tweet/post") {
     if (d.status === "posted") return json(req, { error: "이미 올린 글이에요" }, 409);
-    if (!appOk || !(await xAccount(env))) return json(req, { error: "X 계정이 아직 연결되지 않았어요" }, 503);
+    const ac = await xAccount(env);
+    if (!ac || (ac.v !== 2 && !appOk)) return json(req, { error: "X 계정이 아직 연결되지 않았어요" }, 503);
     const text = typeof b.text === "string" && b.text.trim() ? b.text.trim().slice(0, 1000) : d.text;
     try {
       const tid = await postTweet(env, text);
