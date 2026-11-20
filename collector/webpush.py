@@ -100,11 +100,14 @@ def candidates(dash, site, now):
             live = next((x for x in lives if x.get("show") and x["show"] in (e.get("title") or "")), None)
             out.append((f"ev|{e['date']}|{tm}|{e['title']}", "show", "show",
                         {"name": e["title"], "t": tm, "url": (live or {}).get("url") or site, "parts": [e["title"]], "tr": tr, "now": now >= st,
-                         "credit": e.get("credit") or ""}))
-            if timedelta(0) <= now - st <= timedelta(minutes=30):  # 방송 시작 → 트윗 초안 하나 더 (푸시는 1시간 전 것만)
-                out.append((f"ev|{e['date']}|{tm}|{e['title']}|live", "show", "show",
-                            {"name": e["title"], "t": tm, "url": (live or {}).get("url") or site, "parts": [e["title"]], "tr": tr, "now": True,
-                             "credit": e.get("credit") or "", "draft_only": True}))
+                         "credit": e.get("credit") or "", "no_draft": True}))  # 1시간 전은 푸시만
+            # 트윗 초안: 방송 5분 전 · 시작 10분 뒤 (수집이 10분마다라 창을 조금 넓게)
+            base = {"name": e["title"], "t": tm, "url": (live or {}).get("url") or site, "parts": [e["title"]], "tr": tr,
+                    "credit": e.get("credit") or "", "draft_only": True}
+            if timedelta(0) < st - now <= timedelta(minutes=12):
+                out.append((f"ev|{e['date']}|{tm}|{e['title']}|pre5", "show", "show", {**base, "soon": True}))
+            if timedelta(minutes=8) <= now - st <= timedelta(minutes=30):
+                out.append((f"ev|{e['date']}|{tm}|{e['title']}|live", "show", "show", {**base, "now": True}))
     for c in dash.get("chart_moves") or []:  # 차트 첫 진입·10계단 이상 상승 (입력 후 3시간 안)
         if timedelta(0) <= now - _kst(c["at"]) <= timedelta(hours=3):
             out.append((f"ch|{c['song']}|{c['service']}|{c['at']}", "notice", "chart", {**c, "url": site + "#cheer", "tr": tr}))
@@ -210,12 +213,17 @@ def tweet_text(kind, data):
     en = ""
     if kind == "media":  # 매체 글은 초안 페이지에서 리트윗 (본문은 미리보기용)
         title, body, url = f"📸 {data['name']} 새 콘텐츠", data["title"], data["url"]
-    elif kind == "show" and data.get("now"):  # 방송 시작: '🔴 지금 뮤직뱅크 생방송 중!'
+    elif kind == "show" and (data.get("now") or data.get("soon")):  # 방송 5분 전 / 시작 뒤
         mm = re.fullmatch(r"(.+?)\s*출연", data["name"])
         show = mm.group(1) if mm else data["name"]
         show_en = (((data.get("tr") or {}).get(show) or {}).get("en")) or show
-        title, body, url = f"🔴 지금 {show} 생방송 중!", "A2O SOUL 무대 같이 봐요 💜", data["url"]
-        en = f"🔴 {show_en} is LIVE now — watch A2O SOUL!"
+        if data.get("soon"):
+            title, body = f"⏰ 곧 {show} 생방송!", f"{data['t']} 시작 — A2O SOUL 무대 함께 봐요 💜"
+            en = f"⏰ {show_en} starts soon ({data['t']} KST)"
+        else:
+            title, body = f"🔴 지금 {show} 생방송 중!", "A2O SOUL 무대 같이 봐요 💜"
+            en = f"🔴 {show_en} is LIVE now — watch A2O SOUL!"
+        url = data["url"]
     else:
         title, body, url = compose(kind, data, "ko")
         t2, b2, _ = compose(kind, data, "en")
@@ -247,7 +255,7 @@ def drafts(api, priv, new, site):
     """새 알림 후보 → 트윗 초안을 Worker에 저장. 저장된 개수를 돌려줌."""
     # 팬 계정이 주최하는 행사(credit 있음)는 초안 안 만듦 — 그쪽 공지를 리트윗하는 게 맞음
     items = [{"key": key, "kind": kind, "text": tweet_text(kind, data)} for key, topic, kind, data in new
-             if kind not in ("notice",) and not data.get("credit")]
+             if kind not in ("notice",) and not data.get("credit") and not data.get("no_draft")]
     if not items:
         return 0
     try:
