@@ -627,3 +627,41 @@ window.I18N = {
   const V = { ko: "사전투표", en: "Pre-vote", ja: "事前投票", zh: "预投票", es: "Prevoto", id: "Pre-vote", th: "โหวตล่วงหน้า", pt: "Pré-votação", fil: "Pre-vote", vi: "Bình chọn trước" };
   for (const [l, v] of Object.entries(V)) if (window.I18N[l]) window.I18N[l].prevote_win = v;
 })();
+
+// 사녹 신청 제출 시간 확인
+(() => {
+  const K = ["pcheck_title", "pcheck_desc", "pcheck_go", "pcheck_bad", "pcheck_nosub", "pcheck_open", "pcheck_guess", "pcheck_made", "pcheck_min", "pcheck_sec"];
+  const V = {
+    ko: ["⏱ 사녹 신청 제출 시간 확인", "신청을 마치고 받은 링크(…submissionId=…)를 붙여 넣으면 몇 초에 제출됐는지 알려 줘요. 링크는 이 기기 안에서만 계산하고 어디에도 보내지 않아요.", "확인",
+      "링크를 확인해 주세요 — 주소에 submissionId=… 가 있어야 해요", "이건 신청 페이지 주소예요 — 신청을 마친 뒤 받은 링크(submissionId=… 포함)를 넣어 주세요",
+      "신청 오픈 {t} 기준 {d}", "{t} 기준 {d} (오픈 시각 추정)", "설문 생성 {t}", "분", "초"],
+    en: ["⏱ Pre-recording sign-up time check", "Paste the link you got after signing up (…submissionId=…) to see the exact second you submitted. It's calculated on this device only — nothing is sent.", "Check",
+      "Please check the link — it needs submissionId=…", "That's the sign-up page — paste the link you got after submitting (with submissionId=…)",
+      "{d} after sign-up opened at {t}", "{d} after {t} (opening time estimated)", "Form created {t}", "m", "s"],
+    ja: ["⏱ 事前収録 申込時刻チェック", "申込完了後のリンク（…submissionId=…）を貼ると、何秒に送信したか分かります。この端末内で計算し、どこにも送りません。", "確認",
+      "リンクを確認してください — submissionId=… が必要です", "これは申込ページのリンクです — 送信後に受け取ったリンク（submissionId=…付き）を貼ってください",
+      "受付開始 {t} から {d}", "{t} から {d}（開始時刻は推定）", "フォーム作成 {t}", "分", "秒"],
+    zh: ["⏱ 预录报名提交时间查询", "粘贴报名完成后得到的链接（…submissionId=…），即可知道是第几秒提交的。仅在本设备计算，不会发送到任何地方。", "查询",
+      "请检查链接 — 需要包含 submissionId=…", "这是报名页面链接 — 请粘贴提交后得到的链接（含 submissionId=…）",
+      "报名开放 {t} 后 {d}", "{t} 后 {d}（开放时间为推测）", "表单创建于 {t}", "分", "秒"],
+    es: ["⏱ Hora de envío de la pregrabación", "Pega el enlace que recibiste al inscribirte (…submissionId=…) para ver el segundo exacto del envío. Se calcula en este dispositivo y no se envía nada.", "Ver",
+      "Revisa el enlace: debe tener submissionId=…", "Ese es el enlace del formulario: pega el que recibiste tras enviarlo (con submissionId=…)",
+      "{d} después de abrir a las {t}", "{d} después de las {t} (hora de apertura estimada)", "Formulario creado {t}", "min", "s"],
+    id: ["⏱ Cek waktu kirim pendaftaran pre-rec", "Tempel link setelah mendaftar (…submissionId=…) untuk melihat detik pengiriman. Dihitung di perangkat ini saja, tidak dikirim ke mana pun.", "Cek",
+      "Periksa link — harus ada submissionId=…", "Itu link halaman pendaftaran — tempel link setelah kirim (dengan submissionId=…)",
+      "{d} setelah dibuka pukul {t}", "{d} setelah {t} (waktu buka perkiraan)", "Formulir dibuat {t}", "m", "d"],
+    th: ["⏱ เช็กเวลาส่งใบสมัครพรีเรค", "วางลิงก์ที่ได้หลังสมัคร (…submissionId=…) เพื่อดูว่าส่งวินาทีไหน คำนวณในเครื่องนี้เท่านั้น ไม่ส่งไปที่ไหน", "เช็ก",
+      "ตรวจลิงก์อีกครั้ง — ต้องมี submissionId=…", "นี่คือลิงก์หน้าสมัคร — วางลิงก์ที่ได้หลังส่ง (มี submissionId=…)",
+      "หลังเปิดรับ {t} {d}", "หลัง {t} {d} (เวลาเปิดโดยประมาณ)", "สร้างฟอร์ม {t}", " นาที", " วินาที"],
+    pt: ["⏱ Horário de envio da pré-gravação", "Cole o link recebido após a inscrição (…submissionId=…) para ver o segundo exato do envio. Calculado só neste aparelho, nada é enviado.", "Ver",
+      "Confira o link — precisa ter submissionId=…", "Esse é o link do formulário — cole o recebido após enviar (com submissionId=…)",
+      "{d} após abrir às {t}", "{d} após {t} (abertura estimada)", "Formulário criado {t}", "min", "s"],
+    fil: ["⏱ Oras ng pag-submit sa pre-rec", "I-paste ang link pagkatapos mag-sign up (…submissionId=…) para makita kung anong segundo ka nag-submit. Sa device na ito lang kinukwenta, walang ipinapadala.", "Tingnan",
+      "Pakitingnan ang link — kailangan ng submissionId=…", "Link ng sign-up page iyan — i-paste ang link pagkatapos mag-submit (may submissionId=…)",
+      "{d} matapos magbukas ng {t}", "{d} matapos ang {t} (tantya ang oras ng bukas)", "Ginawa ang form {t}", "m", "s"],
+    vi: ["⏱ Kiểm tra giờ gửi đăng ký ghi hình trước", "Dán link nhận được sau khi đăng ký (…submissionId=…) để xem bạn gửi vào giây thứ mấy. Chỉ tính trên thiết bị này, không gửi đi đâu.", "Kiểm tra",
+      "Hãy kiểm tra link — cần có submissionId=…", "Đây là link trang đăng ký — hãy dán link nhận được sau khi gửi (có submissionId=…)",
+      "{d} sau khi mở lúc {t}", "{d} sau {t} (giờ mở ước tính)", "Tạo biểu mẫu {t}", " phút", " giây"],
+  };
+  for (const [l, v] of Object.entries(V)) if (window.I18N[l]) K.forEach((k, i) => { window.I18N[l][k] = v[i]; });
+})();
