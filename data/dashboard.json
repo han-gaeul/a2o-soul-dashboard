@@ -8724,6 +8724,12 @@
   },
   {
    "label": "Apple Music A (Photobook)",
+   "member": "SEOHA",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20A%20%28Photobook%29_SEOHA.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Apple Music A (Photobook)",
    "member": "TEO",
    "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20A%20%28Photobook%29_TEO.webp",
    "version": "예판 특전"
@@ -8738,6 +8744,18 @@
    "label": "Apple Music A (Photobook)",
    "member": "JUNE",
    "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20A%20%28Photobook%29_JUNE.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Apple Music A (Photobook)",
+   "member": "HANSUNG",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20A%20%28Photobook%29_HANSUNG.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Apple Music A (Photobook)",
+   "member": "LUCIEN",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20A%20%28Photobook%29_LUCIEN.webp",
    "version": "예판 특전"
   },
   {
@@ -8766,6 +8784,12 @@
   },
   {
    "label": "Apple Music A (Photobook)",
+   "member": "ZAI",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20A%20%28Photobook%29_ZAI.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Apple Music A (Photobook)",
    "member": "AYDEN",
    "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20A%20%28Photobook%29_AYDEN.webp",
    "version": "예판 특전"
@@ -8784,14 +8808,50 @@
   },
   {
    "label": "Apple Music B (Photobook)",
+   "member": "SORA",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20B%20%28Photobook%29_SORA.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Apple Music B (Photobook)",
+   "member": "SEOHA",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20B%20%28Photobook%29_SEOHA.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Apple Music B (Photobook)",
    "member": "GAKU",
    "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20B%20%28Photobook%29_GAKU.webp",
    "version": "예판 특전"
   },
   {
    "label": "Apple Music B (Photobook)",
+   "member": "JUNE",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20B%20%28Photobook%29_JUNE.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Apple Music B (Photobook)",
    "member": "HANSUNG",
    "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20B%20%28Photobook%29_HANSUNG.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Apple Music B (Photobook)",
+   "member": "LUCIEN",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20B%20%28Photobook%29_LUCIEN.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Apple Music B (Photobook)",
+   "member": "ALURE",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20B%20%28Photobook%29_ALURE.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Apple Music B (Photobook)",
+   "member": "SONO",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20B%20%28Photobook%29_SONO.webp",
    "version": "예판 특전"
   },
   {
@@ -8984,6 +9044,108 @@
    "label": "Makestar B",
    "member": "ZET",
    "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Makestar%20B_ZET.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Mnet (Carabiner)",
+   "member": "MOON",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Mnet%20%28Carabiner%29_MOON.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Mnet (Carabiner)",
+   "member": "TEO",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Mnet%20%28Carabiner%29_TEO.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Mnet (Carabiner)",
+   "member": "TAI",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Mnet%20%28Carabiner%29_TAI.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Mnet (Photobook)",
+   "member": "MOON",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Mnet%20%28Photobook%29_MOON.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Mnet (Photobook)",
+   "member": "TEO",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Mnet%20%28Photobook%29_TEO.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Mnet (Photobook)",
+   "member": "GAKU",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Mnet%20%28Photobook%29_GAKU.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Mnet (Photobook)",
+   "member": "SEE-ONE",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Mnet%20%28Photobook%29_SEE-ONE.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Mnet (Photobook)",
+   "member": "ALURE",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Mnet%20%28Photobook%29_ALURE.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Mnet (Photobook)",
+   "member": "TAI",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Mnet%20%28Photobook%29_TAI.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Mnet (Photobook)",
+   "member": "SONO",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Mnet%20%28Photobook%29_SONO.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Mnet (Photobook)",
+   "member": "AYDEN",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Mnet%20%28Photobook%29_AYDEN.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Mnet (Photobook)",
+   "member": "ZET",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Mnet%20%28Photobook%29_ZET.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Music Plant A (Photobook)",
+   "member": "SORA",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Music%20Plant%20A%20%28Photobook%29_SORA.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Music Plant A (Photobook)",
+   "member": "TEO",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Music%20Plant%20A%20%28Photobook%29_TEO.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Music Plant A (Photobook)",
+   "member": "TAI",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Music%20Plant%20A%20%28Photobook%29_TAI.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Music Plant A (Photobook)",
+   "member": "ZAI",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Music%20Plant%20A%20%28Photobook%29_ZAI.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Music Plant B (Photobook)",
+   "member": "TAI",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Music%20Plant%20B%20%28Photobook%29_TAI.webp",
    "version": "예판 특전"
   },
   {
@@ -9255,6 +9417,96 @@
    "member": "ZET",
    "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Withmuu%20%28Photobook%29_ZET.webp",
    "version": "예판 특전"
+  },
+  {
+   "label": "Mnet (Videocall·Fansign)",
+   "member": "MOON",
+   "src": "img/photocards/%ED%8C%AC%EC%82%AC%EC%9D%B8%C2%B7%EC%98%81%ED%86%B5_Mnet%20%28Videocall%C2%B7Fansign%29_MOON.webp",
+   "version": "팬사인·영통"
+  },
+  {
+   "label": "Mnet (Videocall·Fansign)",
+   "member": "SORA",
+   "src": "img/photocards/%ED%8C%AC%EC%82%AC%EC%9D%B8%C2%B7%EC%98%81%ED%86%B5_Mnet%20%28Videocall%C2%B7Fansign%29_SORA.webp",
+   "version": "팬사인·영통"
+  },
+  {
+   "label": "Mnet (Videocall·Fansign)",
+   "member": "SEOHA",
+   "src": "img/photocards/%ED%8C%AC%EC%82%AC%EC%9D%B8%C2%B7%EC%98%81%ED%86%B5_Mnet%20%28Videocall%C2%B7Fansign%29_SEOHA.webp",
+   "version": "팬사인·영통"
+  },
+  {
+   "label": "Mnet (Videocall·Fansign)",
+   "member": "TEO",
+   "src": "img/photocards/%ED%8C%AC%EC%82%AC%EC%9D%B8%C2%B7%EC%98%81%ED%86%B5_Mnet%20%28Videocall%C2%B7Fansign%29_TEO.webp",
+   "version": "팬사인·영통"
+  },
+  {
+   "label": "Mnet (Videocall·Fansign)",
+   "member": "GAKU",
+   "src": "img/photocards/%ED%8C%AC%EC%82%AC%EC%9D%B8%C2%B7%EC%98%81%ED%86%B5_Mnet%20%28Videocall%C2%B7Fansign%29_GAKU.webp",
+   "version": "팬사인·영통"
+  },
+  {
+   "label": "Mnet (Videocall·Fansign)",
+   "member": "JUNE",
+   "src": "img/photocards/%ED%8C%AC%EC%82%AC%EC%9D%B8%C2%B7%EC%98%81%ED%86%B5_Mnet%20%28Videocall%C2%B7Fansign%29_JUNE.webp",
+   "version": "팬사인·영통"
+  },
+  {
+   "label": "Mnet (Videocall·Fansign)",
+   "member": "HANSUNG",
+   "src": "img/photocards/%ED%8C%AC%EC%82%AC%EC%9D%B8%C2%B7%EC%98%81%ED%86%B5_Mnet%20%28Videocall%C2%B7Fansign%29_HANSUNG.webp",
+   "version": "팬사인·영통"
+  },
+  {
+   "label": "Mnet (Videocall·Fansign)",
+   "member": "LUCIEN",
+   "src": "img/photocards/%ED%8C%AC%EC%82%AC%EC%9D%B8%C2%B7%EC%98%81%ED%86%B5_Mnet%20%28Videocall%C2%B7Fansign%29_LUCIEN.webp",
+   "version": "팬사인·영통"
+  },
+  {
+   "label": "Mnet (Videocall·Fansign)",
+   "member": "SEE-ONE",
+   "src": "img/photocards/%ED%8C%AC%EC%82%AC%EC%9D%B8%C2%B7%EC%98%81%ED%86%B5_Mnet%20%28Videocall%C2%B7Fansign%29_SEE-ONE.webp",
+   "version": "팬사인·영통"
+  },
+  {
+   "label": "Mnet (Videocall·Fansign)",
+   "member": "ALURE",
+   "src": "img/photocards/%ED%8C%AC%EC%82%AC%EC%9D%B8%C2%B7%EC%98%81%ED%86%B5_Mnet%20%28Videocall%C2%B7Fansign%29_ALURE.webp",
+   "version": "팬사인·영통"
+  },
+  {
+   "label": "Mnet (Videocall·Fansign)",
+   "member": "TAI",
+   "src": "img/photocards/%ED%8C%AC%EC%82%AC%EC%9D%B8%C2%B7%EC%98%81%ED%86%B5_Mnet%20%28Videocall%C2%B7Fansign%29_TAI.webp",
+   "version": "팬사인·영통"
+  },
+  {
+   "label": "Mnet (Videocall·Fansign)",
+   "member": "SONO",
+   "src": "img/photocards/%ED%8C%AC%EC%82%AC%EC%9D%B8%C2%B7%EC%98%81%ED%86%B5_Mnet%20%28Videocall%C2%B7Fansign%29_SONO.webp",
+   "version": "팬사인·영통"
+  },
+  {
+   "label": "Mnet (Videocall·Fansign)",
+   "member": "ZAI",
+   "src": "img/photocards/%ED%8C%AC%EC%82%AC%EC%9D%B8%C2%B7%EC%98%81%ED%86%B5_Mnet%20%28Videocall%C2%B7Fansign%29_ZAI.webp",
+   "version": "팬사인·영통"
+  },
+  {
+   "label": "Mnet (Videocall·Fansign)",
+   "member": "AYDEN",
+   "src": "img/photocards/%ED%8C%AC%EC%82%AC%EC%9D%B8%C2%B7%EC%98%81%ED%86%B5_Mnet%20%28Videocall%C2%B7Fansign%29_AYDEN.webp",
+   "version": "팬사인·영통"
+  },
+  {
+   "label": "Mnet (Videocall·Fansign)",
+   "member": "ZET",
+   "src": "img/photocards/%ED%8C%AC%EC%82%AC%EC%9D%B8%C2%B7%EC%98%81%ED%86%B5_Mnet%20%28Videocall%C2%B7Fansign%29_ZET.webp",
+   "version": "팬사인·영통"
   },
   {
    "label": "Dancing in the Dark",
