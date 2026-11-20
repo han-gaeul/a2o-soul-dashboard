@@ -486,7 +486,9 @@ if ("serviceWorker" in navigator) {
   };
   // 투표 버튼이 갈 곳: 투표는 앱 안에서 하니 앱(스토어, 설치돼 있으면 '열기')이 먼저, 앱을 모르면 투표 링크 → 앱 검색
   const voteHref = (v) => appStore(v.app) || v.url || (v.app ? appSearch(v.app) : "");
-  const voteLabel = (v) => (voteHref(v) === appStore(v.app) ? t("vote_in_app", { app: tc(v.app) }) : v.url ? t("vote_open") : t("vote_find_app", { app: tc(v.app) }));
+  // 버튼 문구 안에 이미 '앱'이 있으니 앱 이름만 ('U+PICK app' → 'U+PICK', 중복 'app app' 방지)
+  const appOnly = (a) => tc(a).replace(/\s*(\bapp\b|\bapps\b|aplikasi|アプリ|แอป|앱)\s*/gi, " ").trim() || tc(a);
+  const voteLabel = (v) => (voteHref(v) === appStore(v.app) ? t("vote_in_app", { app: appOnly(v.app) }) : v.url ? t("vote_open") : t("vote_find_app", { app: appOnly(v.app) }));
   const voteTile = (v, full) => {
     const start = kstDate(v.start), end = kstDate(v.end), now = Date.now();
     const open = now >= start;
