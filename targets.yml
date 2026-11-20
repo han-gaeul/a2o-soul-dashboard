@@ -63,16 +63,25 @@ channels:
     filter: group
     kpi: false
 
-# 방송사 라디오·예능 출연 영상 자동 찾기 (YouTube 검색, every_hours마다 한 번 — 검색은 100유닛이라 자주 안 함)
-#   제목에 그룹명이 있고 채널 이름이 channels(정규식)에 맞는 영상만 등록 — 리액션·팬 채널은 제외됨
+# 영상 자동 찾기 (YouTube 검색, every_hours마다 — 검색은 100유닛이라 자주 안 함)
+#   규칙마다: query로 검색 → 제목에 그룹명 + title(정규식, 선택) + channels(채널 이름 정규식, 선택)이 맞는 영상만 등록
+#   규칙을 바꾸면 다음 실행 때 데뷔일부터 다시 훑어서 지난 영상도 채움
 discover:
-  query: "A2O SOUL"
   every_hours: 6
   days: 14
-  channels: "\\b(MBC|KBS|SBS|JTBC|Mnet|tvN|EBS|ENA)\\b|라디오|RADIO|아리랑|Arirang|1theK|원더케이|딩고|Dingo|스튜디오 춤|STUDIO CHOOM|문명특급|주간아이돌|Weekly Idol|뮤플리|NAVER NOW|이지금"
+  rules:
+    # 방송사 라디오·예능 출연 (리액션·팬 채널 제외)
+    - query: "A2O SOUL"
+      channels: &bc "(MBC|KBS|SBS|JTBC|Mnet|tvN|EBS|ENA)|라디오|RADIO|아리랑|Arirang|1theK|원더케이|딩고|Dingo|스튜디오 춤|STUDIO CHOOM|문명특급|주간아이돌|Weekly Idol|뮤플리|NAVER NOW|이지금|IDOL RADIO|Mhz|므흐즈"
+    - query: "A2O SOUL 라디오|RADIO|보이는라디오|정오의 희망곡|아이돌 라디오"
+      channels: *bc
+    # 출근길·퇴근길 — 언론사·팬 채널 상관없이 제목에 출근길/퇴근길이 있으면
+    - query: "A2O SOUL 출근길|퇴근길"
+      title: "출근길|퇴근길|출퇴근|commute"
 
 # 영상 시리즈 — 제목 정규식(대소문자 무시)으로 분류, 위에서부터 먼저 맞는 것 (전체 영상 탭 '시리즈' 필터)
 series:
+  - { name: 출근길·퇴근길, pattern: "출근길|퇴근길|출퇴근|commute" }
   - { name: 웰컴 투 소울라이트, pattern: "WELCOME TO SOULITE|Welcome to SOULITE" }
   - { name: INFINITE CLIP, pattern: "INFINITE CLIP" }
   - { name: 릴레이댄스, pattern: "릴레이댄스|릴댄" }

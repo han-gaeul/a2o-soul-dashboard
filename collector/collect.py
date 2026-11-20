@@ -544,7 +544,7 @@ def official_extract(caption, posted, today):
     if not A2O_MENTION.search(caption or "") or re.search(r"결과|RESULTS?\b|WINNERS?\b|발표합니다", head, re.I):
         return []  # A2O SOUL 없는 일반 투표, 첫 줄이 '결과 발표'인 글(이미 끝난 투표)은 빼기
     return [{**i, "confidence": max(i["confidence"], 0.9)} if i["kind"] == "vote" and i.get("end") else i
-            for i in rules.extract(caption, posted, today) if i["kind"] in ("vote", "nominee")]
+            for i in rules.extract(caption, posted, today) if i["kind"] in ("vote", "nominee", "radio")]
 
 def nominees(today):
     """음방 1위 후보 (공식 글에서 자동, 최근 2주) — 이번 주 음방 표시·알림용"""
@@ -1026,30 +1026,42 @@ def collect(cfg, rescan=False):
     for cid in set(channels) - set(registry["channels"]):
         print(f"[YT] 채널을 찾을 수 없음: {cid}")
 
-    # 방송사 라디오·예능 출연 영상 찾기 (검색 100유닛이라 몇 시간에 한 번)
-    #   제목에 그룹명이 있고, 채널 이름이 방송사·라디오 목록에 맞는 것만 (리액션·팬 채널 제외)
+    # 방송사 라디오·예능 출연 영상 + 출근길·퇴근길 영상 찾기 (검색 100유닛이라 몇 시간에 한 번)
+    #   규칙마다 query로 검색 → 제목에 그룹명 + (title 정규식) + (channels 정규식)이 맞는 것만 등록
+    #   처음 한 번(또는 규칙이 바뀌면)은 데뷔일부터 몇 페이지 훑어서 지난 영상도 채움
     disc = cfg.get("discover") or {}
-    if disc.get("query"):
+    rules_ = disc.get("rules") or ([{"query": disc["query"], "channels": disc.get("channels")}] if disc.get("query") else [])
+    if rules_:
         last = registry.get("discover_at")
         every = timedelta(hours=float(disc.get("every_hours", 6)))
         if rescan or not last or now - datetime.fromisoformat(last) >= every:
-            ch_re = re.compile(disc.get("channels") or r"MBC|KBS|SBS|JTBC|Mnet|tvN|EBS|ENA", re.I)
             title_re = re.compile(GROUP_PATTERN, re.I)
-            after = (now - timedelta(days=int(disc.get("days", 14)))).astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-            try:
-                found_s = youtube.search_videos(disc["query"], published_after=after)
+            sig = json.dumps(rules_, ensure_ascii=False, sort_keys=True)
+            backfill = registry.get("discover_sig") != sig and cfg["debut_date"]
+            since = (f"{cfg['debut_date']}T00:00:00Z" if backfill
+                     else (now - timedelta(days=int(disc.get("days", 14)))).astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"))
+            ok = True
+            for r in rules_:
+                ch_re = re.compile(r["channels"], re.I) if r.get("channels") else None
+                t_re = re.compile(r["title"], re.I) if r.get("title") else None
+                try:
+                    found_s = youtube.search_videos(r["query"], published_after=since, pages=4 if backfill else 1)
+                except Exception as e:  # noqa: BLE001
+                    print(f"[YT] 검색 실패 ({r['query']}): {e}")
+                    ok = False
+                    continue
+                for up in found_s:
+                    if up["id"] in registry["videos"] or up["channel_id"] in channels:
+                        continue
+                    if not title_re.search(up["title"]) or (t_re and not t_re.search(up["title"])) \
+                            or (ch_re and not ch_re.search(up["channel_title"])):
+                        continue
+                    registry["videos"][up["id"]] = {"title": up["title"], "published_at": up["published_at"],
+                                                    "channel_id": up["channel_id"], "channel_title": up["channel_title"], "discovered": True}
+                    print(f"[YT] 찾음: {up['channel_title']} — {up['title']}")
+            if ok:
                 registry["discover_at"] = now.isoformat(timespec="minutes")
-            except Exception as e:  # noqa: BLE001
-                print(f"[YT] 검색 실패: {e}")
-                found_s = []
-            for up in found_s:
-                if up["id"] in registry["videos"] or up["channel_id"] in channels:
-                    continue
-                if not title_re.search(up["title"]) or not ch_re.search(up["channel_title"]):
-                    continue
-                registry["videos"][up["id"]] = {"title": up["title"], "published_at": up["published_at"],
-                                                "channel_id": up["channel_id"], "discovered": True}
-                print(f"[YT] 방송사 영상 찾음: {up['channel_title']} — {up['title']}")
+                registry["discover_sig"] = sig
 
     # 등록된 공식 채널 영상과 targets.yml에 직접 적은 영상만 유지
     removed = purge_unofficial(cfg, registry, history, set(channels))
@@ -1369,7 +1381,8 @@ def collect(cfg, rescan=False):
         gap = timedelta(minutes=10) if on_air else timedelta(hours=3)
         if ost.get("deep") != 1 or not ost.get("at") or now - datetime.fromisoformat(ost["at"]) >= gap:
             query = ("(\"A2O SOUL\" OR A2OSOUL OR 에이투오소울 OR \"에이투오 소울\") "
-                     "(투표 OR 사전투표 OR 1위후보 OR \"1위 후보\" OR vote OR voting OR nominee OR nominees) "
+                     "(투표 OR 사전투표 OR 1위후보 OR \"1위 후보\" OR vote OR voting OR nominee OR nominees "
+                     "OR 라디오 OR RADIO OR 보이는라디오 OR 희망곡 OR 컬투쇼 OR 영스트리트 OR 러브게임 OR 가요광장 OR FM4U OR 파워FM OR 쿨FM) "
                      "-from:A2O_SOUL -is:retweet -is:reply")
             try:
                 # 팬 글이 많아서 최신 50개만 보면 며칠 전 공식 글을 놓침 → 처음 한 번은 최근 7일을 5쪽(최대 500개)까지

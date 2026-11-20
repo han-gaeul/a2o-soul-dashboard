@@ -114,6 +114,22 @@
   id: "Live"
   th: "ไลฟ์"
   pt: "Live"
+"라디오":
+  en: "Radio"
+  ja: "ラジオ"
+  zh: "电台"
+  es: "Radio"
+  id: "Radio"
+  th: "วิทยุ"
+  pt: "Rádio"
+"📻 라디오":
+  en: "📻 Radio"
+  ja: "📻 ラジオ"
+  zh: "📻 电台"
+  es: "📻 Radio"
+  id: "📻 Radio"
+  th: "📻 วิทยุ"
+  pt: "📻 Rádio"
 "발매":
   en: "Release"
   ja: "リリース"
@@ -1610,6 +1626,14 @@
   id: "Voting dan pengumuman pra-rekaman baru muncul otomatis di sini. Tambahkan ke layar utama dan sering cek ya"
   th: "โหวตและประกาศพรีเรคใหม่จะขึ้นที่เว็บอัตโนมัติ เพิ่มไว้ที่หน้าจอโฮมแล้วเข้ามาเช็กบ่อยๆ"
   pt: "Novas votações e avisos de pré-gravação aparecem aqui automaticamente. Adicione o site à tela de início e confira sempre"
+"출근길·퇴근길":
+  en: "Commute"
+  ja: "出勤・退勤"
+  zh: "上下班路透"
+  es: "Llegadas y salidas"
+  id: "Commute"
+  th: "เดินทางไป-กลับงาน"
+  pt: "Chegadas e saídas"
 "웰컴 투 소울라이트":
   en: "Welcome to SOULITE"
   ja: "ウェルカム・トゥ・ソウライト"
