@@ -1457,7 +1457,7 @@ if ("serviceWorker" in navigator) {
       sections.push(el("section", { class: "dlg-sec", id: "dlg-pc" },
         el("h3", {}, `${t("photocards")} ${myPc.length}`),
         el("div", { class: "pc-grid" }, ...myPc.map((x, i) => pcBtn(x, myPc, i,
-          el("span", { class: "pc-cap muted" }, `${tc(x.version)} · ${x.label}`)))),
+          el("span", { class: "pc-cap" }, el("b", { class: "pc-who" }, tc(x.version)), el("span", { class: "pc-lbl" }, x.label))))),
         cr.url ? el("p", { class: "pf-src" }, t("pc_credit"), " ", ext(cr.url, cr.label || cr.url)) : null));
     }
     if ((m.ig_mentions || []).length) {
@@ -2612,8 +2612,10 @@ if ("serviceWorker" in navigator) {
   const pcCredit = (data.info || {}).photocard_credit || {};
   const pcCreditLine = () => (pcCredit.url
     ? el("p", { class: "pf-src" }, t("pc_credit"), " ", ext(pcCredit.url, pcCredit.label || pcCredit.url)) : null);
-  const pcCard = (x, list, i) => pcBtn(x, list, i, el("span", { class: "pc-cap" }, x.member,
-    x.label ? el("span", { class: "muted" }, ` · ${x.label}`) : null));
+  // 카드 아래: 멤버 이름(굵게) + 라벨(작게, 최대 2줄) — 멤버를 고른 상태면 이름은 빼고 라벨만
+  const pcCard = (x, list, i, solo) => pcBtn(x, list, i, el("span", { class: "pc-cap" },
+    solo ? null : el("b", { class: "pc-who" }, x.member),
+    el("span", { class: "pc-lbl" }, x.label || tc(x.version))));
   if (pcs.length) {
     const versions = [...new Set(pcs.map((x) => x.version))];
     const mems = [...new Set(pcs.map((x) => x.member))].sort((a, b) => (a === bias ? -1 : b === bias ? 1 : 0));
@@ -2638,7 +2640,7 @@ if ("serviceWorker" in navigator) {
         $("pcGrid").replaceChildren(...versions.filter((v) => inWho.some((x) => x.version === v)).map((v) => {
           const list = inWho.filter((x) => x.version === v);
           return el("div", { class: "pc-group" }, el("h4", { class: "pc-group-h" }, tc(v)),
-            el("div", { class: "pc-grid" }, ...list.map((x, i) => pcCard(x, list, i))));
+            el("div", { class: "pc-grid" }, ...list.map((x, i) => pcCard(x, list, i, !!pcWho))));
         }));
         $("pcGrid").classList.add("pc-all");
         fold($("pcGrid"), 99);  // 이전 '더 보기' 버튼 지우기
@@ -2646,7 +2648,7 @@ if ("serviceWorker" in navigator) {
       }
       $("pcGrid").classList.remove("pc-all");
       const list = inWho.filter((x) => x.version === pcVer);
-      $("pcGrid").replaceChildren(...(list.length ? list.map((x, i) => pcCard(x, list, i)) : [el("p", { class: "muted" }, "—")]));
+      $("pcGrid").replaceChildren(...(list.length ? list.map((x, i) => pcCard(x, list, i, !!pcWho)) : [el("p", { class: "muted" }, "—")]));
       fold($("pcGrid"), MOBILE ? 12 : 24);
     };
     drawPc();

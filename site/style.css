@@ -427,7 +427,7 @@ header .head-right { margin-left: auto; }
 #pcTabs { margin-bottom: 10px; }
 #pcTabs button { border: 1px solid var(--line); background: var(--card); color: var(--muted); border-radius: 999px; padding: 5px 10px; font: inherit; font-size: 12px; font-weight: 600; cursor: pointer; }
 #pcTabs button.on { background: var(--accent-bg); border-color: var(--accent-bg); color: #fff; }
-.pc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 10px; }
+.pc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 12px 10px; align-items: start; }
 .pc { margin: 0; display: grid; gap: 4px; font-size: 12px; font-weight: 700; text-align: center; }
 .pc-mem { margin: 8px 0 12px; }
 .pc-mem button { padding: 4px 10px; font-size: 12px; }
@@ -500,9 +500,12 @@ a.tour-item:hover { border-color: var(--accent); }
 
 /* 포토카드 크게 보기 */
 button.pc { all: unset; display: block; cursor: pointer; }
-button.pc img { width: 100%; height: auto; display: block; border-radius: 8px; }
+button.pc img { width: 100%; height: auto; aspect-ratio: 55 / 85; object-fit: cover; display: block; border-radius: 10px;
+  background: var(--line); box-shadow: 0 1px 3px rgba(0,0,0,.08); }
 button.pc:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 8px; }
-.pc-cap { display: block; font-size: 12px; margin-top: 4px; text-align: center; }
+.pc-cap { display: flex; flex-direction: column; align-items: center; gap: 1px; margin-top: 6px; text-align: center; line-height: 1.3; min-height: 2.6em; }
+.pc-who { font-size: 12px; font-weight: 800; letter-spacing: .01em; color: var(--text); }
+.pc-lbl { font-size: 11px; font-weight: 500; color: var(--muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; word-break: keep-all; }
 .pc-view { border: 0; padding: 12px; background: transparent; max-width: min(92vw, 420px); width: 100%; overflow: visible; }
 .pc-view::backdrop { background: rgba(0, 0, 0, .82); }
 .pc-view img { display: block; width: 100%; height: auto; max-height: 72vh; object-fit: contain; border-radius: 14px; }
