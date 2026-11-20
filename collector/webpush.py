@@ -92,6 +92,8 @@ def candidates(dash, site, now):
     for e in dash.get("events") or []:  # 음방·라이브 1시간 전 ~ 시작 30분 뒤 (생방송 보기 링크로)
         if e.get("type") not in ("음방", "라이브", "라디오") and not e.get("notify"):  # notify: true면 행사도 1시간 전 알림
             continue
+        if e.get("credit"):  # 팬 계정이 주최하는 행사(단체 스밍·콜라보 등)는 푸시·트윗 둘 다 안 함
+            continue
         tm = e.get("time") or next((t for sh, t in air.items() if sh in (e.get("title") or "")), None)
         if not (tm and re.fullmatch(r"\d{2}:\d{2}", tm)):
             continue
