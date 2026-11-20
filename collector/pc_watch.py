@@ -37,11 +37,14 @@ SEARCHES = [
     GROUP_Q + '(위드뮤 OR Withmuu OR 메이크스타 OR Makestar OR 뮤직아트 OR Musicart OR 뮤직플랜트 OR "Music Plant" OR 애플뮤직 '
               'OR 점프업 OR Jumpup OR 엠넷플러스 OR "Mnet Plus" OR 올리브영 OR 사운드웨이브 OR Soundwave OR 케타포 OR Ktown4u '
               'OR 팬싸 OR 영통 OR 팬사인회 OR 공방 OR 럭키)' + TAIL_Q,
+    # 그룹명 없는 글: 멤버 이름 + 포카 단어 (한 글자 이름 문·준은 오탐이 많아 영문만)
+    '(서하 OR 소라 OR 테오 OR 가쿠 OR 한성 OR 루시엔 OR 시원 OR 알루어 OR 타이 OR 소노 OR 자이 OR 에이든 OR 제트 '
+    'OR MOON OR SORA OR SEOHA OR TEO OR GAKU OR JUNE OR HANSUNG OR LUCIEN OR SEEONE OR ALURE OR TAI OR SONO OR ZAI OR AYDEN OR ZET) '
+    '(포카 OR 미공포 OR 앨포 OR 특전포카 OR 럭드 OR photocard OR トレカ)' + TAIL_Q,
+    # 그룹명·멤버명 둘 다 없는 글: 지금 A2O SOUL 특전을 하는 판매처 + 특전 포카 (다른 그룹 글도 섞일 수 있음)
+    '(위드뮤 OR Withmuu OR 뮤직플랜트 OR 뮤플 OR 뮤직아트 OR Musicart OR 메이크스타 OR 점프업 OR 애플뮤직 OR 엠플) '
+    '(특전 OR 미공포 OR 드볼 OR 럭드) (포카 OR 포토카드 OR pc)' + TAIL_Q,
 ]
-# 알고 있는 팬 계정은 그룹명 없이 포카 단어만 있어도 (계정은 검색 결과에서 자동으로 늘어남, 최대 FAN_MAX개)
-FAN_Q = '(포카 OR 포토카드 OR 미공포 OR 앨포 OR 특전 OR 럭드 OR 공방 OR 팬싸 OR 드볼 OR photocard OR pc OR POB OR トレカ OR 小卡) '
-FAN_SEED = ["HeyTAI_20261109"]
-FAN_MAX = 120
 CAND = Path(__file__).resolve().parent.parent / "pc_candidates.md"
 STATE = Path(__file__).resolve().parent / "pc_state.json"
 REPORT = Path(__file__).resolve().parent.parent / "pc_report.md"
@@ -98,38 +101,6 @@ def search_candidates(state):
         for p in got:
             found.setdefault(p["tweet_id"], p)
     state["search_v"] = 2
-    # 팬 계정 학습: 그룹명을 붙여 글을 쓴 계정을 기억해 두고, 그 계정들은 그룹명 없이 '포카·특전'만 써도 잡기
-    #   (예: @HeyTAI_… '뮤직플랜트 특전 포카 드볼' — 본문에 A2O SOUL이 없음)
-    fans = state.setdefault("fan_accounts", {})
-    for p in found.values():
-        if p.get("author"):
-            fans[p["author"]] = max(fans.get(p["author"], ""), p.get("timestamp") or "")
-    for h in FAN_SEED:
-        fans.setdefault(h, "")
-    if len(fans) > FAN_MAX:  # 최근에 글 쓴 계정 위주로
-        for h in sorted(fans, key=lambda h: fans[h])[:len(fans) - FAN_MAX]:
-            fans.pop(h)
-    handles = sorted(fans)
-    groups, cur = [], []
-    for h in handles:  # X 검색어 길이 제한(512자) 안에서 from: 묶기
-        if cur and len(FAN_Q) + len(" OR ".join("from:" + x for x in cur + [h])) + len(TAIL_Q) + 4 > 500:
-            groups.append(cur)
-            cur = []
-        cur.append(h)
-    if cur:
-        groups.append(cur)
-    for g in groups:
-        q = FAN_Q + "(" + " OR ".join("from:" + h for h in g) + ")" + TAIL_Q
-        try:
-            got = xposts.search_posts(q, since_id=state.get("fan_since"), max_results=100, pages=2, media=True)
-        except Exception as e:  # noqa: BLE001
-            print(f"[포카 검색 팬계정] 실패: {type(e).__name__} {e}")
-            continue
-        for p in got:
-            found.setdefault(p["tweet_id"], p)
-    if found:
-        state["fan_since"] = max(found, key=int)
-    print(f"[포카 검색] 팬 계정 {len(handles)}개 확인")
     posts = sorted(found.values(), key=lambda p: int(p["tweet_id"]), reverse=True)
     posts = [p for p in posts if p.get("images")]
     print(f"[포카 검색] 후보 {len(posts)}개")
