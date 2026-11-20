@@ -91,6 +91,13 @@ def template_name(img):
 def search_candidates(state):
     """X 검색(여러 묶음) → 새 포카 글 후보 마크다운 목록(댓글 하나씩, 없으면 None).
     처음 한 번은 최근 7일을 깊게(묶음마다 최대 300개), 이후엔 since_id 이후 새 글을 묶음마다 최대 200개."""
+    # X 비용 아끼기: 템플릿 확인은 3시간마다, 이 검색은 6시간마다만
+    from datetime import datetime, timedelta, timezone
+    now = datetime.now(timezone.utc)
+    if state.get("search_at") and now - datetime.fromisoformat(state["search_at"]) < timedelta(hours=5, minutes=50):
+        print("[포카 검색] 6시간 안 지나서 건너뜀")
+        return None
+    state["search_at"] = now.isoformat(timespec="minutes")
     deep = state.get("search_v") != 3  # 3: 한 번 더 7일치 다시 (예전엔 80개만 보여서 나머지가 안 보였음)
     if deep:
         state.pop("search_since", None)
@@ -99,7 +106,7 @@ def search_candidates(state):
         key = f"search_since_{i}"
         since = None if deep else state.get(key)
         try:
-            got = xposts.search_posts(q, since_id=since, max_results=100, pages=3 if deep else 2, media=True)
+            got = xposts.search_posts(q, since_id=since, max_results=100, pages=3 if deep else 1, media=True)  # 평소엔 묶음마다 최대 100개
         except Exception as e:  # noqa: BLE001
             print(f"[포카 검색 {i}] 실패: {type(e).__name__} {e}")
             continue
