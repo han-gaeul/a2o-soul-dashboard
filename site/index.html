@@ -49,6 +49,7 @@
     <a href="#overview" class="on" data-i18n="tab.overview">한눈에</a>
     <a href="#notice" id="noticeTab" data-i18n="tab.notice">공지</a>
     <a href="#cheer" data-i18n="tab.cheer">응원</a>
+    <a href="#collab" data-i18n="tab.collab">콜라보</a>
     <a href="#mv" data-i18n="tab.mv">MV</a>
     <a href="#members" data-i18n="tab.members">멤버</a>
     <a href="#fancams" data-i18n="tab.fancams">직캠</a>
@@ -63,7 +64,7 @@
     <a href="#videos" data-more="mv,fancams"><b>🎬</b><span data-i18n="tab.videos">영상</span></a>
     <a href="#members"><b>👥</b><span data-i18n="tab.members">멤버</span></a>
     <a href="#community"><b>💬</b><span data-i18n="tab.community">커뮤니티</span></a>
-    <a href="#more" id="tabMore" data-more="notice,guide"><b>☰</b><span data-i18n="more_menu">더보기</span></a>
+    <a href="#more" id="tabMore" data-more="notice,guide,collab"><b>☰</b><span data-i18n="more_menu">더보기</span></a>
   </nav>
 
   <!-- 한눈에 -->
@@ -190,6 +191,14 @@
   </div>
 
   <!-- MV -->
+  <div data-tab="collab" hidden>
+    <section class="card">
+      <h2 data-i18n="collab_title">🤝 팬 콜라보</h2>
+      <p class="note small" data-i18n="collab_desc"></p>
+      <div class="collabs" id="collabs"></div>
+    </section>
+  </div>
+
   <div data-tab="mv" hidden>
     <section class="card">
       <h2 data-i18n="mv">뮤직비디오</h2>

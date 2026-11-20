@@ -91,6 +91,12 @@ def load_config():
         if e.get("time") is not None:
             e["time"] = str(e["time"])
     cfg["events"] = events
+    collabs = read_yml("schedule.yml").get("collabs") or []
+    for c in collabs:
+        c["date"] = str(c.get("date", ""))
+        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", c["date"]) or not c.get("title"):
+            sys.exit(f"schedule.yml collabs: date(YYYY-MM-DD)와 title이 필요해요: {c}")
+    cfg["collabs"] = [{k: str(c[k]) for k in ("date", "time", "title", "with", "host", "url", "note") if c.get(k) is not None} for c in collabs]
 
     cfg["series"] = [(str(x["name"]), re.compile(str(x["pattern"]), re.I)) for x in cfg.get("series") or []]
     load_fan_files(cfg)
@@ -1529,6 +1535,7 @@ def write_health(cfg, videos, members, today, official=(), store_cands=None, med
     for b in cfg["guide"]["beginner"]:
         texts += [b["title"]] + b["items"]
     texts += [c["note"] for c in cfg["guide"]["course"]]
+    texts += [c.get(k, "") for c in cfg.get("collabs") or [] for k in ("title", "with", "note")]
     texts += [x for st in cfg["guide"]["steps"] for x in (st["title"], st["desc"])] + [x for f in cfg["guide"]["faq"] for x in (f["q"], f["a"])]
     missing = sorted({x for x in texts if x and re.search(r"[가-힣]", x) and set(tr.get(x, {})) < {"en", "ja", "zh", "es", "id", "th", "pt"}})
     if missing:
@@ -1850,6 +1857,7 @@ def build(cfg):
         "episodes": episodes,
         "timeline": timeline,
         "events": all_events,
+        "collabs": sorted(cfg["collabs"], key=lambda c: (c["date"], c.get("time") or "")),
         "notices": sorted(notices, key=lambda x: (x.get("date") or "9999", x.get("time") or "99:99")),  # 가까운 날짜부터
         "categories": CATEGORIES,
         "feedback_url": str(cfg.get("feedback_url") or ""),
