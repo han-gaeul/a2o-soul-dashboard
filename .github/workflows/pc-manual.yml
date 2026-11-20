@@ -1,0 +1,30 @@
+# collector/pc_manual.json 이 바뀌면(포카 사진 손으로 추가) 카드를 잘라 같은 브랜치에 커밋
+name: Photocards (manual)
+
+on:
+  push:
+    branches-ignore: [main]
+    paths: [collector/pc_manual.json]
+
+permissions:
+  contents: write
+
+jobs:
+  crop:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q pillow requests
+      - run: python collector/pc_manual.py
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain site/img/photocards)" ]; then
+            git add site/img/photocards
+            git commit -m "포카: 손으로 고른 사진 잘라 넣기 (pc_manual.json)"
+            git push
+          fi
