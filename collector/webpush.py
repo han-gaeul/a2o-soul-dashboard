@@ -210,7 +210,7 @@ def x_weight(s):
 
 def tweet_text(kind, data):
     """알림 내용 → X 글 초안: 한국어 + 영어 한 줄 + 링크 + 해시태그(그룹·곡·활동·멤버). 280자 넘으면 활동 태그 → 영어 줄 순서로 뺌."""
-    en = ""
+    en, links = "", []
     if kind == "media":  # 매체 글은 초안 페이지에서 리트윗 (본문은 미리보기용)
         title, body, url = f"📸 {data['name']} 새 콘텐츠", data["title"], data["url"]
     elif kind == "show" and (data.get("now") or data.get("soon")):  # 방송 5분 전 / 시작 뒤
@@ -224,6 +224,8 @@ def tweet_text(kind, data):
             title, body = f"🔴 지금 {show} 생방송 중!", "A2O SOUL 무대 같이 봐요 💜"
             en = f"🔴 {show_en} is LIVE now — watch A2O SOUL!"
         url = data["url"]
+        site_cheer = "https://a2osoul-tracker.com/#cheer"
+        links = [f"📺 생방송 {url}", f"💜 응원법·투표 {site_cheer}"]  # 방송 보기 + 사이트(응원법·투표) 링크 둘 다
     else:
         title, body, url = compose(kind, data, "ko")
         t2, b2, _ = compose(kind, data, "en")
@@ -241,7 +243,7 @@ def tweet_text(kind, data):
 
     def build(with_en, with_era):
         tag2 = " ".join(x for x in (song, ERA_TAGS if with_era else "") if x)
-        lines = [title] + ([body] if body else []) + ([en] if with_en and en else []) + ["", f"👉 {url}" if url else "", "", tags, tag2]
+        lines = [title] + ([body] if body else []) + ([en] if with_en and en else []) + [""] + (links or [f"👉 {url}" if url else ""]) + ["", tags, tag2]
         return re.sub(r"\n{3,}", "\n\n", "\n".join(x for x in lines if x is not None)).strip()
 
     for opt in ((True, True), (True, False), (False, False)):
