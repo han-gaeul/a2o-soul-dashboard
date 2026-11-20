@@ -529,7 +529,8 @@ async function tweets(req, env, url) {
     let cursor;
     do {
       const page = await env.SUBS.list({ prefix: "_tw:", cursor });
-      for (const k of page.keys) { const v = await env.SUBS.get(k.name, "json"); if (v) out.push(v); }
+      const vals = await Promise.all(page.keys.map((k) => env.SUBS.get(k.name, "json")));  // 한꺼번에 (하나씩 읽으면 느림)
+      for (const v of vals) if (v) out.push(v);
       cursor = page.list_complete ? null : page.cursor;
     } while (cursor);
     const acct = await xAccount(env);

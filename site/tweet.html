@@ -299,11 +299,10 @@
   $("login").onsubmit = (e) => { e.preventDefault(); load(); };
   $("notify").onclick = () => subscribe(false);
   $("notifyOff").onclick = () => subscribe(true);
-  fetch("data/dashboard.json").then((r) => r.json()).then((d) => {
-    api = ((d.push || {}).api || "").replace(/\/$/, "");
-    vapid = (d.push || {}).vapid_public || "";
-    if ($("key").value) load();
-  });
+  // 워커 주소·VAPID 공개키는 공개 값이라 바로 씀 (예전엔 700KB짜리 dashboard.json을 받아서 느렸음 — targets.yml push와 같게)
+  api = "https://push.a2osoul-tracker.com";
+  vapid = "BPszmnnzF5KS8DntczISNMfwY2etOSx_oX7L38hORWSCX_mfJE2MzKSKralQ_Y3NcK1osX-iEArij0qscPlj1YU";
+  if ($("key").value) { $("login").hidden = true; msg("불러오는 중…"); load(); }
 })();
 </script>
 </body>
