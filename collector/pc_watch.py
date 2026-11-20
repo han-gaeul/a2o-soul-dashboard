@@ -32,6 +32,8 @@ SEARCH = ('(에이투오소울 OR 에투소 OR "A2O SOUL" OR A2OSOUL) '
           'OR トレカ OR フォトカード OR 特典 OR ラキドロ '                       # 일본어
           'OR 小卡 OR 特典卡 OR 签售卡 '                                        # 중국어
           'OR โฟโต้การ์ด OR การ์ด OR "kartu foto") '                           # 태국어·인니어
+          # 양도·교환·판매·대리구매·분철 글은 빼기 (새 버전 소개 글만 남게)
+          '-양도 -교환 -판매 -구매 -구함 -삽니다 -팝니다 -대리 -분철 -포장 -택포 -반택 -WTS -WTT -WTB -LFB -proxy -"group order" '
           'has:images -is:retweet -is:reply -from:soultemplates')
 CAND = Path(__file__).resolve().parent.parent / "pc_candidates.md"
 STATE = Path(__file__).resolve().parent / "pc_state.json"
