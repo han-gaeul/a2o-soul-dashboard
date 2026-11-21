@@ -1228,7 +1228,7 @@ def collect(cfg, rescan=False):
             for g in groups:
                 query = base + f"({' OR '.join('from:' + h for h in g)}) -is:retweet -is:reply"
                 try:
-                    posts += xposts.search_posts(query, since_id=vst.get("since_id"))
+                    posts += xposts.search_posts(query, since_id=vst.get("since_id"), media=True)  # 공지 이미지도 (날짜가 이미지에만 있을 때 읽으려고)
                 except Exception as e:  # noqa: BLE001
                     print(f"[공지] X 판매처 검색 실패: {e}")
             print(f"[공지] X 판매처 새 글 {len(posts)}개")
@@ -1236,6 +1236,13 @@ def collect(cfg, rescan=False):
                 vst["since_id"] = max(posts, key=lambda p: int(p["tweet_id"]))["tweet_id"]
                 for post in posts:
                     vendor = names.get(post["author"].lower(), post["author"])
+                    # 본문에서 행사 날짜를 못 찾으면 공지 이미지 글자를 읽어 본문 뒤에 붙임
+                    if post.get("images") and not any(i.get("date") for i in rules.fansign_items(post["caption"], post.get("timestamp") or "", vendor)):
+                        import ocr
+                        txt = ocr.read_images(post["images"])
+                        if txt:
+                            post["caption"] = f"{post['caption']}\n\n[이미지]\n{txt}"
+                            print(f"[OCR] {vendor} {post['permalink']} — 이미지 글자 {len(txt.splitlines())}줄")
                     announce.run([post], store, today, kst_datetime,
                                  lambda c, p_, t_, v=vendor: rules.fansign_items(c, p_, v), limit)
                     if post["id"] in store["posts"]:
