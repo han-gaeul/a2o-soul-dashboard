@@ -1269,6 +1269,27 @@
    "permalink": "https://x.com/A2O_SOUL/status/2124062761613181102",
    "timestamp": "2026-11-21T08:50:00.000Z"
   },
+  "x:2124240320259051881": {
+   "caption": "[📍]\n261122 (일) A2O SOUL SBS 인기가요 사전녹화에 참여하시는 분은 인원 체크 시간에 맞춰 사진 속 장소로 모여주시기 바랍니다🪩\n\n인원 체크 시작 시간 - AM 6:00 (KST)\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2O_SOUL/status/2124240320259051881/photo/1",
+   "excerpt": "[📍]\n261122 (일) A2O SOUL SBS 인기가요 사전녹화에 참여하시는 분은 인원 체크 시간에 맞춰 사진 속 장소로 모여주시기 바랍니다🪩\n\n인원 체크 시작 시간 - AM 6:00 (KST)\n\n#A2O #A2OSOUL\n#Dancing_in_th",
+   "images": [
+    "https://pbs.twimg.com/media/HXrRTz3aUAA3130.jpg"
+   ],
+   "items": [
+    {
+     "confidence": 0.85,
+     "date": "2026-11-22",
+     "end_date": null,
+     "kind": "music_show",
+     "place": null,
+     "time": null,
+     "title": "인기가요 출연",
+     "url": null
+    }
+   ],
+   "permalink": "https://x.com/A2O_SOUL/status/2124240320259051881",
+   "timestamp": "2026-11-21T20:35:33.000Z"
+  },
   "xf:2121586007254708290": {
    "caption": "[📸] 261114 @A2O_SOUL \n\n2026.11.14\nMBC Show! Music Core\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2OSOULBASE/status/2121586007254708290/photo/1",
    "excerpt": "[📸] 261114 @A2O_SOUL \n\n2026.11.14\nMBC Show! Music Core\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2OSOULBASE/status/2121586007254708",
@@ -2674,7 +2695,7 @@
  "x": {
   "A2O_SOUL": {
    "id": "1986498790229262336",
-   "since_id": "2124062761613181102"
+   "since_id": "2124240320259051881"
   }
  },
  "x_fans": {
@@ -2684,7 +2705,7 @@
   }
  },
  "x_media": {
-  "at": "2026-11-22T05:30+09:00",
+  "at": "2026-11-22T05:40+09:00",
   "auto_since": "2124231915955765653",
   "candidates": {},
   "checked": "2026-11-21T16:40+09:00",
