@@ -1826,6 +1826,14 @@ def build(cfg):
         if not any(e["date"] == row["date"] and e["title"] == row["title"] for e in cfg["events"]):
             cfg["events"].append({"date": row["date"], "time": row["time"] or None, "type": "행사", "title": row["title"],
                                   "url": row["post"] or None, **({"short": row["short"]} if row["short"] else {})})
+    # 같은 행사를 판매처가 다시 올리면(재공지·수정) 같은 날짜·시간·제목이 두 번 생김 → 최신 글 하나만
+    uniq = {}
+    for n in notices:
+        k = (n.get("date"), n.get("time") or "", n.get("title"))
+        old_ = uniq.get(k)
+        if not old_ or str(n.get("key", "")).split("|")[0] > str(old_.get("key", "")).split("|")[0]:
+            uniq[k] = n
+    notices = list(uniq.values())
     have = {(v["end"], v.get("show", ""), v.get("title", "")) for v in cfg["votes"]}
     have_app = {(v["end"][:10], v.get("app", "")) for v in cfg["votes"] if v.get("app")}
     cfg["votes"] += [v for v in auto_votes if (v["end"], v["show"], v["title"]) not in have
