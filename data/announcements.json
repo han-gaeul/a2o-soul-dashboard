@@ -1220,6 +1220,24 @@
    "permalink": "https://x.com/A2O_SOUL/status/2124005712523395284",
    "timestamp": "2026-11-21T05:03:18.000Z"
   },
+  "x:2124019983525003692": {
+   "caption": "[#음악중심] \n잠시 후, 3시 20분 ‘쇼! 음악중심’에 A2O SOUL이 출연합니다. 팬 여러분의 많은 시청 부탁드립니다. \n\n#A2O #A2OSOUL \n#Dancing_in_the_Dark",
+   "excerpt": "[#음악중심] \n잠시 후, 3시 20분 ‘쇼! 음악중심’에 A2O SOUL이 출연합니다. 팬 여러분의 많은 시청 부탁드립니다. \n\n#A2O #A2OSOUL \n#Dancing_in_the_Dark",
+   "items": [
+    {
+     "confidence": 0.9,
+     "date": "2026-11-21",
+     "end_date": null,
+     "kind": "music_show",
+     "place": null,
+     "time": "15:20",
+     "title": "음악중심 출연",
+     "url": null
+    }
+   ],
+   "permalink": "https://x.com/A2O_SOUL/status/2124019983525003692",
+   "timestamp": "2026-11-21T06:00:01.000Z"
+  },
   "xf:2121586007254708290": {
    "caption": "[📸] 261114 @A2O_SOUL \n\n2026.11.14\nMBC Show! Music Core\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2OSOULBASE/status/2121586007254708290/photo/1",
    "excerpt": "[📸] 261114 @A2O_SOUL \n\n2026.11.14\nMBC Show! Music Core\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2OSOULBASE/status/2121586007254708",
@@ -2589,13 +2607,21 @@
    "permalink": "https://x.com/JumpUp_ent/status/2123702905354023209",
    "timestamp": "2026-11-20T09:00:03.000Z",
    "vendor": "Jumpup"
+  },
+  "xv:2124019989317390428": {
+   "caption": "#A2O\n#A2OSOUL DEBUT ALBUM [SUPERSTAR] 대면 팬사인회 이벤트 OPEN! 📢\n\n🩷응모자 전원 미공개 셀카 포토카드 증정\n🩷당첨자 전원 사인 포토카드 증정\n\n📅~ 26.11.23 23:59 (KST)\n🔗https://bit.ly/3V6u16Y https://x.com/Makestarcorp/status/2124019989317390428/photo/1",
+   "excerpt": "#A2O\n#A2OSOUL DEBUT ALBUM [SUPERSTAR] 대면 팬사인회 이벤트 OPEN! 📢\n\n🩷응모자 전원 미공개 셀카 포토카드 증정\n🩷당첨자 전원 사인 포토카드 증정\n\n📅~ 26.11.23 23:59 (KST)\n🔗https://bit.l",
+   "items": [],
+   "permalink": "https://x.com/Makestarcorp/status/2124019989317390428",
+   "timestamp": "2026-11-21T06:00:02.000Z",
+   "vendor": "Makestar"
   }
  },
  "rules_version": 13,
  "x": {
   "A2O_SOUL": {
    "id": "1986498790229262336",
-   "since_id": "2124005712523395284"
+   "since_id": "2124019983525003692"
   }
  },
  "x_fans": {
@@ -2605,8 +2631,8 @@
   }
  },
  "x_media": {
-  "at": "2026-11-21T14:50+09:00",
-  "auto_since": "2124016098383438178",
+  "at": "2026-11-21T15:00+09:00",
+  "auto_since": "2124020021731156162",
   "candidates": {},
   "checked": "2026-11-20T16:40+09:00",
   "missing": [],
@@ -2766,12 +2792,23 @@
     "permalink": "https://x.com/StudioK_twt/status/2123945237643170204",
     "timestamp": "2026-11-21T01:03:00.000Z",
     "video": false
+   },
+   "2124020133429669953": {
+    "author": "myidolmiim",
+    "author_name": "miim miim",
+    "caption": "[EXCLUSIVE] A2O SOUL 한성이 좋아하는 단어는? 🍕🍅\n\n한성이 좋아하는 단어들을 소개합니다 😍\n추가로 얼굴 자랑까지 🫶\n\n🔗 https://www.instagram.com/reel/Df_ia0khi67/\n\n✔️ 밈 팔로우 하고 A2O SOUL 독점 콘텐츠 미리 보기 😁\n\n#A2OSOUL #에이투오소울\n#한성 #HANSUNG\n#MIIM #마이밈 #KPOP https://x.com/myidolmiim/status/2124020133429669953/photo/1",
+    "images": [
+     "https://pbs.twimg.com/media/HXoJDWpbUAA7CaC.jpg"
+    ],
+    "permalink": "https://x.com/myidolmiim/status/2124020133429669953",
+    "timestamp": "2026-11-21T06:00:36.000Z",
+    "video": false
    }
   },
-  "since_id": "2123945237643170204"
+  "since_id": "2124020133429669953"
  },
  "x_official_votes": {
-  "at": "2026-11-21T14:50+09:00",
+  "at": "2026-11-21T15:00+09:00",
   "deep": 1,
   "last": {
    "official": [],
@@ -2782,7 +2819,7 @@
   "v": 2
  },
  "x_show_photos": {
-  "at": "2026-11-21T14:00+09:00",
+  "at": "2026-11-21T15:00+09:00",
   "posts": {
    "2123249908413268001": {
     "author": "BIGCChoice",
@@ -2847,6 +2884,6 @@
   "v": 2
  },
  "x_vendors": {
-  "since_id": "2123702905354023209"
+  "since_id": "2124019989317390428"
  }
 }
