@@ -2,11 +2,14 @@
 
 비용 줄이기: 사용자 ID는 한 번만 조회해 저장, 이후엔 since_id로 새 글만, 답글·리트윗 제외.
 """
+import atexit
 import os
 
 import requests
 
 API = "https://api.x.com/2"
+# 이번 실행의 X 사용량 (추정용): 읽은 글 수(글당 $0.005)·사용자 조회(건당 $0.01)·402(크레딧 부족) 여부
+USAGE = {"reads": 0, "users": 0, "err402": 0}
 
 
 def enabled():
@@ -16,8 +19,37 @@ def enabled():
 def _get(path, params=None):
     r = requests.get(f"{API}{path}", params=params, timeout=30,
                      headers={"Authorization": f"Bearer {os.environ['X_BEARER_TOKEN']}"})
+    if r.status_code == 402:
+        USAGE["err402"] += 1
     r.raise_for_status()
-    return r.json()
+    j = r.json()
+    if path.startswith("/users/by/"):
+        USAGE["users"] += 1
+    else:
+        d = j.get("data")
+        USAGE["reads"] += len(d) if isinstance(d, list) else (1 if d else 0)
+    return j
+
+
+@atexit.register
+def _report():
+    """실행이 끝나면 사용량을 워커에 보냄 (초안 페이지에서만 보임). 크레딧이 처음 바닥나면 관리자 기기에 푸시."""
+    if not (USAGE["reads"] or USAGE["users"] or USAGE["err402"]):
+        return
+    priv = os.environ.get("VAPID_PRIVATE_KEY")
+    if not priv:
+        return
+    try:
+        import webpush
+        api = "https://push.a2osoul-tracker.com"
+        r = requests.post(api + "/tweet/xstat", json=USAGE, timeout=15,
+                          headers={"Authorization": f"Bearer {webpush._admin_token(priv)}"})
+        r.raise_for_status()
+        if r.json().get("alert"):  # 오늘 처음 402 → 관리자에게 알림
+            webpush.alert_admin(api, priv, "⚠️ X 크레딧 부족", "수집·자동 글이 멈췄어요 — console.x.com에서 충전해 주세요")
+        print(f"[X] 사용량 기록: 글 {USAGE['reads']} · 사용자 조회 {USAGE['users']}" + (f" · 402 {USAGE['err402']}" if USAGE["err402"] else ""))
+    except Exception as e:  # noqa: BLE001
+        print(f"[X] 사용량 기록 실패: {type(e).__name__} {e}")
 
 
 def user_id(username):

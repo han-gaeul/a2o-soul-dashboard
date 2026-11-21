@@ -105,6 +105,8 @@
     <div class="stat" id="noti"><span class="dot">🔔</span><span><b></b><small>새 초안이 생기면 이 기기로 알림</small></span>
       <span class="row"><button type="button" id="notify" class="ghost">켜기</button><button type="button" id="notifyOff" class="ghost" hidden>끄기</button></span></div>
     <div class="sep" id="subsSep" hidden></div>
+    <div class="stat" id="xuse" hidden><span class="dot">🐦</span><span><b></b><small></small></span><span><a class="ghost" href="https://console.x.com" target="_blank" rel="noopener">충전 ↗</a></span></div>
+    <div class="sep" id="xuseSep" hidden></div>
     <div class="stat" id="subs" hidden><span class="dot">📊</span><span><b></b><small></small><small class="trend"></small></span><span></span></div>
   </section>
 
@@ -233,6 +235,15 @@
       $("subs").querySelector(".trend").textContent = h.length > 1
         ? `최근: ${h.slice(-7).map((x) => `${x.d.slice(5).replace("-", "/")} ${x.n}`).join(" → ")}${prev ? ` (어제보다 ${s.total - prev.n >= 0 ? "+" : ""}${s.total - prev.n})` : ""}` : "오늘부터 날짜별로 기록해요";
       $("subs").hidden = $("subsSep").hidden = false;
+      if (s.x && s.x.days) {  // X 사용량 추정: 글 읽기 $0.005 · 사용자 조회 $0.01 (하루 같은 글 중복 읽기는 실제론 안 셈 → 실제보다 조금 많게 나옴)
+        const usd = (d) => d ? d.reads * 0.005 + d.users * 0.01 : 0;
+        const days = Object.keys(s.x.days).sort(), today = days[days.length - 1];
+        const week = days.slice(-7).reduce((a, k) => a + usd(s.x.days[k]), 0);
+        const t = s.x.days[today] || { reads: 0, users: 0 };
+        if (s.x.err_at) setStat("xuse", "no", "⚠️", "X 크레딧 부족 — 수집·자동 글 멈춤", `${when(s.x.err_at)}부터 · console.x.com에서 충전해 주세요`);
+        else setStat("xuse", "ok", "🐦", `X 오늘 약 $${usd(t).toFixed(2)}`, `글 ${t.reads}개 읽음 · 최근 7일 약 $${week.toFixed(2)} (추정, 실제 청구는 콘솔에서)`);
+        $("xuse").hidden = $("xuseSep").hidden = false;
+      }
     } catch (_) { /* 워커가 예전 버전이면 안 보임 */ }
   };
   const load = async () => {
