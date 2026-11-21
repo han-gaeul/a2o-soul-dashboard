@@ -84,13 +84,19 @@ def candidates(dash, site, now):
             out.append((f"vt|{v['end']}|{name}", "vote", "vote",
                         {"name": name, "t": v["end"][11:], "url": site + "#cheer", "parts": [v.get("show"), v.get("title")], "tr": tr}))
     lives = (dash.get("info") or {}).get("show_live") or []
-    air = {}  # 일정에 시간이 없으면 투표 가이드의 방송 시간 ('화 18:00 · SBS Life')
+    # 일정에 시간이 없으면 기본 방송 시간 → 투표 가이드의 방송 시간 ('화 18:00 · SBS Life')으로 덮어씀
+    air = {"더쇼": "18:00", "쇼챔피언": "18:00", "엠카운트다운": "18:00", "뮤직뱅크": "17:15", "음악중심": "15:15", "인기가요": "15:20"}
     for v in (dash.get("howto") or {}).get("voting") or []:
         m = re.search(r"(\d{1,2}):(\d{2})", v.get("when") or "")
         if m and v.get("show"):
             air[v["show"]] = f"{int(m.group(1)):02d}:{m.group(2)}"
-    for e in dash.get("events") or []:  # 음방·라이브 1시간 전 ~ 시작 30분 뒤 (생방송 보기 링크로)
+    evs = dash.get("events") or []
+    shows_on = {(e["date"], sh) for e in evs if e.get("type") == "음방" for sh in air if sh in (e.get("title") or "")}
+    for e in evs:  # 음방·라이브 1시간 전 ~ 시작 30분 뒤 (생방송 보기 링크로)
         if e.get("type") not in ("음방", "라이브", "라디오") and not e.get("notify"):  # notify: true면 행사도 1시간 전 알림
+            continue
+        # 방송사 유튜브 라이브('[🔴라이브] 11/21 SATㅣ쇼! 음악중심ㅣ…')는 같은 날 '음악중심 출연' 일정이 있으면 건너뜀 (알림·초안 중복 + 긴 제목)
+        if e.get("type") == "라이브" and any((e["date"], sh) in shows_on for sh in air if sh in (e.get("title") or "")):
             continue
         if e.get("credit"):  # 팬 계정이 주최하는 행사(단체 스밍·콜라보 등)는 푸시·트윗 둘 다 안 함
             continue
