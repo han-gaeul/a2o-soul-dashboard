@@ -44,7 +44,7 @@
   .stat { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: center; }
   .dot { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-size: 16px; background: var(--chip); }
   .stat b { display: block; font-size: 14px; }
-  .stat small { display: block; font-size: 12px; color: var(--muted); margin-top: 1px; }
+  .stat small { display: block; font-size: 12px; color: var(--muted); margin-top: 1px; white-space: pre-line; }
   .ok .dot { background: #e6f7ec; } .warn2 .dot { background: #fff4e5; } .no .dot { background: #fde8ec; }
   .sep { height: 1px; background: var(--line); margin: 0 -16px; }
   .msg { font-size: 14px; margin: 0; }
@@ -104,6 +104,8 @@
     <div class="sep"></div>
     <div class="stat" id="noti"><span class="dot">🔔</span><span><b></b><small>새 초안이 생기면 이 기기로 알림</small></span>
       <span class="row"><button type="button" id="notify" class="ghost">켜기</button><button type="button" id="notifyOff" class="ghost" hidden>끄기</button></span></div>
+    <div class="sep" id="subsSep" hidden></div>
+    <div class="stat" id="subs" hidden><span class="dot">📊</span><span><b></b><small></small><small class="trend"></small></span><span></span></div>
   </section>
 
   <p class="msg" id="msg" role="status"></p>
@@ -218,6 +220,21 @@
     $("notify").hidden = on; $("notifyOff").hidden = !on;
   };
 
+  // 알림 구독자 수 (나만 보는 곳 — 공개 사이트·레포엔 안 나옴)
+  const TOPIC = { show: "음방", notice: "공지", vote: "투표", video: "영상", birthday: "생일", tweet: "초안" };
+  const LANGN = { ko: "한국어", en: "영어", ja: "일본어", zh: "중국어", es: "스페인어", id: "인니어", th: "태국어", pt: "포르투갈어", fil: "필리핀어", vi: "베트남어" };
+  const subStats = async () => {
+    try {
+      const s = await call("/tweet/stats", {});
+      const tp = Object.entries(TOPIC).filter(([k]) => s.topics[k]).map(([k, n]) => `${n} ${s.topics[k]}`).join(" · ");
+      const lg = Object.entries(s.langs).sort((a, b) => b[1] - a[1]).map(([k, n]) => `${LANGN[k] || k} ${n}`).join(" · ");
+      setStat("subs", "", "📊", `알림 구독 ${s.total}명`, `${tp}\n${lg}`);
+      const h = s.history || [], prev = h.length > 1 ? h[h.length - 2] : null;
+      $("subs").querySelector(".trend").textContent = h.length > 1
+        ? `최근: ${h.slice(-7).map((x) => `${x.d.slice(5).replace("-", "/")} ${x.n}`).join(" → ")}${prev ? ` (어제보다 ${s.total - prev.n >= 0 ? "+" : ""}${s.total - prev.n})` : ""}` : "오늘부터 날짜별로 기록해요";
+      $("subs").hidden = $("subsSep").hidden = false;
+    } catch (_) { /* 워커가 예전 버전이면 안 보임 */ }
+  };
   const load = async () => {
     if (!api || !$("key").value) return;
     try {
@@ -233,6 +250,7 @@
       $("disconnect").hidden = !j.connected;
       notiState();
       if (!j.ready) { const w = document.createElement("div"); w.className = "warn"; w.textContent = "X 계정이 아직 연결되지 않아서 올리기는 안 돼요 — '연결'을 눌러 올릴 계정으로 로그인해 주세요"; $("warn").append(w); }
+      subStats();
       all = (j.drafts || []).sort((a, b) => b.at - a.at);
       msg(back || "");
       draw();

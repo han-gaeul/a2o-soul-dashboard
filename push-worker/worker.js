@@ -524,6 +524,28 @@ async function tweets(req, env, url) {
     try { return json(req, { url: await xConnect(env, url.origin) }); } catch (e) { return json(req, { error: e.message }, 502); }
   }
   if (p === "/tweet/disconnect") { await env.SUBS.delete("_twacct"); return json(req, { ok: true }); }
+  if (p === "/tweet/stats") {  // 알림 구독자 수 (관리 비밀번호로만) — 사람 정보 없이 숫자만
+    const topics = {}, langs = {};
+    let total = 0, cursor;
+    do {
+      const page = await env.SUBS.list({ cursor });
+      for (const k of page.keys) {
+        if (k.name.startsWith("_")) continue;
+        let m = k.metadata;
+        if (!(m && m.e)) { const v = await env.SUBS.get(k.name, "json"); if (!v) continue; m = { t: v.topics, l: v.lang }; }
+        total++;
+        for (const t of m.t || []) topics[t] = (topics[t] || 0) + 1;
+        langs[m.l || "?"] = (langs[m.l || "?"] || 0) + 1;
+      }
+      cursor = page.list_complete ? null : page.cursor;
+    } while (cursor);
+    // 날짜별 기록: 하루 한 번만 씀 (KST)
+    const day = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
+    const hist = (await env.SUBS.get("_substats", "json")) || [];
+    if (!hist.length || hist[hist.length - 1].d !== day) { hist.push({ d: day, n: total }); await env.SUBS.put("_substats", JSON.stringify(hist.slice(-120))); }
+    else if (hist[hist.length - 1].n !== total) { hist[hist.length - 1].n = total; await env.SUBS.put("_substats", JSON.stringify(hist.slice(-120))); }
+    return json(req, { total, topics, langs, history: hist.slice(-30) });
+  }
   if (p === "/tweet/list") {
     const out = [];
     let cursor;
