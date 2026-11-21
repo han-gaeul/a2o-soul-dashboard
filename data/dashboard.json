@@ -2253,6 +2253,14 @@
   },
   {
    "date": "2026-12-11",
+   "short": "영통",
+   "time": "18:00",
+   "title": "Makestar 단체 영상통화",
+   "type": "행사",
+   "url": "https://www.makestar.com/product/22506"
+  },
+  {
+   "date": "2026-12-11",
    "short": "팬싸",
    "time": "20:00",
    "title": "Makestar 팬사인회",
@@ -8607,6 +8615,19 @@
    "short": "팬싸",
    "time": "20:00",
    "title": "Jumpup 팬사인회"
+  },
+  {
+   "announce": "2026-11-24 17:00",
+   "apply_end": "2026-11-23 23:59",
+   "apply_start": "2026-11-21 15:00",
+   "date": "2026-12-11",
+   "key": "manual|2026-12-11|Makestar 단체 영상통화",
+   "kind": "event",
+   "label": "행사",
+   "post": "https://www.makestar.com/product/22506",
+   "short": "영통",
+   "time": "18:00",
+   "title": "Makestar 단체 영상통화"
   },
   {
    "announce": "2026-11-24 17:00",
