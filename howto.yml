@@ -35,7 +35,7 @@ voting:
     prevote: "일 21:00~수 15:00"
     note: 쿠궁은 예전 팬캐스트(FANCAST) 앱이 이름을 바꾼 것 · 1표 = 하트 50개
   - show: 음악중심
-    when: 토 · MBC
+    when: 토 15:15 · MBC
     pre: 뮤니버스(MUNIVERSE) · 뮤빗(MUBEAT, 글로벌)
     live: 뮤니버스(MUNIVERSE) · 뮤빗(MUBEAT)
     prevote: "화 18:00~목 23:00"
