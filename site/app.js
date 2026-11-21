@@ -808,7 +808,7 @@ if ("serviceWorker" in navigator) {
     const voting = (howto.voting || []).map((v) => ({ ...v, wd: DAYS.indexOf((v.when || "").trim()[0]) })).filter((v) => v.wd >= 0)
       .sort((a, b) => a.wd - b.wd);
     if (voting.length) {
-      const todayWd = (kstDate(todayKst).getUTCDay() + 6) % 7; // 월=0
+      const todayWd = (new Date(`${todayKst}T00:00:00Z`).getUTCDay() + 6) % 7; // 월=0 (kstDate는 UTC로 전날이 돼서 요일이 하루 밀림)
       const wdName = (i) => new Date(Date.UTC(2026, 10, 16 + i)).toLocaleDateString(LOCALES[LANG] || "en", { weekday: "short", timeZone: "UTC" });
       const nowStr = new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Seoul", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" }).format(new Date());
       const live = (show) => (data.votes || []).some((x) => x.show === show && (x.start || x.end) <= nowStr && nowStr <= x.end);
