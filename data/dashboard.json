@@ -2189,6 +2189,14 @@
    "url": "https://x.com/JumpUp_ent/status/2122932820913860808"
   },
   {
+   "date": "2026-12-11",
+   "short": "팬싸",
+   "time": "20:00",
+   "title": "Makestar 팬사인회",
+   "type": "행사",
+   "url": "https://x.com/Makestarcorp/status/2124019989317390428"
+  },
+  {
    "date": "2026-12-18",
    "title": "KBS 가요대축제 출연",
    "type": "음방"
@@ -8528,24 +8536,6 @@
    "announce": "2026-11-21 15:00",
    "apply_end": "2026-11-20 23:59",
    "apply_start": "2026-11-18 15:00",
-   "confidence": 0.85,
-   "date": "2026-11-29",
-   "end_date": null,
-   "key": "xv:2122932820913860808|2026-11-29|Jumpup 영상통화 팬사인회",
-   "kind": "event",
-   "label": "행사",
-   "place": null,
-   "post": "https://x.com/JumpUp_ent/status/2122932820913860808",
-   "posted": "2026-11-18",
-   "short": "영통",
-   "time": "18:00",
-   "title": "Jumpup 영상통화 팬사인회",
-   "url": null
-  },
-  {
-   "announce": "2026-11-21 15:00",
-   "apply_end": "2026-11-20 23:59",
-   "apply_start": "2026-11-18 15:00",
    "date": "2026-11-29",
    "key": "manual|2026-11-29|Jumpup 팬사인회",
    "kind": "event",
@@ -8554,6 +8544,19 @@
    "short": "팬싸",
    "time": "20:00",
    "title": "Jumpup 팬사인회"
+  },
+  {
+   "announce": "2026-11-24 17:00",
+   "apply_end": "2026-11-23 23:59",
+   "apply_start": "2026-11-21 15:00",
+   "date": "2026-12-11",
+   "key": "manual|2026-12-11|Makestar 팬사인회",
+   "kind": "event",
+   "label": "행사",
+   "post": "https://x.com/Makestarcorp/status/2124019989317390428",
+   "short": "팬싸",
+   "time": "20:00",
+   "title": "Makestar 팬사인회"
   }
  ],
  "photocards": [
