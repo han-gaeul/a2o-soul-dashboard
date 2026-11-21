@@ -1213,6 +1213,13 @@
    "permalink": "https://x.com/A2O_SOUL/status/2123957057720316392",
    "timestamp": "2026-11-21T01:49:58.000Z"
   },
+  "x:2124005712523395284": {
+   "caption": "[📱]\nWhat‘s your pick?\n\n🔗 https://vm.tiktok.com/ZPNYwpQxe/\n🔗 https://www.instagram.com/reel/Df_bfzNxfHv/\n🔗 https://youtube.com/shorts/E-uxAwtp-Bw\n\n#A2O #A2OSOUL https://x.com/A2O_SOUL/status/2124005712523395284/video/1",
+   "excerpt": "[📱]\nWhat‘s your pick?\n\n🔗 https://vm.tiktok.com/ZPNYwpQxe/\n🔗 https://www.instagram.com/reel/Df_bfzNxfHv/\n🔗 https://youtube.com/shorts/E-uxAwt",
+   "items": [],
+   "permalink": "https://x.com/A2O_SOUL/status/2124005712523395284",
+   "timestamp": "2026-11-21T05:03:18.000Z"
+  },
   "xf:2121586007254708290": {
    "caption": "[📸] 261114 @A2O_SOUL \n\n2026.11.14\nMBC Show! Music Core\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2OSOULBASE/status/2121586007254708290/photo/1",
    "excerpt": "[📸] 261114 @A2O_SOUL \n\n2026.11.14\nMBC Show! Music Core\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2OSOULBASE/status/2121586007254708",
@@ -2588,7 +2595,7 @@
  "x": {
   "A2O_SOUL": {
    "id": "1986498790229262336",
-   "since_id": "2123957057720316392"
+   "since_id": "2124005712523395284"
   }
  },
  "x_fans": {
@@ -2598,8 +2605,8 @@
   }
  },
  "x_media": {
-  "at": "2026-11-21T14:00+09:00",
-  "auto_since": "2124004243011162412",
+  "at": "2026-11-21T14:10+09:00",
+  "auto_since": "2124007583119999276",
   "candidates": {},
   "checked": "2026-11-20T16:40+09:00",
   "missing": [],
@@ -2764,7 +2771,7 @@
   "since_id": "2123945237643170204"
  },
  "x_official_votes": {
-  "at": "2026-11-21T14:00+09:00",
+  "at": "2026-11-21T14:10+09:00",
   "deep": 1,
   "last": {
    "official": [],
