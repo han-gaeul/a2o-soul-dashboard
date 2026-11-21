@@ -686,6 +686,27 @@ if ("serviceWorker" in navigator) {
     $("voteHome").remove();
   }
 
+  // 음원 총공팀 — 진행 중·예정 총공(시간·사이트·플레이리스트) + 최근 글 (총공팀 X 글에서 자동)
+  const stt = data.stream_team || {};
+  if (stt.handle && ((stt.pushes || []).length || (stt.posts || []).length)) {
+    const SITE_EN = { 멜론: "Melon", 지니: "Genie", 벅스: "Bugs", 플로: "FLO", 바이브: "VIBE", "유튜브 뮤직": "YouTube Music", 스포티파이: "Spotify" };
+    const nowS = new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Seoul", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" }).format(new Date());
+    const rows = (stt.pushes || []).map((x) => {
+      const on = `${x.date} ${x.start}` <= nowS && nowS <= `${x.date} ${x.end}`;
+      const sites = (x.sites || []).map((n) => (LANG === "ko" ? n : SITE_EN[n] || n)).join(" · ") || "";
+      return el("div", { class: `st-push${on ? " on" : ""}` },
+        el("div", {}, el("span", { class: `chip${on ? " chip-on" : ""}` }, on ? t("st_now") : t("st_next")), " ",
+          el("b", {}, `${x.date === todayKst ? t("today") : x.date.slice(5).replace("-", ".")} ${x.start}–${x.end}`), " KST"),
+        el("div", {}, sites ? `${sites} ` : "", t(`st_what_${x.what}`)),
+        el("div", { class: "links small" }, x.link ? ext(x.link, `🎧 ${t("st_list")}`) : null, x.post ? ext(x.post, t("st_post")) : null));
+    });
+    const recent = (stt.posts || []).map((p) => el("li", {}, el("span", { class: "st-txt" }, p.text), " ", ext(p.url, "↗")));
+    $("streaming").before(el("div", { class: "st-team" },
+      el("h3", {}, t("st_title")), el("p", { class: "muted small" }, t("st_desc"), " · ", ext(stt.url, `@${stt.handle}`)),
+      rows.length ? el("div", { class: "st-pushes" }, ...rows) : el("p", { class: "muted small" }, t("st_none")),
+      recent.length ? el("details", { class: "howto" }, el("summary", {}, t("st_recent")), el("ul", { class: "st-recent" }, ...recent)) : null));
+  }
+
   // 에투소 스밍 리스트 — 원클릭 담기(앱 링크) + 곡별 검색 링크
   const sp = data.stream_playlist || {};
   if ((sp.tracks || []).length) {

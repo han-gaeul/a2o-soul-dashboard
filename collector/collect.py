@@ -56,6 +56,7 @@ def load_config():
     cfg["instagram"] = cfg.get("instagram") or []
     cfg["x"] = [str(u).lstrip("@") for u in (cfg.get("x") or [])]
     cfg["x_fans"] = [str(u).lstrip("@") for u in (cfg.get("x_fans") or [])]
+    cfg["x_stream"] = [str(u).lstrip("@") for u in (cfg.get("x_stream") or [])]
     cfg["x_vendors"] = [{"handle": str(v["handle"]).lstrip("@"), "name": str(v.get("name") or v["handle"])}
                         for v in (cfg.get("x_vendors") or []) if isinstance(v, dict) and v.get("handle")]
     cfg["x_vote_accounts"] = [str(u).lstrip("@") for u in (cfg.get("x_vote_accounts") or [])]
@@ -552,6 +553,31 @@ def media_feed(cfg, state, limit=40):
 def fan_extract(caption, posted, today):
     """팬 계정 글: 규칙으로 뽑되 확신을 낮춰 전부 '확인 필요'로."""
     return [{**i, "confidence": min(i["confidence"], 0.6), "title": f"[팬 계정] {i['title']}"} for i in rules.extract(caption, posted, today)]
+
+STREAM_SITES = [("멜론", r"멜론|melon"), ("지니", r"지니|genie"), ("벅스", r"벅스|bugs"), ("플로", r"플로|\bflo\b"), ("바이브", r"바이브|vibe"),
+                ("유튜브 뮤직", r"유튜브\s?뮤직|youtube\s?music"), ("스포티파이", r"스포티파이|spotify")]
+
+
+def stream_pushes(posts):
+    """총공팀 글 → 총공 일정 [{date, start, end, sites, what, title, link, post}] — '2026.11.21. 11:30-13:30' 꼴 날짜·시간이 있는 글만."""
+    out = []
+    for p_ in posts:
+        cap = p_.get("caption") or ""
+        if not re.search(r"총공|스밍|스트리밍|다운", cap):
+            continue
+        for m in re.finditer(r"(20\d\d)[.\-/]\s?(\d{1,2})[.\-/]\s?(\d{1,2})\.?\s*(?:\([^)]*\))?\s*(\d{1,2}):(\d{2})\s*[-~–]\s*(\d{1,2}):(\d{2})", cap):
+            y, mo, d, h1, m1, h2, m2 = m.groups()
+            sites = [n for n, r in STREAM_SITES if re.search(r, cap, re.I)]
+            what = "스밍·다운" if re.search(r"스밍|스트리밍", cap) and re.search(r"다운", cap) else "다운" if re.search(r"다운", cap) else "스밍"
+            link = next((u for u in re.findall(r"https?://\S+", cap) if not re.search(r"x\.com|twitter\.com", u)), "")
+            start, end = f"{int(h1):02d}:{m1}", f"{int(h2):02d}:{m2}"
+            out.append({"date": f"{y}-{int(mo):02d}-{int(d):02d}", "start": start, "end": end, "sites": sites, "what": what,
+                        "title": f"{'·'.join(sites[:2]) or '음원'} {what} 총공 (~{end})", "link": link.rstrip(".,)"), "post": p_.get("permalink") or ""})
+    uniq = {}
+    for x in out:
+        uniq[(x["date"], x["start"], x["title"])] = uniq.get((x["date"], x["start"], x["title"])) or x
+    return sorted(uniq.values(), key=lambda x: (x["date"], x["start"]))
+
 
 A2O_MENTION = re.compile(r"A2O\s?SOUL|A2OSOUL|에이투오\s?소울|에이투오소울", re.I)
 
@@ -1448,6 +1474,24 @@ def collect(cfg, rescan=False):
                 for xp in posts:
                     xp["id"] = "xf:" + xp["tweet_id"]
                 announce.run(posts, store, today, kst_datetime, fan_extract, limit)
+        # 음원 총공팀 — 최근 글 보관 (총공 일정은 build에서 글을 읽어 만듦)
+        sst = store.setdefault("x_stream", {})
+        for username in cfg["x_stream"]:
+            st = sst.setdefault(username, {})
+            try:
+                st.setdefault("id", xposts.user_id(username))
+                posts = xposts.fetch_posts(st["id"], username, since_id=st.get("since_id"), first_limit=30)
+            except Exception as e:  # noqa: BLE001
+                print(f"[총공] X @{username} 조회 실패: {e}")
+                continue
+            print(f"[총공] X @{username} 새 글 {len(posts)}개")
+            if posts:
+                st["since_id"] = max(posts, key=lambda p: int(p["tweet_id"]))["tweet_id"]
+                keep = {p_["tweet_id"]: p_ for p_ in st.get("posts") or []}
+                for xp in posts:
+                    keep[xp["tweet_id"]] = {"tweet_id": xp["tweet_id"], "caption": xp["caption"][:1500], "timestamp": xp.get("timestamp"),
+                                            "permalink": xp["permalink"], "images": (xp.get("images") or [])[:1]}
+                st["posts"] = sorted(keep.values(), key=lambda p_: int(p_["tweet_id"]), reverse=True)[:40]
     elif cfg["x"]:
         print("[공지] X_BEARER_TOKEN 없음 — X 건너뜀")
     save_json("announcements.json", store)
@@ -1826,6 +1870,20 @@ def build(cfg):
         if not any(e["date"] == row["date"] and e["title"] == row["title"] for e in cfg["events"]):
             cfg["events"].append({"date": row["date"], "time": row["time"] or None, "type": "행사", "title": row["title"],
                                   "url": row["post"] or None, **({"short": row["short"]} if row["short"] else {})})
+    # 음원 총공팀 글 → 총공 일정(일정 탭, 팬 주최라 알림·트윗 없음) + 응원 탭 '음원 총공' 블록
+    stream_team = {}
+    for handle, st in ((load_json("announcements.json", {}).get("x_stream") or {})).items():
+        posts = st.get("posts") or []
+        pushes = stream_pushes(posts)
+        for x in pushes:
+            if not any(e["date"] == x["date"] and e["title"] == x["title"] for e in cfg["events"]):
+                cfg["events"].append({"date": x["date"], "time": x["start"], "type": "총공", "title": x["title"], "short": "총공",
+                                      "url": x["post"] or None, "credit": f"@{handle}"})
+        now_s = datetime.now(KST).strftime("%Y-%m-%d %H:%M")
+        stream_team = {"handle": handle, "url": f"https://x.com/{handle}",
+                       "pushes": [x for x in pushes if f"{x['date']} {x['end']}" >= now_s][:4],
+                       "posts": [{"text": "\n".join([ln for ln in (p_.get("caption") or "").splitlines() if ln.strip()][:4])[:220],
+                                  "url": p_["permalink"], "at": p_.get("timestamp")} for p_ in posts[:3]]}
     have = {(v["end"], v.get("show", ""), v.get("title", "")) for v in cfg["votes"]}
     have_app = {(v["end"][:10], v.get("app", "")) for v in cfg["votes"] if v.get("app")}
     cfg["votes"] += [v for v in auto_votes if (v["end"], v["show"], v["title"]) not in have
@@ -1888,6 +1946,7 @@ def build(cfg):
         "photocards": photocards(cfg),
         "streaming": cfg["streaming"],
         "stream_playlist": cfg["stream_playlist"],
+        "stream_team": stream_team,
         "charts": cfg["charts"],
         "chart_moves": cfg.get("chart_moves", [])[-30:],
         "supports": sorted((x for x in cfg["supports"] if x["end"] >= today), key=lambda x: x["start"]),
