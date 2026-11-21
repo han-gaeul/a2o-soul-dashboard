@@ -159,6 +159,15 @@ def candidates(dash, site, now):
             head = re.sub(r"\s*https?://\S+", "", head).strip()[:100]
             out.append((f"md|{x['url']}", "media", "media", {"name": x.get("name") or x.get("handle") or "", "title": head, "url": x["url"],
                                                             "members": _members_in({"title": x.get("text") or ""}, dash.get("members") or [])}))
+    seen = set()
+    for x in dash.get("photos") or []:  # 공식 계정 [📸] 사진 글 (3시간 안) — 확인 없이 바로 리트윗 (푸시는 안 보냄)
+        u = x.get("url") or ""
+        if x.get("account") != "x" or "/a2o_soul/status/" not in u.lower() or u in seen or not (x.get("text") or "").lstrip().startswith("[📸]"):
+            continue
+        seen.add(u)
+        if x.get("at") and timedelta(0) <= now - _kst(x["at"]) < timedelta(hours=3):
+            out.append((f"rt|{u}", "media", "media", {"name": "A2O SOUL", "title": (x.get("text") or "[📸]").strip()[:100], "url": u,
+                                                     "members": [], "rt": True}))
     return out
 
 
@@ -292,7 +301,8 @@ def tweet_image(kind, data, site):
 def drafts(api, priv, new, site):
     """새 알림 후보 → 트윗 초안을 Worker에 저장. 저장된 개수를 돌려줌."""
     # 팬 계정이 주최하는 행사(credit 있음)는 초안 안 만듦 — 그쪽 공지를 리트윗하는 게 맞음
-    items = [{"key": key, "kind": kind, "text": tweet_text(kind, data), "auto": kind in AUTO_POST, **({"image": tweet_image(kind, data, site)} if tweet_image(kind, data, site) else {})}
+    items = [{"key": key, "kind": kind, "text": tweet_text(kind, data), "auto": kind in AUTO_POST, **({"rt": True} if data.get("rt") else {}),
+              **({"image": tweet_image(kind, data, site)} if tweet_image(kind, data, site) else {})}
              for key, topic, kind, data in new
              if kind not in ("notice",) and not data.get("credit") and not data.get("no_draft")]
     if not items:

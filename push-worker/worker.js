@@ -518,7 +518,11 @@ async function tweets(req, env, url) {
       if (await env.SUBS.get(`_tw:${id}`)) continue;
       const rec = { id, key: String(d.key).slice(0, 120), kind: String(d.kind || ""), text: d.text.slice(0, 1000), status: "pending", at: Date.now(),
         ...(typeof d.image === "string" && /^https:\/\/a2osoul-tracker\.com\//.test(d.image) ? { image: d.image } : {}) };
-      if (d.auto && canPost) {  // 확실한 정보(일정·생일·조회수)는 확인 없이 바로 올림 — 실패하면 초안으로 남김
+      const ref = d.rt && (String(d.key).match(/status\/(\d+)/) || [])[1];
+      if (ref && canPost) {  // 공식 계정 [📸] 사진 글은 바로 리트윗 — 실패하면 리트윗 초안으로 남김
+        try { await retweet(env, ref); Object.assign(rec, { status: "posted", tweet: ref, retweet: true, auto: true, posted: Date.now() }); posted++; }
+        catch (e) { rec.error = String(e.message || e).slice(0, 200); }
+      } else if (d.auto && canPost) {  // 확실한 정보(일정·생일·조회수)는 확인 없이 바로 올림 — 실패하면 초안으로 남김
         try { rec.tweet = await postTweet(env, rec.text, rec.image); rec.status = "posted"; rec.auto = true; rec.posted = Date.now(); posted++; }
         catch (e) { rec.error = String(e.message || e).slice(0, 200); }
       }
