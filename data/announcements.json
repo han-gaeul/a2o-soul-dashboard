@@ -2684,8 +2684,8 @@
   }
  },
  "x_media": {
-  "at": "2026-11-21T22:00+09:00",
-  "auto_since": "2124125340671058294",
+  "at": "2026-11-21T22:10+09:00",
+  "auto_since": "2124128334582018252",
   "candidates": {},
   "checked": "2026-11-21T16:40+09:00",
   "missing": [],
@@ -2861,19 +2861,16 @@
   "since_id": "2124020133429669953"
  },
  "x_official_votes": {
-  "at": "2026-11-21T19:10+09:00",
+  "at": "2026-11-21T22:10+09:00",
   "deep": 1,
   "last": {
-   "official": [
-    "muniverse_io"
-   ],
-   "read": 2,
+   "official": [],
+   "read": 1,
    "verified": [
-    "a2osoulvote:blue",
-    "muniverse_io:blue"
+    "a2osoulvote:blue"
    ]
   },
-  "since_id": "2124057321332494493",
+  "since_id": "2124096771915911303",
   "v": 2
  },
  "x_show_photos": {
