@@ -185,3 +185,7 @@ x_vote_accounts:
   - HIGHER_twt       # 하이어 (인기가요)
   - KTOPSTAR_offcl   # 케이탑스타
   - twt_my1pick      # 마이원픽
+# 방송사 K-POP 계정 (파란 인증이라 자동으로 못 가림) — 직캠 트윗은 바로 리트윗
+x_show_accounts:
+  - MBC_entertain    # MBCkpop (음악중심)
+  - StudioK_twt      # KBS Kpop (뮤직뱅크)

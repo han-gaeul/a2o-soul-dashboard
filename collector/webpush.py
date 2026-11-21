@@ -168,6 +168,9 @@ def candidates(dash, site, now):
         if x.get("at") and timedelta(0) <= now - _kst(x["at"]) < timedelta(hours=3):
             out.append((f"rt|{u}", "media", "media", {"name": "A2O SOUL", "title": (x.get("text") or "[📸]").strip()[:100], "url": u,
                                                      "members": [], "rt": True}))
+    for x in dash.get("show_fancams") or []:  # 방송사 공식 직캠 글 (4시간 안 — 음방 사진 검색이 1~3시간마다) — 바로 리트윗
+        if x.get("at") and timedelta(0) <= now - _kst(x["at"]) < timedelta(hours=4):
+            out.append((f"rt|{x['url']}", "media", "media", {"name": x.get("by") or "", "title": "직캠", "url": x["url"], "members": [], "rt": True}))
     return out
 
 
