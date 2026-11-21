@@ -559,10 +559,12 @@ async function tweets(req, env, url) {
     let total = 0, cursor;
     do {
       const page = await env.SUBS.list({ cursor });
-      for (const k of page.keys) {
-        if (k.name.startsWith("_")) continue;
-        let m = k.metadata;
-        if (!(m && m.e)) { const v = await env.SUBS.get(k.name, "json"); if (!v) continue; m = { t: v.topics, l: v.lang }; }
+      const keys = page.keys.filter((k) => !k.name.startsWith("_"));
+      // 메타데이터 없는 옛 구독만 한꺼번에 읽기 (하나씩 읽으면 느림)
+      const old = await Promise.all(keys.map((k) => (k.metadata && k.metadata.e) ? null : env.SUBS.get(k.name, "json")));
+      for (let i = 0; i < keys.length; i++) {
+        let m = keys[i].metadata;
+        if (!(m && m.e)) { const v = old[i]; if (!v) continue; m = { t: v.topics, l: v.lang }; }
         total++;
         for (const t of m.t || []) topics[t] = (topics[t] || 0) + 1;
         langs[m.l || "?"] = (langs[m.l || "?"] || 0) + 1;

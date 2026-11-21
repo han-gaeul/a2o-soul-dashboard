@@ -225,9 +225,17 @@
   // 알림 구독자 수 (나만 보는 곳 — 공개 사이트·레포엔 안 나옴)
   const TOPIC = { show: "음방", notice: "공지", vote: "투표", video: "영상", birthday: "생일", tweet: "초안" };
   const LANGN = { ko: "한국어", en: "영어", ja: "일본어", zh: "중국어", es: "스페인어", id: "인니어", th: "태국어", pt: "포르투갈어", fil: "필리핀어", vi: "베트남어" };
+  // 지난번 숫자를 먼저 바로 보여 주고(저장해 둔 것), 새 숫자가 오면 바꿈
   const subStats = async () => {
+    try { const c = JSON.parse(store.get("tw_stats") || "null"); if (c) showStats(c); } catch (_) {}
     try {
       const s = await call("/tweet/stats", {});
+      store.set("tw_stats", JSON.stringify(s));
+      showStats(s);
+    } catch (_) { /* 워커가 예전 버전이면 안 보임 */ }
+  };
+  const showStats = (s) => {
+    try {
       const tp = Object.entries(TOPIC).filter(([k]) => s.topics[k]).map(([k, n]) => `${n} ${s.topics[k]}`).join(" · ");
       const lg = Object.entries(s.langs).sort((a, b) => b[1] - a[1]).map(([k, n]) => `${LANGN[k] || k} ${n}`).join(" · ");
       setStat("subs", "", "📊", `알림 구독 ${s.total}명`, `${tp}\n${lg}`);
@@ -244,10 +252,12 @@
         else setStat("xuse", "ok", "🐦", `X 오늘 약 $${usd(t).toFixed(2)}`, `글 ${t.reads}개 읽음 · 최근 7일 약 $${week.toFixed(2)} (추정, 실제 청구는 콘솔에서)`);
         $("xuse").hidden = $("xuseSep").hidden = false;
       }
-    } catch (_) { /* 워커가 예전 버전이면 안 보임 */ }
+    } catch (_) {}
   };
   const load = async () => {
     if (!api || !$("key").value) return;
+    const statsOn = store.get("tw_key") === $("key").value;
+    if (statsOn) subStats();  // 비밀번호 맞는 걸 아는 경우 목록이랑 같이 불러오기
     try {
       const j = await call("/tweet/list", {});
       store.set("tw_key", $("key").value);
@@ -261,7 +271,7 @@
       $("disconnect").hidden = !j.connected;
       notiState();
       if (!j.ready) { const w = document.createElement("div"); w.className = "warn"; w.textContent = "X 계정이 아직 연결되지 않아서 올리기는 안 돼요 — '연결'을 눌러 올릴 계정으로 로그인해 주세요"; $("warn").append(w); }
-      subStats();
+      if (!statsOn) subStats();
       all = (j.drafts || []).sort((a, b) => b.at - a.at);
       msg(back || "");
       draw();
