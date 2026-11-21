@@ -33,10 +33,11 @@ jobs:
       - name: Install OCR
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq tesseract-ocr > /dev/null
-          pip install -q pytesseract scipy numpy pillow requests
+          pip install -q pytesseract scipy numpy pillow requests cryptography pywebpush
       - name: Watch @soultemplates
         env:
           X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
+          VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
         run: python collector/pc_watch.py ${{ inputs.backfill && '--backfill' || '' }}
       - name: X 검색 포카 후보 → 이슈에 댓글
         if: hashFiles('pc_candidates.md') != ''

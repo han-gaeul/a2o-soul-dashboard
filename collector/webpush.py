@@ -56,6 +56,19 @@ def _admin_token(priv_b64):
     return f"{head}.{body}.{_b64u(r.to_bytes(32, 'big') + s.to_bytes(32, 'big'))}"
 
 
+def alert_admin(api, priv, title, body):
+    """초안 알림(tweet)을 켠 관리자 기기에만 푸시."""
+    from pywebpush import webpush
+    subs = requests.get(api.rstrip("/") + "/subs", headers={"Authorization": f"Bearer {_admin_token(priv)}"}, timeout=20).json()
+    for s in subs:
+        if "tweet" in (s.get("topics") or []):
+            try:
+                webpush(subscription_info=s["sub"], data=json.dumps({"title": title, "body": body, "url": "https://a2osoul-tracker.com/tweet.html",
+                        "tag": "x-credit"}, ensure_ascii=False), vapid_private_key=priv, vapid_claims={"sub": "https://a2osoul-tracker.com"}, ttl=6 * 3600, timeout=15)
+            except Exception as e:  # noqa: BLE001
+                print(f"[X] 관리자 알림 실패: {type(e).__name__}")
+
+
 def _kst(s):
     return datetime.fromisoformat(s).replace(tzinfo=KST)
 

@@ -513,6 +513,22 @@ async function tweets(req, env, url) {
     }
     return json(req, { ok: true, added, posted });
   }
+  if (req.method === "POST" && p === "/tweet/xstat") { // 수집기(GitHub Actions)만 — X 사용량 하루치 합산
+    if (!(await isAdmin(req, env))) return json(req, { error: "forbidden" }, 403);
+    const b = await req.json().catch(() => ({}));
+    const day = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
+    const x = (await env.SUBS.get("_xstat", "json")) || { days: {} };
+    const t = x.days[day] || { reads: 0, users: 0 };
+    t.reads += Math.max(0, Number(b.reads) || 0); t.users += Math.max(0, Number(b.users) || 0);
+    x.days[day] = t;
+    for (const k of Object.keys(x.days).sort().slice(0, -14)) delete x.days[k];
+    let alert = false;
+    if (Number(b.err402) > 0) { alert = x.err_day !== day; if (!x.err_at) x.err_at = Date.now(); x.err_day = day; }
+    else if ((Number(b.reads) || 0) + (Number(b.users) || 0) > 0) { x.err_at = 0; }  // 다시 읽히면 회복
+    x.at = Date.now();
+    await env.SUBS.put("_xstat", JSON.stringify(x));
+    return json(req, { ok: true, alert });
+  }
   if (req.method === "GET" && p === "/tweet/callback") return xCallback(env, url);
   if (req.method === "GET" && p === "/tweet/callback2") return x2Callback(env, url);
   const b = req.method === "POST" ? await req.json().catch(() => ({})) : {};
@@ -544,7 +560,7 @@ async function tweets(req, env, url) {
     const hist = (await env.SUBS.get("_substats", "json")) || [];
     if (!hist.length || hist[hist.length - 1].d !== day) { hist.push({ d: day, n: total }); await env.SUBS.put("_substats", JSON.stringify(hist.slice(-120))); }
     else if (hist[hist.length - 1].n !== total) { hist[hist.length - 1].n = total; await env.SUBS.put("_substats", JSON.stringify(hist.slice(-120))); }
-    return json(req, { total, topics, langs, history: hist.slice(-30) });
+    return json(req, { total, topics, langs, history: hist.slice(-30), x: (await env.SUBS.get("_xstat", "json")) || null });
   }
   if (p === "/tweet/list") {
     const out = [];
