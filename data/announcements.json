@@ -2462,6 +2462,28 @@
    "permalink": "https://x.com/HIGHER_twt/status/2123710447924732023",
    "timestamp": "2026-11-20T09:30:02.000Z"
   },
+  "xo:2124050187039776819": {
+   "caption": "✦ MBC 쇼! 음악중심 971회 STAGE M PICK 투표 시작 ✦\n\nMBC 쇼! 음악중심 방송에서 발표하는\nSTAGE M PICK이 오픈되었습니다!\n뮤니버스에서 내 최애 1등 만들고, 트로피도 선물하세요 💗\n\n🗳️ 뮤니버스에서 #스테이지엠픽 투표하기:\n🔗 https://t.co/kyWqjTljkH\n\n#뮤니버스 #Muniverse #mbc #kpop #쇼음악중심 #라인업 #엔시티드림 #채령 #도미노즈 #전유진 #피스트범프 #윤서빈 #하이키 #에이머스 #싸이커스 #앰퍼샌드원 #베이비돈크라이 #키빗업 #언차일드 #키비츠 #에이투오소울 #에이댑 #더와일드클럽 #코드지구\n\n— Muniverse",
+   "excerpt": "✦ MBC 쇼! 음악중심 971회 STAGE M PICK 투표 시작 ✦\n\nMBC 쇼! 음악중심 방송에서 발표하는\nSTAGE M PICK이 오픈되었습니다!\n뮤니버스에서 내 최애 1등 만들고, 트로피도 선물하세요 💗\n\n🗳️ 뮤니버스에서 #스테이지엠픽 투표",
+   "items": [
+    {
+     "app": "뮤니버스(MUNIVERSE)",
+     "confidence": 0.6,
+     "date": null,
+     "end": null,
+     "end_date": null,
+     "kind": "vote",
+     "place": null,
+     "show": "음악중심",
+     "start": null,
+     "time": null,
+     "title": "음악중심 투표",
+     "url": null
+    }
+   ],
+   "permalink": "https://x.com/muniverse_io/status/2124050187039776819",
+   "timestamp": "2026-11-21T08:00:02.000Z"
+  },
   "xv:2119672177347981651": {
    "caption": "[💿] A2O SOUL DEBUT EP [SUPERSTAR]\n발매 기념 공개 팬사인회\n\n📢응모 마감 D-1‼️\n✨당일 공개 팬사인회에서 SPECIAL STAGE가 진행됩니다.\n\n📅2026.11.14 (토) 19:30 (KST)\n📍스타필드 수원 타워 아트리움\n\n[ONLINE] 뮤직아트 온라인몰\n🛒온라인 응모기간 : 2026.11.08 (일) 14:00 ~ 11.10 (화) 23:59 (KST)\n\n[OFFLINE] 영풍문고 스타필드수원점 내 음반매장\n🛒오프라인 응모기간 : 2026.11.08 (일) 14:00 ~ 11.10 (화) 21:00 (KST)\n\n🌠응모자 전원 미공개 셀카 포토카드 15종 중 1종 랜덤 증정\n\n🔗https://t.co/I1sj0S6DOk",
    "excerpt": "[💿] A2O SOUL DEBUT EP [SUPERSTAR]\n발매 기념 공개 팬사인회\n\n📢응모 마감 D-1‼️\n✨당일 공개 팬사인회에서 SPECIAL STAGE가 진행됩니다.\n\n📅2026.11.14 (토) 19:30 (KST)\n📍스타필드 수원 타워 아",
@@ -2662,8 +2684,8 @@
   }
  },
  "x_media": {
-  "at": "2026-11-21T19:00+09:00",
-  "auto_since": "2124080449840656518",
+  "at": "2026-11-21T19:10+09:00",
+  "auto_since": "2124082749468516631",
   "candidates": {},
   "checked": "2026-11-21T16:40+09:00",
   "missing": [],
@@ -2839,14 +2861,19 @@
   "since_id": "2124020133429669953"
  },
  "x_official_votes": {
-  "at": "2026-11-21T16:10+09:00",
+  "at": "2026-11-21T19:10+09:00",
   "deep": 1,
   "last": {
-   "official": [],
-   "read": 0,
-   "verified": []
+   "official": [
+    "muniverse_io"
+   ],
+   "read": 2,
+   "verified": [
+    "a2osoulvote:blue",
+    "muniverse_io:blue"
+   ]
   },
-  "since_id": "2123999357875945505",
+  "since_id": "2124057321332494493",
   "v": 2
  },
  "x_show_photos": {
