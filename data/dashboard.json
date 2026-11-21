@@ -140,6 +140,15 @@
    "with": "KO1KEYZ 스테이션"
   },
   {
+   "date": "2026-11-24",
+   "host": "@wichustation · @a2osoulstation",
+   "note": "세부 시간표는 주최 계정에 올라와요",
+   "time": "21:00",
+   "title": "스테이션헤드 콜라보 (~24:00)",
+   "url": "https://x.com/a2osoulstation",
+   "with": "NCT WISH 스테이션"
+  },
+  {
    "date": "2026-11-25",
    "host": "@a2osoulstation · @NNStation · @yizhuodaily",
    "note": "자세한 공지는 11/22(일) 주최 계정에 올라와요",
@@ -13400,6 +13409,15 @@
    "th": "แฟนไซน์ Musicart",
    "zh": "Musicart 签售会"
   },
+  "NCT WISH 스테이션": {
+   "en": "NCT WISH station",
+   "es": "Estación de NCT WISH",
+   "id": "Stasiun NCT WISH",
+   "ja": "NCT WISH ステーション",
+   "pt": "Estação de NCT WISH",
+   "th": "สเตชัน NCT WISH",
+   "zh": "NCT WISH 电台"
+  },
   "NINGNING 스테이션": {
    "en": "NINGNING station",
    "es": "Estación de NINGNING",
@@ -14751,6 +14769,15 @@
    "th": "โฟโต้การ์ดสำหรับผู้ซื้อก่อน",
    "zh": "先到先得小卡"
   },
+  "세부 시간표는 주최 계정에 올라와요": {
+   "en": "The detailed timetable will be posted by the hosts",
+   "es": "Los organizadores publicarán el horario detallado",
+   "id": "Jadwal lengkap akan diunggah di akun penyelenggara",
+   "ja": "詳しいタイムテーブルは主催アカウントで公開されます",
+   "pt": "Os organizadores vão publicar o horário detalhado",
+   "th": "ตารางเวลาโดยละเอียดจะประกาศในบัญชีผู้จัด",
+   "zh": "详细时间表将在主办账号发布"
+  },
   "세트 판매": {
    "en": "Set sales",
    "es": "Venta en set",
@@ -14878,6 +14905,15 @@
    "pt": "Collab no Stationhead (até 23:00)",
    "th": "คอลแลบ Stationhead (ถึง 23:00)",
    "zh": "Stationhead 联动（至23:00）"
+  },
+  "스테이션헤드 콜라보 (~24:00)": {
+   "en": "Stationhead collab (until midnight)",
+   "es": "Collab en Stationhead (hasta la medianoche)",
+   "id": "Kolab Stationhead (sampai 24:00)",
+   "ja": "Stationhead コラボ（〜24:00）",
+   "pt": "Collab no Stationhead (até a meia-noite)",
+   "th": "คอลแลบ Stationhead (ถึง 24:00)",
+   "zh": "Stationhead 联动（至24:00）"
   },
   "스테이션헤드 합동 스밍 1부": {
    "en": "Stationhead joint streaming, part 1",
