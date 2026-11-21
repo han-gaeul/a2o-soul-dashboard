@@ -160,9 +160,9 @@ def candidates(dash, site, now):
             out.append((f"md|{x['url']}", "media", "media", {"name": x.get("name") or x.get("handle") or "", "title": head, "url": x["url"],
                                                             "members": _members_in({"title": x.get("text") or ""}, dash.get("members") or [])}))
     seen = set()
-    for x in dash.get("photos") or []:  # 공식 계정 [📸] 사진 글 (3시간 안) — 확인 없이 바로 리트윗 (푸시는 안 보냄)
+    for x in dash.get("photos") or []:  # 공식 계정 사진 글 ([📸]·컨셉 포토·생일 등, 공지 이미지는 사진 모음에서 이미 빠짐 · 3시간 안) — 확인 없이 바로 리트윗 (푸시는 안 보냄)
         u = x.get("url") or ""
-        if x.get("account") != "x" or "/a2o_soul/status/" not in u.lower() or u in seen or not (x.get("text") or "").lstrip().startswith("[📸]"):
+        if x.get("account") != "x" or "/a2o_soul/status/" not in u.lower() or u in seen:
             continue
         seen.add(u)
         if x.get("at") and timedelta(0) <= now - _kst(x["at"]) < timedelta(hours=3):
