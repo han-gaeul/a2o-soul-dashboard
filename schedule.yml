@@ -36,6 +36,7 @@ fansign:
     - { match: Music Plant, announce: "2026-11-19 15:00" }
     - { match: Jumpup, apply_start: "2026-11-18 15:00", apply_end: "2026-11-20 23:59", announce: "2026-11-21 15:00" }
   add:
+    - { date: 2026-12-11, time: "20:00", title: Makestar 팬사인회, short: 팬싸, apply_start: "2026-11-21 15:00", apply_end: "2026-11-23 23:59", announce: "2026-11-24 17:00", post: "https://x.com/Makestarcorp/status/2124019989317390428" }
     - { date: 2026-11-29, time: "20:00", title: Jumpup 팬사인회, short: 팬싸, apply_start: "2026-11-18 15:00", apply_end: "2026-11-20 23:59", announce: "2026-11-21 15:00", post: "https://x.com/JumpUp_ent/status/2122932820913860808" }
 
 # 팬 콜라보 — 다른 팬덤·스테이션과 함께하는 팬 주최 이벤트 (사이트 '콜라보' 탭에만, 일정·알림·트윗 초안엔 안 넣음)
