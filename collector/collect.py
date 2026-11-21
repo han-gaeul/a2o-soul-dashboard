@@ -60,6 +60,7 @@ def load_config():
     cfg["x_vendors"] = [{"handle": str(v["handle"]).lstrip("@"), "name": str(v.get("name") or v["handle"])}
                         for v in (cfg.get("x_vendors") or []) if isinstance(v, dict) and v.get("handle")]
     cfg["x_vote_accounts"] = [str(u).lstrip("@") for u in (cfg.get("x_vote_accounts") or [])]
+    cfg["x_show_accounts"] = [str(u).lstrip("@") for u in (cfg.get("x_show_accounts") or [])]
     cfg["x_media"] = [{"handle": str(v["handle"]).lstrip("@"), "name": str(v.get("name") or v["handle"])}
                       for v in (cfg.get("x_media") or []) if isinstance(v, dict) and v.get("handle")]
     cfg["videos"] = cfg.get("videos") or []
@@ -579,6 +580,7 @@ def stream_pushes(posts):
     return sorted(uniq.values(), key=lambda x: (x["date"], x["start"]))
 
 
+FANCAM_POST = re.compile(r"직캠|FANCAM|FAN\s?CAM|Choreo", re.I)
 A2O_MENTION = re.compile(r"A2O\s?SOUL|A2OSOUL|에이투오\s?소울|에이투오소울", re.I)
 
 
@@ -1348,16 +1350,22 @@ def collect(cfg, rescan=False):
                 sst["at"] = now.isoformat(timespec="minutes")
                 if got:
                     sst["since_id"] = max(got, key=lambda p_: int(p_["tweet_id"]))["tweet_id"]
-                known = {u.lower() for u in cfg["x_vote_accounts"]} | {v["handle"].lower() for v in cfg["x_media"]}
+                known = {u.lower() for u in cfg["x_vote_accounts"] + cfg["x_show_accounts"]} | {v["handle"].lower() for v in cfg["x_media"]}
                 n_new = 0
+                fcs = sst.setdefault("fancams", {})
                 for p_ in got:
                     official = p_.get("verified_type") in ("business", "government") or p_["author"].lower() in known
+                    if official and FANCAM_POST.search(p_["caption"]) and A2O_MENTION.search(p_["caption"]):  # 방송사 직캠 글 → 리트윗용
+                        fcs[p_["tweet_id"]] = {k: p_.get(k) for k in ("timestamp", "permalink", "author", "author_name")}
+                        continue
                     if official and p_.get("images") and not p_.get("video") and A2O_MENTION.search(p_["caption"]) and show_photo_ok(cfg, p_):
                         sposts[p_["tweet_id"]] = {k: p_.get(k) for k in ("caption", "timestamp", "permalink", "author", "author_name", "images")}
                         n_new += 1
                 cut = (now - timedelta(days=60)).isoformat()
                 for k in [k for k, m in sposts.items() if (m.get("timestamp") or "") < cut]:
                     sposts.pop(k)
+                for k in [k for k, m in fcs.items() if (m.get("timestamp") or "") < cut]:
+                    fcs.pop(k)
                 print(f"[음방 사진] 검색 {len(got)}개 · 새 공식 사진 글 {n_new}개 · 보관 {len(sposts)}개")
             except Exception as e:  # noqa: BLE001
                 print(f"[음방 사진] 검색 실패: {e}")
@@ -1938,6 +1946,9 @@ def build(cfg):
         "photos": photo_feed(cfg, registry, load_json("announcements.json", {})),
         "notice_posts": notice_feed(cfg, registry, load_json("announcements.json", {})),
         "media_posts": media_feed(cfg, media_state),
+        "show_fancams": sorted(({"url": m["permalink"], "at": kst_datetime(m["timestamp"]), "by": m.get("author_name") or m.get("author")}
+                                 for m in ((load_json("announcements.json", {}).get("x_show_photos") or {}).get("fancams") or {}).values()
+                                 if m.get("permalink") and m.get("timestamp")), key=lambda x: x["at"], reverse=True)[:20],
         "mvs": mvs,
         "members": members,
         "group_links": cfg["group_links"],
