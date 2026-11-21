@@ -2684,8 +2684,8 @@
   }
  },
  "x_media": {
-  "at": "2026-11-21T22:10+09:00",
-  "auto_since": "2124128334582018252",
+  "at": "2026-11-21T22:20+09:00",
+  "auto_since": "2124130889605202365",
   "candidates": {},
   "checked": "2026-11-21T16:40+09:00",
   "missing": [],
@@ -2943,6 +2943,15 @@
   "A2OSOUL_STREAM": {
    "id": "2122910820325847040",
    "posts": [
+    {
+     "caption": "음원/투표 총공팀 단톡방 멤버 모집중입니다.\n자세한 내용은 이미지 참고 부탁드립니다.\n\n입장 링크 https://open.kakao.com/o/gkUU6zXi https://x.com/A2OSOUL_STREAM/status/2124130582615720394/photo/1",
+     "images": [
+      "https://pbs.twimg.com/media/HXptgWlaEAA4RlN.jpg"
+     ],
+     "permalink": "https://x.com/A2OSOUL_STREAM/status/2124130582615720394",
+     "timestamp": "2026-11-21T13:19:29.000Z",
+     "tweet_id": "2124130582615720394"
+    },
     {
      "caption": "영등포 타임스퀘어 전광판에 우리애들을 비출 수 있는 기회입니다!! 다들 투표 당장해주세요! https://twitter.com/A20SOUL_VOTE/status/2124096290544132158",
      "images": [],
@@ -3218,7 +3227,7 @@
      "tweet_id": "2123321105431842966"
     }
    ],
-   "since_id": "2124120522632147135"
+   "since_id": "2124130582615720394"
   }
  },
  "x_vendors": {
