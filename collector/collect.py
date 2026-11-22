@@ -769,6 +769,26 @@ def other_group_only(title):
     return bool(re.search(r"A2O\s*LITE|에이투오\s*라이트", head, re.I)) and not re.search(r"A2O\s*SOUL|에이투오\s*소울", head, re.I)
 
 
+DISCOVER_SKIP = re.compile(r"reaction|리액션|cover|커버", re.I)
+
+
+def discovered_ok(cfg, reg):
+    """자동 찾기(discover)로 등록한 방송사 라디오·예능·출근길 영상 중 지금 규칙에도 맞는 것만 (리액션·커버 제외)."""
+    if not reg.get("discovered") or DISCOVER_SKIP.search(reg["title"]):
+        return False
+    disc = cfg.get("discover") or {}
+    rules_ = disc.get("rules") or ([{"query": disc["query"], "channels": disc.get("channels")}] if disc.get("query") else [])
+    if not re.search(GROUP_PATTERN, reg["title"], re.I):
+        return False
+    for r in rules_:
+        if r.get("title") and not re.search(r["title"], reg["title"], re.I):
+            continue
+        if r.get("channels") and not re.search(r["channels"], reg.get("channel_title") or "", re.I):
+            continue
+        return True
+    return False
+
+
 def other_trainee_only(cfg, title):
     """'A2O LTB DAVID, A2O LTG OA ...'처럼 유닛 뒤에 이름이 붙었는데 그 이름이 소울 멤버(별칭 포함)가 아닌 영상."""
     names = re.findall(r"\b(?:LTB|HTB)\s+([A-Z][A-Z\-]+)\b", title)
@@ -1919,11 +1939,13 @@ def build(cfg):
         ov = overrides.get(vid, {})
         if ov.get("active") is False or "title" not in reg:
             continue
-        if vid not in overrides and reg.get("channel_id") not in tracked:  # 공식 채널 영상만
-            continue
+        if vid not in overrides and reg.get("channel_id") not in tracked and not discovered_ok(cfg, reg):
+            continue  # 등록 채널 영상 + 자동 찾기로 찾은 방송사 라디오·예능·출근길 영상만
         if vid not in overrides and (other_group_only(reg["title"]) or other_trainee_only(cfg, reg["title"])):
             continue  # A2O LITE 단독 영상, 소울 멤버가 아닌 연습생 개인 영상
         cat, member = resolve_video(cfg, registry, vid, overrides)
+        if vid not in overrides and reg.get("channel_id") not in tracked and cat == "fancam":
+            cat, member = "content", ""  # 언론사 출근길 '직캠'은 무대 직캠이 아니라 콘텐츠로
         pts = points(f"yt:{vid}", "views")
         value, delta = last_delta(pts)
         videos.append({
