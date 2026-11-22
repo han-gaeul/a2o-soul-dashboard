@@ -35,6 +35,34 @@ votes:
     note: 100% 팬 투표 · 남자 18팀 중 상위 5팀이 결선(12/9~12/22) 진출
     url: https://sports.khan.co.kr/en/article/202611171532017/
     in_app: true
+  - show: 음악중심
+    app: 뮤니버스(MUNIVERSE)
+    title: STAGE M PICK (971회)
+    start: "2026-11-21 17:00"
+    end: "2026-11-26 12:00"
+    url: https://muniverse.io/votes
+    note: 레전드 무대 투표 · 결과는 다음 음악중심 방송에서
+  - show: 더쇼
+    app: 빅크(BIGC)
+    title: 핫 스테이지 투표 (애프터)
+    start: "2026-11-21 00:00"
+    end: "2026-11-23 17:00"
+    url: https://go.bigc.im/3XniKQd
+    note: 1위 리워드 영등포 타임스퀘어 아트캔버스 · 11/22 13시 중간 랭킹 1위
+  - show: 더쇼
+    app: 빅크(BIGC)
+    title: 팬픽캠 투표 (애프터)
+    start: "2026-11-21 00:00"
+    end: "2026-11-23 17:00"
+    url: https://x.com/BIGCChoice/status/2124367268356460881
+    note: 11/22 13시 중간 랭킹 1위 자이 · 2위 테오
+  - show: 더쇼
+    app: 빅크(BIGC)
+    title: 엔딩요정 투표 (애프터)
+    start: "2026-11-21 00:00"
+    end: "2026-11-23 17:00"
+    url: https://x.com/BIGCChoice/status/2124369784787603592
+
 
 # 스밍 리스트 (응원 탭 '스밍 리스트' 맨 위) — 이 순서로 반복 재생. song마다 음원 사이트 검색 버튼이 자동으로 붙음
 #   멜론 TOP100 = 24시간 이용자 수 + 1시간 이용량 50:50, 1시간 이용량은 한 계정이 한 곡을 1시간에 1번만 셈
