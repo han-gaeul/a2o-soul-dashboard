@@ -2593,6 +2593,28 @@
    "permalink": "https://x.com/HIGHER_twt/status/2124372285960446302",
    "timestamp": "2026-11-22T05:19:56.000Z"
   },
+  "xo:2124389920030789779": {
+   "caption": "❤️‍🔥11월 넷째 주 핫스테이지의 주인공은?❤️‍🔥\n내 아티스트의 무대를 최고의 무대로 만들어 1위 트로피를 안겨주세요! 🏆\n\n🗳️투표 링크: https://t.co/KSbSM3VRyN \n\n❤️‍🔥주간 핫스테이지 1, 2위에 선정된 무대는 월간 핫스테이지 투표로 이어집니다! 👀\n\n#A2OSOUL #ADAP #AMERSANDONE #BabyDONTCry #BESTie #CHAERYEONG #CODEZiGU #FISTBUMP #H1KEY #HEARTOFWOMAN #Kei #KEYVITUP #Keyveatz #KimJangHoon #LNGSHOT #NCTDREAM #NTOP #TOMORROW_X_TOGETHER #UNCHILD #xikers #김장훈 #롱샷 #베스티 #베이비돈크라이 #싸이커스 #언차일드 #앰퍼샌드원 #에이댑 #에이투오소울 #엔시티드림 #엔탑 #채령 #케이 #코드지구 #키비츠 #키빗업 #투모로우바이투게더 #피스트범프 #하이키 #하트오브우먼\n\n— HIGHER",
+   "excerpt": "❤️‍🔥11월 넷째 주 핫스테이지의 주인공은?❤️‍🔥\n내 아티스트의 무대를 최고의 무대로 만들어 1위 트로피를 안겨주세요! 🏆\n\n🗳️투표 링크: https://t.co/KSbSM3VRyN \n\n❤️‍🔥주간 핫스테이지 1, 2위에 선정된 무대는 월간 핫스",
+   "items": [
+    {
+     "app": "하이어(HIGHER)",
+     "confidence": 0.6,
+     "date": null,
+     "end": null,
+     "end_date": null,
+     "kind": "vote",
+     "place": null,
+     "show": "",
+     "start": null,
+     "time": null,
+     "title": "❤️‍🔥11월 넷째 주 핫스테이지의 주인공은?❤️‍🔥",
+     "url": null
+    }
+   ],
+   "permalink": "https://x.com/HIGHER_twt/status/2124389920030789779",
+   "timestamp": "2026-11-22T06:30:00.000Z"
+  },
   "xv:2119672177347981651": {
    "caption": "[💿] A2O SOUL DEBUT EP [SUPERSTAR]\n발매 기념 공개 팬사인회\n\n📢응모 마감 D-1‼️\n✨당일 공개 팬사인회에서 SPECIAL STAGE가 진행됩니다.\n\n📅2026.11.14 (토) 19:30 (KST)\n📍스타필드 수원 타워 아트리움\n\n[ONLINE] 뮤직아트 온라인몰\n🛒온라인 응모기간 : 2026.11.08 (일) 14:00 ~ 11.10 (화) 23:59 (KST)\n\n[OFFLINE] 영풍문고 스타필드수원점 내 음반매장\n🛒오프라인 응모기간 : 2026.11.08 (일) 14:00 ~ 11.10 (화) 21:00 (KST)\n\n🌠응모자 전원 미공개 셀카 포토카드 15종 중 1종 랜덤 증정\n\n🔗https://t.co/I1sj0S6DOk",
    "excerpt": "[💿] A2O SOUL DEBUT EP [SUPERSTAR]\n발매 기념 공개 팬사인회\n\n📢응모 마감 D-1‼️\n✨당일 공개 팬사인회에서 SPECIAL STAGE가 진행됩니다.\n\n📅2026.11.14 (토) 19:30 (KST)\n📍스타필드 수원 타워 아",
@@ -2793,8 +2815,8 @@
   }
  },
  "x_media": {
-  "at": "2026-11-22T15:20+09:00",
-  "auto_since": "2124386532551536931",
+  "at": "2026-11-22T15:30+09:00",
+  "auto_since": "2124389920030789779",
   "candidates": {},
   "checked": "2026-11-21T16:40+09:00",
   "missing": [],
@@ -2970,14 +2992,18 @@
   "since_id": "2124020133429669953"
  },
  "x_official_votes": {
-  "at": "2026-11-22T15:20+09:00",
+  "at": "2026-11-22T15:30+09:00",
   "deep": 1,
   "last": {
-   "official": [],
-   "read": 0,
-   "verified": []
+   "official": [
+    "HIGHER_twt"
+   ],
+   "read": 1,
+   "verified": [
+    "HIGHER_twt:business"
+   ]
   },
-  "since_id": "2124372285960446302",
+  "since_id": "2124389920030789779",
   "v": 2
  },
  "x_show_photos": {
