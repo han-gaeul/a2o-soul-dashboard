@@ -2970,16 +2970,12 @@
   "since_id": "2124020133429669953"
  },
  "x_official_votes": {
-  "at": "2026-11-22T14:21+09:00",
+  "at": "2026-11-22T14:34+09:00",
   "deep": 1,
   "last": {
-   "official": [
-    "HIGHER_twt"
-   ],
-   "read": 1,
-   "verified": [
-    "HIGHER_twt:business"
-   ]
+   "official": [],
+   "read": 0,
+   "verified": []
   },
   "since_id": "2124372285960446302",
   "v": 2
