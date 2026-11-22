@@ -580,15 +580,14 @@ def stream_pushes(posts):
     return sorted(uniq.values(), key=lambda x: (x["date"], x["start"]))
 
 
-VOTE_WIN = re.compile(r"결과|축하|congrat|WINNER", re.I)  # 투표 1위·결과 발표 글
-VOTE_NOT_WIN = re.compile(r"중간|투표\s*(시작|오픈|OPEN|진행|링크|하러)|마감\s*(까지|임박)|D-\d|후보\s*(발표|공개)|주인공은\s*\?", re.I)
+VOTE_POST = re.compile(r"투표|vote|voting|후보|nominee|결과|1위|랭킹|ranking|winner", re.I)  # 투표 관련 글 전부 (시작·중간·마감·결과)
 def vote_wins(store):
-    """투표 앱·방송사 공식 글(xo:) 중 A2O SOUL 투표 1위·결과 발표 → 리트윗 후보 (최근 20개)"""
+    """투표 앱·방송사 공식 글(xo:) 중 A2O SOUL이 나오는 투표 글 전부 → 리트윗 후보 (최근 20개)"""
     out = []
     for pid, m in (store.get("posts") or {}).items():
         c = m.get("caption") or ""
         if pid.startswith("xo:") and m.get("permalink") and m.get("timestamp") \
-                and VOTE_WIN.search(c) and not VOTE_NOT_WIN.search(c) and A2O_MENTION.search(c):
+                and VOTE_POST.search(c) and A2O_MENTION.search(c):
             out.append({"url": m["permalink"], "at": kst_datetime(m["timestamp"]), "by": c.rsplit("— ", 1)[-1].strip() if "\n\n— " in c else ""})
     return sorted(out, key=lambda x: x["at"], reverse=True)[:20]
 
