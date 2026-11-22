@@ -167,9 +167,9 @@ def candidates(dash, site, now):
         if x.get("at") and timedelta(0) <= now - _kst(x["at"]) < timedelta(hours=3):
             out.append((f"rt|{u}", "media", "media", {"name": "A2O SOUL", "title": (x.get("text") or "[📸]").strip()[:100], "url": u,
                                                      "members": [], "rt": True}))
-    for x in dash.get("vote_wins") or []:  # 투표 앱·방송사의 A2O SOUL 1위·결과 글 (6시간 안 — 투표 검색이 평소 3시간마다) — 바로 리트윗
+    for x in dash.get("vote_wins") or []:  # 투표 앱·방송사의 A2O SOUL 투표 글 전부 (6시간 안 — 투표 검색이 평소 3시간마다) — 바로 리트윗
         if x.get("at") and timedelta(0) <= now - _kst(x["at"]) < timedelta(hours=6):
-            out.append((f"rt|{x['url']}", "media", "media", {"name": x.get("by") or "", "title": "투표 결과", "url": x["url"], "members": [], "rt": True}))
+            out.append((f"rt|{x['url']}", "media", "media", {"name": x.get("by") or "", "title": "투표", "url": x["url"], "members": [], "rt": True}))
     for x in dash.get("show_fancams") or []:  # 방송사 공식 직캠 글 (4시간 안 — 음방 사진 검색이 1~3시간마다) — 바로 리트윗
         if x.get("at") and timedelta(0) <= now - _kst(x["at"]) < timedelta(hours=4):
             out.append((f"rt|{x['url']}", "media", "media", {"name": x.get("by") or "", "title": "직캠", "url": x["url"], "members": [], "rt": True}))
