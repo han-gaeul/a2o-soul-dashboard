@@ -62,7 +62,13 @@ votes:
     start: "2026-11-21 00:00"
     end: "2026-11-23 17:00"
     url: https://x.com/BIGCChoice/status/2124369784787603592
-
+  - show: 뮤직뱅크
+    app: 쿠궁(COOGOONG)
+    title: 사전투표 (1316회)
+    start: "2026-11-22 15:00"
+    end: "2026-11-25 11:00"
+    url: https://open.coogoong.com/?target=event%2Fdetail%3Fkey_event%3D921
+    note: K-차트 1위에 반영되는 팬 투표 · 11/22 오후 3위 (1위 TXT, 2위 ATEEZ)
 
 # 스밍 리스트 (응원 탭 '스밍 리스트' 맨 위) — 이 순서로 반복 재생. song마다 음원 사이트 검색 버튼이 자동으로 붙음
 #   멜론 TOP100 = 24시간 이용자 수 + 1시간 이용량 50:50, 1시간 이용량은 한 계정이 한 곡을 1시간에 1번만 셈
