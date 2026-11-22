@@ -991,8 +991,11 @@ def auto_items(today):
     approved = set(store.get("approved") or [])
     events, notices, pending, votes, prerecs = [], [], [], [], []
     seen_ev, seen_pend, seen_vote = set(), set(), set()
+    fans = {str(u).lstrip("@").lower() for u in (read_yml("targets.yml").get("x_fans") or [])}
     for pid, post in sorted(store.get("posts", {}).items(), key=lambda kv: kv[1].get("timestamp") or "", reverse=True):
         posted = kst_datetime(post.get("timestamp"))[:10]
+        if pid.startswith("xf:") and (post.get("permalink") or "").split("/")[3:4] and post["permalink"].split("/")[3].lower() not in fans:
+            continue  # 목록에서 뺀 팬 계정 글은 안 씀
         for i in post.get("items", []):
             akey = f"{pid}|{i.get('date') or ''}|{i['title']}"
             if akey in approved:  # 이슈에서 체크 → 확인된 항목으로
