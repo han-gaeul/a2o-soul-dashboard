@@ -678,7 +678,7 @@ details.howto { scroll-margin-top: 64px; }
 .vt-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 10px; }
 .vt-seg { margin-bottom: 10px; }
 /* 이번 주 음방 */
-.wk { border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; margin-bottom: 12px; display: grid; gap: 2px; }
+.wk { border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; margin: 14px 0 12px; display: grid; gap: 2px; }
 .wk-head { display: flex; gap: 8px; align-items: baseline; margin-bottom: 4px; }
 .wk-row { display: grid; grid-template-columns: 52px 1fr auto; gap: 10px; align-items: center; padding: 8px 4px; border-top: 1px solid var(--line); }
 .wk-row.past { opacity: .45; }
@@ -814,8 +814,7 @@ dialog.dlg-full[open] { display: flex; flex-direction: column; }
 .pc-all .pc-grid { display: flex; overflow-x: auto; gap: 8px; padding-bottom: 4px; scroll-snap-type: x proximity; }
 .pc-all .pc-grid .pc { flex: 0 0 92px; scroll-snap-align: start; }
 @media (max-width: 720px) {
-  #votes.vt-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 4px; }
-  #votes .vt { flex: 0 0 78%; scroll-snap-align: start; }
+  #votes.vt-grid { grid-template-columns: 1fr; }  /* 투표 탭은 세로로 쭉 */
   #kpis { grid-template-columns: 1fr 1fr; gap: 8px; }
   #tourSec .tour-item span:not(.tour-ico) { display: none; }
   #tourSec .tour-list { grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
@@ -1150,3 +1149,7 @@ html:not([lang="ko"]) .vt-t { -webkit-line-clamp: 3; font-size: 13px; overflow-w
 .st-push.on { border-color: var(--accent); box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 25%, transparent); }
 .st-recent { margin: 6px 0 0; padding-left: 18px; display: grid; gap: 6px; font-size: 13px; }
 .st-txt { white-space: pre-line; }
+
+/* 투표 탭: 음방 / 어워즈·기타 묶음 제목 (타일 그리드 한 줄 전체) */
+.vt-grid .vt-group { grid-column: 1 / -1; margin: 10px 2px 0; font-size: 15px; }
+.vt-grid .vt-group:first-child { margin-top: 0; }
