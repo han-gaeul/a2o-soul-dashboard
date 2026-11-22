@@ -46,6 +46,10 @@ channels:
     filter: group
     kpi: false
     show: 인기가요
+  - id: UCM3jwNRfl5-W8VzgT6DsaEQ   # SBSKPOP ZOOM (인기가요 직캠·페이스캠)
+    filter: group
+    kpi: false
+    show: 인기가요
   - handle: ALLTHEKPOP             # ALL THE K-POP (쇼챔피언)
     filter: group
     kpi: false
@@ -152,6 +156,9 @@ videos:
   - id: GR0wz-I0Q3A   # SORA 'SUPERSTAR' THE SHOW 261020 [FAN PICK CAM 4K] (같은 이유)
     category: fancam
     member: SORA
+  - id: lSscEV36v7g   # [페이스캠4K] 제트 @SBS Inkigayo 261115 — 'FaceCam'은 직캠 패턴에 안 걸려서 직접 지정
+    category: fancam
+    member: ZET
 
 # 웹 푸시 알림 (사이트 '🔔 알림 받기') — 둘 다 있어야 버튼이 보임
 #   api: 구독 저장 Cloudflare Worker 주소 (push-worker/worker.js), vapid_public: VAPID 공개키
