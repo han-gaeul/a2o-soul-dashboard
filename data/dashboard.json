@@ -20726,24 +20726,39 @@
    "url": "https://sports.khan.co.kr/en/article/202611171532017/"
   },
   {
-   "app": "빅크(BIGC)",
-   "auto": true,
-   "end": "2026-11-23 17:00",
-   "show": "더쇼",
-   "source": "https://x.com/BIGCChoice/status/2124369784787603592",
-   "start": "2026-11-22 00:00",
-   "title": "엔딩요정 투표",
-   "url": "https://x.com/BIGCChoice/status/2124369784787603592"
+   "app": "뮤니버스(MUNIVERSE)",
+   "end": "2026-11-26 12:00",
+   "note": "레전드 무대 투표 · 결과는 다음 음악중심 방송에서",
+   "show": "음악중심",
+   "start": "2026-11-21 17:00",
+   "title": "STAGE M PICK (971회)",
+   "url": "https://muniverse.io/votes"
   },
   {
    "app": "빅크(BIGC)",
-   "auto": true,
+   "end": "2026-11-23 17:00",
+   "note": "1위 리워드 영등포 타임스퀘어 아트캔버스 · 11/22 13시 중간 랭킹 1위",
+   "show": "더쇼",
+   "start": "2026-11-21 00:00",
+   "title": "핫 스테이지 투표 (애프터)",
+   "url": "https://go.bigc.im/3XniKQd"
+  },
+  {
+   "app": "빅크(BIGC)",
+   "end": "2026-11-23 17:00",
+   "note": "11/22 13시 중간 랭킹 1위 자이 · 2위 테오",
+   "show": "더쇼",
+   "start": "2026-11-21 00:00",
+   "title": "팬픽캠 투표 (애프터)",
+   "url": "https://x.com/BIGCChoice/status/2124367268356460881"
+  },
+  {
+   "app": "빅크(BIGC)",
    "end": "2026-11-23 17:00",
    "show": "더쇼",
-   "source": "https://x.com/BIGCChoice/status/2124367268356460881",
-   "start": "2026-11-22 00:00",
-   "title": "팬픽캠 투표",
-   "url": "https://x.com/BIGCChoice/status/2124367268356460881"
+   "start": "2026-11-21 00:00",
+   "title": "엔딩요정 투표 (애프터)",
+   "url": "https://x.com/BIGCChoice/status/2124369784787603592"
   },
   {
    "app": "하이어(HIGHER)",
