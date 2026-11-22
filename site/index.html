@@ -49,6 +49,7 @@
     <a href="#overview" class="on" data-i18n="tab.overview">한눈에</a>
     <a href="#notice" id="noticeTab" data-i18n="tab.notice">공지</a>
     <a href="#cheer" data-i18n="tab.cheer">응원</a>
+    <a href="#vote" data-i18n="tab.vote">투표</a>
     <a href="#collab" data-i18n="tab.collab">콜라보</a>
     <a href="#mv" data-i18n="tab.mv">MV</a>
     <a href="#members" data-i18n="tab.members">멤버</a>
@@ -72,7 +73,7 @@
     <div id="homeStyle"></div>
     <div class="tour-tip" id="tourTip" hidden><button type="button" class="tour-open" id="tourOpen" data-i18n="tour_tip">👋 처음이세요? 30초 사용법</button><button type="button" class="tour-x" id="tourX" aria-label="✕">✕</button></div>
     <section class="card vote-home" id="voteHome" hidden>
-      <div class="sec-head"><h2><span data-i18n="vote_home">🗳 진행 중인 투표</span> <span class="muted small" id="voteHomeCount"></span></h2><a class="more" href="#cheer" data-i18n="vote_more">응원 탭 ›</a></div>
+      <div class="sec-head"><h2><span data-i18n="vote_home">🗳 진행 중인 투표</span> <span class="muted small" id="voteHomeCount"></span></h2><a class="more" href="#vote" data-i18n="vote_tab_more">투표 탭 ›</a></div>
       <div class="vt-grid vt-row" id="voteHomeList"></div>
     </section>
     <section class="card" id="shopHome" hidden>
@@ -157,10 +158,6 @@
       <p class="note small" data-i18n="prerec_desc"></p>
       <div class="votes" id="prerecs"></div>
     </section>
-    <section class="card" id="votesSec">
-      <h2 data-i18n="votes">투표</h2>
-      <div class="vt-grid" id="votes"></div>
-    </section>
     <section class="card" id="radioSec">
       <h2 data-i18n="radio_title">📻 라디오 신청</h2>
       <p class="note small" data-i18n="radio_desc"></p>
@@ -192,6 +189,13 @@
       <h2 data-i18n="calendar">캘린더 구독</h2>
       <p class="note" data-i18n="calendar_desc"></p>
       <div class="links" id="calLinks"></div>
+    </section>
+  </div>
+
+  <div data-tab="vote" hidden>
+    <section class="card" id="votesSec">
+      <h2 data-i18n="votes">투표</h2>
+      <div class="vt-grid" id="votes"></div>
     </section>
   </div>
 

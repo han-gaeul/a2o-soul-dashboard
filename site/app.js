@@ -127,7 +127,7 @@ if ("serviceWorker" in navigator) {
   const kstDate = (s) => new Date(`${s.replace(" ", "T")}${s.length > 10 ? ":00" : "T00:00:00"}+09:00`); // "YYYY-MM-DD[ HH:MM]" KST
 
   // ---------- 탭 ----------
-  const tabs = ["overview", "notice", "cheer", "collab", "mv", "members", "fancams", "videos", "guide", "community"];
+  const tabs = ["overview", "notice", "cheer", "vote", "collab", "mv", "members", "fancams", "videos", "guide", "community"];
   const drawn = new Set();
   const drawers = {};
   // 공유 링크: #member/MOON → 멤버 탭, #ep/날짜/방송 → 영상 탭, #cmp/날짜/방송/A/B → 직캠 탭
@@ -524,7 +524,7 @@ if ("serviceWorker" in navigator) {
       const close = el("button", { type: "button", class: "vb-x", "aria-label": "✕" }, "✕");
       const bar = el("div", { class: `vote-bar${kstDate(v.end) - Date.now() < 6 * 3600000 ? " urgent" : ""}`, role: "status" },
         // 누르면 바로 투표 링크로 (없으면 투표 앱 찾기)
-        el("a", { href: voteHref(v) || "#cheer", ...(voteHref(v) ? { target: "_blank", rel: "noopener" } : {}), class: "vb-main" },
+        el("a", { href: voteHref(v) || "#vote", ...(voteHref(v) ? { target: "_blank", rel: "noopener" } : {}), class: "vb-main" },
           `🗳 ${[tc(v.show), tc(v.title)].filter(Boolean).join(" · ")} — ${t("vote_ends", { t: duration(kstDate(v.end) - Date.now()) })}`,
           soon.length > 1 ? el("span", { class: "vb-more" }, ` +${soon.length - 1}`) : null),
         voteHref(v) ? el("a", { class: "vb-go", href: voteHref(v), target: "_blank", rel: "noopener" }, voteLabel(v)) : null, close);
@@ -653,7 +653,7 @@ if ("serviceWorker" in navigator) {
             el("div", { class: "muted small" }, [r.v.pre ? `${t("wk_pre")} ${tc(r.v.pre)}` : "", r.v.live ? `${t("wk_live")} ${tc(r.v.live)}` : ""].filter(Boolean).join(" · ")),
             ...r.open.map((x) => el("div", { class: "small wk-vote" }, `🗳 ${tc(x.title)} · ${t("wk_until", { t: x.end.slice(5).replace("-", ".") })}`))),
           r.state !== "past" && r.live ? ext(r.live.url, `${r.live.label} ↗`) : null)));
-      $("votes").parentNode.insertBefore(box, $("votes"));
+      $("votes").after(box);  // 투표 탭: 투표 목록 먼저, 이번 주 음방 표는 그 아래
     }
   }
   if (votes.length) {
@@ -673,7 +673,13 @@ if ("serviceWorker" in navigator) {
         return b;
       }));
       const f = groups.find((g) => g[0] === gk)[2];
-      $("votes").replaceChildren(...sorted.filter(f).map((v) => voteTile(v, true)));
+      const list = sorted.filter(f);
+      // 전체 보기: 음방 투표 / 어워즈·기타 두 묶음으로
+      const isShow = (v) => SHOW_RX.test(`${v.show} ${v.title}`);
+      const parts = gk ? [["", list]] : [[`📺 ${t("vote_f_show")}`, list.filter(isShow)], [`🏆 ${t("vote_f_app")}`, list.filter((v) => !isShow(v))]];
+      $("votes").replaceChildren(...parts.filter(([, l]) => l.length).flatMap(([h, l]) => [
+        ...(h ? [el("h3", { class: "vt-group" }, `${h} `, el("span", { class: "muted small" }, String(l.length)))] : []),
+        ...l.map((v) => voteTile(v, true))]));
     };
     if (groups.length > 2) $("votes").before(seg);
     drawVotes();
@@ -1392,7 +1398,7 @@ if ("serviceWorker" in navigator) {
     const radio = rg && document.querySelector(`#howto .gd-tile[data-title="${CSS.escape(rg.title)}"]`);
     const tiles = [
       ["🎙", "prerec", "prerecSec", cnt("prerecs", ".vote"), true],
-      ["🗳", "votes", "votesSec", cnt("votes", ".vt"), true],
+      ["🗳", "votes", "#vote", cnt("votes", ".vt"), true],  // 투표는 따로 탭
       ["🎧", "streaming", "streamSec"],
       ["📣", "fanchants", "fanchantSec"],
       ["📻", "cheer_radio", $("radioSec") || radio],
@@ -1402,13 +1408,14 @@ if ("serviceWorker" in navigator) {
       ["📅", "calendar", "calendarSec"],
     ];
     const items = tiles.map(([icon, key, target, n, counted]) => {
-      const node = typeof target === "string" ? $(target) : target;
+      const node = typeof target === "string" ? (target.startsWith("#") ? { hash: target } : $(target)) : target;
       if (!node) return null;
       const b = el("button", { type: "button", class: `cm-tile${counted && n ? " on" : ""}` },
         el("span", { class: "cm-icon", "aria-hidden": "true" }, icon),
         el("span", { class: "cm-label" }, t(key)),
         counted ? el("span", { class: "cm-sub" }, n ? t("cheer_open", { n }) : t("cheer_none")) : null);
       b.addEventListener("click", () => {
+        if (node.hash) { location.hash = node.hash; window.scrollTo({ top: 0 }); return; }
         if (node.tagName === "DETAILS") node.open = true;
         if (node.classList?.contains("gd-tile") && !node.classList.contains("on")) node.click();
         node.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -2487,7 +2494,7 @@ if ("serviceWorker" in navigator) {
         rows.push(a);
       };
       votes.filter((v) => now >= kstDate(v.start)).sort((a, b) => kstDate(a.end) - kstDate(b.end)).slice(0, 3)
-        .forEach((v) => row("🗳", [tc(v.show), tc(v.title)].filter(Boolean).join(" · "), t("vote_left", { t: duration(kstDate(v.end) - now) }), voteHref(v) || "#cheer", kstDate(v.end) - now < 24 * 3600000));
+        .forEach((v) => row("🗳", [tc(v.show), tc(v.title)].filter(Boolean).join(" · "), t("vote_left", { t: duration(kstDate(v.end) - now) }), voteHref(v) || "#vote", kstDate(v.end) - now < 24 * 3600000));
       (data.events || []).filter((e) => e.type === "음방" && e.date === todayKst)
         .forEach((e) => { const l = liveFor(e.title); row("📺", tc(e.title), [e.time, l ? l.label : ""].filter(Boolean).join(" · "), l?.url || "#cheer"); });
       const bm = data.members.find((x) => x.name === bias);
@@ -2582,6 +2589,7 @@ if ("serviceWorker" in navigator) {
     const item = (ico, label, fn) => { const b = el("button", { type: "button", class: "more-item" }, el("span", { class: "mi-ico" }, ico), el("span", {}, label)); b.onclick = fn; return b; };
     const fresh = $("noticeTab").querySelector(".tab-dot");
     $("moreList").replaceChildren(
+      item("🗳", t("tab.vote"), () => go("vote")),
       item("📢", t("tab.notice"), () => go("notice")), item("🎬", t("tab.mv"), () => go("mv")), item("🎥", t("tab.fancams"), () => go("fancams")),
       item("🔰", t("tab.guide"), () => go("guide")),
       item("🤝", t("tab.collab"), () => go("collab")),

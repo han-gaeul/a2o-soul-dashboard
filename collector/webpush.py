@@ -89,13 +89,13 @@ def candidates(dash, site, now):
         st = _kst(v["start"])
         if timedelta(0) <= st - now <= timedelta(hours=1, minutes=10):
             out.append((f"pr|{v['start']}|{v.get('show')}", "notice", "prerec",
-                        {"body": f"{v.get('show', '')} {v['start'][11:]}", "url": site + "#cheer", "tr": {v.get('show', ''): tr.get(v.get('show', ''), {})}}))
+                        {"body": f"{v.get('show', '')} {v['start'][11:]}", "url": site + "#vote", "tr": {v.get('show', ''): tr.get(v.get('show', ''), {})}}))
     for v in dash.get("votes") or []:  # 투표 마감 3시간 전
         end, start = _kst(v["end"]), _kst(v.get("start") or v["end"])
         if start <= now and timedelta(0) < end - now <= timedelta(hours=3):
             name = " · ".join(x for x in [v.get("show"), v.get("title")] if x)
             out.append((f"vt|{v['end']}|{name}", "vote", "vote",
-                        {"name": name, "t": v["end"][11:], "url": site + "#cheer", "parts": [v.get("show"), v.get("title")], "tr": tr}))
+                        {"name": name, "t": v["end"][11:], "url": site + "#vote", "parts": [v.get("show"), v.get("title")], "tr": tr}))
     lives = (dash.get("info") or {}).get("show_live") or []
     # 일정에 시간이 없으면 기본 방송 시간 → 투표 가이드의 방송 시간 ('화 18:00 · SBS Life')으로 덮어씀
     air = {"더쇼": "18:00", "쇼챔피언": "18:00", "엠카운트다운": "18:00", "뮤직뱅크": "17:15", "음악중심": "15:15", "인기가요": "15:20"}
