@@ -580,6 +580,19 @@ def stream_pushes(posts):
     return sorted(uniq.values(), key=lambda x: (x["date"], x["start"]))
 
 
+VOTE_WIN = re.compile(r"결과|축하|congrat|WINNER", re.I)  # 투표 1위·결과 발표 글
+VOTE_NOT_WIN = re.compile(r"중간|투표\s*(시작|오픈|OPEN|진행|링크|하러)|마감\s*(까지|임박)|D-\d|후보\s*(발표|공개)|주인공은\s*\?", re.I)
+def vote_wins(store):
+    """투표 앱·방송사 공식 글(xo:) 중 A2O SOUL 투표 1위·결과 발표 → 리트윗 후보 (최근 20개)"""
+    out = []
+    for pid, m in (store.get("posts") or {}).items():
+        c = m.get("caption") or ""
+        if pid.startswith("xo:") and m.get("permalink") and m.get("timestamp") \
+                and VOTE_WIN.search(c) and not VOTE_NOT_WIN.search(c) and A2O_MENTION.search(c):
+            out.append({"url": m["permalink"], "at": kst_datetime(m["timestamp"]), "by": c.rsplit("— ", 1)[-1].strip() if "\n\n— " in c else ""})
+    return sorted(out, key=lambda x: x["at"], reverse=True)[:20]
+
+
 FANCAM_POST = re.compile(r"직캠|FANCAM|FAN\s?CAM|Choreo", re.I)
 A2O_MENTION = re.compile(r"A2O\s?SOUL|A2OSOUL|에이투오\s?소울|에이투오소울", re.I)
 
@@ -1946,6 +1959,7 @@ def build(cfg):
         "photos": photo_feed(cfg, registry, load_json("announcements.json", {})),
         "notice_posts": notice_feed(cfg, registry, load_json("announcements.json", {})),
         "media_posts": media_feed(cfg, media_state),
+        "vote_wins": vote_wins(load_json("announcements.json", {})),
         "show_fancams": sorted(({"url": m["permalink"], "at": kst_datetime(m["timestamp"]), "by": m.get("author_name") or m.get("author")}
                                  for m in ((load_json("announcements.json", {}).get("x_show_photos") or {}).get("fancams") or {}).values()
                                  if m.get("permalink") and m.get("timestamp")), key=lambda x: x["at"], reverse=True)[:20],
