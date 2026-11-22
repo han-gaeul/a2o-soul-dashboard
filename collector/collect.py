@@ -1296,8 +1296,9 @@ def collect(cfg, rescan=False):
     # 매체 인스타: A2O SOUL 나오는 릴스만 (30분마다 — 계정마다 호출 1번)
     if instagram.enabled() and cfg["instagram_media"]:
         mst = store.setdefault("ig_media", {})
-        if not mst.get("at") or now - datetime.fromisoformat(mst["at"]) >= timedelta(minutes=30):
-            mst["at"] = now.isoformat(timespec="minutes")
+        sig = ",".join(v["username"] for v in cfg["instagram_media"])  # 계정 목록을 바꾸면 바로 다시 읽음
+        if not mst.get("at") or mst.get("sig") != sig or now - datetime.fromisoformat(mst["at"]) >= timedelta(minutes=30):
+            mst["at"], mst["sig"] = now.isoformat(timespec="minutes"), sig
             for v in cfg["instagram_media"]:
                 u = v["username"]
                 try:
