@@ -95,6 +95,16 @@ series:
 # 인스타그램 공식 계정 (IG_USER_ID / IG_ACCESS_TOKEN 시크릿이 있을 때만 수집)
 instagram:
   - a2o.soul
+# 매체 인스타 (공개 비즈니스·크리에이터 계정) — A2O SOUL 릴스만 골라 영상 탭 '인스타 릴스'에
+instagram_media:
+  - { username: myidol_miim, name: miim }
+  - { username: 1thek, name: 1theK }
+  - { username: stonemusicent, name: STONE MUSIC }
+  - { username: mbckpop, name: MBCkpop }
+  - { username: kbskpop, name: KBS Kpop }
+  - { username: sbskpop, name: SBS KPOP }
+  - { username: mnet_kpop, name: Mnet K-POP }
+  - { username: studio_choom, name: STUDIO CHOOM }
 
 # 공식 X 계정 (@ 없이). 음방 공지 등을 읽어 일정 후보로 정리 — X_BEARER_TOKEN 필요(사용량 과금)
 x:
