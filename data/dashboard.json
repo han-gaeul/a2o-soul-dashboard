@@ -9268,21 +9268,21 @@
    "version": "예판 특전"
   },
   {
-   "label": "Jumpup",
-   "member": "JUNE",
-   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Jumpup_JUNE.webp",
-   "version": "예판 특전"
-  },
-  {
-   "label": "Jumpup",
-   "member": "AYDEN",
-   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Jumpup_AYDEN.webp",
+   "label": "Jumpup (Photobook)",
+   "member": "MOON",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Jumpup%20%28Photobook%29_MOON.webp",
    "version": "예판 특전"
   },
   {
    "label": "Jumpup (Photobook)",
-   "member": "MOON",
-   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Jumpup%20%28Photobook%29_MOON.webp",
+   "member": "JUNE",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Jumpup%20%28Photobook%29_JUNE.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Jumpup (Photobook)",
+   "member": "AYDEN",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Jumpup%20%28Photobook%29_AYDEN.webp",
    "version": "예판 특전"
   },
   {
