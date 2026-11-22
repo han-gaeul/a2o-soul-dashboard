@@ -3188,7 +3188,7 @@
   }
  },
  "x_media": {
-  "at": "2026-11-23T04:00+09:00",
+  "at": "2026-11-23T04:10+09:00",
   "auto_since": "2124576149422702770",
   "candidates": {},
   "checked": "2026-11-22T16:40+09:00",
@@ -3385,16 +3385,12 @@
   "since_id": "2124416067544219917"
  },
  "x_official_votes": {
-  "at": "2026-11-23T01:10+09:00",
+  "at": "2026-11-23T04:10+09:00",
   "deep": 1,
   "last": {
    "official": [],
-   "read": 3,
-   "verified": [
-    "a2osoulvote:blue",
-    "dujiayibrasil:blue",
-    "onlyseeonee:blue"
-   ]
+   "read": 0,
+   "verified": []
   },
   "since_id": "2124523914135265784",
   "v": 2
