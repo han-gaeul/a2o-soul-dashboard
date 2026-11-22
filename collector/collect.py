@@ -54,6 +54,10 @@ def load_config():
     cfg = read_yml("targets.yml")
     cfg["channels"] = cfg.get("channels") or []
     cfg["instagram"] = cfg.get("instagram") or []
+    IG_MEDIA_NAMES.clear()
+    cfg["instagram_media"] = [{"username": str(v["username"]).lstrip("@"), "name": str(v.get("name") or v["username"])}
+                              for v in (cfg.get("instagram_media") or []) if isinstance(v, dict) and v.get("username")]
+    IG_MEDIA_NAMES.update({v["username"]: v["name"] for v in cfg["instagram_media"]})
     cfg["x"] = [str(u).lstrip("@") for u in (cfg.get("x") or [])]
     cfg["x_fans"] = [str(u).lstrip("@") for u in (cfg.get("x_fans") or [])]
     cfg["x_stream"] = [str(u).lstrip("@") for u in (cfg.get("x_stream") or [])]
@@ -586,6 +590,7 @@ def stream_pushes(posts):
 
 
 VOTE_POST = re.compile(r"투표|vote|voting|후보|nominee|결과|1위|랭킹|ranking|winner", re.I)  # 투표 관련 글 전부 (시작·중간·마감·결과)
+IG_MEDIA_NAMES = {}  # 매체 인스타 아이디 → 표시 이름 (load_config에서 채움)
 IG_REEL = re.compile(r"https://(?:www\.)?instagram\.com/reels?/[\w-]+/?")
 
 
@@ -598,6 +603,15 @@ def ig_reels(registry, mfeed):
             key = m["permalink"].rstrip("/").rsplit("/", 1)[-1]
             seen.add(key)
             out.append({"url": m["permalink"], "at": kst_datetime(m.get("timestamp")), "by": name, "official": True,
+                        "text": (m.get("caption") or "").split("\n")[0][:120], "thumb": m.get("thumb") or "",
+                        "likes": m.get("likes"), "comments": m.get("comments")})
+    for u, items in (registry.get("ig_media_reels") or {}).items():
+        for m in items:
+            key = m["permalink"].rstrip("/").rsplit("/", 1)[-1]
+            if key in seen:
+                continue
+            seen.add(key)
+            out.append({"url": m["permalink"], "at": kst_datetime(m.get("timestamp")), "by": IG_MEDIA_NAMES.get(u, u), "official": False,
                         "text": (m.get("caption") or "").split("\n")[0][:120], "thumb": m.get("thumb") or "",
                         "likes": m.get("likes"), "comments": m.get("comments")})
     for x in mfeed or []:
@@ -1279,6 +1293,27 @@ def collect(cfg, rescan=False):
                 print(f"[IG] 사진 게시물 {len(registry['ig_photos'][username])}개 · 릴스 {len(registry['ig_reels'][username])}개 (전체 {len(allm)}개 중)")
             except Exception as e:  # noqa: BLE001
                 print(f"[IG] {username} 사진 모음 조회 실패: {e}")
+    # 매체 인스타: A2O SOUL 나오는 릴스만 (30분마다 — 계정마다 호출 1번)
+    if instagram.enabled() and cfg["instagram_media"]:
+        mst = store.setdefault("ig_media", {})
+        if not mst.get("at") or now - datetime.fromisoformat(mst["at"]) >= timedelta(minutes=30):
+            mst["at"] = now.isoformat(timespec="minutes")
+            for v in cfg["instagram_media"]:
+                u = v["username"]
+                try:
+                    media = instagram.fetch_media(u, limit=30)
+                except Exception as e:  # noqa: BLE001
+                    print(f"[IG 매체] {u} 못 읽음: {str(e)[:120]}")
+                    continue
+                hits = [m for m in media if m.get("media_type") == "VIDEO" and m.get("permalink")
+                        and A2O_MENTION.search(m.get("caption") or "")]
+                keep = {m["id"]: m for m in registry.setdefault("ig_media_reels", {}).get(u, [])}
+                for m in hits:
+                    keep[m["id"]] = {"id": m["id"], "caption": (m.get("caption") or "")[:300], "timestamp": m.get("timestamp"),
+                                     "permalink": m["permalink"], "thumb": m.get("thumbnail_url") or "",
+                                     "likes": m.get("like_count"), "comments": m.get("comments_count")}
+                registry["ig_media_reels"][u] = sorted(keep.values(), key=lambda m: m.get("timestamp") or "", reverse=True)[:30]
+                print(f"[IG 매체] {u}: 최근 {len(media)}개 중 A2O SOUL 릴스 {len(hits)}개")
     if xposts.enabled():
         xstate = store.setdefault("x", {})
         for username in cfg["x"]:
