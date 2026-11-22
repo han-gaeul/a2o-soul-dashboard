@@ -1327,6 +1327,16 @@
    "permalink": "https://x.com/A2O_SOUL/status/2124358460011643001",
    "timestamp": "2026-11-22T04:25:00.000Z"
   },
+  "x:2124412574066515980": {
+   "caption": "[📸] \n2026.11.22\nSBS 인기가요\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2O_SOUL/status/2124412574066515980/photo/1",
+   "excerpt": "[📸] \n2026.11.22\nSBS 인기가요\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2O_SOUL/status/2124412574066515980/photo/1",
+   "images": [
+    "https://pbs.twimg.com/media/HXtIwmSaYAArPIm.jpg"
+   ],
+   "items": [],
+   "permalink": "https://x.com/A2O_SOUL/status/2124412574066515980",
+   "timestamp": "2026-11-22T08:00:01.000Z"
+  },
   "xf:2121586007254708290": {
    "caption": "[📸] 261114 @A2O_SOUL \n\n2026.11.14\nMBC Show! Music Core\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2OSOULBASE/status/2121586007254708290/photo/1",
    "excerpt": "[📸] 261114 @A2O_SOUL \n\n2026.11.14\nMBC Show! Music Core\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2OSOULBASE/status/2121586007254708",
@@ -2805,7 +2815,7 @@
  "x": {
   "A2O_SOUL": {
    "id": "1986498790229262336",
-   "since_id": "2124358460011643001"
+   "since_id": "2124412574066515980"
   }
  },
  "x_fans": {
@@ -2815,8 +2825,8 @@
   }
  },
  "x_media": {
-  "at": "2026-11-22T16:50+09:00",
-  "auto_since": "2124410133296173362",
+  "at": "2026-11-22T17:00+09:00",
+  "auto_since": "2124412771060355460",
   "candidates": {},
   "checked": "2026-11-22T16:40+09:00",
   "missing": [],
@@ -3005,7 +3015,7 @@
   "v": 2
  },
  "x_show_photos": {
-  "at": "2026-11-22T16:00+09:00",
+  "at": "2026-11-22T17:00+09:00",
   "fancams": {},
   "posts": {
    "2123249908413268001": {
@@ -3052,7 +3062,7 @@
     "timestamp": "2026-11-21T01:03:00.000Z"
    }
   },
-  "since_id": "2124374208511918108"
+  "since_id": "2124412574066515980"
  },
  "x_stores": {
   "at": "2026-11-22T12:00+09:00",
