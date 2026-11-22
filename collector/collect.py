@@ -151,6 +151,11 @@ def load_fan_files(cfg):
                 sby.setdefault((str(x["song"]), str(x["service"])), {})[str(x.get("date") or x["at"][:10])] = int(x["streams"])
                 continue
             by.setdefault((str(x["song"]), str(x["service"])), []).append(x)
+    # Spotify 누적 재생 수(data/spotify.json, 하루 한 번 자동) → 하루 재생 수 = 오늘 − 어제 (직접 입력한 값이 있으면 그걸 씀)
+    for song, days in spotify_daily().items():
+        cur = sby.setdefault((song, "Spotify 일간 스트리밍"), {})
+        for d, n in days.items():
+            cur.setdefault(d, n)
     for (song, service), days in sby.items():
         c = next((c for c in cfg["charts"] if c["song"] == song and c["service"] == service), None)
         if not c:
@@ -581,6 +586,31 @@ def stream_pushes(posts):
 
 
 VOTE_POST = re.compile(r"투표|vote|voting|후보|nominee|결과|1위|랭킹|ranking|winner", re.I)  # 투표 관련 글 전부 (시작·중간·마감·결과)
+def spotify_daily():
+    """data/spotify.json 누적 재생 수 → {곡: {날짜: 하루 재생 수}} (이어진 날짜끼리만)"""
+    days = load_json("spotify.json", {}).get("days") or {}
+    out = {}
+    ds = sorted(days)
+    for a, b in zip(ds, ds[1:]):
+        if (date.fromisoformat(b) - date.fromisoformat(a)).days != 1:
+            continue
+        for song, n in days[b].items():
+            if song in days[a] and n >= days[a][song]:
+                out.setdefault(song, {})[b] = n - days[a][song]
+    return out
+
+
+def spotify_summary():
+    """사이트 차트 칸 표: 마지막 날 곡별 누적 + 하루 재생 수"""
+    days = load_json("spotify.json", {}).get("days") or {}
+    if not days:
+        return None
+    last = max(days)
+    daily = spotify_daily()
+    songs = [{"song": k, "total": v, "daily": (daily.get(k) or {}).get(last)} for k, v in days[last].items()]
+    return {"date": last, "artist": load_json("spotify.json", {}).get("artist") or "", "songs": sorted(songs, key=lambda x: -x["total"])}
+
+
 def vote_wins(store):
     """투표 앱·방송사 공식 글(xo:) 중 A2O SOUL이 나오는 투표 글 전부 → 리트윗 후보 (최근 20개)"""
     out = []
@@ -1958,6 +1988,7 @@ def build(cfg):
         "photos": photo_feed(cfg, registry, load_json("announcements.json", {})),
         "notice_posts": notice_feed(cfg, registry, load_json("announcements.json", {})),
         "media_posts": media_feed(cfg, media_state),
+        "spotify": spotify_summary(),
         "vote_wins": vote_wins(load_json("announcements.json", {})),
         "show_fancams": sorted(({"url": m["permalink"], "at": kst_datetime(m["timestamp"]), "by": m.get("author_name") or m.get("author")}
                                  for m in ((load_json("announcements.json", {}).get("x_show_photos") or {}).get("fancams") or {}).values()

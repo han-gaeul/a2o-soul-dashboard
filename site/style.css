@@ -1153,3 +1153,11 @@ html:not([lang="ko"]) .vt-t { -webkit-line-clamp: 3; font-size: 13px; overflow-w
 /* 투표 탭: 음방 / 어워즈·기타 묶음 제목 (타일 그리드 한 줄 전체) */
 .vt-grid .vt-group { grid-column: 1 / -1; margin: 10px 2px 0; font-size: 15px; }
 .vt-grid .vt-group:first-child { margin-top: 0; }
+
+/* 차트 칸: Spotify 곡별 누적·하루 재생 수 */
+.sp-box { border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; margin-bottom: 10px; }
+.sp-table { width: 100%; border-collapse: collapse; margin: 6px 0; font-size: 14px; }
+.sp-table th { text-align: right; font-weight: 600; color: var(--muted, #888); font-size: 12px; padding: 4px 0; }
+.sp-table th:first-child, .sp-table td:first-child { text-align: left; }
+.sp-table td { text-align: right; padding: 6px 0; border-top: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+.sp-table th + th, .sp-table td + td { padding-left: 16px; white-space: nowrap; }

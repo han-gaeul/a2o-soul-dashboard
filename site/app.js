@@ -902,8 +902,21 @@ if ("serviceWorker" in navigator) {
 
   const renderCharts = () => {
     $("charts").replaceChildren();
-    if ((data.charts || []).length) {
-      for (const c of data.charts) {
+    // Spotify 곡별 누적·하루 재생 수 (하루 한 번 자동 기록)
+    const sp = data.spotify;
+    if (sp && (sp.songs || []).length) {
+      const n = (x) => Number(x).toLocaleString(locale);
+      $("charts").append(el("div", { class: "sp-box" },
+        el("div", { class: "sp-head" }, el("b", {}, t("sp_title")), el("span", { class: "muted small" }, ` ${t("sp_asof", { d: sp.date.slice(5).replace("-", ".") })}`)),
+        el("table", { class: "sp-table" },
+          el("thead", {}, el("tr", {}, el("th", {}, t("sp_song")), el("th", {}, t("sp_total")), el("th", {}, t("sp_daily")))),
+          el("tbody", {}, ...sp.songs.map((x) => el("tr", {}, el("td", {}, x.song), el("td", {}, n(x.total)),
+            el("td", { class: x.daily != null ? "up" : "muted" }, x.daily != null ? `+${n(x.daily)}` : "—"))))),
+        sp.songs.every((x) => x.daily == null) ? el("p", { class: "muted small" }, t("sp_first")) : null,
+        sp.artist ? ext(`https://open.spotify.com/artist/${sp.artist}`, "Spotify ↗") : null));
+    }
+    if ((data.charts || []).length || sp) {
+      for (const c of data.charts || []) {
         if (c.streams && c.streams.length) {  // 재생 수 차트 (Spotify 일간 등)
           const sl = c.streams[c.streams.length - 1], sp = c.streams[c.streams.length - 2];
           const d = sl && sp ? sl[1] - sp[1] : 0;
