@@ -1274,6 +1274,40 @@ if ("serviceWorker" in navigator) {
     };
   }
 
+  // ---------- 영상 탭: 인스타 릴스 (공식 + 매체가 X에 건 릴스 링크) ----------
+  const reels = data.reels || [];
+  if (reels.length) {
+    let who = "";
+    const names = [...new Set(reels.map((x) => x.by))];
+    const drawReels = () => {
+      $("reelsAccts").replaceChildren(...(names.length > 1 ? ["", ...names] : []).map((n) => {
+        const b = el("button", { type: "button", class: n === who ? "on" : "", "aria-pressed": String(n === who) }, n || t("ev_all"));
+        b.addEventListener("click", () => { who = n; drawReels(); });
+        return b;
+      }));
+      $("reels").replaceChildren(...reels.filter((x) => !who || x.by === who).map((x) => {
+        const iso = kstDate(x.at).toISOString();
+        let thumb = null;
+        if (x.thumb) {
+          const img = el("img", { src: x.thumb, alt: "", loading: "lazy", decoding: "async", referrerpolicy: "no-referrer" });
+          img.addEventListener("error", () => thumb.remove());
+          thumb = el("div", { class: "media-thumb reel-thumb" }, img, el("span", { class: "media-play", "aria-label": t("media_video") }, "▶"));
+        }
+        const stat = x.likes != null ? `♥ ${Number(x.likes).toLocaleString(locale)}` : "";
+        return el("a", { class: "media-card", href: x.url, target: "_blank", rel: "noopener" },
+          thumb,
+          el("div", { class: "media-body" },
+            el("div", { class: "ig-meta" }, el("b", {}, x.by),
+              ageHours(iso) <= NEW_HOURS ? el("span", { class: "chip chip-on" }, "NEW") : null,
+              el("span", { class: "muted" }, when(iso))),
+            el("div", { class: "media-text" }, x.text),
+            stat ? el("div", { class: "muted small" }, stat) : null));
+      }));
+    };
+    drawReels();
+    $("reelsSec").hidden = false;
+  }
+
   // ---------- 공지 탭: 매체·콘텐츠 계정의 A2O SOUL 글 ----------
   const mposts = data.media_posts || [];
   if (mposts.length) {
