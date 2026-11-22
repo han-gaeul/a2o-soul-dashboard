@@ -9268,6 +9268,18 @@
    "version": "예판 특전"
   },
   {
+   "label": "Jumpup (Carabiner)",
+   "member": "TEO",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Jumpup%20%28Carabiner%29_TEO.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Jumpup (Carabiner)",
+   "member": "LUCIEN",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Jumpup%20%28Carabiner%29_LUCIEN.webp",
+   "version": "예판 특전"
+  },
+  {
    "label": "Jumpup (Photobook)",
    "member": "MOON",
    "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Jumpup%20%28Photobook%29_MOON.webp",
@@ -9275,8 +9287,20 @@
   },
   {
    "label": "Jumpup (Photobook)",
+   "member": "TEO",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Jumpup%20%28Photobook%29_TEO.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Jumpup (Photobook)",
    "member": "JUNE",
    "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Jumpup%20%28Photobook%29_JUNE.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Jumpup (Photobook)",
+   "member": "LUCIEN",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Jumpup%20%28Photobook%29_LUCIEN.webp",
    "version": "예판 특전"
   },
   {
