@@ -1603,8 +1603,12 @@ def collect(cfg, rescan=False):
                     c_ = p_["caption"]
                     if not VOTE_KW.search(c_) or A2O_MENTION.search(c_) or not p_.get("images"):
                         continue  # 본문에 A2O SOUL이 있는 글은 위 검색으로 이미 잡음
-                    import ocr
-                    txt = ocr.read_images(p_["images"])
+                    try:
+                        import ocr
+                        txt = ocr.read_images(p_["images"])
+                    except Exception as e:  # noqa: BLE001 — 이미지 읽기 실패해도 수집은 계속
+                        print(f"[투표 이미지] 글자 읽기 실패: {str(e)[:100]}")
+                        txt = ""
                     if OCR_A2O.search(txt or ""):
                         p_.update(id="xo:" + p_["tweet_id"], author=u, caption=f"{c_}\n\n[이미지]\n{txt}\n\n— {u}")
                         hits.append(p_)
