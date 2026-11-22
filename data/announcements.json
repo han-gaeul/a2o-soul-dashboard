@@ -2564,6 +2564,28 @@
    "permalink": "https://x.com/BIGCChoice/status/2124367268356460881",
    "timestamp": "2026-11-22T05:00:00.000Z"
   },
+  "xo:2124369784787603592": {
+   "caption": "💖[THE SHOW] EP.404 애프터 투표 D-1💖\n\n엔딩요정 투표 마감까지 단 1일!⏰\n\n📊 오후 1시 기준 중간 랭킹 공개!\n1위) #제트 (#ZET) - #A2OSOUL\n2위) #타이 (#TAI) - #A2OSOUL\n3위) #재백 (#JAEBAEK) - #피스트범프 (#FISTBUMP)\n\n지금 가장 많은 사랑을 받고 있는\n엔딩요정은 누구일까요?👀✨\n\n🗳️ https://t.co/h36AOg07JA\n📆 ~11월 23일 17:00 (KST)\n\n🎁 1위 리워드 - 엔딩요정 트로피🏆\n\n#더쇼 #THESHOW #빅크 #BIGC\n\n— 빅크 초이스 | BIGC CHOICE",
+   "excerpt": "💖[THE SHOW] EP.404 애프터 투표 D-1💖\n\n엔딩요정 투표 마감까지 단 1일!⏰\n\n📊 오후 1시 기준 중간 랭킹 공개!\n1위) #제트 (#ZET) - #A2OSOUL\n2위) #타이 (#TAI) - #A2OSOUL\n3위) #재백 (#JAEB",
+   "items": [
+    {
+     "app": "빅크(BIGC)",
+     "confidence": 0.9,
+     "date": "2026-11-23",
+     "end": "2026-11-23 17:00",
+     "end_date": null,
+     "kind": "vote",
+     "place": null,
+     "show": "더쇼",
+     "start": "2026-11-22 00:00",
+     "time": "17:00",
+     "title": "더쇼 엔딩요정 투표",
+     "url": null
+    }
+   ],
+   "permalink": "https://x.com/BIGCChoice/status/2124369784787603592",
+   "timestamp": "2026-11-22T05:10:00.000Z"
+  },
   "xv:2119672177347981651": {
    "caption": "[💿] A2O SOUL DEBUT EP [SUPERSTAR]\n발매 기념 공개 팬사인회\n\n📢응모 마감 D-1‼️\n✨당일 공개 팬사인회에서 SPECIAL STAGE가 진행됩니다.\n\n📅2026.11.14 (토) 19:30 (KST)\n📍스타필드 수원 타워 아트리움\n\n[ONLINE] 뮤직아트 온라인몰\n🛒온라인 응모기간 : 2026.11.08 (일) 14:00 ~ 11.10 (화) 23:59 (KST)\n\n[OFFLINE] 영풍문고 스타필드수원점 내 음반매장\n🛒오프라인 응모기간 : 2026.11.08 (일) 14:00 ~ 11.10 (화) 21:00 (KST)\n\n🌠응모자 전원 미공개 셀카 포토카드 15종 중 1종 랜덤 증정\n\n🔗https://t.co/I1sj0S6DOk",
    "excerpt": "[💿] A2O SOUL DEBUT EP [SUPERSTAR]\n발매 기념 공개 팬사인회\n\n📢응모 마감 D-1‼️\n✨당일 공개 팬사인회에서 SPECIAL STAGE가 진행됩니다.\n\n📅2026.11.14 (토) 19:30 (KST)\n📍스타필드 수원 타워 아",
@@ -2764,8 +2786,8 @@
   }
  },
  "x_media": {
-  "at": "2026-11-22T14:00+09:00",
-  "auto_since": "2124367268356460881",
+  "at": "2026-11-22T14:10+09:00",
+  "auto_since": "2124370011385164154",
   "candidates": {},
   "checked": "2026-11-21T16:40+09:00",
   "missing": [],
@@ -2941,7 +2963,7 @@
   "since_id": "2124020133429669953"
  },
  "x_official_votes": {
-  "at": "2026-11-22T14:00+09:00",
+  "at": "2026-11-22T14:10+09:00",
   "deep": 1,
   "last": {
    "official": [
@@ -2952,7 +2974,7 @@
     "BIGCChoice:blue"
    ]
   },
-  "since_id": "2124367268356460881",
+  "since_id": "2124369784787603592",
   "v": 2
  },
  "x_show_photos": {
