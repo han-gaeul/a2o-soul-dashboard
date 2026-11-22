@@ -2815,8 +2815,8 @@
   }
  },
  "x_media": {
-  "at": "2026-11-22T15:30+09:00",
-  "auto_since": "2124389920030789779",
+  "at": "2026-11-22T15:40+09:00",
+  "auto_since": "2124391920294355438",
   "candidates": {},
   "checked": "2026-11-21T16:40+09:00",
   "missing": [],
@@ -2992,18 +2992,16 @@
   "since_id": "2124020133429669953"
  },
  "x_official_votes": {
-  "at": "2026-11-22T15:30+09:00",
+  "at": "2026-11-22T15:40+09:00",
   "deep": 1,
   "last": {
-   "official": [
-    "HIGHER_twt"
-   ],
+   "official": [],
    "read": 1,
    "verified": [
-    "HIGHER_twt:business"
+    "puppylhz:blue"
    ]
   },
-  "since_id": "2124389920030789779",
+  "since_id": "2124391090702962996",
   "v": 2
  },
  "x_show_photos": {
