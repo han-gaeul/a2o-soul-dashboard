@@ -443,6 +443,35 @@ async function postTweet(env, text, imageUrl) {
 async function xAuth(env, acct, method, url) {
   return acct.v === 2 ? `Bearer ${(await x2Fresh(env, acct)).access}` : await oauthHeader(env, method, url, { token: acct.token, tokenSecret: acct.secret });
 }
+// 사이트 일별 방문자 (Cloudflare Web Analytics) — 시크릿 CF_API_TOKEN(Account Analytics: Read) 필요, 1시간 캐시(KV 안 씀)
+async function siteVisits(env) {
+  if (!env.CF_API_TOKEN) return null;
+  const ck = new Request("https://push.a2osoul-tracker.com/_cache/visits");
+  const hit = await caches.default.match(ck);
+  if (hit) return hit.json();
+  const H = { Authorization: `Bearer ${env.CF_API_TOKEN}`, "Content-Type": "application/json" };
+  try {
+    let acct = env.CF_ACCOUNT_ID;
+    if (!acct) { const a = await (await fetch("https://api.cloudflare.com/client/v4/accounts", { headers: H })).json(); acct = a.result && a.result[0] && a.result[0].id; }
+    if (!acct) return { error: "계정을 못 찾았어요 (토큰 권한 확인)" };
+    // 날짜는 KST 기준으로 묶음 (Cloudflare 날짜는 UTC라 시간 단위로 받아서 +9시간)
+    const from = new Date(Date.now() - 14 * 86400e3).toISOString().slice(0, 13) + ":00:00Z";
+    const q = `query($a:String!,$f:Time!){viewer{accounts(filter:{accountTag:$a}){rumPageloadEventsAdaptiveGroups(limit:400,filter:{datetime_geq:$f,requestHost:"a2osoul-tracker.com"}){count sum{visits} dimensions{datetimeHour}}}}}`;
+    const r = await (await fetch("https://api.cloudflare.com/client/v4/graphql", { method: "POST", headers: H, body: JSON.stringify({ query: q, variables: { a: acct, f: from } }) })).json();
+    if (r.errors && r.errors.length) return { error: String(r.errors[0].message).slice(0, 120) };
+    const rows = (((r.data || {}).viewer || {}).accounts || [])[0];
+    const by = {};
+    for (const g of (rows && rows.rumPageloadEventsAdaptiveGroups) || []) {
+      const d = new Date(Date.parse(g.dimensions.datetimeHour) + 9 * 3600e3).toISOString().slice(0, 10);
+      const t = by[d] || (by[d] = { d, v: 0, pv: 0 }); t.v += g.sum.visits; t.pv += g.count;
+    }
+    const days = Object.values(by).sort((a, b) => (a.d < b.d ? -1 : 1)).slice(-14);
+    const out = { days, at: Date.now() };
+    await caches.default.put(ck, new Response(JSON.stringify(out), { headers: { "Cache-Control": "max-age=3600" } }));
+    return out;
+  } catch (e) { return { error: String(e.message || e).slice(0, 120) }; }
+}
+
 // 예약된 트윗 중 시각이 된 것 올리기 (_tw_sched: [{id, at}])
 async function postScheduled(env) {
   const q = (await env.SUBS.get("_tw_sched", "json")) || [];
@@ -600,7 +629,7 @@ async function tweets(req, env, url) {
     const hist = (await env.SUBS.get("_substats", "json")) || [];
     if (!hist.length || hist[hist.length - 1].d !== day) { hist.push({ d: day, n: total }); await env.SUBS.put("_substats", JSON.stringify(hist.slice(-120))); }
     else if (hist[hist.length - 1].n !== total) { hist[hist.length - 1].n = total; await env.SUBS.put("_substats", JSON.stringify(hist.slice(-120))); }
-    return json(req, { total, topics, langs, history: hist.slice(-30), x: (await env.SUBS.get("_xstat", "json")) || null });
+    return json(req, { total, topics, langs, history: hist.slice(-30), x: (await env.SUBS.get("_xstat", "json")) || null, visits: await siteVisits(env) });
   }
   if (p === "/tweet/list") {
     const out = [];

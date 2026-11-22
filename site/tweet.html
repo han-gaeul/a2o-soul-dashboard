@@ -107,6 +107,8 @@
     <div class="sep" id="subsSep" hidden></div>
     <div class="stat" id="xuse" hidden><span class="dot">🐦</span><span><b></b><small></small></span><span><a class="ghost" href="https://console.x.com" target="_blank" rel="noopener">충전 ↗</a></span></div>
     <div class="sep" id="xuseSep" hidden></div>
+    <div class="stat" id="visits" hidden><span class="dot">👀</span><span><b></b><small></small><small class="trend"></small></span><span><a class="ghost" href="https://dash.cloudflare.com/?to=/:account/web-analytics" target="_blank" rel="noopener">자세히 ↗</a></span></div>
+    <div class="sep" id="visitsSep" hidden></div>
     <div class="stat" id="subs" hidden><span class="dot">📊</span><span><b></b><small></small><small class="trend"></small></span><span></span></div>
   </section>
 
@@ -251,6 +253,16 @@
         if (s.x.err_at) setStat("xuse", "no", "⚠️", "X 크레딧 부족 — 수집·자동 글 멈춤", `${when(s.x.err_at)}부터 · console.x.com에서 충전해 주세요`);
         else setStat("xuse", "ok", "🐦", `X 오늘 약 $${usd(t).toFixed(2)}`, `글 ${t.reads}개 읽음 · 최근 7일 약 $${week.toFixed(2)} (추정, 실제 청구는 콘솔에서)`);
         $("xuse").hidden = $("xuseSep").hidden = false;
+      }
+      if (s.visits && s.visits.days && s.visits.days.length) {  // 사이트 방문자 (Cloudflare Web Analytics, 1시간마다 갱신)
+        const v = s.visits.days, today = v[v.length - 1], y = v.length > 1 ? v[v.length - 2] : null;
+        const n = (x) => Number(x).toLocaleString();
+        setStat("visits", "", "👀", `오늘 방문 ${n(today.v)}명`, `${y ? `어제 ${n(y.v)}명 · ` : ""}페이지뷰 오늘 ${n(today.pv)} · 최근 7일 ${n(v.slice(-7).reduce((a, x) => a + x.v, 0))}명`);
+        $("visits").querySelector(".trend").textContent = v.slice(-7).map((x) => `${x.d.slice(5).replace("-", "/")} ${n(x.v)}`).join(" → ");
+        $("visits").hidden = $("visitsSep").hidden = false;
+      } else if (s.visits && s.visits.error) {
+        setStat("visits", "no", "👀", "방문자 수를 못 불러왔어요", s.visits.error);
+        $("visits").hidden = $("visitsSep").hidden = false;
       }
     } catch (_) {}
   };
