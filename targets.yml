@@ -185,6 +185,11 @@ x_vote_accounts:
   - HIGHER_twt       # 하이어 (인기가요)
   - KTOPSTAR_offcl   # 케이탑스타
   - twt_my1pick      # 마이원픽
+  - idolchamp1       # 아이돌챔프 (쇼챔피언)
+  - THE_STARPLANET   # 스타플래닛
+  - myloveidol_kpop  # 최애돌
+  - kpopidol_en      # 최애돌 (영문)
+  - mnetplus         # 엠넷플러스 (엠카운트다운)
 # 방송사 K-POP 계정 (파란 인증이라 자동으로 못 가림) — 직캠 트윗은 바로 리트윗
 x_show_accounts:
   - MBC_entertain    # MBCkpop (음악중심)
