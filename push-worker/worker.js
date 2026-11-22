@@ -443,6 +443,22 @@ async function postTweet(env, text, imageUrl) {
 async function xAuth(env, acct, method, url) {
   return acct.v === 2 ? `Bearer ${(await x2Fresh(env, acct)).access}` : await oauthHeader(env, method, url, { token: acct.token, tokenSecret: acct.secret });
 }
+// 예약된 트윗 중 시각이 된 것 올리기 (_tw_sched: [{id, at}])
+async function postScheduled(env) {
+  const q = (await env.SUBS.get("_tw_sched", "json")) || [];
+  if (!q.length) return;
+  const now = Date.now(), due = q.filter((x) => x.at <= now + 20e3), rest = q.filter((x) => x.at > now + 20e3);
+  if (!due.length) return;
+  await env.SUBS.put("_tw_sched", JSON.stringify(rest));
+  for (const x of due) {
+    const rec = await env.SUBS.get(`_tw:${x.id}`, "json");
+    if (!rec || rec.status !== "scheduled") continue;
+    try { rec.tweet = await postTweet(env, rec.text, rec.image); Object.assign(rec, { status: "posted", auto: true, posted: Date.now() }); }
+    catch (e) { rec.status = "pending"; rec.error = String(e.message || e).slice(0, 200); }  // 실패하면 초안으로
+    await env.SUBS.put(`_tw:${x.id}`, JSON.stringify(rec), { expirationTtl: 3 * 86400 });
+  }
+}
+
 async function retweet(env, tweetId) {
   const acct = await xAccount(env);
   if (!acct) throw new Error("연결된 X 계정이 없어요");
@@ -522,6 +538,10 @@ async function tweets(req, env, url) {
       if (ref && canPost) {  // 공식 계정 [📸] 사진 글은 바로 리트윗 — 실패하면 리트윗 초안으로 남김
         try { await retweet(env, ref); Object.assign(rec, { status: "posted", tweet: ref, retweet: true, auto: true, posted: Date.now() }); posted++; }
         catch (e) { rec.error = String(e.message || e).slice(0, 200); }
+      } else if (d.auto && canPost && Number(d.post_at) > Date.now() + 30e3) {  // 정해진 시각에 올릴 것(음방 5분 전·시작 10분 뒤) → 매분 크론이 올림
+        Object.assign(rec, { status: "scheduled", post_at: Number(d.post_at) });
+        const q = (await env.SUBS.get("_tw_sched", "json")) || [];
+        q.push({ id, at: rec.post_at }); await env.SUBS.put("_tw_sched", JSON.stringify(q));
       } else if (d.auto && canPost) {  // 확실한 정보(일정·생일·조회수)는 확인 없이 바로 올림 — 실패하면 초안으로 남김
         try { rec.tweet = await postTweet(env, rec.text, rec.image); rec.status = "posted"; rec.auto = true; rec.posted = Date.now(); posted++; }
         catch (e) { rec.error = String(e.message || e).slice(0, 200); }
@@ -749,9 +769,12 @@ export default {
   },
 
   // Cron Trigger (*/10 * * * *): 10분마다 수집 실행, 3시간마다 포카 확인, 하루 한 번(KST 12시대) YouTube 알림 구독 갱신
+  // 크론을 '* * * * *'(매분)로 두면 예약 트윗을 정확한 시각에 올림 — 수집 실행은 10분마다 그대로
   async scheduled(event, env, ctx) {
-    ctx.waitUntil(dispatch(env, "10분 정기"));
     const t = new Date(event.scheduledTime);
+    ctx.waitUntil(postScheduled(env));
+    if (t.getUTCMinutes() % 10 !== 0) return;
+    ctx.waitUntil(dispatch(env, "10분 정기"));
     if (t.getUTCHours() === 3 && t.getUTCMinutes() < 10) ctx.waitUntil(renewYoutube(env));
     // 포카 템플릿 확인: 3시간마다 (GitHub 자체 예약 실행은 자주 밀리거나 건너뛰어서 여기서 깨움)
     if (t.getUTCHours() % 3 === 0 && t.getUTCMinutes() >= 40 && t.getUTCMinutes() < 50) ctx.waitUntil(dispatch(env, "3시간 정기", "photocards.yml"));

@@ -122,13 +122,12 @@ def candidates(dash, site, now):
             out.append((f"ev|{e['date']}|{tm}|{e['title']}", "show", "show",
                         {"name": e["title"], "t": tm, "url": (live or {}).get("url") or site, "parts": [e["title"]], "tr": tr, "now": now >= st,
                          "credit": e.get("credit") or "", "no_draft": True}))  # 1시간 전은 푸시만
-            # 트윗 초안: 방송 5분 전 · 시작 10분 뒤 (수집이 10분마다라 창을 조금 넓게)
+            # 트윗: 방송 5분 전 · 시작 정확히 10분 뒤 — 수집이 10분마다라 미리 보내고 워커가 그 시각(post_at)에 올림
             base = {"name": e["title"], "t": tm, "url": (live or {}).get("url") or site, "parts": [e["title"]], "tr": tr,
                     "credit": e.get("credit") or "", "draft_only": True}
-            if timedelta(0) < st - now <= timedelta(minutes=12):
-                out.append((f"ev|{e['date']}|{tm}|{e['title']}|pre5", "show", "show", {**base, "soon": True}))
-            if timedelta(minutes=8) <= now - st <= timedelta(minutes=30):
-                out.append((f"ev|{e['date']}|{tm}|{e['title']}|live", "show", "show", {**base, "now": True}))
+            for tag, at, extra in (("pre5", st - timedelta(minutes=5), {"soon": True}), ("live", st + timedelta(minutes=10), {"now": True})):
+                if -timedelta(minutes=20) <= now - at <= timedelta(minutes=20):  # 20분 전부터 예약 · 놓쳤으면 20분 안엔 바로
+                    out.append((f"ev|{e['date']}|{tm}|{e['title']}|{tag}", "show", "show", {**base, **extra, "post_at": int(at.timestamp() * 1000)}))
     for c in dash.get("chart_moves") or []:  # 차트 첫 진입·10계단 이상 상승 (입력 후 3시간 안)
         if timedelta(0) <= now - _kst(c["at"]) <= timedelta(hours=3):
             out.append((f"ch|{c['song']}|{c['service']}|{c['at']}", "notice", "chart", {**c, "url": site + "#cheer", "tr": tr}))
@@ -304,7 +303,7 @@ def tweet_image(kind, data, site):
 def drafts(api, priv, new, site):
     """새 알림 후보 → 트윗 초안을 Worker에 저장. 저장된 개수를 돌려줌."""
     # 팬 계정이 주최하는 행사(credit 있음)는 초안 안 만듦 — 그쪽 공지를 리트윗하는 게 맞음
-    items = [{"key": key, "kind": kind, "text": tweet_text(kind, data), "auto": kind in AUTO_POST, **({"rt": True} if data.get("rt") else {}),
+    items = [{"key": key, "kind": kind, "text": tweet_text(kind, data), "auto": kind in AUTO_POST, **({"rt": True} if data.get("rt") else {}), **({"post_at": data["post_at"]} if data.get("post_at") else {}),
               **({"image": tweet_image(kind, data, site)} if tweet_image(kind, data, site) else {})}
              for key, topic, kind, data in new
              if kind not in ("notice",) and not data.get("credit") and not data.get("no_draft")]
