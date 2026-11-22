@@ -159,10 +159,10 @@
   {
    "date": "2026-11-25",
    "host": "@a2osoulstation · @NNStation · @yizhuodaily",
-   "note": "자세한 공지는 11/22(일) 주최 계정에 올라와요",
+   "note": "Stationhead에서 Spotify·Apple Music 연결하고 참여해요",
    "time": "20:00",
    "title": "스테이션헤드 콜라보 (~23:00)",
-   "url": "https://x.com/a2osoulstation",
+   "url": "https://x.com/a2osoulstation/status/2124338639186665834",
    "with": "NINGNING 스테이션"
   }
  ],
@@ -13840,6 +13840,15 @@
    "th": "ฟังด้วยกันบน Stationhead (แฟนต่างประเทศ · ไกด์โดย @a2osoulstation)",
    "vi": "Nghe cùng nhau trên Stationhead (fan quốc tế · hướng dẫn của @a2osoulstation)",
    "zh": "在 Stationhead 一起听（海外粉丝 · 指南 @a2osoulstation）"
+  },
+  "Stationhead에서 Spotify·Apple Music 연결하고 참여해요": {
+   "en": "Join on Stationhead with Spotify or Apple Music connected",
+   "es": "Únete en Stationhead conectando Spotify o Apple Music",
+   "id": "Ikut di Stationhead dengan Spotify/Apple Music terhubung",
+   "ja": "StationheadでSpotify・Apple Musicを連携して参加",
+   "pt": "Participe no Stationhead conectando Spotify ou Apple Music",
+   "th": "เข้าร่วมใน Stationhead โดยเชื่อม Spotify·Apple Music",
+   "zh": "在 Stationhead 连接 Spotify·Apple Music 后参加"
   },
   "URIZIP KPOP ACADEMY 출신": {
    "en": "Trained at URIZIP KPOP ACADEMY",
