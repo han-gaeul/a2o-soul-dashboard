@@ -589,6 +589,8 @@ def stream_pushes(posts):
     return sorted(uniq.values(), key=lambda x: (x["date"], x["start"]))
 
 
+VOTE_KW = re.compile(r"투표|vote|voting|후보|nominee", re.I)
+OCR_A2O = re.compile(r"A[2Z][O0]\s?S[O0]UL|Dancing\s?in\s?the\s?Dark|에이투오", re.I)  # 이미지 글자 (O↔0 오인식 감안)
 VOTE_POST = re.compile(r"투표|vote|voting|후보|nominee|결과|1위|랭킹|ranking|winner", re.I)  # 투표 관련 글 전부 (시작·중간·마감·결과)
 IG_MEDIA_NAMES = {}  # 매체 인스타 아이디 → 표시 이름 (load_config에서 채움)
 IG_REEL = re.compile(r"https://(?:www\.)?instagram\.com/reels?/[\w-]+/?")
@@ -1582,6 +1584,33 @@ def collect(cfg, rescan=False):
                 print(f"[공지] X 음방 공식 투표 글 {len(official)}개 (검색 {len(posts)}개 중)")
             except Exception as e:  # noqa: BLE001
                 print(f"[공지] X 음방 공식 투표 검색 실패: {e}")
+        # 투표 앱 계정 타임라인: 후보가 이미지에만 있는 공식 투표 글 (예: 쿠궁 뮤직뱅크 사전투표) → 이미지 글자를 읽어 A2O SOUL이 있으면 공식 투표 글로
+        vst = store.setdefault("x_vote_tl", {})
+        if not vst.get("at") or now - datetime.fromisoformat(vst["at"]) >= (timedelta(minutes=10) if on_air else timedelta(minutes=30)):
+            vst["at"] = now.isoformat(timespec="minutes")
+            hits = []
+            for u in cfg["x_vote_accounts"]:
+                st = vst.setdefault(u, {})
+                try:
+                    st.setdefault("id", xposts.user_id(u))
+                    posts = xposts.fetch_posts(st["id"], u, since_id=st.get("since_id"), first_limit=10)
+                except Exception as e:  # noqa: BLE001
+                    print(f"[투표 이미지] @{u} 조회 실패: {str(e)[:100]}")
+                    continue
+                if posts:
+                    st["since_id"] = max(posts, key=lambda p_: int(p_["tweet_id"]))["tweet_id"]
+                for p_ in posts:
+                    c_ = p_["caption"]
+                    if not VOTE_KW.search(c_) or A2O_MENTION.search(c_) or not p_.get("images"):
+                        continue  # 본문에 A2O SOUL이 있는 글은 위 검색으로 이미 잡음
+                    import ocr
+                    txt = ocr.read_images(p_["images"])
+                    if OCR_A2O.search(txt or ""):
+                        p_.update(id="xo:" + p_["tweet_id"], author=u, caption=f"{c_}\n\n[이미지]\n{txt}\n\n— {u}")
+                        hits.append(p_)
+            if hits:
+                announce.run(hits, store, today, kst_datetime, official_extract, limit)
+            print(f"[투표 이미지] 투표 앱 새 글 중 이미지에 A2O SOUL {len(hits)}개")
         # 팬 계정(정보 계정) — 일정·투표 후보만 뽑아 전부 '확인 필요' 이슈로 (사이트에 바로 반영 안 함, 새 글 피드에도 안 섞음)
         fstate = store.setdefault("x_fans", {})
         for username in cfg["x_fans"]:
