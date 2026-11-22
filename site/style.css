@@ -1161,3 +1161,6 @@ html:not([lang="ko"]) .vt-t { -webkit-line-clamp: 3; font-size: 13px; overflow-w
 .sp-table th:first-child, .sp-table td:first-child { text-align: left; }
 .sp-table td { text-align: right; padding: 6px 0; border-top: 1px solid var(--line); font-variant-numeric: tabular-nums; }
 .sp-table th + th, .sp-table td + td { padding-left: 16px; white-space: nowrap; }
+
+/* 영상 탭: 인스타 릴스 — 세로 썸네일 */
+.reels-grid .reel-thumb { aspect-ratio: 9 / 12; }

@@ -586,6 +586,32 @@ def stream_pushes(posts):
 
 
 VOTE_POST = re.compile(r"투표|vote|voting|후보|nominee|결과|1위|랭킹|ranking|winner", re.I)  # 투표 관련 글 전부 (시작·중간·마감·결과)
+IG_REEL = re.compile(r"https://(?:www\.)?instagram\.com/reels?/[\w-]+/?")
+
+
+def ig_reels(registry, mfeed):
+    """영상 탭 '인스타 릴스': 공식 인스타 릴스 + 매체 X 글에 걸린 릴스 링크 (최신 40개)"""
+    out, seen = [], set()
+    for u, items in (registry.get("ig_reels") or {}).items():
+        name = ((registry.get("instagram") or {}).get(u) or {}).get("name") or u
+        for m in items:
+            key = m["permalink"].rstrip("/").rsplit("/", 1)[-1]
+            seen.add(key)
+            out.append({"url": m["permalink"], "at": kst_datetime(m.get("timestamp")), "by": name, "official": True,
+                        "text": (m.get("caption") or "").split("\n")[0][:120], "thumb": m.get("thumb") or "",
+                        "likes": m.get("likes"), "comments": m.get("comments")})
+    for x in mfeed or []:
+        for url in IG_REEL.findall(x.get("text") or ""):
+            key = url.rstrip("/").rsplit("/", 1)[-1]
+            if key in seen:
+                continue
+            seen.add(key)
+            head = next((ln for ln in (x.get("text") or "").splitlines() if re.sub(r"#\S+|https?://\S+|🔗", "", ln).strip()), "")
+            out.append({"url": url, "at": x["at"], "by": x.get("name") or x.get("handle") or "", "official": False,
+                        "text": re.sub(r"\s*https?://\S+", "", head).strip()[:120], "thumb": (x.get("images") or [""])[0], "post": x.get("url")})
+    return sorted(out, key=lambda r: r["at"] or "", reverse=True)[:40]
+
+
 def spotify_daily():
     """data/spotify.json 누적 재생 수 → {곡: {날짜: 하루 재생 수}} (이어진 날짜끼리만)"""
     days = load_json("spotify.json", {}).get("days") or {}
@@ -1245,7 +1271,12 @@ def collect(cfg, rescan=False):
                 registry.setdefault("ig_photos", {})[username] = [
                     {"id": m["id"], "caption": (m.get("caption") or "")[:400], "timestamp": m.get("timestamp"),
                      "permalink": m.get("permalink"), "images": ig_images(m)} for m in allm if ig_images(m)]
-                print(f"[IG] 사진 게시물 {len(registry['ig_photos'][username])}개 (전체 {len(allm)}개 중)")
+                # 릴스(영상): 영상 탭 '인스타 릴스' 칸 — 썸네일 주소도 만료돼서 매번 새로
+                registry.setdefault("ig_reels", {})[username] = [
+                    {"id": m["id"], "caption": (m.get("caption") or "")[:300], "timestamp": m.get("timestamp"), "permalink": m.get("permalink"),
+                     "thumb": m.get("thumbnail_url") or "", "likes": m.get("like_count"), "comments": m.get("comments_count")}
+                    for m in allm if m.get("media_type") == "VIDEO" and m.get("permalink")]
+                print(f"[IG] 사진 게시물 {len(registry['ig_photos'][username])}개 · 릴스 {len(registry['ig_reels'][username])}개 (전체 {len(allm)}개 중)")
             except Exception as e:  # noqa: BLE001
                 print(f"[IG] {username} 사진 모음 조회 실패: {e}")
     if xposts.enabled():
@@ -1987,7 +2018,8 @@ def build(cfg):
         "ig_feed": [x for x in feed_all if x["account"] != "x"][:15] + [x for x in feed_all if x["account"] == "x"][:15],
         "photos": photo_feed(cfg, registry, load_json("announcements.json", {})),
         "notice_posts": notice_feed(cfg, registry, load_json("announcements.json", {})),
-        "media_posts": media_feed(cfg, media_state),
+        "media_posts": (mfeed := media_feed(cfg, media_state)),
+        "reels": ig_reels(registry, mfeed),
         "spotify": spotify_summary(),
         "vote_wins": vote_wins(load_json("announcements.json", {})),
         "show_fancams": sorted(({"url": m["permalink"], "at": kst_datetime(m["timestamp"]), "by": m.get("author_name") or m.get("author")}
