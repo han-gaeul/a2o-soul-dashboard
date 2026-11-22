@@ -44,5 +44,5 @@ fansign:
 #   date, time(KST), title, with(함께하는 쪽), host(주최 계정), url(주최 공지·참여 링크), note(선택)
 collabs:
   - { date: 2026-11-23, time: "18:00", title: 스테이션헤드 합동 스밍 1부, with: KO1KEYZ 스테이션, host: "@a2osoulstation", url: "https://www.stationhead.com/ko1keyzstation2", note: "19:30 2부는 A2O SOUL 스테이션에서 (일정 탭)" }
-  - { date: 2026-11-24, time: "21:00", title: 스테이션헤드 콜라보 (~24:00), with: NCT WISH 스테이션, host: "@wichustation · @a2osoulstation", url: "https://x.com/a2osoulstation", note: "세부 시간표는 주최 계정에 올라와요" }
+  - { date: 2026-11-24, time: "21:00", title: 스테이션헤드 콜라보 (~24:00), with: NCT WISH 스테이션, host: "@wichustation · @a2osoulstation", url: "https://share.stationhead.com/j7u0pciji3e8", note: "포커스 곡: Dancing in the Dark·SUPERSTAR (+ 데뷔 앨범 전곡) · 두 팬덤 모두 각자 스테이션에서 들어요" }
   - { date: 2026-11-25, time: "20:00", title: 스테이션헤드 콜라보 (~23:00), with: NINGNING 스테이션, host: "@a2osoulstation · @NNStation · @yizhuodaily", url: "https://x.com/a2osoulstation/status/2124338639186665834", note: "Stationhead에서 Spotify·Apple Music 연결하고 참여해요" }
