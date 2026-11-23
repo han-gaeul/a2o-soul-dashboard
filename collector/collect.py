@@ -428,6 +428,12 @@ def photo_feed(cfg, registry, store, limit=600):
             out.append({"src": src, "url": post.get("permalink"), "at": kst_datetime(post.get("timestamp")), "account": "show",
                         "by": post.get("author_name") or post.get("author"), "members": detect_members(cfg, text),
                         "text": text.split("\n")[0][:80], "n": i})
+    # 여러 멤버 게시물은 사진마다 얼굴로 가린 멤버만 (collector/faces.py — 아직 안 본 사진은 글에 적힌 멤버 그대로)
+    faces = load_json("photo_faces.json", {})
+    for p in out:
+        k = f"{p['url']}#{p['n']}"
+        if len(p["members"]) >= 2 and k in faces:
+            p["members"] = faces[k]
     out.sort(key=lambda x: (x["at"], -x["n"]), reverse=True)
     return out[:limit]
 
