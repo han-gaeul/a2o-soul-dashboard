@@ -160,6 +160,16 @@ def load_fan_files(cfg):
         cur = sby.setdefault((song, "Spotify 일간 스트리밍"), {})
         for d, n in days.items():
             cur.setdefault(d, n)
+    # 국내 음원 차트 자동 기록(collector/kcharts.py) — 직접 적은 순위가 있으면 그걸 우선
+    import kcharts
+    for a in kcharts.chart_series():
+        c = next((c for c in cfg["charts"] if c["song"].lower() == a["song"].lower() and c["service"] == a["service"] and c["type"] == a["type"]), None)
+        if not c:
+            c = {"song": a["song"], "service": a["service"], "type": a["type"], "ranks": []}
+            cfg["charts"].append(c)
+        c["ranks"] = sorted({**dict(a["ranks"]), **dict(c.get("ranks") or [])}.items())
+        if a.get("streams"):
+            c["streams"] = sorted({**dict(a["streams"]), **dict(c.get("streams") or [])}.items())
     for (song, service), days in sby.items():
         c = next((c for c in cfg["charts"] if c["song"] == song and c["service"] == service), None)
         if not c:
@@ -1347,6 +1357,14 @@ def collect(cfg, rescan=False):
                                      "likes": m.get("like_count"), "comments": m.get("comments_count")}
                 registry["ig_media_reels"][u] = sorted(keep.values(), key=lambda m: m.get("timestamp") or "", reverse=True)[:30]
                 print(f"[IG 매체] {u}: 최근 {len(media)}개 중 A2O SOUL 릴스 {len(hits)}개")
+    # 국내 음원 차트(멜론·지니·벅스·FLO 순위, 지니 재생·멜론 좋아요, 써클 디지털·스트리밍) — 1시간마다
+    try:
+        import kcharts
+        chk = kcharts.load().get("checked")
+        if not chk or now - datetime.fromisoformat(chk) >= timedelta(minutes=55):
+            kcharts.run()
+    except Exception as e:  # noqa: BLE001
+        print(f"[음원차트] 실패: {str(e)[:120]}")
     # 라디오 선곡표에서 A2O SOUL 곡 찾기 — 3시간마다 (어제·오늘)
     try:
         import radio
@@ -2145,6 +2163,7 @@ def build(cfg):
         "spotify": spotify_summary(),
         "sales": __import__("sales").summary(),
         "radio_plays": __import__("radio").summary(),
+        "kcharts": __import__("kcharts").summary(),
         "official_x": [{"url": m["permalink"], "at": kst_datetime(m["timestamp"])}
                        for k, m in sorted((load_json("announcements.json", {}).get("posts") or {}).items(), key=lambda kv: kv[1].get("timestamp") or "", reverse=True)
                        if k.startswith("x:") and "/a2o_soul/status/" in (m.get("permalink") or "").lower() and m.get("timestamp")][:20],
