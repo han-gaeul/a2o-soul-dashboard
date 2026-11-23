@@ -1068,8 +1068,7 @@ body.home-a #voteHome, body.home-a #pickSec, body.home-b #pickSec { display: non
 .hc-st b { font-size: 17px; color: var(--accent); }
 .hc-st small { font-size: 11.5px; color: var(--muted); }
 .hc-foot { display: flex; justify-content: flex-end; }
-body.home-c #bias > :not(.bias-foot):not(.bias-colors) { display: none; }
-body.home-c #bias .bias-foot .more { display: none; }
+body.home-c #bias { display: none; }  /* 최애 색 테마는 최애 카드 안으로 */
 @media (max-width: 720px) {
   .hc-top { flex-wrap: wrap; }
   .hc-top .sel { order: 3; max-width: none; width: 100%; }
@@ -1177,3 +1176,8 @@ html:not([lang="ko"]) .vt-t { -webkit-line-clamp: 3; font-size: 13px; overflow-w
 
 .sp-box > summary.sp-head { cursor: pointer; list-style: revert; }
 .sp-box:not([open]) { padding-bottom: 10px; }
+
+/* 한눈에: 음반 구매처 한 줄 링크 */
+.home-link { display: block; padding: 12px 16px; font-weight: 600; text-decoration: none; color: inherit; }
+.home-link:hover { color: var(--accent); }
+.hc-foot { align-items: center; gap: 12px; justify-content: space-between; }

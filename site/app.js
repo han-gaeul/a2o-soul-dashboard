@@ -131,7 +131,7 @@ if ("serviceWorker" in navigator) {
   const drawn = new Set();
   const drawers = {};
   // 공유 링크: #member/MOON → 멤버 탭, #ep/날짜/방송 → 영상 탭, #cmp/날짜/방송/A/B → 직캠 탭
-  const ROUTE_TAB = { member: "members", ep: "videos", cmp: "videos", fancams: "videos", post: "community" };  // 직캠 탭은 영상 탭으로 합침
+  const ROUTE_TAB = { member: "members", ep: "videos", cmp: "videos", fancams: "videos", shops: "cheer", post: "community" };  // 직캠 탭은 영상 탭으로 합침
   const route = () => decodeURIComponent(location.hash.slice(1)).split("/");
   function showTab() {
     const [head] = route();
@@ -145,6 +145,7 @@ if ("serviceWorker" in navigator) {
       if (on) a.scrollIntoView({ block: "nearest", inline: "nearest" });
     });
     if (!drawn.has(cur) && drawers[cur] && window.Chart) { drawn.add(cur); drawers[cur](); }
+    if (head === "shops") setTimeout(() => $("shopHome")?.scrollIntoView({ behavior: "smooth" }), 80);  // 한눈에 '음반 구매처' 링크 → 응원 탭
     if (head === "fancams") setTimeout(() => $("fancamSec")?.scrollIntoView({ behavior: "smooth" }), 80);  // 예전 #fancams 링크 → 영상 탭 직캠 칸
   }
   window.addEventListener("hashchange", () => { showTab(); openRoute(); });
@@ -312,7 +313,7 @@ if ("serviceWorker" in navigator) {
 
   const EV_GROUPS = [["all", "ev_all"], ["show", "ev_show_g"], ["anniv", "ev_anniv_g"], ["etc", "ev_etc_g"]];
   let evGroup = pref.get("evGroup", "all");
-  let evView = pref.get("evView", "cal");
+  let evView = pref.get("evView", "list");  // 목록이 기본, 달력은 버튼으로
   const todayD = new Date(`${todayKst}T00:00:00Z`);
   let calY = todayD.getUTCFullYear(), calM = todayD.getUTCMonth() + 1, calSel = todayKst;
   let calFold = pref.get("calFold", true);
@@ -429,7 +430,7 @@ if ("serviceWorker" in navigator) {
   const newCount = data.videos.filter(isNew).length;
   if (newCount) $("recentHead").append(el("span", { class: "new-count" }, `NEW ${newCount}`));
   if (data.recent.length) {
-    for (const v of data.recent) $("recent").append(videoCard(v, v.member || catLabel(v.category)));
+    for (const v of data.recent.slice(0, 8)) $("recent").append(videoCard(v, v.member || catLabel(v.category)));
     if (MOBILE) fold($("recent"), 6);
   } else {
     $("recent").replaceWith(empty(t("empty_videos")));
@@ -685,7 +686,7 @@ if ("serviceWorker" in navigator) {
     if (groups.length > 2) $("votes").before(seg);
     drawVotes();
     // 한눈에 탭 맨 위: 마감 가까운 순 타일 (폰은 가로로 넘기기)
-    $("voteHomeList").replaceChildren(...sorted.map((v) => voteTile(v, false)));
+    $("voteHomeList").replaceChildren(...sorted.slice(0, 4).map((v) => voteTile(v, false)));  // 한눈에는 마감 가까운 4개만
     $("voteHomeCount").textContent = t("vote_count", { n: sorted.length });
     $("voteHome").hidden = false;
   } else {
@@ -1120,6 +1121,7 @@ if ("serviceWorker" in navigator) {
     }
   } else {
     $("shopHome").remove();
+    $("shopLink")?.remove();
   }
   // 공지 탭 맨 위: 팬싸·영통·행사 일정을 날짜별 카드로 (지난 일정·날짜 없는 공지는 뒤로)
   if (notices.length) {
@@ -2220,27 +2222,33 @@ if ("serviceWorker" in navigator) {
       if ((m.ig_mentions || []).length) body.push(el("div", { class: "ig-feed bias-ig" }, ...m.ig_mentions.slice(0, 2).map((x) => igPost(x, false))));
       const more = el("button", { class: "more", type: "button" }, t("profile_view"));
       more.addEventListener("click", () => openMember(m));
-      const tg = el("label", { class: "bias-theme-tg small" }, el("input", { type: "checkbox", ...(themeOn() ? { checked: "" } : {}) }), ` ${t("bias_theme")}`);
-      tg.firstChild.addEventListener("change", (e) => { pref.set("biasTheme", e.target.checked); applyTheme(); });
-      // 테마 색 고르기: 자주 쓰는 색 + 직접 고르기 (이 브라우저에만 저장)
-      const cur = pref.get("biasColor", null);
-      const sw = (hex) => {
-        const b = el("button", { type: "button", class: `bias-sw${cur === hex ? " on" : ""}`, "aria-label": hex, style: `--c:${hex}` });
-        b.addEventListener("click", () => { pref.set("biasColor", hex); pref.set("biasTheme", true); renderBias(); applyTheme(); });
-        return b;
-      };
-      const reset = el("button", { type: "button", class: `bias-sw auto${cur === null ? " on" : ""}`, title: t("bias_color_auto") }, "A");
-      reset.addEventListener("click", () => { pref.set("biasColor", null); renderBias(); applyTheme(); });
-      const custom = el("input", { type: "color", class: "bias-pick", "aria-label": t("bias_color_pick"), value: cur || "#9b87f5" });
-      custom.addEventListener("input", (e) => { pref.set("biasColor", e.target.value); pref.set("biasTheme", true); applyTheme(); });
-      custom.addEventListener("change", () => renderBias());
-      body.push(el("div", { class: "bias-foot" }, more, tg),
-        themeOn() ? el("div", { class: "bias-colors" }, el("span", { class: "muted small" }, t("bias_color")), reset, ...PALETTE.slice(0, 10).map(sw),
-          el("label", { class: "bias-sw rainbow", title: t("bias_color_pick") }, custom)) : null);
+      const [tg, colors] = themeControls();
+      body.push(el("div", { class: "bias-foot" }, more, tg), colors);
     } else {
       body.push(el("p", { class: "note small" }, t("bias_desc")));
     }
     $("bias").replaceChildren(head, ...body);
+  }
+  // 최애 색 테마 켜기·색 고르기 (최애 카드 · 최애 중심형 한눈에 카드에서 같이 씀)
+  function themeControls() {
+    const rerenderHome = () => { if (document.body.classList.contains("home-c") && typeof homeRender === "function") homeRender(); };
+      const tg = el("label", { class: "bias-theme-tg small" }, el("input", { type: "checkbox", ...(themeOn() ? { checked: "" } : {}) }), ` ${t("bias_theme")}`);
+    tg.firstChild.addEventListener("change", (e) => { pref.set("biasTheme", e.target.checked); applyTheme(); renderBias(); rerenderHome(); });
+    // 테마 색 고르기: 자주 쓰는 색 + 직접 고르기 (이 브라우저에만 저장)
+    const cur = pref.get("biasColor", null);
+    const sw = (hex) => {
+      const b = el("button", { type: "button", class: `bias-sw${cur === hex ? " on" : ""}`, "aria-label": hex, style: `--c:${hex}` });
+      b.addEventListener("click", () => { pref.set("biasColor", hex); pref.set("biasTheme", true); renderBias(); rerenderHome(); applyTheme(); });
+      return b;
+    };
+    const reset = el("button", { type: "button", class: `bias-sw auto${cur === null ? " on" : ""}`, title: t("bias_color_auto") }, "A");
+    reset.addEventListener("click", () => { pref.set("biasColor", null); renderBias(); rerenderHome(); applyTheme(); });
+    const custom = el("input", { type: "color", class: "bias-pick", "aria-label": t("bias_color_pick"), value: cur || "#9b87f5" });
+    custom.addEventListener("input", (e) => { pref.set("biasColor", e.target.value); pref.set("biasTheme", true); applyTheme(); });
+    custom.addEventListener("change", () => renderBias());
+    const colors = themeOn() ? el("div", { class: "bias-colors" }, el("span", { class: "muted small" }, t("bias_color")), reset, ...PALETTE.slice(0, 10).map(sw),
+      el("label", { class: "bias-sw rainbow", title: t("bias_color_pick") }, custom)) : null;
+    return [tg, colors];
   }
   // 최애 테마: 멤버별 포인트 색 + 상단에 최애 사진 (끄기 가능)
   // 파스텔 계열 15색 — 멤버 순서대로 기본 색, 사용자가 바꿀 수 있음
@@ -2642,7 +2650,7 @@ if ("serviceWorker" in navigator) {
         el("div", { class: "hc-stats" }, stat(fmt(m.fancam_count), t("hs_c_cams")), stat(kr(m.fancam_views), t("hs_c_views")), stat(m.fancam_delta ? `+${kr(m.fancam_delta)}` : "–", t("hs_c_today"))),
         cams.length ? el("div", { class: "mg-row" }, ...cams.map((v) => el("a", { class: "mg-cam", href: ytUrl(v.id), target: "_blank", rel: "noopener" },
           el("img", { src: thumbUrl(v.id), alt: "", loading: "lazy" }), el("span", {}, tc(v.show) || when(v.published_at))))) : empty(t("fancam_pending")),
-        el("div", { class: "hc-foot" }, prof));
+        ...(() => { const [tg, colors] = themeControls(); return [el("div", { class: "hc-foot" }, tg, prof), colors]; })());  // 최애 색 테마도 이 카드 안에
     };
 
     const render = () => {

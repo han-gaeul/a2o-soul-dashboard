@@ -72,36 +72,22 @@
     <div id="homeStyle"></div>
     <div class="tour-tip" id="tourTip" hidden><button type="button" class="tour-open" id="tourOpen" data-i18n="tour_tip">👋 처음이세요? 30초 사용법</button><button type="button" class="tour-x" id="tourX" aria-label="✕">✕</button></div>
     <section class="card vote-home" id="voteHome" hidden>
-      <div class="sec-head"><h2><span data-i18n="vote_home">🗳 진행 중인 투표</span> <span class="muted small" id="voteHomeCount"></span></h2><a class="more" href="#vote" data-i18n="vote_tab_more">투표 탭 ›</a></div>
+      <div class="sec-head"><h2><span data-i18n="vote_home_soon">⏰ 마감 임박 투표</span> <span class="muted small" id="voteHomeCount"></span></h2><a class="more" href="#vote" data-i18n="vote_tab_more">투표 탭 ›</a></div>
       <div class="vt-grid vt-row" id="voteHomeList"></div>
     </section>
-    <section class="card" id="shopHome" hidden>
-      <h2 data-i18n="shops_home">💿 음반 구매처</h2>
-      <p class="muted small" data-i18n="shops_home_desc">공식 판매처 — 팬싸·특전은 판매처마다 달라요</p>
-      <div class="shop-grid" id="shopGrid"></div>
-      <div id="offlineStores" hidden>
-        <h3 class="off-title" data-i18n="off_title">🏬 오프라인 매장</h3>
-        <p class="muted small" id="offlineNote"></p>
-        <div class="filter-row era-row" id="offRegions"></div>
-        <div class="off-wrap"><div class="off-map" id="offMap" hidden></div><div class="off-list" id="offlineList"></div></div>
-      </div>
-      <div id="chainStores" hidden>
-        <h3 class="off-title" data-i18n="chain_title">🛒 어디서나 살 수 있는 음반 매장</h3>
-        <p class="muted small" data-i18n="chain_desc">전국 체인 — 지점별 재고는 매장에 문의하세요</p>
-        <div class="chain-grid" id="chainGrid"></div>
-      </div>
-    </section>
+    <div class="grid" id="kpis"></div>
+    <a class="home-link card" href="#shops" id="shopLink" data-i18n="shops_link">💿 음반 구매처 · 판매처·오프라인 매장 ›</a>
     <section class="card bday" id="bdayCard"></section>
     <section class="card bias" id="bias"></section>
-    <section class="card" id="pickSec">
-      <div class="sec-head"><h2 data-i18n="pick_title">🎲 오늘의 직캠</h2><button class="more pick-btn" id="pickBtn" type="button" data-i18n="pick_again">다른 거</button></div>
-      <div class="videos" id="pick"></div>
-    </section>
-    <div class="grid" id="kpis"></div>
 
     <section class="card" id="eventsSection">
       <div class="sec-head"><h2 data-i18n="upcoming">다가오는 일정</h2><a href="#cheer" class="see-all" data-i18n="calendar">캘린더 구독</a></div>
       <ul class="events" id="events"></ul>
+    </section>
+
+    <section class="card" id="pickSec">
+      <div class="sec-head"><h2 data-i18n="pick_title">🎲 오늘의 직캠</h2><button class="more pick-btn" id="pickBtn" type="button" data-i18n="pick_again">다른 거</button></div>
+      <div class="videos" id="pick"></div>
     </section>
 
     <section class="card">
@@ -169,6 +155,22 @@
     <section class="card" id="streamSec">
       <h2 data-i18n="cheer_stream">🎧 스밍</h2>
       <ol class="stream" id="streaming"></ol>
+    </section>
+    <section class="card" id="shopHome" hidden>
+      <h2 data-i18n="shops_buy">💿 음반 사기</h2>
+      <p class="muted small" data-i18n="shops_home_desc">공식 판매처 — 팬싸·특전은 판매처마다 달라요</p>
+      <div class="shop-grid" id="shopGrid"></div>
+      <div id="offlineStores" hidden>
+        <h3 class="off-title" data-i18n="off_title">🏬 오프라인 매장</h3>
+        <p class="muted small" id="offlineNote"></p>
+        <div class="filter-row era-row" id="offRegions"></div>
+        <div class="off-wrap"><div class="off-map" id="offMap" hidden></div><div class="off-list" id="offlineList"></div></div>
+      </div>
+      <div id="chainStores" hidden>
+        <h3 class="off-title" data-i18n="chain_title">🛒 어디서나 살 수 있는 음반 매장</h3>
+        <p class="muted small" data-i18n="chain_desc">전국 체인 — 지점별 재고는 매장에 문의하세요</p>
+        <div class="chain-grid" id="chainGrid"></div>
+      </div>
     </section>
     <section class="card" id="radioSec">
       <h2 data-i18n="radio_title">📻 라디오 신청</h2>
