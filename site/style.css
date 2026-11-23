@@ -298,6 +298,12 @@ header .head-right { margin-left: auto; }
 
 /* 오늘의 직캠 */
 .pick-btn { width: auto; margin: 0; padding: 6px 12px; }
+/* 오늘의 직캠: 작은 썸네일 + 옆에 제목 한 줄 카드 */
+#pick { display: block; }
+#pick .video { display: grid; grid-template-columns: 132px 1fr; column-gap: 12px; align-items: start; }
+#pick .video .thumb { grid-row: 1 / span 3; }
+#pick .video .t { margin-top: 0; }
+#pickSec .sec-head { margin-bottom: 8px; }
 #pick .video { max-width: 360px; }
 
 /* 퀴즈 */

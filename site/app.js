@@ -236,7 +236,7 @@ if ("serviceWorker" in navigator) {
   }
 
   // ---------- 한눈에 ----------
-  for (const k of data.kpis) {
+  for (const k of $("kpis") ? data.kpis : []) {
     const sub = k.key === "mv_total" ? t("kpi.mv_count", { n: k.count })
       : k.key === "fancam_total" ? t("kpi.fancam_count", { n: k.count }) : k.sub;
     $("kpis").append(el("div", { class: "card kpi" },
@@ -282,10 +282,25 @@ if ("serviceWorker" in navigator) {
     if (m) return short(m[1]);
     return tx(e).replace(/^[^\p{L}\p{N}]+/u, "").slice(0, 8);
   };
-  const voteEvents = (data.votes || []).map((v) => ({
-    date: v.end.slice(0, 10), time: v.end.slice(11), type: t("votes"),
-    title: `🗳 ${[tc(v.show), tc(v.title)].filter(Boolean).join(" ")}`, url: v.url, short: short(v.show) || t("votes"),
-  }));
+  // 같은 시각에 같은 곳(방송·앱)에서 마감하는 투표는 한 줄로: 🗳 더쇼 투표 (애프터) · 핫 스테이지 · 팬픽캠 · 엔딩요정
+  const voteBuckets = new Map();
+  for (const v of data.votes || []) {
+    const k = [v.end, v.show, v.app].join("|");
+    if (!voteBuckets.has(k)) voteBuckets.set(k, []);
+    voteBuckets.get(k).push(v);
+  }
+  const voteEvents = [...voteBuckets.values()].map((vs) => {
+    const v = vs[0];
+    const base = { date: v.end.slice(0, 10), time: v.end.slice(11), type: t("votes"), short: short(v.show) || t("votes") };
+    if (vs.length === 1) return { ...base, title: `🗳 ${[tc(v.show), tc(v.title)].filter(Boolean).join(" ")}`, url: v.url };
+    // 제목 끝의 같은 말('투표 (애프터)')은 묶음 제목으로, 앞부분은 각 링크 이름으로
+    const words = vs.map((x) => tc(x.title).split(" "));
+    let n = 0;
+    while (words.every((w) => w.length > n + 1 && w[w.length - 1 - n] === words[0][words[0].length - 1 - n])) n++;
+    const tail = n ? words[0].slice(-n).join(" ") : "";
+    return { ...base, title: `🗳 ${[tc(v.show), tail].filter(Boolean).join(" ")}`,
+      parts: vs.map((x, i) => ({ label: (n ? words[i].slice(0, -n) : words[i]).join(" "), url: x.url })) };
+  });
   const supportEvents = (data.supports || []).filter((x) => x.start >= todayKst).map((x) => ({
     date: x.start, type: x.kind, title: `☕ ${[x.member, x.title].filter(Boolean).join(" ")}`, url: x.url,
   }));
@@ -338,6 +353,7 @@ if ("serviceWorker" in navigator) {
     } else {
       title = e.url ? ext(e.url, tx(e)) : el("span", {}, tx(e));
     }
+    if (e.parts) title = el("span", {}, tx(e), " ", ...e.parts.flatMap((p, i) => [i ? " · " : "", p.url ? ext(p.url, p.label) : p.label]));
     title.classList.add("what");
     const live = e.type === "음방" && e.date >= todayKst ? liveLink(e.title) : null;
     return el("li", { class: `ev-${e.group}` }, whenEl, el("div", {}, e.type ? el("span", { class: "chip" }, tc(e.type)) : null, title, live, tipBy(e)));
