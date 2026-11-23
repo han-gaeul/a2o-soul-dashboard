@@ -74,6 +74,35 @@ jobs:
           python collector/spotify.py
 
       # push(코드·targets.yml 수정)일 때는 수집 없이 다시 빌드만
+      # 여러 멤버 게시물 사진마다 누가 있는지 얼굴로 가리기 — 새 사진이 있을 때만 OpenCV·모델 받아서 (collector/faces.py)
+      - name: Faces due?
+        id: fc
+        if: github.event_name != 'push'
+        run: |
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json, sys
+          sys.path.insert(0, "collector")
+          import faces
+          photos = json.load(open("data/dashboard.json")).get("photos") or []
+          print("due=" + ("1" if faces.todo(photos, faces.load()) else "0"))
+          PY
+      - name: Face models cache
+        if: steps.fc.outputs.due == '1'
+        uses: actions/cache@v4
+        with:
+          path: /tmp/fr
+          key: face-models-yunet2023mar-sface2021dec
+      - name: Faces
+        if: steps.fc.outputs.due == '1'
+        continue-on-error: true
+        run: |
+          pip install -q opencv-python-headless
+          mkdir -p /tmp/fr
+          z=https://github.com/opencv/opencv_zoo/raw/main/models
+          [ -s /tmp/fr/face_detection_yunet_2023mar.onnx ] || curl -sSL -o /tmp/fr/face_detection_yunet_2023mar.onnx $z/face_detection_yunet/face_detection_yunet_2023mar.onnx
+          [ -s /tmp/fr/face_recognition_sface_2021dec.onnx ] || curl -sSL -o /tmp/fr/face_recognition_sface_2021dec.onnx $z/face_recognition_sface/face_recognition_sface_2021dec.onnx
+          python collector/faces.py
+
       - name: Collect & build
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
