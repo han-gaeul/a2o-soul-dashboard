@@ -1307,15 +1307,22 @@ if ("serviceWorker" in navigator) {
   // ---------- 영상 탭: 인스타 릴스 (공식 + 매체가 X에 건 릴스 링크) ----------
   const reels = data.reels || [];
   if (reels.length) {
-    let who = "";
+    let who = "", reelLimit = 12;  // 처음엔 12개만, '더 보기'로 12개씩
     const names = [...new Set(reels.map((x) => x.by))];
     const drawReels = () => {
       $("reelsAccts").replaceChildren(...(names.length > 1 ? ["", ...names] : []).map((n) => {
         const b = el("button", { type: "button", class: n === who ? "on" : "", "aria-pressed": String(n === who) }, n || t("ev_all"));
-        b.addEventListener("click", () => { who = n; drawReels(); });
+        b.addEventListener("click", () => { who = n; reelLimit = 12; drawReels(); });
         return b;
       }));
-      $("reels").replaceChildren(...reels.filter((x) => !who || x.by === who).map((x) => {
+      const shown = reels.filter((x) => !who || x.by === who);
+      $("reelsMore")?.remove();
+      if (shown.length > reelLimit) {
+        const mb = el("button", { type: "button", class: "more", id: "reelsMore" }, `${t("more")} (${shown.length - reelLimit})`);
+        mb.addEventListener("click", () => { reelLimit += 12; drawReels(); });
+        $("reels").after(mb);
+      }
+      $("reels").replaceChildren(...shown.slice(0, reelLimit).map((x) => {
         const iso = kstDate(x.at).toISOString();
         let thumb = null;
         if (x.thumb) {
