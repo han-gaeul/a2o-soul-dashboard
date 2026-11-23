@@ -1201,3 +1201,20 @@ html:not([lang="ko"]) .vt-t { -webkit-line-clamp: 3; font-size: 13px; overflow-w
 .kc-cnt { font-size: 11px; white-space: nowrap; text-align: right; }
 @media (max-width: 600px) { .kc-song { grid-template-columns: 1fr auto; gap: 2px 8px; } .kc-ranks { grid-column: 1 / -1; grid-row: 2; } }
 .kc-box td .small { font-size: 11px; }
+
+/* 지금 현황: 요약 3칸 + 탭 + 표 */
+.now-tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 6px 0 12px; }
+.now-tile { display: grid; gap: 2px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); }
+.now-tile b { font-size: 22px; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.now-tabs { margin-bottom: 8px; }
+.now-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.now-table { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; }
+.now-table th { font-size: 11px; font-weight: 600; color: var(--muted); text-align: center; padding: 6px 4px; border-bottom: 1px solid var(--line); vertical-align: bottom; line-height: 1.25; }
+.now-table td { text-align: center; padding: 8px 4px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.now-table th:first-child, .now-table td:first-child { text-align: left; position: sticky; left: 0; background: var(--card); font-weight: 600; padding-left: 0; white-space: normal; min-width: 96px; }
+.now-table td.hit b { color: var(--accent); font-size: 15px; }
+.now-table .up, .now-table .down { font-size: 11px; }
+.now-table.play td:not(:first-child), .now-table.play th:not(:first-child) { text-align: right; }
+.now-h { font-size: 14px; margin: 14px 0 6px; }
+.now-chart { height: 260px; }
+@media (max-width: 600px) { .now-tiles { gap: 6px; } .now-tile { padding: 8px; } .now-tile b { font-size: 17px; } .now-tile .small { font-size: 10px; } .now-chart { height: 220px; } }

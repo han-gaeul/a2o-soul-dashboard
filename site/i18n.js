@@ -762,3 +762,15 @@ window.I18N = {
   for (const [l, v] of Object.entries(V)) if (window.I18N[l]) Object.assign(window.I18N[l], v);
   for (const l of Object.keys(window.I18N)) if (!V[l]) for (const [k, v] of Object.entries(V.en)) window.I18N[l][k] ??= v;
 })();
+
+// 지금 현황: 요약·탭
+(() => {
+  const V = {
+    ko: { now_best: "최고 순위", now_sp: "Spotify 하루 (전곡)", now_sales: "앨범 초동", now_t_rank: "📈 차트 순위", now_t_play: "🎧 재생 수", now_t_sales: "💿 판매량",
+      now_week: "주간", now_trend: "순위 추이", now_daily: "Spotify 하루 재생 수", now_play_note: "누적 · 초록 숫자는 하루 증가 (Spotify 낮 12시쯤, 지니·멜론 새벽에 기록)" },
+    en: { now_best: "Best rank", now_sp: "Spotify / day (all songs)", now_sales: "First-week sales", now_t_rank: "📈 Chart ranks", now_t_play: "🎧 Plays", now_t_sales: "💿 Sales",
+      now_week: "weekly", now_trend: "Rank trend", now_daily: "Spotify daily plays", now_play_note: "Totals · green = gain in a day (Spotify ~noon KST, Genie/Melon early morning)" },
+  };
+  for (const [l, v] of Object.entries(V)) if (window.I18N[l]) Object.assign(window.I18N[l], v);
+  for (const l of Object.keys(window.I18N)) if (!V[l]) for (const [k, v] of Object.entries(V.en)) window.I18N[l][k] ??= v;
+})();
