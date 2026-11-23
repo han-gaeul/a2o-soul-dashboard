@@ -969,6 +969,7 @@ if ("serviceWorker" in navigator) {
           return x ? el("td", { class: "hit" }, el("b", {}, x.rank), " ", chg(x)) : el("td", { class: "muted" }, "–");
         })))))) : null,
       (data.charts || []).some((c) => c.ranks.length > 1) ? el("div", {}, el("h3", { class: "now-h" }, t("now_trend")),
+        el("div", { class: "filter-row ev-tabs", id: "rankTrendPick" }),
         el("div", { class: "chart-box now-chart" }, el("canvas", { id: "rankTrend" }))) : null);
 
     // 재생: 곡별 Spotify 누적·하루, 지니 재생, 멜론 좋아요 + Spotify 하루 재생 그래프
@@ -2948,23 +2949,40 @@ if ("serviceWorker" in navigator) {
   }
 
   function rankCharts() {
-    // 순위 추이: 곡·차트별 선 하나씩 (위로 갈수록 높은 순위)
+    // 순위 추이: 차트 하나를 골라서(멜론 HOT100·써클 스트리밍 주간 …) 곡별 선 — 날짜 간격이 실제와 같게 빈 날도 칸을 둠
     const rc = $("rankTrend");
     if (rc && !rc.dataset.done && rc.offsetParent) {
       rc.dataset.done = "1";
-      const series = (data.charts || []).filter((c) => c.ranks.length > 1);
-      const labels = [...new Set(series.flatMap((c) => c.ranks.map((r) => r[0])))].sort();
-      new Chart(rc, {
-        type: "line",
-        data: { labels: labels.map((d) => d.slice(5).replace("-", "/")),
-                datasets: series.map((c, i) => { const m = Object.fromEntries(c.ranks); return {
-                  label: `${c.song} · ${[c.service, c.type].filter(Boolean).join(" ")}`, data: labels.map((l) => m[l] ?? null), spanGaps: true,
-                  borderColor: palette[i % palette.length], backgroundColor: palette[i % palette.length], tension: 0.2, pointRadius: 2 }; }) },
-        options: { maintainAspectRatio: false, interaction: { mode: "nearest", intersect: false },
-                   plugins: { legend: { position: "bottom", labels: { boxWidth: 10, font: { size: 11 } } },
-                              tooltip: { callbacks: { label: (x) => `${x.dataset.label} ${t("rank", { n: x.parsed.y })}` } } },
-                   scales: { y: { reverse: true, ticks: { precision: 0 } } } },
-      });
+      const groups = {};
+      for (const c of (data.charts || []).filter((c) => c.ranks.length)) (groups[[c.service, c.type].filter(Boolean).join(" ")] ||= []).push(c);
+      const names = Object.keys(groups).filter((g) => groups[g].some((c) => c.ranks.length > 1))
+        .sort((a, b) => /주간/.test(a) - /주간/.test(b) || Math.min(...groups[a].map((c) => c.ranks.at(-1)[1])) - Math.min(...groups[b].map((c) => c.ranks.at(-1)[1])));
+      let pick = names.includes(pref.get("rankTrend", "")) ? pref.get("rankTrend", "") : names[0];
+      let chart;
+      const draw = () => {
+        $("rankTrendPick").replaceChildren(...names.map((g) => {
+          const b_ = el("button", { type: "button", class: g === pick ? "on" : "" }, g);
+          b_.addEventListener("click", () => { pick = g; pref.set("rankTrend", g); draw(); });
+          return b_;
+        }));
+        const series = groups[pick];
+        const ds = series.flatMap((c) => c.ranks.map((r) => r[0])).sort();
+        const labels = [];
+        for (let d = new Date(`${ds[0]}T00:00:00Z`); d <= new Date(`${ds.at(-1)}T00:00:00Z`); d.setUTCDate(d.getUTCDate() + 1)) labels.push(d.toISOString().slice(0, 10));
+        if (chart) chart.destroy();
+        chart = new Chart(rc, {
+          type: "line",
+          data: { labels: labels.map((d) => d.slice(5).replace("-", "/")),
+                  datasets: series.map((c, i) => { const m = Object.fromEntries(c.ranks); return {
+                    label: c.song, data: labels.map((l) => m[l] ?? null), spanGaps: true,
+                    borderColor: palette[i % palette.length], backgroundColor: palette[i % palette.length], tension: 0.2, pointRadius: 3 }; }) },
+          options: { maintainAspectRatio: false, interaction: { mode: "nearest", intersect: false },
+                     plugins: { legend: { position: "bottom", labels: { boxWidth: 10, font: { size: 11 } } },
+                                tooltip: { callbacks: { label: (x) => `${x.dataset.label} ${t("rank", { n: x.parsed.y })}` } } },
+                     scales: { x: { ticks: { maxRotation: 0, autoSkip: true, autoSkipPadding: 12 } }, y: { reverse: true, ticks: { precision: 0 } } } },
+        });
+      };
+      if (names.length) draw();
     }
     // 하루 재생 수: 곡별 막대 (Spotify)
     const pc = $("playTrend");
