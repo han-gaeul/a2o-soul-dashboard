@@ -134,16 +134,18 @@ radio:
     - { name: SBS 파워FM, app: SBS 고릴라, sms: "#1077" }
     - { name: KBS 쿨FM, app: KBS 콩, sms: "#8910" }
     - { name: MBC FM4U, app: MBC 미니, sms: "#8000" }
+    - { name: KBS 해피FM, app: KBS 콩 }
     - { name: CBS 음악FM, app: CBS 레인보우, sms: "#9390", ios: "https://apps.apple.com/app/id432866707" }
   # 평일 기준 시간(KST) — 2026-11-20 확인 (KBS 쿨FM 5월 개편, MBC 굿모닝FM은 11월 DJ 교체 중). 주말은 다를 수 있음
   programs:
-    - { name: 가요속으로, station: CBS 음악FM, start: "16:00", end: "18:00", dj: 박승화, note: 신청곡 비중이 커서 특히 추천 }
-    - { name: 두시탈출 컬투쇼, station: SBS 파워FM, start: "14:00", end: "16:00", dj: 김태균 }
-    - { name: 김영철의 파워FM, station: SBS 파워FM, start: "07:00", end: "09:00", dj: 김영철 }
-    - { name: 가요광장, station: KBS 쿨FM, start: "12:00", end: "14:00", dj: 폴킴 }
-    - { name: 슈퍼라디오, station: KBS 쿨FM, start: "14:00", end: "16:00", dj: 가비 }
-    - { name: 볼륨을 높여요, station: KBS 쿨FM, start: "20:00", end: "22:00", dj: 오마이걸 효정 }
     - { name: 굿모닝FM, station: MBC FM4U, start: "07:00", end: "09:00" }
+    - { name: 세상을 여는 아침, station: MBC FM4U, start: "06:00", end: "07:00", dj: 이영은, url: "https://program.imbc.com/radio/worldmorning/corners/338" }
+    - { name: 정오의 희망곡, station: MBC FM4U, start: "12:00", end: "14:00", url: "https://program.imbc.com/radio/musicparty/corners/212" }
+    - { name: 별이 빛나는 밤에, station: MBC FM4U, start: "20:00", end: "22:00", dj: 김이나, url: "https://program.imbc.com/radio/starnight/corners/431" }
+    - { name: 친한친구, station: MBC FM4U, start: "22:00", end: "24:00", dj: "제로베이스원 (월~수)", url: "https://program.imbc.com/radio/bfever/corners/258" }
+    - { name: 밤을 잊은 그대에게, station: KBS 해피FM, start: "22:00", end: "24:00", dj: 유지원, url: "https://program.kbs.co.kr/2radio/radio/nightyou/pc/board.html?smenu=e5c2d2&bbs_loc=R2018-0187-03-763323,list,none,1,0" }
+    - { name: 행복한 동행, station: CBS 음악FM, start: "20:00", end: "22:00", dj: 김현주, url: "https://www.cbs.co.kr/board/list/cbs_P000011_request" }
+    - { name: 꿈과 음악사이에, station: CBS 음악FM, start: "22:00", end: "24:00", dj: 허윤희, url: "https://www.cbs.co.kr/board/list/cbs_P000221_request" }
   songs: [Dancing in the Dark, Superstar, "While We're Young", Very First Love, Moonlight Shadow]
   situations:
     - { label: 출근·등교길, line: "출근길(등교길)에 이 노래 들으면 하루가 가벼워져요. 오늘도 힘내라고 같이 들어요!" }

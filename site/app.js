@@ -1486,7 +1486,7 @@ if ("serviceWorker" in navigator) {
         el("b", {}, s.name),
         el("div", { class: "rd-meta" }, ext(appLink(s), `📱 ${s.app}`), s.sms ? el("span", {}, `✉️ ${s.sms}`) : null),
         el("div", { class: "rd-progs" }, ...progs.filter((p) => p.station === s.name).sort((a, b) => (a.start || "") < (b.start || "") ? -1 : 1)
-          .map((p) => el("div", {}, p.start ? el("span", { class: "rd-time" }, `${p.start}–${p.end || ""}`) : null, ` ${p.name}`,
+          .map((p) => el("div", {}, p.start ? el("span", { class: "rd-time" }, `${p.start}–${p.end || ""}`) : null, " ", p.url ? ext(p.url, p.name) : p.name,
             p.dj ? el("span", { class: "muted" }, ` · ${p.dj}`) : null)))))),
         el("p", { class: "muted small" }, t("radio_wkday")),
         el("p", { class: "muted small" }, t("radio_sms_note")),
