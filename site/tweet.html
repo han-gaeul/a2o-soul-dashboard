@@ -45,6 +45,17 @@
   .dot { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-size: 16px; background: var(--chip); }
   .stat b { display: block; font-size: 14px; }
   .stat small { display: block; font-size: 12px; color: var(--muted); margin-top: 1px; white-space: pre-line; }
+  /* 날짜별 막대: 위에 숫자, 아래에 날짜, 오늘은 진하게 */
+  .trend:empty { display: none; }
+  .trend { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 56px); gap: 4px; margin-top: 8px; }
+  @media (max-width: 600px) { .bar { font-size: 10px; } .trend { gap: 2px; } }
+  .trend.note { display: block; font-size: 12px; color: var(--muted); }
+  .bar { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 74px; font-size: 11px; color: var(--muted); }
+  .bar i { display: block; width: 100%; max-width: 30px; border-radius: 4px 4px 0 0; background: color-mix(in srgb, var(--accent) 30%, transparent); min-height: 2px; }
+  .bar .v { font-variant-numeric: tabular-nums; margin-bottom: 2px; white-space: nowrap; }
+  .bar .d { margin-top: 3px; white-space: nowrap; }
+  .bar.now i { background: var(--accent); }
+  .bar.now .v, .bar.now .d { color: var(--accent); font-weight: 700; }
   .ok .dot { background: #e6f7ec; } .warn2 .dot { background: #fff4e5; } .no .dot { background: #fde8ec; }
   .sep { height: 1px; background: var(--line); margin: 0 -16px; }
   .msg { font-size: 14px; margin: 0; }
@@ -105,11 +116,11 @@
     <div class="stat" id="noti"><span class="dot">🔔</span><span><b></b><small>새 초안이 생기면 이 기기로 알림</small></span>
       <span class="row"><button type="button" id="notify" class="ghost">켜기</button><button type="button" id="notifyOff" class="ghost" hidden>끄기</button></span></div>
     <div class="sep" id="subsSep" hidden></div>
-    <div class="stat" id="xuse" hidden><span class="dot">🐦</span><span><b></b><small></small></span><span><a class="ghost" href="https://console.x.com" target="_blank" rel="noopener">충전 ↗</a></span></div>
+    <div class="stat" id="xuse" hidden><span class="dot">🐦</span><span><b></b><small></small><div class="trend"></div></span><span><a class="ghost" href="https://console.x.com" target="_blank" rel="noopener">충전 ↗</a></span></div>
     <div class="sep" id="xuseSep" hidden></div>
-    <div class="stat" id="visits" hidden><span class="dot">👀</span><span><b></b><small></small><small class="trend"></small></span><span><a class="ghost" href="https://dash.cloudflare.com/?to=/:account/web-analytics" target="_blank" rel="noopener">자세히 ↗</a></span></div>
+    <div class="stat" id="visits" hidden><span class="dot">👀</span><span><b></b><small></small><div class="trend"></div></span><span><a class="ghost" href="https://dash.cloudflare.com/?to=/:account/web-analytics" target="_blank" rel="noopener">자세히 ↗</a></span></div>
     <div class="sep" id="visitsSep" hidden></div>
-    <div class="stat" id="subs" hidden><span class="dot">📊</span><span><b></b><small></small><small class="trend"></small></span><span></span></div>
+    <div class="stat" id="subs" hidden><span class="dot">📊</span><span><b></b><small></small><div class="trend"></div></span><span></span></div>
   </section>
 
   <p class="msg" id="msg" role="status"></p>
@@ -236,14 +247,29 @@
       showStats(s);
     } catch (_) { /* 워커가 예전 버전이면 안 보임 */ }
   };
+  // 최근 7일 막대 (rows: [{d:'2026-11-23', v:123}], fmt: 숫자 표시)
+  const bars = (box, rows, fmt) => {
+    box.className = "trend";
+    const max = Math.max(...rows.map((r) => r.v), 1), last = rows.length - 1;
+    box.replaceChildren(...rows.map((r, i) => {
+      const b = document.createElement("div");
+      b.className = `bar${i === last ? " now" : ""}`;
+      const v = document.createElement("span"); v.className = "v"; v.textContent = fmt(r.v);
+      const bar = document.createElement("i"); bar.style.height = `${Math.round((r.v / max) * 44)}px`;
+      const d = document.createElement("span"); d.className = "d"; d.textContent = i === last ? "오늘" : `${+r.d.slice(5, 7)}/${+r.d.slice(8)}`;
+      b.append(v, bar, d);
+      return b;
+    }));
+  };
   const showStats = (s) => {
     try {
       const tp = Object.entries(TOPIC).filter(([k]) => s.topics[k]).map(([k, n]) => `${n} ${s.topics[k]}`).join(" · ");
       const lg = Object.entries(s.langs).sort((a, b) => b[1] - a[1]).map(([k, n]) => `${LANGN[k] || k} ${n}`).join(" · ");
-      setStat("subs", "", "📊", `알림 구독 ${s.total}명`, `${tp}\n${lg}`);
       const h = s.history || [], prev = h.length > 1 ? h[h.length - 2] : null;
-      $("subs").querySelector(".trend").textContent = h.length > 1
-        ? `최근: ${h.slice(-7).map((x) => `${x.d.slice(5).replace("-", "/")} ${x.n}`).join(" → ")}${prev ? ` (어제보다 ${s.total - prev.n >= 0 ? "+" : ""}${s.total - prev.n})` : ""}` : "오늘부터 날짜별로 기록해요";
+      setStat("subs", "", "📊", `알림 구독 ${s.total}명${prev ? ` (어제보다 ${s.total - prev.n >= 0 ? "+" : ""}${s.total - prev.n})` : ""}`, `${tp}\n${lg}`);
+      const st = $("subs").querySelector(".trend");
+      if (h.length > 1) bars(st, h.slice(-7).map((x) => ({ d: x.d, v: x.n })), String);
+      else { st.className = "trend note"; st.textContent = "오늘부터 날짜별로 기록해요"; }
       $("subs").hidden = $("subsSep").hidden = false;
       if (s.x && s.x.days) {  // X 사용량 추정: 글 읽기 $0.005 · 사용자 조회 $0.01 (하루 같은 글 중복 읽기는 실제론 안 셈 → 실제보다 조금 많게 나옴)
         const usd = (d) => d ? d.reads * 0.005 + d.users * 0.01 : 0;
@@ -252,13 +278,14 @@
         const t = s.x.days[today] || { reads: 0, users: 0 };
         if (s.x.err_at) setStat("xuse", "no", "⚠️", "X 크레딧 부족 — 수집·자동 글 멈춤", `${when(s.x.err_at)}부터 · console.x.com에서 충전해 주세요`);
         else setStat("xuse", "ok", "🐦", `X 오늘 약 $${usd(t).toFixed(2)}`, `글 ${t.reads}개 읽음 · 최근 7일 약 $${week.toFixed(2)} (추정, 실제 청구는 콘솔에서)`);
+        if (!s.x.err_at) bars($("xuse").querySelector(".trend"), days.slice(-7).map((k) => ({ d: k, v: usd(s.x.days[k]) })), (x) => `$${x.toFixed(1)}`);
         $("xuse").hidden = $("xuseSep").hidden = false;
       }
       if (s.visits && s.visits.days && s.visits.days.length) {  // 사이트 방문자 (Cloudflare Web Analytics, 1시간마다 갱신)
         const v = s.visits.days, today = v[v.length - 1], y = v.length > 1 ? v[v.length - 2] : null;
         const n = (x) => Number(x).toLocaleString();
         setStat("visits", "", "👀", `오늘 방문 ${n(today.v)}명`, `${y ? `어제 ${n(y.v)}명 · ` : ""}페이지뷰 오늘 ${n(today.pv)} · 최근 7일 ${n(v.slice(-7).reduce((a, x) => a + x.v, 0))}명`);
-        $("visits").querySelector(".trend").textContent = v.slice(-7).map((x) => `${x.d.slice(5).replace("-", "/")} ${n(x.v)}`).join(" → ");
+        bars($("visits").querySelector(".trend"), v.slice(-7).map((x) => ({ d: x.d, v: x.v })), n);
         $("visits").hidden = $("visitsSep").hidden = false;
       } else if (s.visits && s.visits.error) {
         setStat("visits", "no", "👀", "방문자 수를 못 불러왔어요", s.visits.error);
