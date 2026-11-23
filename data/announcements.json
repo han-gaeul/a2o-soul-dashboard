@@ -3175,6 +3175,14 @@
    "permalink": "https://x.com/Makestarcorp/status/2124019989317390428",
    "timestamp": "2026-11-21T06:00:02.000Z",
    "vendor": "Makestar"
+  },
+  "xv:2124774961953096126": {
+   "caption": "#A2O\n#A2OSOUL DEBUT ALBUM [SUPERSTAR] 대면 팬사인회 이벤트📢\n\n⏰마감 D-DAY⏰\n🌟PHOTOCARD PREVIEW🌟\n\n🩷응모자 전원 미공개 셀카 포토카드 증정\n🩷당첨자 전원 사인 포토카드 증정\n\n📅~ 26.11.23 23:59 (KST)\n🔗https://bit.ly/3V6u16Y https://x.com/Makestarcorp/status/2124774961953096126/photo/1 https://twitter.com/Makestarcorp/status/2124019989317390428\n\n[이미지]\njena\n1 [도\n8 rae\nan oais\nLeber Ale",
+   "excerpt": "#A2O\n#A2OSOUL DEBUT ALBUM [SUPERSTAR] 대면 팬사인회 이벤트📢\n\n⏰마감 D-DAY⏰\n🌟PHOTOCARD PREVIEW🌟\n\n🩷응모자 전원 미공개 셀카 포토카드 증정\n🩷당첨자 전원 사인 포토카드 증정\n\n📅~ 26.11.23 2",
+   "items": [],
+   "permalink": "https://x.com/Makestarcorp/status/2124774961953096126",
+   "timestamp": "2026-11-23T08:00:01.000Z",
+   "vendor": "Makestar"
   }
  },
  "rules_version": 13,
@@ -3195,8 +3203,8 @@
   }
  },
  "x_media": {
-  "at": "2026-11-23T16:50+09:00",
-  "auto_since": "2124771968138264577",
+  "at": "2026-11-23T17:00+09:00",
+  "auto_since": "2124774961953096126",
   "candidates": {},
   "checked": "2026-11-23T16:41+09:00",
   "missing": [],
@@ -3821,7 +3829,7 @@
   }
  },
  "x_vendors": {
-  "since_id": "2124019989317390428"
+  "since_id": "2124774961953096126"
  },
  "x_vote_tl": {
   "BIGCChoice": {
