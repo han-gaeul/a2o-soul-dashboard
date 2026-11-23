@@ -143,6 +143,66 @@
    "service": "멜론",
    "song": "Dancing in the Dark",
    "type": "HOT100"
+  },
+  {
+   "ranks": [],
+   "service": "Spotify 일간 스트리밍",
+   "song": "SUPERSTAR",
+   "streams": [
+    [
+     "2026-11-23",
+     194686
+    ]
+   ],
+   "type": ""
+  },
+  {
+   "ranks": [],
+   "service": "Spotify 일간 스트리밍",
+   "song": "Dancing in the Dark",
+   "streams": [
+    [
+     "2026-11-23",
+     324692
+    ]
+   ],
+   "type": ""
+  },
+  {
+   "ranks": [],
+   "service": "Spotify 일간 스트리밍",
+   "song": "While We’re Young",
+   "streams": [
+    [
+     "2026-11-23",
+     88964
+    ]
+   ],
+   "type": ""
+  },
+  {
+   "ranks": [],
+   "service": "Spotify 일간 스트리밍",
+   "song": "Very First Love (첫사랑)",
+   "streams": [
+    [
+     "2026-11-23",
+     65005
+    ]
+   ],
+   "type": ""
+  },
+  {
+   "ranks": [],
+   "service": "Spotify 일간 스트리밍",
+   "song": "Moonlight Shadow",
+   "streams": [
+    [
+     "2026-11-23",
+     53613
+    ]
+   ],
+   "type": ""
   }
  ],
  "collabs": [
@@ -13723,32 +13783,32 @@
  "show_fancams": [],
  "spotify": {
   "artist": "1sqWFSwBcJ6eunJRrCsmYb",
-  "date": "2026-11-22",
+  "date": "2026-11-23",
   "songs": [
    {
-    "daily": null,
+    "daily": 194686,
     "song": "SUPERSTAR",
-    "total": 10774147
+    "total": 10968833
    },
    {
-    "daily": null,
+    "daily": 324692,
     "song": "Dancing in the Dark",
-    "total": 3947635
+    "total": 4272327
    },
    {
-    "daily": null,
+    "daily": 88964,
     "song": "While We’re Young",
-    "total": 1001818
+    "total": 1090782
    },
    {
-    "daily": null,
+    "daily": 65005,
     "song": "Very First Love (첫사랑)",
-    "total": 884012
+    "total": 949017
    },
    {
-    "daily": null,
+    "daily": 53613,
     "song": "Moonlight Shadow",
-    "total": 764329
+    "total": 817942
    }
   ]
  },
