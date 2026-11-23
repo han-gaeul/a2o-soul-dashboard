@@ -3787,6 +3787,15 @@
     ],
     "note": "일본 · 수입반 온라인",
     "url": "https://tower.jp/artist/6440143"
+   },
+   {
+    "kind": "앨범",
+    "label": "KPOP Bestie (LA)",
+    "langs": [
+     "en"
+    ],
+    "note": "미국 LA 매장 · 메이크스타 특전 포함 · 버전당 $27.99",
+    "url": "https://www.instagram.com/kpopbestie_la/"
    }
   ],
   "show_live": [
@@ -15581,6 +15590,15 @@
    "pt": "Musicplant",
    "th": "Musicplant",
    "zh": "Musicplant"
+  },
+  "미국 LA 매장 · 메이크스타 특전 포함 · 버전당 $27.99": {
+   "en": "LA store, USA · includes MAKESTAR POB · $27.99 per version",
+   "es": "Tienda en LA, EE. UU. · incluye POB de MAKESTAR · $27.99 por versión",
+   "id": "Toko di LA, AS · termasuk POB MAKESTAR · $27.99 per versi",
+   "ja": "アメリカ・LA店舗 · MAKESTAR特典付き · 1形態 $27.99",
+   "pt": "Loja em LA, EUA · inclui POB da MAKESTAR · US$27,99 por versão",
+   "th": "ร้านที่ LA สหรัฐฯ · มีของแถม MAKESTAR · เวอร์ชันละ $27.99",
+   "zh": "美国洛杉矶门店 · 含 MAKESTAR 特典 · 每版 $27.99"
   },
   "미리 보내려면 프로그램 홈페이지 '사연과 신청곡' 게시판이나 공식 인스타 댓글·DM": {
    "en": "To send ahead of time: the program website's 'stories & requests' board, or comments/DMs on its official Instagram",
