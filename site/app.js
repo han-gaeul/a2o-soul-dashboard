@@ -867,7 +867,8 @@ if ("serviceWorker" in navigator) {
         b.addEventListener("click", () => showDetail(v));
         return b;
       }));
-      $("howto").append(el("div", { class: "wk" }, el("h3", { class: "wk-title" }, t("howto_voting")), grid, detail));
+      if ($("voteHowto")) { $("voteHowto").append(el("div", { class: "wk" }, grid, detail)); $("voteHowtoSec").hidden = false; }  // 투표 탭으로
+      else $("howto").append(el("div", { class: "wk" }, el("h3", { class: "wk-title" }, t("howto_voting")), grid, detail));
       showDetail(pick);
     }
     // 나머지 가이드: 아이콘 타일 → 누른 것만 펼치기
@@ -906,8 +907,9 @@ if ("serviceWorker" in navigator) {
     const sp = data.spotify;
     if (sp && (sp.songs || []).length) {
       const n = (x) => Number(x).toLocaleString(locale);
-      $("charts").append(el("div", { class: "sp-box" },
-        el("div", { class: "sp-head" }, el("b", {}, t("sp_title")), el("span", { class: "muted small" }, ` ${t("sp_asof", { d: sp.date.slice(5).replace("-", ".") })}`)),
+      const top = sp.songs[0];
+      $("charts").append(el("details", { class: "sp-box", ...(MOBILE ? {} : { open: "" }) },
+        el("summary", { class: "sp-head" }, el("b", {}, t("sp_title")), el("span", { class: "muted small" }, ` ${top.song} ${n(top.total)}${top.daily != null ? ` (+${n(top.daily)})` : ""} · ${t("sp_asof", { d: sp.date.slice(5).replace("-", ".") })}`)),
         el("table", { class: "sp-table" },
           el("thead", {}, el("tr", {}, el("th", {}, t("sp_song")), el("th", {}, t("sp_total")), el("th", {}, t("sp_daily")))),
           el("tbody", {}, ...sp.songs.map((x) => el("tr", {}, el("td", {}, x.song), el("td", {}, n(x.total)),
@@ -922,8 +924,10 @@ if ("serviceWorker" in navigator) {
       const hd = (sl.hanteo && sl.hanteo.days) || [];
       const max = Math.max(1, ...hd.map((x) => x.n));
       const wkLabel = (k) => { const [y, w] = k.split("-").map(Number); const j4 = new Date(Date.UTC(y, 0, 4)); const mon = new Date(j4.getTime() + ((w - 1) * 7 - ((j4.getUTCDay() + 6) % 7)) * 86400000); return `${mon.getUTCMonth() + 1}/${mon.getUTCDate()}~`; };
-      $("charts").append(el("div", { class: "sp-box sales-box" },
-        el("div", { class: "sp-head" }, el("b", {}, t("sales_title", { a: sl.album }))),
+      const hs = sl.hanteo || {};
+      $("charts").append(el("details", { class: "sp-box sales-box", ...(MOBILE ? {} : { open: "" }) },
+        el("summary", { class: "sp-head" }, el("b", {}, t("sales_title", { a: sl.album })),
+          el("span", { class: "muted small" }, hs.first_week ? ` ${t("sales_first")} ${n(hs.first_week)}` : (sl.circle || []).length ? ` ${t("sales_circle")} ${n(sl.circle[sl.circle.length - 1].sales)}` : "")),
         sl.hanteo && sl.hanteo.total ? el("p", { class: "sales-sum" },
           sl.hanteo.first_week ? el("span", {}, t("sales_first"), " ", el("b", {}, n(sl.hanteo.first_week))) : null,
           sl.hanteo.total !== sl.hanteo.first_week ? el("span", {}, ` · ${t("sales_total")} `, el("b", {}, n(sl.hanteo.total))) : null,
@@ -1391,6 +1395,7 @@ if ("serviceWorker" in navigator) {
   if (supports.length) {
     for (const x of supports) {
       const running = x.start <= todayKst;
+      $("supportsSec").hidden = false;
       $("supports").append(el("div", { class: "support" },
         el("div", {}, el("span", { class: `chip ${running ? "chip-on" : ""}` }, x.kind || "-"),
           el("b", {}, [x.member, x.title].filter(Boolean).join(" "))),
@@ -1399,7 +1404,7 @@ if ("serviceWorker" in navigator) {
         x.url ? ext(x.url, "↗") : null));
     }
   } else {
-    $("supports").append(empty(t("no_supports")));
+    $("supports").append(empty(t("no_supports")));  // 서포트 없으면 칸 자체를 숨김 (supportsSec hidden 그대로)
   }
 
   const icsUrl = new URL("data/calendar.ics", location.href).href;
@@ -1470,14 +1475,12 @@ if ("serviceWorker" in navigator) {
     const radio = rg && document.querySelector(`#howto .gd-tile[data-title="${CSS.escape(rg.title)}"]`);
     const tiles = [
       ["🎙", "prerec", "prerecSec", cnt("prerecs", ".vote"), true],
-      ["🗳", "votes", "#vote", cnt("votes", ".vt"), true],  // 투표는 따로 탭
-      ["🎧", "streaming", "streamSec"],
-      ["📣", "fanchants", "fanchantSec"],
+      ["📊", "cheer_now", "chartsSec"],
+      ["🎧", "cheer_stream", "streamSec"],
       ["📻", "cheer_radio", $("radioSec") || radio],
-      ["📖", "howto", "howtoSec"],
-      ["📊", "charts", "chartsSec"],
-      ["🎂", "supports", "supportsSec", cnt("supports", ".support"), true],
-      ["📅", "calendar", "calendarSec"],
+      ["📣", "cheer_chant", "fanchantSec"],
+      ["📚", "cheer_guide", "howtoSec"],
+      ...(($("supports") && $("supports").querySelector(".support")) ? [["🎂", "supports", "supportsSec", cnt("supports", ".support"), true]] : []),
     ];
     const items = tiles.map(([icon, key, target, n, counted]) => {
       const node = typeof target === "string" ? (target.startsWith("#") ? { hash: target } : $(target)) : target;
@@ -2662,7 +2665,8 @@ if ("serviceWorker" in navigator) {
     const fresh = $("noticeTab").querySelector(".tab-dot");
     $("moreList").replaceChildren(
       item("🗳", t("tab.vote"), () => go("vote")),
-      item("📢", t("tab.notice"), () => go("notice")), item("🎬", t("tab.mv"), () => go("mv")), item("🎥", t("tab.fancams"), () => go("fancams")),
+      item("📢", t("tab.notice"), () => go("notice")),
+      item("📅", t("calendar"), () => { go("notice"); setTimeout(() => $("calendarSec")?.scrollIntoView({ behavior: "smooth" }), 80); }), item("🎬", t("tab.mv"), () => go("mv")), item("🎥", t("tab.fancams"), () => go("fancams")),
       item("🔰", t("tab.guide"), () => go("guide")),
       item("🤝", t("tab.collab"), () => go("collab")),
       item("🔔", t("push_btn"), () => { more.close(); $("pushBtn").click(); }),

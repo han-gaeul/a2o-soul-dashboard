@@ -149,6 +149,11 @@
       </form>
       <div class="pcheck-out" id="pcheckOut" role="status"></div>
     </section>
+    <section class="card" id="calendarSec">
+      <h2 data-i18n="calendar">캘린더 구독</h2>
+      <p class="note" data-i18n="calendar_desc"></p>
+      <div class="links" id="calLinks"></div>
+    </section>
   </div>
 
   <div data-tab="cheer" hidden>
@@ -158,37 +163,32 @@
       <p class="note small" data-i18n="prerec_desc"></p>
       <div class="votes" id="prerecs"></div>
     </section>
+    <section class="card" id="chartsSec">
+      <h2 data-i18n="cheer_now">📊 지금 현황</h2>
+      <div id="charts"></div>
+    </section>
+    <section class="card" id="streamSec">
+      <h2 data-i18n="cheer_stream">🎧 스밍</h2>
+      <ol class="stream" id="streaming"></ol>
+    </section>
     <section class="card" id="radioSec">
       <h2 data-i18n="radio_title">📻 라디오 신청</h2>
       <p class="note small" data-i18n="radio_desc"></p>
       <div id="radio"></div>
     </section>
-    <section class="card" id="streamSec">
-      <h2 data-i18n="streaming">스밍 리스트</h2>
-      <ol class="stream" id="streaming"></ol>
-    </section>
     <section class="card" id="fanchantSec">
-      <h2 data-i18n="fanchants">응원법</h2>
+      <h2 data-i18n="cheer_chant">📣 응원법</h2>
       <div class="chant-guides" id="chantGuides"></div>
       <div class="videos" id="fanchants"></div>
     </section>
     <section class="card" id="howtoSec">
-      <h2 data-i18n="howto">스밍·투표 방법</h2>
+      <h2 data-i18n="cheer_guide">📚 가이드</h2>
       <div id="howto"></div>
       <p class="note small" id="howtoChecked"></p>
     </section>
-    <section class="card" id="chartsSec">
-      <h2 data-i18n="charts">음원 차트</h2>
-      <div id="charts"></div>
-    </section>
-    <section class="card" id="supportsSec">
+    <section class="card" id="supportsSec" hidden>
       <h2 data-i18n="supports">생일 카페 · 서포트</h2>
       <div class="supports" id="supports"></div>
-    </section>
-    <section class="card" id="calendarSec">
-      <h2 data-i18n="calendar">캘린더 구독</h2>
-      <p class="note" data-i18n="calendar_desc"></p>
-      <div class="links" id="calLinks"></div>
     </section>
   </div>
 
@@ -196,6 +196,10 @@
     <section class="card" id="votesSec">
       <h2 data-i18n="votes">투표</h2>
       <div class="vt-grid" id="votes"></div>
+    </section>
+    <section class="card" id="voteHowtoSec" hidden>
+      <h2 data-i18n="howto_voting">음방별 투표 앱</h2>
+      <div id="voteHowto"></div>
     </section>
   </div>
 
