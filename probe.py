@@ -1,20 +1,32 @@
-import re, json, requests
+import re, requests
+from playwright.sync_api import sync_playwright
 H = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36"}
-for ch in ["21", "22", "24", "25"]:
-    try:
-        r = requests.get(f"https://pprogramapi.kbs.co.kr/api/v1/external/program?page=1&page_size=100&rtype=json&program_ch_code={ch}&end_yn=n&station_code=00", headers=H, timeout=20)
-        j = r.json()
-        items = j.get("data") or j.get("items") or j
-        print("== KBS ch", ch, str(j)[:200] if not isinstance(items, list) else "")
-        if isinstance(items, list):
-            for it in items:
-                print("  ", it.get("program_code"), it.get("program_title"), it.get("program_url") or it.get("homepage_url"))
-    except Exception as e:
-        print("ERR", ch, e)
-r = requests.get("https://www.cbs.co.kr/radio/musicfm", headers=H, timeout=20)
-print("== CBS", r.status_code, set(re.findall(r"(cbs_P\d+)[^<]{0,80}?[\"'>]\s*([^<]{2,30})<", r.text)))
-for u in ["https://programs.sbs.co.kr/radio/cultwoshow/main", "https://programs.sbs.co.kr/radio/ycfm/main", "https://programs.sbs.co.kr/radio/king/main"]:
+for u in ["https://www.cbs.co.kr/program/playlist/cbs_P000011", "https://www.cbs.co.kr/schedule/radio"]:
     r = requests.get(u, headers=H, timeout=20)
-    print("== SBS", u, r.status_code, len(r.text), r.url)
-    for a in re.findall(r'href="([^"]+)"[^>]*>([^<]*선곡[^<]*)<', r.text): print("  A", a)
-    print("  API", set(re.findall(r"https?://[a-z.]*api[^\"' ]{0,120}", r.text)))
+    print("== CBS", u, r.status_code)
+    for code, name in sorted(set(re.findall(r"(cbs_P\d+)[^>]*>\s*(?:<[^>]+>\s*)*([^<]{2,40})<", r.text))):
+        print("  ", code, name.strip())
+with sync_playwright() as p:
+    b = p.chromium.launch()
+    for u in ["https://programs.sbs.co.kr/radio/cultwoshow/main"]:
+        pg = b.new_page(); seen = []
+        pg.on("response", lambda r: seen.append((r.url, r.headers.get("content-type", ""))))
+        try: pg.goto(u, wait_until="load", timeout=45000)
+        except Exception as e: print("goto", e)
+        pg.wait_for_timeout(6000)
+        print("== SBS", u)
+        for a in pg.query_selector_all("a"):
+            t = (a.inner_text() or "").strip(); h = a.get_attribute("href") or ""
+            if "선곡" in t or "music" in h.lower(): print("  A", t[:30], "|", h[:200])
+        links = [a.get_attribute("href") for a in pg.query_selector_all("a") if "선곡" in (a.inner_text() or "")]
+        if links:
+            seen.clear()
+            l = links[0]
+            try: pg.goto(l if l.startswith("http") else "https://programs.sbs.co.kr" + l, wait_until="load", timeout=45000)
+            except Exception as e: print("goto2", e)
+            pg.wait_for_timeout(6000)
+            print("  URL", pg.url)
+            for url, ct in seen:
+                if "json" in ct or "api" in url: print("  XHR", url[:250])
+            print("  TEXT", re.sub(r"\s+", " ", pg.inner_text("body"))[:1500])
+    b.close()
