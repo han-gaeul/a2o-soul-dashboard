@@ -754,9 +754,9 @@ window.I18N = {
 // 국내 음원 차트 칸
 (() => {
   const V = {
-    ko: { kc_title: "🇰🇷 국내 음원 차트", kc_now: "지금 순위 ({h}시)", kc_rank: "위", kc_out: "지금은 차트 밖이에요", kc_genie: "지니 재생", kc_like: "멜론 좋아요",
+    ko: { kc_title: "🇰🇷 국내 음원 차트", kc_now: "{h}시 기준 · ▲▼는 어제(써클은 지난주)와 비교", kc_counts: "누적 재생·좋아요 (지니·멜론)", kc_rank: "위", kc_out: "차트 밖", kc_genie: "지니 재생", kc_like: "멜론 좋아요",
       kc_src: "멜론 TOP100·HOT100·일간, 지니 TOP200, 벅스, FLO는 1시간마다 · 지니 재생·멜론 좋아요는 하루 한 번 · 써클 디지털·스트리밍 주간 순위는 아래 그래프에" },
-    en: { kc_title: "🇰🇷 Korean music charts", kc_now: "Now ({h}:00 KST)", kc_rank: "", kc_out: "Not on the charts right now", kc_genie: "Genie plays", kc_like: "Melon likes",
+    en: { kc_title: "🇰🇷 Korean music charts", kc_now: "As of {h}:00 KST · ▲▼ vs yesterday (Circle: last week)", kc_counts: "Total plays & likes (Genie · Melon)", kc_rank: "", kc_out: "Not charting", kc_genie: "Genie plays", kc_like: "Melon likes",
       kc_src: "Melon TOP100/HOT100/daily, Genie TOP200, Bugs, FLO checked hourly · Genie plays & Melon likes daily · Circle digital/streaming weekly in the graphs below" },
   };
   for (const [l, v] of Object.entries(V)) if (window.I18N[l]) Object.assign(window.I18N[l], v);
