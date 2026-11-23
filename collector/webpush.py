@@ -150,10 +150,11 @@ def candidates(dash, site, now):
                 "end_real": end.strftime("%H:%M"), "post": e.get("url") or "", "url": site + "#cheer", "with": e.get("with") or "",
                 "draft_only": True}
         key = f"{'sg' if kind == 'stream' else 'cb'}|{e['date']}|{e['time']}|{e['title']}"
-        if -timedelta(minutes=20) <= st - now <= timedelta(hours=1, minutes=10):  # 시작 전
-            out.append((key, "show", kind, base))
-        elif st + timedelta(minutes=30) <= now <= end - timedelta(minutes=30):  # 진행 중 (시작 30분 뒤 ~ 끝나기 30분 전)
-            out.append((key + "|live", "show", kind, {**base, "now": True}))
+        # fallback_at: 그때까지 tweet.html에서 올리기·건너뛰기를 안 하면 워커가 자동으로 올림 (자는 시간 대비)
+        if -timedelta(minutes=20) <= st - now <= timedelta(hours=1, minutes=10):  # 시작 전 → 시작 10분 전 자동
+            out.append((key, "show", kind, {**base, "fallback_at": int((st - timedelta(minutes=10)).timestamp() * 1000)}))
+        elif st + timedelta(minutes=30) <= now <= end - timedelta(minutes=30):  # 진행 중 (시작 30분 뒤 ~ 끝나기 30분 전) → 20분 뒤 자동
+            out.append((key + "|live", "show", kind, {**base, "now": True, "fallback_at": int((now + timedelta(minutes=20)).timestamp() * 1000)}))
     for n in dash.get("nominees") or []:  # 음방 1위 후보 — 방송 당일, 방송 끝나기 전까지
         tm = air.get(n["show"]) or ""
         end = _kst(f"{n['date']} {tm or '23:00'}") + timedelta(hours=1)
@@ -360,7 +361,7 @@ def tweet_image(kind, data, site):
 def drafts(api, priv, new, site):
     """새 알림 후보 → 트윗 초안을 Worker에 저장. 저장된 개수를 돌려줌."""
     # 팬 계정이 주최하는 행사(credit 있음)는 초안 안 만듦 — 그쪽 공지를 리트윗하는 게 맞음
-    items = [{"key": key, "kind": kind, "text": tweet_text(kind, data), "auto": kind in AUTO_POST, **({"rt": True} if data.get("rt") else {}), **({"post_at": data["post_at"]} if data.get("post_at") else {}),
+    items = [{"key": key, "kind": kind, "text": tweet_text(kind, data), "auto": kind in AUTO_POST, **({"rt": True} if data.get("rt") else {}), **({"post_at": data["post_at"]} if data.get("post_at") else {}), **({"fallback_at": data["fallback_at"]} if data.get("fallback_at") else {}),
               **({"image": tweet_image(kind, data, site)} if tweet_image(kind, data, site) else {})}
              for key, topic, kind, data in new
              if kind not in ("notice",) and not data.get("credit") and not data.get("no_draft")]  # 음원 총공(stream)은 초안만 — 공지 링크를 붙여서 만듦

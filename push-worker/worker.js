@@ -481,7 +481,7 @@ async function postScheduled(env) {
   await env.SUBS.put("_tw_sched", JSON.stringify(rest));
   for (const x of due) {
     const rec = await env.SUBS.get(`_tw:${x.id}`, "json");
-    if (!rec || rec.status !== "scheduled") continue;
+    if (!rec || rec.status !== (x.fb ? "pending" : "scheduled")) continue;  // fb: 안 보면 자동 — 그때까지 올리기·건너뛰기 안 했을 때만
     try { rec.tweet = await postTweet(env, rec.text, rec.image); Object.assign(rec, { status: "posted", auto: true, posted: Date.now() }); }
     catch (e) { rec.status = "pending"; rec.error = String(e.message || e).slice(0, 200); }  // 실패하면 초안으로
     await env.SUBS.put(`_tw:${x.id}`, JSON.stringify(rec), { expirationTtl: 3 * 86400 });
@@ -574,6 +574,11 @@ async function tweets(req, env, url) {
       } else if (d.auto && canPost) {  // 확실한 정보(일정·생일·조회수)는 확인 없이 바로 올림 — 실패하면 초안으로 남김
         try { rec.tweet = await postTweet(env, rec.text, rec.image); rec.status = "posted"; rec.auto = true; rec.posted = Date.now(); posted++; }
         catch (e) { rec.error = String(e.message || e).slice(0, 200); }
+      }
+      if (rec.status === "pending" && canPost && Number(d.fallback_at) > 0) {  // 총공·콜라보: 확인 못 하면 이 시각에 자동으로 올림
+        rec.fallback_at = Math.max(Number(d.fallback_at), Date.now() + 60e3);
+        const q = (await env.SUBS.get("_tw_sched", "json")) || [];
+        q.push({ id, at: rec.fallback_at, fb: true }); await env.SUBS.put("_tw_sched", JSON.stringify(q));
       }
       await env.SUBS.put(`_tw:${id}`, JSON.stringify(rec), { expirationTtl: 3 * 86400 });
       if (rec.status === "pending") added++;
