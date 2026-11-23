@@ -568,6 +568,9 @@ def media_feed(cfg, state, limit=40, keep_video=False):
             continue
         text = re.sub(r"\s*https://(t\.co/\w+|x\.com/\S+/photo/\d)\s*$", "", (m.get("caption") or "").strip())
         # 영상 글은 다른 칸에 있음: 인스타 릴스 링크(→ 인스타 릴스 칸), 유튜브 링크·직캠 홍보·X 영상(→ 영상 목록)
+        # 여러 가수 출연자 목록 글(방송 라인업·배포 안내)은 A2O SOUL 글이 아님 — 구분자(／ , 、)가 8개 이상이면 빼기
+        if re.search(r"出演|출연자|라인업|LINE-?UP", text, re.I) or len(re.findall(r"[／/、,，]", text)) >= 8:
+            continue
         if not keep_video and (IG_REEL.search(text) or re.search(r"youtu\.?be|직캠|FANCAM|Choreo|🖥", text, re.I) or m.get("video")):
             continue
         imgs = (m.get("images") or [])[:4]
