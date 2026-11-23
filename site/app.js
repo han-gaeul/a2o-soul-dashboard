@@ -1462,6 +1462,13 @@ if ("serviceWorker" in navigator) {
       const onAir = wd >= 1 && wd <= 5 ? progs.filter((x) => x.start && x.end && x.start <= hm && hm < x.end) : [];
       if (onAir.length) box.append(el("div", { class: "rd-today rd-live" }, el("b", {}, t("radio_live")),
         ...onAir.map((x) => el("span", { class: "chip" }, `${x.name} · ${x.station}`))));
+      // 선곡표에서 찾은 최근 방송 (collector/radio.py, 최근 30일)
+      const plays = data.radio_plays || [];
+      if (plays.length) box.append(el("div", { class: "rd-played" }, el("b", {}, t("radio_played")),
+        el("ul", {}, ...plays.slice(0, 6).map((p) => el("li", {},
+          el("span", { class: "rd-time" }, `${+p.date.slice(5, 7)}/${+p.date.slice(8)}${p.time ? ` ${p.time}` : ""}`), " ",
+          p.url ? ext(p.url, `${p.station} ${p.program}`) : `${p.station} ${p.program}`,
+          el("span", { class: "muted" }, ` · ${p.song}`))))));
       const todayRest = today.filter((x) => !onAir.includes(x));  // 지금 방송 중인 건 위에 이미 보여서 빼기
       if (todayRest.length) box.append(el("div", { class: "rd-today" }, el("b", {}, t("radio_today")),
         ...todayRest.map((x) => el("span", { class: "chip" }, `${x.name} · ${x.station}${x.start ? ` ${x.start}` : ""}`))));

@@ -1124,6 +1124,9 @@ body:not([data-cur="overview"]) .hs-switch, .hs-switch[hidden] { display: none; 
 /* 라디오 신청 */
 .rd-today { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 10px 0 4px; font-size: 13px; }
 .rd-today b { margin-right: 4px; }
+.rd-played { margin: 10px 0 4px; font-size: 13px; }
+.rd-played ul { list-style: none; padding: 0; margin: 6px 0 0; display: grid; gap: 4px; }
+.rd-played .rd-time { font-variant-numeric: tabular-nums; }
 .rd-make { margin-top: 12px; padding: 14px; border: 1px solid var(--line); border-radius: 14px; display: grid; gap: 10px; }
 .rd-make h3, #radioSec h3 { margin: 0; font-size: 15px; }
 #radioSec > div > h3 { margin: 16px 0 8px; }

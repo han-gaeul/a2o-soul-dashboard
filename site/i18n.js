@@ -743,3 +743,10 @@ window.I18N = {
     fil: ["🔴 Live ngayon", "Oras sa weekdays (KST); maaaring iba tuwing weekend."], vi: ["🔴 Đang phát sóng", "Giờ ngày thường (KST); cuối tuần có thể khác."] };
   for (const [l, [a, b]] of Object.entries(V)) if (window.I18N[l]) Object.assign(window.I18N[l], { radio_live: a, radio_wkday: b });
 })();
+
+// 라디오: 선곡표에서 찾은 최근 방송
+(() => {
+  const V = { ko: "📻 최근 라디오에 나왔어요", en: "📻 Recently played on radio", ja: "📻 最近ラジオで流れた曲", zh: "📻 最近电台播放", es: "📻 Sonó hace poco en la radio",
+    id: "📻 Baru diputar di radio", th: "📻 เพิ่งเปิดในวิทยุ", pt: "📻 Tocou recentemente no rádio", fil: "📻 Kamakailang tinugtog sa radyo", vi: "📻 Mới được phát trên radio" };
+  for (const [l, v] of Object.entries(V)) if (window.I18N[l]) window.I18N[l].radio_played = v;
+})();

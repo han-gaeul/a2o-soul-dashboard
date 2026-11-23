@@ -1340,6 +1340,14 @@ def collect(cfg, rescan=False):
                                      "likes": m.get("like_count"), "comments": m.get("comments_count")}
                 registry["ig_media_reels"][u] = sorted(keep.values(), key=lambda m: m.get("timestamp") or "", reverse=True)[:30]
                 print(f"[IG 매체] {u}: 최근 {len(media)}개 중 A2O SOUL 릴스 {len(hits)}개")
+    # 라디오 선곡표에서 A2O SOUL 곡 찾기 — 3시간마다 (어제·오늘)
+    try:
+        import radio
+        chk = radio.load().get("checked")
+        if not chk or now - datetime.fromisoformat(chk) >= timedelta(hours=3):
+            radio.run()
+    except Exception as e:  # noqa: BLE001
+        print(f"[라디오] 실패: {str(e)[:120]}")
     # 앨범 판매량 (써클 주간 공식 + 한터 일차별) — 6시간마다
     try:
         import sales
@@ -2129,6 +2137,7 @@ def build(cfg):
         "reels": ig_reels(registry, mfeed),
         "spotify": spotify_summary(),
         "sales": __import__("sales").summary(),
+        "radio_plays": __import__("radio").summary(),
         "official_x": [{"url": m["permalink"], "at": kst_datetime(m["timestamp"])}
                        for k, m in sorted((load_json("announcements.json", {}).get("posts") or {}).items(), key=lambda kv: kv[1].get("timestamp") or "", reverse=True)
                        if k.startswith("x:") and "/a2o_soul/status/" in (m.get("permalink") or "").lower() and m.get("timestamp")][:20],
