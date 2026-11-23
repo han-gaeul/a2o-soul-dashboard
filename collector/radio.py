@@ -43,25 +43,27 @@ def _get(url, **kw):
 def kbs(days):
     out = []
     for ch, station in KBS_CH.items():
-        progs = _get(f"https://pprogramapi.kbs.co.kr/api/v1/external/program?page=1&page_size=100&rtype=json&program_ch_code={ch}&end_yn=n&station_code=00").json()
-        progs = {p["program_code"]: p.get("program_title") or "" for p in (progs.get("data") or progs.get("items") or []) if p.get("program_code")}
+        progs_j = _get(f"https://pprogramapi.kbs.co.kr/api/v1/external/program?page=1&page_size=100&rtype=json&program_ch_code={ch}&end_yn=n&station_code=00").json()
+        progs = {}
+        for p in (progs_j.get("data") or progs_j.get("items") or []):
+            m = p.get("program_code") or (re.search(r"open_program/([A-Z]\d{4}-\d{4})", json.dumps(p)) or [None, None])[1]
+            if m:
+                progs[m] = p.get("program_title") or p.get("title") or ""
         codes = ",".join(progs)
+        want = {d.strftime("%Y%m%d") for d in days}
         for d in days:
-            page = 1
-            while page <= 10:
+            for page in range(1, 30):  # 한 쪽에 40곡씩
                 j = _get("https://kong2017.kbs.co.kr/api/mobile/select_song_list",
-                         params={"program_code": codes, "rtype": "json", "request_date": d.strftime("%Y%m%d"), "page": page, "page_size": 200}).json()
+                         params={"program_code": codes, "rtype": "json", "request_date": d.strftime("%Y%m%d"), "page": page, "page_size": 40}).json()
                 items = j.get("items") or []
                 for it in items:
-                    if ARTIST.search(it.get("artist") or ""):
-                        ts = it.get("timestamp") or ""
-                        out.append({"date": f"{ts[:4]}-{ts[4:6]}-{ts[6:8]}" if len(ts) >= 8 else d.isoformat(),
-                                    "time": f"{ts[8:10]}:{ts[10:12]}" if len(ts) >= 12 else "",
+                    ts = it.get("timestamp") or ""
+                    if ts[:8] in want and ARTIST.search(it.get("artist") or ""):
+                        out.append({"date": f"{ts[:4]}-{ts[4:6]}-{ts[6:8]}", "time": f"{ts[8:10]}:{ts[10:12]}",
                                     "station": station, "program": progs.get(it.get("program_code"), ""),
                                     "song": it.get("song_title") or "", "artist": it.get("artist") or ""})
-                if len(items) < 200:
+                if not items or not any(str(it.get("timestamp", ""))[:8] >= d.strftime("%Y%m%d") for it in items):
                     break
-                page += 1
     return out
 
 
