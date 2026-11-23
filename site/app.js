@@ -915,7 +915,32 @@ if ("serviceWorker" in navigator) {
         sp.songs.every((x) => x.daily == null) ? el("p", { class: "muted small" }, t("sp_first")) : null,
         sp.artist ? ext(`https://open.spotify.com/artist/${sp.artist}`, "Spotify ↗") : null));
     }
-    if ((data.charts || []).length || sp) {
+    // 앨범 판매량: 한터 일차별(초동) + 써클 주간 (공식)
+    const sl = data.sales;
+    if (sl) {
+      const n = (x) => Number(x).toLocaleString(locale);
+      const hd = (sl.hanteo && sl.hanteo.days) || [];
+      const max = Math.max(1, ...hd.map((x) => x.n));
+      const wkLabel = (k) => { const [y, w] = k.split("-").map(Number); const j4 = new Date(Date.UTC(y, 0, 4)); const mon = new Date(j4.getTime() + ((w - 1) * 7 - ((j4.getUTCDay() + 6) % 7)) * 86400000); return `${mon.getUTCMonth() + 1}/${mon.getUTCDate()}~`; };
+      $("charts").append(el("div", { class: "sp-box sales-box" },
+        el("div", { class: "sp-head" }, el("b", {}, t("sales_title", { a: sl.album }))),
+        sl.hanteo && sl.hanteo.total ? el("p", { class: "sales-sum" },
+          sl.hanteo.first_week ? el("span", {}, t("sales_first"), " ", el("b", {}, n(sl.hanteo.first_week))) : null,
+          sl.hanteo.total !== sl.hanteo.first_week ? el("span", {}, ` · ${t("sales_total")} `, el("b", {}, n(sl.hanteo.total))) : null,
+          el("span", { class: "muted small" }, " (Hanteo)")) : null,
+        hd.length ? el("div", { class: "sales-bars", role: "img", "aria-label": hd.map((x) => `${x.date.slice(5)} ${n(x.n)}`).join(", ") },
+          ...hd.map((x) => el("div", { class: "sb", title: `${x.date.slice(5).replace("-", "/")} · ${n(x.n)}` },
+            el("span", { class: "sb-n" }, x.n >= 10000 ? `${(x.n / 10000).toFixed(1)}만` : n(x.n)),
+            el("i", { style: `height:${Math.max(4, Math.round((x.n / max) * 64))}px` }),
+            el("span", { class: "sb-d" }, x.date.slice(5).replace("-", "/"))))) : null,
+        (sl.circle || []).length ? el("table", { class: "sp-table" },
+          el("thead", {}, el("tr", {}, el("th", {}, t("sales_circle")), el("th", {}, t("sales_rank")), el("th", {}, t("sales_sales")))),
+          el("tbody", {}, ...sl.circle.map((x) => el("tr", {}, el("td", {}, wkLabel(x.week)), el("td", {}, x.rank ? `#${x.rank}` : "—"), el("td", {}, n(x.sales)))))) : null,
+        el("p", { class: "muted small" }, t("sales_src")),
+        sl.hanteo && sl.hanteo.post ? ext(sl.hanteo.post, "Hanteo ↗") : null,
+        ext("https://circlechart.kr/page_chart/album.circle?nationGbn=T&serviceGbn=ALL&termGbn=week", "Circle Chart ↗")));
+    }
+    if ((data.charts || []).length || sp || sl) {
       for (const c of data.charts || []) {
         if (c.streams && c.streams.length) {  // 재생 수 차트 (Spotify 일간 등)
           const sl = c.streams[c.streams.length - 1], sp = c.streams[c.streams.length - 2];

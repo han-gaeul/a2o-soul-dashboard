@@ -1164,3 +1164,13 @@ html:not([lang="ko"]) .vt-t { -webkit-line-clamp: 3; font-size: 13px; overflow-w
 
 /* 영상 탭: 인스타 릴스 — 세로 썸네일 */
 .reels-grid .reel-thumb { aspect-ratio: 9 / 12; }
+
+/* 차트 칸: 앨범 판매량 (일차별 막대) */
+.sales-sum { margin: 4px 0 8px; }
+.sales-sum b { font-size: 18px; }
+.sales-bars { display: flex; align-items: flex-end; gap: 6px; height: 110px; padding: 6px 0; }
+.sales-bars .sb { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; min-width: 0; }
+.sales-bars .sb i { display: block; width: 100%; max-width: 34px; border-radius: 6px 6px 2px 2px; background: var(--accent, #7c4dff); }
+.sales-bars .sb-n { font-size: 11px; margin-bottom: 3px; white-space: nowrap; }
+.sales-bars .sb-d { font-size: 11px; color: var(--muted, #888); margin-top: 3px; }
+.sales-box a + a { margin-left: 12px; }
