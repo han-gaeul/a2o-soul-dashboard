@@ -167,6 +167,9 @@ def candidates(dash, site, now):
         if x.get("at") and timedelta(0) <= now - _kst(x["at"]) < timedelta(hours=3):
             out.append((f"rt|{u}", "media", "media", {"name": "A2O SOUL", "title": (x.get("text") or "[📸]").strip()[:100], "url": u,
                                                      "members": [], "rt": True}))
+    for x in dash.get("official_x") or []:  # @A2O_SOUL 글 전부 (링크·영상·공지 포함, 3시간 안) — 바로 리트윗 (사진 글과 같은 키라 중복 없음)
+        if x.get("at") and timedelta(0) <= now - _kst(x["at"]) < timedelta(hours=3) and f"rt|{x['url']}" not in {o[0] for o in out}:
+            out.append((f"rt|{x['url']}", "media", "media", {"name": "A2O SOUL", "title": "공식", "url": x["url"], "members": [], "rt": True}))
     for x in dash.get("vote_wins") or []:  # 투표 앱·방송사의 A2O SOUL 투표 글 전부 (6시간 안 — 투표 검색이 평소 3시간마다) — 바로 리트윗
         if x.get("at") and timedelta(0) <= now - _kst(x["at"]) < timedelta(hours=6):
             out.append((f"rt|{x['url']}", "media", "media", {"name": x.get("by") or "", "title": "투표", "url": x["url"], "members": [], "rt": True}))

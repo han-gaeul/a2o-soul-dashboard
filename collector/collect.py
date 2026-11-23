@@ -2115,6 +2115,9 @@ def build(cfg):
         "media_posts": (mfeed := media_feed(cfg, media_state)),
         "reels": ig_reels(registry, mfeed),
         "spotify": spotify_summary(),
+        "official_x": [{"url": m["permalink"], "at": kst_datetime(m["timestamp"])}
+                       for k, m in sorted((load_json("announcements.json", {}).get("posts") or {}).items(), key=lambda kv: kv[1].get("timestamp") or "", reverse=True)
+                       if k.startswith("x:") and "/a2o_soul/status/" in (m.get("permalink") or "").lower() and m.get("timestamp")][:20],
         "vote_wins": vote_wins(load_json("announcements.json", {})),
         "show_fancams": sorted(({"url": m["permalink"], "at": kst_datetime(m["timestamp"]), "by": m.get("author_name") or m.get("author")}
                                  for m in ((load_json("announcements.json", {}).get("x_show_photos") or {}).get("fancams") or {}).values()
