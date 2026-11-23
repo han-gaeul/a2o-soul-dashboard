@@ -56,7 +56,7 @@ def _admin_token(priv_b64):
     return f"{head}.{body}.{_b64u(r.to_bytes(32, 'big') + s.to_bytes(32, 'big'))}"
 
 
-def alert_admin(api, priv, title, body):
+def alert_admin(api, priv, title, body, tag="x-credit"):
     """초안 알림(tweet)을 켠 관리자 기기에만 푸시."""
     from pywebpush import webpush
     subs = requests.get(api.rstrip("/") + "/subs", headers={"Authorization": f"Bearer {_admin_token(priv)}"}, timeout=20).json()
@@ -64,7 +64,7 @@ def alert_admin(api, priv, title, body):
         if "tweet" in (s.get("topics") or []):
             try:
                 webpush(subscription_info=s["sub"], data=json.dumps({"title": title, "body": body, "url": "https://a2osoul-tracker.com/tweet.html",
-                        "tag": "x-credit"}, ensure_ascii=False), vapid_private_key=priv, vapid_claims={"sub": "https://a2osoul-tracker.com"}, ttl=6 * 3600, timeout=15)
+                        "tag": tag}, ensure_ascii=False), vapid_private_key=priv, vapid_claims={"sub": "https://a2osoul-tracker.com"}, ttl=6 * 3600, timeout=15)
             except Exception as e:  # noqa: BLE001
                 print(f"[X] 관리자 알림 실패: {type(e).__name__}")
 
@@ -380,7 +380,33 @@ def drafts(api, priv, new, site):
         return 0
 
 
+def posted_alert(push, priv):
+    """워커가 자동으로 올린 트윗(바로·예약·안 보면 자동) → 관리자 기기에 '올렸어요' 알림"""
+    if not (priv and push.get("api")):
+        return
+    try:
+        r = requests.post(push["api"].rstrip("/") + "/tweet/notes", json={}, timeout=20, headers={"Authorization": f"Bearer {_admin_token(priv)}"})
+        notes = r.json().get("notes") or [] if r.ok else []
+    except Exception as e:  # noqa: BLE001
+        print(f"[트윗] 올린 글 확인 실패: {type(e).__name__}")
+        return
+    if not notes:
+        return
+    print(f"[트윗] 자동으로 올린 글 {len(notes)}개 → 관리자 알림")
+    title = "⚡ 트윗 자동으로 올렸어요" + (f" ({len(notes)}개)" if len(notes) > 1 else "")
+    alert_admin(push["api"], priv, title, "\n".join(n.get("text") or "" for n in notes[-3:]), tag="tweet-posted")
+
+
 def run(dash, cfg, state, site="https://a2osoul-tracker.com/"):
+    state = _run(dash, cfg, state, site)
+    try:
+        posted_alert(cfg.get("push") or {}, os.environ.get("VAPID_PRIVATE_KEY"))
+    except Exception as e:  # noqa: BLE001
+        print(f"[트윗] 올림 알림 실패: {type(e).__name__}")
+    return state
+
+
+def _run(dash, cfg, state, site="https://a2osoul-tracker.com/"):
     """state: {'sent': [...]} — 바뀐 state를 돌려줌."""
     push = cfg.get("push") or {}
     priv = os.environ.get("VAPID_PRIVATE_KEY")

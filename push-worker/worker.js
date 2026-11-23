@@ -472,6 +472,13 @@ async function siteVisits(env) {
   } catch (e) { return { error: String(e.message || e).slice(0, 120) }; }
 }
 
+// 자동으로 올린 트윗 기록 → 수집기가 /tweet/notes로 가져가 관리자에게 "올렸어요" 알림 (리트윗은 많아서 뺌)
+async function noteAuto(env, rec) {
+  const q = (await env.SUBS.get("_tw_note", "json")) || [];
+  q.push({ id: rec.id, kind: rec.kind, text: (rec.text || "").split("\n")[0].slice(0, 100), tweet: rec.tweet, at: Date.now() });
+  await env.SUBS.put("_tw_note", JSON.stringify(q.slice(-30)));
+}
+
 // 예약된 트윗 중 시각이 된 것 올리기 (_tw_sched: [{id, at}])
 async function postScheduled(env) {
   const q = (await env.SUBS.get("_tw_sched", "json")) || [];
@@ -482,7 +489,7 @@ async function postScheduled(env) {
   for (const x of due) {
     const rec = await env.SUBS.get(`_tw:${x.id}`, "json");
     if (!rec || rec.status !== (x.fb ? "pending" : "scheduled")) continue;  // fb: 안 보면 자동 — 그때까지 올리기·건너뛰기 안 했을 때만
-    try { rec.tweet = await postTweet(env, rec.text, rec.image); Object.assign(rec, { status: "posted", auto: true, posted: Date.now() }); }
+    try { rec.tweet = await postTweet(env, rec.text, rec.image); Object.assign(rec, { status: "posted", auto: true, posted: Date.now() }); await noteAuto(env, rec); }
     catch (e) { rec.status = "pending"; rec.error = String(e.message || e).slice(0, 200); }  // 실패하면 초안으로
     await env.SUBS.put(`_tw:${x.id}`, JSON.stringify(rec), { expirationTtl: 3 * 86400 });
   }
@@ -572,7 +579,7 @@ async function tweets(req, env, url) {
         const q = (await env.SUBS.get("_tw_sched", "json")) || [];
         q.push({ id, at: rec.post_at }); await env.SUBS.put("_tw_sched", JSON.stringify(q));
       } else if (d.auto && canPost) {  // 확실한 정보(일정·생일·조회수)는 확인 없이 바로 올림 — 실패하면 초안으로 남김
-        try { rec.tweet = await postTweet(env, rec.text, rec.image); rec.status = "posted"; rec.auto = true; rec.posted = Date.now(); posted++; }
+        try { rec.tweet = await postTweet(env, rec.text, rec.image); rec.status = "posted"; rec.auto = true; rec.posted = Date.now(); posted++; await noteAuto(env, rec); }
         catch (e) { rec.error = String(e.message || e).slice(0, 200); }
       }
       if (rec.status === "pending" && canPost && Number(d.fallback_at) > 0) {  // 총공·콜라보: 확인 못 하면 이 시각에 자동으로 올림
@@ -584,6 +591,12 @@ async function tweets(req, env, url) {
       if (rec.status === "pending") added++;
     }
     return json(req, { ok: true, added, posted });
+  }
+  if (req.method === "POST" && p === "/tweet/notes") { // 수집기(GitHub Actions)만 — 자동으로 올린 트윗 목록 가져가고 비움
+    if (!(await isAdmin(req, env))) return json(req, { error: "forbidden" }, 403);
+    const q = (await env.SUBS.get("_tw_note", "json")) || [];
+    if (q.length) await env.SUBS.put("_tw_note", "[]");
+    return json(req, { notes: q });
   }
   if (req.method === "POST" && p === "/tweet/xstat") { // 수집기(GitHub Actions)만 — X 사용량 하루치 합산
     if (!(await isAdmin(req, env))) return json(req, { error: "forbidden" }, 403);
