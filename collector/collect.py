@@ -1386,7 +1386,8 @@ def collect(cfg, rescan=False):
         for username in cfg["x"]:
             st = xstate.setdefault(username, {})
             try:
-                st.setdefault("id", xposts.user_id(username))
+                if not st.get("id"):  # setdefault는 인자를 매번 계산해서 사용자 조회($0.01)가 매번 나갔음
+                    st["id"] = xposts.user_id(username)
                 posts = xposts.fetch_posts(st["id"], username, since_id=st.get("since_id"))
             except Exception as e:  # noqa: BLE001
                 print(f"[공지] X @{username} 조회 실패: {e}")
@@ -1656,7 +1657,8 @@ def collect(cfg, rescan=False):
             for u in cfg["x_vote_accounts"]:
                 st = vst.setdefault(u, {})
                 try:
-                    st.setdefault("id", xposts.user_id(u))
+                    if not st.get("id"):  # setdefault는 인자를 매번 계산해서 사용자 조회($0.01)가 매번 나갔음
+                        st["id"] = xposts.user_id(u)
                     posts = xposts.fetch_posts(st["id"], u, since_id=st.get("since_id"), first_limit=10)
                 except Exception as e:  # noqa: BLE001
                     print(f"[투표 이미지] @{u} 조회 실패: {str(e)[:100]}")
@@ -1689,7 +1691,8 @@ def collect(cfg, rescan=False):
         for username in cfg["x_fans"]:
             st = fstate.setdefault(username, {})
             try:
-                st.setdefault("id", xposts.user_id(username))
+                if not st.get("id"):  # setdefault는 인자를 매번 계산해서 사용자 조회($0.01)가 매번 나갔음
+                    st["id"] = xposts.user_id(username)
                 posts = xposts.fetch_posts(st["id"], username, since_id=st.get("since_id"))
             except Exception as e:  # noqa: BLE001
                 print(f"[공지] X 팬 계정 @{username} 조회 실패: {e}")
@@ -1705,7 +1708,8 @@ def collect(cfg, rescan=False):
         for username in cfg["x_stream"]:
             st = sst.setdefault(username, {})
             try:
-                st.setdefault("id", xposts.user_id(username))
+                if not st.get("id"):  # setdefault는 인자를 매번 계산해서 사용자 조회($0.01)가 매번 나갔음
+                    st["id"] = xposts.user_id(username)
                 posts = xposts.fetch_posts(st["id"], username, since_id=st.get("since_id"), first_limit=30)
             except Exception as e:  # noqa: BLE001
                 print(f"[총공] X @{username} 조회 실패: {e}")
