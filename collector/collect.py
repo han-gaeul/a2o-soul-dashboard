@@ -432,7 +432,8 @@ def photo_feed(cfg, registry, store, limit=600):
     return out[:limit]
 
 
-SHOW_PHOTO_SKIP = re.compile(r"라인업|LINE-?UP|Cheer\s*Up|응원\s*(메시지|메세지|광고)|이벤트|리워드|EVENT|REWARD|MESSAGE|광고|투표|VOTE|VOTING|순위|RANKING|중간\s*집계", re.I)
+SHOW_PHOTO_SKIP = re.compile(r"라인업|LINE-?UP|Cheer\s*Up|응원\s*(메시지|메세지|광고)|이벤트|리워드|EVENT|REWARD|MESSAGE|광고|투표|VOTE|VOTING|순위|RANKING|중간\s*집계"
+                             r"|직캠|FANCAM|Choreo|youtu\.?be|▶|🖥", re.I)  # 영상 홍보 글(썸네일)은 사진이 아님
 
 
 def show_photo_ok(cfg, post):
