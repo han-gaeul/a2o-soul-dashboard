@@ -189,7 +189,7 @@
   // 올릴 초안: 편집 카드
   const card = (d) => {
     if (d.kind === "media") return rtCard(d);
-    const ta = document.createElement("textarea"); ta.value = d.text;
+    const ta = document.createElement("textarea"); ta.value = d.text; ta.dataset.orig = d.text;
     const cnt = document.createElement("span"); cnt.className = "cnt";
     const fit = () => { ta.style.height = "auto"; ta.style.height = ta.scrollHeight + 2 + "px"; }; // 글 길이에 맞춰 높이
     const upd = () => { const w = weight(ta.value); cnt.textContent = `${w}/280`; cnt.classList.toggle("over", w > 280); fit(); };
@@ -381,6 +381,13 @@
   api = "https://push.a2osoul-tracker.com";
   vapid = "BPszmnnzF5KS8DntczISNMfwY2etOSx_oX7L38hORWSCX_mfJE2MzKSKralQ_Y3NcK1osX-iEArij0qscPlj1YU";
   if ($("key").value) { $("login").hidden = true; msg("불러오는 중…"); load(); }
+  // 다른 기기(폰↔PC)에서 올리거나 버린 게 바로 반영되게: 이 탭으로 돌아올 때 + 보고 있는 동안 1분마다 다시 불러오기
+  //   고치고 있는 초안이 있으면(글을 바꿨거나 입력 중) 덮어쓰지 않게 건너뜀
+  const editing = () => [...document.querySelectorAll("textarea")].some((t) => t === document.activeElement || t.value !== t.dataset.orig);
+  const refresh = () => { if (document.visibilityState === "visible" && $("login").hidden && !editing()) load(); };
+  document.addEventListener("visibilitychange", refresh);
+  window.addEventListener("focus", refresh);
+  setInterval(refresh, 60000);
 })();
 </script>
 </body>
