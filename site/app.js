@@ -313,7 +313,7 @@ if ("serviceWorker" in navigator) {
 
   const EV_GROUPS = [["all", "ev_all"], ["show", "ev_show_g"], ["anniv", "ev_anniv_g"], ["etc", "ev_etc_g"]];
   let evGroup = pref.get("evGroup", "all");
-  let evView = pref.get("evView", "list");  // 목록이 기본, 달력은 버튼으로
+  let evView = pref.get("evView", "cal");  // 달력이 기본
   const todayD = new Date(`${todayKst}T00:00:00Z`);
   let calY = todayD.getUTCFullYear(), calM = todayD.getUTCMonth() + 1, calSel = todayKst;
   let calFold = pref.get("calFold", true);
