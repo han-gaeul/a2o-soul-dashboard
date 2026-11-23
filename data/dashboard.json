@@ -127,6 +127,10 @@
     [
      "2026-11-19",
      76
+    ],
+    [
+     "2026-11-23",
+     83
     ]
    ],
    "service": "멜론",
@@ -138,11 +142,61 @@
     [
      "2026-11-19",
      82
+    ],
+    [
+     "2026-11-23",
+     99
     ]
    ],
    "service": "멜론",
    "song": "Dancing in the Dark",
    "type": "HOT100"
+  },
+  {
+   "ranks": [
+    [
+     "2026-10-24",
+     101
+    ],
+    [
+     "2026-10-31",
+     109
+    ],
+    [
+     "2026-11-07",
+     149
+    ],
+    [
+     "2026-11-14",
+     163
+    ]
+   ],
+   "service": "써클",
+   "song": "SUPERSTAR",
+   "type": "디지털 주간"
+  },
+  {
+   "ranks": [
+    [
+     "2026-10-24",
+     110
+    ],
+    [
+     "2026-10-31",
+     114
+    ],
+    [
+     "2026-11-07",
+     158
+    ],
+    [
+     "2026-11-14",
+     187
+    ]
+   ],
+   "service": "써클",
+   "song": "SUPERSTAR",
+   "type": "스트리밍 주간"
   },
   {
    "ranks": [],
@@ -4024,84 +4078,122 @@
  },
  "kcharts": {
   "checked": "2026-11-23T16:21+09:00",
-  "counts": {
-   "Dancing in the Dark": {
-    "멜론 좋아요": {
-     "daily": null,
-     "total": 3533
+  "songs": [
+   {
+    "counts": {
+     "멜론 좋아요": {
+      "daily": null,
+      "total": 7918
+     },
+     "지니 재생": {
+      "daily": null,
+      "total": 499136
+     },
+     "지니 청취자": {
+      "daily": null,
+      "total": 49970
+     }
     },
-    "지니 재생": {
-     "daily": null,
-     "total": 135639
-    },
-    "지니 청취자": {
-     "daily": null,
-     "total": 16494
-    }
+    "ranks": [
+     {
+      "chart": "멜론 HOT100",
+      "prev": null,
+      "rank": 83
+     },
+     {
+      "chart": "써클 디지털 주간",
+      "prev": 149,
+      "rank": 163,
+      "week": "2026-46"
+     },
+     {
+      "chart": "써클 스트리밍 주간",
+      "prev": 158,
+      "rank": 187,
+      "week": "2026-46"
+     }
+    ],
+    "song": "SUPERSTAR"
    },
-   "Moonlight Shadow": {
-    "멜론 좋아요": {
-     "daily": null,
-     "total": 1297
+   {
+    "counts": {
+     "멜론 좋아요": {
+      "daily": null,
+      "total": 3533
+     },
+     "지니 재생": {
+      "daily": null,
+      "total": 135639
+     },
+     "지니 청취자": {
+      "daily": null,
+      "total": 16494
+     }
     },
-    "지니 재생": {
-     "daily": null,
-     "total": 27285
-    },
-    "지니 청취자": {
-     "daily": null,
-     "total": 3218
-    }
+    "ranks": [
+     {
+      "chart": "멜론 HOT100",
+      "prev": null,
+      "rank": 99
+     }
+    ],
+    "song": "Dancing in the Dark"
    },
-   "SUPERSTAR": {
-    "멜론 좋아요": {
-     "daily": null,
-     "total": 7918
+   {
+    "counts": {
+     "멜론 좋아요": {
+      "daily": null,
+      "total": 1388
+     },
+     "지니 재생": {
+      "daily": null,
+      "total": 34017
+     },
+     "지니 청취자": {
+      "daily": null,
+      "total": 3853
+     }
     },
-    "지니 재생": {
-     "daily": null,
-     "total": 499136
-    },
-    "지니 청취자": {
-     "daily": null,
-     "total": 49970
-    }
+    "ranks": [],
+    "song": "While We're Young"
    },
-   "Very First Love": {
-    "멜론 좋아요": {
-     "daily": null,
-     "total": 1237
+   {
+    "counts": {
+     "멜론 좋아요": {
+      "daily": null,
+      "total": 1237
+     },
+     "지니 재생": {
+      "daily": null,
+      "total": 30641
+     },
+     "지니 청취자": {
+      "daily": null,
+      "total": 3531
+     }
     },
-    "지니 재생": {
-     "daily": null,
-     "total": 30641
-    },
-    "지니 청취자": {
-     "daily": null,
-     "total": 3531
-    }
+    "ranks": [],
+    "song": "Very First Love"
    },
-   "While We're Young": {
-    "멜론 좋아요": {
-     "daily": null,
-     "total": 1388
+   {
+    "counts": {
+     "멜론 좋아요": {
+      "daily": null,
+      "total": 1297
+     },
+     "지니 재생": {
+      "daily": null,
+      "total": 27285
+     },
+     "지니 청취자": {
+      "daily": null,
+      "total": 3218
+     }
     },
-    "지니 재생": {
-     "daily": null,
-     "total": 34017
-    },
-    "지니 청취자": {
-     "daily": null,
-     "total": 3853
-    }
+    "ranks": [],
+    "song": "Moonlight Shadow"
    }
-  },
-  "live": {
-   "멜론 HOT100": {
-    "Dancing in the Dark": 99,
-    "SUPERSTAR": 83
-   }
-  }
+  ]
  },
  "kpis": [
   {
