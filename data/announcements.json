@@ -7,7 +7,7 @@
   "xo:2124389920030789779||❤️‍🔥11월 넷째 주 핫스테이지의 주인공은?❤️‍🔥"
  ],
  "ig_media": {
-  "at": "2026-11-23T14:21+09:00",
+  "at": "2026-11-23T15:01+09:00",
   "sig": "myidol_miim,1thek,stonemusicent,kbskpop,a2o.story,studio_choom"
  },
  "posts": {
@@ -3195,8 +3195,8 @@
   }
  },
  "x_media": {
-  "at": "2026-11-23T14:50+09:00",
-  "auto_since": "2124739756265456018",
+  "at": "2026-11-23T15:01+09:00",
+  "auto_since": "2124743679080567268",
   "candidates": {},
   "checked": "2026-11-22T16:40+09:00",
   "missing": [],
@@ -3402,9 +3402,20 @@
     "permalink": "https://x.com/yes24_official/status/2124691721984643108",
     "timestamp": "2026-11-23T02:29:16.000Z",
     "video": false
+   },
+   "2124744877045125283": {
+    "author": "myidolmiim",
+    "author_name": "miim miim",
+    "caption": "[EXCLUSIVE] A2O SOUL 타이의 아기돼지 삼형제 🐺\n\n아기 늑대 타이의 등장 💗\n타이라면 언제든 환영입니다 💘\n\n🔗 https://www.instagram.com/reel/DgEr7X7B_mp\n\n✔️ 밈 팔로우 하고 A2O SOUL 독점 콘텐츠 미리 보기 😁\n\n#A2OSOUL #에이투오소울 #A2O\n#타이 #TAI\n#MIIM #마이밈 #KPOP https://x.com/myidolmiim/status/2124744877045125283/photo/1",
+    "images": [
+     "https://pbs.twimg.com/media/HXycNCUb0AAqjjG.jpg"
+    ],
+    "permalink": "https://x.com/myidolmiim/status/2124744877045125283",
+    "timestamp": "2026-11-23T06:00:29.000Z",
+    "video": false
    }
   },
-  "since_id": "2124416067544219917"
+  "since_id": "2124744877045125283"
  },
  "x_official_votes": {
   "at": "2026-11-23T13:10+09:00",
@@ -3487,6 +3498,13 @@
   "A2OSOUL_STREAM": {
    "id": "2122910820325847040",
    "posts": [
+    {
+     "caption": "🌝DANCING IN THE DARK🕺\n▶️Melon 스밍/다운로드총공 안내🔄\n📆2026.11.23. 15:00-16:00\n(음원점수 반영-스밍40%/다운60%)\n\nhttps://muzip.link/V4DxIT\n(플레이리스트 공유)",
+     "images": [],
+     "permalink": "https://x.com/A2OSOUL_STREAM/status/2124744252098060703",
+     "timestamp": "2026-11-23T05:58:00.000Z",
+     "tweet_id": "2124744252098060703"
+    },
     {
      "caption": "🌝DANCING IN THE DARK🕺\n▶️Melon 스밍/다운로드총공 안내🔄\n📆2026.11.23. 11:30-13:30\n(음원점수 반영-스밍40%/다운60%)\n\nhttps://muzip.link/V4DxIT",
      "images": [],
@@ -3797,18 +3815,9 @@
      "permalink": "https://x.com/A2OSOUL_STREAM/status/2123352035395539075",
      "timestamp": "2026-11-19T09:45:49.000Z",
      "tweet_id": "2123352035395539075"
-    },
-    {
-     "caption": "⭐️🌝DANCING IN THE DARK🕺✨\n\n▶️Melon 스밍/다운 총공 안내🔄\n📆2026.11.20. 17:30-19:00\n(음원점수 반영-스밍40%/다운60%)\n*상세주의사항은 이미지 참고*\n\n직장인들 많이 들을 시간대니 힘내요.\n소울이들 핫100 말고\n멜론 탑100 들여보내줍시다🌚🌛\n\nhttps://muzip.link/V4DxIT\n(플레이리스트 공유) https://x.com/A2OSOUL_STREAM/status/2123332701054988363/photo/1",
-     "images": [
-      "https://pbs.twimg.com/media/HXePWcNacAAis8n.jpg"
-     ],
-     "permalink": "https://x.com/A2OSOUL_STREAM/status/2123332701054988363",
-     "timestamp": "2026-11-19T08:29:00.000Z",
-     "tweet_id": "2123332701054988363"
     }
    ],
-   "since_id": "2124691655492305071"
+   "since_id": "2124744252098060703"
   }
  },
  "x_vendors": {
@@ -3835,7 +3844,7 @@
    "id": "1556541258696622080",
    "since_id": "2124714556916212172"
   },
-  "at": "2026-11-23T14:21+09:00",
+  "at": "2026-11-23T15:01+09:00",
   "coogoong": {
    "id": "1549266721516978176",
    "since_id": "2124384884311589210"
@@ -3854,7 +3863,7 @@
   },
   "muniverse_io": {
    "id": "1912737786052112386",
-   "since_id": "2124729908962169329"
+   "since_id": "2124744762687402104"
   },
   "myloveidol_kpop": {
    "id": "2999130457",
@@ -3862,7 +3871,7 @@
   },
   "twt_my1pick": {
    "id": "1139074639374704641",
-   "since_id": "2124703249097982137"
+   "since_id": "2124740682741055602"
   }
  }
 }
