@@ -106,6 +106,14 @@ if ("serviceWorker" in navigator) {
   };
   const kstFmt = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Seoul" });
   const todayKst = kstFmt.format(new Date()); // YYYY-MM-DD
+  // 기기 수 세기: 이 기기에서 하루 한 번 '왔어요'만 보냄 (처음 온 기기면 new) — 아이디·개인 정보 없음 (개인정보처리방침)
+  try {
+    if (localStorage.getItem("dv_day") !== todayKst && /a2osoul-tracker\.com$/.test(location.hostname)) {
+      const isNew = !localStorage.getItem("dv_first");
+      fetch("https://push.a2osoul-tracker.com/hit", { method: "POST", headers: { "Content-Type": "text/plain" }, body: JSON.stringify({ new: isNew ? 1 : 0 }), keepalive: true })
+        .then((r) => { if (r.ok) { localStorage.setItem("dv_day", todayKst); if (isNew) localStorage.setItem("dv_first", todayKst); } }).catch(() => {});
+    }
+  } catch (_) { /* 저장 공간 막힘 등 */ }
   const nat = (s) => (s || "").split("·").map((x) => (t("nat")[x] || x)).join("·");
   // 내용 번역 (translations.yml): 한국어 원문 그대로 키, 없으면 원문
   let TR = {};
