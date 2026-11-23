@@ -53,7 +53,6 @@
     <a href="#collab" data-i18n="tab.collab">콜라보</a>
     <a href="#mv" data-i18n="tab.mv">MV</a>
     <a href="#members" data-i18n="tab.members">멤버</a>
-    <a href="#fancams" data-i18n="tab.fancams">직캠</a>
     <a href="#videos" data-i18n="tab.videos">영상</a>
     <a href="#guide" data-i18n="tab.guide">가이드</a>
     <a href="#community" data-i18n="tab.community">커뮤니티</a>
@@ -254,17 +253,6 @@
   </div>
 
   <!-- 직캠 -->
-  <div data-tab="fancams" hidden>
-    <section class="card" id="cmpSec">
-      <h2 data-i18n="cmp_open">직캠 나란히 보기</h2>
-      <p class="note small" data-i18n="cmp_pick_desc"></p>
-      <select id="cmpEp" class="sel cmp-ep"></select>
-    </section>
-    <section class="card">
-      <h2 data-i18n="latest_fancams">멤버별 최신 직캠</h2>
-      <div class="members" id="members"></div>
-    </section>
-  </div>
 
   <!-- 영상 아카이브 -->
   <div data-tab="videos" hidden>
@@ -273,6 +261,15 @@
       <h2 data-i18n="episodes">음방 회차별 무대</h2>
       <p class="note small" data-i18n="episodes_desc"></p>
       <div id="episodes"></div>
+    </section>
+    <section class="card" id="cmpSec">
+      <h2 data-i18n="cmp_open">직캠 나란히 보기</h2>
+      <p class="note small" data-i18n="cmp_pick_desc"></p>
+      <select id="cmpEp" class="sel cmp-ep"></select>
+    </section>
+    <section class="card" id="fancamSec">
+      <h2 data-i18n="latest_fancams">멤버별 최신 직캠</h2>
+      <div class="members" id="members"></div>
     </section>
     <section class="card" id="reelsSec" hidden>
       <h2 data-i18n="reels">📱 인스타 릴스</h2>

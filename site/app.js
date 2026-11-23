@@ -127,11 +127,11 @@ if ("serviceWorker" in navigator) {
   const kstDate = (s) => new Date(`${s.replace(" ", "T")}${s.length > 10 ? ":00" : "T00:00:00"}+09:00`); // "YYYY-MM-DD[ HH:MM]" KST
 
   // ---------- 탭 ----------
-  const tabs = ["overview", "notice", "cheer", "vote", "collab", "mv", "members", "fancams", "videos", "guide", "community"];
+  const tabs = ["overview", "notice", "cheer", "vote", "collab", "mv", "members", "videos", "guide", "community"];
   const drawn = new Set();
   const drawers = {};
   // 공유 링크: #member/MOON → 멤버 탭, #ep/날짜/방송 → 영상 탭, #cmp/날짜/방송/A/B → 직캠 탭
-  const ROUTE_TAB = { member: "members", ep: "videos", cmp: "fancams", post: "community" };
+  const ROUTE_TAB = { member: "members", ep: "videos", cmp: "videos", fancams: "videos", post: "community" };  // 직캠 탭은 영상 탭으로 합침
   const route = () => decodeURIComponent(location.hash.slice(1)).split("/");
   function showTab() {
     const [head] = route();
@@ -145,6 +145,7 @@ if ("serviceWorker" in navigator) {
       if (on) a.scrollIntoView({ block: "nearest", inline: "nearest" });
     });
     if (!drawn.has(cur) && drawers[cur] && window.Chart) { drawn.add(cur); drawers[cur](); }
+    if (head === "fancams") setTimeout(() => $("fancamSec")?.scrollIntoView({ behavior: "smooth" }), 80);  // 예전 #fancams 링크 → 영상 탭 직캠 칸
   }
   window.addEventListener("hashchange", () => { showTab(); openRoute(); });
   let openRoute = () => {};
@@ -1306,15 +1307,22 @@ if ("serviceWorker" in navigator) {
   // ---------- 영상 탭: 인스타 릴스 (공식 + 매체가 X에 건 릴스 링크) ----------
   const reels = data.reels || [];
   if (reels.length) {
-    let who = "";
+    let who = "", reelLimit = 12;  // 처음엔 12개만, '더 보기'로 12개씩
     const names = [...new Set(reels.map((x) => x.by))];
     const drawReels = () => {
       $("reelsAccts").replaceChildren(...(names.length > 1 ? ["", ...names] : []).map((n) => {
         const b = el("button", { type: "button", class: n === who ? "on" : "", "aria-pressed": String(n === who) }, n || t("ev_all"));
-        b.addEventListener("click", () => { who = n; drawReels(); });
+        b.addEventListener("click", () => { who = n; reelLimit = 12; drawReels(); });
         return b;
       }));
-      $("reels").replaceChildren(...reels.filter((x) => !who || x.by === who).map((x) => {
+      const shown = reels.filter((x) => !who || x.by === who);
+      $("reelsMore")?.remove();
+      if (shown.length > reelLimit) {
+        const mb = el("button", { type: "button", class: "more", id: "reelsMore" }, `${t("more")} (${shown.length - reelLimit})`);
+        mb.addEventListener("click", () => { reelLimit += 12; drawReels(); });
+        $("reels").after(mb);
+      }
+      $("reels").replaceChildren(...shown.slice(0, reelLimit).map((x) => {
         const iso = kstDate(x.at).toISOString();
         let thumb = null;
         if (x.thumb) {
@@ -1988,7 +1996,7 @@ if ("serviceWorker" in navigator) {
   $("cmpClose").addEventListener("click", () => cmpDlg.close());
   cmpDlg.addEventListener("close", () => {
     $("cmpBody").replaceChildren(); // 닫으면 재생 멈춤
-    if (route()[0] === "cmp") history.replaceState(null, "", "#fancams");
+    if (route()[0] === "cmp") history.replaceState(null, "", "#videos");
   });
   function openCompare(ep, cams, pre = []) {
     $("cmpTitle").replaceChildren(`${ep.date.slice(5).replace("-", ".")} ${tc(ep.show)}`,
@@ -2666,7 +2674,7 @@ if ("serviceWorker" in navigator) {
     $("moreList").replaceChildren(
       item("🗳", t("tab.vote"), () => go("vote")),
       item("📢", t("tab.notice"), () => go("notice")),
-      item("📅", t("calendar"), () => { go("notice"); setTimeout(() => $("calendarSec")?.scrollIntoView({ behavior: "smooth" }), 80); }), item("🎬", t("tab.mv"), () => go("mv")), item("🎥", t("tab.fancams"), () => go("fancams")),
+      item("📅", t("calendar"), () => { go("notice"); setTimeout(() => $("calendarSec")?.scrollIntoView({ behavior: "smooth" }), 80); }), item("🎬", t("tab.mv"), () => go("mv")),
       item("🔰", t("tab.guide"), () => go("guide")),
       item("🤝", t("tab.collab"), () => go("collab")),
       item("🔔", t("push_btn"), () => { more.close(); $("pushBtn").click(); }),
