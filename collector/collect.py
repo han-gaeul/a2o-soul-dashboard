@@ -898,10 +898,10 @@ def build_timeline(cfg, videos, episodes, subs=()):
         firsts[ep["show"]] = min(firsts.get(ep["show"], ep["date"]), ep["date"])
     for show, d in firsts.items():
         items.append({"date": d, "kind": "show", "title": f"첫 {show} 무대", "key": "tl_first_show", "show": show})
-    ms = view_milestones()
     for v in videos:
         if v["category"] != "mv":
             continue
+        ms = view_milestones(v["id"])
         pts = v["points"]
         for (_, a), (d, b) in zip(pts, pts[1:]):
             for m in ms:
@@ -947,12 +947,16 @@ def build_timeline(cfg, videos, episodes, subs=()):
 
 # ---------- 돌파 기준 ----------
 
-def view_milestones():
+# 한 번만 따로 챙기는 돌파 기준 (영상 ID → 조회수) — 지난 총공 목표였던 Dancing in the Dark 450만
+EXTRA_VIEW_MILESTONES = {"JPJokqIoIJI": [4_500_000]}
+
+
+def view_milestones(vid=None):
     ms = [100_000, 500_000]
     ms += [n * 1_000_000 for n in range(1, 10)]
     ms += [n * 10_000_000 for n in range(1, 10)]
     ms += [n * 100_000_000 for n in range(1, 21)]
-    return ms
+    return sorted(set(ms + EXTRA_VIEW_MILESTONES.get(vid, [])))
 
 
 def subscriber_milestones():
@@ -1266,7 +1270,7 @@ def collect(cfg, rescan=False):
             if age <= timedelta(hours=NEW_VIDEO_ALERT_HOURS):
                 events.append(f"🆕 새 영상 {label}\n{url}")
         if cat in ("mv", "fancam"):
-            m = crossed(prev, d["views"], view_milestones())
+            m = crossed(prev, d["views"], view_milestones(vid))
             if m:
                 events.append(f"🎉 {label} 조회수 {kr_num(m)} 돌파!\n{url}")
     for vid in sorted(ids - set(found)):
