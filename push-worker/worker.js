@@ -709,10 +709,12 @@ export default {
       // 나눠 보기: 기기 종류(모바일·PC·태블릿) · 나라(Cloudflare가 아는 접속 나라 코드) — 날짜별 숫자만
       const type = ["mobile", "pc", "tablet"].includes(b && b.type) ? b.type : "etc";
       const cc = String((req.cf && req.cf.country) || "XX").slice(0, 2);
+      // 앱(홈 화면에 추가해서 연 것) · 웹(브라우저) · 인앱(카톡·인스타 등 앱 안 브라우저)
+      const mode = ["app", "web", "kakao", "instagram", "line", "naver", "facebook", "inapp"].includes(b && b.mode) ? b.mode : "web";
       const split = (k) => env.DB.prepare("INSERT INTO dev_split (day, k, n) VALUES (?, ?, 1) ON CONFLICT(day, k) DO UPDATE SET n = n + 1").bind(day, k);
       const all = () => env.DB.batch([
         env.DB.prepare("INSERT INTO devices (day, active, fresh) VALUES (?, 1, ?) ON CONFLICT(day) DO UPDATE SET active = active + 1, fresh = fresh + excluded.fresh").bind(day, b && b.new ? 1 : 0),
-        split("type:" + type), split("cc:" + cc)]);
+        split("type:" + type), split("cc:" + cc), split("mode:" + mode)]);
       try { await all(); } catch (_) {
         await env.DB.batch([
           env.DB.prepare("CREATE TABLE IF NOT EXISTS devices (day TEXT PRIMARY KEY, active INTEGER DEFAULT 0, fresh INTEGER DEFAULT 0)"),

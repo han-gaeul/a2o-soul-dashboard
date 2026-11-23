@@ -290,7 +290,10 @@
         const sp = s.devices.today || {}, pct = (k) => today.active ? Math.round(((sp[k] || 0) / today.active) * 100) : 0;
         const ccs = Object.entries(sp).filter(([k]) => k.startsWith("cc:")).sort((a, b) => b[1] - a[1]).slice(0, 6)
           .map(([k, c]) => { try { return `${new Intl.DisplayNames(["ko"], { type: "region" }).of(k.slice(3))} ${c}`; } catch (_) { return `${k.slice(3)} ${c}`; } });
-        $("devs").querySelector("small").textContent += `\n오늘: 모바일 ${pct("type:mobile")}% · PC ${pct("type:pc")}% · 태블릿 ${pct("type:tablet")}%${ccs.length ? `\n나라: ${ccs.join(" · ")}` : ""}`;
+        const MODE = { app: "앱(홈 화면)", web: "브라우저", kakao: "카톡", instagram: "인스타", line: "라인", naver: "네이버", facebook: "페북", inapp: "기타 앱 안" };
+        const modes = Object.entries(sp).filter(([k]) => k.startsWith("mode:")).sort((a, b) => b[1] - a[1]).map(([k, c]) => `${MODE[k.slice(5)] || k.slice(5)} ${pct(k)}%`);
+        $("devs").querySelector("small").textContent += `\n오늘: 모바일 ${pct("type:mobile")}% · PC ${pct("type:pc")}% · 태블릿 ${pct("type:tablet")}%`
+          + (modes.length ? `\n여는 곳: ${modes.join(" · ")}` : "") + (ccs.length ? `\n나라: ${ccs.join(" · ")}` : "");
         bars($("devs").querySelector(".trend"), v.slice(-7).map((x) => ({ d: x.day, v: x.active })), n);
         $("devs").hidden = $("devsSep").hidden = false;
       }

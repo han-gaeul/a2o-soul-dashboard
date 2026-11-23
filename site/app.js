@@ -111,6 +111,9 @@ if ("serviceWorker" in navigator) {
     if (localStorage.getItem("dv_day") !== todayKst && /a2osoul-tracker\.com$/.test(location.hostname)) {
       const isNew = !localStorage.getItem("dv_first");
       fetch("https://push.a2osoul-tracker.com/hit", { method: "POST", headers: { "Content-Type": "text/plain" }, body: JSON.stringify({ new: isNew ? 1 : 0,
+        mode: window.matchMedia("(display-mode: standalone)").matches || navigator.standalone ? "app"
+          : /KAKAOTALK/i.test(navigator.userAgent) ? "kakao" : /Instagram/i.test(navigator.userAgent) ? "instagram" : /\bLine\//i.test(navigator.userAgent) ? "line"
+          : /NAVER\(inapp/i.test(navigator.userAgent) ? "naver" : /FBAN|FBAV/i.test(navigator.userAgent) ? "facebook" : /; wv\)|Twitter/i.test(navigator.userAgent) ? "inapp" : "web",
         type: /iPad|Tablet/i.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1) ? "tablet" : /Mobi|Android|iPhone/i.test(navigator.userAgent) ? "mobile" : "pc" }), keepalive: true })
         .then((r) => { if (r.ok) { localStorage.setItem("dv_day", todayKst); if (isNew) localStorage.setItem("dv_first", todayKst); } }).catch(() => {});
     }
