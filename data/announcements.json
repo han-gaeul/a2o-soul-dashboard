@@ -3188,8 +3188,8 @@
   }
  },
  "x_media": {
-  "at": "2026-11-23T11:20+09:00",
-  "auto_since": "2124689252164264256",
+  "at": "2026-11-23T11:30+09:00",
+  "auto_since": "2124691760983179308",
   "candidates": {},
   "checked": "2026-11-22T16:40+09:00",
   "missing": [],
@@ -3380,6 +3380,21 @@
     "permalink": "https://x.com/myidolmiim/status/2124416067544219917",
     "timestamp": "2026-11-22T08:13:54.000Z",
     "video": false
+   },
+   "2124691721984643108": {
+    "author": "yes24_official",
+    "author_name": "예스24",
+    "auto": true,
+    "caption": "데이즈드 앤 컨퓨즈드 코리아 : 무비에디션 [2026]\n\n* 예약판매 : https://t.co/c2KipCXRmA\n* 표지 : 변우석 (A~F형 커버, 총6종)\n* 부록 : 김윤식 커버\n* 주요기사 : A2O SOUL, 최예나\n\n#변우석 #ByeonWooSeok",
+    "images": [
+     "https://pbs.twimg.com/media/HXxrd_zaYAAGt-S.jpg",
+     "https://pbs.twimg.com/media/HXxreWWbsAA2Oyx.jpg",
+     "https://pbs.twimg.com/media/HXxrewpa8AAZXts.jpg",
+     "https://pbs.twimg.com/media/HXxrfMIbEAAS_LW.jpg"
+    ],
+    "permalink": "https://x.com/yes24_official/status/2124691721984643108",
+    "timestamp": "2026-11-23T02:29:16.000Z",
+    "video": false
    }
   },
   "since_id": "2124416067544219917"
@@ -3465,6 +3480,13 @@
   "A2OSOUL_STREAM": {
    "id": "2122910820325847040",
    "posts": [
+    {
+     "caption": "🌝DANCING IN THE DARK🕺\n▶️Melon 스밍/다운로드총공 안내🔄\n📆2026.11.23. 11:30-13:30\n(음원점수 반영-스밍40%/다운60%)\n\nhttps://muzip.link/V4DxIT",
+     "images": [],
+     "permalink": "https://x.com/A2OSOUL_STREAM/status/2124691655492305071",
+     "timestamp": "2026-11-23T02:29:00.000Z",
+     "tweet_id": "2124691655492305071"
+    },
     {
      "caption": "🌝DANCING IN THE DARK🕺\n▶️Melon 스밍/다운로드총공 안내🔄\n📆2026.11.21. 23:00-26:00\n(음원점수 반영-스밍40%/다운60%)\n새벽 시간 정말 중요합니다..! \n주말 밤도 함께 Dancing in the dark해요! \n\nhttps://muzip.link/V4DxIT https://x.com/A2OSOUL_STREAM/status/2124502912202047502/photo/1",
      "images": [
@@ -3777,16 +3799,9 @@
      "permalink": "https://x.com/A2OSOUL_STREAM/status/2123332701054988363",
      "timestamp": "2026-11-19T08:29:00.000Z",
      "tweet_id": "2123332701054988363"
-    },
-    {
-     "caption": "🚨🚨 스밍 독려 공지 🚨🚨\n\n현재 에이투오소울 음원 순위가 계속 90위권에 머물러 있습니다‼️\n\n순위를 더 끌어올리기 위해서는 여러분의 꾸준한 스밍이 정말 중요합니다. 잠깐이라도 좋으니 시간 날 때마다 스밍 부탁드립니다🙏\n\n지금 바로 스밍 달려주세요!!! 🏃‍♀️💨\n\n#에이투오소울 #A2OSOUL #스밍총공",
-     "images": [],
-     "permalink": "https://x.com/A2OSOUL_STREAM/status/2123321105431842966",
-     "timestamp": "2026-11-19T07:42:55.000Z",
-     "tweet_id": "2123321105431842966"
     }
    ],
-   "since_id": "2124502912202047502"
+   "since_id": "2124691655492305071"
   }
  },
  "x_vendors": {
