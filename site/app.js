@@ -943,21 +943,21 @@ if ("serviceWorker" in navigator) {
       const chg = (x) => x.prev == null ? null : x.prev === x.rank ? el("span", { class: "muted" }, "–")
         : el("span", { class: x.prev > x.rank ? "up" : "down" }, `${x.prev > x.rank ? "▲" : "▼"}${Math.abs(x.prev - x.rank)}`);
       const best = kc.songs.flatMap((s_) => s_.ranks.filter((x) => !/주간/.test(x.chart)).map((x) => ({ ...x, song: s_.song }))).sort((a, b) => a.rank - b.rank)[0];
-      const cell = (v) => v ? el("td", {}, n(v.total), v.daily != null ? el("span", { class: "up small" }, ` +${n(v.daily)}`) : null) : el("td", { class: "muted" }, "—");
       $("charts").append(el("details", { class: "sp-box kc-box", ...(MOBILE ? {} : { open: "" }) },
         el("summary", { class: "sp-head" }, el("b", {}, t("kc_title")),
           el("span", { class: "muted small" }, best ? ` ${best.song} · ${best.chart} ${best.rank}${t("kc_rank")}` : ` ${t("kc_out")}`)),
         el("p", { class: "muted small kc-at" }, t("kc_now", { h: at })),
-        el("div", { class: "kc-songs" }, ...kc.songs.map((s_) => el("div", { class: "kc-song" },
-          el("b", {}, s_.song),
-          el("div", { class: "kc-ranks" }, ...(s_.ranks.length ? s_.ranks.map((x) => el("span", { class: `kc-r${/주간/.test(x.chart) ? " kc-wk" : ""}` },
-            el("span", { class: "muted" }, `${x.chart} `), el("b", {}, `${x.rank}${t("kc_rank")}`), " ", chg(x)))
-            : [el("span", { class: "muted" }, t("kc_out"))]))))),
-        el("details", { class: "kc-cnt" }, el("summary", {}, t("kc_counts")),
-          el("table", { class: "sp-table" },
-            el("thead", {}, el("tr", {}, el("th", {}, t("sp_song")), el("th", {}, t("kc_genie")), el("th", {}, t("kc_like")))),
-            el("tbody", {}, ...kc.songs.filter((s_) => Object.keys(s_.counts).length).map((s_) =>
-              el("tr", {}, el("td", {}, s_.song), cell(s_.counts["지니 재생"]), cell(s_.counts["멜론 좋아요"])))))),
+        el("div", { class: "kc-songs" }, ...kc.songs.map((s_) => {
+          const g = s_.counts["지니 재생"], lk = s_.counts["멜론 좋아요"];
+          const k = (x) => new Intl.NumberFormat(locale, { notation: "compact", maximumFractionDigits: 1 }).format(x);
+          return el("div", { class: "kc-song" },
+            el("b", {}, s_.song),
+            el("div", { class: "kc-ranks" }, ...(s_.ranks.length ? s_.ranks.map((x) => el("span", { class: `kc-r${/주간/.test(x.chart) ? " kc-wk" : ""}` },
+              el("span", { class: "muted" }, `${x.chart} `), el("b", {}, `${x.rank}${t("kc_rank")}`), " ", chg(x)))
+              : [el("span", { class: "muted" }, t("kc_out"))])),
+            g || lk ? el("span", { class: "kc-cnt muted", title: `${t("kc_genie")} · ${t("kc_like")}` },
+              g ? `${t("kc_genie")} ${k(g.total)}` : "", g && lk ? " · " : "", lk ? `♥ ${n(lk.total)}` : "") : el("span"));
+        })),
         el("p", { class: "muted small" }, t("kc_src"))));
     }
     // 앨범 판매량: 한터 일차별(초동) + 써클 주간 (공식)
