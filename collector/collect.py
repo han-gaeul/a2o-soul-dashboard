@@ -591,7 +591,7 @@ def stream_pushes(posts):
 
 VOTE_KW = re.compile(r"투표|vote|voting|후보|nominee", re.I)
 OCR_A2O = re.compile(r"A[2Z][O0]\s?S[O0]UL|Dancing\s?in\s?the\s?Dark|에이투오", re.I)  # 이미지 글자 (O↔0 오인식 감안)
-VOTE_POST = re.compile(r"투표|vote|voting|후보|nominee|결과|1위|랭킹|ranking|winner", re.I)  # 투표 관련 글 전부 (시작·중간·마감·결과)
+VOTE_POST = re.compile(r"투표|vote|voting|후보|nominee|결과|1위|랭킹|ranking|winner|광고|서포트|펀딩|cheer\s?up", re.I)  # 투표 관련 글 전부 (시작·중간·마감·결과)
 IG_MEDIA_NAMES = {}  # 매체 인스타 아이디 → 표시 이름 (load_config에서 채움)
 IG_REEL = re.compile(r"https://(?:www\.)?instagram\.com/reels?/[\w-]+/?")
 
@@ -1624,8 +1624,13 @@ def collect(cfg, rescan=False):
                     st["since_id"] = max(posts, key=lambda p_: int(p_["tweet_id"]))["tweet_id"]
                 for p_ in posts:
                     c_ = p_["caption"]
-                    if not VOTE_KW.search(c_) or A2O_MENTION.search(c_) or not p_.get("images"):
-                        continue  # 본문에 A2O SOUL이 있는 글은 위 검색으로 이미 잡음
+                    if A2O_MENTION.search(c_):  # 본문에 A2O SOUL — 투표 검색어(투표·vote 등)가 없어 검색에 안 걸린 글(축하 광고 펀딩 등)도 공식 글로
+                        if "xo:" + p_["tweet_id"] not in (store.get("posts") or {}):
+                            p_.update(id="xo:" + p_["tweet_id"], author=u, caption=f"{c_}\n\n— {u}")
+                            hits.append(p_)
+                        continue
+                    if not VOTE_KW.search(c_) or not p_.get("images"):
+                        continue
                     try:
                         import ocr
                         txt = ocr.read_images(p_["images"])

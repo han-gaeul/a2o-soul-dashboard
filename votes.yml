@@ -69,6 +69,13 @@ votes:
     end: "2026-11-25 11:00"
     url: https://open.coogoong.com/?target=event%2Fdetail%3Fkey_event%3D921
     note: K-차트 1위에 반영되는 팬 투표 · 11/22 오후 3위 (1위 TXT, 2위 ATEEZ)
+  - show: 더쇼
+    app: 빅크(BIGC)
+    title: A2O SOUL Cheer Up! 축하 광고
+    start: "2026-11-21 00:00"
+    end: "2026-11-30 12:00"
+    url: https://go.bigc.im/3WXgOxU
+    note: 1단계 더케이팝 서포트·2단계 합정역 CM보드 달성 · 지금 3단계 명동 쇼핑스트리트 광고 도전 중
 
 # 스밍 리스트 (응원 탭 '스밍 리스트' 맨 위) — 이 순서로 반복 재생. song마다 음원 사이트 검색 버튼이 자동으로 붙음
 #   멜론 TOP100 = 24시간 이용자 수 + 1시간 이용량 50:50, 1시간 이용량은 한 계정이 한 곡을 1시간에 1번만 셈
