@@ -44,7 +44,7 @@ def kbs(days):
     out = []
     for ch, station in KBS_CH.items():
         progs = _get(f"https://pprogramapi.kbs.co.kr/api/v1/external/program?page=1&page_size=100&rtype=json&program_ch_code={ch}&end_yn=n&station_code=00").json()
-        progs = {p["program_code"]: p.get("program_title") or "" for p in (progs.get("data") or []) if p.get("program_code")}
+        progs = {p["program_code"]: p.get("program_title") or "" for p in (progs.get("data") or progs.get("items") or []) if p.get("program_code")}
         codes = ",".join(progs)
         for d in days:
             page = 1
@@ -126,7 +126,7 @@ def mbc():
 
 def cbs(days):
     out = []
-    for code, title in CBS_PROGS.items():
+    for code, prog in CBS_PROGS.items():
         for d in days:
             try:
                 h = _get(f"https://www.cbs.co.kr/program/playlist/{code}", params={"date": d.strftime("%Y%m%d")}).text
@@ -134,15 +134,15 @@ def cbs(days):
                 continue
             # 고른 날짜의 목록만 (페이지에 여러 날짜가 슬라이드로 들어 있음)
             for li in re.split(r"<li\b", h):
-                if f'data-playdate="{d:%Y%m%d}"' not in li and f"data-playdate='{d:%Y%m%d}'" not in li:
+                if not re.search(rf'data-playdate=["\']{d.isoformat()}["\']', li, re.I):
                     continue
-                t = _text("<li" + li)
-                if ARTIST.search(t):
-                    tm = re.search(r"\b(\d{2}:\d{2}):\d{2}\b", t)
-                    a = ARTIST.search(t)
-                    song = re.sub(r"^\S*\d{2}:\d{2}:\d{2}\s*", "", t[:a.start()]).strip()
-                    out.append({"date": d.isoformat(), "time": tm[1] if tm else "", "station": "CBS 음악FM", "program": title,
-                                "song": song, "artist": "A2O SOUL", "url": f"https://www.cbs.co.kr/program/playlist/{code}?date={d:%Y%m%d}"})
+                name = re.search(r'class="name"[^>]*>(.*?)</div>', li, re.S)
+                title = re.search(r'class="title"[^>]*>(.*?)</div>', li, re.S)
+                tm = re.search(r'class="time"[^>]*>\s*(\d{2}:\d{2})', li)
+                if name and ARTIST.search(_text(name[1])):
+                    out.append({"date": d.isoformat(), "time": tm[1] if tm else "", "station": "CBS 음악FM", "program": prog,
+                                "song": _text(title[1]) if title else "", "artist": _text(name[1]),
+                                "url": f"https://www.cbs.co.kr/program/playlist/{code}?date={d:%Y%m%d}"})
     return out
 
 

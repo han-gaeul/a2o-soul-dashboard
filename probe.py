@@ -1,9 +1,12 @@
-import re, requests
-H = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36"}
-for codes, ps in [("R2018-0187", 50), ("R2018-0187", 200), ("R2026-0019,R2026-0020", 50), ("R2026-0019", 50)]:
-    r = requests.get("https://kong2017.kbs.co.kr/api/mobile/select_song_list", headers=H, timeout=20,
-                     params={"program_code": codes, "rtype": "json", "request_date": "20261122", "page": 1, "page_size": ps})
-    print("== KBS", codes, ps, r.status_code, r.text[:300])
-h = requests.get("https://www.cbs.co.kr/program/playlist/cbs_P000221", params={"date": "20261122"}, headers=H, timeout=20).text
-i = h.find("언제나 그대 내곁에")
-print("== CBS", h[i - 1500:i + 400])
+import sys, re
+sys.path.insert(0, "collector")
+import radio
+from datetime import date, timedelta
+radio.ARTIST = re.compile(r"아이유|\bIU\b|김현식|BOYS LIKE GIRLS|AESPA|에스파|검정치마", re.I)
+days = [date(2026, 11, 21), date(2026, 11, 22)]
+for name, fn in (("KBS", lambda: radio.kbs(days)), ("CBS", lambda: radio.cbs(days))):
+    got = fn(); print("==", name, len(got)); [print("  ", x) for x in got[:4]]
+radio.ARTIST = re.compile(r"A2O\s?SOUL|에이투오\s?소울", re.I)
+d = [date(2026, 11, 9) + timedelta(i) for i in range(15)]
+for name, fn in (("KBS", lambda: radio.kbs(d)), ("CBS", lambda: radio.cbs(d))):
+    got = fn(); print("== REAL", name, len(got)); [print("  ", x) for x in got[:10]]
