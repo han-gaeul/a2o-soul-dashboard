@@ -1,0 +1,14 @@
+name: probe
+on: { push: { branches: [probe-faces] } }
+jobs:
+  p:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          pip install -q -r requirements.txt opencv-python-headless
+          mkdir -p /tmp/fr
+          curl -sSL -o /tmp/fr/face_detection_yunet_2023mar.onnx https://github.com/opencv/opencv_zoo/raw/main/models/face_detection_yunet/face_detection_yunet_2023mar.onnx
+          curl -sSL -o /tmp/fr/face_recognition_sface_2021dec.onnx https://github.com/opencv/opencv_zoo/raw/main/models/face_recognition_sface/face_recognition_sface_2021dec.onnx
+          ls -la /tmp/fr
+          python collector/faces.py -v
