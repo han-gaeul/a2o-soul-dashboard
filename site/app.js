@@ -514,21 +514,23 @@ if ("serviceWorker" in navigator) {
     const href = voteHref(v);
     const pct = open ? Math.min(100, Math.max(3, ((now - start) / Math.max(1, end - start)) * 100)) : 0;
     const title = [v.show && !String(v.title).includes(v.show) ? tc(v.show) : "", tc(v.title)].filter(Boolean).join(" · ");
-    const tile = el(href ? "a" : "div", { class: `vt${urgent ? " urgent" : ""}${open ? "" : " upcoming"}`, ...(href ? { href, target: "_blank", rel: "noopener" } : {}) },
+    const asLink = href && !v.parts;
+    const tile = el(asLink ? "a" : "div", { class: `vt${urgent ? " urgent" : ""}${open ? "" : " upcoming"}`, ...(asLink ? { href, target: "_blank", rel: "noopener" } : {}) },
       el("span", { class: `vt-st${urgent ? " soon" : open ? "" : " up"}` }, urgent ? t("vote_urgent") : open ? t("vote_now") : t("vote_soon")),
       el("div", { class: "vt-app" }, el("span", { class: "vt-lg", style: `background:${appColor(v.app || v.show)}` }, appLetter(v.app || v.show)),
         el("span", {}, [tc(v.app || ""), v.show && SHOW_RX.test(v.show) ? tc(v.show) : ""].filter(Boolean).join(" · ")),
         v.fan ? el("span", { class: "chip chip-fan", title: t("vote_fan_tip") }, t("vote_fan")) : null),
       el("div", { class: "vt-t" }, title),
+      v.parts ? el("div", { class: "vt-parts" }, ...v.parts.map((p) => p.url ? el("a", { href: p.url, target: "_blank", rel: "noopener", class: "chip" }, p.label) : el("span", { class: "chip" }, p.label))) : null,
       el("div", { class: "vt-cd" }, open ? t("vote_left", { t: duration(end - now) }) : t("vote_to_start", { t: duration(start - now) })),
       open ? el("div", { class: "vt-bar" }, el("i", { style: `width:${pct.toFixed(0)}%` })) : null,
       el("div", { class: "vt-when muted" }, open ? t("vote_end_at", { t: v.end.slice(5).replace("-", ".") }) : `${v.start.slice(5).replace("-", ".")} ~ ${v.end.slice(v.end.slice(0, 10) === v.start.slice(0, 10) ? 11 : 5).replace("-", ".")}`,
         localOf(v.end.slice(0, 10), v.end.slice(11)) ? el("span", { class: "local-t" }, localOf(v.end.slice(0, 10), v.end.slice(11))) : null),
       full && v.note ? el("div", { class: "vt-note" }, tc(v.note)) : null,
       full ? tipBy(v) : null,
-      el("div", { class: "vt-go" }, href ? voteLabel(v) : ""));
+      v.parts && href ? el("a", { class: "vt-go", href, target: "_blank", rel: "noopener" }, voteLabel(v)) : el("div", { class: "vt-go" }, href ? voteLabel(v) : ""));
     // 응원 탭: 앱으로 가는 타일엔 투표 안내 글 링크도 따로 (타일 밖 한 줄)
-    if (full && v.url && href !== v.url) return el("div", { class: "vt-wrap" }, tile, ext(v.url, `↗ ${t("from_notice")}`));
+    if (full && v.url && href !== v.url && !v.parts) return el("div", { class: "vt-wrap" }, tile, ext(v.url, `↗ ${t("from_notice")}`));
     return tile;
   };
   const voteKey = (v) => (Date.now() >= kstDate(v.start) ? kstDate(v.end) : kstDate(v.start));
@@ -550,11 +552,11 @@ if ("serviceWorker" in navigator) {
       $("tabs").before(bar);
     }
   }
-  // 음방 1위 축하 배너: 1위 후 7일 동안 맨 위에 크게 (첫 1위면 '데뷔 첫 음방 1위')
+  // 음방 1위 축하 배너: 1위 후 3일 동안 한눈에 탭 맨 위에 크게 (첫 1위면 '데뷔 첫 음방 1위')
   {
     const wins = (data.timeline || []).filter((x) => x.kind === "win").sort((a, b) => a.date.localeCompare(b.date));
     const w = wins[wins.length - 1];
-    if (w && (Date.parse(todayKst) - Date.parse(w.date)) / 86400000 <= 7) {
+    if (w && (Date.parse(todayKst) - Date.parse(w.date)) / 86400000 <= 3) {  // 1위 후 3일, 한눈에 탭에만 (style.css)
       const first = wins.length === 1;
       const n = data.debut_date ? Math.round((Date.parse(w.date) - Date.parse(data.debut_date)) / 86400000) : 0;
       const show = tc(w.show);
@@ -653,7 +655,10 @@ if ("serviceWorker" in navigator) {
       const show = String(v.show), live = liveFor(show);
       const on = (data.events || []).some((e) => e.type === "음방" && e.date === date && String(e.title).includes(show));
       const nom = (data.nominees || []).find((n) => n.date === date && show.includes(n.show));
-      const open = votes.filter((x) => `${x.show} ${x.title}`.includes(show) && Date.now() < kstDate(x.end.includes(" ") ? x.end : `${x.end} 23:59`));
+      // 그 방송 전 6일 안에 마감하는 사전 투표만 (지난 방송 '애프터' 투표·방송 뒤에 끝나는 광고 투표는 빼기)
+      const airAt = +kstDate(`${date} ${(time || "23:59").padStart(5, "0")}`);
+      const open = votes.filter((x) => { const e = +kstDate(x.end.includes(" ") ? x.end : `${x.end} 23:59`);
+        return `${x.show} ${x.title}`.includes(show) && !/애프터|after/i.test(x.title) && Date.now() < e && e <= airAt && e > airAt - 6 * 864e5; });
       const state = date < todayKst ? "past" : date === todayKst ? "today" : "next";
       return { d, date, time, show, v, live, on, nom, open, state };
     }).filter(Boolean).sort((a, b) => a.d - b.d);
@@ -669,13 +674,29 @@ if ("serviceWorker" in navigator) {
               r.nom ? el("a", { class: "chip wk-nom", href: r.nom.url || "#", target: "_blank", rel: "noopener" }, `🏆 ${t("wk_nom")}`) : null,
               r.state === "past" ? el("span", { class: "muted small" }, ` · ${t("wk_past")}`) : null),
             el("div", { class: "muted small" }, [r.v.pre ? `${t("wk_pre")} ${tc(r.v.pre)}` : "", r.v.live ? `${t("wk_live")} ${tc(r.v.live)}` : ""].filter(Boolean).join(" · ")),
+            r.v.prevote || r.v.note ? el("div", { class: "muted small" }, [r.v.prevote ? `${t("wk_pre")} ${tc(r.v.prevote)} KST` : "", r.v.note ? tc(r.v.note) : ""].filter(Boolean).join(" · ")) : null,
             ...r.open.map((x) => el("div", { class: "small wk-vote" }, `🗳 ${tc(x.title)} · ${t("wk_until", { t: x.end.slice(5).replace("-", ".") })}`))),
           r.state !== "past" && r.live ? ext(r.live.url, `${r.live.label} ↗`) : null)));
       $("votes").after(box);  // 투표 탭: 투표 목록 먼저, 이번 주 음방 표는 그 아래
     }
   }
   if (votes.length) {
-    const sorted = [...votes].sort((a, b) => voteKey(a) - voteKey(b));
+    // 같은 시각·같은 방송·같은 앱 투표는 타일 하나로 (더쇼 핫 스테이지·팬픽캠·엔딩요정 등) — 제목 끝 같은 말은 묶음 제목으로
+    const merged = [];
+    for (const v of votes) {
+      const m = merged.find((x) => x.end === v.end && x.show === v.show && x.app === v.app && x.start === v.start);
+      if (m) (m.parts ||= [{ title: m.title, url: m.url }]).push({ title: v.title, url: v.url });
+      else merged.push({ ...v });
+    }
+    for (const m of merged.filter((x) => x.parts)) {
+      const ws = m.parts.map((p) => tc(p.title).split(" "));
+      let n = 0;
+      while (ws.every((w) => w.length > n + 1 && w[w.length - 1 - n] === ws[0][ws[0].length - 1 - n])) n++;
+      m.title = n ? ws[0].slice(-n).join(" ") : t("votes");
+      m.parts = m.parts.map((p, i) => ({ ...p, label: (n ? ws[i].slice(0, -n) : ws[i]).join(" ") }));
+      m.note = "";  // 설명은 투표마다 달라서 묶으면 뺌
+    }
+    const sorted = merged.sort((a, b) => voteKey(a) - voteKey(b));
     const groups = [["", t("ev_all"), () => true],
       ["open", t("vote_now"), (v) => Date.now() >= kstDate(v.start)],
       ["soon", t("vote_soon"), (v) => Date.now() < kstDate(v.start)],
@@ -885,13 +906,14 @@ if ("serviceWorker" in navigator) {
         b.addEventListener("click", () => showDetail(v));
         return b;
       }));
-      if ($("voteHowto")) { $("voteHowto").append(el("div", { class: "wk" }, grid, detail)); $("voteHowtoSec").hidden = false; }  // 투표 탭으로
-      else $("howto").append(el("div", { class: "wk" }, el("h3", { class: "wk-title" }, t("howto_voting")), grid, detail));
+      // 투표 탭의 '이번 주 음방' 표에 같은 정보(사전·생방송 앱, 사전투표 기간)가 있어서 따로 안 보임
+      if (!$("voteHowto")) $("howto").append(el("div", { class: "wk" }, el("h3", { class: "wk-title" }, t("howto_voting")), grid, detail));
       showDetail(pick);
     }
     // 나머지 가이드: 아이콘 타일 → 누른 것만 펼치기
     const ICON = [[/해외|global/i, "🌏"], [/음원|스밍/, "🎧"], [/유튜브|조회수/, "▶️"], [/라디오 신청/, "📻"], [/프로그램/, "🎙"], [/공통/, "✅"]];
-    const groups = howto.streaming || [];
+    // 라디오 칸(radioSec)이 있으면 라디오 가이드 두 개는 겹쳐서 빼기
+    const groups = (howto.streaming || []).filter((g) => !($("radioSec") && /라디오|신청곡/.test(g.title)));
     if (groups.length) {
       const panel = el("div", { class: "gd-panel" });
       const tiles = el("div", { class: "gd-tiles" });
@@ -943,7 +965,8 @@ if ("serviceWorker" in navigator) {
     const panes = {};
     const tabs = el("div", { class: "filter-row ev-tabs now-tabs" });
     const body = el("div", {});
-    const TABS = [["rank", "now_t_rank"], ["play", "now_t_play"], ["sales", "now_t_sales"]].filter(([k]) => k !== "sales" || sl);
+    const TABS = [["rank", "now_t_rank"], ["play", "now_t_play"], ["sales", "now_t_sales"], ["subs", "now_t_subs"]]
+      .filter(([k]) => (k !== "sales" || sl) && (k !== "subs" || (data.accounts || []).length));
     let cur = pref.get("nowTab", "rank");
     if (!TABS.some(([k]) => k === cur)) cur = "rank";
     const show = () => {
@@ -952,7 +975,7 @@ if ("serviceWorker" in navigator) {
     };
     for (const [k, label] of TABS) {
       const b = el("button", { type: "button", "data-k": k }, t(label));
-      b.addEventListener("click", () => { cur = k; pref.set("nowTab", k); show(); if (k === "rank" || k === "play") requestAnimationFrame(() => { if (window.Chart) rankCharts(); }); });
+      b.addEventListener("click", () => { cur = k; pref.set("nowTab", k); show(); requestAnimationFrame(() => { if (window.Chart) rankCharts(); }); });
       tabs.append(b);
     }
     $("charts").append(tabs, body);
@@ -1015,6 +1038,9 @@ if ("serviceWorker" in navigator) {
         sl.hanteo && sl.hanteo.post ? ext(sl.hanteo.post, "Hanteo ↗") : null,
         ext("https://circlechart.kr/page_chart/album.circle?nationGbn=T&serviceGbn=ALL&termGbn=week", "Circle Chart ↗")));
     }
+    // 구독자·팔로워 추이 (한눈에 탭에서 옮김)
+    if ((data.accounts || []).length) panes.subs = el("div", { class: "now-pane" },
+      el("div", { class: "chart-box now-chart" }, el("canvas", { id: "accountsChart" })));
     for (const p_ of Object.values(panes)) body.append(p_);
     show();
   };
@@ -1516,12 +1542,16 @@ if ("serviceWorker" in navigator) {
       // 보내는 곳: 방송사별 앱·문자 번호·추천 프로그램
       const appLink = (s) => s.ios && IOS ? s.ios : IOS ? `https://www.google.com/search?q=${encodeURIComponent(s.app + " 앱")}`
         : `https://play.google.com/store/search?q=${encodeURIComponent(s.app)}&c=apps`;
-      box.append(el("h3", {}, t("radio_where")), el("div", { class: "rd-sts" }, ...sts.map((s) => el("div", { class: "rd-st" },
+      // 추천 프로그램이 없는 방송국은 앱·문자 번호만 한 줄로
+      const stsP = sts.filter((s) => progs.some((p) => p.station === s.name)), stsN = sts.filter((s) => !stsP.includes(s));
+      box.append(el("h3", {}, t("radio_where")), el("div", { class: "rd-sts" }, ...stsP.map((s) => el("div", { class: "rd-st" },
         el("b", {}, s.name),
         el("div", { class: "rd-meta" }, ext(appLink(s), `📱 ${s.app}`), s.sms ? el("span", {}, `✉️ ${s.sms}`) : null),
         el("div", { class: "rd-progs" }, ...progs.filter((p) => p.station === s.name).sort((a, b) => (a.start || "") < (b.start || "") ? -1 : 1)
           .map((p) => el("div", {}, p.start ? el("span", { class: "rd-time" }, `${p.start}–${p.end || ""}`) : null, " ", p.url ? ext(p.url, p.name) : p.name,
             p.dj ? el("span", { class: "muted" }, ` · ${p.dj}`) : null)))))),
+        stsN.length ? el("p", { class: "rd-other small" }, el("b", {}, `${t("radio_other")} `),
+          ...stsN.flatMap((s, i) => [i ? " · " : "", el("span", {}, `${s.name} (`), ext(appLink(s), `📱 ${s.app}`), s.sms ? ` ✉️ ${s.sms}` : "", ")"])) : null,
         el("p", { class: "muted small" }, t("radio_wkday")),
         el("p", { class: "muted small" }, t("radio_sms_note")),
         rd.credit ? el("p", { class: "pf-src" }, t("radio_credit", { who: rd.credit })) : null);
@@ -1547,7 +1577,7 @@ if ("serviceWorker" in navigator) {
       if (!node) return null;
       const b = el("button", { type: "button", class: `cm-tile${counted && n ? " on" : ""}` },
         el("span", { class: "cm-icon", "aria-hidden": "true" }, icon),
-        el("span", { class: "cm-label" }, t(key)),
+        el("span", { class: "cm-label" }, t(key).replace(/^[^\p{L}\p{N}]+/u, "")),  // 위에 아이콘이 있으니 글자 앞 이모지는 빼기
         counted ? el("span", { class: "cm-sub" }, n ? t("cheer_open", { n }) : t("cheer_none")) : null);
       b.addEventListener("click", () => {
         if (node.hash) { location.hash = node.hash; window.scrollTo({ top: 0 }); return; }
@@ -1970,7 +2000,7 @@ if ("serviceWorker" in navigator) {
 
   // ---------- 음방 회차별 무대 (영상 탭) ----------
   const eps = data.episodes || [];
-  // 영상 탭 위 음방별 탭 — 회차별 무대·전체 영상 둘 다 거름
+  // 음방 회차별 무대 칸 안의 음방별 탭
   {
     const shows = [...new Set([...eps.map((e) => e.show), ...data.videos.map((v) => v.show)].filter(Boolean))];
     const order = (data.howto?.voting || []).map((v) => v.show);
@@ -1983,9 +2013,7 @@ if ("serviceWorker" in navigator) {
         b.addEventListener("click", () => {
           curShow = k;
           drawTabs();
-          epVisible();
-          const sel = $("showSel");
-          if (sel) { sel.value = k; sel.dispatchEvent(new Event("change")); }
+          epVisible();  // 회차별 무대만 거름 (전체 영상은 아래 '모든 음방' 선택으로 따로)
         });
         return b;
       }));
@@ -2949,6 +2977,8 @@ if ("serviceWorker" in navigator) {
   }
 
   function rankCharts() {
+    const ac = $("accountsChart");
+    if (ac && !ac.dataset.done && ac.offsetParent) { ac.dataset.done = "1"; lineChart("accountsChart", data.accounts); }
     // 순위 추이: 차트 하나를 골라서(멜론 HOT100·써클 스트리밍 주간 …) 곡별 선 — 날짜 간격이 실제와 같게 빈 날도 칸을 둠
     const rc = $("rankTrend");
     if (rc && !rc.dataset.done && rc.offsetParent) {
@@ -3002,7 +3032,7 @@ if ("serviceWorker" in navigator) {
     }
   }
 
-  drawers.overview = () => lineChart("accountsChart", data.accounts);
+  drawers.overview = () => {};  // 구독자 추이는 응원 탭 '지금 현황'으로 옮김
   drawers.cheer = rankCharts;
   drawers.mv = () => { lineChart("mvChart", data.mvs); dailyChart("mvDailyChart", data.mvs); };
 
