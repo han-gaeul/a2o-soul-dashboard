@@ -139,11 +139,16 @@ def candidates(dash, site, now):
         if e.get("type") != "총공" or not re.fullmatch(r"\d{2}:\d{2}", e.get("time") or ""):
             continue
         st = _kst(f"{e['date']} {e['time']}")
-        if -timedelta(minutes=20) <= st - now <= timedelta(hours=1, minutes=10):
-            mm = re.search(r"\(~\s*(\d{1,2}:\d{2})\)", e["title"])
-            out.append((f"sg|{e['date']}|{e['time']}|{e['title']}", "show", "stream",
-                        {"name": re.sub(r"\s*\(~[^)]*\)", "", e["title"]).strip(), "t": e["time"], "end": mm.group(1) if mm else "",
-                         "post": e.get("url") or "", "url": site + "#cheer", "draft_only": True}))
+        mm = re.search(r"\(~\s*(\d{1,2}):(\d{2})\)", e["title"])
+        end = _kst(f"{e['date']} 00:00") + timedelta(hours=int(mm.group(1)), minutes=int(mm.group(2))) if mm else st + timedelta(hours=1)
+        if end <= st:
+            end += timedelta(days=1)
+        base = {"name": re.sub(r"\s*\(~[^)]*\)", "", e["title"]).strip(), "t": e["time"], "end": f"{mm.group(1)}:{mm.group(2)}" if mm else "",
+                "end_real": end.strftime("%H:%M"), "post": e.get("url") or "", "url": site + "#cheer", "draft_only": True}
+        if -timedelta(minutes=20) <= st - now <= timedelta(hours=1, minutes=10):  # 시작 전
+            out.append((f"sg|{e['date']}|{e['time']}|{e['title']}", "show", "stream", base))
+        elif st + timedelta(minutes=30) <= now <= end - timedelta(minutes=30):  # 진행 중 (시작 30분 뒤 ~ 끝나기 30분 전)
+            out.append((f"sg|{e['date']}|{e['time']}|{e['title']}|live", "show", "stream", {**base, "now": True}))
     for n in dash.get("nominees") or []:  # 음방 1위 후보 — 방송 당일, 방송 끝나기 전까지
         tm = air.get(n["show"]) or ""
         end = _kst(f"{n['date']} {tm or '23:00'}") + timedelta(hours=1)
@@ -278,8 +283,13 @@ def tweet_text(kind, data):
         links = [f"📺 생방송 {url}", f"💜 응원법·투표 {site_cheer}"]  # 방송 보기 + 사이트(응원법·투표) 링크 둘 다
     elif kind == "stream":
         when = f"{data['t']}~{data['end']}" if data.get("end") else data["t"]
-        title, body, url = f"📢 오늘 {when} {data['name']}!", "시간 맞춰 같이 스밍해요 💜", data["url"]
-        en = f"📢 Streaming party {when} KST — stream together!"
+        if data.get("now"):
+            until = f" (~{data['end']})" if data.get("end") else ""
+            title, body, url = f"🔴 지금 {data['name']} 진행 중!{until}", "아직 늦지 않았어요, 같이 스밍해요 💜", data["url"]
+            en = f"🔴 Streaming party is ON now (until {data['end_real']} KST)!"
+        else:
+            title, body, url = f"📢 오늘 {when} {data['name']}!", "시간 맞춰 같이 스밍해요 💜", data["url"]
+            en = f"📢 Streaming party {when} KST — stream together!"
         links = [f"🎧 플레이리스트 원클릭 담기 {url}"] + ([f"📌 총공 공지 {data['post']}"] if data.get("post") else [])
     else:
         title, body, url = compose(kind, data, "ko")
