@@ -49,21 +49,18 @@ def kbs(days):
             m = p.get("program_code") or (re.search(r"open_program/([A-Z]\d{4}-\d{4})", json.dumps(p)) or [None, None])[1]
             if m:
                 progs[m] = p.get("program_title") or p.get("title") or ""
-        codes = ",".join(progs)
         want = {d.strftime("%Y%m%d") for d in days}
-        for d in days:
-            for page in range(1, 30):  # 한 쪽에 40곡씩
+        # 여러 프로그램을 한 번에 물으면 40곡까지만 오고 쪽 넘김도 안 돼서 프로그램·날짜마다 (2시간 방송 ≈ 30곡)
+        for code in progs:
+            for d in days:
                 j = _get("https://kong2017.kbs.co.kr/api/mobile/select_song_list",
-                         params={"program_code": codes, "rtype": "json", "request_date": d.strftime("%Y%m%d"), "page": page, "page_size": 40}).json()
-                items = j.get("items") or []
-                for it in items:
+                         params={"program_code": code, "rtype": "json", "request_date": d.strftime("%Y%m%d"), "page": 1, "page_size": 40}).json()
+                for it in j.get("items") or []:
                     ts = it.get("timestamp") or ""
                     if ts[:8] in want and ARTIST.search(it.get("artist") or ""):
                         out.append({"date": f"{ts[:4]}-{ts[4:6]}-{ts[6:8]}", "time": f"{ts[8:10]}:{ts[10:12]}",
-                                    "station": station, "program": progs.get(it.get("program_code"), ""),
+                                    "station": station, "program": progs[code],
                                     "song": it.get("song_title") or "", "artist": it.get("artist") or ""})
-                if not items or not any(str(it.get("timestamp", ""))[:8] >= d.strftime("%Y%m%d") for it in items):
-                    break
     return out
 
 
