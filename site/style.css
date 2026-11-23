@@ -1218,3 +1218,10 @@ html:not([lang="ko"]) .vt-t { -webkit-line-clamp: 3; font-size: 13px; overflow-w
 .now-h { font-size: 14px; margin: 14px 0 6px; }
 .now-chart { height: 260px; }
 @media (max-width: 600px) { .now-tiles { gap: 6px; } .now-tile { padding: 8px; } .now-tile b { font-size: 17px; } .now-tile .small { font-size: 10px; } .now-chart { height: 220px; } }
+
+/* 1위 축하 카드는 한눈에 탭에만, 투표 마감 띠는 한눈에 탭에선 안 보임('마감 임박 투표'와 겹쳐서) */
+body:not([data-cur="overview"]) .win-wrap { display: none; }
+body[data-cur="overview"] .vote-bar:not(.live-bar) { display: none; }
+.vt-parts { display: flex; flex-wrap: wrap; gap: 4px; margin: 4px 0 2px; }
+.vt-parts a.chip { text-decoration: none; }
+.rd-other { margin: 8px 0 0; }

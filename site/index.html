@@ -103,10 +103,6 @@
       <button class="more" id="igMore" hidden data-i18n="more">더 보기</button>
     </section>
 
-    <section class="card">
-      <h2 data-i18n="accounts">구독자 · 팔로워 추이</h2>
-      <div class="chart-box"><canvas id="accountsChart"></canvas></div>
-    </section>
 
   </div>
 
@@ -257,10 +253,10 @@
 
   <!-- 영상 아카이브 -->
   <div data-tab="videos" hidden>
-    <div class="filter-row era-row show-tabs" id="showTabs"></div>
     <section class="card" id="episodesSec">
       <h2 data-i18n="episodes">음방 회차별 무대</h2>
       <p class="note small" data-i18n="episodes_desc"></p>
+      <div class="filter-row era-row show-tabs" id="showTabs"></div>
       <div id="episodes"></div>
     </section>
     <section class="card" id="cmpSec">
@@ -289,7 +285,8 @@
       <p class="note small" data-i18n="archive_desc"></p>
       <div id="archive"></div>
     </section>
-    <section class="card">
+    <section class="card" id="allVideosSec">
+      <h2 data-i18n="all_videos">🎞 전체 영상</h2>
       <div class="archive-tools">
         <input type="search" id="search" class="search" autocomplete="off">
         <select id="seriesSel" class="sel"></select>

@@ -559,7 +559,7 @@ def notice_summary(kind, text):
 MEDIA_SKIP = re.compile(r"논란|비판|비난|백래시|사과문|해명|의혹|갑론을박|네티즌|누리꾼|backlash|controvers|criticis|slammed|apologi[sz]e|netizens|sparks?\s+debate|under fire|outrage", re.I)
 
 
-def media_feed(cfg, state, limit=40):
+def media_feed(cfg, state, limit=40, keep_video=False):
     """매체·콘텐츠 계정의 A2O SOUL 글 → 최신순 [{url, at, handle, name, text, images, video}]."""
     names = {v["handle"].lower(): v["name"] for v in cfg["x_media"]}
     out = []
@@ -567,9 +567,10 @@ def media_feed(cfg, state, limit=40):
         if (m.get("author", "").lower() not in names and not m.get("auto")) or MEDIA_SKIP.search(m.get("caption") or ""):  # 목록에서 뺀 계정·논란 기사는 숨김
             continue
         text = re.sub(r"\s*https://(t\.co/\w+|x\.com/\S+/photo/\d)\s*$", "", (m.get("caption") or "").strip())
+        # 영상 글은 다른 칸에 있음: 인스타 릴스 링크(→ 인스타 릴스 칸), 유튜브 링크·직캠 홍보·X 영상(→ 영상 목록)
+        if not keep_video and (IG_REEL.search(text) or re.search(r"youtu\.?be|직캠|FANCAM|Choreo|🖥", text, re.I) or m.get("video")):
+            continue
         imgs = (m.get("images") or [])[:4]
-        if not imgs and (yt := re.search(r"(?:youtu\.be/|youtube\.com/(?:watch\?v=|shorts/))([\w-]{11})", text)):
-            imgs = [f"https://i.ytimg.com/vi/{yt.group(1)}/hqdefault.jpg"]  # 사진 없는 글은 유튜브 링크 썸네일로
         out.append({"url": m["permalink"], "at": kst_datetime(m.get("timestamp")), "handle": m["author"],
                     "name": names.get(m["author"].lower()) or m.get("author_name") or m["author"], "text": text[:400], "images": imgs,
                     "video": bool(m.get("video"))})
@@ -2163,7 +2164,7 @@ def build(cfg):
         "photos": photo_feed(cfg, registry, load_json("announcements.json", {})),
         "notice_posts": notice_feed(cfg, registry, load_json("announcements.json", {})),
         "media_posts": (mfeed := media_feed(cfg, media_state)),
-        "reels": ig_reels(registry, mfeed),
+        "reels": ig_reels(registry, media_feed(cfg, media_state, limit=200, keep_video=True)),  # 릴스 링크 글은 매체 칸에선 빠지니 따로
         "spotify": spotify_summary(),
         "sales": __import__("sales").summary(),
         "radio_plays": __import__("radio").summary(),
