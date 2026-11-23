@@ -629,7 +629,13 @@ async function tweets(req, env, url) {
     const hist = (await env.SUBS.get("_substats", "json")) || [];
     if (!hist.length || hist[hist.length - 1].d !== day) { hist.push({ d: day, n: total }); await env.SUBS.put("_substats", JSON.stringify(hist.slice(-120))); }
     else if (hist[hist.length - 1].n !== total) { hist[hist.length - 1].n = total; await env.SUBS.put("_substats", JSON.stringify(hist.slice(-120))); }
-    return json(req, { total, topics, langs, history: hist.slice(-30), x: (await env.SUBS.get("_xstat", "json")) || null, visits: await siteVisits(env) });
+    let devices = null;  // 날짜별 기기 수 (사이트 /hit) — 표가 아직 없으면 null
+    try {
+      const r = await env.DB.prepare("SELECT day, active, fresh FROM devices ORDER BY day DESC LIMIT 30").all();
+      const t = await env.DB.prepare("SELECT SUM(fresh) AS n FROM devices").first();
+      devices = { days: (r.results || []).reverse(), total: (t && t.n) || 0 };
+    } catch (_) { /* 아직 기록 없음 */ }
+    return json(req, { total, topics, langs, history: hist.slice(-30), x: (await env.SUBS.get("_xstat", "json")) || null, visits: await siteVisits(env), devices });
   }
   if (p === "/tweet/list") {
     const out = [];
@@ -691,6 +697,20 @@ export default {
       if (Date.now() - (Number(await env.SUBS.get("_renew_at")) || 0) < 600000) return json(req, { ok: true, skipped: "10분 안에 이미 갱신" });
       await env.SUBS.put("_renew_at", String(Date.now()), { expirationTtl: 3600 });
       return json(req, { ok: true, subscribed: await renewYoutube(env) });
+    }
+
+    // 기기 수 세기: 사이트가 기기마다 하루 한 번 보냄 {new: 처음 온 기기면 1} — 아이디·IP 없이 날짜별 숫자만 (D1 devices)
+    if (req.method === "POST" && url.pathname === "/hit") {
+      if (!/^https:\/\/(www\.)?a2osoul-tracker\.com$/.test(req.headers.get("Origin") || "")) return json(req, { ok: false }, 403);
+      const b = await req.json().catch(() => ({}));
+      const day = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
+      const q = () => env.DB.prepare("INSERT INTO devices (day, active, fresh) VALUES (?, 1, ?) ON CONFLICT(day) DO UPDATE SET active = active + 1, fresh = fresh + excluded.fresh")
+        .bind(day, b && b.new ? 1 : 0).run();
+      try { await q(); } catch (_) {
+        await env.DB.prepare("CREATE TABLE IF NOT EXISTS devices (day TEXT PRIMARY KEY, active INTEGER DEFAULT 0, fresh INTEGER DEFAULT 0)").run();
+        await q();
+      }
+      return json(req, { ok: true });
     }
 
     if (req.method === "POST" && url.pathname === "/subscribe") {

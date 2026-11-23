@@ -120,6 +120,8 @@
     <div class="sep" id="xuseSep" hidden></div>
     <div class="stat" id="visits" hidden><span class="dot">👀</span><span><b></b><small></small><div class="trend"></div></span><span><a class="ghost" href="https://dash.cloudflare.com/?to=/:account/web-analytics" target="_blank" rel="noopener">자세히 ↗</a></span></div>
     <div class="sep" id="visitsSep" hidden></div>
+    <div class="stat" id="devs" hidden><span class="dot">📱</span><span><b></b><small></small><div class="trend"></div></span><span></span></div>
+    <div class="sep" id="devsSep" hidden></div>
     <div class="stat" id="subs" hidden><span class="dot">📊</span><span><b></b><small></small><div class="trend"></div></span><span></span></div>
   </section>
 
@@ -281,10 +283,17 @@
         if (!s.x.err_at) bars($("xuse").querySelector(".trend"), days.slice(-7).map((k) => ({ d: k, v: usd(s.x.days[k]) })), (x) => `$${x.toFixed(1)}`);
         $("xuse").hidden = $("xuseSep").hidden = false;
       }
+      if (s.devices && s.devices.days && s.devices.days.length) {  // 기기 수 (사이트가 기기마다 하루 한 번 보냄)
+        const v = s.devices.days, today = v[v.length - 1], y = v.length > 1 ? v[v.length - 2] : null;
+        const n = (x) => Number(x).toLocaleString();
+        setStat("devs", "", "📱", `오늘 쓴 기기 ${n(today.active)}대`, `${y ? `어제 ${n(y.active)}대 · ` : ""}새 기기 오늘 ${n(today.fresh)} · 누적 ${n(s.devices.total)}대 (${v[0].day.slice(5).replace("-", "/")}부터)`);
+        bars($("devs").querySelector(".trend"), v.slice(-7).map((x) => ({ d: x.day, v: x.active })), n);
+        $("devs").hidden = $("devsSep").hidden = false;
+      }
       if (s.visits && s.visits.days && s.visits.days.length) {  // 사이트 방문자 (Cloudflare Web Analytics, 1시간마다 갱신)
         const v = s.visits.days, today = v[v.length - 1], y = v.length > 1 ? v[v.length - 2] : null;
         const n = (x) => Number(x).toLocaleString();
-        setStat("visits", "", "👀", `오늘 방문 ${n(today.v)}명`, `${y ? `어제 ${n(y.v)}명 · ` : ""}페이지뷰 오늘 ${n(today.pv)} · 최근 7일 ${n(v.slice(-7).reduce((a, x) => a + x.v, 0))}명`);
+        setStat("visits", "", "👀", `오늘 유입 ${n(today.v)}회`, `${y ? `어제 ${n(y.v)}회 · ` : ""}페이지뷰 오늘 ${n(today.pv)} · 최근 7일 ${n(v.slice(-7).reduce((a, x) => a + x.v, 0))}회 (외부에서 들어온 횟수)`);
         bars($("visits").querySelector(".trend"), v.slice(-7).map((x) => ({ d: x.d, v: x.v })), n);
         $("visits").hidden = $("visitsSep").hidden = false;
       } else if (s.visits && s.visits.error) {
