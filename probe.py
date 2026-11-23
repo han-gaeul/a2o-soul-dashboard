@@ -1,15 +1,7 @@
-import sys, re, json
-sys.path.insert(0, "collector")
-import kcharts
-h = kcharts._get("https://music.bugs.co.kr/chart/track/realtime/total").text
-i = h.find("<tbody")
-print("== BUGS", re.sub(r"\s+", " ", h[i:i + 1500]))
-for name, svc, fn in kcharts.CHARTS:
-    got = fn(); print("==", name, len(got), list(got.items())[:3])
-kcharts.run()
-d = kcharts.load()
-d["counts_at"] = ""
-kcharts.save(d)
-kcharts.counts(d, kcharts.songs()); kcharts.circle(d, kcharts.songs()); kcharts.save(d)
-print("== SUMMARY", json.dumps(kcharts.summary(), ensure_ascii=False))
-print("== SERIES", json.dumps(kcharts.chart_series(), ensure_ascii=False)[:1500])
+import re, requests
+H = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36"}
+for u in ["https://circlechart.kr/page_chart/onoff.circle", "https://circlechart.kr/page_chart/onoff.circle?nationGbn=T&serviceGbn=S1020"]:
+    h = requests.get(u, headers=H, timeout=20).text
+    print("==", u, len(h))
+    for m in set(re.findall(r".{0,120}S10\d0.{0,120}", h)):
+        print("  ", re.sub(r"\s+", " ", m))
