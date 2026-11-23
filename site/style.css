@@ -1190,3 +1190,7 @@ html:not([lang="ko"]) .vt-t { -webkit-line-clamp: 3; font-size: 13px; overflow-w
 .home-link { display: block; padding: 12px 16px; font-weight: 600; text-decoration: none; color: inherit; }
 .home-link:hover { color: var(--accent); }
 .hc-foot { align-items: center; gap: 12px; justify-content: space-between; }
+
+/* 국내 음원 차트 칸 */
+.kc-live { display: grid; gap: 4px; font-size: 13px; margin: 8px 0; }
+.kc-box td .small { font-size: 11px; }

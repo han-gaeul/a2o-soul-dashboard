@@ -935,6 +935,25 @@ if ("serviceWorker" in navigator) {
         sp.songs.every((x) => x.daily == null) ? el("p", { class: "muted small" }, t("sp_first")) : null,
         sp.artist ? ext(`https://open.spotify.com/artist/${sp.artist}`, "Spotify ↗") : null));
     }
+    // 국내 음원 차트: 지금 순위(1시간마다) + 지니 재생·멜론 좋아요 (하루 한 번)
+    const kc = data.kcharts;
+    if (kc) {
+      const n = (x) => Number(x).toLocaleString(locale);
+      const live = Object.entries(kc.live || {});
+      const songs = Object.entries(kc.counts || {}).sort((a, b) => ((b[1]["지니 재생"] || {}).total || 0) - ((a[1]["지니 재생"] || {}).total || 0));
+      const at = (kc.checked || "").slice(11, 13);
+      const cell = (v) => v ? el("td", {}, n(v.total), v.daily != null ? el("span", { class: "up small" }, ` +${n(v.daily)}`) : null) : el("td", { class: "muted" }, "—");
+      $("charts").append(el("details", { class: "sp-box kc-box", ...(MOBILE ? {} : { open: "" }) },
+        el("summary", { class: "sp-head" }, el("b", {}, t("kc_title")),
+          el("span", { class: "muted small" }, live.length ? ` ${live[0][0]} ${Object.entries(live[0][1]).map(([s_, r]) => `${s_} ${r}${t("kc_rank")}`).join(" · ")}` : ` ${t("kc_out")}`)),
+        el("div", { class: "kc-live" }, el("b", {}, t("kc_now", { h: at })),
+          ...(live.length ? live.map(([name, by]) => el("div", {}, el("span", { class: "muted" }, `${name} `),
+            Object.entries(by).sort((a, b) => a[1] - b[1]).map(([s_, r]) => `${s_} ${r}${t("kc_rank")}`).join(" · "))) : [el("div", { class: "muted" }, t("kc_out"))])),
+        songs.length ? el("table", { class: "sp-table" },
+          el("thead", {}, el("tr", {}, el("th", {}, t("sp_song")), el("th", {}, t("kc_genie")), el("th", {}, t("kc_like")))),
+          el("tbody", {}, ...songs.map(([s_, c]) => el("tr", {}, el("td", {}, s_), cell(c["지니 재생"]), cell(c["멜론 좋아요"]))))) : null,
+        el("p", { class: "muted small" }, t("kc_src"))));
+    }
     // 앨범 판매량: 한터 일차별(초동) + 써클 주간 (공식)
     const sl = data.sales;
     if (sl) {
