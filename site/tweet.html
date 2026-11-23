@@ -153,13 +153,14 @@
     return n;
   };
   const KIND = { vote: "🗳 투표", show: "📺 음방·라이브", nominee: "🏆 1위 후보", chart: "📈 차트", views: "🎉 조회수", subs: "🎉 구독자",
-    birthday: "🎂 생일", video: "🎬 새 영상", prerec: "🎙 사녹", media: "📸 매체" };
+    birthday: "🎂 생일", video: "🎬 새 영상", prerec: "🎙 사녹", media: "📸 매체", stream: "📢 음원 총공", collab: "🤝 팬 콜라보" };
   const when = (ms) => new Date(ms).toLocaleString("ko-KR", { month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit", timeZone: "Asia/Seoul" });
 
   const meta = (d, right) => {
     const m = document.createElement("div"); m.className = "meta";
     const l = document.createElement("span"); l.innerHTML = `<span class="kind"></span> · ${when(d.at)}`;
     l.querySelector(".kind").textContent = KIND[d.kind] || d.kind;
+    if (d.status === "pending" && d.fallback_at) l.append(` · ⏰ ${when(d.fallback_at)}까지 안 누르면 자동으로 올라가요`);
     m.append(l, right);
     return m;
   };
