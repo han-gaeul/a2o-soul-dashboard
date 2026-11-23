@@ -135,8 +135,11 @@ def candidates(dash, site, now):
         if x.get("kind") in ("views", "subs") and x.get("n") and now.date() - _kst(x["date"] + " 00:00").date() <= timedelta(days=1):
             out.append((f"ms|{x['kind']}|{x.get('name', '')}|{x['n']}", "video", x["kind"],
                         {"name": x.get("name") or "", "n": x["n"], "url": x.get("url") or site}))
-    for e in evs:  # 음원 총공(총공팀 공지) — 시작 1시간 전쯤 트윗 초안만 (팬 주최라 푸시·자동 업로드 없음, tweet.html에서 확인 후 올림)
-        if e.get("type") != "총공" or not re.fullmatch(r"\d{2}:\d{2}", e.get("time") or ""):
+    # 음원 총공(총공팀 공지)·해외 팬 콜라보(스테이션헤드 등) — 시작 1시간 전쯤 + 진행 중에 트윗 초안만
+    # (팬 주최라 푸시·자동 업로드 없음, tweet.html에서 확인 후 올림)
+    jobs = [(e, "stream") for e in evs if e.get("type") == "총공"] + [(c, "collab") for c in dash.get("collabs") or []]
+    for e, kind in jobs:
+        if not re.fullmatch(r"\d{2}:\d{2}", e.get("time") or ""):
             continue
         st = _kst(f"{e['date']} {e['time']}")
         mm = re.search(r"\(~\s*(\d{1,2}):(\d{2})\)", e["title"])
@@ -144,11 +147,13 @@ def candidates(dash, site, now):
         if end <= st:
             end += timedelta(days=1)
         base = {"name": re.sub(r"\s*\(~[^)]*\)", "", e["title"]).strip(), "t": e["time"], "end": f"{mm.group(1)}:{mm.group(2)}" if mm else "",
-                "end_real": end.strftime("%H:%M"), "post": e.get("url") or "", "url": site + "#cheer", "draft_only": True}
+                "end_real": end.strftime("%H:%M"), "post": e.get("url") or "", "url": site + "#cheer", "with": e.get("with") or "",
+                "draft_only": True}
+        key = f"{'sg' if kind == 'stream' else 'cb'}|{e['date']}|{e['time']}|{e['title']}"
         if -timedelta(minutes=20) <= st - now <= timedelta(hours=1, minutes=10):  # 시작 전
-            out.append((f"sg|{e['date']}|{e['time']}|{e['title']}", "show", "stream", base))
+            out.append((key, "show", kind, base))
         elif st + timedelta(minutes=30) <= now <= end - timedelta(minutes=30):  # 진행 중 (시작 30분 뒤 ~ 끝나기 30분 전)
-            out.append((f"sg|{e['date']}|{e['time']}|{e['title']}|live", "show", "stream", {**base, "now": True}))
+            out.append((key + "|live", "show", kind, {**base, "now": True}))
     for n in dash.get("nominees") or []:  # 음방 1위 후보 — 방송 당일, 방송 끝나기 전까지
         tm = air.get(n["show"]) or ""
         end = _kst(f"{n['date']} {tm or '23:00'}") + timedelta(hours=1)
@@ -263,9 +268,16 @@ def x_weight(s):
     return n
 
 
+def _josa(word, with_final, without_final):
+    """한글 받침에 따라 조사 (과/와 등) — 한글이 아니면 받침 없는 쪽"""
+    c = ord(word[-1]) if word else 0
+    return with_final if 0xAC00 <= c <= 0xD7A3 and (c - 0xAC00) % 28 else without_final
+
+
 def tweet_text(kind, data):
     """알림 내용 → X 글 초안: 한국어 + 영어 한 줄 + 링크 + 해시태그(그룹·곡·활동·멤버). 280자 넘으면 활동 태그 → 영어 줄 순서로 뺌."""
     en, links = "", []
+    site_url = "https://a2osoul-tracker.com/"
     if kind == "media":  # 매체 글은 초안 페이지에서 리트윗 (본문은 미리보기용)
         title, body, url = f"📸 {data['name']} 새 콘텐츠", data["title"], data["url"]
     elif kind == "show" and (data.get("now") or data.get("soon")):  # 방송 5분 전 / 시작 뒤
@@ -281,16 +293,30 @@ def tweet_text(kind, data):
         url = data["url"]
         site_cheer = "https://a2osoul-tracker.com/#cheer"
         links = [f"📺 생방송 {url}", f"💜 응원법·투표 {site_cheer}"]  # 방송 보기 + 사이트(응원법·투표) 링크 둘 다
-    elif kind == "stream":
+    elif kind == "stream":  # 멜론 등 국내 음원 차트라 영어 줄 없음
         when = f"{data['t']}~{data['end']}" if data.get("end") else data["t"]
         if data.get("now"):
             until = f" (~{data['end']})" if data.get("end") else ""
             title, body, url = f"🔴 지금 {data['name']} 진행 중!{until}", "아직 늦지 않았어요, 같이 스밍해요 💜", data["url"]
-            en = f"🔴 Streaming party is ON now (until {data['end_real']} KST)!"
         else:
             title, body, url = f"📢 오늘 {when} {data['name']}!", "시간 맞춰 같이 스밍해요 💜", data["url"]
-            en = f"📢 Streaming party {when} KST — stream together!"
         links = [f"🎧 플레이리스트 원클릭 담기 {url}"] + ([f"📌 총공 공지 {data['post']}"] if data.get("post") else [])
+    elif kind == "collab":  # 해외 팬 콜라보 (스테이션헤드 등) — 해외 팬 대상이라 영어 줄 포함
+        when = f"{data['t']}~{data['end']}" if data.get("end") else data["t"]
+        w = data.get("with") or ""
+        w_en = re.sub(r"\s*스테이션$", " station", w)
+        ko_w = f"{w}{_josa(w, '과', '와')} " if w else ""
+        en_w = f" with {w_en}" if w else ""
+        what = data["name"].replace("스테이션헤드", "Stationhead").replace("콜라보", "collab").replace("합동 스밍", "streaming party")
+        if data.get("now"):
+            until = f" (~{data['end']})" if data.get("end") else ""
+            title, body = f"🔴 지금 {ko_w}{data['name']} 진행 중!{until}", "아직 늦지 않았어요, 같이 들어요 💜"
+            en = f"🔴 {what}{en_w} is ON now (until {data['end_real']} KST)!"
+        else:
+            title, body = f"📢 오늘 {when} {ko_w}{data['name']}!", "시간 맞춰 같이 들어요 💜"
+            en = f"📢 {what}{en_w} — {when} KST, join us!"
+        url = data["post"] or site_url
+        links = [f"🎧 참여 {url}"]
     else:
         title, body, url = compose(kind, data, "ko")
         t2, b2, _ = compose(kind, data, "en")
