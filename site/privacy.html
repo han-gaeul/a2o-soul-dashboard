@@ -35,7 +35,7 @@
     <tr><td>알림 구독 정보</td><td>앱 알림을 켰을 때 — 브라우저가 주는 알림 주소, 고른 알림 종류·언어</td><td>알림을 끄면 삭제</td></tr>
     <tr><td>최애·언어·본 영상 등 설정</td><td>사이트 편의 기능</td><td>내 브라우저에만 저장 (서버로 보내지 않음)</td></tr>
   </table>
-  <p>사이트를 쓰는 기기 수를 세기 위해, 기기마다 하루 한 번 "왔어요"(처음 온 기기인지 여부만)를 보냅니다. 아이디·IP 등 기기를 알아볼 수 있는 정보는 보내거나 저장하지 않고, 날짜별 숫자만 남습니다. 이 기기에서 처음 온 날짜는 브라우저(localStorage)에만 저장됩니다.</p>
+  <p>사이트를 쓰는 기기 수를 세기 위해, 기기마다 하루 한 번 "왔어요"(처음 온 기기인지, 모바일·PC·태블릿 중 무엇인지만)를 보냅니다. 접속한 나라는 Cloudflare가 알려 주는 나라 코드로 날짜별 합계만 셉니다. 아이디·IP 등 기기를 알아볼 수 있는 정보는 보내거나 저장하지 않고, 날짜별 숫자만 남습니다. 이 기기에서 처음 온 날짜는 브라우저(localStorage)에만 저장됩니다.</p>
   <p>IP 주소는 저장하지 않습니다. 익명으로 글을 쓸 때 Cloudflare Turnstile이 사람인지 확인하며, 이 과정은 <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare 개인정보처리방침</a>을 따릅니다.</p>
 
   <h2>2. 보관 기간</h2>
@@ -62,7 +62,7 @@
     <li><b>Posts, comments, photos and nicknames</b> you submit are stored until you or the admin delete them. Anonymous post passwords are stored hashed.</li>
     <li><b>Push alerts:</b> the endpoint your browser provides, plus your chosen topics and language — deleted when you turn alerts off.</li>
     <li><b>Preferences</b> (bias, language, watched videos) stay in your browser only.</li>
-    <li>To count devices, the site sends a once-a-day "visited" ping (plus whether it's a first visit). No ID or IP is sent or stored — only daily totals. The first-visit date stays in your browser (localStorage).</li>
+    <li>To count devices, the site sends a once-a-day "visited" ping (plus whether it's a first visit and mobile/PC/tablet; country is counted only as a daily total from Cloudflare's country code). No ID or IP is sent or stored — only daily totals. The first-visit date stays in your browser (localStorage).</li>
     <li>We do <b>not</b> store IP addresses. Anonymous posting uses Cloudflare Turnstile to check you're human.</li>
     <li>Ban records from reports last 30 days.</li>
     <li>Hosting: GitHub Pages and Cloudflare (Workers, D1, KV). Sign-in: Google Identity Services.</li>

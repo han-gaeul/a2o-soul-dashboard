@@ -634,6 +634,8 @@ async function tweets(req, env, url) {
       const r = await env.DB.prepare("SELECT day, active, fresh FROM devices ORDER BY day DESC LIMIT 30").all();
       const t = await env.DB.prepare("SELECT SUM(fresh) AS n FROM devices").first();
       devices = { days: (r.results || []).reverse(), total: (t && t.n) || 0 };
+      const sp = await env.DB.prepare("SELECT k, n FROM dev_split WHERE day = ?").bind(new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10)).all().catch(() => ({ results: [] }));
+      devices.today = Object.fromEntries((sp.results || []).map((x) => [x.k, x.n]));
     } catch (_) { /* 아직 기록 없음 */ }
     return json(req, { total, topics, langs, history: hist.slice(-30), x: (await env.SUBS.get("_xstat", "json")) || null, visits: await siteVisits(env), devices });
   }
@@ -704,11 +706,18 @@ export default {
       if (!/^https:\/\/(www\.)?a2osoul-tracker\.com$/.test(req.headers.get("Origin") || "")) return json(req, { ok: false }, 403);
       const b = await req.json().catch(() => ({}));
       const day = new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
-      const q = () => env.DB.prepare("INSERT INTO devices (day, active, fresh) VALUES (?, 1, ?) ON CONFLICT(day) DO UPDATE SET active = active + 1, fresh = fresh + excluded.fresh")
-        .bind(day, b && b.new ? 1 : 0).run();
-      try { await q(); } catch (_) {
-        await env.DB.prepare("CREATE TABLE IF NOT EXISTS devices (day TEXT PRIMARY KEY, active INTEGER DEFAULT 0, fresh INTEGER DEFAULT 0)").run();
-        await q();
+      // 나눠 보기: 기기 종류(모바일·PC·태블릿) · 나라(Cloudflare가 아는 접속 나라 코드) — 날짜별 숫자만
+      const type = ["mobile", "pc", "tablet"].includes(b && b.type) ? b.type : "etc";
+      const cc = String((req.cf && req.cf.country) || "XX").slice(0, 2);
+      const split = (k) => env.DB.prepare("INSERT INTO dev_split (day, k, n) VALUES (?, ?, 1) ON CONFLICT(day, k) DO UPDATE SET n = n + 1").bind(day, k);
+      const all = () => env.DB.batch([
+        env.DB.prepare("INSERT INTO devices (day, active, fresh) VALUES (?, 1, ?) ON CONFLICT(day) DO UPDATE SET active = active + 1, fresh = fresh + excluded.fresh").bind(day, b && b.new ? 1 : 0),
+        split("type:" + type), split("cc:" + cc)]);
+      try { await all(); } catch (_) {
+        await env.DB.batch([
+          env.DB.prepare("CREATE TABLE IF NOT EXISTS devices (day TEXT PRIMARY KEY, active INTEGER DEFAULT 0, fresh INTEGER DEFAULT 0)"),
+          env.DB.prepare("CREATE TABLE IF NOT EXISTS dev_split (day TEXT, k TEXT, n INTEGER DEFAULT 0, PRIMARY KEY (day, k))")]);
+        await all();
       }
       return json(req, { ok: true });
     }
