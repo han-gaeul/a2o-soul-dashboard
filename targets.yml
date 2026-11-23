@@ -148,6 +148,8 @@ x_vendors:
 #     category: fancam
 #     member: MOON
 videos:
+  - id: oj804ttqVkI   # A2O SOUL 데뷔 앨범 'SUPERSTAR' 소개 영상 (WowKorea FAN · 일본어)
+    category: content
   - id: PbpHyIQerX8   # [핫클립/SUB] 정오의 희망곡 김신영입니다 (팬 제보)
     category: content
   - id: 2QPN0tFcv6c   # [FAN PICK CAM 4K] SORA 'SUPERSTAR' THE SHOW 261020 (팬 제보 — 'FAN PICK CAM'이라 자동 분류 안 됨)
