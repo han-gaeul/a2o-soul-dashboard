@@ -41,12 +41,12 @@ def todo(photos, cache):
 
 def _models():
     import cv2
-    det = cv2.FaceDetectorYN.create(str(MODEL_DIR / YUNET), "", (320, 320), 0.8, 0.3, 5000)
+    det = cv2.FaceDetectorYN.create(str(MODEL_DIR / YUNET), "", (320, 320), 0.6, 0.3, 5000)
     rec = cv2.FaceRecognizerSF.create(str(MODEL_DIR / SFACE), "")
     return det, rec
 
 
-def _faces(img, det, rec, min_size=40):
+def _faces(img, det, rec, min_size=32):
     import cv2
     h, w = img.shape[:2]
     s = min(1.0, 1600 / max(h, w))
