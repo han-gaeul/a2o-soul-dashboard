@@ -135,6 +135,15 @@ def candidates(dash, site, now):
         if x.get("kind") in ("views", "subs") and x.get("n") and now.date() - _kst(x["date"] + " 00:00").date() <= timedelta(days=1):
             out.append((f"ms|{x['kind']}|{x.get('name', '')}|{x['n']}", "video", x["kind"],
                         {"name": x.get("name") or "", "n": x["n"], "url": x.get("url") or site}))
+    for e in evs:  # 음원 총공(총공팀 공지) — 시작 1시간 전쯤 트윗 초안만 (팬 주최라 푸시·자동 업로드 없음, tweet.html에서 확인 후 올림)
+        if e.get("type") != "총공" or not re.fullmatch(r"\d{2}:\d{2}", e.get("time") or ""):
+            continue
+        st = _kst(f"{e['date']} {e['time']}")
+        if -timedelta(minutes=20) <= st - now <= timedelta(hours=1, minutes=10):
+            mm = re.search(r"\(~\s*(\d{1,2}:\d{2})\)", e["title"])
+            out.append((f"sg|{e['date']}|{e['time']}|{e['title']}", "show", "stream",
+                        {"name": re.sub(r"\s*\(~[^)]*\)", "", e["title"]).strip(), "t": e["time"], "end": mm.group(1) if mm else "",
+                         "post": e.get("url") or "", "url": site + "#cheer", "draft_only": True}))
     for n in dash.get("nominees") or []:  # 음방 1위 후보 — 방송 당일, 방송 끝나기 전까지
         tm = air.get(n["show"]) or ""
         end = _kst(f"{n['date']} {tm or '23:00'}") + timedelta(hours=1)
@@ -267,6 +276,11 @@ def tweet_text(kind, data):
         url = data["url"]
         site_cheer = "https://a2osoul-tracker.com/#cheer"
         links = [f"📺 생방송 {url}", f"💜 응원법·투표 {site_cheer}"]  # 방송 보기 + 사이트(응원법·투표) 링크 둘 다
+    elif kind == "stream":
+        when = f"{data['t']}~{data['end']}" if data.get("end") else data["t"]
+        title, body, url = f"📢 오늘 {when} {data['name']}!", "시간 맞춰 같이 스밍해요 💜", data["url"]
+        en = f"📢 Streaming party {when} KST — stream together!"
+        links = [f"🎧 플레이리스트 원클릭 담기 {url}"] + ([f"📌 총공 공지 {data['post']}"] if data.get("post") else [])
     else:
         title, body, url = compose(kind, data, "ko")
         t2, b2, _ = compose(kind, data, "en")
@@ -312,7 +326,7 @@ def drafts(api, priv, new, site):
     items = [{"key": key, "kind": kind, "text": tweet_text(kind, data), "auto": kind in AUTO_POST, **({"rt": True} if data.get("rt") else {}), **({"post_at": data["post_at"]} if data.get("post_at") else {}),
               **({"image": tweet_image(kind, data, site)} if tweet_image(kind, data, site) else {})}
              for key, topic, kind, data in new
-             if kind not in ("notice",) and not data.get("credit") and not data.get("no_draft")]
+             if kind not in ("notice",) and not data.get("credit") and not data.get("no_draft")]  # 음원 총공(stream)은 초안만 — 공지 링크를 붙여서 만듦
     if not items:
         return 0
     try:
