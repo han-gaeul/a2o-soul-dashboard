@@ -921,54 +921,81 @@ if ("serviceWorker" in navigator) {
 
   const renderCharts = () => {
     $("charts").replaceChildren();
-    // Spotify 곡별 누적·하루 재생 수 (하루 한 번 자동 기록)
-    const sp = data.spotify;
-    if (sp && (sp.songs || []).length) {
-      const n = (x) => Number(x).toLocaleString(locale);
-      const top = sp.songs[0];
-      $("charts").append(el("details", { class: "sp-box", ...(MOBILE ? {} : { open: "" }) },
-        el("summary", { class: "sp-head" }, el("b", {}, t("sp_title")), el("span", { class: "muted small" }, ` ${top.song} ${n(top.total)}${top.daily != null ? ` (+${n(top.daily)})` : ""} · ${t("sp_asof", { d: sp.date.slice(5).replace("-", ".") })}`)),
-        el("table", { class: "sp-table" },
-          el("thead", {}, el("tr", {}, el("th", {}, t("sp_song")), el("th", {}, t("sp_total")), el("th", {}, t("sp_daily")))),
-          el("tbody", {}, ...sp.songs.map((x) => el("tr", {}, el("td", {}, x.song), el("td", {}, n(x.total)),
-            el("td", { class: x.daily != null ? "up" : "muted" }, x.daily != null ? `+${n(x.daily)}` : "—"))))),
-        sp.songs.every((x) => x.daily == null) ? el("p", { class: "muted small" }, t("sp_first")) : null,
-        sp.artist ? ext(`https://open.spotify.com/artist/${sp.artist}`, "Spotify ↗") : null));
+    const n = (x) => Number(x).toLocaleString(locale);
+    const key = (x) => String(x).toLowerCase().replace(/\(.*?\)/g, "").replace(/[^a-z0-9가-힣]/g, "");
+    const kc = data.kcharts, sp = data.spotify, sl = data.sales;
+    const songs = (kc && kc.songs) || [];
+    const spBy = Object.fromEntries(((sp && sp.songs) || []).map((x) => [key(x.song), x]));
+    const chg = (x) => x.prev == null || x.prev === x.rank ? null
+      : el("span", { class: x.prev > x.rank ? "up" : "down" }, `${x.prev > x.rank ? "▲" : "▼"}${Math.abs(x.prev - x.rank)}`);
+
+    // ① 맨 위 요약 3칸: 최고 순위 · Spotify 하루 합계 · 앨범 초동
+    const best = songs.flatMap((s_) => s_.ranks.filter((x) => !/주간/.test(x.chart)).map((x) => ({ ...x, song: s_.song }))).sort((a, b) => a.rank - b.rank)[0];
+    const spDay = ((sp && sp.songs) || []).reduce((a, x) => a + (x.daily || 0), 0);
+    const hs = (sl && sl.hanteo) || {};
+    const tile = (label, value, sub) => el("div", { class: "now-tile" }, el("span", { class: "muted small" }, label), el("b", {}, value), sub ? el("span", { class: "muted small" }, sub) : null);
+    $("charts").append(el("div", { class: "now-tiles" },
+      tile(t("now_best"), best ? `${best.rank}${t("kc_rank")}` : t("kc_out"), best ? `${best.chart} · ${best.song}` : null),
+      sp ? tile(t("now_sp"), spDay ? `+${compact.format(spDay)}` : "—", t("sp_asof", { d: sp.date.slice(5).replace("-", ".") })) : null,
+      hs.first_week || hs.total ? tile(t("now_sales"), n(hs.first_week || hs.total), "Hanteo") : null));
+
+    // ② 탭: 순위 · 재생 · 판매량
+    const panes = {};
+    const tabs = el("div", { class: "filter-row ev-tabs now-tabs" });
+    const body = el("div", {});
+    const TABS = [["rank", "now_t_rank"], ["play", "now_t_play"], ["sales", "now_t_sales"]].filter(([k]) => k !== "sales" || sl);
+    let cur = pref.get("nowTab", "rank");
+    if (!TABS.some(([k]) => k === cur)) cur = "rank";
+    const show = () => {
+      tabs.querySelectorAll("button").forEach((b) => b.classList.toggle("on", b.dataset.k === cur));
+      for (const [k, el_] of Object.entries(panes)) el_.hidden = k !== cur;
+    };
+    for (const [k, label] of TABS) {
+      const b = el("button", { type: "button", "data-k": k }, t(label));
+      b.addEventListener("click", () => { cur = k; pref.set("nowTab", k); show(); if (k === "rank" || k === "play") requestAnimationFrame(() => { if (window.Chart) rankCharts(); }); });
+      tabs.append(b);
     }
-    // 국내 음원 차트: 곡마다 지금 순위(1시간마다, 어제와 비교) 먼저 → 누적 재생·좋아요는 접어서
-    const kc = data.kcharts;
-    if (kc && (kc.songs || []).length) {
-      const n = (x) => Number(x).toLocaleString(locale);
-      const at = (kc.checked || "").slice(11, 13);
-      const chg = (x) => x.prev == null ? null : x.prev === x.rank ? el("span", { class: "muted" }, "–")
-        : el("span", { class: x.prev > x.rank ? "up" : "down" }, `${x.prev > x.rank ? "▲" : "▼"}${Math.abs(x.prev - x.rank)}`);
-      const best = kc.songs.flatMap((s_) => s_.ranks.filter((x) => !/주간/.test(x.chart)).map((x) => ({ ...x, song: s_.song }))).sort((a, b) => a.rank - b.rank)[0];
-      $("charts").append(el("details", { class: "sp-box kc-box", ...(MOBILE ? {} : { open: "" }) },
-        el("summary", { class: "sp-head" }, el("b", {}, t("kc_title")),
-          el("span", { class: "muted small" }, best ? ` ${best.song} · ${best.chart} ${best.rank}${t("kc_rank")}` : ` ${t("kc_out")}`)),
-        el("p", { class: "muted small kc-at" }, t("kc_now", { h: at })),
-        el("div", { class: "kc-songs" }, ...kc.songs.map((s_) => {
-          const g = s_.counts["지니 재생"], lk = s_.counts["멜론 좋아요"];
-          const k = (x) => new Intl.NumberFormat(locale, { notation: "compact", maximumFractionDigits: 1 }).format(x);
-          return el("div", { class: "kc-song" },
-            el("b", {}, s_.song),
-            el("div", { class: "kc-ranks" }, ...(s_.ranks.length ? s_.ranks.map((x) => el("span", { class: `kc-r${/주간/.test(x.chart) ? " kc-wk" : ""}` },
-              el("span", { class: "muted" }, `${x.chart} `), el("b", {}, `${x.rank}${t("kc_rank")}`), " ", chg(x)))
-              : [el("span", { class: "muted" }, t("kc_out"))])),
-            g || lk ? el("span", { class: "kc-cnt muted", title: `${t("kc_genie")} · ${t("kc_like")}` },
-              g ? `${t("kc_genie")} ${k(g.total)}` : "", g && lk ? " · " : "", lk ? `♥ ${n(lk.total)}` : "") : el("span"));
-        })),
-        el("p", { class: "muted small" }, t("kc_src"))));
-    }
+    $("charts").append(tabs, body);
+
+    // 순위: 곡 × 차트 표 (지금 순위, ▲▼는 어제·지난주 대비) + 순위 추이 그래프 하나
+    const COLS = ["멜론 TOP100", "멜론 HOT100", "멜론 일간", "지니 TOP200", "벅스 실시간", "FLO 차트", "써클 디지털 주간", "써클 스트리밍 주간"];
+    const used = COLS.filter((c) => songs.some((s_) => s_.ranks.some((x) => x.chart === c)) || ["멜론 HOT100", "멜론 TOP100", "지니 TOP200"].includes(c));
+    const rankPane = panes.rank = el("div", { class: "now-pane" },
+      el("p", { class: "muted small" }, kc ? t("kc_now", { h: (kc.checked || "").slice(11, 13) }) : t("no_charts")),
+      songs.length ? el("div", { class: "now-scroll" }, el("table", { class: "now-table" },
+        el("thead", {}, el("tr", {}, el("th", {}, t("sp_song")), ...used.map((c) => el("th", {}, ...c.replace(" 주간", "").split(" ").flatMap((w, i) => i ? [el("br"), w] : [w]), /주간/.test(c) ? el("small", { class: "muted" }, ` (${t("now_week")})`) : null)))),
+        el("tbody", {}, ...songs.map((s_) => el("tr", {}, el("td", {}, s_.song), ...used.map((c) => {
+          const x = s_.ranks.find((r) => r.chart === c);
+          return x ? el("td", { class: "hit" }, el("b", {}, x.rank), " ", chg(x)) : el("td", { class: "muted" }, "–");
+        })))))) : null,
+      (data.charts || []).some((c) => c.ranks.length > 1) ? el("div", {}, el("h3", { class: "now-h" }, t("now_trend")),
+        el("div", { class: "chart-box now-chart" }, el("canvas", { id: "rankTrend" }))) : null);
+
+    // 재생: 곡별 Spotify 누적·하루, 지니 재생, 멜론 좋아요 + Spotify 하루 재생 그래프
+    const names = songs.length ? songs.map((s_) => s_.song) : ((sp && sp.songs) || []).map((x) => x.song);
+    const cnt = (s_, k) => (songs.find((x) => x.song === s_) || { counts: {} }).counts[k];
+    const two = (tot, day) => tot == null ? el("td", { class: "muted" }, "–") : el("td", {}, n(tot), day != null ? el("div", { class: "up small" }, `+${n(day)}`) : null);
+    panes.play = el("div", { class: "now-pane" },
+      el("div", { class: "now-scroll" }, el("table", { class: "now-table play" },
+        el("thead", {}, el("tr", {}, el("th", {}, t("sp_song")), el("th", {}, "Spotify"), el("th", {}, t("kc_genie")), el("th", {}, t("kc_like")))),
+        el("tbody", {}, ...names.map((s_) => { const x = spBy[key(s_)] || {}; const g = cnt(s_, "지니 재생"), lk = cnt(s_, "멜론 좋아요");
+          return el("tr", {}, el("td", {}, s_), two(x.total, x.daily), two(g && g.total, g && g.daily), two(lk && lk.total, lk && lk.daily)); })))),
+      el("p", { class: "muted small" }, t("now_play_note")),
+      (data.charts || []).some((c) => (c.streams || []).length > 1) ? el("div", {}, el("h3", { class: "now-h" }, t("now_daily")),
+        el("div", { class: "chart-box now-chart" }, el("canvas", { id: "playTrend" }))) : null,
+      sp && sp.artist ? ext(`https://open.spotify.com/artist/${sp.artist}`, "Spotify ↗") : null);
+
+    // 판매량
+    const salesPane = panes.sales = el("div", { class: "now-pane" });
     // 앨범 판매량: 한터 일차별(초동) + 써클 주간 (공식)
-    const sl = data.sales;
+    // (sl = data.sales 위에서)
     if (sl) {
       const n = (x) => Number(x).toLocaleString(locale);
       const hd = (sl.hanteo && sl.hanteo.days) || [];
       const max = Math.max(1, ...hd.map((x) => x.n));
       const wkLabel = (k) => { const [y, w] = k.split("-").map(Number); const j4 = new Date(Date.UTC(y, 0, 4)); const mon = new Date(j4.getTime() + ((w - 1) * 7 - ((j4.getUTCDay() + 6) % 7)) * 86400000); return `${mon.getUTCMonth() + 1}/${mon.getUTCDate()}~`; };
       const hs = sl.hanteo || {};
-      $("charts").append(el("details", { class: "sp-box sales-box", ...(MOBILE ? {} : { open: "" }) },
+      salesPane.append(el("details", { class: "sp-box sales-box", open: "" },
         el("summary", { class: "sp-head" }, el("b", {}, t("sales_title", { a: sl.album })),
           el("span", { class: "muted small" }, hs.first_week ? ` ${t("sales_first")} ${n(hs.first_week)}` : (sl.circle || []).length ? ` ${t("sales_circle")} ${n(sl.circle[sl.circle.length - 1].sales)}` : "")),
         sl.hanteo && sl.hanteo.total ? el("p", { class: "sales-sum" },
@@ -987,34 +1014,8 @@ if ("serviceWorker" in navigator) {
         sl.hanteo && sl.hanteo.post ? ext(sl.hanteo.post, "Hanteo ↗") : null,
         ext("https://circlechart.kr/page_chart/album.circle?nationGbn=T&serviceGbn=ALL&termGbn=week", "Circle Chart ↗")));
     }
-    if ((data.charts || []).length || sp || sl) {
-      for (const c of data.charts || []) {
-        if (c.streams && c.streams.length) {  // 재생 수 차트 (Spotify 일간 등)
-          const sl = c.streams[c.streams.length - 1], sp = c.streams[c.streams.length - 2];
-          const d = sl && sp ? sl[1] - sp[1] : 0;
-          $("charts").append(el("div", { class: "chart-row" },
-            el("div", { class: "chart-meta" },
-              el("b", {}, c.song), el("span", { class: "muted" }, ` · ${[c.service, c.type].filter(Boolean).join(" ")}`),
-              el("span", { class: "rank" }, t("streams_n", { n: Number(sl[1]).toLocaleString(locale) })),
-              d ? el("span", { class: d > 0 ? "up" : "down" }, ` ${d > 0 ? "▲" : "▼"}${Math.abs(d).toLocaleString(locale)}`) : null,
-              el("span", { class: "muted small" }, ` (${sl[0].slice(5).replace("-", ".")})`)),
-            c.streams.length > 1 ? el("div", { class: "chart-box small-chart" }, el("canvas", { "data-streams": "1" })) : null));
-          if (!c.ranks.length) continue;
-        }
-        const last = c.ranks[c.ranks.length - 1];
-        const prev = c.ranks[c.ranks.length - 2];
-        const move = last && prev ? prev[1] - last[1] : 0;
-        const box = el("div", { class: "chart-row" },
-          el("div", { class: "chart-meta" },
-            el("b", {}, c.song), el("span", { class: "muted" }, ` · ${[c.service, c.type].filter(Boolean).join(" ")}`),
-            last ? el("span", { class: "rank" }, t("rank", { n: last[1] })) : null,
-            move ? el("span", { class: move > 0 ? "up" : "down" }, move > 0 ? ` ▲${move}` : ` ▼${-move}`) : null),
-          c.ranks.length > 1 ? el("div", { class: "chart-box small-chart" }, el("canvas", {})) : null);
-        $("charts").append(box);
-      }
-    } else {
-      $("charts").append(empty(t("no_charts")));
-    }
+    for (const p_ of Object.values(panes)) body.append(p_);
+    show();
   };
   renderCharts();
   // chart.html로 방금 입력한 순위도 바로 보이게: 워커에서 입력 목록을 받아 날짜별 마지막 순위로 합침
@@ -2947,28 +2948,40 @@ if ("serviceWorker" in navigator) {
   }
 
   function rankCharts() {
-    const sc = [...$("charts").querySelectorAll("canvas[data-streams]")];
-    (data.charts || []).filter((c) => (c.streams || []).length > 1).forEach((c, i) => {
-      new Chart(sc[i], {
+    // 순위 추이: 곡·차트별 선 하나씩 (위로 갈수록 높은 순위)
+    const rc = $("rankTrend");
+    if (rc && !rc.dataset.done && rc.offsetParent) {
+      rc.dataset.done = "1";
+      const series = (data.charts || []).filter((c) => c.ranks.length > 1);
+      const labels = [...new Set(series.flatMap((c) => c.ranks.map((r) => r[0])))].sort();
+      new Chart(rc, {
         type: "line",
-        data: { labels: c.streams.map((r) => r[0].slice(5)),
-                datasets: [{ data: c.streams.map((r) => r[1]), borderColor: "#1db954", backgroundColor: "#1db954", tension: 0.2, pointRadius: 2 }] },
-        options: { maintainAspectRatio: false, plugins: { legend: { display: false },
-                   tooltip: { callbacks: { label: (x) => t("streams_n", { n: x.parsed.y.toLocaleString(locale) }) } } },
-                   scales: { y: { ticks: { callback: (v) => compact.format(v) } } } },
-      });
-    });
-    const canvases = [...$("charts").querySelectorAll("canvas:not([data-streams])")];
-    (data.charts || []).filter((c) => c.ranks.length > 1).forEach((c, i) => {
-      new Chart(canvases[i], {
-        type: "line",
-        data: { labels: c.ranks.map((r) => r[0].slice(5)),
-                datasets: [{ data: c.ranks.map((r) => r[1]), borderColor: palette[i % palette.length], backgroundColor: palette[i % palette.length], tension: 0.2, pointRadius: 2 }] },
-        options: { maintainAspectRatio: false, plugins: { legend: { display: false },
-                   tooltip: { callbacks: { label: (x) => t("rank", { n: x.parsed.y }) } } },
+        data: { labels: labels.map((d) => d.slice(5).replace("-", "/")),
+                datasets: series.map((c, i) => { const m = Object.fromEntries(c.ranks); return {
+                  label: `${c.song} · ${[c.service, c.type].filter(Boolean).join(" ")}`, data: labels.map((l) => m[l] ?? null), spanGaps: true,
+                  borderColor: palette[i % palette.length], backgroundColor: palette[i % palette.length], tension: 0.2, pointRadius: 2 }; }) },
+        options: { maintainAspectRatio: false, interaction: { mode: "nearest", intersect: false },
+                   plugins: { legend: { position: "bottom", labels: { boxWidth: 10, font: { size: 11 } } },
+                              tooltip: { callbacks: { label: (x) => `${x.dataset.label} ${t("rank", { n: x.parsed.y })}` } } },
                    scales: { y: { reverse: true, ticks: { precision: 0 } } } },
       });
-    });
+    }
+    // 하루 재생 수: 곡별 막대 (Spotify)
+    const pc = $("playTrend");
+    if (pc && !pc.dataset.done && pc.offsetParent) {
+      pc.dataset.done = "1";
+      const series = (data.charts || []).filter((c) => (c.streams || []).length && /Spotify/.test(c.service));
+      const labels = [...new Set(series.flatMap((c) => c.streams.map((r) => r[0])))].sort();
+      new Chart(pc, {
+        type: "bar",
+        data: { labels: labels.map((d) => d.slice(5).replace("-", "/")),
+                datasets: series.map((c, i) => { const m = Object.fromEntries(c.streams); return {
+                  label: c.song, data: labels.map((l) => m[l] ?? null), backgroundColor: palette[i % palette.length], borderRadius: 3 }; }) },
+        options: { maintainAspectRatio: false, interaction: { mode: "index", intersect: false },
+                   plugins: { legend: { position: "bottom", labels: { boxWidth: 10, font: { size: 11 } } } },
+                   scales: { x: { stacked: true }, y: { stacked: true, ticks: { callback: (v) => compact.format(v) } } } },
+      });
+    }
   }
 
   drawers.overview = () => lineChart("accountsChart", data.accounts);
