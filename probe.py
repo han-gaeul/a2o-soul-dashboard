@@ -7,8 +7,10 @@ with sync_playwright() as p:
         pg = b.new_page()
         seen = []
         pg.on("response", lambda r: seen.append((r.status, r.url, r.headers.get("content-type", ""))))
-        pg.goto(u, wait_until="networkidle", timeout=60000)
-        pg.wait_for_timeout(3000)
+        
+        try: pg.goto(u, wait_until="load", timeout=45000)
+        except Exception as e: print("goto", e)
+        pg.wait_for_timeout(8000)
         print("==", u)
         for s, url, ct in seen:
             if "json" in ct or "api" in url:
