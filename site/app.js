@@ -110,7 +110,8 @@ if ("serviceWorker" in navigator) {
   try {
     if (localStorage.getItem("dv_day") !== todayKst && /a2osoul-tracker\.com$/.test(location.hostname)) {
       const isNew = !localStorage.getItem("dv_first");
-      fetch("https://push.a2osoul-tracker.com/hit", { method: "POST", headers: { "Content-Type": "text/plain" }, body: JSON.stringify({ new: isNew ? 1 : 0 }), keepalive: true })
+      fetch("https://push.a2osoul-tracker.com/hit", { method: "POST", headers: { "Content-Type": "text/plain" }, body: JSON.stringify({ new: isNew ? 1 : 0,
+        type: /iPad|Tablet/i.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1) ? "tablet" : /Mobi|Android|iPhone/i.test(navigator.userAgent) ? "mobile" : "pc" }), keepalive: true })
         .then((r) => { if (r.ok) { localStorage.setItem("dv_day", todayKst); if (isNew) localStorage.setItem("dv_first", todayKst); } }).catch(() => {});
     }
   } catch (_) { /* 저장 공간 막힘 등 */ }

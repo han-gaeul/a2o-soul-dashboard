@@ -287,6 +287,10 @@
         const v = s.devices.days, today = v[v.length - 1], y = v.length > 1 ? v[v.length - 2] : null;
         const n = (x) => Number(x).toLocaleString();
         setStat("devs", "", "📱", `오늘 쓴 기기 ${n(today.active)}대`, `${y ? `어제 ${n(y.active)}대 · ` : ""}새 기기 오늘 ${n(today.fresh)} · 누적 ${n(s.devices.total)}대 (${v[0].day.slice(5).replace("-", "/")}부터)`);
+        const sp = s.devices.today || {}, pct = (k) => today.active ? Math.round(((sp[k] || 0) / today.active) * 100) : 0;
+        const ccs = Object.entries(sp).filter(([k]) => k.startsWith("cc:")).sort((a, b) => b[1] - a[1]).slice(0, 6)
+          .map(([k, c]) => { try { return `${new Intl.DisplayNames(["ko"], { type: "region" }).of(k.slice(3))} ${c}`; } catch (_) { return `${k.slice(3)} ${c}`; } });
+        $("devs").querySelector("small").textContent += `\n오늘: 모바일 ${pct("type:mobile")}% · PC ${pct("type:pc")}% · 태블릿 ${pct("type:tablet")}%${ccs.length ? `\n나라: ${ccs.join(" · ")}` : ""}`;
         bars($("devs").querySelector(".trend"), v.slice(-7).map((x) => ({ d: x.day, v: x.active })), n);
         $("devs").hidden = $("devsSep").hidden = false;
       }
