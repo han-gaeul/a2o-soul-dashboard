@@ -212,22 +212,33 @@ def chart_series():
 
 
 def summary():
-    """차트 칸 표: 지금 순위(마지막 확인 시각) + 지니·멜론 누적"""
+    """차트 칸: 곡마다 지금 들어가 있는 차트 순위(어제 마지막 순위와 비교) + 써클 최근 주 + 지니·멜론 누적"""
     d = load()
-    last = {}
+    now = (d.get("checked") or "")[:13].replace("T", " ")
+    S = list(songs())
+    rk = {s: [] for s in S}
     for name, by in (d.get("ranks") or {}).items():
         for song, hours in by.items():
-            h = max(hours)
-            last.setdefault(name, {})[song] = {"rank": hours[h], "at": h}
-    now = (d.get("checked") or "")[:13].replace("T", " ")
-    live = {n: {s: v["rank"] for s, v in by.items() if v["at"] == now} for n, by in last.items()}
-    live = {n: v for n, v in live.items() if v}
+            if now not in hours:
+                continue
+            before = [h for h in hours if h[:10] < now[:10]]
+            rk.setdefault(song, []).append({"chart": name, "rank": hours[now], "prev": hours[max(before)] if before else None})
+    for label, weeks in (d.get("circle") or {}).items():
+        ws = sorted(weeks)
+        if not ws:
+            continue
+        for song, r in weeks[ws[-1]].items():
+            prev = weeks[ws[-2]].get(song) if len(ws) > 1 else None
+            rk.setdefault(song, []).append({"chart": f"{label} 주간", "rank": r, "prev": prev, "week": ws[-1]})
+    for v in rk.values():
+        v.sort(key=lambda x: ("주간" in x["chart"], x["rank"]))
     cnt = {}
     for label, by in (d.get("counts") or {}).items():
         for song, days in by.items():
             ds = sorted(days)
             cnt.setdefault(song, {})[label] = {"total": days[ds[-1]], "daily": days[ds[-1]] - days[ds[-2]] if len(ds) > 1 else None}
-    return {"checked": d.get("checked"), "live": live, "counts": cnt} if (live or cnt) else None
+    order = sorted(rk, key=lambda s: min([x["rank"] + (1000 if "주간" in x["chart"] else 0) for x in rk[s]] or [9999]))
+    return {"checked": d.get("checked"), "songs": [{"song": s, "ranks": rk[s], "counts": cnt.get(s, {})} for s in order]} if (d.get("ranks") or cnt) else None
 
 
 if __name__ == "__main__":
