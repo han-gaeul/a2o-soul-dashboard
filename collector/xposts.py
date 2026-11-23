@@ -4,19 +4,31 @@
 """
 import atexit
 import os
+import sys
+from collections import Counter
 
 import requests
 
 API = "https://api.x.com/2"
 # 이번 실행의 X 사용량 (추정용): 읽은 글 수(글당 $0.005)·사용자 조회(건당 $0.01)·402(크레딧 부족) 여부
 USAGE = {"reads": 0, "users": 0, "err402": 0}
+# 어디서 읽었는지 (부른 파일:줄 · 계정/검색어 앞부분) → 읽은 글 수. 로그에만 찍음 (비용 줄일 곳 찾기용)
+BY = Counter()
+
+
+def _where(tag):
+    f = sys._getframe(1)
+    while f and f.f_code.co_filename.endswith("xposts.py"):
+        f = f.f_back
+    at = f"{os.path.basename(f.f_code.co_filename)}:{f.f_lineno}" if f else "?"
+    return f"{at} {tag or ''}".strip()
 
 
 def enabled():
     return bool(os.environ.get("X_BEARER_TOKEN"))
 
 
-def _get(path, params=None):
+def _get(path, params=None, tag=None):
     r = requests.get(f"{API}{path}", params=params, timeout=30,
                      headers={"Authorization": f"Bearer {os.environ['X_BEARER_TOKEN']}"})
     if r.status_code == 402:
@@ -27,7 +39,9 @@ def _get(path, params=None):
         USAGE["users"] += 1
     else:
         d = j.get("data")
-        USAGE["reads"] += len(d) if isinstance(d, list) else (1 if d else 0)
+        n = len(d) if isinstance(d, list) else (1 if d else 0)
+        USAGE["reads"] += n
+        BY[_where(tag or (params or {}).get("query", "")[:50])] += n
     return j
 
 
@@ -48,6 +62,9 @@ def _report():
         if r.json().get("alert"):  # 오늘 처음 402 → 관리자에게 알림
             webpush.alert_admin(api, priv, "⚠️ X 크레딧 부족", "수집·자동 글이 멈췄어요 — console.x.com에서 충전해 주세요")
         print(f"[X] 사용량 기록: 글 {USAGE['reads']} · 사용자 조회 {USAGE['users']}" + (f" · 402 {USAGE['err402']}" if USAGE["err402"] else ""))
+        for k, n in BY.most_common():
+            if n:
+                print(f"[X] 읽음 {n:>4} · {k}")
     except Exception as e:  # noqa: BLE001
         print(f"[X] 사용량 기록 실패: {type(e).__name__} {e}")
 
@@ -65,7 +82,7 @@ def fetch_posts(uid, username, since_id=None, first_limit=20, exclude="replies,r
     else:
         params["max_results"] = max(5, min(100, first_limit))
     out = []
-    res = _get(f"/users/{uid}/tweets", params)
+    res = _get(f"/users/{uid}/tweets", params, tag=f"@{username}")
     media = {m["media_key"]: m for m in (res.get("includes") or {}).get("media", [])}
     for t in res.get("data", []):
         text = (t.get("note_tweet") or {}).get("text") or t.get("text") or ""
@@ -87,7 +104,7 @@ def fetch_photo_posts(uid, username, pages=5):
     for _ in range(pages):
         if token:
             params["pagination_token"] = token
-        res = _get(f"/users/{uid}/tweets", params)
+        res = _get(f"/users/{uid}/tweets", params, tag=f"@{username} 사진")
         media = {m["media_key"]: m for m in (res.get("includes") or {}).get("media", [])}
         for t in res.get("data", []):
             imgs = [media[k]["url"] for k in (t.get("attachments") or {}).get("media_keys", [])
