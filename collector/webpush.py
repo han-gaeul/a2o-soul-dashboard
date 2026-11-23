@@ -276,7 +276,7 @@ def _josa(word, with_final, without_final):
 
 def tweet_text(kind, data):
     """알림 내용 → X 글 초안: 한국어 + 영어 한 줄 + 링크 + 해시태그(그룹·곡·활동·멤버). 280자 넘으면 활동 태그 → 영어 줄 순서로 뺌."""
-    en, links = "", []
+    en, links, quote = "", [], ""  # quote: 맨 끝에 붙이는 글 주소 → X가 인용으로 보여줌
     site_url = "https://a2osoul-tracker.com/"
     if kind == "media":  # 매체 글은 초안 페이지에서 리트윗 (본문은 미리보기용)
         title, body, url = f"📸 {data['name']} 새 콘텐츠", data["title"], data["url"]
@@ -300,7 +300,8 @@ def tweet_text(kind, data):
             title, body, url = f"🔴 지금 {data['name']} 진행 중!{until}", "아직 늦지 않았어요, 같이 스밍해요 💜", data["url"]
         else:
             title, body, url = f"📢 오늘 {when} {data['name']}!", "시간 맞춰 같이 스밍해요 💜", data["url"]
-        links = [f"🎧 플레이리스트 원클릭 담기 {url}"] + ([f"📌 총공 공지 {data['post']}"] if data.get("post") else [])
+        links = [f"🎧 플레이리스트 원클릭 담기 {url}"]
+        quote = data.get("post") or ""  # 총공팀 공지는 인용으로
     elif kind == "collab":  # 해외 팬 콜라보 (스테이션헤드 등) — 해외 팬 대상이라 영어 줄 포함
         when = f"{data['t']}~{data['end']}" if data.get("end") else data["t"]
         w = data.get("with") or ""
@@ -334,7 +335,7 @@ def tweet_text(kind, data):
 
     def build(with_en, with_era):
         tag2 = " ".join(x for x in (ACTIVE_TAG, song, ERA_TAGS if with_era else "") if x)
-        lines = [title] + ([body] if body else []) + ([en] if with_en and en else []) + [""] + (links or [f"👉 {url}" if url else ""]) + ["", tags, tag2]
+        lines = [title] + ([body] if body else []) + ([en] if with_en and en else []) + [""] + (links or [f"👉 {url}" if url else ""]) + ["", tags, tag2] + ([quote] if quote else [])
         return re.sub(r"\n{3,}", "\n\n", "\n".join(x for x in lines if x is not None)).strip()
 
     for opt in ((True, True), (True, False), (False, False)):
