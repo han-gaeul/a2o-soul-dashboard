@@ -14203,6 +14203,15 @@
    "th": "ช่วงที่ 2 เวลา 19:30 ที่สถานี A2O SOUL (ดูตารางงาน)",
    "zh": "19:30 第2场在 A2O SOUL 电台（见日程）"
   },
+  "1단계 더케이팝 서포트·2단계 합정역 CM보드 달성 · 지금 3단계 명동 쇼핑스트리트 광고 도전 중": {
+   "en": "Stage 1 THE K-POP support & stage 2 Hapjeong Station CM board reached · now going for stage 3, a Myeongdong shopping street billboard",
+   "es": "Etapa 1 (apoyo THE K-POP) y etapa 2 (pantalla en la estación Hapjeong) logradas · ahora vamos por la etapa 3: anuncio en la calle comercial de Myeongdong",
+   "id": "Tahap 1 dukungan THE K-POP & tahap 2 papan CM Stasiun Hapjeong tercapai · sekarang menuju tahap 3, iklan di jalan belanja Myeongdong",
+   "ja": "1段階 THE K-POPサポート・2段階 合井駅CMボード達成・現在3段階 明洞ショッピングストリート広告に挑戦中",
+   "pt": "Etapa 1 (apoio THE K-POP) e etapa 2 (painel na estação Hapjeong) concluídas · agora rumo à etapa 3: anúncio na rua comercial de Myeongdong",
+   "th": "ผ่านขั้น 1 ซัพพอร์ต THE K-POP และขั้น 2 ป้าย CM สถานีฮับจอง · ตอนนี้ลุ้นขั้น 3 ป้ายโฆษณาถนนช้อปปิ้งเมียงดง",
+   "zh": "已达成第1阶段 THE K-POP 应援·第2阶段 合井站广告屏 · 正在挑战第3阶段明洞购物街户外广告"
+  },
   "1시간 재생목록: Dancing in the Dark 다음에 다른 곡 2개(수록곡 1 + 다른 가수 곡 1)를 넣는 순서로": {
    "en": "1-hour playlist: after each Dancing in the Dark, add 2 different songs (1 EP B-side + 1 song by another artist)",
    "es": "Playlist de 1 hora: después de cada Dancing in the Dark, 2 canciones distintas (1 del EP + 1 de otro artista)",
@@ -14316,6 +14325,15 @@
    "pt": "A2O Rookies LTB (out. 2024–) → HTB (fev. 2025–)",
    "th": "A2O Rookies LTB (ต.ค. 2024–) → HTB (ก.พ. 2025–)",
    "zh": "A2O Rookies LTB（2024.10起）→ HTB（2025.2起）"
+  },
+  "A2O SOUL Cheer Up! 축하 광고": {
+   "en": "A2O SOUL Cheer Up! celebration ad",
+   "es": "A2O SOUL Cheer Up! anuncio de celebración",
+   "id": "A2O SOUL Cheer Up! iklan perayaan",
+   "ja": "A2O SOUL Cheer Up! お祝い広告",
+   "pt": "A2O SOUL Cheer Up! anúncio de comemoração",
+   "th": "A2O SOUL Cheer Up! โฆษณาฉลอง",
+   "zh": "A2O SOUL Cheer Up! 庆祝广告"
   },
   "A2O엔터테인먼트 아티스트 페이지": {
    "en": "A2O Entertainment artist page",
@@ -23270,6 +23288,15 @@
    "start": "2026-11-22 15:00",
    "title": "사전투표 (1316회)",
    "url": "https://open.coogoong.com/?target=event%2Fdetail%3Fkey_event%3D921"
+  },
+  {
+   "app": "빅크(BIGC)",
+   "end": "2026-11-30 12:00",
+   "note": "1단계 더케이팝 서포트·2단계 합정역 CM보드 달성 · 지금 3단계 명동 쇼핑스트리트 광고 도전 중",
+   "show": "더쇼",
+   "start": "2026-11-21 00:00",
+   "title": "A2O SOUL Cheer Up! 축하 광고",
+   "url": "https://go.bigc.im/3WXgOxU"
   },
   {
    "app": "하이어(HIGHER)",
