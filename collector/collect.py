@@ -259,7 +259,8 @@ def load_fan_files(cfg):
                        **{k: str(x[k]) for k in ("ios",) if str(x.get(k) or "").startswith("https://")}}
                       for x in info.get("vote_apps") or [] if x.get("name")],
         # 음방 생방송 보는 곳 (방송사 온에어) — show: 일정·투표 제목에 들어가는 이름
-        "show_live": [{"show": str(x["show"]), "label": str(x.get("label") or ""), "url": str(x["url"])}
+        "show_live": [{"show": str(x["show"]), "label": str(x.get("label") or ""), "url": _live_url(str(x["show"])) or str(x["url"]),
+                       **({"yt_channel": str(x["yt_channel"])} if x.get("yt_channel") else {})}
                       for x in info.get("show_live") or [] if x.get("show") and str(x.get("url", "")).startswith("https://")],
     }
     guide = read_yml("guide.yml")
@@ -1087,6 +1088,48 @@ def auto_items(today):
     return events, notices[:20], pending, votes, prerecs
 
 
+def _live_url(show):
+    """오늘 방송의 유튜브 라이브·프리미어 주소 (data/show_live.json, find_show_live가 찾아 둠)"""
+    p = DATA / "show_live.json"
+    if not p.exists():
+        return ""
+    x = (json.loads(p.read_text("utf-8")) or {}).get(show) or {}
+    return x.get("url") if x.get("date") == datetime.now(KST).date().isoformat() else ""
+
+
+def find_show_live(cfg, now):
+    """음방 당일(방송 3시간 전 ~ 3시간 뒤) yt_channel 채널의 예정·진행 중 라이브(프리미어 포함) 주소 찾기 — 30분마다, API 2유닛"""
+    p = DATA / "show_live.json"
+    st = json.loads(p.read_text("utf-8")) if p.exists() else {}
+    today = now.date().isoformat()
+    for x in cfg["info"].get("show_live") or []:
+        ch = x.get("yt_channel")
+        if not ch:
+            continue
+        evs = [e for e in cfg["events"] if e.get("date") == today and x["show"] in (e.get("title") or "") and re.fullmatch(r"\d{2}:\d{2}", str(e.get("time") or ""))]
+        if not evs or not any(abs((datetime.fromisoformat(f"{today}T{e['time']}:00+09:00") - now).total_seconds()) <= 3 * 3600 for e in evs):
+            continue
+        cur = st.get(x["show"]) or {}
+        if cur.get("date") == today and cur.get("url") and now - datetime.fromisoformat(cur["at"]) < timedelta(minutes=30):
+            continue
+        try:
+            ids = [v["id"] for v in youtube.fetch_uploads("UU" + ch[2:], max_pages=1)[:15]]
+            vids = youtube.fetch_videos(ids)
+            cands = [(vid, v) for vid, v in vids.items() if v.get("live_status") in ("upcoming", "live")
+                     and kst_datetime(v.get("scheduled_start") or v.get("published_at"))[:10] == today]
+        except Exception as e:  # noqa: BLE001
+            print(f"[생방송 링크] {x['show']} 실패: {str(e)[:100]}")
+            continue
+        if cands:
+            vid = sorted(cands, key=lambda c: c[1].get("scheduled_start") or "")[0][0]
+            st[x["show"]] = {"date": today, "url": f"https://www.youtube.com/watch?v={vid}", "at": now.isoformat(timespec="minutes")}
+            print(f"[생방송 링크] {x['show']}: {vid}")
+        else:
+            st[x["show"]] = {**cur, "at": now.isoformat(timespec="minutes")} if cur.get("date") == today else {"date": "", "at": now.isoformat(timespec="minutes")}
+            print(f"[생방송 링크] {x['show']}: 아직 없음")
+    p.write_text(json.dumps(st, ensure_ascii=False, indent=1) + "\n")
+
+
 def youtube_upcoming(registry, today):
     """예정된 유튜브 라이브·프리미어 → 일정."""
     out = []
@@ -1403,6 +1446,11 @@ def collect(cfg, rescan=False):
             radio.run()
     except Exception as e:  # noqa: BLE001
         print(f"[라디오] 실패: {str(e)[:120]}")
+    # 음방 생방송 링크 (유튜브 라이브·프리미어 주소가 방송마다 바뀌는 곳) — 방송 당일 30분마다
+    try:
+        find_show_live(cfg, now)
+    except Exception as e:  # noqa: BLE001
+        print(f"[생방송 링크] 실패: {str(e)[:120]}")
     # 앨범 판매량 (써클 주간 공식 + 한터 일차별) — 6시간마다
     try:
         import sales
