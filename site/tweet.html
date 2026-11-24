@@ -429,10 +429,28 @@
       chips.append(b);
     }
     const ds = all.filter((d) => inTab(d, tab));
-    const pend = ds.filter((d) => d.status === "pending"), past = ds.filter((d) => d.status !== "pending");
+    const pend = ds.filter((d) => d.status === "pending"), past = ds.filter((d) => !["pending", "scheduled"].includes(d.status));
+    const sched = ds.filter((d) => d.status === "scheduled").sort((a, c) => (a.post_at || 0) - (c.post_at || 0));
       const h = document.createElement("div"); h.className = "sec-h";
       h.innerHTML = `<h2>올릴 초안</h2><span class="badge">${pend.length}</span>`;
-      const out = [chips, h];
+      const out = [chips];
+      if (sched.length) {  // 예약됨: 정해진 시각에 자동으로 올라갈 글 (취소하면 안 올라감)
+        const sh = document.createElement("div"); sh.className = "sec-h";
+        sh.innerHTML = `<h2>⏰ 예약됨</h2><span class="badge">${sched.length}</span>`;
+        const g = document.createElement("div"); g.className = "grid-c";
+        g.append(...sched.map((d) => {
+          const box = document.createElement("div"); box.className = "card";
+          const right = document.createElement("b"); right.style.color = "var(--accent)"; right.textContent = `${when(d.post_at)} 올라감`;
+          const body = document.createElement("div"); body.className = "rt-body"; body.textContent = d.text;
+          const x = document.createElement("button"); x.type = "button"; x.textContent = "취소";
+          x.onclick = async () => { x.disabled = true; try { await call("/tweet/skip", { id: d.id }); msg("예약을 취소했어요"); load(); } catch (e) { msg(e.message, true); x.disabled = false; } };
+          const acts = document.createElement("div"); acts.className = "acts"; acts.append(x);
+          box.append(meta(d, right), body, acts);
+          return box;
+        }));
+        out.push(sh, g);
+      }
+      out.push(h);
       if (pend.length) { const g = document.createElement("div"); g.className = "grid-c"; g.append(...pend.map(card)); out.push(g); }
       else { const e = document.createElement("div"); e.className = "empty"; e.textContent = "지금은 올릴 초안이 없어요 🙌"; out.push(e); }
       if (past.length) {
