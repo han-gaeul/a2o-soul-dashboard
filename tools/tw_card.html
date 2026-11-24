@@ -33,6 +33,8 @@
   .foot { position: absolute; left: 80px; right: 70px; bottom: 34px; display: flex; justify-content: space-between; font-size: 20px; font-weight: 700; opacity: .75; }
   .bday .foot { right: 540px; } .views .foot { right: 70px; }
   .line { position: absolute; inset: 0; opacity: .14; }
+  .win .wl { font-size: 26px; font-weight: 700; display: grid; gap: 6px; }
+  body.win { background: linear-gradient(125deg, #f5b301 0%, #f06292 50%, #7b5cf5 100%); }
 </style></head>
 <body>
 <div class="conf" id="conf"></div>
@@ -56,6 +58,15 @@
       <div class="sub">${esc(q.get("date"))} · A2O SOUL ${esc(q.get("en"))}</div>
       <div class="tags"><span>#Happy${esc(q.get("tag"))}Day</span><span>#${esc(q.get("ko"))}</span></div>`;
     const ph = document.createElement("div"); ph.className = "photo"; ph.innerHTML = `<img src="${esc(q.get("img"))}" alt="">`; document.body.append(ph);
+  } else if (kind === "win") {  // ?kind=win&n=3&lines=더쇼 · 11.17|…&song=Dancing in the Dark&tags=#A2OSOUL3rdWin&imgs=…
+    document.body.className = "views win";
+    left.innerHTML = `<div class="emoji">🏆</div><div class="kicker">A2O SOUL · ${esc(q.get("song"))}</div>
+      <div class="big">1위 ${esc(q.get("n"))}관왕!</div>
+      <div class="wl">${(q.get("lines") || "").split("|").filter(Boolean).map((l) => `<div>🏆 ${esc(l)}</div>`).join("")}</div>
+      <div class="tags">${(q.get("tags") || "").split(" ").filter(Boolean).map((x) => `<span>${esc(x)}</span>`).join("")}</div>`;
+    const mo = document.createElement("div"); mo.className = "mosaic";
+    for (const src of (q.get("imgs") || "").split("|").filter(Boolean)) { const im = document.createElement("img"); im.src = src; mo.append(im); }
+    document.body.append(mo);
   } else if (kind === "views") {  // ?kind=views&n=500&unit=만&song=Dancing in the Dark&label=Official MV
     left.innerHTML = `<div class="emoji">🎉</div><div class="kicker">A2O SOUL · ${esc(q.get("label"))}</div>
       <div class="big">${esc(q.get("n"))}<small>뷰 돌파!</small></div>
