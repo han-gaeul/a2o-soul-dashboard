@@ -53,8 +53,7 @@ wins:
   - { date: 2026-11-23, show: SHOW K-POP SHOW STAGE, ep: 5, url: "https://x.com/KJ_TaeLixfanboy/status/2125000310154580416",
       tags: "#A2OSOUL2ndWin #DancingintheDark2ndWin", speech: true }   # 아리랑TV SHOW K-POP EP.05(11/16) SHOW STAGE 팬 투표 1위 — 소감 영상(팬 계정). @showkpop_live 공식 발표 글 나오면 url 바꾸기
   - { date: 2026-11-24, show: 케이팝업 차트쇼, ep: 26, url: "https://x.com/ena_kpopupshow/status/2125171608671400083",
-      image: "https://pbs.twimg.com/amplify_video_thumb/2125171555735162881/img/l_2qNYL8hkwuv57U.jpg", image_post: "https://x.com/ena_kpopupshow/status/2125171608671400083",
-      tags: "#A2OSOUL3rdWin #DancingintheDark3rdWin", speech: true, og: img/tw/win_20261124.jpg }   # ENA K-POP UP BEST MUSIC — 공식 계정이 3rd Win으로 셈
+      tags: "#A2OSOUL3rdWin #DancingintheDark3rdWin", speech: true, og: img/og/win-20261124.png, image: "https://pbs.twimg.com/media/HX4gCLeaQAA7BP6?format=jpg&name=large", image_post: "https://x.com/A2O_SOUL/status/2125175094389428278" }   # ENA K-POP UP BEST MUSIC — 공식 계정이 3rd Win으로 셈
 
 # 음반·굿즈 판매처 (한눈에 탭 '음반 구매처' + 응원 탭) { label, url, note, kind }
 #   예) - { label: 공식 스토어, url: "https://...", note: "앨범·응원봉" }
