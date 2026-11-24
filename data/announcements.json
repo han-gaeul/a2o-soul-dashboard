@@ -3372,7 +3372,7 @@
   }
  },
  "x_media": {
-  "at": "2026-11-25T03:40+09:00",
+  "at": "2026-11-25T03:50+09:00",
   "auto_since": "2125296730178756876",
   "candidates": {},
   "checked": "2026-11-24T16:41+09:00",
@@ -3691,16 +3691,16 @@
   "since_id": "2125180779227701685"
  },
  "x_official_votes": {
-  "at": "2026-11-25T00:50+09:00",
+  "at": "2026-11-25T03:50+09:00",
   "deep": 1,
   "last": {
    "official": [],
-   "read": 2,
+   "read": 1,
    "verified": [
-    "itsmoonlights_:blue"
+    "a2osoulvote:blue"
    ]
   },
-  "since_id": "2125240766704558118",
+  "since_id": "2125256600017674332",
   "v": 2
  },
  "x_show_photos": {
