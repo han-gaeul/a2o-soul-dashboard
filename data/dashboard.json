@@ -515,21 +515,6 @@
     {
      "category": "content",
      "channel": "THE K-POP",
-     "delta": 1378,
-     "era": "Superstar",
-     "id": "OO3HX-fN4pw",
-     "member": "",
-     "predebut": false,
-     "published_at": "2026-11-17T10:31:35Z",
-     "series": "비하인드",
-     "short": false,
-     "show": "더쇼",
-     "title": "A2O SOUL 소라 #DancingintheDark #A2OSOUL #소라 #SORA #THESHOW #더쇼 @261117 [BEHIND THE SHOW]",
-     "views": 71221
-    },
-    {
-     "category": "content",
-     "channel": "THE K-POP",
      "delta": 3809,
      "era": "Dancing in the Dark",
      "id": "e84FIWj4pOk",
@@ -556,36 +541,6 @@
      "show": "더쇼",
      "title": "Dancing in the Dark – A2O SOUL [THE SHOW] 261117 방송",
      "views": 277597
-    },
-    {
-     "category": "content",
-     "channel": "THE K-POP",
-     "delta": 234,
-     "era": "Superstar",
-     "id": "2rO4TJmzZLs",
-     "member": "",
-     "predebut": false,
-     "published_at": "2026-11-17T12:28:39Z",
-     "series": "",
-     "short": false,
-     "show": "더쇼",
-     "title": "[FAN PICK CAM 4K] THE SHOW CHOICE - A2O SOUL 'ZAI' [THE SHOW] 261117 방송",
-     "views": 30291
-    },
-    {
-     "category": "content",
-     "channel": "THE K-POP",
-     "delta": 252,
-     "era": "Dancing in the Dark",
-     "id": "gs2_Bem6dz8",
-     "member": "",
-     "predebut": false,
-     "published_at": "2026-11-17T12:35:48Z",
-     "series": "",
-     "short": false,
-     "show": "더쇼",
-     "title": "[FAN PICK CAM 4K] A2O SOUL - ZAI 'Dancing in the Dark’ [에이투오소울-자이] [THE SHOW] 261117 방송",
-     "views": 20129
     },
     {
      "category": "content",
@@ -695,6 +650,21 @@
     {
      "category": "fancam",
      "channel": "THE K-POP",
+     "delta": 1378,
+     "era": "Superstar",
+     "id": "OO3HX-fN4pw",
+     "member": "SORA",
+     "predebut": false,
+     "published_at": "2026-11-17T10:31:35Z",
+     "series": "비하인드",
+     "short": false,
+     "show": "더쇼",
+     "title": "A2O SOUL 소라 #DancingintheDark #A2OSOUL #소라 #SORA #THESHOW #더쇼 @261117 [BEHIND THE SHOW]",
+     "views": 71221
+    },
+    {
+     "category": "fancam",
+     "channel": "THE K-POP",
      "delta": 151,
      "era": "Superstar",
      "id": "pMFIKCDFKrc",
@@ -706,6 +676,36 @@
      "show": "더쇼",
      "title": "A2O SOUL 타이 #DancingintheDark #A2OSOUL #타이 #TAI #THESHOW #더쇼 @261117 [BEHIND THE SHOW]",
      "views": 18802
+    },
+    {
+     "category": "fancam",
+     "channel": "THE K-POP",
+     "delta": 234,
+     "era": "Superstar",
+     "id": "2rO4TJmzZLs",
+     "member": "ZAI",
+     "predebut": false,
+     "published_at": "2026-11-17T12:28:39Z",
+     "series": "",
+     "short": false,
+     "show": "더쇼",
+     "title": "[FAN PICK CAM 4K] THE SHOW CHOICE - A2O SOUL 'ZAI' [THE SHOW] 261117 방송",
+     "views": 30291
+    },
+    {
+     "category": "fancam",
+     "channel": "THE K-POP",
+     "delta": 252,
+     "era": "Dancing in the Dark",
+     "id": "gs2_Bem6dz8",
+     "member": "ZAI",
+     "predebut": false,
+     "published_at": "2026-11-17T12:35:48Z",
+     "series": "",
+     "short": false,
+     "show": "더쇼",
+     "title": "[FAN PICK CAM 4K] A2O SOUL - ZAI 'Dancing in the Dark’ [에이투오소울-자이] [THE SHOW] 261117 방송",
+     "views": 20129
     },
     {
      "category": "fancam",
@@ -4313,12 +4313,12 @@
    "value": 9173752
   },
   {
-   "count": 99,
-   "delta": 26523,
+   "count": 104,
+   "delta": 30604,
    "key": "fancam_total",
    "label": "직캠 총 조회수",
-   "sub": "99개",
-   "value": 5087885
+   "sub": "104개",
+   "value": 5269379
   }
  ],
  "media_posts": [
@@ -4563,10 +4563,25 @@
     "비공개 연습생으로 데뷔"
    ],
    "color": "",
-   "fancam_count": 5,
-   "fancam_delta": 2223,
-   "fancam_views": 598088,
+   "fancam_count": 6,
+   "fancam_delta": 3601,
+   "fancam_views": 669309,
    "fancams": [
+    {
+     "category": "fancam",
+     "channel": "THE K-POP",
+     "delta": 1378,
+     "era": "Superstar",
+     "id": "OO3HX-fN4pw",
+     "member": "SORA",
+     "predebut": false,
+     "published_at": "2026-11-17T10:31:35Z",
+     "series": "비하인드",
+     "short": false,
+     "show": "더쇼",
+     "title": "A2O SOUL 소라 #DancingintheDark #A2OSOUL #소라 #SORA #THESHOW #더쇼 @261117 [BEHIND THE SHOW]",
+     "views": 71221
+    },
     {
      "category": "fancam",
      "channel": "ALL THE K-POP",
@@ -6630,9 +6645,9 @@
     "제트와 같은 댄스 스튜디오 출신으로 약 4년간 함께 연습"
    ],
    "color": "",
-   "fancam_count": 11,
-   "fancam_delta": 2521,
-   "fancam_views": 364263,
+   "fancam_count": 15,
+   "fancam_delta": 5224,
+   "fancam_views": 474536,
    "fancams": [
     {
      "category": "fancam",
@@ -6648,6 +6663,66 @@
      "show": "음악중심",
      "title": "[#음중직캠] A2O SOUL ZAI (에이투오 소울 자이) – Dancing in the Dark FanCam | 쇼! 음악중심 | MBC261121",
      "views": 17037
+    },
+    {
+     "category": "fancam",
+     "channel": "THE K-POP",
+     "delta": 270,
+     "era": "Superstar",
+     "id": "SK1efoy1nVY",
+     "member": "ZAI",
+     "predebut": false,
+     "published_at": "2026-11-19T10:00:25Z",
+     "series": "",
+     "short": true,
+     "show": "더쇼",
+     "title": "THE SHOW CHOICE - A2O SOUL 'ZAI' [THE SHOW] 261117 방송 [FAN PICK CAM 4K]",
+     "views": 17564
+    },
+    {
+     "category": "fancam",
+     "channel": "THE K-POP",
+     "delta": 1947,
+     "era": "Dancing in the Dark",
+     "id": "z1gQzwYjwfw",
+     "member": "ZAI",
+     "predebut": false,
+     "published_at": "2026-11-19T10:00:08Z",
+     "series": "",
+     "short": true,
+     "show": "더쇼",
+     "title": "A2O SOUL - ZAI 'Dancing in the Dark’ [에이투오소울-자이] [THE SHOW] 261117 방송 [FAN PICK CAM 4K]",
+     "views": 42289
+    },
+    {
+     "category": "fancam",
+     "channel": "THE K-POP",
+     "delta": 252,
+     "era": "Dancing in the Dark",
+     "id": "gs2_Bem6dz8",
+     "member": "ZAI",
+     "predebut": false,
+     "published_at": "2026-11-17T12:35:48Z",
+     "series": "",
+     "short": false,
+     "show": "더쇼",
+     "title": "[FAN PICK CAM 4K] A2O SOUL - ZAI 'Dancing in the Dark’ [에이투오소울-자이] [THE SHOW] 261117 방송",
+     "views": 20129
+    },
+    {
+     "category": "fancam",
+     "channel": "THE K-POP",
+     "delta": 234,
+     "era": "Superstar",
+     "id": "2rO4TJmzZLs",
+     "member": "ZAI",
+     "predebut": false,
+     "published_at": "2026-11-17T12:28:39Z",
+     "series": "",
+     "short": false,
+     "show": "더쇼",
+     "title": "[FAN PICK CAM 4K] THE SHOW CHOICE - A2O SOUL 'ZAI' [THE SHOW] 261117 방송",
+     "views": 30291
     },
     {
      "category": "fancam",
@@ -18601,12 +18676,12 @@
    "views": 31392
   },
   {
-   "category": "content",
+   "category": "fancam",
    "channel": "THE K-POP",
    "delta": 270,
    "era": "Superstar",
    "id": "SK1efoy1nVY",
-   "member": "",
+   "member": "ZAI",
    "predebut": false,
    "published_at": "2026-11-19T10:00:25Z",
    "series": "",
@@ -18616,12 +18691,12 @@
    "views": 17564
   },
   {
-   "category": "content",
+   "category": "fancam",
    "channel": "THE K-POP",
    "delta": 1947,
    "era": "Dancing in the Dark",
    "id": "z1gQzwYjwfw",
-   "member": "",
+   "member": "ZAI",
    "predebut": false,
    "published_at": "2026-11-19T10:00:08Z",
    "series": "",
@@ -19036,12 +19111,12 @@
    "views": 51066
   },
   {
-   "category": "content",
+   "category": "fancam",
    "channel": "THE K-POP",
    "delta": 252,
    "era": "Dancing in the Dark",
    "id": "gs2_Bem6dz8",
-   "member": "",
+   "member": "ZAI",
    "predebut": false,
    "published_at": "2026-11-17T12:35:48Z",
    "series": "",
@@ -19066,12 +19141,12 @@
    "views": 89984
   },
   {
-   "category": "content",
+   "category": "fancam",
    "channel": "THE K-POP",
    "delta": 234,
    "era": "Superstar",
    "id": "2rO4TJmzZLs",
-   "member": "",
+   "member": "ZAI",
    "predebut": false,
    "published_at": "2026-11-17T12:28:39Z",
    "series": "",
@@ -19141,12 +19216,12 @@
    "views": 43453
   },
   {
-   "category": "content",
+   "category": "fancam",
    "channel": "THE K-POP",
    "delta": 1378,
    "era": "Superstar",
    "id": "OO3HX-fN4pw",
-   "member": "",
+   "member": "SORA",
    "predebut": false,
    "published_at": "2026-11-17T10:31:35Z",
    "series": "비하인드",
