@@ -301,7 +301,8 @@
       if (s.visits && s.visits.days && s.visits.days.length) {  // 사이트 방문자 (Cloudflare Web Analytics, 10분마다 갱신)
         const v = s.visits.days, today = v[v.length - 1], y = v.length > 1 ? v[v.length - 2] : null;
         const n = (x) => Number(x).toLocaleString();
-        setStat("visits", "", "👀", `오늘 유입 ${n(today.v)}회`, `${y ? `어제 ${n(y.v)}회 · ` : ""}페이지뷰 오늘 ${n(today.pv)} · 최근 7일 ${n(v.slice(-7).reduce((a, x) => a + x.v, 0))}회 (외부에서 들어온 횟수)${s.visits.at ? `\n${new Date(s.visits.at).toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit", hour12: false, timeZone: "Asia/Seoul" })} 기준` : ""}`);
+        setStat("visits", "", "👀", `오늘 유입 ${n(today.v)}회`, `${y ? `어제 ${n(y.v)}회 · ` : ""}페이지뷰 오늘 ${n(today.pv)} · 최근 7일 ${n(v.slice(-7).reduce((a, x) => a + x.v, 0))}회 (외부에서 들어온 횟수)`);
+        if (s.visits.at) $("visits").querySelector("b").append(Object.assign(document.createElement("span"), { className: "muted", style: "font-weight:400;font-size:12px;margin-left:6px", textContent: `${new Date(s.visits.at).toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit", hour12: false, timeZone: "Asia/Seoul" })} 기준` }));
         bars($("visits").querySelector(".trend"), v.slice(-7).map((x) => ({ d: x.d, v: x.v })), n);
         $("visits").hidden = $("visitsSep").hidden = false;
       } else if (s.visits && s.visits.error) {
