@@ -1632,7 +1632,7 @@ if ("serviceWorker" in navigator) {
     const mo = +m.birthday.slice(0, 2), d = +m.birthday.slice(3);
     return t("bday", { m: mo, d, mon: (t("months") || [])[mo - 1] || mo });
   };
-  const facts = (m, withBday) => [tc(m.position), m.birth_year ? t("born", { y: m.birth_year }) : "",
+  const facts = (m, withBday) => [withBday && m.real_name ? t("real_name_line", { v: m.real_name }) : "", tc(m.position), m.birth_year ? t("born", { y: m.birth_year }) : "",
     withBday ? bdayText(m) : "", nat(m.nationality), withBday ? m.mbti : ""].filter(Boolean).join(" · ");
 
   function profile(m) {
@@ -1799,7 +1799,7 @@ if ("serviceWorker" in navigator) {
     const tip = (data.guide?.tips || {})[m.name];
     const card = el("button", { class: "member", type: "button" },
       v ? el("img", { src: thumbUrl(v.id), alt: "", loading: "lazy" }) : el("div", { class: "nothumb" }, t("fancam_pending")),
-      el("div", { class: "n" }, m.name, el("span", { class: "c" }, tc(m.position) || nat(m.nationality))),
+      el("div", { class: "n" }, m.name, el("span", { class: "c" }, tc(m.position))),
       tip ? el("div", { class: "s tip" }, tip) : (v ? el("div", { class: "t" }, v.title) : null),
       v ? el("div", { class: "s" }, `${ymd(v.published_at)} · ${t("views", { v: kr(v.views ?? 0) })}`) : null,
       links.length ? el("div", { class: "s more-link" }, links.map((l) => l[1]).join(" · ") + t("view")) : null);
