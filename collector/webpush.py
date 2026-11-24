@@ -226,12 +226,12 @@ def candidates(dash, site, now):
             continue
         out.append((f"vd|{v['id']}", "video", "video", {"title": v["title"][:90], "url": f"https://youtu.be/{v['id']}",
                                                          "members": _members_in(v, mems)}))
-    for x in dash.get("media_posts_tw") or dash.get("media_posts") or []:  # 매체·콘텐츠 계정 새 글 (릴스·영상 글 포함) (3시간 안) — 트윗 초안만, 푸시는 안 보냄
-        if x.get("at") and timedelta(0) <= now - _kst(x["at"]) < timedelta(hours=3):
+    for x in dash.get("media_posts_tw") or dash.get("media_posts") or []:  # 매체·방송사 계정의 A2O SOUL 글 (3시간 안) — 바로 리트윗, 푸시는 안 보냄
+        if x.get("at") and timedelta(0) <= now - _kst(x["at"]) < timedelta(hours=3) and f"rt|{x['url']}" not in {o[0] for o in out}:
             head = next((ln for ln in (x.get("text") or "").splitlines() if re.sub(r"#\S+|https?://\S+", "", ln).strip()), "")
             head = re.sub(r"\s*https?://\S+", "", head).strip()[:100]
-            out.append((f"md|{x['url']}", "media", "media", {"name": x.get("name") or x.get("handle") or "", "title": head, "url": x["url"],
-                                                            "members": _members_in({"title": x.get("text") or ""}, dash.get("members") or [])}))
+            out.append((f"rt|{x['url']}", "media", "media", {"name": x.get("name") or x.get("handle") or "", "title": head, "url": x["url"],
+                                                            "members": _members_in({"title": x.get("text") or ""}, dash.get("members") or []), "rt": True}))
     seen = set()
     for x in dash.get("photos") or []:  # 공식 계정 사진 글 ([📸]·컨셉 포토·생일 등, 공지 이미지는 사진 모음에서 이미 빠짐 · 3시간 안) — 확인 없이 바로 리트윗 (푸시는 안 보냄)
         u = x.get("url") or ""
