@@ -1260,3 +1260,6 @@ body[data-cur="overview"] .vote-bar:not(.live-bar) { display: none; }
 .sales-weeks td:nth-child(2), .sales-weeks td:nth-child(3), .sales-weeks th:nth-child(2), .sales-weeks th:nth-child(3) { text-align: right; }
 .sales-firstweek { margin: 10px 0 4px; }
 .sales-firstweek > summary { cursor: pointer; color: var(--muted); }
+.pf-press { display: grid; gap: 10px; }
+.pf-press-src { font-size: 13px; color: var(--accent, #6c4cf5); }
+.pf-press ul { margin: 4px 0 0; }
