@@ -14653,42 +14653,51 @@
     {
      "date": "2026-11-09",
      "day": 1,
-     "n": 66718
+     "n": 66718,
+     "rank": null
     },
     {
      "date": "2026-11-10",
      "day": 2,
-     "n": 13843
+     "n": 13843,
+     "rank": null
     },
     {
      "date": "2026-11-11",
      "day": 3,
-     "n": 13651
+     "n": 13651,
+     "rank": null
     },
     {
      "date": "2026-11-12",
      "day": 4,
-     "n": 13322
+     "n": 13322,
+     "rank": null
     },
     {
      "date": "2026-11-13",
      "day": 5,
-     "n": 10080
+     "n": 10080,
+     "rank": null
     },
     {
      "date": "2026-11-14",
      "day": 6,
-     "n": 20733
+     "n": 20733,
+     "rank": null
     },
     {
      "date": "2026-11-15",
      "day": 7,
-     "n": 77855
+     "n": 77855,
+     "rank": null
     }
    ],
    "first_week": 216202,
    "post": "https://x.com/koreansales_twt",
-   "total": 216202
+   "total": 216202,
+   "week_rank": null,
+   "week_url": "https://www.hanteochart.com/ko/charts/album/weekly/2026-W46"
   },
   "hanteo_daily": [
    {
