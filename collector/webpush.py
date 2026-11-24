@@ -226,7 +226,7 @@ def candidates(dash, site, now):
             continue
         out.append((f"vd|{v['id']}", "video", "video", {"title": v["title"][:90], "url": f"https://youtu.be/{v['id']}",
                                                          "members": _members_in(v, mems)}))
-    for x in dash.get("media_posts") or []:  # 매체·콘텐츠 계정 새 글 (3시간 안) — 트윗 초안만, 푸시는 안 보냄
+    for x in dash.get("media_posts_tw") or dash.get("media_posts") or []:  # 매체·콘텐츠 계정 새 글 (릴스·영상 글 포함) (3시간 안) — 트윗 초안만, 푸시는 안 보냄
         if x.get("at") and timedelta(0) <= now - _kst(x["at"]) < timedelta(hours=3):
             head = next((ln for ln in (x.get("text") or "").splitlines() if re.sub(r"#\S+|https?://\S+", "", ln).strip()), "")
             head = re.sub(r"\s*https?://\S+", "", head).strip()[:100]
