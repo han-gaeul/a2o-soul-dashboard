@@ -1,6 +1,7 @@
 """앨범 판매량 → data/sales.json
 - 써클차트 주간 앨범 차트 (공식, 매주 목요일쯤 발표): 순위·판매량
-- 한터 일간 (한터 사이트엔 숫자가 안 나와서 한터 기준 수치를 올리는 @koreansales_twt 글에서 DAY·TOTAL을 읽음)
+- 한터 초동 일차별 (@koreansales_twt 글의 DAY·TOTAL)
+- 한터 차트 일간·주간 판매량 (hanteochart.com 공식 차트 API, 100위 안에 있을 때) — 초동 이후 판매량
 """
 import json
 import re
@@ -85,9 +86,38 @@ def update_hanteo(d, xposts):
     print(f"[판매량] 한터: 일차 {len(h.get('days') or {})}개 · 누적 {h.get('total')}")
 
 
+HT_TARGET = "912566026"  # 한터 SUPERSTAR 음반 번호 (차트 페이지 targetIdx)
+HT_UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36"}
+
+
+def update_hanteo_chart(d):
+    """한터 공식 일간·주간 음반 차트에서 SUPERSTAR 판매량 (집계 날짜는 차트 페이지의 '집계 기준')"""
+    hc = d.setdefault("hanteo_chart", {"daily": {}, "weekly": {}})
+    for term in ("daily", "weekly"):
+        try:
+            html = requests.get(f"https://www.hanteochart.com/ko/charts/album/{term}", headers=HT_UA, timeout=20).text
+            ds = re.findall(r"(\d{4})\.(\d{2})\.(\d{2})", html[html.find("집계 기준"):][:120])
+            j = requests.get(f"https://www.hanteochart.com/api/chart-sales?type=album&term={term}&genre=basic", headers=HT_UA, timeout=20).json()
+        except Exception as e:  # noqa: BLE001
+            print(f"[판매량] 한터 {term} 실패: {type(e).__name__}")
+            continue
+        if not ds:
+            print(f"[판매량] 한터 {term}: 집계 날짜 못 읽음")
+            continue
+        x = next((r for r in j.get("sales") or [] if str(r.get("targetIdx")) == HT_TARGET), None)
+        key = "-".join(ds[0])
+        if x:
+            row = {"rank": int(x["rank"]), "sales": int(x["salesVolume"])}
+            if term == "weekly" and len(ds) > 1:
+                row["end"] = "-".join(ds[1])
+            hc[term][key] = row
+        print(f"[판매량] 한터 {term} {key}: {x and x['salesVolume']}장 {x and x['rank']}위" if x else f"[판매량] 한터 {term} {key}: 100위 밖")
+
+
 def run(xposts=None):
     d = load()
     update_circle(d)
+    update_hanteo_chart(d)
     if xposts is not None and xposts.enabled():
         update_hanteo(d, xposts)
     d["checked"] = datetime.now(KST).isoformat(timespec="minutes")
@@ -100,10 +130,14 @@ def summary():
     h = d.get("hanteo") or {}
     days = sorted(((int(k), v) for k, v in (h.get("days") or {}).items()))
     weeks = [{"week": k, **v} for k, v in sorted((d.get("circle") or {}).items()) if v and v.get("sales")]
-    if not days and not weeks:
+    hc = d.get("hanteo_chart") or {}
+    first_end = (RELEASE + timedelta(days=6)).isoformat()
+    ht_days = [{"date": k, **v} for k, v in sorted((hc.get("daily") or {}).items()) if k > first_end]  # 초동 이후 일간
+    ht_weeks = [{"start": k, **v} for k, v in sorted((hc.get("weekly") or {}).items())]
+    if not days and not weeks and not ht_weeks:
         return None
     first = sum(v for k, v in days if k <= 7) if len([k for k, _ in days if k <= 7]) == 7 else None
     return {"album": d.get("album") or ALBUM, "release": RELEASE.isoformat(),
             "hanteo": {"days": [{"day": k, "date": (RELEASE + timedelta(days=k - 1)).isoformat(), "n": v} for k, v in days],
                        "total": h.get("total"), "first_week": first, "post": h.get("post")},
-            "circle": weeks}
+            "circle": weeks, "hanteo_daily": ht_days, "hanteo_weekly": ht_weeks}

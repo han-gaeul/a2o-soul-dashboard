@@ -1016,7 +1016,7 @@ if ("serviceWorker" in navigator) {
     const two = (tot, day) => tot == null ? el("td", { class: "muted" }, "–") : el("td", {}, n(tot), day != null ? el("div", { class: "up small" }, `+${n(day)}`) : null);
     panes.play = el("div", { class: "now-pane" },
       el("div", { class: "now-scroll" }, el("table", { class: "now-table play" },
-        el("thead", {}, el("tr", {}, el("th", {}, t("sp_song")), el("th", {}, "Spotify"), el("th", {}, t("kc_genie")), el("th", {}, t("kc_like")))),
+        el("thead", {}, el("tr", {}, el("th", {}, t("sp_song")), el("th", {}, t("sp_global")), el("th", {}, t("kc_genie")), el("th", {}, t("kc_like")))),
         el("tbody", {}, ...names.map((s_) => { const x = spBy[key(s_)] || {}; const g = cnt(s_, "지니 재생"), lk = cnt(s_, "멜론 좋아요");
           return el("tr", {}, el("td", {}, s_), two(x.total, x.daily), two(g && g.total, g && g.daily), two(lk && lk.total, lk && lk.daily)); })))),
       el("p", { class: "muted small" }, t("now_play_note")),
@@ -1049,8 +1049,13 @@ if ("serviceWorker" in navigator) {
         (sl.circle || []).length ? el("table", { class: "sp-table" },
           el("thead", {}, el("tr", {}, el("th", {}, t("sales_circle")), el("th", {}, t("sales_rank")), el("th", {}, t("sales_sales")))),
           el("tbody", {}, ...sl.circle.map((x) => el("tr", {}, el("td", {}, wkLabel(x.week)), el("td", {}, x.rank ? `#${x.rank}` : "—"), el("td", {}, n(x.sales)))))) : null,
+        (sl.hanteo_weekly || []).length ? el("table", { class: "sp-table" },
+          el("thead", {}, el("tr", {}, el("th", {}, t("sales_ht_week")), el("th", {}, t("sales_rank")), el("th", {}, t("sales_sales")))),
+          el("tbody", {}, ...sl.hanteo_weekly.map((x) => el("tr", {}, el("td", {}, `${+x.start.slice(5, 7)}/${+x.start.slice(8)}~`), el("td", {}, `#${x.rank}`), el("td", {}, n(x.sales)))))) : null,
+        (sl.hanteo_daily || []).length ? el("p", { class: "small" }, t("sales_ht_day", { d: sl.hanteo_daily.at(-1).date.slice(5).replace("-", "/"), n: n(sl.hanteo_daily.at(-1).sales), r: sl.hanteo_daily.at(-1).rank })) : null,
         el("p", { class: "muted small" }, t("sales_src")),
         sl.hanteo && sl.hanteo.post ? ext(sl.hanteo.post, "Hanteo ↗") : null,
+        ext("https://www.hanteochart.com/ko/charts/album/weekly", "Hanteo Chart ↗"),
         ext("https://circlechart.kr/page_chart/album.circle?nationGbn=T&serviceGbn=ALL&termGbn=week", "Circle Chart ↗")));
     }
     // 구독자·팔로워 추이 (한눈에 탭에서 옮김)
