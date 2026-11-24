@@ -588,9 +588,9 @@ if ("serviceWorker" in navigator) {
     const w = wins[wins.length - 1];
     if (w && (Date.parse(todayKst) - Date.parse(w.date)) / 86400000 <= 3) {  // 1위 후 3일, 한눈에 탭에만 (style.css)
       const first = wins.length === 1;
-      // 연달아 1위 (마지막 1위 기준 3일 안) — 한 배너로 같이 축하 ('1위 2관왕')
-      const streak = wins.filter((x) => (Date.parse(w.date) - Date.parse(x.date)) / 86400000 <= 3);
-      const multi = streak.length > 1;
+      // 마지막 1위 기준 3일 안에 1위가 또 있으면 한 배너로 — 'n관왕'은 지금까지 1위 전부 (같은 활동 곡)
+      const multi = wins.filter((x) => (Date.parse(w.date) - Date.parse(x.date)) / 86400000 <= 3).length > 1;
+      const streak = wins;
       const winLine = (x) => `${tc(x.show)}${x.ep ? ` ${t("win_ep", { n: x.ep })}` : ""} · ${x.date.slice(5).replace("-", ".")}`;
       const n = data.debut_date ? Math.round((Date.parse(w.date) - Date.parse(data.debut_date)) / 86400000) : 0;
       const show = tc(w.show);
