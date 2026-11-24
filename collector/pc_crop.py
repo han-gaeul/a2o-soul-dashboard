@@ -4,7 +4,7 @@
 
 - 멤버 템플릿(파일 이름에 멤버 이름): 카드 아래 글자(OCR)로 라벨, 줄 위치로 버전(앨범/예판 특전/팬사인·영통/방송/럭키드로우)
 - 단체 템플릿(CARABINER·BROADCAST·OLIVE YOUNG): 카드 아래 멤버 이름 순서(알파벳)로 매칭
-- 아직 공개 안 된 '?' 카드는 건너뜀. 같은 카드가 겹치면 먼저 나온 것만.
+- 아직 공개 안 된 '?' 카드는 건너뜀. 같은 판매처·멤버 카드 중 사진이 같은 게 이미 있으면 건너뜀(이름이 달라도 — 이미지 지문 비교).
 필요: tesseract, pytesseract, scipy, Pillow
 """
 import re
@@ -75,31 +75,56 @@ ONLY_NEW = False  # True: 이미 있는 카드(같은 버전·판매처·멤버)
 
 
 def base(label):
-    """'Makestar A (Photobook)' → 'Makestar A' — 단체 템플릿에서 괄호 없이 들어간 카드와 같은 카드로 봄
-    ('Withmuu (Photobook)'과 'Withmuu (Carabiner)'는 서로 다른 카드로 남음)"""
+    """'Makestar A (Photobook)' → 'Makestar A' (판매처 이름만)"""
     return re.sub(r"\s*\(.*?\)\s*$", "", label).strip()
 
 
+SAME = 120  # dHash(16×24) 해밍 거리 — 같은 카드는 ~100 이하(색감·자르기 차이), 다른 카드는 140 넘음
+
+
+def dhash(im):
+    """색감·밝기·테두리 차이에 덜 민감한 카드 지문"""
+    from PIL import ImageOps
+    g = ImageOps.autocontrast(im.convert("L"))
+    w, h = g.size
+    g = g.crop((int(w * .08), int(h * .06), int(w * .92), int(h * .94))).resize((17, 24))
+    p = np.asarray(g, dtype=np.int16)
+    return (p[:, 1:] > p[:, :-1]).flatten()
+
+
 def existing():
-    out = set()
+    """이미 저장된 카드 → {(버전, 판매처, 멤버): [(라벨, 지문)]}"""
+    out = {}
     for f in OUT.glob("*.webp"):
         parts = unicodedata.normalize("NFC", f.stem).split("_")
         if len(parts) >= 3:
-            out.add((parts[0], "_".join(parts[1:-1]), parts[-1]))
+            v, label, m = parts[0], "_".join(parts[1:-1]), parts[-1]
+            try:
+                out.setdefault((v, base(label), m), []).append((label, dhash(Image.open(f))))
+            except Exception:  # noqa: BLE001
+                pass
     return out
 
 
 def save(img, c, version, label, member, seen):
-    key = (version, label, member)
-    if key in seen:
-        return
-    seen.add(key)
-    have = existing() if ONLY_NEW else set()
-    if (version, label, member) in have or (version, base(label), member) in have:
-        return
+    """같은 판매처라도 카드가 다를 수 있음 → 이름이 아니라 사진으로 비교해서, 같은 사진이 이미 있으면 건너뜀"""
     y, x, w, h, _ = c
+    crop = img.crop((x + 1, y + 1, x + w - 1, y + h - 1))
+    fp = dhash(crop)
+    if not hasattr(save, "_have"):
+        save._have = existing()
+    have = save._have.setdefault((version, base(label), member), [])
+    for lab, f2 in have:
+        if lab == label:
+            if ONLY_NEW:
+                return  # 드라이브 자동 확인: 이미 있는 이름은 건드리지 않음
+            continue  # 다시 자르는 중 — 같은 이름은 덮어씀
+        if int((fp != f2).sum()) < SAME:
+            print(f"  같은 카드라 건너뜀: {version}_{label}_{member} = {lab}")
+            return
+    have.append((label, fp))
     name = f"{version}_{label}_{member}.webp".replace("/", "·")
-    img.crop((x + 1, y + 1, x + w - 1, y + h - 1)).save(OUT / name, "WEBP", quality=92, method=6)
+    crop.save(OUT / name, "WEBP", quality=92, method=6)
     print(" ", name)
 
 
