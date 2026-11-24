@@ -14739,6 +14739,57 @@
    }
   ]
  },
+ "spotify_country": {
+  "checked": "2026-11-24T16:00+09:00",
+  "songs": [
+   {
+    "countries": [
+     {
+      "cc": "KR",
+      "days": 5,
+      "last": "2026-11-20",
+      "peak": 99,
+      "peak_date": "2026-11-18",
+      "pos": 156,
+      "streams": 14120
+     },
+     {
+      "cc": "SG",
+      "days": 4,
+      "last": "2026-11-20",
+      "peak": 153,
+      "peak_date": "2026-11-18",
+      "pos": 186,
+      "streams": 7856
+     }
+    ],
+    "song": "Dancing in the Dark"
+   },
+   {
+    "countries": [
+     {
+      "cc": "KR",
+      "days": 30,
+      "last": "2026-11-17",
+      "peak": 24,
+      "peak_date": "2026-10-16",
+      "pos": 171,
+      "streams": 13665
+     },
+     {
+      "cc": "SG",
+      "days": 9,
+      "last": "2026-10-28",
+      "peak": 114,
+      "peak_date": "2026-10-23",
+      "pos": 163,
+      "streams": 8406
+     }
+    ],
+    "song": "SUPERSTAR"
+   }
+  ]
+ },
  "stream_playlist": {
   "credit": {
    "label": "",
