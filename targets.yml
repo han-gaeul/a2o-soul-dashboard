@@ -148,6 +148,15 @@ x_vendors:
 #     category: fancam
 #     member: MOON
 videos:
+  - id: _5DLvrRo3UU   # 문 #MOON THE SHOW 261117 [BEHIND THE SHOW] 쇼츠 직캠 (소라 것과 같이 — 해시태그 제목이라 자동 분류 안 됨)
+    category: fancam
+    member: MOON
+  - id: 98_S8rjzxGI   # 제트 #ZET THE SHOW 261117 [BEHIND THE SHOW] 쇼츠 직캠 (같은 이유)
+    category: fancam
+    member: ZET
+  - id: pMFIKCDFKrc   # 타이 #TAI THE SHOW 261117 [BEHIND THE SHOW] 쇼츠 직캠 (같은 이유)
+    category: fancam
+    member: TAI
   - id: oj804ttqVkI   # A2O SOUL 데뷔 앨범 'SUPERSTAR' 소개 영상 (WowKorea FAN · 일본어)
     category: content
   - id: PbpHyIQerX8   # [핫클립/SUB] 정오의 희망곡 김신영입니다 (팬 제보)
