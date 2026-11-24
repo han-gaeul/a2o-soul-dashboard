@@ -7,7 +7,7 @@
   "xo:2124389920030789779||❤️‍🔥11월 넷째 주 핫스테이지의 주인공은?❤️‍🔥"
  ],
  "ig_media": {
-  "at": "2026-11-24T17:00+09:00",
+  "at": "2026-11-24T17:30+09:00",
   "sig": "myidol_miim,1thek,stonemusicent,kbskpop,a2o.story,studio_choom"
  },
  "posts": {
@@ -3314,8 +3314,8 @@
   }
  },
  "x_media": {
-  "at": "2026-11-24T17:20+09:00",
-  "auto_since": "2125142207569219774",
+  "at": "2026-11-24T17:30+09:00",
+  "auto_since": "2125145144014033050",
   "candidates": {},
   "checked": "2026-11-24T16:41+09:00",
   "missing": [],
@@ -3543,19 +3543,32 @@
     "permalink": "https://x.com/myidolmiim/status/2125137675359559744",
     "timestamp": "2026-11-24T08:01:19.000Z",
     "video": false
+   },
+   "2125145144014033050": {
+    "author": "StoneMusicEnt",
+    "author_name": "STONE MUSIC",
+    "caption": "몽환적인 음색 위로 펼쳐지는 다인원 퍼포먼스가 주는 전율💙\nA2O SOUL 'Dancing in the Dark' 퍼포먼스!\n　\n[In The Studio] A2O SOUL - Dancing in the Dark\nFull ver.▶ https://youtu.be/tk9LvqQ9X9A\n　\n#A2O #A2OSOUL #Dancing_in_the_Dark #SUPERSTAR #ZalphaPop https://x.com/StoneMusicEnt/status/2125145144014033050/video/1",
+    "images": [
+     "https://pbs.twimg.com/media/HX4FPOsaQAEb6Ci.jpg"
+    ],
+    "permalink": "https://x.com/StoneMusicEnt/status/2125145144014033050",
+    "timestamp": "2026-11-24T08:31:00.000Z",
+    "video": true
    }
   },
-  "since_id": "2125137675359559744"
+  "since_id": "2125145144014033050"
  },
  "x_official_votes": {
-  "at": "2026-11-24T17:20+09:00",
+  "at": "2026-11-24T17:30+09:00",
   "deep": 1,
   "last": {
    "official": [],
-   "read": 0,
-   "verified": []
+   "read": 1,
+   "verified": [
+    "onlyseeonee:blue"
+   ]
   },
-  "since_id": "2125137351454433541",
+  "since_id": "2125145044252536940",
   "v": 2
  },
  "x_show_photos": {
@@ -3628,6 +3641,13 @@
   "A2OSOUL_STREAM": {
    "id": "2122910820325847040",
    "posts": [
+    {
+     "caption": "🌝DANCING IN THE DARK🕺\n▶️Melon 스밍/다운로드총공 안내🔄\n📆2026.11.24. 17:30-19:00\n(음원점수 반영-스밍40%/다운60%)\n\nhttps://muzip.link/V4DxIT\n(플레이리스트 공유)",
+     "images": [],
+     "permalink": "https://x.com/A2OSOUL_STREAM/status/2125144640374419886",
+     "timestamp": "2026-11-24T08:29:00.000Z",
+     "tweet_id": "2125144640374419886"
+    },
     {
      "caption": "🌝DANCING IN THE DARK🕺\n▶️Melon 스밍/다운로드총공 안내🔄\n📆2026.11.24. 15:00-16:00\n(음원점수 반영-스밍40%/다운60%)\n\nhttps://muzip.link/V4DxIT",
      "images": [],
@@ -3928,18 +3948,9 @@
      "permalink": "https://x.com/A2OSOUL_STREAM/status/2123521444688920754",
      "timestamp": "2026-11-19T20:59:00.000Z",
      "tweet_id": "2123521444688920754"
-    },
-    {
-     "caption": "🎤 ALURE ได้รับการเสนอชื่อในหัวข้อ \"ไอดอลเสียงโดดเด่น ฟังครั้งแรกก็จำได้ทันที\"! ✨\n\nมาร่วมโหวตให้ ALURE กันเยอะ ๆ นะคะ 💦\n\n📆 19 พ.ย. 18:00 – 10 ธ.ค. 18:00 (KST)\n\n📱 Higher APP\n🛞 หน้าหลัก ▶️ แท็บโหวตที่ 2 ▶️ แบนเนอร์ที่ 5 ▶️ โหวต ALURE 🗳️\n\n#ALURE #โหวตให้ALURE #HigherApp https://x.com/A2OSOUL_STREAM/status/2123421416913854956/photo/1",
-     "images": [
-      "https://pbs.twimg.com/media/HXfohNQbMAAClfn.jpg"
-     ],
-     "permalink": "https://x.com/A2OSOUL_STREAM/status/2123421416913854956",
-     "timestamp": "2026-11-19T14:21:31.000Z",
-     "tweet_id": "2123421416913854956"
     }
    ],
-   "since_id": "2125106891571478833"
+   "since_id": "2125144640374419886"
   }
  },
  "x_vendors": {
@@ -3966,7 +3977,7 @@
    "id": "1556541258696622080",
    "since_id": "2125140283818135588"
   },
-  "at": "2026-11-24T17:20+09:00",
+  "at": "2026-11-24T17:30+09:00",
   "coogoong": {
    "id": "1549266721516978176",
    "since_id": "2125136252127293769"
