@@ -21,6 +21,7 @@
   }
   .past-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
   .past-grid .li { border-right: 1px solid var(--line); }
+  .past-h { padding: 10px 16px 6px; font-size: 13px; font-weight: 800; border-top: 1px solid var(--line); background: var(--bg); display: flex; gap: 6px; align-items: center; }
   .tw-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
   .tw h1 { font-size: 22px; margin: 0; }
   .tw .sub { margin: 4px 0 0; font-size: 13px; color: var(--muted); }
@@ -482,7 +483,16 @@
         const det = document.createElement("details"); det.className = "past";
         det.open = !!tab;  // 탭을 고르면 지난 초안도 펼쳐서
         det.innerHTML = `<summary>지난 초안 <span class="badge">${past.length}</span></summary>`;
-        const pg = document.createElement("div"); pg.className = "past-grid"; pg.append(...past.map(line)); det.append(pg);
+        // 올라간 방식별로 묶어서 (최신순)
+        const PG = [["⚡ 자동으로 올라감", (d) => d.status === "posted" && !d.retweet && d.auto], ["✅ 직접 올림", (d) => d.status === "posted" && !d.retweet && !d.auto],
+          ["🔁 리트윗", (d) => d.status === "posted" && d.retweet], ["🗑 버림·취소", (d) => d.status !== "posted"]];
+        for (const [label, f] of PG) {
+          const xs = past.filter(f).sort((a, c) => (c.posted || c.at) - (a.posted || a.at));
+          if (!xs.length) continue;
+          const gh = document.createElement("div"); gh.className = "past-h"; gh.innerHTML = `${label} <span class="badge">${xs.length}</span>`;
+          const pg = document.createElement("div"); pg.className = "past-grid"; pg.append(...xs.map(line));
+          det.append(gh, pg);
+        }
         out.push(det);
       }
       $("list").replaceChildren(...out);
