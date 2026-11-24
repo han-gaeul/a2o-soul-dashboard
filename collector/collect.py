@@ -581,6 +581,20 @@ def media_feed(cfg, state, limit=40, keep_video=False):
     return out[:limit]
 
 
+YT_ID = re.compile(r"(?:youtu\.be/|youtube\.com/(?:watch\?v=|shorts/))([\w-]{11})")
+
+
+def media_cams(state, hours=48):
+    """매체·방송사 계정 글 중 유튜브 링크가 있는 것 (최근 이틀) → [{url, at, ids}] — 직캠 묶음 글이 있으면 리트윗하려고"""
+    cut = (datetime.now(timezone.utc) - timedelta(hours=hours)).isoformat()
+    out = []
+    for m in (state.get("posts") or {}).values():
+        ids = sorted(set(YT_ID.findall(m.get("caption") or "")))
+        if ids and (m.get("timestamp") or "") >= cut[:19]:
+            out.append({"url": m["permalink"], "at": kst_datetime(m["timestamp"]), "ids": ids, "handle": m.get("author") or ""})
+    return out
+
+
 def fan_extract(caption, posted, today):
     """팬 계정 글: 규칙으로 뽑되 확신을 낮춰 전부 '확인 필요'로."""
     return [{**i, "confidence": min(i["confidence"], 0.6), "title": f"[팬 계정] {i['title']}"} for i in rules.extract(caption, posted, today)]
@@ -2189,6 +2203,7 @@ def build(cfg):
         "radio_plays": __import__("radio").summary(),
         "kcharts": __import__("kcharts").summary(),
         "spotify_country": __import__("spotify_country").summary(),
+        "media_cams": media_cams(media_state),
         "official_x": [{"url": m["permalink"], "at": kst_datetime(m["timestamp"])}
                        for k, m in sorted((load_json("announcements.json", {}).get("posts") or {}).items(), key=lambda kv: kv[1].get("timestamp") or "", reverse=True)
                        if k.startswith("x:") and "/a2o_soul/status/" in (m.get("permalink") or "").lower() and m.get("timestamp")][:20],

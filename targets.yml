@@ -210,6 +210,7 @@ x_media:
   - { handle: dingo_music, name: 딩고 뮤직 }
   - { handle: MBCkpop, name: MBCkpop }
   - { handle: sbsnow, name: SBS KPOP }
+  - { handle: kpop_sbs, name: SBS 인기가요 }   # 멤버별 직캠 묶음 글 (있으면 우리 초안 대신 리트윗)
   - { handle: KBSKpop, name: KBS Kpop }
   - { handle: DazedKorea, name: Dazed Korea }
   - { handle: ellekorea, name: ELLE Korea }
