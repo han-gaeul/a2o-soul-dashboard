@@ -357,7 +357,7 @@ def tweet_text(kind, data):
     else:
         title, body, url = compose(kind, data, "ko")
         t2, b2, _ = compose(kind, data, "en")
-        en = (t2 if b2 == body or not b2 else f"{t2} {b2}").strip() if kind not in ("show", "chart") else ""  # 차트는 국내라 한국어만  # 본문이 원문 그대로면 영어는 제목만
+        en = (t2 if b2 == body or not b2 else f"{t2} {b2}").strip() if kind not in ("show", "chart", "video") else ""  # 차트는 국내라 한국어만, 영상은 제목이 곧 내용이라 영어 줄 뺌  # 본문이 원문 그대로면 영어는 제목만
         if kind in ("views", "subs"):
             title = title.replace("🎉 ", "🎉 A2O SOUL ", 1) if "A2O SOUL" not in title else title
     if kind == "birthday":
