@@ -90,6 +90,10 @@
   .li .txt { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .li .st { font-size: 12px; color: var(--muted); }
   .li a { font-size: 12px; font-weight: 700; color: var(--accent); text-decoration: none; white-space: nowrap; }
+  .two { display: grid; gap: 16px; align-items: start; }
+  .two .col { display: grid; gap: 10px; align-content: start; min-width: 0; }
+  .stack { display: grid; gap: 12px; }
+  @media (min-width: 900px) { .two { grid-template-columns: 1fr 1fr; } }
   /* 오른쪽: 자동 규칙 정리 (넓은 화면은 옆에 고정, 좁으면 맨 위에 접어서) */
   .layout { max-width: 1520px; margin: 0 auto; }
   .rules { background: var(--card); border: 1px solid var(--line); border-radius: 16px; font-size: 13px; line-height: 1.5; }
@@ -434,10 +438,14 @@
       const h = document.createElement("div"); h.className = "sec-h";
       h.innerHTML = `<h2>올릴 초안</h2><span class="badge">${pend.length}</span>`;
       const out = [chips];
-      if (sched.length) {  // 예약됨: 정해진 시각에 자동으로 올라갈 글 (취소하면 안 올라감)
-        const sh = document.createElement("div"); sh.className = "sec-h";
-        sh.innerHTML = `<h2>⏰ 예약됨</h2><span class="badge">${sched.length}</span>`;
-        const g = document.createElement("div"); g.className = "grid-c";
+      // 예약됨 | 올릴 초안 — 넓은 화면은 나란히 두 칸
+      const colS = document.createElement("div"), colP = document.createElement("div");
+      colS.className = colP.className = "col";
+      const sh = document.createElement("div"); sh.className = "sec-h";
+      sh.innerHTML = `<h2>⏰ 예약됨</h2><span class="badge">${sched.length}</span>`;
+      colS.append(sh);
+      if (sched.length) {  // 정해진 시각에 자동으로 올라갈 글 (취소하면 안 올라감)
+        const g = document.createElement("div"); g.className = "stack";
         g.append(...sched.map((d) => {
           const box = document.createElement("div"); box.className = "card";
           const right = document.createElement("b"); right.style.color = "var(--accent)"; right.textContent = `${when(d.post_at)} 올라감`;
@@ -448,11 +456,13 @@
           box.append(meta(d, right), body, acts);
           return box;
         }));
-        out.push(sh, g);
-      }
-      out.push(h);
-      if (pend.length) { const g = document.createElement("div"); g.className = "grid-c"; g.append(...pend.map(card)); out.push(g); }
-      else { const e = document.createElement("div"); e.className = "empty"; e.textContent = "지금은 올릴 초안이 없어요 🙌"; out.push(e); }
+        colS.append(g);
+      } else { const e = document.createElement("div"); e.className = "empty"; e.textContent = "예약된 트윗이 없어요"; colS.append(e); }
+      colP.append(h);
+      if (pend.length) { const g = document.createElement("div"); g.className = "stack"; g.append(...pend.map(card)); colP.append(g); }
+      else { const e = document.createElement("div"); e.className = "empty"; e.textContent = "지금은 올릴 초안이 없어요 🙌"; colP.append(e); }
+      const two = document.createElement("div"); two.className = "two"; two.append(colS, colP);
+      out.push(two);
       if (past.length) {
         const det = document.createElement("details"); det.className = "past";
         det.open = !!tab;  // 탭을 고르면 지난 초안도 펼쳐서
