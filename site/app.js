@@ -2036,7 +2036,7 @@ if ("serviceWorker" in navigator) {
     };
     if (shows.length) drawTabs(); else $("showTabs").remove();
   }
-  const EP_FIRST = 5; // 처음엔 최근 회차 몇 개만 — 나머지는 '이전 회차 더 보기'
+  const EP_FIRST = 8; // 처음엔 최근 회차 몇 개만 (카드 2·4칸에 맞게) — 나머지는 '이전 회차 더 보기'
   let epAll = false;
   const epVisible = () => {
     const showSel = document.querySelector("#showTabs button.on");
