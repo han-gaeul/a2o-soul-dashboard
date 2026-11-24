@@ -221,9 +221,17 @@ def candidates(dash, site, now):
             out.append((f"vg|{ch}|{base[:60]}|{i // 5}", "video", "video",
                         {"title": base[:90], "url": f"https://youtu.be/{part[0][0]['id']}", "members": [],
                          "cams": [[m[1] or m[0], v["id"]] for v, m in part]}))
+    mposts = dash.get("media_posts_tw") or []
+
+    def same_post(v):  # 이 영상을 알리는 매체·공식 X 글 (영상 주소가 있거나, 같은 채널 계정이 같은 제목으로 올림) → 그 글은 리트윗되니 초안 안 만듦
+        core = re.sub(r"\s*[｜|]\s*#?Shorts.*$|#\S+", "", v["title"], flags=re.I).strip()[:30].lower()
+        return any(v["id"] in (x.get("text") or "") or ((x.get("name") or "").lower() == (v.get("channel") or "").lower()
+                                                         and core and core in (x.get("text") or "").lower()) for x in mposts)
     for v in recent:  # 새 MV·무대 영상 (직캠 한 개짜리는 많아서 뺌)
         if v["id"] in grouped or v.get("category") == "fancam":
             continue
+        if same_post(v) or now - pub(v) < timedelta(minutes=30):
+            continue  # 공식·매체 X 글이 있으면 리트윗으로 충분 — 30분 기다려도 없으면 우리 초안
         out.append((f"vd|{v['id']}", "video", "video", {"title": v["title"][:90], "url": f"https://youtu.be/{v['id']}",
                                                          "members": _members_in(v, mems)}))
     for x in dash.get("media_posts_tw") or dash.get("media_posts") or []:  # 매체·방송사 계정의 A2O SOUL 글 (3시간 안) — 바로 리트윗, 푸시는 안 보냄
