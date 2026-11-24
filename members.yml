@@ -167,7 +167,7 @@ members:
     position: 보컬, 랩
     aliases: [SEEONE, SEE ONE]
     career: [키즈모델 활동, 댄스 보컬 아카데미 HIBEAT 출신, 전 JYP엔터테인먼트 연습생]
-    notes: ["매력 포인트는 '동굴 보이스' 저음", "QQ뮤직 TMI: 요즘 매일 'SUPERSTAR'를 듣는다", "쿠거우뮤직: 좋아하는 동물: 고양이, 레서판다 · 불리고 싶은 별명: '저음인 그 사람'처럼 '~한 그 사람'"]
+    notes: ["매력 포인트는 '동굴 보이스' 저음", "QQ뮤직 TMI: 요즘 매일 'SUPERSTAR'를 듣는다", "쿠거우뮤직: 좋아하는 동물: 고양이, 레서판다 · 불리고 싶은 별명: '~한 그 사람' (예: '목소리 낮은 그 사람')"]
     drawings: [{ src: img/drawings/qq_seeone.webp, label: "QQ뮤직·KPOP研究社 프로필 (모음 @tweentween13)", url: "https://x.com/tweentween13/status/2119759845880668274" }]
 
   - name: ALURE
