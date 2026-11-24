@@ -62,6 +62,10 @@ channels:
     filter: group
     kpi: false
     show: SHOW K-POP
+  # 직캠 채널
+  - handle: _the_idol              # THE IDOL (직캠·사녹 멘트 영상)
+    filter: group
+    kpi: false
   # 음원 유통사
   - id: UC_pwIXKXNm5KGhdEVzmY60A   # STONE MUSIC
     filter: group
@@ -213,6 +217,7 @@ x_media:
   - { handle: kpop_sbs, name: SBS 인기가요 }   # 멤버별 직캠 묶음 글 (있으면 우리 초안 대신 리트윗)
   - { handle: ena_kpopupshow, name: ENA 케이팝업 차트쇼 }
   - { handle: showkpop_live, name: SHOW K-POP (아리랑) }
+  - { handle: _THE_IDOL, name: THE IDOL }   # 직캠 채널 X
   - { handle: KBSKpop, name: KBS Kpop }
   - { handle: DazedKorea, name: Dazed Korea }
   - { handle: ellekorea, name: ELLE Korea }
