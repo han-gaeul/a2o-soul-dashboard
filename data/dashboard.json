@@ -4347,6 +4347,13 @@
     "비공개 연습생으로 데뷔"
    ],
    "color": "",
+   "drawings": [
+    {
+     "label": "QQ뮤직·KPOP研究社 프로필 (모음 @tweentween13)",
+     "src": "img/drawings/qq_moon.webp",
+     "url": "https://x.com/tweentween13/status/2119757336546005468"
+    }
+   ],
    "fancam_count": 11,
    "fancam_delta": 886,
    "fancam_views": 218826,
@@ -4520,12 +4527,14 @@
    "ig_mentions": [],
    "instagram_posts": [],
    "ko": "문",
+   "mbti": "INFP",
    "name": "MOON",
    "nationality": "한국",
    "nicknames": [],
    "notes": [
     "팀의 맏형으로 동생들을 잘 챙김",
-    "소울메이트로 동갑 멤버 소라를 꼽음"
+    "소울메이트로 동갑 멤버 소라를 꼽음",
+    "QQ뮤직 TMI: 멤버랑 둘이 '뮤직뱅크' 계단 난간 안에 들어가 사진을 찍다가 못 나올 뻔했다"
    ],
    "photo": "img/members/댄인닼_문.webp",
    "position": "리더, 보컬, 비주얼 센터",
@@ -4563,6 +4572,13 @@
     "비공개 연습생으로 데뷔"
    ],
    "color": "",
+   "drawings": [
+    {
+     "label": "QQ뮤직·KPOP研究社 프로필 (모음 @tweentween13)",
+     "src": "img/drawings/qq_sora.webp",
+     "url": "https://x.com/tweentween13/status/2119757336546005468"
+    }
+   ],
    "fancam_count": 6,
    "fancam_delta": 3767,
    "fancam_views": 669475,
@@ -4661,13 +4677,15 @@
    "ig_mentions": [],
    "instagram_posts": [],
    "ko": "소라",
+   "mbti": "INFP",
    "name": "SORA",
    "nationality": "일본",
    "nicknames": [],
    "notes": [
     "여러 장르를 소화하는 스트리트댄스 기본기",
     "표정·제스처를 살린 무대 퍼포먼스",
-    "비트박스가 특기"
+    "비트박스가 특기",
+    "QQ뮤직 TMI: 팬들이 올리는 글 보는 걸 정말 좋아한다"
    ],
    "photo": "img/members/댄인닼_소라.webp",
    "position": "메인댄서",
@@ -4702,6 +4720,13 @@
     "비공개 연습생으로 데뷔"
    ],
    "color": "",
+   "drawings": [
+    {
+     "label": "QQ뮤직·KPOP研究社 프로필 (모음 @tweentween13)",
+     "src": "img/drawings/qq_seoha.webp",
+     "url": "https://x.com/tweentween13/status/2119757336546005468"
+    }
+   ],
    "fancam_count": 7,
    "fancam_delta": 2059,
    "fancam_views": 254912,
@@ -4822,13 +4847,15 @@
    ],
    "instagram_posts": [],
    "ko": "서하",
+   "mbti": "INFP",
    "name": "SEOHA",
    "nationality": "한국",
    "nicknames": [],
    "notes": [
     "'SUPERSTAR' 고음 파트 담당",
     "데뷔 쇼케이스 영상 영어 내레이션",
-    "무표정과 웃는 얼굴의 반전 매력"
+    "무표정과 웃는 얼굴의 반전 매력",
+    "QQ뮤직 TMI: 알람 소리를 못 들어서 늘 멤버들이 깨워 준다"
    ],
    "photo": "img/members/댄인닼_서하.webp",
    "position": "메인보컬",
@@ -4864,6 +4891,13 @@
     "A2O Rookies LTB(2024.10~) → HTB(2025.2~)"
    ],
    "color": "",
+   "drawings": [
+    {
+     "label": "QQ뮤직·KPOP研究社 프로필 (모음 @tweentween13)",
+     "src": "img/drawings/qq_teo.webp",
+     "url": "https://x.com/tweentween13/status/2119757336546005468"
+    }
+   ],
    "fancam_count": 3,
    "fancam_delta": 218,
    "fancam_views": 39048,
@@ -4924,6 +4958,7 @@
    ],
    "instagram_posts": [],
    "ko": "테오",
+   "mbti": "ENFP",
    "name": "TEO",
    "nationality": "중국",
    "nicknames": [
@@ -4932,7 +4967,8 @@
    "notes": [
     "댄스 브레이크 센터",
     "팀에서 흥이 가장 많은 멤버",
-    "소울푸드는 짜장면"
+    "소울푸드는 짜장면",
+    "QQ뮤직 TMI: 요즘 두바이 초콜릿이 맛있다"
    ],
    "photo": "img/members/댄인닼_테오.webp",
    "position": "메인댄서",
@@ -5149,6 +5185,7 @@
     "HTB 'REVOLUTION', 'CHAMPAGNE' 참여"
    ],
    "color": "",
+   "drawings": [],
    "fancam_count": 7,
    "fancam_delta": 1164,
    "fancam_views": 216813,
@@ -5269,6 +5306,7 @@
    ],
    "instagram_posts": [],
    "ko": "가쿠",
+   "mbti": "",
    "name": "GAKU",
    "nationality": "일본",
    "nicknames": [],
@@ -5490,6 +5528,7 @@
     "A2O Rookies HTB '쥔린(JUNLIN)' (2025.2~)"
    ],
    "color": "",
+   "drawings": [],
    "fancam_count": 3,
    "fancam_delta": 76,
    "fancam_views": 22690,
@@ -5556,6 +5595,7 @@
    ],
    "instagram_posts": [],
    "ko": "준",
+   "mbti": "",
    "name": "JUNE",
    "nationality": "중국",
    "nicknames": [],
@@ -5687,6 +5727,7 @@
     "비공개 연습생으로 데뷔"
    ],
    "color": "",
+   "drawings": [],
    "fancam_count": 2,
    "fancam_delta": 233,
    "fancam_views": 21620,
@@ -5725,6 +5766,7 @@
    "ig_mentions": [],
    "instagram_posts": [],
    "ko": "한성",
+   "mbti": "",
    "name": "HANSUNG",
    "nationality": "한국",
    "nicknames": [
@@ -5767,6 +5809,7 @@
     "비공개 연습생으로 데뷔"
    ],
    "color": "",
+   "drawings": [],
    "fancam_count": 2,
    "fancam_delta": 138,
    "fancam_views": 24450,
@@ -5812,6 +5855,7 @@
    ],
    "instagram_posts": [],
    "ko": "루시엔",
+   "mbti": "",
    "name": "LUCIEN",
    "nationality": "한국·미국",
    "nicknames": [],
@@ -5856,6 +5900,7 @@
     "전 JYP엔터테인먼트 연습생"
    ],
    "color": "",
+   "drawings": [],
    "fancam_count": 5,
    "fancam_delta": 294,
    "fancam_views": 66633,
@@ -5946,6 +5991,7 @@
    ],
    "instagram_posts": [],
    "ko": "시원",
+   "mbti": "",
    "name": "SEE-ONE",
    "nationality": "한국·일본",
    "nicknames": [],
@@ -5986,6 +6032,7 @@
     "비공개 연습생으로 데뷔"
    ],
    "color": "",
+   "drawings": [],
    "fancam_count": 2,
    "fancam_delta": 358,
    "fancam_views": 80248,
@@ -6024,6 +6071,7 @@
    "ig_mentions": [],
    "instagram_posts": [],
    "ko": "알루어",
+   "mbti": "",
    "name": "ALURE",
    "nationality": "태국",
    "nicknames": [
@@ -6067,6 +6115,7 @@
     "A2O Rookies LTB (2024.10~)"
    ],
    "color": "",
+   "drawings": [],
    "fancam_count": 11,
    "fancam_delta": 1479,
    "fancam_views": 374966,
@@ -6240,6 +6289,7 @@
    "ig_mentions": [],
    "instagram_posts": [],
    "ko": "타이",
+   "mbti": "",
    "name": "TAI",
    "nationality": "중국",
    "nicknames": [],
@@ -6550,6 +6600,7 @@
     "A2O Rookies LTB (2025.8~)"
    ],
    "color": "",
+   "drawings": [],
    "fancam_count": 3,
    "fancam_delta": 938,
    "fancam_views": 190122,
@@ -6603,6 +6654,7 @@
    "ig_mentions": [],
    "instagram_posts": [],
    "ko": "소노",
+   "mbti": "",
    "name": "SONO",
    "nationality": "일본",
    "nicknames": [],
@@ -6645,6 +6697,7 @@
     "제트와 같은 댄스 스튜디오 출신으로 약 4년간 함께 연습"
    ],
    "color": "",
+   "drawings": [],
    "fancam_count": 15,
    "fancam_delta": 5424,
    "fancam_views": 474736,
@@ -6891,6 +6944,7 @@
    ],
    "instagram_posts": [],
    "ko": "자이",
+   "mbti": "",
    "name": "ZAI",
    "nationality": "중국",
    "nicknames": [
@@ -7280,6 +7334,7 @@
     "솔로 'Love Is Gone' Zal-Dance 영상(2025.4)"
    ],
    "color": "",
+   "drawings": [],
    "fancam_count": 6,
    "fancam_delta": 622,
    "fancam_views": 115623,
@@ -7378,6 +7433,7 @@
    "ig_mentions": [],
    "instagram_posts": [],
    "ko": "에이든",
+   "mbti": "",
    "name": "AYDEN",
    "nationality": "중국",
    "nicknames": [
@@ -7723,6 +7779,7 @@
     "솔로 'Palette' Zal-Dance 영상(2025.6)"
    ],
    "color": "",
+   "drawings": [],
    "fancam_count": 10,
    "fancam_delta": 4404,
    "fancam_views": 684889,
@@ -7881,6 +7938,7 @@
    "ig_mentions": [],
    "instagram_posts": [],
    "ko": "제트",
+   "mbti": "",
    "name": "ZET",
    "nationality": "중국",
    "nicknames": [
