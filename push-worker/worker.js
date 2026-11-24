@@ -564,9 +564,14 @@ async function tweets(req, env, url) {
     let added = 0, posted = 0;
     const acct = await xAccount(env);
     const canPost = !!(acct && (acct.v === 2 || (env.X_API_KEY && env.X_API_SECRET)));
-    for (const d of (b.drafts || []).slice(0, 20)) {
+    for (const d of (b.drafts || []).slice(0, 30)) {
       if (!d || typeof d.text !== "string" || !d.key) continue;
       const id = (await sha("tw:" + d.key)).slice(0, 16);
+      if (d.cancel) {  // 예약 취소 (공식 글이 나와서 리트윗으로 대신) — 아직 안 올라간 것만
+        const r0 = await env.SUBS.get(`_tw:${id}`, "json");
+        if (r0 && ["scheduled", "pending"].includes(r0.status)) await env.SUBS.put(`_tw:${id}`, JSON.stringify({ ...r0, status: "skipped", canceled: true }), { expirationTtl: 3 * 86400 });
+        continue;
+      }
       if (await env.SUBS.get(`_tw:${id}`)) continue;
       const rec = { id, key: String(d.key).slice(0, 120), kind: String(d.kind || ""), text: d.text.slice(0, 1000), status: "pending", at: Date.now(),
         ...(typeof d.image === "string" && /^https:\/\/a2osoul-tracker\.com\//.test(d.image) ? { image: d.image } : {}) };
