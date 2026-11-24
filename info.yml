@@ -103,7 +103,7 @@ show_live:
   - { show: 뮤직뱅크, label: KBS2, url: "https://onair.kbs.co.kr/index.html?sname=onair&stype=live&ch_code=12" }
   - { show: 음악중심, label: MBC, url: "https://onair.imbc.com/" }
   - { show: 인기가요, label: SBS, url: "https://www.sbs.co.kr/live/S01" }
-  - { show: 케이팝업 차트쇼, label: "ENA K-POP 유튜브 (11/24 라이브는 18:00 시작)", url: "https://www.youtube.com/@ENAKPOP/live" }  # 채널 /live 주소 = 그때 하는 라이브로 연결 (방송마다 주소 바뀌어도 그대로)
+  - { show: 케이팝업 차트쇼, label: ENA K-POP 유튜브, url: "https://www.youtube.com/@ENAKPOP/streams", yt_channel: UCFpfKdO4MMSc9ZoMjk2Tikg }  # 방송마다 라이브 주소가 바뀜 → 수집기가 당일 주소를 찾아 넣음 (못 찾으면 채널 라이브 목록)
 
 shops:
   - { label: Mnet Plus Merch (A2O), url: "https://mnetplusmerch.com/product/list.html?cate_no=374", note: "앨범·팬사인회·영상통화 이벤트", kind: 앨범 }
