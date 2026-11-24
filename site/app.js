@@ -618,17 +618,21 @@ if ("serviceWorker" in navigator) {
       document.addEventListener("click", (e) => { if (!menu.contains(e.target)) menu.hidden = true; });
       const watch = w.url || `https://www.youtube.com/results?search_query=${encodeURIComponent(`A2O SOUL ${w.show} 1위 앵콜`)}`;
       // 앵콜 영상이 여러 개(무대·직캠)면 창을 띄워 고르기
-      const enc = (w.encore || []).filter((x) => x.url);
+      // 여러 1위를 같이 축하할 때: 소감만 있는 1위들의 소감 영상을 골라 보기 (최근 것 먼저)
+      const speeches = multi ? wins.filter((x) => x.speech && x.url && (Date.parse(w.date) - Date.parse(x.date)) / 86400000 <= 3).reverse()
+        .map((x) => ({ url: x.url, label: `🏆 ${tc(x.show)}` })) : [];
+      const enc = speeches.length > 1 ? speeches : (w.encore || []).filter((x) => x.url);
       // 앵콜 없이 수상 소감만 있으면 (info.yml wins.speech: true) '수상 소감 보기'
       const watchBtn = el("a", { class: "win-btn primary", href: enc[0]?.url || watch, target: "_blank", rel: "noopener" }, t(w.speech ? "win_speech" : "win_watch"));
       if (enc.length > 1) {
         const vid = (u) => (/(?:youtu\.be\/|v=|shorts\/)([\w-]{11})/.exec(u) || [])[1];
         const close = el("button", { class: "dlg-close", type: "button", "aria-label": "✕" }, "✕");
-        const dlg = el("dialog", { class: "enc-dlg", "aria-label": t("win_enc_title") },
-          el("div", { class: "dlg-head" }, el("h2", {}, t("win_enc_title")), close),
+        const dlgTitle = speeches.length > 1 ? t("win_speech") : t("win_enc_title");
+        const dlg = el("dialog", { class: "enc-dlg", "aria-label": dlgTitle },
+          el("div", { class: "dlg-head" }, el("h2", {}, dlgTitle), close),
           el("div", { class: "enc-list" }, ...enc.map((x) => el("a", { class: "enc-opt", href: x.url, target: "_blank", rel: "noopener" },
             vid(x.url) ? el("img", { src: `https://i.ytimg.com/vi/${vid(x.url)}/mqdefault.jpg`, alt: "", loading: "lazy" }) : null,
-            el("b", {}, t(`win_enc_${x.kind}`) || x.kind || t("win_watch"))))));
+            el("b", {}, x.label || t(`win_enc_${x.kind}`) || x.kind || t("win_watch"))))));
         document.body.append(dlg);
         close.onclick = () => dlg.close();
         dlg.onclick = (e) => { if (e.target === dlg || e.target.closest(".enc-opt")) dlg.close(); };
