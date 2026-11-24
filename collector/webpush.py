@@ -213,14 +213,14 @@ def candidates(dash, site, now):
                 out.append((f"rt|{p['url']}", "media", "media", {"name": p.get("handle") or "", "title": base[:100], "url": p["url"],
                                                                 "members": [], "rt": True}))
             continue
-        if now - max(pub(v) for v, _ in lst) < timedelta(minutes=30):
-            continue  # 공식 계정이 묶음 글을 올릴 때까지 30분 기다림 — 안 올리면 우리 초안
+        if now - max(pub(v) for v, _ in lst) < timedelta(minutes=10):
+            continue  # 공식 계정이 묶음 글을 올릴 때까지 10분 기다림 — 안 올리면 우리 글 바로 올림
         lst.sort(key=lambda x: order.get(x[1][0], 99))
         for i in range(0, len(lst), 5):  # 5명씩 (280자 안에 들어가게)
             part = lst[i:i + 5]
             out.append((f"vg|{ch}|{base[:60]}|{i // 5}", "video", "video",
                         {"title": base[:90], "url": f"https://youtu.be/{part[0][0]['id']}", "members": [],
-                         "cams": [[m[1] or m[0], v["id"]] for v, m in part]}))
+                         "cams": [[m[1] or m[0], v["id"]] for v, m in part], "auto": True}))
     mposts = dash.get("media_posts_tw") or []
 
     def same_post(v):  # 이 영상을 알리는 매체·공식 X 글 (영상 주소가 있거나, 같은 채널 계정이 같은 제목으로 올림) → 그 글은 리트윗되니 초안 안 만듦
@@ -230,10 +230,10 @@ def candidates(dash, site, now):
     for v in recent:  # 새 MV·무대 영상 (직캠 한 개짜리는 많아서 뺌)
         if v["id"] in grouped or v.get("category") == "fancam":
             continue
-        if same_post(v) or now - pub(v) < timedelta(minutes=30):
-            continue  # 공식·매체 X 글이 있으면 리트윗으로 충분 — 30분 기다려도 없으면 우리 초안
+        if same_post(v) or now - pub(v) < timedelta(minutes=10):
+            continue  # 공식·매체 X 글이 있으면 리트윗으로 충분 — 10분 기다려도 없으면 우리 글 바로 올림
         out.append((f"vd|{v['id']}", "video", "video", {"title": v["title"][:90], "url": f"https://youtu.be/{v['id']}",
-                                                         "members": _members_in(v, mems)}))
+                                                         "members": _members_in(v, mems), "auto": True}))
     for x in dash.get("media_posts_tw") or dash.get("media_posts") or []:  # 매체·방송사 계정의 A2O SOUL 글 (3시간 안) — 바로 리트윗, 푸시는 안 보냄
         if x.get("at") and timedelta(0) <= now - _kst(x["at"]) < timedelta(hours=3) and f"rt|{x['url']}" not in {o[0] for o in out}:
             head = next((ln for ln in (x.get("text") or "").splitlines() if re.sub(r"#\S+|https?://\S+", "", ln).strip()), "")
