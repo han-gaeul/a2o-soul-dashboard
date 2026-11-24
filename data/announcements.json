@@ -3314,8 +3314,8 @@
   }
  },
  "x_media": {
-  "at": "2026-11-24T17:30+09:00",
-  "auto_since": "2125145144014033050",
+  "at": "2026-11-24T17:40+09:00",
+  "auto_since": "2125146794938216665",
   "candidates": {},
   "checked": "2026-11-24T16:41+09:00",
   "missing": [],
@@ -3554,19 +3554,28 @@
     "permalink": "https://x.com/StoneMusicEnt/status/2125145144014033050",
     "timestamp": "2026-11-24T08:31:00.000Z",
     "video": true
+   },
+   "2125145395709743119": {
+    "author": "StoneMusicEnt",
+    "author_name": "STONE MUSIC",
+    "caption": "<🖤‘In The Studio - A2O SOUL' 편 시청 인증 이벤트>\n \n📅이벤트 기간 : 11.24 (화) ~ 11.30 (월) / 발표: 12.1 (화) (당첨자에 한해 메일로 개별 안내)\n🎁경품안내 : A2O SOUL 폴라로이드 사진 (총 15인 추첨 / 1인 1장 랜덤 증정) / 국내 주소에 한함\n \n📢 이벤트 참여방법\n1) 스톤뮤직 SNS 구독 인증샷 캡처 (스톤뮤직 유튜브, 인스타그램, X, TikTok 中 본인 참여 채널)\n2) 스톤뮤직 공식 유튜브 채널에서 'In The Studio - A2O SOUL' 편 시청 후 응원 댓글 캡처\n3) 아래 링크에 성함, 이메일 주소, 참여채널과 함께 '구독 인증샷'과 '응원 댓글 캡처' 이미지 첨부! \n👉https://t.co/wQJO5oMmWa\n\n#A2O #A2OSOUL #Dancing_in_the_Dark #SUPERSTAR #ZalphaPop",
+    "images": [
+     "https://pbs.twimg.com/media/HX3xkWWaEAAk_oY.jpg"
+    ],
+    "permalink": "https://x.com/StoneMusicEnt/status/2125145395709743119",
+    "timestamp": "2026-11-24T08:32:00.000Z",
+    "video": false
    }
   },
-  "since_id": "2125145144014033050"
+  "since_id": "2125145395709743119"
  },
  "x_official_votes": {
-  "at": "2026-11-24T17:30+09:00",
+  "at": "2026-11-24T17:40+09:00",
   "deep": 1,
   "last": {
    "official": [],
-   "read": 1,
-   "verified": [
-    "onlyseeonee:blue"
-   ]
+   "read": 0,
+   "verified": []
   },
   "since_id": "2125145044252536940",
   "v": 2
@@ -3977,7 +3986,7 @@
    "id": "1556541258696622080",
    "since_id": "2125140283818135588"
   },
-  "at": "2026-11-24T17:30+09:00",
+  "at": "2026-11-24T17:40+09:00",
   "coogoong": {
    "id": "1549266721516978176",
    "since_id": "2125136252127293769"
