@@ -1707,6 +1707,23 @@ if ("serviceWorker" in navigator) {
   const facts = (m, withBday) => [withBday && m.real_name ? t("real_name_line", { v: m.real_name }) : "", tc(m.position), m.birth_year ? t("born", { y: m.birth_year }) : "",
     withBday ? bdayText(m) : "", nat(m.nationality), withBday ? m.mbti : ""].filter(Boolean).join(" · ");
 
+  // 매체(음원 사이트·매거진) 프로필 카드에서 나온 정보 — 여담과 따로, 출처별로 묶어서
+  const PRESS = /^(QQ뮤직|쿠거우뮤직)( TMI)?:\s*/;
+  const pressRow = (m) => {
+    const groups = new Map();
+    for (const n of m.notes.filter((x) => PRESS.test(x))) {
+      const tr = tc(n), i = tr.search(/[:：]/);
+      const src = i > 0 ? tr.slice(0, i).trim() : n.match(PRESS)[1];
+      const body = i > 0 ? tr.slice(i + 1).trim() : tr;
+      if (!groups.has(src)) groups.set(src, []);
+      groups.get(src).push(...body.split(/\s*·\s*/).filter(Boolean));
+    }
+    if (!groups.size) return null;
+    return el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, t("press_profile")),
+      el("div", { class: "pf-press" }, ...[...groups].map(([src, items]) => el("div", {},
+        el("b", { class: "pf-press-src" }, src), el("ul", {}, ...items.map((x) => el("li", {}, x)))))));
+  };
+
   function profile(m) {
     const list = (label, items) => (items.length
       ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, label), el("ul", {}, ...items.map((x) => el("li", {}, x))))
@@ -1719,7 +1736,8 @@ if ("serviceWorker" in navigator) {
       m.nicknames.length ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, t("nickname")), el("div", {}, m.nicknames.map(tc).join(", "))) : null,
       tip ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, "Tip"), el("div", {}, tip)) : null,
       list(t("career"), m.career.map(tc)),
-      list(t("notes"), m.notes.map(tc)),
+      list(t("notes"), m.notes.filter((n) => !PRESS.test(n)).map(tc)),
+      pressRow(m),
       (m.signatures || []).length || m.signature ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, t("signature")),
         el("div", { class: "pf-signs" }, ...((m.signatures || []).length ? m.signatures : [{ src: m.signature }]).map((x) => el("figure", {},
           el("img", { class: "pf-sign", src: x.src, alt: "", loading: "lazy" }),
