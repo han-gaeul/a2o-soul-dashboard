@@ -351,6 +351,8 @@ def tweet_text(kind, data):
         url = data["url"]
         site_cheer = "https://a2osoul-tracker.com/#cheer"
         links = [f"📺 생방송 {url}", f"💜 응원법·투표 {site_cheer}"]  # 방송 보기 + 사이트(응원법·투표) 링크 둘 다
+        if not url or url.rstrip("/") == site_url.rstrip("/"):  # 생방송 링크를 모르면 (예: ENA TV) 사이트 링크만
+            links = [f"💜 응원법·투표 {site_cheer}"]
     elif kind == "chart_day":  # 하루 한 번 차트 요약 — 국내 차트라 한국어만
         m_, d_ = int(data["date"][5:7]), int(data["date"][8:10])
         title, body, url = f"📊 {m_}/{d_} {data['hour']}시 차트", "", data["url"]
