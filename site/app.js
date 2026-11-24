@@ -619,7 +619,8 @@ if ("serviceWorker" in navigator) {
       const watch = w.url || `https://www.youtube.com/results?search_query=${encodeURIComponent(`A2O SOUL ${w.show} 1위 앵콜`)}`;
       // 앵콜 영상이 여러 개(무대·직캠)면 창을 띄워 고르기
       const enc = (w.encore || []).filter((x) => x.url);
-      const watchBtn = el("a", { class: "win-btn primary", href: enc[0]?.url || watch, target: "_blank", rel: "noopener" }, t("win_watch"));
+      // 앵콜 없이 수상 소감만 있으면 (info.yml wins.speech: true) '수상 소감 보기'
+      const watchBtn = el("a", { class: "win-btn primary", href: enc[0]?.url || watch, target: "_blank", rel: "noopener" }, t(w.speech ? "win_speech" : "win_watch"));
       if (enc.length > 1) {
         const vid = (u) => (/(?:youtu\.be\/|v=|shorts\/)([\w-]{11})/.exec(u) || [])[1];
         const close = el("button", { class: "dlg-close", type: "button", "aria-label": "✕" }, "✕");
