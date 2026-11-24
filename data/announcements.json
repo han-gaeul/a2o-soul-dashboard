@@ -1363,6 +1363,24 @@
    "permalink": "https://x.com/A2O_SOUL/status/2124820943310909538",
    "timestamp": "2026-11-23T11:02:44.000Z"
   },
+  "x:2125139858964513161": {
+   "caption": "[#케이팝업차트쇼]\n잠시 후, 5시 40분 '케이팝업 차트쇼'에 A2O SOUL이 출연합니다.\n팬 여러분의 많은 시청 부탁드립니다. \n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark",
+   "excerpt": "[#케이팝업차트쇼]\n잠시 후, 5시 40분 '케이팝업 차트쇼'에 A2O SOUL이 출연합니다.\n팬 여러분의 많은 시청 부탁드립니다. \n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark",
+   "items": [
+    {
+     "confidence": 0.9,
+     "date": "2026-11-24",
+     "end_date": null,
+     "kind": "music_show",
+     "place": null,
+     "time": "17:40",
+     "title": "케이팝업 차트쇼 출연",
+     "url": null
+    }
+   ],
+   "permalink": "https://x.com/A2O_SOUL/status/2125139858964513161",
+   "timestamp": "2026-11-24T08:10:00.000Z"
+  },
   "xf:2121586007254708290": {
    "caption": "[📸] 261114 @A2O_SOUL \n\n2026.11.14\nMBC Show! Music Core\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2OSOULBASE/status/2121586007254708290/photo/1",
    "excerpt": "[📸] 261114 @A2O_SOUL \n\n2026.11.14\nMBC Show! Music Core\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2OSOULBASE/status/2121586007254708",
@@ -3282,7 +3300,7 @@
  "x": {
   "A2O_SOUL": {
    "id": "1986498790229262336",
-   "since_id": "2124820943310909538"
+   "since_id": "2125139858964513161"
   }
  },
  "x_fans": {
@@ -3296,8 +3314,8 @@
   }
  },
  "x_media": {
-  "at": "2026-11-24T17:00+09:00",
-  "auto_since": "2125137351454433541",
+  "at": "2026-11-24T17:10+09:00",
+  "auto_since": "2125139276459655373",
   "candidates": {},
   "checked": "2026-11-24T16:41+09:00",
   "missing": [],
@@ -3514,21 +3532,28 @@
     "permalink": "https://x.com/myidolmiim/status/2124744877045125283",
     "timestamp": "2026-11-23T06:00:29.000Z",
     "video": false
+   },
+   "2125137675359559744": {
+    "author": "myidolmiim",
+    "author_name": "miim miim",
+    "caption": "[EXCLUSIVE] 아기 명창 알루어를 다각도로 감상하기 👀\n\n어느 각도에서 봐도 귀여움 💘\n오늘도 알루어에게 제대로 입덕 🥹\n\n🔗 https://www.instagram.com/reel/DgHedxUBClp\n\n✔️ 밈 팔로우 하고 A2O SOUL 독점 콘텐츠 미리 보기 😁\n\n#A2OSOUL #에이투오소울 #A2O\n#알루어 #ALURE\n#MIIM #마이밈 #KPOP https://x.com/myidolmiim/status/2125137675359559744/photo/1",
+    "images": [
+     "https://pbs.twimg.com/media/HX4Bc7YbgAAz1Be.jpg"
+    ],
+    "permalink": "https://x.com/myidolmiim/status/2125137675359559744",
+    "timestamp": "2026-11-24T08:01:19.000Z",
+    "video": false
    }
   },
-  "since_id": "2124744877045125283"
+  "since_id": "2125137675359559744"
  },
  "x_official_votes": {
-  "at": "2026-11-24T17:00+09:00",
+  "at": "2026-11-24T17:10+09:00",
   "deep": 1,
   "last": {
-   "official": [
-    "muniverse_io"
-   ],
-   "read": 1,
-   "verified": [
-    "muniverse_io:blue"
-   ]
+   "official": [],
+   "read": 0,
+   "verified": []
   },
   "since_id": "2125137351454433541",
   "v": 2
@@ -3939,9 +3964,9 @@
   },
   "UPICK_twt": {
    "id": "1556541258696622080",
-   "since_id": "2125137350984339562"
+   "since_id": "2125140283818135588"
   },
-  "at": "2026-11-24T17:00+09:00",
+  "at": "2026-11-24T17:10+09:00",
   "coogoong": {
    "id": "1549266721516978176",
    "since_id": "2125136252127293769"
@@ -3952,7 +3977,7 @@
   },
   "kpopidol_en": {
    "id": "1133645883965263872",
-   "since_id": "2125132489530413437"
+   "since_id": "2125139423692259563"
   },
   "mnetplus": {
    "id": "1506519992665526276",
@@ -3964,11 +3989,11 @@
   },
   "myloveidol_kpop": {
    "id": "2999130457",
-   "since_id": "2125132494706266358"
+   "since_id": "2125139168724746580"
   },
   "twt_my1pick": {
    "id": "1139074639374704641",
-   "since_id": "2125084692970090913"
+   "since_id": "2125139238534742522"
   }
  }
 }
