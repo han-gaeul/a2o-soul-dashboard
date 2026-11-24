@@ -103,6 +103,7 @@ show_live:
   - { show: 뮤직뱅크, label: KBS2, url: "https://onair.kbs.co.kr/index.html?sname=onair&stype=live&ch_code=12" }
   - { show: 음악중심, label: MBC, url: "https://onair.imbc.com/" }
   - { show: 인기가요, label: SBS, url: "https://www.sbs.co.kr/live/S01" }
+  - { show: 케이팝업 차트쇼, label: ENA K-POP 유튜브, url: "https://www.youtube.com/@ENAKPOP/live" }
 
 shops:
   - { label: Mnet Plus Merch (A2O), url: "https://mnetplusmerch.com/product/list.html?cate_no=374", note: "앨범·팬사인회·영상통화 이벤트", kind: 앨범 }
