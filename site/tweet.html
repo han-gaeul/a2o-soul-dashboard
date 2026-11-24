@@ -79,6 +79,7 @@
   .meta a { font-weight: 700; color: var(--accent); text-decoration: none; }
   .tw-img { width: 100%; border-radius: 12px; border: 1px solid var(--line); display: block; }
   .acts { display: flex; gap: 8px; justify-content: flex-end; }
+  .acts .cnt { margin-right: auto; align-self: center; font-size: 12px; color: var(--muted); }
   .empty { text-align: center; color: var(--muted); font-size: 14px; padding: 22px 0; background: var(--card); border: 1px dashed var(--line); border-radius: 16px; }
   /* 지난 초안: 한 줄씩 */
   details.past { background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
@@ -277,6 +278,8 @@
     const fit = () => { ta.style.height = "auto"; ta.style.height = ta.scrollHeight + 2 + "px"; }; // 글 길이에 맞춰 높이
     const upd = () => { const w = weight(ta.value); cnt.textContent = `${w}/280`; cnt.classList.toggle("over", w > 280); fit(); };
     ta.oninput = upd; upd(); requestAnimationFrame(fit);
+    // 고친 내용 저장 (칸을 벗어나면) — 안 보면 자동으로 올라가는 초안도 고친 내용으로 올라가게
+    ta.onchange = async () => { if (weight(ta.value) <= 280 && ta.value.trim()) { try { await call("/tweet/edit", { id: d.id, text: ta.value }); d.text = ta.value; msg("✅ 고친 내용 저장했어요"); } catch (_) {} } };
     const go = document.createElement("button"); go.type = "button"; go.className = "go"; go.textContent = "올리기";
     const skip = document.createElement("button"); skip.type = "button"; skip.textContent = "버리기";
     let sure = false;
@@ -449,11 +452,23 @@
         g.append(...sched.map((d) => {
           const box = document.createElement("div"); box.className = "card";
           const right = document.createElement("b"); right.style.color = "var(--accent)"; right.textContent = `${when(d.post_at)} 올라감`;
-          const body = document.createElement("div"); body.className = "rt-body"; body.textContent = d.text;
+          // 예약 글도 고칠 수 있게: 고치면 '저장' 버튼이 생김 (저장한 내용으로 그 시각에 올라감)
+          const ta = document.createElement("textarea"); ta.value = d.text;
+          const cnt = document.createElement("span"); cnt.className = "cnt";
+          const fit = () => { ta.style.height = "auto"; ta.style.height = ta.scrollHeight + 2 + "px"; };
+          const sv = document.createElement("button"); sv.type = "button"; sv.className = "go"; sv.textContent = "저장"; sv.hidden = true;
+          const upd = () => { const w = weight(ta.value); cnt.textContent = `${w}/280`; cnt.classList.toggle("over", w > 280); sv.hidden = ta.value === d.text; fit(); };
+          ta.oninput = upd; requestAnimationFrame(upd);
+          sv.onclick = async () => {
+            if (weight(ta.value) > 280) return msg("280자를 넘었어요", true);
+            sv.disabled = true;
+            try { await call("/tweet/edit", { id: d.id, text: ta.value }); d.text = ta.value; msg("✅ 고친 내용으로 예약했어요"); upd(); }
+            catch (e) { msg(e.message, true); } finally { sv.disabled = false; }
+          };
           const x = document.createElement("button"); x.type = "button"; x.textContent = "취소";
           x.onclick = async () => { x.disabled = true; try { await call("/tweet/skip", { id: d.id }); msg("예약을 취소했어요"); load(); } catch (e) { msg(e.message, true); x.disabled = false; } };
-          const acts = document.createElement("div"); acts.className = "acts"; acts.append(x);
-          box.append(meta(d, right), body, acts);
+          const acts = document.createElement("div"); acts.className = "acts"; acts.append(cnt, x, sv);
+          box.append(meta(d, right), ta, acts);
           return box;
         }));
         colS.append(g);
