@@ -9,7 +9,8 @@
 #
 # 프로필 (멤버 팝업에 표시)
 #   position, birth_year, nationality, nicknames, career(데뷔 전 경력), notes(여담)
-#   미성년 멤버가 많아 활동 관련 정보만 — 본명·학교·가족·거주지·신체정보·출처 없는 소문은 넣지 않기
+#   미성년 멤버가 많아 활동 관련 정보만 — 학교·가족·거주지·신체정보·출처 없는 소문은 넣지 않기
+#   real_name: 본명 (멤버가 공식 프로필·QQ뮤직 카드에서 직접 밝힌 것만, 운영자 결정 2026-11-24)
 #   birthday: "MM-DD" → 프로필에 표시, 다가오는 일정에 생일 D-day 자동 (30일 전부터)
 #   mbti: MBTI (멤버가 직접 밝힌 것만)
 #   drawings: 멤버가 직접 그린 그림 [{src: img/drawings/파일, label: 출처, url: 출처 주소}]
@@ -51,6 +52,7 @@ signature_sources:
 members:
   - name: MOON
     ko: 문
+    real_name: "문지찬 (文智璨)"
     nationality: 한국
     birth_year: 2007
     birthday: "04-07"
@@ -62,6 +64,7 @@ members:
 
   - name: SORA
     ko: 소라
+    real_name: "니시구치 소라 (西口空良)"
     nationality: 일본
     birth_year: 2007
     birthday: "07-30"
@@ -78,6 +81,7 @@ members:
 
   - name: SEOHA
     ko: 서하
+    real_name: "강서하"
     nationality: 한국
     birth_year: 2008
     birthday: "01-01"
@@ -89,6 +93,7 @@ members:
 
   - name: TEO
     ko: 테오
+    real_name: "마오팅쉬안 (毛廷瑄)"
     nationality: 중국
     birth_year: 2009
     birthday: "07-30"
@@ -102,6 +107,7 @@ members:
 
   - name: GAKU
     ko: 가쿠
+    real_name: "카지와라 가쿠 (梶原楽)"
     nationality: 일본
     birth_year: 2009
     birthday: "09-04"
@@ -114,6 +120,7 @@ members:
 
   - name: JUNE
     ko: 준
+    real_name: "황쥔린 (黄俊霖)"
     nationality: 중국
     birth_year: 2009
     birthday: "11-09"
@@ -127,6 +134,7 @@ members:
 
   - name: HANSUNG
     ko: 한성
+    real_name: "한지성 (韓知成)"
     nationality: 한국
     birth_year: 2010
     birthday: "02-25"
@@ -139,6 +147,7 @@ members:
 
   - name: LUCIEN
     ko: 루시엔
+    real_name: "Lucien Karoly"
     nationality: 한국·미국
     birth_year: 2010
     birthday: "12-10"
@@ -150,6 +159,7 @@ members:
 
   - name: SEE-ONE
     ko: 시원
+    real_name: "문시원 (文詩苑)"
     nationality: 한국·일본
     birth_year: 2011
     birthday: "02-10"
@@ -162,6 +172,7 @@ members:
 
   - name: ALURE
     ko: 알루어
+    real_name: "Issara Chaisiri"
     nationality: 태국
     birth_year: 2011
     birthday: "07-08"
@@ -177,6 +188,7 @@ members:
 
   - name: TAI
     ko: 타이
+    real_name: "츠시타이 (池析泰)"
     nationality: 중국
     birth_year: 2011
     birthday: "08-09"
@@ -189,6 +201,7 @@ members:
 
   - name: SONO
     ko: 소노
+    real_name: "카지와라 소노 (梶原園)"
     nationality: 일본
     birth_year: 2011
     birthday: "11-05"
@@ -201,6 +214,7 @@ members:
 
   - name: ZAI
     ko: 자이
+    real_name: "두자이 (杜嘉一)"
     nationality: 중국
     birth_year: 2012
     birthday: "01-06"
@@ -215,6 +229,7 @@ members:
 
   - name: AYDEN
     ko: 에이든
+    real_name: "덩민촨 (邓敏川)"
     nationality: 중국
     birth_year: 2012
     birthday: "03-27"
@@ -228,6 +243,7 @@ members:
 
   - name: ZET
     ko: 제트
+    real_name: "류한쩌 (刘瀚泽)"
     nationality: 중국
     birth_year: 2012
     birthday: "06-21"
