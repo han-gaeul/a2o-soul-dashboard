@@ -1130,6 +1130,9 @@ def find_show_live(cfg, now):
     p.write_text(json.dumps(st, ensure_ascii=False, indent=1) + "\n")
 
 
+SITE_DIR_TW = Path(__file__).resolve().parent.parent / "site" / "img" / "tw"
+
+
 def youtube_upcoming(registry, today):
     """예정된 유튜브 라이브·프리미어 → 일정."""
     out = []
@@ -1916,6 +1919,12 @@ def write_health(cfg, videos, members, today, official=(), store_cands=None, med
         rows = [f"- @{c['handle']} {c['name']} · {c['date']} · [글]({c['url']}) — {c['text']}"
                 for c in sorted(store_cands.values(), key=lambda c: c["date"], reverse=True)[:20]]
         secs.append(("새 오프라인 매장 후보", "매장 공식 계정이 맞으면 `info.yml` offline_stores에 추가 (리셀러·팬 계정은 무시)", rows))
+    twc = SITE_DIR_TW / "cards.json"  # 트윗 이미지(생일·조회수)가 지금 멤버 프로필 사진(최신 컨셉 포토)으로 만들어졌는지
+    if twc.exists():
+        made = (json.loads(twc.read_text("utf-8")) or {}).get("photos") or {}
+        old = [m["name"] for m in members or [] if m.get("photo") and made.get(m["name"]) != m.get("photo")]
+        if old:
+            secs.append(("트윗 이미지 다시 만들기", "멤버 프로필 사진이 바뀜 → `node tools/make_tw_cards.js` (생일·조회수 이미지를 최신 컨셉 포토로)", [f"- {n}" for n in old]))
     # 매체·콘텐츠: 없는 아이디, 새 후보
     ms = media_state or {}
     if ms.get("missing"):
