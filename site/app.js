@@ -1016,7 +1016,7 @@ if ("serviceWorker" in navigator) {
     const two = (tot, day) => tot == null ? el("td", { class: "muted" }, "–") : el("td", {}, n(tot), day != null ? el("div", { class: "up small" }, `+${n(day)}`) : null);
     panes.play = el("div", { class: "now-pane" },
       el("div", { class: "now-scroll" }, el("table", { class: "now-table play" },
-        el("thead", {}, el("tr", {}, el("th", {}, t("sp_song")), el("th", {}, "Spotify"), el("th", {}, t("kc_genie")), el("th", {}, t("kc_like")))),
+        el("thead", {}, el("tr", {}, el("th", {}, t("sp_song")), el("th", {}, t("sp_global")), el("th", {}, t("kc_genie")), el("th", {}, t("kc_like")))),
         el("tbody", {}, ...names.map((s_) => { const x = spBy[key(s_)] || {}; const g = cnt(s_, "지니 재생"), lk = cnt(s_, "멜론 좋아요");
           return el("tr", {}, el("td", {}, s_), two(x.total, x.daily), two(g && g.total, g && g.daily), two(lk && lk.total, lk && lk.daily)); })))),
       el("p", { class: "muted small" }, t("now_play_note")),
@@ -1034,23 +1034,48 @@ if ("serviceWorker" in navigator) {
       const max = Math.max(1, ...hd.map((x) => x.n));
       const wkLabel = (k) => { const [y, w] = k.split("-").map(Number); const j4 = new Date(Date.UTC(y, 0, 4)); const mon = new Date(j4.getTime() + ((w - 1) * 7 - ((j4.getUTCDay() + 6) % 7)) * 86400000); return `${mon.getUTCMonth() + 1}/${mon.getUTCDate()}~`; };
       const hs = sl.hanteo || {};
+      // 한눈에: 한터 누적(초동 + 이후 주간 + 주간 집계 뒤 일간) · 주차별(한터·써클 나란히) · 초동 일별은 접어서
+      const hw = sl.hanteo_weekly || [];
+      const hdy = sl.hanteo_daily || [];
+      const lastEnd = hw.length ? (hw.at(-1).end || "") : (hd.length ? hd.at(-1).date : "");
+      const after = hdy.filter((x) => x.date > lastEnd);
+      const cum = (hs.first_week || hs.total || 0) + hw.reduce((a, x) => a + x.sales, 0) + after.reduce((a, x) => a + x.sales, 0);
+      const yest = hdy.at(-1);
+      const mon = (iso) => `${+iso.slice(5, 7)}/${+iso.slice(8)}~`;
+      const weeks = [];  // 주차: 1주차 = 발매 주
+      const rel = new Date(`${sl.release}T00:00:00Z`);
+      const wkOf = (iso) => Math.floor((new Date(`${iso}T00:00:00Z`) - rel) / (7 * 86400000)) + 1;
+      if (hs.first_week || hs.total) weeks[1] = { label: mon(sl.release), ht: hs.first_week || hs.total, htRank: null };
+      for (const x of hw) { const k = wkOf(x.start); weeks[k] = { ...(weeks[k] || {}), label: mon(x.start), ht: x.sales, htRank: x.rank }; }
+      for (const x of sl.circle || []) {
+        const [y, w] = x.week.split("-").map(Number); const j4 = new Date(Date.UTC(y, 0, 4));
+        const m0 = new Date(j4.getTime() + ((w - 1) * 7 - ((j4.getUTCDay() + 6) % 7)) * 86400000).toISOString().slice(0, 10);
+        const k = wkOf(m0); weeks[k] = { ...(weeks[k] || { label: mon(m0) }), ci: x.sales, ciRank: x.rank };
+      }
+      const curWk = wkOf(new Date(Date.now() + 9 * 3600000).toISOString().slice(0, 10));
+      for (let k = 1; k <= curWk; k++) weeks[k] ||= { label: mon(new Date(rel.getTime() + (k - 1) * 7 * 86400000).toISOString().slice(0, 10)) };
       salesPane.append(el("details", { class: "sp-box sales-box", open: "" },
-        el("summary", { class: "sp-head" }, el("b", {}, t("sales_title", { a: sl.album })),
-          el("span", { class: "muted small" }, hs.first_week ? ` ${t("sales_first")} ${n(hs.first_week)}` : (sl.circle || []).length ? ` ${t("sales_circle")} ${n(sl.circle[sl.circle.length - 1].sales)}` : "")),
-        sl.hanteo && sl.hanteo.total ? el("p", { class: "sales-sum" },
-          sl.hanteo.first_week ? el("span", {}, t("sales_first"), " ", el("b", {}, n(sl.hanteo.first_week))) : null,
-          sl.hanteo.total !== sl.hanteo.first_week ? el("span", {}, ` · ${t("sales_total")} `, el("b", {}, n(sl.hanteo.total))) : null,
-          el("span", { class: "muted small" }, " (Hanteo)")) : null,
-        hd.length ? el("div", { class: "sales-bars", role: "img", "aria-label": hd.map((x) => `${x.date.slice(5)} ${n(x.n)}`).join(", ") },
-          ...hd.map((x) => el("div", { class: "sb", title: `${x.date.slice(5).replace("-", "/")} · ${n(x.n)}` },
-            el("span", { class: "sb-n" }, x.n >= 10000 ? `${(x.n / 10000).toFixed(1)}만` : n(x.n)),
-            el("i", { style: `height:${Math.max(4, Math.round((x.n / max) * 64))}px` }),
-            el("span", { class: "sb-d" }, x.date.slice(5).replace("-", "/"))))) : null,
-        (sl.circle || []).length ? el("table", { class: "sp-table" },
-          el("thead", {}, el("tr", {}, el("th", {}, t("sales_circle")), el("th", {}, t("sales_rank")), el("th", {}, t("sales_sales")))),
-          el("tbody", {}, ...sl.circle.map((x) => el("tr", {}, el("td", {}, wkLabel(x.week)), el("td", {}, x.rank ? `#${x.rank}` : "—"), el("td", {}, n(x.sales)))))) : null,
+        el("summary", { class: "sp-head" }, el("b", {}, t("sales_title", { a: sl.album }))),
+        el("div", { class: "sales-tiles" },
+          cum ? el("div", { class: "now-tile big" }, el("span", { class: "muted small" }, t("sales_cum")), el("b", {}, n(cum)), el("small", { class: "muted" }, "Hanteo")) : null,
+          hs.first_week ? el("div", { class: "now-tile" }, el("span", { class: "muted small" }, t("sales_first")), el("b", {}, n(hs.first_week)), el("small", { class: "muted" }, `${mon(sl.release)} 7${t("sales_days")}`)) : null,
+          hw.length ? el("div", { class: "now-tile" }, el("span", { class: "muted small" }, t("sales_last_week")), el("b", {}, n(hw.at(-1).sales)), el("small", { class: "muted" }, `${mon(hw.at(-1).start)} · #${hw.at(-1).rank}`)) : null,
+          yest ? el("div", { class: "now-tile" }, el("span", { class: "muted small" }, t("sales_yday")), el("b", {}, n(yest.sales)), el("small", { class: "muted" }, `${yest.date.slice(5).replace("-", "/")} · #${yest.rank}`)) : null),
+        el("table", { class: "sp-table sales-weeks" },
+          el("thead", {}, el("tr", {}, el("th", {}, t("sales_week")), el("th", {}, "Hanteo"), el("th", {}, "Circle"))),
+          el("tbody", {}, ...weeks.map((w, k) => w ? el("tr", {},
+            el("td", {}, el("b", {}, t("sales_wk_n", { n: k })), " ", el("span", { class: "muted small" }, w.label)),
+            el("td", {}, ...(w.ht != null ? [n(w.ht), w.htRank ? el("small", { class: "muted" }, ` #${w.htRank}`) : null] : [el("span", { class: "muted small" }, k === curWk ? t("sales_counting") : "–")])),
+            el("td", {}, ...(w.ci != null ? [n(w.ci), w.ciRank ? el("small", { class: "muted" }, ` #${w.ciRank}`) : null] : [el("span", { class: "muted small" }, k >= curWk - 1 ? t("sales_soon") : "–")]))) : null).filter(Boolean))),
+        hd.length ? el("details", { class: "sales-firstweek" }, el("summary", { class: "small" }, t("sales_first_days")),
+          el("div", { class: "sales-bars", role: "img", "aria-label": hd.map((x) => `${x.date.slice(5)} ${n(x.n)}`).join(", ") },
+            ...hd.map((x) => el("div", { class: "sb", title: `${x.date.slice(5).replace("-", "/")} · ${n(x.n)}` },
+              el("span", { class: "sb-n" }, x.n >= 10000 ? `${(x.n / 10000).toFixed(1)}만` : n(x.n)),
+              el("i", { style: `height:${Math.max(4, Math.round((x.n / max) * 64))}px` }),
+              el("span", { class: "sb-d" }, x.date.slice(5).replace("-", "/")))))) : null,
         el("p", { class: "muted small" }, t("sales_src")),
         sl.hanteo && sl.hanteo.post ? ext(sl.hanteo.post, "Hanteo ↗") : null,
+        ext("https://www.hanteochart.com/ko/charts/album/weekly", "Hanteo Chart ↗"),
         ext("https://circlechart.kr/page_chart/album.circle?nationGbn=T&serviceGbn=ALL&termGbn=week", "Circle Chart ↗")));
     }
     // 구독자·팔로워 추이 (한눈에 탭에서 옮김)
