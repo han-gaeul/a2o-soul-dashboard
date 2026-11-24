@@ -1057,7 +1057,7 @@ if ("serviceWorker" in navigator) {
       const weeks = [];  // 주차: 1주차 = 발매 주
       const rel = new Date(`${sl.release}T00:00:00Z`);
       const wkOf = (iso) => Math.floor((new Date(`${iso}T00:00:00Z`) - rel) / (7 * 86400000)) + 1;
-      if (hs.first_week || hs.total) weeks[1] = { label: mon(sl.release), ht: hs.first_week || hs.total, htRank: null };
+      if (hs.first_week || hs.total) weeks[1] = { label: mon(sl.release), ht: hs.first_week || hs.total, htRank: hs.week_rank || null };
       for (const x of hw) { const k = wkOf(x.start); weeks[k] = { ...(weeks[k] || {}), label: mon(x.start), ht: x.sales, htRank: x.rank }; }
       for (const x of sl.circle || []) {
         const [y, w] = x.week.split("-").map(Number); const j4 = new Date(Date.UTC(y, 0, 4));
@@ -1070,7 +1070,7 @@ if ("serviceWorker" in navigator) {
         el("summary", { class: "sp-head" }, el("b", {}, t("sales_title", { a: sl.album }))),
         el("div", { class: "sales-tiles" },
           cum ? el("div", { class: "now-tile big" }, el("span", { class: "muted small" }, t("sales_cum")), el("b", {}, n(cum)), el("small", { class: "muted" }, "Hanteo")) : null,
-          hs.first_week ? el("div", { class: "now-tile" }, el("span", { class: "muted small" }, t("sales_first")), el("b", {}, n(hs.first_week)), el("small", { class: "muted" }, `${mon(sl.release)} 7${t("sales_days")}`)) : null,
+          hs.first_week ? el("div", { class: "now-tile" }, el("span", { class: "muted small" }, t("sales_first")), el("b", {}, n(hs.first_week)), el("small", { class: "muted" }, `${mon(sl.release)} 7${t("sales_days")}${hs.week_rank ? ` · ${t("sales_wk_rank", { n: hs.week_rank })}` : ""}`)) : null,
           hw.length ? el("div", { class: "now-tile" }, el("span", { class: "muted small" }, t("sales_last_week")), el("b", {}, n(hw.at(-1).sales)), el("small", { class: "muted" }, `${mon(hw.at(-1).start)} · #${hw.at(-1).rank}`)) : null,
           yest ? el("div", { class: "now-tile" }, el("span", { class: "muted small" }, t("sales_yday")), el("b", {}, n(yest.sales)), el("small", { class: "muted" }, `${yest.date.slice(5).replace("-", "/")} · #${yest.rank}`)) : null),
         el("table", { class: "sp-table sales-weeks" },
@@ -1080,13 +1080,15 @@ if ("serviceWorker" in navigator) {
             el("td", {}, ...(w.ht != null ? [n(w.ht), w.htRank ? el("small", { class: "muted" }, ` #${w.htRank}`) : null] : [el("span", { class: "muted small" }, k === curWk ? t("sales_counting") : "–")])),
             el("td", {}, ...(w.ci != null ? [n(w.ci), w.ciRank ? el("small", { class: "muted" }, ` #${w.ciRank}`) : null] : [el("span", { class: "muted small" }, k >= curWk - 1 ? t("sales_soon") : "–")]))) : null).filter(Boolean))),
         hd.length ? el("details", { class: "sales-firstweek" }, el("summary", { class: "small" }, t("sales_first_days")),
-          el("div", { class: "sales-bars", role: "img", "aria-label": hd.map((x) => `${x.date.slice(5)} ${n(x.n)}`).join(", ") },
+          el("div", { class: "sales-bars", role: "img", "aria-label": hd.map((x) => `${x.date.slice(5)} ${n(x.n)}${x.rank ? ` #${x.rank}` : ""}`).join(", ") },
             ...hd.map((x) => el("div", { class: "sb", title: `${x.date.slice(5).replace("-", "/")} · ${n(x.n)}` },
               el("span", { class: "sb-n" }, x.n >= 10000 ? `${(x.n / 10000).toFixed(1)}만` : n(x.n)),
               el("i", { style: `height:${Math.max(4, Math.round((x.n / max) * 64))}px` }),
-              el("span", { class: "sb-d" }, x.date.slice(5).replace("-", "/")))))) : null,
+              el("span", { class: "sb-d" }, x.date.slice(5).replace("-", "/")),
+              x.rank ? el("span", { class: "sb-r" }, `#${x.rank}`) : null))),
+          el("p", { class: "muted small" }, t("sales_days_src"), " ", hs.post ? ext(hs.post, "@koreansales_twt ↗") : null)) : null,
         el("p", { class: "muted small" }, t("sales_src")),
-        sl.hanteo && sl.hanteo.post ? ext(sl.hanteo.post, "Hanteo ↗") : null,
+        hs.week_url ? ext(hs.week_url, `Hanteo ${t("sales_wk_n", { n: 1 })} ↗`) : null,
         ext("https://www.hanteochart.com/ko/charts/album/weekly", "Hanteo Chart ↗"),
         ext("https://circlechart.kr/page_chart/album.circle?nationGbn=T&serviceGbn=ALL&termGbn=week", "Circle Chart ↗")));
     }

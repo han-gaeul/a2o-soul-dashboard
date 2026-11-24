@@ -114,10 +114,51 @@ def update_hanteo_chart(d):
         print(f"[판매량] 한터 {term} {key}: {x and x['salesVolume']}장 {x and x['rank']}위" if x else f"[판매량] 한터 {term} {key}: 100위 밖")
 
 
+HT_RANK = re.compile(r'"rank":(\d+),"rankDiff":-?\d+,"targetIdx":"' + HT_TARGET + '"')
+
+
+def _ht_rank(path):
+    """한터 공식 차트 지난 발행본 페이지 → SUPERSTAR 순위 (판매량은 최신 발행본만 공개라 순위만). 100위 밖 = 0"""
+    r = requests.get(f"https://www.hanteochart.com/ko/charts/album/{path}", headers=HT_UA, timeout=20)
+    r.raise_for_status()
+    m = HT_RANK.search(r.text.replace('\\"', '"'))
+    return int(m.group(1)) if m else 0
+
+
+def update_hanteo_ranks(d):
+    """발매일부터 어제까지 일간 순위, 발매 주부터 지난주까지 주간 순위 — 없는 것만 한 번씩"""
+    rk = d.setdefault("hanteo_chart", {}).setdefault("ranks", {"daily": {}, "weekly": {}})
+    today = datetime.now(KST).date()
+    day = RELEASE
+    while day < today:
+        k = day.isoformat()
+        if k not in rk["daily"]:
+            try:
+                rk["daily"][k] = _ht_rank(f"daily/{k}")
+                print(f"[판매량] 한터 일간 {k}: {rk['daily'][k] or '100위 밖'}")
+            except Exception as e:  # noqa: BLE001
+                print(f"[판매량] 한터 일간 {k} 실패: {type(e).__name__}")
+                break
+        day += timedelta(days=1)
+    wk = RELEASE - timedelta(days=RELEASE.weekday())
+    while wk + timedelta(days=6) < today:
+        y, w, _ = wk.isocalendar()
+        k = f"{y}-W{w:02d}"
+        if k not in rk["weekly"]:
+            try:
+                rk["weekly"][k] = _ht_rank(f"weekly/{k}")
+                print(f"[판매량] 한터 주간 {k}: {rk['weekly'][k] or '100위 밖'}")
+            except Exception as e:  # noqa: BLE001
+                print(f"[판매량] 한터 주간 {k} 실패: {type(e).__name__}")
+                break
+        wk += timedelta(days=7)
+
+
 def run(xposts=None):
     d = load()
     update_circle(d)
     update_hanteo_chart(d)
+    update_hanteo_ranks(d)
     if xposts is not None and xposts.enabled():
         update_hanteo(d, xposts)
     d["checked"] = datetime.now(KST).isoformat(timespec="minutes")
@@ -137,7 +178,16 @@ def summary():
     if not days and not weeks and not ht_weeks:
         return None
     first = sum(v for k, v in days if k <= 7) if len([k for k, _ in days if k <= 7]) == 7 else None
+    rk = hc.get("ranks") or {}
+    y, w, _ = RELEASE.isocalendar()
+    wk1 = f"{y}-W{w:02d}"
+
+    def day_row(k, v):
+        iso = (RELEASE + timedelta(days=k - 1)).isoformat()
+        return {"day": k, "date": iso, "n": v, "rank": (rk.get("daily") or {}).get(iso) or None}
     return {"album": d.get("album") or ALBUM, "release": RELEASE.isoformat(),
-            "hanteo": {"days": [{"day": k, "date": (RELEASE + timedelta(days=k - 1)).isoformat(), "n": v} for k, v in days],
-                       "total": h.get("total"), "first_week": first, "post": h.get("post")},
+            "hanteo": {"days": [day_row(k, v) for k, v in days],
+                       "total": h.get("total"), "first_week": first, "post": h.get("post"),
+                       "week_rank": (rk.get("weekly") or {}).get(wk1) or None,
+                       "week_url": f"https://www.hanteochart.com/ko/charts/album/weekly/{wk1}"},
             "circle": weeks, "hanteo_daily": ht_days, "hanteo_weekly": ht_weeks}
