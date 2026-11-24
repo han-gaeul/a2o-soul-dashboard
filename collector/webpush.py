@@ -461,6 +461,16 @@ def tweet_image(kind, data, site):
         slug = next((v for k, v in LIVE_IMG.items() if k in data.get("name", "")), None)
         if slug:
             return f"{site.rstrip('/')}/img/live/{slug}-{'live' if data.get('now') else 'soon'}.jpg"
+    # 생일·MV 조회수 돌파: tools/make_tw_cards.js로 미리 만든 이미지 (site/img/tw/)
+    tw = Path(__file__).resolve().parent.parent / "site" / "img" / "tw"
+    name = None
+    if kind == "birthday":
+        name = f"bday_{data.get('name')}.jpg"
+    elif kind == "views":
+        m = re.search(r"(?:youtu\.be/|v=)([\w-]{11})", data.get("url") or "")
+        name = f"views_{m.group(1)}_{data.get('n')}.jpg" if m else None
+    if name and (tw / name).exists():
+        return f"{site.rstrip('/')}/img/tw/{name}"
     return None
 
 
