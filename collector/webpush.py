@@ -206,8 +206,15 @@ def candidates(dash, site, now):
         if len(lst) < 2:
             continue
         grouped.update(v["id"] for v, _ in lst)
-        if now - max(pub(v) for v, _ in lst) < timedelta(minutes=15):
-            continue  # 아직 줄줄이 올라오는 중 — 다 올라온 뒤 한 번에
+        ids = {v["id"] for v, _ in lst}
+        hits = [p for p in dash.get("media_cams") or [] if ids & set(p["ids"])]
+        if hits:  # 방송사 공식 계정이 먼저 묶어서 올렸으면 그 글을 리트윗 (우리 초안은 안 만듦)
+            for p in hits:
+                out.append((f"rt|{p['url']}", "media", "media", {"name": p.get("handle") or "", "title": base[:100], "url": p["url"],
+                                                                "members": [], "rt": True}))
+            continue
+        if now - max(pub(v) for v, _ in lst) < timedelta(minutes=30):
+            continue  # 공식 계정이 묶음 글을 올릴 때까지 30분 기다림 — 안 올리면 우리 초안
         lst.sort(key=lambda x: order.get(x[1][0], 99))
         for i in range(0, len(lst), 5):  # 5명씩 (280자 안에 들어가게)
             part = lst[i:i + 5]
