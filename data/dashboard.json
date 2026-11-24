@@ -515,36 +515,6 @@
     {
      "category": "content",
      "channel": "THE K-POP",
-     "delta": 50,
-     "era": "Superstar",
-     "id": "98_S8rjzxGI",
-     "member": "",
-     "predebut": false,
-     "published_at": "2026-11-17T10:21:37Z",
-     "series": "비하인드",
-     "short": false,
-     "show": "더쇼",
-     "title": "제트 무대 정말 쥑이네!! 살아있네!!! #DancingintheDark #A2OSOUL #제트 #ZET #THESHOW #더쇼 @261117 [BEHIND THE SHOW]",
-     "views": 21849
-    },
-    {
-     "category": "content",
-     "channel": "THE K-POP",
-     "delta": 108,
-     "era": "Superstar",
-     "id": "_5DLvrRo3UU",
-     "member": "",
-     "predebut": false,
-     "published_at": "2026-11-17T10:30:43Z",
-     "series": "비하인드",
-     "short": false,
-     "show": "더쇼",
-     "title": "A2O SOUL 문 #DancingintheDark #A2OSOUL #문 #MOON #THESHOW #더쇼 @261117 [BEHIND THE SHOW]",
-     "views": 18064
-    },
-    {
-     "category": "content",
-     "channel": "THE K-POP",
      "delta": 1366,
      "era": "Superstar",
      "id": "OO3HX-fN4pw",
@@ -650,21 +620,6 @@
     {
      "category": "content",
      "channel": "THE K-POP",
-     "delta": 151,
-     "era": "Superstar",
-     "id": "pMFIKCDFKrc",
-     "member": "",
-     "predebut": false,
-     "published_at": "2026-11-17T14:42:47Z",
-     "series": "비하인드",
-     "short": false,
-     "show": "더쇼",
-     "title": "A2O SOUL 타이 #DancingintheDark #A2OSOUL #타이 #TAI #THESHOW #더쇼 @261117 [BEHIND THE SHOW]",
-     "views": 18802
-    },
-    {
-     "category": "content",
-     "channel": "THE K-POP",
      "delta": 285,
      "era": "Superstar",
      "id": "53nXTXS9e_Y",
@@ -721,6 +676,51 @@
      "show": "더쇼",
      "title": "[FAN CAM 4K] Dancing in the Dark - A2O SOUL [THE SHOW]  261117 방송",
      "views": 97208
+    },
+    {
+     "category": "fancam",
+     "channel": "THE K-POP",
+     "delta": 108,
+     "era": "Superstar",
+     "id": "_5DLvrRo3UU",
+     "member": "MOON",
+     "predebut": false,
+     "published_at": "2026-11-17T10:30:43Z",
+     "series": "비하인드",
+     "short": false,
+     "show": "더쇼",
+     "title": "A2O SOUL 문 #DancingintheDark #A2OSOUL #문 #MOON #THESHOW #더쇼 @261117 [BEHIND THE SHOW]",
+     "views": 18064
+    },
+    {
+     "category": "fancam",
+     "channel": "THE K-POP",
+     "delta": 151,
+     "era": "Superstar",
+     "id": "pMFIKCDFKrc",
+     "member": "TAI",
+     "predebut": false,
+     "published_at": "2026-11-17T14:42:47Z",
+     "series": "비하인드",
+     "short": false,
+     "show": "더쇼",
+     "title": "A2O SOUL 타이 #DancingintheDark #A2OSOUL #타이 #TAI #THESHOW #더쇼 @261117 [BEHIND THE SHOW]",
+     "views": 18802
+    },
+    {
+     "category": "fancam",
+     "channel": "THE K-POP",
+     "delta": 50,
+     "era": "Superstar",
+     "id": "98_S8rjzxGI",
+     "member": "ZET",
+     "predebut": false,
+     "published_at": "2026-11-17T10:21:37Z",
+     "series": "비하인드",
+     "short": false,
+     "show": "더쇼",
+     "title": "제트 무대 정말 쥑이네!! 살아있네!!! #DancingintheDark #A2OSOUL #제트 #ZET #THESHOW #더쇼 @261117 [BEHIND THE SHOW]",
+     "views": 21849
     }
    ]
   },
@@ -4313,12 +4313,12 @@
    "value": 9172716
   },
   {
-   "count": 96,
-   "delta": 26012,
+   "count": 99,
+   "delta": 26321,
    "key": "fancam_total",
    "label": "직캠 총 조회수",
-   "sub": "96개",
-   "value": 5028968
+   "sub": "99개",
+   "value": 5087683
   }
  ],
  "media_posts": [
@@ -4347,10 +4347,25 @@
     "비공개 연습생으로 데뷔"
    ],
    "color": "",
-   "fancam_count": 10,
-   "fancam_delta": 717,
-   "fancam_views": 200701,
+   "fancam_count": 11,
+   "fancam_delta": 825,
+   "fancam_views": 218765,
    "fancams": [
+    {
+     "category": "fancam",
+     "channel": "THE K-POP",
+     "delta": 108,
+     "era": "Superstar",
+     "id": "_5DLvrRo3UU",
+     "member": "MOON",
+     "predebut": false,
+     "published_at": "2026-11-17T10:30:43Z",
+     "series": "비하인드",
+     "short": false,
+     "show": "더쇼",
+     "title": "A2O SOUL 문 #DancingintheDark #A2OSOUL #문 #MOON #THESHOW #더쇼 @261117 [BEHIND THE SHOW]",
+     "views": 18064
+    },
     {
      "category": "fancam",
      "channel": "SBSKPOP ZOOM",
@@ -6037,10 +6052,25 @@
     "A2O Rookies LTB (2024.10~)"
    ],
    "color": "",
-   "fancam_count": 10,
-   "fancam_delta": 1518,
-   "fancam_views": 356354,
+   "fancam_count": 11,
+   "fancam_delta": 1669,
+   "fancam_views": 375156,
    "fancams": [
+    {
+     "category": "fancam",
+     "channel": "THE K-POP",
+     "delta": 151,
+     "era": "Superstar",
+     "id": "pMFIKCDFKrc",
+     "member": "TAI",
+     "predebut": false,
+     "published_at": "2026-11-17T14:42:47Z",
+     "series": "비하인드",
+     "short": false,
+     "show": "더쇼",
+     "title": "A2O SOUL 타이 #DancingintheDark #A2OSOUL #타이 #TAI #THESHOW #더쇼 @261117 [BEHIND THE SHOW]",
+     "views": 18802
+    },
     {
      "category": "fancam",
      "channel": "SHOW K-POP (쇼케이팝)",
@@ -7618,9 +7648,9 @@
     "솔로 'Palette' Zal-Dance 영상(2025.6)"
    ],
    "color": "",
-   "fancam_count": 9,
-   "fancam_delta": 4194,
-   "fancam_views": 662880,
+   "fancam_count": 10,
+   "fancam_delta": 4244,
+   "fancam_views": 684729,
    "fancams": [
     {
      "category": "fancam",
@@ -7636,6 +7666,21 @@
      "show": "음악중심",
      "title": "[#음중직캠] A2O SOUL ZET (에이투오 소울 제트) – Dancing in the Dark FanCam | 쇼! 음악중심 | MBC261121",
      "views": 25073
+    },
+    {
+     "category": "fancam",
+     "channel": "THE K-POP",
+     "delta": 50,
+     "era": "Superstar",
+     "id": "98_S8rjzxGI",
+     "member": "ZET",
+     "predebut": false,
+     "published_at": "2026-11-17T10:21:37Z",
+     "series": "비하인드",
+     "short": false,
+     "show": "더쇼",
+     "title": "제트 무대 정말 쥑이네!! 살아있네!!! #DancingintheDark #A2OSOUL #제트 #ZET #THESHOW #더쇼 @261117 [BEHIND THE SHOW]",
+     "views": 21849
     },
     {
      "category": "fancam",
@@ -18886,12 +18931,12 @@
    "views": 13894
   },
   {
-   "category": "content",
+   "category": "fancam",
    "channel": "THE K-POP",
    "delta": 151,
    "era": "Superstar",
    "id": "pMFIKCDFKrc",
-   "member": "",
+   "member": "TAI",
    "predebut": false,
    "published_at": "2026-11-17T14:42:47Z",
    "series": "비하인드",
@@ -19111,12 +19156,12 @@
    "views": 71209
   },
   {
-   "category": "content",
+   "category": "fancam",
    "channel": "THE K-POP",
    "delta": 108,
    "era": "Superstar",
    "id": "_5DLvrRo3UU",
-   "member": "",
+   "member": "MOON",
    "predebut": false,
    "published_at": "2026-11-17T10:30:43Z",
    "series": "비하인드",
@@ -19126,12 +19171,12 @@
    "views": 18064
   },
   {
-   "category": "content",
+   "category": "fancam",
    "channel": "THE K-POP",
    "delta": 50,
    "era": "Superstar",
    "id": "98_S8rjzxGI",
-   "member": "",
+   "member": "ZET",
    "predebut": false,
    "published_at": "2026-11-17T10:21:37Z",
    "series": "비하인드",
