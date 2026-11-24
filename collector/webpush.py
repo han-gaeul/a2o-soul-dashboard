@@ -119,17 +119,17 @@ def candidates(dash, site, now):
         if not (tm and re.fullmatch(r"\d{2}:\d{2}", tm)):
             continue
         st = _kst(f"{e['date']} {tm}")
+        live = next((x for x in lives if x.get("show") and x["show"] in (e.get("title") or "")), None)
         if -timedelta(minutes=30) <= st - now <= timedelta(hours=1, minutes=10):
-            live = next((x for x in lives if x.get("show") and x["show"] in (e.get("title") or "")), None)
             out.append((f"ev|{e['date']}|{tm}|{e['title']}", "show", "show",
                         {"name": e["title"], "t": tm, "url": (live or {}).get("url") or site, "parts": [e["title"]], "tr": tr, "now": now >= st,
                          "credit": e.get("credit") or "", "no_draft": True}))  # 1시간 전은 푸시만
-            # 트윗: 방송 5분 전 · 시작 정확히 10분 뒤 — 수집이 10분마다라 미리 보내고 워커가 그 시각(post_at)에 올림
-            base = {"name": e["title"], "t": tm, "url": (live or {}).get("url") or site, "parts": [e["title"]], "tr": tr,
-                    "credit": e.get("credit") or "", "draft_only": True}
-            for tag, at, extra in (("pre5", st - timedelta(minutes=5), {"soon": True}), ("live", st + timedelta(minutes=10), {"now": True})):
-                if -timedelta(minutes=20) <= now - at <= timedelta(minutes=20):  # 20분 전부터 예약 · 놓쳤으면 20분 안엔 바로
-                    out.append((f"ev|{e['date']}|{tm}|{e['title']}|{tag}", "show", "show", {**base, **extra, "post_at": int(at.timestamp() * 1000)}))
+        # 트윗: 방송 5분 전 · 시작 10분 뒤 — 3시간 전부터 미리 예약해 두고(트윗 페이지 '예약됨'에서 보고 취소 가능) 워커가 그 시각(post_at)에 올림
+        base = {"name": e["title"], "t": tm, "url": (live or {}).get("url") or site, "parts": [e["title"]], "tr": tr,
+                "credit": e.get("credit") or "", "draft_only": True}
+        for tag, at, extra in (("pre5", st - timedelta(minutes=5), {"soon": True}), ("live", st + timedelta(minutes=10), {"now": True})):
+            if -timedelta(hours=3) <= now - at <= timedelta(minutes=20):  # 3시간 전부터 예약 · 놓쳤으면 20분 안엔 바로
+                out.append((f"ev|{e['date']}|{tm}|{e['title']}|{tag}", "show", "show", {**base, **extra, "post_at": int(at.timestamp() * 1000)}))
     for c in dash.get("chart_moves") or []:  # 차트 첫 진입·10계단 이상 상승 (입력 후 3시간 안)
         if timedelta(0) <= now - _kst(c["at"]) <= timedelta(hours=3):
             out.append((f"ch|{c['song']}|{c['service']}|{c['at']}", "notice", "chart", {**c, "url": site + "#cheer", "tr": tr}))
