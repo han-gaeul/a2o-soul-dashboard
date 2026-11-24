@@ -2924,11 +2924,24 @@ if ("serviceWorker" in navigator) {
             el("div", { class: "pc-grid" }, ...list.map((x, i) => pcCard(x, list, i, !!pcWho))));
         }));
         $("pcGrid").classList.add("pc-all");
+        $("pcGrid").classList.remove("pc-bylabel");
         fold($("pcGrid"), 99);  // 이전 '더 보기' 버튼 지우기
         return;
       }
       $("pcGrid").classList.remove("pc-all");
       const list = inWho.filter((x) => x.version === pcVer);
+      const labels = [...new Set(list.map((x) => x.label || ""))];
+      if (!pcWho && labels.length > 1) {  // 멤버 전체: 앨범 버전·판매처(라벨)별로 묶어서 — 카드 밑엔 멤버 이름만
+        $("pcGrid").replaceChildren(...labels.map((lb) => {
+          const sub = list.filter((x) => (x.label || "") === lb);
+          return el("div", { class: "pc-group pc-lblgroup" }, el("h4", { class: "pc-group-h" }, `${lb || tc(pcVer)} · ${sub.length}`),
+            el("div", { class: "pc-grid" }, ...sub.map((x, i) => pcBtn(x, sub, i, el("span", { class: "pc-cap" }, el("b", { class: "pc-who" }, x.member))))));
+        }));
+        $("pcGrid").classList.add("pc-bylabel");
+        fold($("pcGrid"), 99);
+        return;
+      }
+      $("pcGrid").classList.remove("pc-bylabel");
       $("pcGrid").replaceChildren(...(list.length ? list.map((x, i) => pcCard(x, list, i, !!pcWho)) : [el("p", { class: "muted" }, "—")]));
       fold($("pcGrid"), MOBILE ? 12 : 24);
     };
