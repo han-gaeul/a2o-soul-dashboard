@@ -347,7 +347,7 @@ def tweet_text(kind, data):
         what = data["name"].replace("스테이션헤드", "Stationhead").replace("콜라보", "collab").replace("합동 스밍", "streaming party")
         if data.get("now"):
             until = f" (~{data['end']})" if data.get("end") else ""
-            title, body = f"🔴 지금 {ko_w}{data['name']} 진행 중!{until}", "아직 늦지 않았어요, 같이 들어요 💜"
+            title, body = f"🔴 지금 {ko_w}{data['name']} 진행 중!{until}", "같이 들어요 💜"
             en = f"🔴 {what}{en_w} is ON now (until {data['end_real']} KST)!"
         else:
             title, body = f"📢 오늘 {when} {ko_w}{data['name']}!", "시간 맞춰 같이 들어요 💜"
