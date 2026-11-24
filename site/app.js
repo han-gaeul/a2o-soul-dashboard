@@ -1633,7 +1633,7 @@ if ("serviceWorker" in navigator) {
     return t("bday", { m: mo, d, mon: (t("months") || [])[mo - 1] || mo });
   };
   const facts = (m, withBday) => [tc(m.position), m.birth_year ? t("born", { y: m.birth_year }) : "",
-    withBday ? bdayText(m) : "", nat(m.nationality)].filter(Boolean).join(" · ");
+    withBday ? bdayText(m) : "", nat(m.nationality), withBday ? m.mbti : ""].filter(Boolean).join(" · ");
 
   function profile(m) {
     const list = (label, items) => (items.length
@@ -1651,6 +1651,10 @@ if ("serviceWorker" in navigator) {
       (m.signatures || []).length || m.signature ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, t("signature")),
         el("div", { class: "pf-signs" }, ...((m.signatures || []).length ? m.signatures : [{ src: m.signature }]).map((x) => el("figure", {},
           el("img", { class: "pf-sign", src: x.src, alt: "", loading: "lazy" }),
+          x.label ? el("figcaption", { class: "muted small" }, t("sign_src"), " ", x.url ? ext(x.url, x.label) : x.label) : null)))) : null,
+      (m.drawings || []).length ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, t("drawing")),
+        el("div", { class: "pf-signs" }, ...m.drawings.map((x) => el("figure", {},
+          el("img", { class: "pf-drawing", src: x.src, alt: "", loading: "lazy" }),
           x.label ? el("figcaption", { class: "muted small" }, t("sign_src"), " ", x.url ? ext(x.url, x.label) : x.label) : null)))) : null,
       (m.profile_history || []).length ? el("div", { class: "pf-row" }, el("div", { class: "pf-label" }, t("history")),
         el("div", { class: "pf-history", tabindex: "0" }, ...m.profile_history.map((h) => el("figure", {},
