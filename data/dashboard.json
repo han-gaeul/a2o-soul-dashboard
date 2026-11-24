@@ -14690,6 +14690,21 @@
    "post": "https://x.com/koreansales_twt",
    "total": 216202
   },
+  "hanteo_daily": [
+   {
+    "date": "2026-11-23",
+    "rank": 91,
+    "sales": 58
+   }
+  ],
+  "hanteo_weekly": [
+   {
+    "end": "2026-11-22",
+    "rank": 36,
+    "sales": 1017,
+    "start": "2026-11-16"
+   }
+  ],
   "release": "2026-11-09"
  },
  "show_fancams": [],
