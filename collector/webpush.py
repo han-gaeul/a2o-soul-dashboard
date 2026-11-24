@@ -12,10 +12,12 @@ import os
 import re
 import time
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
 
 import requests
 
 KST = timezone(timedelta(hours=9))
+KCHARTS = Path(__file__).resolve().parent.parent / "data" / "kcharts.json"
 
 MSG = {
     "ko": {"views": "🎉 {name} MV {n}뷰 돌파!", "subs": "🎉 유튜브 구독자 {n} 돌파!", "birthday": "🎂 오늘은 {name} 생일", "birthday_body": "{name}의 생일을 함께 축하해요!", "chart_new": "📈 {service} 진입!", "chart_up": "🚀 {service} 급상승", "chart_new_body": "{song} {rank}위", "chart_up_body": "{song} {rank}위 (↑{n})", "nominee": "🏆 에투소 {show} 1위 후보!", "nominee_body": "{t} 생방송 투표로 1위 만들어요", "ev_show": "{show} 출연", "show_now": "🔴 지금 생방송 중", "notice": "📢 새 공지", "prerec": "🎙 사녹 신청 곧 시작", "vote": "🗳 투표 마감 임박", "vote_body": "{name} — {t} 마감",
@@ -131,6 +133,28 @@ def candidates(dash, site, now):
     for c in dash.get("chart_moves") or []:  # 차트 첫 진입·10계단 이상 상승 (입력 후 3시간 안)
         if timedelta(0) <= now - _kst(c["at"]) <= timedelta(hours=3):
             out.append((f"ch|{c['song']}|{c['service']}|{c['at']}", "notice", "chart", {**c, "url": site + "#cheer", "tr": tr}))
+    # 국내 음원 차트 (collector/kcharts.py가 1시간마다 기록)
+    kc = dash.get("kcharts") or {}
+    chk = kc.get("checked") or ""
+    if chk[:10] == now.strftime("%Y-%m-%d") and 9 <= int(chk[11:13] or 0) and now.hour < 12:  # 하루 한 번 오전 차트 요약 (9시 기록 기준)
+        rows = {}
+        for sg in kc.get("songs") or []:
+            for r in sg.get("ranks") or []:
+                if "주간" not in r["chart"]:
+                    rows.setdefault(r["chart"], []).append((sg["song"], r["rank"], r.get("prev")))
+        if rows:
+            out.append((f"cd|{chk[:10]}", "notice", "chart_day", {"hour": int(chk[11:13]), "date": chk[:10], "rows": rows,
+                                                                 "url": site + "#cheer", "draft_only": True}))
+    try:  # 차트 첫 진입 — 그 차트·곡의 기록이 지금 시각 하나뿐일 때
+        hist = json.loads(KCHARTS.read_text()).get("ranks") or {} if KCHARTS.exists() else {}
+    except Exception:  # noqa: BLE001
+        hist = {}
+    nowh = chk[:13].replace("T", " ")
+    for chart, by in hist.items():
+        for song, hours in by.items():
+            if hours and min(hours) == nowh and now - _kst(nowh + ":00") < timedelta(hours=3):
+                out.append((f"ki|{chart}|{song}", "notice", "chart", {"kind": "new", "service": chart, "song": song, "rank": hours[nowh],
+                                                                      "url": site + "#cheer", "tr": tr, "auto": True}))
     for x in dash.get("timeline") or []:  # MV 조회수·구독자 돌파 (돌파한 날·다음 날까지)
         if x.get("kind") in ("views", "subs") and x.get("n") and now.date() - _kst(x["date"] + " 00:00").date() <= timedelta(days=1):
             out.append((f"ms|{x['kind']}|{x.get('name', '')}|{x['n']}", "video", x["kind"],
@@ -294,6 +318,17 @@ def tweet_text(kind, data):
         url = data["url"]
         site_cheer = "https://a2osoul-tracker.com/#cheer"
         links = [f"📺 생방송 {url}", f"💜 응원법·투표 {site_cheer}"]  # 방송 보기 + 사이트(응원법·투표) 링크 둘 다
+    elif kind == "chart_day":  # 하루 한 번 차트 요약 — 국내 차트라 한국어만
+        m_, d_ = int(data["date"][5:7]), int(data["date"][8:10])
+        title, body, url = f"📊 {m_}/{d_} {data['hour']}시 차트", "", data["url"]
+        lines = []
+        for chart, items in data["rows"].items():
+            lines.append(f"\n{chart}")
+            for song, r, prev in items:
+                mv = "" if prev is None else f" (▲{prev - r})" if prev > r else f" (▼{r - prev})" if prev < r else " (-)"
+                lines.append(f"{song} {r}위{mv}")
+        body = "\n".join(lines).strip()
+        links = [f"🎧 스밍 리스트 원클릭 담기 {url}"]
     elif kind == "stream":  # 멜론 등 국내 음원 차트라 영어 줄 없음
         when = f"{data['t']}~{data['end']}" if data.get("end") else data["t"]
         if data.get("now"):
@@ -322,7 +357,7 @@ def tweet_text(kind, data):
     else:
         title, body, url = compose(kind, data, "ko")
         t2, b2, _ = compose(kind, data, "en")
-        en = (t2 if b2 == body or not b2 else f"{t2} {b2}").strip() if kind not in ("show",) else ""  # 본문이 원문 그대로면 영어는 제목만
+        en = (t2 if b2 == body or not b2 else f"{t2} {b2}").strip() if kind not in ("show", "chart") else ""  # 차트는 국내라 한국어만  # 본문이 원문 그대로면 영어는 제목만
         if kind in ("views", "subs"):
             title = title.replace("🎉 ", "🎉 A2O SOUL ", 1) if "A2O SOUL" not in title else title
     if kind == "birthday":
@@ -361,7 +396,7 @@ def tweet_image(kind, data, site):
 def drafts(api, priv, new, site):
     """새 알림 후보 → 트윗 초안을 Worker에 저장. 저장된 개수를 돌려줌."""
     # 팬 계정이 주최하는 행사(credit 있음)는 초안 안 만듦 — 그쪽 공지를 리트윗하는 게 맞음
-    items = [{"key": key, "kind": kind, "text": tweet_text(kind, data), "auto": kind in AUTO_POST, **({"rt": True} if data.get("rt") else {}), **({"post_at": data["post_at"]} if data.get("post_at") else {}), **({"fallback_at": data["fallback_at"]} if data.get("fallback_at") else {}),
+    items = [{"key": key, "kind": kind, "text": tweet_text(kind, data), "auto": kind in AUTO_POST or bool(data.get("auto")) or kind == "chart_day", **({"rt": True} if data.get("rt") else {}), **({"post_at": data["post_at"]} if data.get("post_at") else {}), **({"fallback_at": data["fallback_at"]} if data.get("fallback_at") else {}),
               **({"image": tweet_image(kind, data, site)} if tweet_image(kind, data, site) else {})}
              for key, topic, kind, data in new
              if kind not in ("notice",) and not data.get("credit") and not data.get("no_draft")]  # 음원 총공(stream)은 초안만 — 공지 링크를 붙여서 만듦
