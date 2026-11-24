@@ -1241,4 +1241,9 @@ body[data-cur="overview"] .vote-bar:not(.live-bar) { display: none; }
 #episodes > details.ep:not([open]) .ep-sum > span { padding: 8px 10px 10px; gap: 2px; }
 #episodes > details.ep:not([open]) .ep-sum b { font-size: 14px; }
 #episodes > details.ep:hover:not([open]) { border-color: var(--accent); }
-#episodes > details.ep[open] { grid-column: 1 / -1; }
+#episodes > details.ep > summary::after, #episodes > details.ep:not([open]) > summary::after { display: none; }
+#episodes > details.ep.on { border: 2px solid var(--accent); }
+.ep-panel { grid-column: 1 / -1; border: 2px solid var(--accent); border-radius: 12px; padding: 12px; scroll-margin-top: 64px; }
+.ep-panel .ep-tools { padding: 0 0 8px; justify-content: space-between; align-items: center; }
+.ep-panel-h { font-size: 15px; }
+.ep-panel .cmp-open { margin: 0 0 10px; }

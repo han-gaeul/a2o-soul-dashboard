@@ -2036,6 +2036,7 @@ if ("serviceWorker" in navigator) {
     };
     if (shows.length) drawTabs(); else $("showTabs").remove();
   }
+  let placePanel = () => {};
   const EP_FIRST = 8; // 처음엔 최근 회차 몇 개만 (카드 2·4칸에 맞게) — 나머지는 '이전 회차 더 보기'
   let epAll = false;
   const epVisible = () => {
@@ -2047,15 +2048,17 @@ if ("serviceWorker" in navigator) {
       d.hidden = !match || (!k && !epAll && shown >= EP_FIRST);
       if (match) shown += 1;
     });
+    const on = document.querySelector("#episodes > details.ep.on");
+    if (on && on.hidden) { on.classList.remove("on"); const pn = $("epPanel"); if (pn) { pn.hidden = true; pn.replaceChildren(); } }
     const rest = k ? 0 : Math.max(0, eps.length - EP_FIRST);
     const mb = $("epMore");
     if (mb) { mb.hidden = epAll || !rest; mb.textContent = `${t("ep_more")} (${rest}) ⌄`; }
+    placePanel();
   };
   if (eps.length) {
     const wd = t("weekdays");
     for (const ep of eps) {
       const day = wd[new Date(`${ep.date}T12:00:00Z`).getUTCDay()];
-      const grid = el("div", { class: "videos" });
       const stage = ep.videos.find((v) => v.category !== "fancam") || ep.videos[0];
       const nCam = ep.videos.filter((v) => v.category === "fancam").length;
       const counts = [nCam < ep.videos.length ? t("ep_stage_n", { n: ep.videos.length - nCam }) : "", nCam ? t("ep_cam_n", { n: nCam }) : ""].filter(Boolean).join(" · ");
@@ -2063,25 +2066,48 @@ if ("serviceWorker" in navigator) {
         el("summary", {}, el("span", { class: "ep-sum" },
           stage ? el("img", { class: "ep-thumb", src: thumbUrl(stage.id), alt: "", loading: "lazy", decoding: "async" }) : null,
           el("span", {}, el("b", {}, `${ep.date.slice(5).replace("-", ".")} (${day}) ${tc(ep.show)}`),
-            el("span", { class: "muted small ep-sub" }, `${ep.ep ? `EP.${ep.ep} · ` : ""}${counts}`)))),
-        grid);
-      // 펼칠 때 카드 만들기 (썸네일을 한꺼번에 불러오지 않게)
-      box.addEventListener("toggle", () => {
-        if (!box.open || grid.childElementCount) return;
-        box.insertBefore(el("div", { class: "ep-tools" }, shareBtn(() => share(`ep/${ep.date}/${ep.show}`, `A2O SOUL ${ep.date} ${ep.show}`))), grid);
+            el("span", { class: "muted small ep-sub" }, `${ep.ep ? `EP.${ep.ep} · ` : ""}${counts}`)))));
+      // 카드를 누르면 카드 목록 바로 아래 칸(#epPanel)에 그 회차 영상 — 다른 카드는 자리 그대로
+      box.querySelector("summary").addEventListener("click", (e) => {
+        e.preventDefault();
+        const panel = $("epPanel");
+        const same = box.classList.contains("on");
+        document.querySelectorAll("#episodes > details.ep.on").forEach((d) => d.classList.remove("on"));
+        if (same) { panel.hidden = true; panel.replaceChildren(); return; }
+        box.classList.add("on");
+        const tools = el("div", { class: "ep-tools" },
+          el("b", { class: "ep-panel-h" }, `${ep.date.slice(5).replace("-", ".")} (${day}) ${tc(ep.show)}`),
+          shareBtn(() => share(`ep/${ep.date}/${ep.show}`, `A2O SOUL ${ep.date} ${ep.show}`)));
         const cams = ep.videos.filter((v) => v.category === "fancam" && v.member);
+        let cmp = null;
         if (cams.length >= 2) {
-          const btn = el("button", { class: "more cmp-open", type: "button" }, `▶▶ ${t("cmp_open")}`);
-          btn.addEventListener("click", () => openCompare(ep, cams));
-          box.insertBefore(btn, grid);
+          cmp = el("button", { class: "more cmp-open", type: "button" }, `▶▶ ${t("cmp_open")}`);
+          cmp.addEventListener("click", () => openCompare(ep, cams));
         }
-        grid.append(...ep.videos.map((v) => videoCard(v, v.member ? camName(v, ep.videos) : (v.category === "fancam" ? catLabel("fancam") : catLabel("stage")))));
+        const g = el("div", { class: "videos" }, ...ep.videos.map((v) => videoCard(v, v.member ? camName(v, ep.videos) : (v.category === "fancam" ? catLabel("fancam") : catLabel("stage")))));
+        panel.replaceChildren(...[tools, cmp, g].filter(Boolean));
+        panel.hidden = false;
+        placePanel();
       });
       $("episodes").append(box);
     }
     const mb = el("button", { type: "button", class: "more", id: "epMore" });
     mb.addEventListener("click", () => { epAll = true; epVisible(); });
+    const panel = el("div", { id: "epPanel", class: "ep-panel", hidden: "" });
+    $("episodes").append(panel);
     $("episodes").after(mb);
+    // 고른 카드가 있는 줄 바로 아래에 영상 칸 (같은 줄 카드는 그대로, 아래 줄만 밀림)
+    placePanel = () => {
+      const on = document.querySelector("#episodes > details.ep.on");
+      if (!on || panel.hidden) return;
+      panel.remove();
+      const cards = [...document.querySelectorAll("#episodes > details.ep")].filter((d) => !d.hidden);
+      const top = on.offsetTop;
+      const last = cards.filter((d) => d.offsetTop === top).pop() || on;
+      last.after(panel);
+    };
+    let rz;
+    window.addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(placePanel, 150); });
     epVisible();
   } else {
     $("episodesSec").remove();
@@ -3072,7 +3098,11 @@ if ("serviceWorker" in navigator) {
       if (m && !dlg.open) openMember(m);
     } else if (head === "ep") {
       const box = document.getElementById(`ep-${a}-${b}`);
-      if (box) { box.open = true; setTimeout(() => box.scrollIntoView({ block: "start" }), 50); }
+      if (box) {
+        box.hidden = false;
+        if (!box.classList.contains("on")) box.querySelector("summary").click();
+        setTimeout(() => $("epPanel").scrollIntoView({ block: "start" }), 50);
+      }
     } else if (head === "cmp") {
       const x = cmpEps.find((e) => e.ep.date === a && e.ep.show === b);
       if (x && !cmpDlg.open) openCompare(x.ep, x.cams, [c, d]);
