@@ -4219,6 +4219,11 @@
     "label": "SBS",
     "show": "인기가요",
     "url": "https://www.sbs.co.kr/live/S01"
+   },
+   {
+    "label": "ENA K-POP 유튜브",
+    "show": "케이팝업 차트쇼",
+    "url": "https://www.youtube.com/@ENAKPOP/live"
    }
   ],
   "vote_apps": [
