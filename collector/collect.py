@@ -574,7 +574,7 @@ def media_feed(cfg, state, limit=40, keep_video=False):
         if not keep_video and (IG_REEL.search(text) or re.search(r"youtu\.?be|직캠|FANCAM|Choreo|🖥", text, re.I) or m.get("video")):
             continue
         imgs = (m.get("images") or [])[:4]
-        out.append({"url": m["permalink"], "at": kst_datetime(m.get("timestamp")), "handle": m["author"],
+        out.append({"url": m["permalink"], "at": kst_datetime(m.get("timestamp")), "handle": m["author"], "listed": m.get("author", "").lower() in names,
                     "name": names.get(m["author"].lower()) or m.get("author_name") or m["author"], "text": text[:400], "images": imgs,
                     "video": bool(m.get("video"))})
     out.sort(key=lambda x: x["at"] or "", reverse=True)
