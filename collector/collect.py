@@ -2204,6 +2204,8 @@ def build(cfg):
         "kcharts": __import__("kcharts").summary(),
         "spotify_country": __import__("spotify_country").summary(),
         "media_cams": media_cams(media_state),
+        # 트윗 초안용: 릴스 링크·X 영상 글도 포함 (유튜브 링크 글은 직캠 묶음·영상 초안에서 따로 처리)
+        "media_posts_tw": [x for x in media_feed(cfg, media_state, keep_video=True) if not YT_ID.search(x.get("text") or "")],
         "official_x": [{"url": m["permalink"], "at": kst_datetime(m["timestamp"])}
                        for k, m in sorted((load_json("announcements.json", {}).get("posts") or {}).items(), key=lambda kv: kv[1].get("timestamp") or "", reverse=True)
                        if k.startswith("x:") and "/a2o_soul/status/" in (m.get("permalink") or "").lower() and m.get("timestamp")][:20],
