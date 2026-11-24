@@ -23,7 +23,8 @@ MEMBERS = ["ALURE", "AYDEN", "GAKU", "HANSUNG", "JUNE", "LUCIEN", "MOON",
            "SEE-ONE", "SEOHA", "SONO", "SORA", "TAI", "TEO", "ZAI", "ZET"]  # 단체 템플릿 순서
 STORES = {"APPLEMUSIC": "Apple Music", "APPLE MUSIC": "Apple Music", "MUSIC PLANT": "Music Plant", "MAKESTAR": "Makestar",
           "WITHMUU": "Withmuu", "JUMPUP": "Jumpup", "NEMOZ": "Nemoz", "JINGDONG": "Jingdong", "MUSINA": "Musina",
-          "MNET": "Mnet", "MUSICART": "Musicart", "OLIVE YOUNG": "Olive Young"}
+          "MNET": "Mnet", "MUSICART": "Musicart", "OLIVE YOUNG": "Olive Young", "MUSINSA": "Musinsa", "KAKAOTALK": "KakaoTalk",
+          "KAKAO TALK": "KakaoTalk"}
 KINDS = {"PHOTOBOOK": "Photobook", "PB": "Photobook", "CARABINER": "Carabiner", "FANSIGN": "Fansign",
          "VIDEOCALL": "Videocall", "VC": "Videocall", "FS": "Fansign"}
 GROUP = {"CARABINER": ("앨범", "CARABINER Ver."), "BROADCAST-SUPERSTAR": ("방송", "SUPERSTAR"),
@@ -120,6 +121,14 @@ def save(img, c, version, label, member, seen):
                 return  # 드라이브 자동 확인: 이미 있는 이름은 건드리지 않음
             continue  # 다시 자르는 중 — 같은 이름은 덮어씀
         if int((fp != f2).sum()) < SAME:
+            if lab == base(lab) and label != lab and base(label) == lab:  # 'Nemoz' → 'Nemoz (Carabiner)'처럼 더 자세한 이름으로 바꿈
+                old = OUT / f"{version}_{lab}_{member}.webp".replace("/", "·")
+                new = OUT / f"{version}_{label}_{member}.webp".replace("/", "·")
+                if old.exists() and not new.exists():
+                    old.rename(new)
+                    have[have.index((lab, f2))] = (label, f2)
+                    print(f"  이름 바꿈: {old.name} → {new.name}")
+                return
             print(f"  같은 카드라 건너뜀: {version}_{label}_{member} = {lab}")
             return
     have.append((label, fp))
@@ -172,7 +181,7 @@ def main(src):
                 version, label = "방송", "SUPERSTAR"
             elif "DANCING" in t:
                 version, label = "방송", "Dancing in the Dark"
-            elif "OLIVE" in t or (row == len(rows) - 1 and "APPLE" in t):
+            elif "OLIVE" in t or row == len(rows) - 1:  # 맨 아래 줄 = 방송(위에서 걸러짐) + 럭키드로우
                 version, label = "럭키드로우", store_label(t)
             elif re.search(r"FANSIGN|VIDEOCALL|VC/FS", t):
                 version, label = "팬사인·영통", store_label(t)
