@@ -588,11 +588,17 @@ if ("serviceWorker" in navigator) {
     const w = wins[wins.length - 1];
     if (w && (Date.parse(todayKst) - Date.parse(w.date)) / 86400000 <= 3) {  // 1위 후 3일, 한눈에 탭에만 (style.css)
       const first = wins.length === 1;
+      // 연달아 1위 (마지막 1위 기준 3일 안) — 한 배너로 같이 축하 ('1위 2관왕')
+      const streak = wins.filter((x) => (Date.parse(w.date) - Date.parse(x.date)) / 86400000 <= 3);
+      const multi = streak.length > 1;
+      const winLine = (x) => `${tc(x.show)}${x.ep ? ` ${t("win_ep", { n: x.ep })}` : ""} · ${x.date.slice(5).replace("-", ".")}`;
       const n = data.debut_date ? Math.round((Date.parse(w.date) - Date.parse(data.debut_date)) / 86400000) : 0;
       const show = tc(w.show);
       // 주소 끝에 ?win=날짜 — 카톡 등이 예전 미리보기를 저장해 둬도 새 카드로 다시 읽게
       const site = `${location.origin}${location.pathname}?win=${w.date.replaceAll("-", "")}`;
-      const shareText = [t("win_share_text", { show }), w.tags].filter(Boolean).join(" ");
+      const shareText = multi
+        ? [t("win_share_multi", { n: streak.length, shows: streak.map((x) => tc(x.show)).join(" · ") }), ...streak.map((x) => x.tags)].filter(Boolean).join(" ")
+        : [t("win_share_text", { show }), w.tags].filter(Boolean).join(" ");
       const share = el("button", { type: "button", class: "win-btn" }, t("win_share"));
       // 폰: 공유 시트(카톡 등) / PC: X에 올리기 · 링크 복사 메뉴 (PC 공유 시트엔 X·카톡이 없어서)
       const TOUCH = window.matchMedia("(pointer: coarse)").matches;
@@ -640,15 +646,16 @@ if ("serviceWorker" in navigator) {
         el("div", { class: "win-trophy", "aria-hidden": "true" }, "🏆"),
         el("div", { class: "win-body" },
           el("div", { class: "win-kicker" }, "A2O SOUL"),
-          el("h2", { class: "win-title" }, first ? t("win_first", { show }) : t("win_n", { show })),
-          el("div", { class: "win-sub" }, [`${show}${w.ep ? ` ${t("win_ep", { n: w.ep })}` : ""}`, w.date.replaceAll("-", "."), n > 0 ? t("win_days", { n }) : ""].filter(Boolean).join(" · ")),
+          el("h2", { class: "win-title" }, multi ? t("win_multi", { n: streak.length }) : first ? t("win_first", { show }) : t("win_n", { show })),
+          multi ? el("div", { class: "win-sub" }, ...streak.map((x) => el("div", {}, `🏆 ${winLine(x)}`)))
+            : el("div", { class: "win-sub" }, [`${show}${w.ep ? ` ${t("win_ep", { n: w.ep })}` : ""}`, w.date.replaceAll("-", "."), n > 0 ? t("win_days", { n }) : ""].filter(Boolean).join(" · ")),
           el("div", { class: "win-acts" }, watchBtn,
             el("span", { class: "win-share" }, share, menu))));
       // 한 줄 요약 (휴대폰 기본) — 누르면 큰 배너 펼침
       const pill = el("button", { type: "button", class: "win-pill" },
         w.image ? el("img", { src: w.image, alt: "", referrerpolicy: "no-referrer" }) : el("span", { class: "wp-ico" }, "🏆"),
-        el("span", { class: "wp-tx" }, el("b", {}, `🏆 ${first ? t("win_first", { show }) : t("win_n", { show })}`),
-          el("small", {}, `${show}${w.ep ? ` ${t("win_ep", { n: w.ep })}` : ""} · ${w.date.slice(5).replace("-", ".")} — ${t("win_tap")}`)),
+        el("span", { class: "wp-tx" }, el("b", {}, `🏆 ${multi ? t("win_multi", { n: streak.length }) : first ? t("win_first", { show }) : t("win_n", { show })}`),
+          el("small", {}, `${multi ? streak.map((x) => tc(x.show)).join(" · ") : `${show}${w.ep ? ` ${t("win_ep", { n: w.ep })}` : ""} · ${w.date.slice(5).replace("-", ".")}`} — ${t("win_tap")}`)),
         el("span", { class: "wp-go" }, "›"));
       pill.addEventListener("click", () => { banner.classList.add("open"); pill.hidden = true; });
       const wrapWin = el("div", { class: "win-wrap" }, pill, banner);
