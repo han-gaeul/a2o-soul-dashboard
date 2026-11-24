@@ -211,6 +211,7 @@ x_media:
   - { handle: MBCkpop, name: MBCkpop }
   - { handle: sbsnow, name: SBS KPOP }
   - { handle: kpop_sbs, name: SBS 인기가요 }   # 멤버별 직캠 묶음 글 (있으면 우리 초안 대신 리트윗)
+  - { handle: ena_kpopupshow, name: ENA 케이팝업 차트쇼 }
   - { handle: KBSKpop, name: KBS Kpop }
   - { handle: DazedKorea, name: Dazed Korea }
   - { handle: ellekorea, name: ELLE Korea }
