@@ -1,0 +1,19 @@
+name: tmp-dl
+on:
+  push:
+    branches: [tmp-dl-win]
+permissions:
+  contents: write
+jobs:
+  dl:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          mkdir -p tmpdl
+          curl -sL -o tmpdl/a.jpg "https://pbs.twimg.com/media/HX4gCLZa8AAFc3S?format=jpg&name=large"
+          curl -sL -o tmpdl/b.jpg "https://pbs.twimg.com/media/HX4gCLeaQAA7BP6?format=jpg&name=large"
+          ls -la tmpdl
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add tmpdl && git commit -m "tmp images" && git push
