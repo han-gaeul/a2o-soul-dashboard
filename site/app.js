@@ -992,6 +992,8 @@ if ("serviceWorker" in navigator) {
     }
     $("charts").append(tabs, body);
 
+    const flagOf = (cc) => cc.toUpperCase().replace(/./g, (c) => String.fromCodePoint(127397 + c.charCodeAt(0)));
+    const ccName = (cc) => { try { return new Intl.DisplayNames([locale], { type: "region" }).of(cc); } catch (e) { return cc; } };
     // 순위: 곡 × 차트 표 (지금 순위, ▲▼는 어제·지난주 대비) + 순위 추이 그래프 하나
     const COLS = ["멜론 TOP100", "멜론 HOT100", "멜론 일간", "지니 TOP200", "벅스 실시간", "FLO 차트", "써클 디지털 주간", "써클 스트리밍 주간"];
     const used = COLS.filter((c) => songs.some((s_) => s_.ranks.some((x) => x.chart === c) || (s_.today_best || {})[c]) || ["멜론 HOT100", "멜론 TOP100", "지니 TOP200"].includes(c));
@@ -1022,6 +1024,16 @@ if ("serviceWorker" in navigator) {
       el("p", { class: "muted small" }, t("now_play_note")),
       (data.charts || []).some((c) => (c.streams || []).length > 1) ? el("div", {}, el("h3", { class: "now-h" }, t("now_daily")),
         el("div", { class: "chart-box now-chart" }, el("canvas", { id: "playTrend" }))) : null,
+      // Spotify 나라별 일간 Top 200 (든 날만 그 나라 순위·재생 수가 나옴)
+      ((data.spotify_country || {}).songs || []).length ? el("div", {}, el("h3", { class: "now-h" }, t("sc_title")),
+        el("div", { class: "now-scroll" }, el("table", { class: "now-table sc-table" },
+          el("thead", {}, el("tr", {}, el("th", {}, t("sp_song")), el("th", {}, t("sc_country")), el("th", {}, t("sc_last")), el("th", {}, t("sc_peak")))),
+          el("tbody", {}, ...data.spotify_country.songs.flatMap((sg) => sg.countries.map((r, i) => el("tr", {},
+            el("td", {}, i ? "" : sg.song),
+            el("td", {}, `${flagOf(r.cc)} ${ccName(r.cc)}`),
+            el("td", {}, el("b", {}, `#${r.pos}`), el("small", { class: "muted" }, ` ${r.last.slice(5).replace("-", "/")} · ${compact.format(r.streams)}`)),
+            el("td", {}, el("b", {}, `#${r.peak}`), el("small", { class: "muted" }, ` ${r.peak_date.slice(5).replace("-", "/")}`)))))))),
+        el("p", { class: "muted small" }, t("sc_note"), " ", ext("https://kworb.net/spotify/artist/1sqWFSwBcJ6eunJRrCsmYb.html", "kworb ↗"))) : null,
       sp && sp.artist ? ext(`https://open.spotify.com/artist/${sp.artist}`, "Spotify ↗") : null);
 
     // 판매량

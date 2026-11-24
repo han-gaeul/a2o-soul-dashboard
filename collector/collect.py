@@ -1373,6 +1373,14 @@ def collect(cfg, rescan=False):
             kcharts.run()
     except Exception as e:  # noqa: BLE001
         print(f"[음원차트] 실패: {str(e)[:120]}")
+    # Spotify 나라별 일간 Top 200 (kworb) — 6시간마다
+    try:
+        import spotify_country
+        chk = spotify_country.load().get("checked")
+        if not chk or now - datetime.fromisoformat(chk) >= timedelta(hours=6):
+            spotify_country.run()
+    except Exception as e:  # noqa: BLE001
+        print(f"[Spotify 나라별] 실패: {str(e)[:120]}")
     # 라디오 선곡표에서 A2O SOUL 곡 찾기 — 3시간마다 (어제·오늘)
     try:
         import radio
@@ -2180,6 +2188,7 @@ def build(cfg):
         "sales": __import__("sales").summary(),
         "radio_plays": __import__("radio").summary(),
         "kcharts": __import__("kcharts").summary(),
+        "spotify_country": __import__("spotify_country").summary(),
         "official_x": [{"url": m["permalink"], "at": kst_datetime(m["timestamp"])}
                        for k, m in sorted((load_json("announcements.json", {}).get("posts") or {}).items(), key=lambda kv: kv[1].get("timestamp") or "", reverse=True)
                        if k.startswith("x:") and "/a2o_soul/status/" in (m.get("permalink") or "").lower() and m.get("timestamp")][:20],
