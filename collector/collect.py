@@ -2066,6 +2066,9 @@ def build(cfg):
                            # 최신순: signature_sources의 date가 늦은 것부터, 날짜 없는 것(처음 올린 서명)은 맨 뒤
                            for label, rel in sorted(auto["signs"], key=lambda x: str((sign_src.get(x[0]) or {}).get("date") or ""), reverse=True)],
             "birthday": str(m.get("birthday") or ""),
+            "mbti": str(m.get("mbti") or ""),
+            "drawings": [{"src": local_img(x.get("src")), **{k: str(x[k]) for k in ("label", "url") if x.get(k)}}
+                         for x in (m.get("drawings") or []) if isinstance(x, dict) and local_img(x.get("src"))],
             "profile_history": profile_history(m) + [{**x, "label": cfg["info"]["photo_labels"].get(x["label"], x["label"])}
                                                      for x in auto["extra"]
                                                      if x["photo"] not in {h.get("photo") for h in profile_history(m)}],

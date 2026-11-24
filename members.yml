@@ -11,6 +11,8 @@
 #   position, birth_year, nationality, nicknames, career(데뷔 전 경력), notes(여담)
 #   미성년 멤버가 많아 활동 관련 정보만 — 본명·학교·가족·거주지·신체정보·출처 없는 소문은 넣지 않기
 #   birthday: "MM-DD" → 프로필에 표시, 다가오는 일정에 생일 D-day 자동 (30일 전부터)
+#   mbti: MBTI (멤버가 직접 밝힌 것만)
+#   drawings: 멤버가 직접 그린 그림 [{src: img/drawings/파일, label: 출처, url: 출처 주소}]
 #   signature: site/img/ 아래 서명 이미지 경로 (예: img/members/moon-sign.png)
 #   서명 여러 장: site/img/members/ 에 '서명_이름' '사인_이름'처럼 올리면 모두 표시, 출처는 아래 signature_sources (라벨별)
 #   profile_history: 역대 프로필 사진 목록. 항목마다 photo(site/img/ 경로) 또는 instagram(게시물 URL) 중 하나
@@ -52,15 +54,18 @@ members:
     nationality: 한국
     birth_year: 2007
     birthday: "04-07"
+    mbti: INFP
     position: 리더, 보컬, 비주얼 센터
     career: [창원 TNS보컬댄스학원 출신, 비공개 연습생으로 데뷔]
-    notes: [팀의 맏형으로 동생들을 잘 챙김, 소울메이트로 동갑 멤버 소라를 꼽음]
+    notes: [팀의 맏형으로 동생들을 잘 챙김, 소울메이트로 동갑 멤버 소라를 꼽음, "QQ뮤직 TMI: 멤버랑 둘이 '뮤직뱅크' 계단 난간 안에 들어가 사진을 찍다가 못 나올 뻔했다"]
+    drawings: [{ src: img/drawings/qq_moon.webp, label: "QQ뮤직·KPOP研究社 프로필 (모음 @tweentween13)", url: "https://x.com/tweentween13/status/2119757336546005468" }]
 
   - name: SORA
     ko: 소라
     nationality: 일본
     birth_year: 2007
     birthday: "07-30"
+    mbti: INFP
     position: 메인댄서
     career:
       - EXPG STUDIO 오사카 출신
@@ -68,27 +73,32 @@ members:
       - 일본 오디션 'iCON Z' 남성 부문 참가
       - 댄스 학원 원데이 클래스 진행
       - 비공개 연습생으로 데뷔
-    notes: [여러 장르를 소화하는 스트리트댄스 기본기, 표정·제스처를 살린 무대 퍼포먼스, 비트박스가 특기]
+    notes: [여러 장르를 소화하는 스트리트댄스 기본기, 표정·제스처를 살린 무대 퍼포먼스, 비트박스가 특기, "QQ뮤직 TMI: 팬들이 올리는 글 보는 걸 정말 좋아한다"]
+    drawings: [{ src: img/drawings/qq_sora.webp, label: "QQ뮤직·KPOP研究社 프로필 (모음 @tweentween13)", url: "https://x.com/tweentween13/status/2119757336546005468" }]
 
   - name: SEOHA
     ko: 서하
     nationality: 한국
     birth_year: 2008
     birthday: "01-01"
+    mbti: INFP
     position: 메인보컬
     career: [경기소년소녀합창단 활동, 비공개 연습생으로 데뷔]
-    notes: ["'SUPERSTAR' 고음 파트 담당", 데뷔 쇼케이스 영상 영어 내레이션, 무표정과 웃는 얼굴의 반전 매력]
+    notes: ["'SUPERSTAR' 고음 파트 담당", 데뷔 쇼케이스 영상 영어 내레이션, 무표정과 웃는 얼굴의 반전 매력, "QQ뮤직 TMI: 알람 소리를 못 들어서 늘 멤버들이 깨워 준다"]
+    drawings: [{ src: img/drawings/qq_seoha.webp, label: "QQ뮤직·KPOP研究社 프로필 (모음 @tweentween13)", url: "https://x.com/tweentween13/status/2119757336546005468" }]
 
   - name: TEO
     ko: 테오
     nationality: 중국
     birth_year: 2009
     birthday: "07-30"
+    mbti: ENFP
     position: 메인댄서
     nicknames: [공식 텐션왕]
     career: [중국 댄스 방송 출연, 다수 댄스 대회 수상, "A2O Rookies LTB(2024.10~) → HTB(2025.2~)"]
-    notes: [댄스 브레이크 센터, 팀에서 흥이 가장 많은 멤버, 소울푸드는 짜장면]
+    notes: [댄스 브레이크 센터, 팀에서 흥이 가장 많은 멤버, 소울푸드는 짜장면, "QQ뮤직 TMI: 요즘 두바이 초콜릿이 맛있다"]
     units: [{ unit: LTB, until: 2025-02-13 }, { unit: HTB, since: 2025-02-14 }]
+    drawings: [{ src: img/drawings/qq_teo.webp, label: "QQ뮤직·KPOP研究社 프로필 (모음 @tweentween13)", url: "https://x.com/tweentween13/status/2119757336546005468" }]
 
   - name: GAKU
     ko: 가쿠
