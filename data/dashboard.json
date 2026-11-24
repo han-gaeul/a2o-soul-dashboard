@@ -4231,9 +4231,10 @@
     "url": "https://www.sbs.co.kr/live/S01"
    },
    {
-    "label": "ENA K-POP 유튜브 (11/24 라이브는 18:00 시작)",
+    "label": "ENA K-POP 유튜브",
     "show": "케이팝업 차트쇼",
-    "url": "https://www.youtube.com/@ENAKPOP/live"
+    "url": "https://www.youtube.com/@ENAKPOP/streams",
+    "yt_channel": "UCFpfKdO4MMSc9ZoMjk2Tikg"
    }
   ],
   "vote_apps": [
