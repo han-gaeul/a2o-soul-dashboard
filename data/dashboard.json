@@ -4321,6 +4321,7 @@
     "image_post": "https://x.com/A2O_SOUL/status/2118538863505522863",
     "og": "img/og/win-20261117.png",
     "show": "더쇼",
+    "speech": false,
     "tags": "#A2OSOUL1stWin #DancingInTheDark1stWin",
     "url": "https://www.youtube.com/watch?v=e84FIWj4pOk"
    },
@@ -4332,6 +4333,7 @@
     "image_post": "",
     "og": "",
     "show": "SHOW K-POP SHOW STAGE",
+    "speech": true,
     "tags": "#A2OSOUL2ndWin #DancingintheDark2ndWin",
     "url": "https://x.com/KJ_TaeLixfanboy/status/2125000310154580416"
    },
@@ -4343,6 +4345,7 @@
     "image_post": "https://x.com/ena_kpopupshow/status/2125171608671400083",
     "og": "",
     "show": "케이팝업 차트쇼",
+    "speech": true,
     "tags": "#A2OSOUL3rdWin #DancingintheDark3rdWin",
     "url": "https://x.com/ena_kpopupshow/status/2125171608671400083"
    }
@@ -15791,6 +15794,7 @@
    "key": "tl_win",
    "kind": "win",
    "show": "케이팝업 차트쇼",
+   "speech": true,
    "tags": "#A2OSOUL3rdWin #DancingintheDark3rdWin",
    "title": "케이팝업 차트쇼 1위",
    "url": "https://x.com/ena_kpopupshow/status/2125171608671400083"
@@ -15801,6 +15805,7 @@
    "key": "tl_win",
    "kind": "win",
    "show": "SHOW K-POP SHOW STAGE",
+   "speech": true,
    "tags": "#A2OSOUL2ndWin #DancingintheDark2ndWin",
    "title": "SHOW K-POP SHOW STAGE 1위",
    "url": "https://x.com/KJ_TaeLixfanboy/status/2125000310154580416"
