@@ -180,15 +180,15 @@ def run():
 
 
 def chart_series():
-    """그래프용 → [{song, service, type, ranks:[(날짜, 순위)]}] 날짜마다 그날 마지막 순위 + 누적 수의 하루 증가량(streams)"""
+    """그래프용 → [{song, service, type, ranks:[(날짜, 순위)]}] 날짜마다 그날 최고 순위 + 누적 수의 하루 증가량(streams)"""
     d = load()
     out = []
     for name, by in (d.get("ranks") or {}).items():
         svc, typ = name.split(" ", 1)
         for song, hours in by.items():
             day = {}
-            for h in sorted(hours):
-                day[h[:10]] = hours[h]
+            for h, r in hours.items():  # 날마다 그날 최고 순위 (잠깐이라도 들어간 날은 다 찍힘)
+                day[h[:10]] = min(day.get(h[:10], 999), r)
             out.append({"song": song, "service": svc, "type": typ, "ranks": sorted(day.items())})
     for label, weeks in (d.get("circle") or {}).items():
         by = {}
@@ -230,6 +230,14 @@ def summary():
         for song, r in weeks[ws[-1]].items():
             prev = weeks[ws[-2]].get(song) if len(ws) > 1 else None
             rk.setdefault(song, []).append({"chart": f"{label} 주간", "rank": r, "prev": prev, "week": ws[-1]})
+    best = {}  # 지금은 차트 밖이지만 오늘 들어간 적 있는 차트 → 오늘 최고 순위
+    for name, by in (d.get("ranks") or {}).items():
+        for song, hours in by.items():
+            if now in hours:
+                continue
+            today = [r for h, r in hours.items() if h[:10] == now[:10]]
+            if today:
+                best.setdefault(song, {})[name] = min(today)
     for v in rk.values():
         v.sort(key=lambda x: ("주간" in x["chart"], x["rank"]))
     cnt = {}
@@ -237,8 +245,14 @@ def summary():
         for song, days in by.items():
             ds = sorted(days)
             cnt.setdefault(song, {})[label] = {"total": days[ds[-1]], "daily": days[ds[-1]] - days[ds[-2]] if len(ds) > 1 else None}
+    hourly = {}  # 오늘 시간별 순위 (그래프 '오늘 시간별')
+    for name, by in (d.get("ranks") or {}).items():
+        for song, hours in by.items():
+            hs = sorted((h[11:13], r) for h, r in hours.items() if h[:10] == now[:10])
+            if hs:
+                hourly.setdefault(name, {})[song] = hs
     order = sorted(rk, key=lambda s: min([x["rank"] + (1000 if "주간" in x["chart"] else 0) for x in rk[s]] or [9999]))
-    return {"checked": d.get("checked"), "songs": [{"song": s, "ranks": rk[s], "counts": cnt.get(s, {})} for s in order]} if (d.get("ranks") or cnt) else None
+    return {"checked": d.get("checked"), "hourly": hourly, "songs": [{"song": s, "ranks": rk[s], "counts": cnt.get(s, {}), **({"today_best": best[s]} if s in best else {})} for s in order]} if (d.get("ranks") or cnt) else None
 
 
 if __name__ == "__main__":

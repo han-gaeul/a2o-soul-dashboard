@@ -994,18 +994,21 @@ if ("serviceWorker" in navigator) {
 
     // 순위: 곡 × 차트 표 (지금 순위, ▲▼는 어제·지난주 대비) + 순위 추이 그래프 하나
     const COLS = ["멜론 TOP100", "멜론 HOT100", "멜론 일간", "지니 TOP200", "벅스 실시간", "FLO 차트", "써클 디지털 주간", "써클 스트리밍 주간"];
-    const used = COLS.filter((c) => songs.some((s_) => s_.ranks.some((x) => x.chart === c)) || ["멜론 HOT100", "멜론 TOP100", "지니 TOP200"].includes(c));
+    const used = COLS.filter((c) => songs.some((s_) => s_.ranks.some((x) => x.chart === c) || (s_.today_best || {})[c]) || ["멜론 HOT100", "멜론 TOP100", "지니 TOP200"].includes(c));
     const rankPane = panes.rank = el("div", { class: "now-pane" },
       el("p", { class: "muted small" }, kc ? t("kc_now", { h: (kc.checked || "").slice(11, 13) }) : t("no_charts")),
       songs.length ? el("div", { class: "now-scroll" }, el("table", { class: "now-table" },
         el("thead", {}, el("tr", {}, el("th", {}, t("sp_song")), ...used.map((c) => el("th", {}, ...c.replace(" 주간", "").split(" ").flatMap((w, i) => i ? [el("br"), w] : [w]), /주간/.test(c) ? el("small", { class: "muted" }, ` (${t("now_week")})`) : null)))),
         el("tbody", {}, ...songs.map((s_) => el("tr", {}, el("td", {}, s_.song), ...used.map((c) => {
           const x = s_.ranks.find((r) => r.chart === c);
-          return x ? el("td", { class: "hit" }, el("b", {}, x.rank), " ", chg(x)) : el("td", { class: "muted" }, "–");
+          const tb = (s_.today_best || {})[c];
+          return x ? el("td", { class: "hit" }, el("b", {}, x.rank), " ", chg(x))
+            : el("td", { class: "muted" }, "–", tb ? el("small", { class: "kc-tb" }, t("kc_today_best", { n: tb })) : null);
         })))))) : null,
       (data.charts || []).some((c) => c.ranks.length > 1) ? el("div", {}, el("h3", { class: "now-h" }, t("now_trend")),
         el("div", { class: "filter-row ev-tabs", id: "rankTrendPick" }),
-        el("div", { class: "chart-box now-chart" }, el("canvas", { id: "rankTrend" }))) : null);
+        el("div", { class: "chart-box now-chart" }, el("canvas", { id: "rankTrend" })),
+        el("p", { class: "muted small", id: "rankTrendNote" })) : null);
 
     // 재생: 곡별 Spotify 누적·하루, 지니 재생, 멜론 좋아요 + Spotify 하루 재생 그래프
     const names = songs.length ? songs.map((s_) => s_.song) : ((sp && sp.songs) || []).map((x) => x.song);
@@ -3040,27 +3043,47 @@ if ("serviceWorker" in navigator) {
       rc.dataset.done = "1";
       const groups = {};
       for (const c of (data.charts || []).filter((c) => c.ranks.length)) (groups[[c.service, c.type].filter(Boolean).join(" ")] ||= []).push(c);
+      const lastR = (c) => (c.ranks.length ? c.ranks.at(-1)[1] : 999);
       const names = Object.keys(groups).filter((g) => groups[g].some((c) => c.ranks.length > 1))
-        .sort((a, b) => /주간/.test(a) - /주간/.test(b) || Math.min(...groups[a].map((c) => c.ranks.at(-1)[1])) - Math.min(...groups[b].map((c) => c.ranks.at(-1)[1])));
+        .sort((a, b) => /주간/.test(a) - /주간/.test(b) || Math.min(...groups[a].map(lastR)) - Math.min(...groups[b].map(lastR)));
       let pick = names.includes(pref.get("rankTrend", "")) ? pref.get("rankTrend", "") : names[0];
       let chart;
+      const hourly = (data.kcharts || {}).hourly || {};
+      let mode = "day";  // day: 날짜별(그날 최고 순위) · hour: 오늘 시간별
       const draw = () => {
+        const canHour = !/주간/.test(pick) && hourly[pick] && Object.keys(hourly[pick]).length;
+        if (!canHour) mode = "day";
         $("rankTrendPick").replaceChildren(...names.map((g) => {
           const b_ = el("button", { type: "button", class: g === pick ? "on" : "" }, g);
           b_.addEventListener("click", () => { pick = g; pref.set("rankTrend", g); draw(); });
           return b_;
-        }));
+        }), ...(canHour ? [el("span", { class: "rt-sep", "aria-hidden": "true" })] : []), ...(canHour ? [["day", t("rt_daily")], ["hour", t("rt_hourly")]].map(([k, label]) => {
+          const b_ = el("button", { type: "button", class: `rt-mode${k === mode ? " on" : ""}` }, label);
+          b_.addEventListener("click", () => { mode = k; draw(); });
+          return b_;
+        }) : []));
+        $("rankTrendNote").textContent = mode === "hour" ? t("rt_hourly_note") : (/주간/.test(pick) ? "" : t("rt_daily_note"));
         const series = groups[pick];
-        const ds = series.flatMap((c) => c.ranks.map((r) => r[0])).sort();
-        const labels = [];
-        for (let d = new Date(`${ds[0]}T00:00:00Z`); d <= new Date(`${ds.at(-1)}T00:00:00Z`); d.setUTCDate(d.getUTCDate() + 1)) labels.push(d.toISOString().slice(0, 10));
+        let labels, keys, rowsOf;
+        if (mode === "hour") {
+          const last = Math.max(...Object.values(hourly[pick]).flatMap((hs) => hs.map((x) => +x[0])));
+          keys = Array.from({ length: last + 1 }, (_, h) => String(h).padStart(2, "0"));
+          labels = keys.map((h) => `${+h}${t("rt_h")}`);
+          rowsOf = (c) => (hourly[pick][c.song] || []);
+        } else {
+          const ds = series.flatMap((c) => c.ranks.map((r) => r[0])).sort();
+          keys = [];
+          for (let d = new Date(`${ds[0]}T00:00:00Z`); d <= new Date(`${ds.at(-1)}T00:00:00Z`); d.setUTCDate(d.getUTCDate() + 1)) keys.push(d.toISOString().slice(0, 10));
+          labels = keys.map((d) => d.slice(5).replace("-", "/"));
+          rowsOf = (c) => c.ranks;
+        }
         if (chart) chart.destroy();
         chart = new Chart(rc, {
           type: "line",
-          data: { labels: labels.map((d) => d.slice(5).replace("-", "/")),
-                  datasets: series.map((c, i) => { const m = Object.fromEntries(c.ranks); return {
-                    label: c.song, data: labels.map((l) => m[l] ?? null), spanGaps: true,
-                    borderColor: palette[i % palette.length], backgroundColor: palette[i % palette.length], tension: 0.2, pointRadius: 3 }; }) },
+          data: { labels,
+                  datasets: [...series.map((c, i) => { const m = Object.fromEntries(rowsOf(c)); return {
+                    label: c.song, data: keys.map((l) => m[l] ?? null), spanGaps: mode === "day",
+                    borderColor: palette[i % palette.length], backgroundColor: palette[i % palette.length], tension: 0.2, pointRadius: 3 }; })] },
           options: { maintainAspectRatio: false, interaction: { mode: "nearest", intersect: false },
                      plugins: { legend: { position: "bottom", labels: { boxWidth: 10, font: { size: 11 } } },
                                 tooltip: { callbacks: { label: (x) => `${x.dataset.label} ${t("rank", { n: x.parsed.y })}` } } },
