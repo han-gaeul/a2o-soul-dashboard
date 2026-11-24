@@ -236,8 +236,8 @@ def candidates(dash, site, now):
         core = re.sub(r"\s*[｜|]\s*#?Shorts.*$|#\S+", "", v["title"], flags=re.I).strip()[:30].lower()
         return any(v["id"] in (x.get("text") or "") or ((x.get("name") or "").lower() == (v.get("channel") or "").lower()
                                                          and core and core in (x.get("text") or "").lower()) for x in mposts)
-    for v in recent:  # 새 MV·무대 영상 (직캠 한 개짜리는 많아서 뺌)
-        if v["id"] in grouped or v.get("category") == "fancam":
+    for v in recent:  # 새 영상 (MV·무대·콘텐츠·직캠)
+        if v["id"] in grouped:  # 직캠 1개짜리도 다른 영상처럼 (10분 예약, 그사이 묶음이 되거나 공식 글 나오면 취소)
             continue
         if same_post(v):  # 공식·매체 X 글이 있으면 그 글이 리트윗되니 우리 예약 글은 취소
             out.append(_cancel(f"vd|{v['id']}"))
