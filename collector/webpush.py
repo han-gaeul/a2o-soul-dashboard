@@ -467,16 +467,12 @@ def tweet_image(kind, data, site):
 def drafts(api, priv, new, site):
     """새 알림 후보 → 트윗 초안을 Worker에 저장. 저장된 개수를 돌려줌."""
     # 팬 계정이 주최하는 행사(credit 있음)는 초안 안 만듦 — 그쪽 공지를 리트윗하는 게 맞음
-    now_ms = int(time.time() * 1000)
     cancels = [{"key": data["cancel"], "cancel": True, "text": ""} for key, topic, kind, data in new if kind == "cancel"]
     new = [c for c in new if c[2] != "cancel"]
     items = [{"key": key, "kind": kind, "text": tweet_text(kind, data), "auto": kind in AUTO_POST or bool(data.get("auto")) or kind == "chart_day", **({"rt": True} if data.get("rt") else {}), **({"post_at": data["post_at"]} if data.get("post_at") else {}), **({"fallback_at": data["fallback_at"]} if data.get("fallback_at") else {}),
               **({"image": tweet_image(kind, data, site)} if tweet_image(kind, data, site) else {})}
              for key, topic, kind, data in new
              if kind not in ("notice",) and not data.get("credit") and not data.get("no_draft")]  # 음원 총공(stream)은 초안만 — 공지 링크를 붙여서 만듦
-    for it in items:  # 바로 올릴 글도 5분 예약으로 — 트윗 페이지 '예약됨'에서 보고 취소할 수 있게 (리트윗·안 보면 자동은 그대로)
-        if it["auto"] and not it.get("rt") and not it.get("post_at") and not it.get("fallback_at"):
-            it["post_at"] = now_ms + 5 * 60 * 1000
     items = cancels + items
     if not items:
         return 0
