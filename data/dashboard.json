@@ -10022,12 +10022,6 @@
    "version": "앨범"
   },
   {
-   "label": "Apple Music (Carabiner)",
-   "member": "SEE-ONE",
-   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20%28Carabiner%29_SEE-ONE.webp",
-   "version": "예판 특전"
-  },
-  {
    "label": "Apple Music A (Photobook)",
    "member": "MOON",
    "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20A%20%28Photobook%29_MOON.webp",
@@ -10157,6 +10151,12 @@
    "label": "Apple Music B (Photobook)",
    "member": "LUCIEN",
    "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20B%20%28Photobook%29_LUCIEN.webp",
+   "version": "예판 특전"
+  },
+  {
+   "label": "Apple Music B (Photobook)",
+   "member": "SEE-ONE",
+   "src": "img/photocards/%EC%98%88%ED%8C%90%20%ED%8A%B9%EC%A0%84_Apple%20Music%20B%20%28Photobook%29_SEE-ONE.webp",
    "version": "예판 특전"
   },
   {
