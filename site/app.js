@@ -458,8 +458,26 @@ if ("serviceWorker" in navigator) {
   const newCount = data.videos.filter(isNew).length;
   if (newCount) $("recentHead").append(el("span", { class: "new-count" }, `NEW ${newCount}`));
   if (data.recent.length) {
-    for (const v of data.recent.slice(0, 8)) $("recent").append(videoCard(v, v.member || catLabel(v.category)));
-    if (MOBILE) fold($("recent"), 6);
+    // 최신 영상: 분류 탭 (전체 · 직캠 · 콘텐츠 · 음방 무대 · MV) — 페이스캠은 직캠으로
+    const recCat = (v) => (v.category === "fancam" || /페이스캠|face\s?cam|직캠|fan\s?cam/i.test(v.title || "") ? "fancam" : v.category);
+    const RT = ["all", "fancam", "content", "stage", "mv"].filter((k) => k === "all" || data.recent.some((v) => recCat(v) === k));
+    let rt = pref.get("recentTab", "all");
+    if (!RT.includes(rt)) rt = "all";
+    const rtabs = el("div", { class: "filter-row ev-tabs" });
+    const drawRecent = () => {
+      rtabs.querySelectorAll("button").forEach((b) => b.classList.toggle("on", b.dataset.k === rt));
+      const box = $("recent"); box.replaceChildren();
+      box.parentElement.querySelectorAll(".fold-more").forEach((b) => b.remove());
+      for (const v of data.recent.filter((v) => rt === "all" || recCat(v) === rt).slice(0, 8)) box.append(videoCard(v, v.member || catLabel(recCat(v))));
+      if (MOBILE) fold(box, 6);
+    };
+    for (const k of RT) {
+      const b = el("button", { type: "button", "data-k": k }, t(`cat.${k}`));
+      b.addEventListener("click", () => { rt = k; pref.set("recentTab", k); drawRecent(); });
+      rtabs.append(b);
+    }
+    $("recent").before(rtabs);
+    drawRecent();
   } else {
     $("recent").replaceWith(empty(t("empty_videos")));
   }

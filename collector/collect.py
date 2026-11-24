@@ -2239,8 +2239,9 @@ def build(cfg):
             have.add((ep["date"], title))
     all_events.sort(key=lambda e: (e["date"], e.get("time") or ""))
     write_pending(pending)
-    recent = sorted((v for v in videos if v["category"] != "fancam"),
-                    key=lambda v: v["published_at"] or "", reverse=True)[:12]
+    _by_new = sorted(videos, key=lambda v: v["published_at"] or "", reverse=True)  # 최신 영상 칸: 직캠 탭도 있어서 직캠 12개 + 나머지 12개
+    recent = sorted([v for v in _by_new if v["category"] != "fancam"][:12] + [v for v in _by_new if v["category"] == "fancam"][:12],
+                    key=lambda v: v["published_at"] or "", reverse=True)
     today = datetime.now(KST).date().isoformat()
 
     stores_state = load_json("announcements.json", {}).get("x_stores") or {}
