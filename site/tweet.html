@@ -90,9 +90,57 @@
   .li .txt { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .li .st { font-size: 12px; color: var(--muted); }
   .li a { font-size: 12px; font-weight: 700; color: var(--accent); text-decoration: none; white-space: nowrap; }
+  /* 오른쪽: 자동 규칙 정리 (넓은 화면은 옆에 고정, 좁으면 맨 위에 접어서) */
+  .layout { max-width: 1520px; margin: 0 auto; }
+  .rules { background: var(--card); border: 1px solid var(--line); border-radius: 16px; font-size: 13px; line-height: 1.5; }
+  .rules summary { cursor: pointer; padding: 12px 16px; font-weight: 800; font-size: 14px; list-style: none; display: flex; align-items: center; }
+  .rules summary::-webkit-details-marker { display: none; }
+  .rules summary::after { content: "▾"; margin-left: auto; color: var(--muted); }
+  .rules[open] summary::after { content: "▴"; }
+  .rules .rb { padding: 0 16px 14px; display: grid; gap: 12px; }
+  .rules h3 { font-size: 12px; margin: 0 0 4px; color: var(--muted); font-weight: 800; }
+  .rules ul { margin: 0; padding-left: 18px; display: grid; gap: 3px; }
+  .rules .tag { font-size: 11px; font-weight: 800; border-radius: 6px; padding: 1px 6px; margin-right: 4px; }
+  .t-auto { background: #e6f7ec; color: #0b7a3b; } .t-rt { background: var(--chip); color: var(--chip-fg); }
+  .t-wait { background: #fff4e5; color: #8a4b00; } .t-draft { background: #eef2f7; color: #475569; } .t-no { background: #fde8ec; color: #c81e43; }
+  .rules-m { max-width: 1180px; margin: 0 auto; padding: 0 16px; }
+  .rules-side { display: none; }
+  @media (min-width: 1240px) {
+    .layout { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 0 8px; padding-right: 16px; align-items: start; }
+    .rules-m { display: none; } .rules-side { display: block; padding-top: 20px; }
+    .rules-side .rules { position: sticky; top: 16px; max-height: calc(100vh - 32px); overflow: auto; }
+  }
 </style>
 </head>
 <body>
+<div class="layout">
+<div class="rules-m" style="padding-top:20px"><details class="rules">
+    <summary>📋 자동으로 하는 일</summary>
+    <div class="rb">
+      <div><h3><span class="tag t-auto">바로 올림</span>확인 없이</h3><ul>
+        <li>🎉 MV 조회수 100만 단위 · 구독자 돌파</li>
+        <li>🎂 멤버 생일 (0시)</li>
+        <li>📺 음방·라이브: 5분 전 '곧 시작', 시작 10분 뒤 '생방송 중'</li>
+        <li>📈 차트: 매일 9시 요약 · 새 차트 첫 진입 (한국어만)</li></ul></div>
+      <div><h3><span class="tag t-rt">바로 리트윗</span></h3><ul>
+        <li>@A2O_SOUL 글 전부</li>
+        <li>매체·방송사 계정(목록에 넣은 곳)의 A2O SOUL 글</li>
+        <li>투표 앱·방송사 투표 글 · 방송사 직캠 글</li></ul></div>
+      <div><h3><span class="tag t-wait">10분 기다림</span>공식 글 있으면 리트윗, 없으면 우리 글 바로</h3><ul>
+        <li>🎬 새 영상 (MV·무대·콘텐츠)</li>
+        <li>🎥 멤버별 직캠·페이스캠 2개 이상 → 한 글로 묶음 (5명씩)</li></ul></div>
+      <div><h3><span class="tag t-draft">초안</span>안 보면 자동</h3><ul>
+        <li>🎧 음원 총공: 시작 전 초안 → 시작 10분 전 자동 · 진행 중 초안 → 20분 뒤 자동 (한국어만, 공지 글 인용)</li>
+        <li>🌏 해외 팬 콜라보: 같은 방식 (한국어 + 영어)</li></ul></div>
+      <div><h3><span class="tag t-draft">초안만</span>직접 올리기</h3><ul>
+        <li>목록에 없는 인증 기업 계정 글 (예스24 등)</li></ul></div>
+      <div><h3><span class="tag t-no">안 함</span></h3><ul>
+        <li>직캠 1개짜리 · 팬 주최 일정 푸시</li></ul></div>
+      <div><h3>🔔 알림</h3><ul>
+        <li>자동으로 올리면 '⚡ 트윗 자동으로 올렸어요' (리트윗은 제외)</li>
+        <li>새 초안이 생기면 이 기기로 (위 '초안 알림')</li></ul></div>
+    </div>
+  </details></div>
 <main class="tw">
   <div class="tw-top">
     <div>
@@ -129,6 +177,34 @@
   <div id="warn"></div>
   <div id="list" style="display:grid;gap:12px"></div>
 </main>
+<aside class="rules-side"><details class="rules" open>
+    <summary>📋 자동으로 하는 일</summary>
+    <div class="rb">
+      <div><h3><span class="tag t-auto">바로 올림</span>확인 없이</h3><ul>
+        <li>🎉 MV 조회수 100만 단위 · 구독자 돌파</li>
+        <li>🎂 멤버 생일 (0시)</li>
+        <li>📺 음방·라이브: 5분 전 '곧 시작', 시작 10분 뒤 '생방송 중'</li>
+        <li>📈 차트: 매일 9시 요약 · 새 차트 첫 진입 (한국어만)</li></ul></div>
+      <div><h3><span class="tag t-rt">바로 리트윗</span></h3><ul>
+        <li>@A2O_SOUL 글 전부</li>
+        <li>매체·방송사 계정(목록에 넣은 곳)의 A2O SOUL 글</li>
+        <li>투표 앱·방송사 투표 글 · 방송사 직캠 글</li></ul></div>
+      <div><h3><span class="tag t-wait">10분 기다림</span>공식 글 있으면 리트윗, 없으면 우리 글 바로</h3><ul>
+        <li>🎬 새 영상 (MV·무대·콘텐츠)</li>
+        <li>🎥 멤버별 직캠·페이스캠 2개 이상 → 한 글로 묶음 (5명씩)</li></ul></div>
+      <div><h3><span class="tag t-draft">초안</span>안 보면 자동</h3><ul>
+        <li>🎧 음원 총공: 시작 전 초안 → 시작 10분 전 자동 · 진행 중 초안 → 20분 뒤 자동 (한국어만, 공지 글 인용)</li>
+        <li>🌏 해외 팬 콜라보: 같은 방식 (한국어 + 영어)</li></ul></div>
+      <div><h3><span class="tag t-draft">초안만</span>직접 올리기</h3><ul>
+        <li>목록에 없는 인증 기업 계정 글 (예스24 등)</li></ul></div>
+      <div><h3><span class="tag t-no">안 함</span></h3><ul>
+        <li>직캠 1개짜리 · 팬 주최 일정 푸시</li></ul></div>
+      <div><h3>🔔 알림</h3><ul>
+        <li>자동으로 올리면 '⚡ 트윗 자동으로 올렸어요' (리트윗은 제외)</li>
+        <li>새 초안이 생기면 이 기기로 (위 '초안 알림')</li></ul></div>
+    </div>
+  </details></aside>
+</div>
 <script>
 (() => {
   const $ = (id) => document.getElementById(id);
