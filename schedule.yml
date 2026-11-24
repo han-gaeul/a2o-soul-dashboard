@@ -30,7 +30,7 @@ events:
   - { date: 2026-12-25, type: 음방, title: SBS 가요대전 출연 }
   - { date: 2026-11-18, title: 케이팝업 차트쇼 출연, hide: true }  # 사전녹화 공지를 출연으로 잘못 읽음
   - { date: 2026-11-18, time: "12:30", type: 기타, title: ENA 케이팝업 차트쇼 사전녹화, url: "https://x.com/A2O_SOUL/status/2122887531385835712" }
-  - { date: 2026-11-24, time: "18:00", type: 음방, title: 케이팝업 차트쇼 출연, url: "https://x.com/A2O_SOUL/status/2125139858964513161" }
+  - { date: 2026-11-24, time: "17:40", type: 음방, title: 케이팝업 차트쇼 출연, url: "https://x.com/A2O_SOUL/status/2125139858964513161" }
 
 # 팬싸·영통 공지 카드(공지 탭) 손보기
 #   fix: 제목에 match가 들어간 공지의 당첨 발표일(announce)·응모 기간 등을 고침 (같은 판매처가 여러 날이면 date로 구분)
