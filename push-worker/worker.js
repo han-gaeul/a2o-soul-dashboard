@@ -678,6 +678,12 @@ async function tweets(req, env, url) {
   const k = `_tw:${String(b.id || "").replace(/[^0-9a-f]/g, "")}`;
   const d = await env.SUBS.get(k, "json");
   if (!d) return json(req, { error: "이미 지났거나 없는 초안이에요" }, 404);
+  if (p === "/tweet/edit") {  // 예약·초안 글 고치기 (아직 안 올라간 것만)
+    if (!["scheduled", "pending"].includes(d.status)) return json(req, { error: "이미 올라갔거나 버린 글이에요" }, 409);
+    if (typeof b.text !== "string" || !b.text.trim()) return json(req, { error: "내용이 비었어요" }, 400);
+    await env.SUBS.put(k, JSON.stringify({ ...d, text: b.text.slice(0, 1000), edited: Date.now() }), { expirationTtl: 3 * 86400 });
+    return json(req, { ok: true });
+  }
   if (p === "/tweet/skip") {
     await env.SUBS.put(k, JSON.stringify({ ...d, status: "skipped" }), { expirationTtl: 86400 });
     return json(req, { ok: true });
