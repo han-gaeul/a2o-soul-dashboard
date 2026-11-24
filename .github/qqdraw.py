@@ -15,7 +15,8 @@ for name, mid in IDS.items():
     w, h = im.size
     px = im.load()
     # 흰 그림 칸: 행마다 밝은 픽셀이 폭의 절반 넘는 줄 중 가장 긴 연속 구간
-    rows = [sum(1 for x in range(0, w, 2) if min(px[x, y]) > 215) > w / 4 for y in range(int(h * 0.6))]
+    bright = lambda c: min(c) > 160 and max(c) - min(c) < 30  # 흰·회색 종이 (파란 배경 제외)
+    rows = [sum(1 for x in range(0, w, 2) if bright(px[x, y])) > w / 4 for y in range(int(h * 0.6))]
     best, cur, start = (0, 0), 0, 0
     for y, ok in enumerate(rows + [False]):
         if ok:
@@ -27,7 +28,7 @@ for name, mid in IDS.items():
                 best = (start, start + cur)
             cur = 0
     y0, y1 = best
-    xs = [x for x in range(w) if min(px[x, (y0 + y1) // 2]) > 215]
+    xs = [x for y in range(y0, y1, max(1, (y1 - y0) // 20)) for x in range(w) if bright(px[x, y])]
     p = 6
     box = (min(xs) + p, y0 + p, max(xs) - p, y1 - p)
     im.crop(box).save(out / f"qq_{name}.webp", quality=90)
