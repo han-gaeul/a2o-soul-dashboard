@@ -1,0 +1,23 @@
+name: pcrerun
+on:
+  push:
+    branches: [pc-fix-ld]
+permissions:
+  contents: write
+jobs:
+  run:
+    if: "!contains(github.event.head_commit.message, '[skip pc]')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq tesseract-ocr > /dev/null
+          pip install -q pytesseract scipy numpy pillow requests
+      - run: python .github/pcrerun.py
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A site/img/photocards && git commit -m "포카 다시 자르기 [skip pc]" && git push || echo "변경 없음"
