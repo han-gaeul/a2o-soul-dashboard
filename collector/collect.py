@@ -1906,7 +1906,7 @@ def write_calendar(cfg, extra_events=()):
             lines.extend(["BEGIN:VALARM", "ACTION:DISPLAY", f"DESCRIPTION:{_ics_escape(summary)}", f"TRIGGER:-PT{mins}M", "END:VALARM"])
         lines.append("END:VEVENT")
 
-    for i, e in enumerate(list(cfg["events"]) + list(extra_events)):
+    for i, e in enumerate([e for e in cfg["events"] if not e.get("hide")] + list(extra_events)):
         label = f"[{e['type']}] " if e.get("type") else ""
         if e.get("time") and re.fullmatch(r"\d{2}:\d{2}", e["time"]):
             st = f"{e['date']} {e['time']}"
@@ -2153,7 +2153,7 @@ def build(cfg):
     soon = (date.fromisoformat(today) + timedelta(days=120)).isoformat()
     # 지난 일정도 달력에 남김 (PAST_DAYS일 전까지) — 목록·'다가오는 일정'은 화면에서 오늘 이후만
     past_from = (date.fromisoformat(today) - timedelta(days=PAST_DAYS)).isoformat()
-    all_events = sorted([e for e in cfg["events"] if e["date"] >= past_from]
+    all_events = sorted([e for e in cfg["events"] if e["date"] >= past_from and not e.get("hide")]
                         + [e for e in auto_events + youtube_upcoming(registry, today) if (e["date"], e["title"]) not in seen]
                         + [a for a in annivs if past_from <= a["date"] <= soon],
                         key=lambda e: (e["date"], e.get("time") or ""))
