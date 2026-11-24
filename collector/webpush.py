@@ -124,13 +124,13 @@ def candidates(dash, site, now):
             out.append((f"ev|{e['date']}|{tm}|{e['title']}", "show", "show",
                         {"name": e["title"], "t": tm, "url": (live or {}).get("url") or site, "parts": [e["title"]], "tr": tr, "now": now >= st,
                          "credit": e.get("credit") or "", "no_draft": True}))  # 1시간 전은 푸시만
-        # 트윗: 방송 5분 전 · 시작 10분 뒤 — 3시간 전부터 미리 예약해 두고(트윗 페이지 '예약됨'에서 보고 취소 가능) 워커가 그 시각(post_at)에 올림
+        # 트윗: 방송 5분 전 · 시작 3분 뒤 — 3시간 전부터 미리 예약해 두고(트윗 페이지 '예약됨'에서 보고 취소 가능) 워커가 그 시각(post_at)에 올림
         # live_time: TV 방송 시각과 유튜브 라이브 시각이 다를 때 트윗은 라이브 시각 기준 (일정 표시는 time 그대로)
         ltm = e.get("live_time") if re.fullmatch(r"\d{2}:\d{2}", str(e.get("live_time") or "")) else tm
         lst = _kst(f"{e['date']} {ltm}")
         base = {"name": e["title"], "t": ltm, "url": (live or {}).get("url") or site, "parts": [e["title"]], "tr": tr,
                 "credit": e.get("credit") or "", "draft_only": True}
-        for tag, at, extra in (("pre5", lst - timedelta(minutes=5), {"soon": True}), ("live", lst + timedelta(minutes=10), {"now": True})):
+        for tag, at, extra in (("pre5", lst - timedelta(minutes=5), {"soon": True}), ("live", lst + timedelta(minutes=3), {"now": True})):
             if tag == "pre5" and now >= lst:
                 continue  # 이미 시작했으면 '곧 시작'은 안 올림
             if -timedelta(hours=3) <= now - at <= timedelta(minutes=20):  # 3시간 전부터 예약 · 놓쳤으면 20분 안엔 바로
