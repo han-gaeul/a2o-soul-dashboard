@@ -468,8 +468,8 @@ if ("serviceWorker" in navigator) {
       rtabs.querySelectorAll("button").forEach((b) => b.classList.toggle("on", b.dataset.k === rt));
       const box = $("recent"); box.replaceChildren();
       box.parentElement.querySelectorAll(".fold-more").forEach((b) => b.remove());
-      for (const v of data.recent.filter((v) => rt === "all" || recCat(v) === rt).slice(0, 8)) box.append(videoCard(v, v.member || catLabel(recCat(v))));
-      if (MOBILE) fold(box, 6);
+      for (const v of data.recent.filter((v) => rt === "all" || recCat(v) === rt)) box.append(videoCard(v, v.member || catLabel(recCat(v))));
+      fold(box, MOBILE ? 6 : 10);  // 다 넣고, 많으면 '더 보기'로
     };
     for (const k of RT) {
       const b = el("button", { type: "button", "data-k": k }, t(`cat.${k}`));
