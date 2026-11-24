@@ -142,7 +142,7 @@
     ],
     [
      "2026-11-24",
-     86
+     78
     ]
    ],
    "service": "멜론",
@@ -161,7 +161,7 @@
     ],
     [
      "2026-11-24",
-     93
+     95
     ]
    ],
    "service": "멜론",
@@ -5659,6 +5659,9 @@
      "src": "img/members/사인_준.png"
     },
     {
+     "src": "img/members/서명_준.svg"
+    },
+    {
      "src": "img/members/서명_준.svg"
     }
    ]
@@ -5955,9 +5958,6 @@
     {
      "label": "THE KPOP",
      "src": "img/members/사인_시원.png"
-    },
-    {
-     "src": "img/members/서명_시원.svg"
     }
    ]
   },
