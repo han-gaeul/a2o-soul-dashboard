@@ -446,7 +446,7 @@ async function xAuth(env, acct, method, url) {
 // 사이트 일별 방문자 (Cloudflare Web Analytics) — 시크릿 CF_API_TOKEN(Account Analytics: Read) 필요, 10분 캐시(KV 안 씀)
 async function siteVisits(env) {
   if (!env.CF_API_TOKEN) return null;
-  const ck = new Request("https://push.a2osoul-tracker.com/_cache/visits");
+  const ck = new Request("https://push.a2osoul-tracker.com/_cache/visits-10m");
   const hit = await caches.default.match(ck);
   if (hit) return hit.json();
   const H = { Authorization: `Bearer ${env.CF_API_TOKEN}`, "Content-Type": "application/json" };
