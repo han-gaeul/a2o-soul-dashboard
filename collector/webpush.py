@@ -191,11 +191,34 @@ def candidates(dash, site, now):
         if m.get("birthday") == today:
             out.append((f"bd|{now.year}|{m['name']}", "birthday", "birthday",
                         {"name": m["name"], "ko": m.get("ko") or m["name"], "url": site + "#member/" + m["name"]}))
-    vids = [v for v in dash.get("videos") or [] if v.get("category") != "fancam" and v.get("published_at")
-            and now - datetime.fromisoformat(v["published_at"].replace("Z", "+00:00")) < timedelta(hours=3)]
-    for v in vids:  # 새 MV·무대 영상 (직캠은 많아서 뺌) — 같은 시간대 여러 개면 하나로 묶음
+    mems = dash.get("members") or []
+    pub = lambda v: datetime.fromisoformat(v["published_at"].replace("Z", "+00:00"))  # noqa: E731
+    recent = [v for v in dash.get("videos") or [] if v.get("published_at") and now - pub(v) < timedelta(hours=3)]
+    # 멤버 한 명씩 나온 영상(직캠·페이스캠)이 같은 채널·같은 제목으로 여러 개 → 공식 계정처럼 한 글에 '#멤버: 링크'로 묶음
+    groups = {}
+    for v in recent:
+        ms = _members_in(v, mems)
+        if len(ms) == 1:
+            groups.setdefault((v.get("channel") or "", _strip_member(v["title"], ms[0])), []).append((v, ms[0]))
+    grouped = set()
+    order = {m["name"]: i for i, m in enumerate(mems)}
+    for (ch, base), lst in groups.items():
+        if len(lst) < 2:
+            continue
+        grouped.update(v["id"] for v, _ in lst)
+        if now - max(pub(v) for v, _ in lst) < timedelta(minutes=15):
+            continue  # 아직 줄줄이 올라오는 중 — 다 올라온 뒤 한 번에
+        lst.sort(key=lambda x: order.get(x[1][0], 99))
+        for i in range(0, len(lst), 5):  # 5명씩 (280자 안에 들어가게)
+            part = lst[i:i + 5]
+            out.append((f"vg|{ch}|{base[:60]}|{i // 5}", "video", "video",
+                        {"title": base[:90], "url": f"https://youtu.be/{part[0][0]['id']}", "members": [],
+                         "cams": [[m[1] or m[0], v["id"]] for v, m in part]}))
+    for v in recent:  # 새 MV·무대 영상 (직캠 한 개짜리는 많아서 뺌)
+        if v["id"] in grouped or v.get("category") == "fancam":
+            continue
         out.append((f"vd|{v['id']}", "video", "video", {"title": v["title"][:90], "url": f"https://youtu.be/{v['id']}",
-                                                         "members": _members_in(v, dash.get("members") or [])}))
+                                                         "members": _members_in(v, mems)}))
     for x in dash.get("media_posts") or []:  # 매체·콘텐츠 계정 새 글 (3시간 안) — 트윗 초안만, 푸시는 안 보냄
         if x.get("at") and timedelta(0) <= now - _kst(x["at"]) < timedelta(hours=3):
             head = next((ln for ln in (x.get("text") or "").splitlines() if re.sub(r"#\S+|https?://\S+", "", ln).strip()), "")
@@ -221,6 +244,16 @@ def candidates(dash, site, now):
         if x.get("at") and timedelta(0) <= now - _kst(x["at"]) < timedelta(hours=4):
             out.append((f"rt|{x['url']}", "media", "media", {"name": x.get("by") or "", "title": "직캠", "url": x["url"], "members": [], "rt": True}))
     return out
+
+
+def _strip_member(title, m):
+    """제목에서 멤버 이름(영문·한글)을 빼서 같은 무대 영상끼리 묶을 수 있게"""
+    en, ko = m
+    t = re.sub(rf"(?<![A-Za-z]){re.escape(en)}(?![A-Za-z])", "", title)
+    if ko:
+        t = re.sub(rf"(?<![가-힣]){re.escape(ko)}(?![가-힣])", "", t)
+    t = re.sub(r"\(\s+", "(", re.sub(r"\s+\)", ")", t))
+    return re.sub(r"\s{2,}", " ", t).strip()
 
 
 def _members_in(v, members):
@@ -354,6 +387,10 @@ def tweet_text(kind, data):
             en = f"📢 {what}{en_w} — {when} KST, join us!"
         url = data["post"] or site_url
         links = [f"🎧 참여 {url}"]
+    elif kind == "video" and data.get("cams"):  # 멤버별 직캠 묶음
+        short = re.sub(r"\s*\([^)]*\)|에이투오 소울|A2O SOUL", "", data["title"])  # 글자 수 아끼기 (그룹명은 해시태그에 있음)
+        title, body, url = "🎬 " + re.sub(r"\s{2,}", " ", short).strip(), "", data["url"]
+        links = [f"#{n}: https://youtu.be/{vid}" for n, vid in data["cams"]]
     else:
         title, body, url = compose(kind, data, "ko")
         t2, b2, _ = compose(kind, data, "en")
