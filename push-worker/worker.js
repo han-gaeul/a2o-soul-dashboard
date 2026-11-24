@@ -443,7 +443,7 @@ async function postTweet(env, text, imageUrl) {
 async function xAuth(env, acct, method, url) {
   return acct.v === 2 ? `Bearer ${(await x2Fresh(env, acct)).access}` : await oauthHeader(env, method, url, { token: acct.token, tokenSecret: acct.secret });
 }
-// 사이트 일별 방문자 (Cloudflare Web Analytics) — 시크릿 CF_API_TOKEN(Account Analytics: Read) 필요, 1시간 캐시(KV 안 씀)
+// 사이트 일별 방문자 (Cloudflare Web Analytics) — 시크릿 CF_API_TOKEN(Account Analytics: Read) 필요, 10분 캐시(KV 안 씀)
 async function siteVisits(env) {
   if (!env.CF_API_TOKEN) return null;
   const ck = new Request("https://push.a2osoul-tracker.com/_cache/visits");
@@ -456,7 +456,7 @@ async function siteVisits(env) {
     if (!acct) return { error: "계정을 못 찾았어요 (토큰 권한 확인)" };
     // 날짜는 KST 기준으로 묶음 (Cloudflare 날짜는 UTC라 시간 단위로 받아서 +9시간)
     const from = new Date(Date.now() - 14 * 86400e3).toISOString().slice(0, 13) + ":00:00Z";
-    const q = `query($a:String!,$f:Time!){viewer{accounts(filter:{accountTag:$a}){rumPageloadEventsAdaptiveGroups(limit:400,filter:{datetime_geq:$f,requestHost:"a2osoul-tracker.com"}){count sum{visits} dimensions{datetimeHour}}}}}`;
+    const q = `query($a:String!,$f:Time!){viewer{accounts(filter:{accountTag:$a}){rumPageloadEventsAdaptiveGroups(limit:400,orderBy:[datetimeHour_DESC],filter:{datetime_geq:$f,requestHost:"a2osoul-tracker.com"}){count sum{visits} dimensions{datetimeHour}}}}}`;
     const r = await (await fetch("https://api.cloudflare.com/client/v4/graphql", { method: "POST", headers: H, body: JSON.stringify({ query: q, variables: { a: acct, f: from } }) })).json();
     if (r.errors && r.errors.length) return { error: String(r.errors[0].message).slice(0, 120) };
     const rows = (((r.data || {}).viewer || {}).accounts || [])[0];
@@ -467,7 +467,7 @@ async function siteVisits(env) {
     }
     const days = Object.values(by).sort((a, b) => (a.d < b.d ? -1 : 1)).slice(-14);
     const out = { days, at: Date.now() };
-    await caches.default.put(ck, new Response(JSON.stringify(out), { headers: { "Cache-Control": "max-age=3600" } }));
+    await caches.default.put(ck, new Response(JSON.stringify(out), { headers: { "Cache-Control": "max-age=600" } }));
     return out;
   } catch (e) { return { error: String(e.message || e).slice(0, 120) }; }
 }
