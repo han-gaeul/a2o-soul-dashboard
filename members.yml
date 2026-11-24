@@ -167,7 +167,7 @@ members:
     position: 보컬, 랩
     aliases: [SEEONE, SEE ONE]
     career: [키즈모델 활동, 댄스 보컬 아카데미 HIBEAT 출신, 전 JYP엔터테인먼트 연습생]
-    notes: ["매력 포인트는 '동굴 보이스' 저음", "QQ뮤직 TMI: 요즘 매일 'SUPERSTAR'를 듣는다", "쿠거우뮤직: 좋아하는 동물은 고양이, 레서판다 · 불리고 싶은 별명은 '목소리 낮은 그 애'처럼 '~한 그 애'"]
+    notes: ["매력 포인트는 '동굴 보이스' 저음", "QQ뮤직 TMI: 요즘 매일 'SUPERSTAR'를 듣는다", "쿠거우뮤직: 좋아하는 동물은 고양이, 레서판다 · 불리고 싶은 별명은 '저음인 그 사람'처럼 '~한 그 사람'"]
     drawings: [{ src: img/drawings/qq_seeone.webp, label: "QQ뮤직·KPOP研究社 프로필 (모음 @tweentween13)", url: "https://x.com/tweentween13/status/2119759845880668274" }]
 
   - name: ALURE
@@ -208,7 +208,7 @@ members:
     mbti: ENTP
     position: 비주얼
     career: [A2O Rookies LTB (2025.8~)]
-    notes: [팀의 분위기 메이커, 일본어·한국어·영어·중국어 4개 국어, "QQ뮤직 TMI: 즉흥 랩 실력이 늘었다", "쿠거우뮤직: 좋아하는 동물은 대게 · 불리고 싶은 별명은 소노 님(소노사마)"]
+    notes: [팀의 분위기 메이커, 일본어·한국어·영어·중국어 4개 국어, "QQ뮤직 TMI: 즉흥 랩 실력이 늘었다", "쿠거우뮤직: 좋아하는 동물은 대게 · 불리고 싶은 별명은 소노 님(SONO 大人)"]
     units: [{ unit: LTB, since: 2025-08-22 }]
     drawings: [{ src: img/drawings/qq_sono.webp, label: "QQ뮤직·KPOP研究社 프로필 (모음 @tweentween13)", url: "https://x.com/tweentween13/status/2119759845880668274" }]
 
@@ -223,7 +223,7 @@ members:
     nicknames: [두바이, 지아이]
     aliases: [JIAYI]
     career: [A2O Rookies LTB 'JIAYI' (2024.10~), 제트와 같은 댄스 스튜디오 출신으로 약 4년간 함께 연습]
-    notes: [스스로를 '황금 올라운더'로 소개, 가볍고 정확한 춤선, "QQ뮤직 TMI: 곧 겨울인데 두꺼운 옷이 다 작아졌다", "쿠거우뮤직: 좋아하는 동물은 고양이, 기니피그 · 불리고 싶은 별명은 플러스원, 기니피그, 두바이, 두쫀쿠"]
+    notes: [스스로를 '황금 올라운더'로 소개, 가볍고 정확한 춤선, "QQ뮤직 TMI: 곧 겨울인데 두꺼운 옷이 다 작아졌다", "쿠거우뮤직: 좋아하는 동물은 고양이, 기니피그 · 불리고 싶은 별명은 Plus One, 기니피그, Dubayy, 두쫀쿠"]
     units: [{ unit: LTB }]
     drawings: [{ src: img/drawings/qq_zai.webp, label: "QQ뮤직·KPOP研究社 프로필 (모음 @tweentween13)", url: "https://x.com/tweentween13/status/2119760076781019584" }]
 
