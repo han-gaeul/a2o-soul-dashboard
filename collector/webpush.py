@@ -333,7 +333,7 @@ def tweet_text(kind, data):
         when = f"{data['t']}~{data['end']}" if data.get("end") else data["t"]
         if data.get("now"):
             until = f" (~{data['end']})" if data.get("end") else ""
-            title, body, url = f"🔴 지금 {data['name']} 진행 중!{until}", "아직 늦지 않았어요, 같이 스밍해요 💜", data["url"]
+            title, body, url = f"🔴 지금 {data['name']} 진행 중!{until}", "같이 스밍해요 💜", data["url"]
         else:
             title, body, url = f"📢 오늘 {when} {data['name']}!", "시간 맞춰 같이 스밍해요 💜", data["url"]
         links = [f"🎧 플레이리스트 원클릭 담기 {url}"]
