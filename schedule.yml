@@ -42,7 +42,7 @@ fansign:
     - { match: Music Plant, date: 2026-11-28, announce: "2026-11-19 15:00" }
     - { match: Jumpup, apply_start: "2026-11-18 15:00", apply_end: "2026-11-20 23:59", announce: "2026-11-21 15:00" }
   add:
-    - { date: 2026-12-04, time: "20:00", title: Music Plant 팬사인회, short: 팬싸, apply_start: "2026-11-25 15:00", apply_end: "2026-11-27 23:59", post: "https://x.com/musicplant_kr/status/2125469534765347313" }
+    - { date: 2026-12-04, time: "20:00", title: Music Plant 팬사인회, short: 팬싸, apply_start: "2026-11-25 15:00", apply_end: "2026-11-27 23:59", announce: "2026-11-28 15:00", url: "https://www.musicplant.co.kr/board/?db=gallery_1&no=1745&mari_mode=view@view", post: "https://x.com/musicplant_kr/status/2125469534765347313" }
     - { date: 2026-12-11, time: "20:00", title: Makestar 팬사인회, short: 팬싸, apply_start: "2026-11-21 15:00", apply_end: "2026-11-23 23:59", announce: "2026-11-24 17:00", post: "https://x.com/Makestarcorp/status/2124019989317390428" }
     - { date: 2026-12-11, time: "18:00", title: Makestar 단체 영상통화, short: 영통, apply_start: "2026-11-21 15:00", apply_end: "2026-11-23 23:59", announce: "2026-11-24 17:00", post: "https://www.makestar.com/product/22506" }
     - { date: 2026-11-29, time: "20:00", title: Jumpup 팬사인회, short: 팬싸, apply_start: "2026-11-18 15:00", apply_end: "2026-11-20 23:59", announce: "2026-11-21 15:00", post: "https://x.com/JumpUp_ent/status/2122932820913860808" }
