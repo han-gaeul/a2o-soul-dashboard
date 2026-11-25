@@ -32,9 +32,10 @@ votes:
     title: "2027 D AWARDS 베스트 라이징 스타(남자) 본선"
     start: "2026-11-18 11:00"
     end: "2026-12-08 16:00"
-    note: 100% 팬 투표 · 남자 18팀 중 상위 5팀이 결선(12/9~12/22) 진출
+    note: 100% 팬 투표 · 남자 18팀 중 상위 5팀이 결선(12/9~12/22) 진출 · 그린 키위는 11/29 소멸 — 그 전에 쓰기
     url: https://sports.khan.co.kr/en/article/202611171532017/
     in_app: true
+    credit: "@a2osoulstation"
   - show: 음악중심
     app: 뮤니버스(MUNIVERSE)
     title: STAGE M PICK (971회)
