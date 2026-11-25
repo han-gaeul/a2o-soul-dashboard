@@ -19,7 +19,7 @@
   "total": 216202,
   "post": "https://x.com/koreansales_twt"
  },
- "checked": "2026-11-25T09:01+09:00",
+ "checked": "2026-11-25T15:12+09:00",
  "hanteo_chart": {
   "daily": {
    "2026-11-23": {
@@ -29,6 +29,10 @@
    "2026-11-22": {
     "rank": 91,
     "sales": 58
+   },
+   "2026-11-24": {
+    "rank": 57,
+    "sales": 52
    }
   },
   "weekly": {
