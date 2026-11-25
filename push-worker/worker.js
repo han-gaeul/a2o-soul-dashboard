@@ -718,8 +718,10 @@ async function tweets(req, env, url) {
 
 export default {
   async fetch(req, env) {
+    const arrived = Date.now();  // 모의 제출 연습(/ft): 요청이 도착한 시각 — 다른 일 하기 전에 먼저 잼
     const url = new URL(req.url);
     if (req.method === "OPTIONS") return new Response(null, { headers: cors(req) });
+    if (url.pathname === "/ft") return json(req, { t: arrived });  // GET = 시계 맞추기, POST = 모의 제출
 
     if (url.pathname === "/yt-hook") return youtubeHook(req, env);
     if (url.pathname.startsWith("/board/")) return board(req, env, url);
