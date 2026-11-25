@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#6c4cf5">
+<meta name="robots" content="noindex">
+<title>모의 제출 · SOUL Tracker</title>
+<link rel="icon" href="icons/favicon-32.png" sizes="32x32">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  body { background: var(--bg); }
+  .ft { max-width: 560px; margin: 0 auto; padding: 20px 16px 56px; display: grid; gap: 14px; }
+  .ft h1 { font-size: 20px; margin: 0; }
+  .clock { font-variant-numeric: tabular-nums; font-size: 34px; font-weight: 700; letter-spacing: -.5px; }
+  .muted { color: var(--muted); font-size: 13px; }
+  .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .row input[type=text] { font: inherit; font-variant-numeric: tabular-nums; padding: 8px 10px; border: 1px solid var(--line); border-radius: 10px; width: 150px; background: var(--card); color: inherit; }
+  .btn2 { font: inherit; padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); color: inherit; cursor: pointer; }
+  .form label { display: block; font-size: 14px; margin: 10px 0 4px; }
+  .form input { width: 100%; box-sizing: border-box; font: inherit; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); color: inherit; }
+  .submit { margin-top: 16px; font: inherit; font-weight: 700; padding: 12px 28px; border: 0; border-radius: 10px; background: #6c4cf5; color: #fff; cursor: pointer; }
+  .result { font-size: 15px; line-height: 1.6; }
+  .ok { color: #16a34a; } .bad { color: #dc2626; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; }
+  td, th { padding: 6px 4px; border-bottom: 1px solid var(--line); text-align: right; }
+  td:first-child, th:first-child { text-align: left; }
+  .tip { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; font-size: 14px; }
+</style>
+</head>
+<body>
+<main class="ft">
+  <h1>⏱️ 모의 제출 연습</h1>
+
+  <section class="card">
+    <div class="muted">서버 시각 (표준시)</div>
+    <div class="clock" id="clock">--:--:--.---</div>
+    <div class="muted" id="sync">시계 맞추는 중…</div>
+  </section>
+
+  <section class="card">
+    <div class="muted">폼이 열리는 시각</div>
+    <div class="row" style="margin-top:6px">
+      <input type="text" id="target" placeholder="18:40:00.000" inputmode="decimal">
+      <button class="btn2" id="nextMin">다음 1분</button>
+      <button class="btn2" id="next2">2분 뒤</button>
+    </div>
+    <div class="muted" id="left" style="margin-top:6px"></div>
+  </section>
+
+  <section class="card form">
+    <strong>사전녹화 신청 (연습)</strong>
+    <label>이름</label><input placeholder="입력하지 않아도 돼요" autocomplete="off">
+    <label>연락처</label><input placeholder="입력하지 않아도 돼요" autocomplete="off">
+    <button class="submit" id="submit" type="button">제출</button>
+    <div class="result" id="result" style="margin-top:12px"></div>
+  </section>
+
+  <section class="tip" id="advice" hidden></section>
+
+  <section class="card">
+    <div class="row" style="justify-content:space-between"><strong>기록</strong><button class="btn2" id="clear">지우기</button></div>
+    <table id="log"><thead><tr><th>열림</th><th>누름</th><th>서버 도착</th><th>전송</th></tr></thead><tbody></tbody></table>
+  </section>
+
+  <p class="muted">서버(Cloudflare, 한국)가 요청을 받은 시각을 잽니다. 실제 구글 폼 서버까지 걸리는 시간과는 조금 다를 수 있어서, 추천값은 참고용이에요. 입력한 내용은 어디에도 보내지 않습니다.</p>
+</main>
+<script>
+(() => {
+  const API = "https://push.a2osoul-tracker.com/ft";
+  const $ = (id) => document.getElementById(id);
+  let offset = null;            // 서버 시각 - 내 시계 (ms)
+  const now = () => Date.now() + (offset || 0);
+  const fmt = (t) => { const d = new Date(t + 9 * 3600e3); return d.toISOString().slice(11, 23); };
+  const load = () => { try { return JSON.parse(localStorage.getItem("ft_log") || "[]"); } catch (_) { return []; } };
+  const save = (l) => { try { localStorage.setItem("ft_log", JSON.stringify(l.slice(0, 30))); } catch (_) {} };
+
+  async function sync() {
+    const res = [];
+    for (let i = 0; i < 6; i++) {
+      try {
+        const t0 = Date.now();
+        const r = await fetch(API, { cache: "no-store" }).then((x) => x.json());
+        const t1 = Date.now();
+        res.push({ off: r.t - (t0 + t1) / 2, rtt: t1 - t0 });
+      } catch (_) {}
+    }
+    if (!res.length) { $("sync").textContent = "서버에 연결 못 했어요 — 새로고침해 주세요"; return; }
+    const best = res.sort((a, b) => a.rtt - b.rtt)[0];
+    offset = Math.round(best.off);
+    $("sync").textContent = `내 기기 시계와 차이 ${offset >= 0 ? "+" : ""}${Math.round(offset)}ms · 왕복 ${best.rtt}ms`;
+  }
+
+  // 목표 시각 (오늘, KST) → 타임스탬프
+  function targetTs() {
+    const m = /^(\d{1,2}):(\d{2}):(\d{2})(?:\.(\d{1,3}))?$/.exec($("target").value.trim());
+    if (!m) return null;
+    const day = new Date(now() + 9 * 3600e3).toISOString().slice(0, 10);
+    return Date.parse(`${day}T${m[1].padStart(2, "0")}:${m[2]}:${m[3]}.${(m[4] || "0").padEnd(3, "0")}+09:00`);
+  }
+  function setIn(min) {
+    const t = Math.floor(now() / 60000) * 60000 + min * 60000;
+    $("target").value = fmt(t);
+  }
+  $("nextMin").onclick = () => setIn(1);
+  $("next2").onclick = () => setIn(2);
+
+  function tick() {
+    if (offset !== null) {
+      $("clock").textContent = fmt(now());
+      const tt = targetTs();
+      const left = tt && tt - now();
+      $("left").textContent = tt ? (left > 0 ? `열리기까지 ${(left / 1000).toFixed(1)}초` : "열렸어요") : "";
+    }
+    requestAnimationFrame(tick);
+  }
+
+  function render() {
+    const l = load();
+    $("log").tBodies[0].innerHTML = l.map((r) => {
+      const d = r.server - r.open;
+      return `<tr><td>${fmt(r.open).slice(0, 8)}</td><td>${fmt(r.click).slice(6)}</td>` +
+        `<td class="${d < 0 ? "bad" : "ok"}">${fmt(r.server).slice(6)} (${d >= 0 ? "+" : ""}${d})</td><td>${r.server - r.click}ms</td></tr>`;
+    }).join("");
+    // 추천: 전송에 걸린 시간 평균만큼 일찍 누르되, 열리기 전 도착하지 않게 10ms 여유
+    const sends = l.map((r) => r.server - r.click).filter((x) => x >= 0 && x < 2000);
+    if (sends.length >= 2) {
+      const avg = Math.round(sends.reduce((a, b) => a + b, 0) / sends.length);
+      const spread = Math.max(...sends) - Math.min(...sends);
+      const early = Math.max(0, avg - 10);
+      $("advice").hidden = false;
+      $("advice").innerHTML = `📌 지금까지 ${sends.length}번: 누르고 서버에 닿기까지 평균 <b>${avg}ms</b> (편차 ${spread}ms)<br>` +
+        `→ 정각 바로 뒤에 닿으려면 <b>${early ? `59.${String(1000 - early).padStart(3, "0")}` : "00.000"}</b>에 누르기 (매크로 끝자리)`;
+    } else $("advice").hidden = true;
+  }
+
+  $("submit").onclick = async () => {
+    const click = now();
+    const open = targetTs();
+    if (!open) { $("result").innerHTML = '<span class="bad">폼이 열리는 시각을 먼저 넣어 주세요</span>'; return; }
+    $("result").textContent = "보내는 중…";
+    try {
+      const r = await fetch(API, { method: "POST", cache: "no-store", body: "{}" }).then((x) => x.json());
+      const d = r.t - open;
+      $("result").innerHTML = d < 0
+        ? `<span class="bad">❌ 너무 빨라요 — 열리기 ${-d}ms 전에 도착 (실제 폼이면 튕김)</span>`
+        : `<span class="ok">✅ 접수 — 열리고 <b>${d}ms</b> 뒤 도착</span>`;
+      $("result").innerHTML += `<div class="muted">누름 ${fmt(click)} · 서버 도착 ${fmt(r.t)} · 전송 ${r.t - click}ms</div>`;
+      const l = load(); l.unshift({ open, click, server: r.t }); save(l); render();
+    } catch (_) {
+      $("result").innerHTML = '<span class="bad">서버에 못 보냈어요 — 인터넷 연결 확인</span>';
+    }
+  };
+  $("clear").onclick = () => { save([]); render(); };
+
+  sync().then(() => { if (!$("target").value) setIn(1); });
+  setInterval(sync, 60000);
+  render(); tick();
+})();
+</script>
+</body>
+</html>
