@@ -3449,8 +3449,8 @@
   }
  },
  "x_media": {
-  "at": "2026-11-25T17:20+09:00",
-  "auto_since": "2125504974977487241",
+  "at": "2026-11-25T17:30+09:00",
+  "auto_since": "2125507090575962431",
   "candidates": {},
   "checked": "2026-11-25T16:50+09:00",
   "missing": [],
@@ -3779,14 +3779,16 @@
   "since_id": "2125484896483422573"
  },
  "x_official_votes": {
-  "at": "2026-11-25T17:20+09:00",
+  "at": "2026-11-25T17:30+09:00",
   "deep": 1,
   "last": {
    "official": [],
-   "read": 0,
-   "verified": []
+   "read": 1,
+   "verified": [
+    "a2osoulvote:blue"
+   ]
   },
-  "since_id": "2125499982279221448",
+  "since_id": "2125505142858654077",
   "v": 2
  },
  "x_show_photos": {
@@ -3859,6 +3861,13 @@
   "A2OSOUL_STREAM": {
    "id": "2122910820325847040",
    "posts": [
+    {
+     "caption": "🌝DANCING IN THE DARK🕺\n▶️Melon 스밍/다운로드총공 안내🔄\n📆2026.11.25. 17:30-19:00\n(음원점수 반영-스밍40%/다운60%)\n\nhttps://muzip.link/V4DxIT\n(원클릭 플레이리스트로 쉬운 스밍 가능)",
+     "images": [],
+     "permalink": "https://x.com/A2OSOUL_STREAM/status/2125507028198228252",
+     "timestamp": "2026-11-25T08:29:00.000Z",
+     "tweet_id": "2125507028198228252"
+    },
     {
      "caption": "🌝DANCING IN THE DARK🕺\n▶️Melon 스밍/다운로드총공 안내🔄\n📆2026.11.25. 15:00-16:00\n(음원점수 반영-스밍40%/다운60%)\n\nhttps://muzip.link/V4DxIT (멜론 플레이리스트)\n\n못 보신 분들을 위해 \n멜론 스트리밍 가이드 이미지도재배포합니다. https://x.com/A2OSOUL_STREAM/status/2125469279478812987/photo/1",
      "images": [
@@ -4153,18 +4162,9 @@
      "permalink": "https://x.com/A2OSOUL_STREAM/status/2123541947864449499",
      "timestamp": "2026-11-19T22:20:28.000Z",
      "tweet_id": "2123541947864449499"
-    },
-    {
-     "caption": "📢 Mubeatアプリ 事前投票のお知らせ‼️\n\nA2OSOULのために、Mubeatアプリでの事前投票にぜひご参加ください！🔥 皆さんの大切な一票が大きな力になります。投票をお忘れなく！\n\n🗳️ 今すぐMubeatアプリから事前投票に参加しましょう！\n\n#에이투오소울 #A2OSOUL #Mubeat #事前投票 https://x.com/A2OSOUL_STREAM/status/2123541859628892344/photo/1",
-     "images": [
-      "https://pbs.twimg.com/media/HXhWD5gbMAAeEBH.jpg"
-     ],
-     "permalink": "https://x.com/A2OSOUL_STREAM/status/2123541859628892344",
-     "timestamp": "2026-11-19T22:20:07.000Z",
-     "tweet_id": "2123541859628892344"
     }
    ],
-   "since_id": "2125469279478812987"
+   "since_id": "2125507028198228252"
   }
  },
  "x_vendors": {
@@ -4191,7 +4191,7 @@
    "id": "1556541258696622080",
    "since_id": "2125499739181617166"
   },
-  "at": "2026-11-25T17:20+09:00",
+  "at": "2026-11-25T17:30+09:00",
   "coogoong": {
    "id": "1549266721516978176",
    "since_id": "2125504796178485296"
@@ -4210,7 +4210,7 @@
   },
   "muniverse_io": {
    "id": "1912737786052112386",
-   "since_id": "2125502247043756138"
+   "since_id": "2125507283761152144"
   },
   "myloveidol_kpop": {
    "id": "2999130457",
