@@ -1499,7 +1499,7 @@ def collect(cfg, rescan=False):
             vst = store.setdefault("x_vendors", {})
             names = {v["handle"].lower(): v["name"] for v in vendors}
             base = ("(\"A2O SOUL\" OR A2OSOUL OR 에이투오소울 OR \"에이투오 소울\") "
-                    "(팬사인회 OR 사인회 OR 영상통화 OR 영통 OR fansign OR \"video call\") ")
+                    "(팬사인회 OR 사인회 OR 영상통화 OR 영통 OR fansign OR \"fan sign\" OR \"video call\") ")
             # 검색어는 512자 제한 → 판매처를 몇 개씩 나눠서
             groups, cur = [], []
             for v in vendors:
