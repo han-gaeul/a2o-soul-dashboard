@@ -3386,8 +3386,8 @@
   }
  },
  "x_media": {
-  "at": "2026-11-25T14:50+09:00",
-  "auto_since": "2125466775823454271",
+  "at": "2026-11-25T15:00+09:00",
+  "auto_since": "2125469534765347313",
   "candidates": {},
   "checked": "2026-11-24T16:41+09:00",
   "missing": [],
@@ -3718,7 +3718,7 @@
   "v": 2
  },
  "x_show_photos": {
-  "at": "2026-11-25T14:00+09:00",
+  "at": "2026-11-25T15:00+09:00",
   "fancams": {},
   "posts": {
    "2123249908413268001": {
@@ -3787,6 +3787,15 @@
   "A2OSOUL_STREAM": {
    "id": "2122910820325847040",
    "posts": [
+    {
+     "caption": "🌝DANCING IN THE DARK🕺\n▶️Melon 스밍/다운로드총공 안내🔄\n📆2026.11.25. 15:00-16:00\n(음원점수 반영-스밍40%/다운60%)\n\nhttps://muzip.link/V4DxIT (멜론 플레이리스트)\n\n못 보신 분들을 위해 \n멜론 스트리밍 가이드 이미지도재배포합니다. https://x.com/A2OSOUL_STREAM/status/2125469279478812987/photo/1",
+     "images": [
+      "https://pbs.twimg.com/media/HX8hYQqaAAAItnN.jpg"
+     ],
+     "permalink": "https://x.com/A2OSOUL_STREAM/status/2125469279478812987",
+     "timestamp": "2026-11-25T05:59:00.000Z",
+     "tweet_id": "2125469279478812987"
+    },
     {
      "caption": "🌝DANCING IN THE DARK🕺\n▶️Melon 스밍/다운로드총공 안내🔄\n📆2026.11.25. 11:30-13:30\n(음원점수 반영-스밍40%/다운60%)\n\nhttps://muzip.link/V4DxIT",
      "images": [],
@@ -4081,18 +4090,9 @@
      "permalink": "https://x.com/A2OSOUL_STREAM/status/2123541859628892344",
      "timestamp": "2026-11-19T22:20:07.000Z",
      "tweet_id": "2123541859628892344"
-    },
-    {
-     "caption": "📢 Mubeat App 预投票通知‼️\n\n请大家积极参与 Mubeat App 的预投票，为 A2OSOUL 投上宝贵的一票！🔥 每一票都非常重要，请不要忘记投票！\n\n🗳️ 现在就打开 Mubeat App 参与预投票吧！\n\n#에이투오소울 #A2OSOUL #Mubeat #预投票 https://x.com/A2OSOUL_STREAM/status/2123541798819885201/photo/1",
-     "images": [
-      "https://pbs.twimg.com/media/HXhWAW-aEAEe0UX.jpg"
-     ],
-     "permalink": "https://x.com/A2OSOUL_STREAM/status/2123541798819885201",
-     "timestamp": "2026-11-19T22:19:52.000Z",
-     "tweet_id": "2123541798819885201"
     }
    ],
-   "since_id": "2125408881526378755"
+   "since_id": "2125469279478812987"
   }
  },
  "x_vendors": {
