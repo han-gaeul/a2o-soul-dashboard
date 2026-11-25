@@ -7,7 +7,7 @@
   "xo:2124389920030789779||❤️‍🔥11월 넷째 주 핫스테이지의 주인공은?❤️‍🔥"
  ],
  "ig_media": {
-  "at": "2026-11-25T16:50+09:00",
+  "at": "2026-11-25T17:20+09:00",
   "sig": "myidol_miim,1thek,stonemusicent,kbskpop,a2o.story,studio_choom"
  },
  "posts": {
@@ -3406,6 +3406,28 @@
    "permalink": "https://x.com/Makestarcorp/status/2124774961953096126",
    "timestamp": "2026-11-23T08:00:01.000Z",
    "vendor": "Makestar"
+  },
+  "xv:2125469534765347313": {
+   "caption": "[FAN SIGN EVENT]\n#A2O #A2OSOUL\n#SUPERSTAR\n#Dancing_in_the_Dark\n\n🗓️이벤트 : 2026년 12월 4일 (금)\n[대면/30명] 20:00 (KST) ~\n\n🩵 응모 기간\n2026.11.25 (수) 15:00 KST ~ 2026.11.27 (금) 23:59 KST\n\n🛒뮤직플랜트 온라인몰\nhttps://bit.ly/4tfVRKJ\n\n#뮤직플랜트 #MUSICPLANT https://x.com/musicplant_kr/status/2125469534765347313/photo/1",
+   "excerpt": "[FAN SIGN EVENT]\n#A2O #A2OSOUL\n#SUPERSTAR\n#Dancing_in_the_Dark\n\n🗓️이벤트 : 2026년 12월 4일 (금)\n[대면/30명] 20:00 (KST) ~\n\n🩵 응모 기간\n2026.11.25 (수) 15:0",
+   "items": [
+    {
+     "apply_end": "2026-11-27 23:59",
+     "apply_start": "2026-11-25 15:00",
+     "confidence": 0.85,
+     "date": "2026-12-04",
+     "end_date": null,
+     "kind": "event",
+     "place": null,
+     "short": "팬싸",
+     "time": "20:00",
+     "title": "Music Plant 팬사인회",
+     "url": "https://bit.ly/4tfVRKJ"
+    }
+   ],
+   "permalink": "https://x.com/musicplant_kr/status/2125469534765347313",
+   "timestamp": "2026-11-25T06:00:01.000Z",
+   "vendor": "Music Plant"
   }
  },
  "rules_version": 13,
@@ -3426,8 +3448,8 @@
   }
  },
  "x_media": {
-  "at": "2026-11-25T17:10+09:00",
-  "auto_since": "2125502074452640151",
+  "at": "2026-11-25T17:20+09:00",
+  "auto_since": "2125504974977487241",
   "candidates": {},
   "checked": "2026-11-25T16:50+09:00",
   "missing": [],
@@ -3756,16 +3778,12 @@
   "since_id": "2125484896483422573"
  },
  "x_official_votes": {
-  "at": "2026-11-25T17:10+09:00",
+  "at": "2026-11-25T17:20+09:00",
   "deep": 1,
   "last": {
-   "official": [
-    "KTOPSTAR_offcl"
-   ],
-   "read": 1,
-   "verified": [
-    "KTOPSTAR_offcl:blue"
-   ]
+   "official": [],
+   "read": 0,
+   "verified": []
   },
   "since_id": "2125499982279221448",
   "v": 2
@@ -4149,7 +4167,7 @@
   }
  },
  "x_vendors": {
-  "since_id": "2124774961953096126"
+  "since_id": "2125469534765347313"
  },
  "x_vote_tl": {
   "BIGCChoice": {
@@ -4172,10 +4190,10 @@
    "id": "1556541258696622080",
    "since_id": "2125499739181617166"
   },
-  "at": "2026-11-25T17:10+09:00",
+  "at": "2026-11-25T17:20+09:00",
   "coogoong": {
    "id": "1549266721516978176",
-   "since_id": "2125136252127293769"
+   "since_id": "2125504796178485296"
   },
   "idolchamp1": {
    "id": "842271014520147968",
