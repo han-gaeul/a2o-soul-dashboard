@@ -1685,6 +1685,11 @@ if ("serviceWorker" in navigator) {
   } else {
     $("mvList").replaceWith(empty(t("empty_mv")));
   }
+  // 퍼포먼스 비디오 (티저 제외)
+  const perfs = data.videos.filter((v) => /performance video/i.test(v.title) && !/teaser/i.test(v.title))
+    .sort((a, b) => (b.published_at || "").localeCompare(a.published_at || ""));
+  if (perfs.length) for (const v of perfs) $("perfList").append(videoCard(v, null));
+  else $("perfCard").remove();
 
   // ---------- 멤버 ----------
   const dlg = $("memberDialog");
