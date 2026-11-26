@@ -3509,8 +3509,8 @@
   }
  },
  "x_media": {
-  "at": "2026-11-26T17:20+09:00",
-  "auto_since": "2125867377707655500",
+  "at": "2026-11-26T17:30+09:00",
+  "auto_since": "2125869560863817996",
   "candidates": {},
   "checked": "2026-11-26T17:10+09:00",
   "missing": [],
@@ -3850,7 +3850,7 @@
   "since_id": "2125862551871471983"
  },
  "x_official_votes": {
-  "at": "2026-11-26T17:20+09:00",
+  "at": "2026-11-26T17:30+09:00",
   "deep": 1,
   "last": {
    "official": [],
@@ -3930,6 +3930,13 @@
   "A2OSOUL_STREAM": {
    "id": "2122910820325847040",
    "posts": [
+    {
+     "caption": "🌝DANCING IN THE DARK🕺\n▶️Melon 스밍/다운로드총공 안내🔄\n📆2026.11.26. 17:30-19:00\n(음원점수 반영-스밍40%/다운60%)\n\nhttps://muzip.link/V4DxIT\n(플레이리스트 공유)",
+     "images": [],
+     "permalink": "https://x.com/A2OSOUL_STREAM/status/2125869416143311169",
+     "timestamp": "2026-11-26T08:29:00.000Z",
+     "tweet_id": "2125869416143311169"
+    },
     {
      "caption": "DANCING IN THE DARK🕺\n▶️Melon 스밍/다운로드총공 안내🔄\n📆2026.11.26. 15:00-16:00\n(음원점수 반영-스밍40%/다운60%)\n\nhttps://muzip.link/V4DxIT\n(플레이리스트 공유)",
      "images": [],
@@ -4218,16 +4225,9 @@
      "permalink": "https://x.com/A2OSOUL_STREAM/status/2123669141102252391",
      "timestamp": "2026-11-20T06:45:53.000Z",
      "tweet_id": "2123669141102252391"
-    },
-    {
-     "caption": "🌝DANCING IN THE DARK🕺\n▶️Melon 스밍/다운로드총공 안내🔄\n📆2026.11.21. -13:30\n(음원점수 반영-스밍40%/다운60%)\n12시 기준 \n12시 핫100\nDancing In the Dark  94위입니다.\n조금만 더 올려보아요! \nhttps://muzip.link/V4DxIT\n(플레이리스트 공유)",
-     "images": [],
-     "permalink": "https://x.com/A2OSOUL_STREAM/status/2123613872804487559",
-     "timestamp": "2026-11-20T03:06:16.000Z",
-     "tweet_id": "2123613872804487559"
     }
    ],
-   "since_id": "2125832153539956880"
+   "since_id": "2125869416143311169"
   }
  },
  "x_vendors": {
@@ -4255,7 +4255,7 @@
    "id": "1556541258696622080",
    "since_id": "2125848741030904013"
   },
-  "at": "2026-11-26T17:20+09:00",
+  "at": "2026-11-26T17:30+09:00",
   "coogoong": {
    "id": "1549266721516978176",
    "since_id": "2125757002387443979"
