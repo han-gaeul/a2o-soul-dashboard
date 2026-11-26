@@ -3495,8 +3495,8 @@
   }
  },
  "x_media": {
-  "at": "2026-11-26T15:00+09:00",
-  "auto_since": "2125831999504122284",
+  "at": "2026-11-26T15:10+09:00",
+  "auto_since": "2125834508838793511",
   "candidates": {},
   "checked": "2026-11-25T16:50+09:00",
   "missing": [],
@@ -3898,6 +3898,13 @@
    "id": "2122910820325847040",
    "posts": [
     {
+     "caption": "DANCING IN THE DARK🕺\n▶️Melon 스밍/다운로드총공 안내🔄\n📆2026.11.26. 15:00-16:00\n(음원점수 반영-스밍40%/다운60%)\n\nhttps://muzip.link/V4DxIT\n(플레이리스트 공유)",
+     "images": [],
+     "permalink": "https://x.com/A2OSOUL_STREAM/status/2125832153539956880",
+     "timestamp": "2026-11-26T06:00:56.000Z",
+     "tweet_id": "2125832153539956880"
+    },
+    {
      "caption": "🌝DANCING IN THE DARK🕺\n▶️Melon 스밍/다운로드총공 안내🔄\n📆2026.11.26. 11:30-13:30\n(음원점수 반영-스밍40%/다운60%)\n\nhttps://muzip.link/V4DxIT",
      "images": [],
      "permalink": "https://x.com/A2OSOUL_STREAM/status/2125778819168530936",
@@ -4185,18 +4192,9 @@
      "permalink": "https://x.com/A2OSOUL_STREAM/status/2123613872804487559",
      "timestamp": "2026-11-20T03:06:16.000Z",
      "tweet_id": "2123613872804487559"
-    },
-    {
-     "caption": "🫱🌜🫲\n🌝DANCING IN THE DARK🕺\n▶️타 플랫폼 스밍 총공 안내🔄\n📆2026.11.20. 09:00-11:30\n멜론 제외 타음악 플랫폼 사용자분들은 해당 시간 내 스밍 시작 부탁드립니다.\n모두 멜론과 스밍 조건은 비슷합니다.\n애플뮤직 사용자는 원클릭 리스트 누르시고 사용해주세요.\nhttps://music.apple.com/us/playlist/a2o-soul-synth-wave/pl.u-dr3BtL8Bp0k?l=ko https://x.com/A2OSOUL_STREAM/status/2123566743213719782/photo/1",
-     "images": [
-      "https://pbs.twimg.com/media/HXgSlQnaQAAbJHt.jpg"
-     ],
-     "permalink": "https://x.com/A2OSOUL_STREAM/status/2123566743213719782",
-     "timestamp": "2026-11-19T23:59:00.000Z",
-     "tweet_id": "2123566743213719782"
     }
    ],
-   "since_id": "2125778819168530936"
+   "since_id": "2125832153539956880"
   }
  },
  "x_vendors": {
