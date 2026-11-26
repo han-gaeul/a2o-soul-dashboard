@@ -151,3 +151,8 @@ fanchant_call:
     - [문|Mun, 소라|So-ra, 서하|Seo-ha, 테오|Te-o, 가쿠|Ga-ku, 준|Jun]
     - [한성|Han-seong, 루시엔|Ru-si-en, 시원|Si-won, 알루어|Al-lu-eo, 타이|Ta-i]
     - [소노|So-no, 자이|Ja-i, 에이든|E-i-deun, 제-트|Je-teu]
+
+# 새 포카 소식 (포토카드 칸 위) — 판매처 공지는 자동으로 모이고, 놓친 것만 여기에 (until 지나면 안 보임)
+pc_events:
+  - { place: 올리브영 홍대놀이터점, vendor: Mnet Plus Merch, kind: lucky, count: 15, tags: [unrel], start: "11/24", end: "11/30", until: "2026-12-07", at: "2026-11-19 12:00", url: "https://x.com/mnetplusmerch/status/2123249922237739012" }
+  - { place: 뮤직플랜트 12/4 팬사인회, vendor: Music Plant, kind: pob, count: 15, tags: [unrel, selfie], start: "11/25", end: "11/27", until: "2026-12-04", at: "2026-11-25 15:00", url: "https://x.com/musicplant_kr/status/2125469534765347313" }

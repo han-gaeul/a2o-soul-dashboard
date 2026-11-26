@@ -215,6 +215,9 @@ def load_fan_files(cfg):
                                   for s in howto.get("streaming") or [] if s.get("title")],
                     "radio": howto.get("radio") or {}}
     info = read_yml("info.yml")
+    cfg["pc_events"] = [{**{k: str(v) for k, v in e.items() if k != "tags"}, "count": int(e.get("count") or 0),
+                         "tags": [str(x) for x in e.get("tags") or []]}
+                        for e in info.get("pc_events") or [] if isinstance(e, dict) and e.get("url")]
     cfg["info"] = {
         "lore": [str(x) for x in info.get("lore") or []],
         "albums": [{"title": str(a["title"]), "type": str(a.get("type") or ""), "date": str(a.get("date") or ""),
@@ -999,6 +1002,33 @@ def kr_num(n):
 
 # ---------- 공통 ----------
 
+def pc_events(store, days=10):
+    """판매처 공지(팬싸 응모 특전·럭키드로우) → 새 포카 소식: 어디서 · 무슨 포카 · 몇 종 · 기간 · 공지 링크.
+    카드 사진은 템플릿이 나오는 대로 포카 도감에 들어가고, 여기는 '이런 포카가 새로 생겼다'만 알려 줌."""
+    out, now = [], datetime.now(KST)
+    for k, p in (store.get("posts") or {}).items():
+        if not k.startswith("xv:"):
+            continue
+        cap = p.get("caption") or ""
+        line = next((ln for ln in cap.splitlines() if re.search(r"포토\s?카드", ln) and re.search(r"\d{1,2}\s*종", ln)), "")
+        if not line or not p.get("timestamp"):
+            continue
+        at = kst_datetime(p["timestamp"])
+        if now - datetime.fromisoformat(at).replace(tzinfo=KST) > timedelta(days=days):
+            continue
+        lucky = bool(re.search(r"럭키\s?드로우|lucky draw", cap, re.I))
+        place = re.search(r"장소\s*[:：]\s*([^\n]+?)(?:\s+\d층|\s*\n|$)", cap)
+        period = re.search(r"기간\s*[:：]?\s*(\d{4})\.(\d{1,2})\.(\d{1,2})[^~\n]*~\s*(?:(\d{4})\.)?(\d{1,2})\.(\d{1,2})", cap)
+        count = max(int(x) for x in re.findall(r"(\d{1,2})\s*종", line))
+        tags = [w for w, pat in (("unrel", r"미공개"), ("selfie", r"셀카|셀피"), ("excl", r"단독")) if re.search(pat, line)]
+        out.append({"vendor": p.get("vendor") or "", "place": place.group(1).strip() if place else "",
+                    "kind": "lucky" if lucky else "pob", "count": count, "tags": tags,
+                    "start": f"{int(period.group(2))}/{int(period.group(3))}" if period else "",
+                    "end": f"{int(period.group(5))}/{int(period.group(6))}" if period else "",
+                    "url": p.get("permalink") or "", "at": at})
+    return sorted(out, key=lambda e: e["at"], reverse=True)
+
+
 def kst_datetime(iso):
     """ISO(UTC) → 'YYYY-MM-DD HH:MM' (KST)."""
     if not iso:
@@ -1516,7 +1546,24 @@ def collect(cfg, rescan=False):
                     posts += xposts.search_posts(query, since_id=vst.get("since_id"), media=True)  # 공지 이미지도 (날짜가 이미지에만 있을 때 읽으려고)
                 except Exception as e:  # noqa: BLE001
                     print(f"[공지] X 판매처 검색 실패: {e}")
-            print(f"[공지] X 판매처 새 글 {len(posts)}개")
+            # 럭키드로우·특전 포카 공지 (팬싸 단어가 없는 글) — 새 포카 소식용, 따로 since_id
+            pc_base = ("(\"A2O SOUL\" OR A2OSOUL OR 에이투오소울 OR \"에이투오 소울\") "
+                       "(럭키드로우 OR \"럭키 드로우\" OR \"lucky draw\" OR 미공개 OR 포토카드) -팬사인회 -영상통화 -fansign ")
+            pc_posts = []
+            for g in groups:
+                try:
+                    pc_posts += xposts.search_posts(pc_base + f"({' OR '.join('from:' + h for h in g)}) -is:retweet -is:reply",
+                                                    since_id=vst.get("since_id_pc"), media=True)
+                except Exception as e:  # noqa: BLE001
+                    print(f"[포카 소식] X 판매처 검색 실패: {e}")
+            if pc_posts:
+                vst["since_id_pc"] = max(pc_posts, key=lambda p: int(p["tweet_id"]))["tweet_id"]
+                for post in pc_posts:
+                    if post["id"] not in store["posts"]:
+                        store["posts"][post["id"]] = {"caption": post["caption"], "permalink": post["permalink"],
+                                                      "timestamp": post.get("timestamp"), "vendor": names.get(post["author"].lower(), post["author"]),
+                                                      "pc_only": True}
+            print(f"[공지] X 판매처 새 글 {len(posts)}개 · 포카 소식 {len(pc_posts)}개")
             if posts:
                 vst["since_id"] = max(posts, key=lambda p: int(p["tweet_id"]))["tweet_id"]
                 for post in posts:
@@ -2267,6 +2314,11 @@ def build(cfg):
         "official_x": [{"url": m["permalink"], "at": kst_datetime(m["timestamp"])}
                        for k, m in sorted((load_json("announcements.json", {}).get("posts") or {}).items(), key=lambda kv: kv[1].get("timestamp") or "", reverse=True)
                        if k.startswith("x:") and "/a2o_soul/status/" in (m.get("permalink") or "").lower() and m.get("timestamp")][:20],
+        "pc_events": sorted(pc_events(load_json("announcements.json", {})) + [  # info.yml pc_events: 검색 기간(7일)이 지난 공지를 손으로
+            {"vendor": "", "place": "", "kind": "lucky", "count": 0, "tags": [], "start": "", "end": "", "url": "", "at": "", **e}
+            for e in cfg.get("pc_events") or []
+            if (not e.get("until") or str(e["until"]) >= datetime.now(KST).strftime("%Y-%m-%d"))],
+            key=lambda e: str(e.get("at") or ""), reverse=True),
         "vote_wins": vote_wins(load_json("announcements.json", {})),
         "show_fancams": sorted(({"url": m["permalink"], "at": kst_datetime(m["timestamp"]), "by": m.get("author_name") or m.get("author")}
                                  for m in ((load_json("announcements.json", {}).get("x_show_photos") or {}).get("fancams") or {}).values()
