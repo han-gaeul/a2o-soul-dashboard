@@ -56,6 +56,8 @@
   .bar .v { font-variant-numeric: tabular-nums; margin-bottom: 2px; white-space: nowrap; }
   .bar .d { margin-top: 3px; white-space: nowrap; }
   .bar.now i { background: var(--accent); }
+  .bar:has(.s) { height: 88px; }
+  .bar .s { font-size: 10px; white-space: nowrap; opacity: .8; }
   .bar.now .v, .bar.now .d { color: var(--accent); font-weight: 700; }
   .ok .dot { background: #e6f7ec; } .warn2 .dot { background: #fff4e5; } .no .dot { background: #fde8ec; }
   .sep { height: 1px; background: var(--line); margin: 0 -16px; }
@@ -351,6 +353,7 @@
       const bar = document.createElement("i"); bar.style.height = `${Math.round((r.v / max) * 44)}px`;
       const d = document.createElement("span"); d.className = "d"; d.textContent = i === last ? "오늘" : `${+r.d.slice(5, 7)}/${+r.d.slice(8)}`;
       b.append(v, bar, d);
+      if (r.sub != null) { const x = document.createElement("span"); x.className = "s"; x.textContent = r.sub; b.append(x); }  // 막대 아래 한 줄 더 (예: 새 기기 수)
       return b;
     }));
   };
@@ -385,7 +388,7 @@
         const modes = Object.entries(sp).filter(([k]) => k.startsWith("mode:")).sort((a, b) => b[1] - a[1]).map(([k, c]) => `${MODE[k.slice(5)] || k.slice(5)} ${pct(k)}%`);
         $("devs").querySelector("small").textContent += `\n오늘: 모바일 ${pct("type:mobile")}% · PC ${pct("type:pc")}% · 태블릿 ${pct("type:tablet")}%`
           + (modes.length ? `\n여는 곳: ${modes.join(" · ")}` : "") + (ccs.length ? `\n나라: ${ccs.join(" · ")}` : "");
-        bars($("devs").querySelector(".trend"), v.slice(-7).map((x) => ({ d: x.day, v: x.active })), n);
+        bars($("devs").querySelector(".trend"), v.slice(-7).map((x) => ({ d: x.day, v: x.active, sub: `새 ${n(x.fresh || 0)}` })), n);
         $("devs").hidden = $("devsSep").hidden = false;
       }
       if (s.visits && s.visits.days && s.visits.days.length) {  // 사이트 방문자 (Cloudflare Web Analytics, 10분마다 갱신)
