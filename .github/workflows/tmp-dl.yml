@@ -1,0 +1,9 @@
+name: tmp-dl
+on: { push: { branches: [tmp-oy] } }
+jobs:
+  dl:
+    runs-on: ubuntu-latest
+    steps:
+      - run: curl -sfL -o oy.jpg "https://pbs.twimg.com/media/HX3nIgBW4AAj85O?format=jpg&name=orig"
+      - uses: actions/upload-artifact@v4
+        with: { name: oy, path: oy.jpg }
