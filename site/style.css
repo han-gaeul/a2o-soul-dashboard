@@ -1279,10 +1279,17 @@ body[data-cur="overview"] .vote-bar:not(.live-bar) { display: none; }
 }
 
 /* 내 포카 체크 */
-.pc-mine { margin: 0 0 10px; }
-.pc-mine .filter-row { align-items: center; gap: 6px; flex-wrap: wrap; }
-.pc-mine b { margin-right: 4px; }
-.pc-mine p { margin: 4px 0 0; }
+.pc-mine { margin: 2px 0 12px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 12px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 12px; }
+.pcm-left { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.pcm-n { font-size: 14px; white-space: nowrap; }
+.pcm-n span { color: var(--accent, #6c4cf5); }
+.pc-mine button:not(.linkbtn) { font: inherit; font-size: 12px; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--line); background: var(--card, #fff); color: inherit; cursor: pointer; }
+.pc-mine button.on { background: var(--accent, #6c4cf5); border-color: var(--accent, #6c4cf5); color: #fff; }
+.pcm-seg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
+.pcm-seg button:not(.linkbtn) { border: 0; border-radius: 0; padding: 5px 10px; }
+.pcm-seg button + button { border-left: 1px solid var(--line); }
+.pcm-right { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+.pcm-right .linkbtn { font-weight: 700; }
 button.pc { position: relative; }
 .pc.have::after { content: "✓"; position: absolute; top: 4px; right: 4px; width: 22px; height: 22px; border-radius: 50%; background: var(--accent, #6c4cf5); color: #fff; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,.3); }
 .pc-checking .pc:not(.have) img { opacity: .45; }

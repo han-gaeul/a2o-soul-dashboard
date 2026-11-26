@@ -3096,15 +3096,16 @@ if ("serviceWorker" in navigator) {
     // 내 포카: 개수 · 체크하기 · 가진 것/없는 것 · 로그인(다른 기기와 같이)
     const drawMine = () => {
       const n = pcs.filter((x) => PCM.has(x)).length;
-      const parts = [el("b", {}, `${t("pcm_title")} ${n}/${pcs.length}`),
-        btn(PCM.on ? t("pcm_done") : t("pcm_check"), PCM.on, () => { PCM.on = !PCM.on; $("pcSec").classList.toggle("pc-checking", PCM.on); drawMine(); })];
-      if (n || PCM.filter) parts.push(...[["", "pcm_all"], ["have", "pcm_have"], ["need", "pcm_need"]].map(([f, k]) =>
-        btn(t(k), PCM.filter === f, () => { PCM.filter = f; drawPc(); drawMine(); })));
-      $("pcMine").replaceChildren(el("div", { class: "filter-row era-row" }, ...parts),
-        PCM.on ? el("p", { class: "muted small" }, t("pcm_hint")) : null,
-        gtok() ? (PCM.synced ? el("p", { class: "muted small" }, t("pcm_synced")) : null)
-          : (data.push || {}).google_client_id ? el("p", { class: "muted small" }, t("pcm_login"), " ",
-            Object.assign(el("button", { type: "button", class: "linkbtn" }, t("pcm_login_btn")), { onclick: gLogin })) : null);
+      const left = el("div", { class: "pcm-left" }, el("b", { class: "pcm-n" }, `${t("pcm_title")} `, el("span", {}, `${n}`), `/${pcs.length}`),
+        btn(PCM.on ? t("pcm_done") : t("pcm_check"), PCM.on, () => { PCM.on = !PCM.on; $("pcSec").classList.toggle("pc-checking", PCM.on); drawMine(); }),
+        n || PCM.filter ? el("div", { class: "pcm-seg" }, ...[["", "pcm_all"], ["have", "pcm_have"], ["need", "pcm_need"]].map(([f, k]) =>
+          btn(t(k), PCM.filter === f, () => { PCM.filter = f; drawPc(); drawMine(); }))) : null);
+      // 오른쪽 한 줄: 체크 중이면 안내, 아니면 로그인·동기화 상태
+      const right = el("div", { class: "pcm-right muted small" }, PCM.on ? t("pcm_hint")
+        : gtok() ? (PCM.synced ? t("pcm_synced") : "")
+          : (data.push || {}).google_client_id ? [t("pcm_login"), " ",
+            Object.assign(el("button", { type: "button", class: "linkbtn" }, t("pcm_login_btn")), { onclick: gLogin })] : "");
+      $("pcMine").replaceChildren(left, right);
     };
     PCM.fns.push(() => { drawMine(); drawPc(); });
     // 멤버를 고르면 '전체'(모든 버전을 버전별 묶음으로)가 기본 — 멤버 전체에서 '전체'는 너무 많아서 버전 하나씩
