@@ -1784,6 +1784,11 @@ if ("serviceWorker" in navigator) {
     if (top && !dlg.open) top.after(dlg);  // 멤버 창 위에 뜨도록
     dlg.showModal();
   }
+  // 라벨 두 줄: 윗줄 판매처(또는 앨범 버전), 아랫줄 괄호 안 종류(Photobook 등) — 없으면 빈 줄로 높이 맞춤
+  const pcLbl = (label) => {
+    const m = /^(.*?)\s*\(([^)]*)\)\s*$/.exec(label || "");
+    return el("span", { class: "pc-lbl" }, el("span", {}, m ? m[1] : label || ""), el("span", {}, m ? `(${m[2]})` : "\u00a0"));
+  };
   const pcBtn = (x, list, i, caption) => {
     const b = el("button", { type: "button", class: "pc", "aria-label": `${x.member} ${tc(x.version)} ${x.label}` },
       el("img", { src: x.src, alt: "", loading: "lazy", decoding: "async" }), caption);
@@ -1827,7 +1832,7 @@ if ("serviceWorker" in navigator) {
       sections.push(el("section", { class: "dlg-sec", id: "dlg-pc" },
         el("h3", {}, `${t("photocards")} ${myPc.length}`),
         el("div", { class: "pc-grid" }, ...myPc.map((x, i) => pcBtn(x, myPc, i,
-          el("span", { class: "pc-cap" }, el("b", { class: "pc-who" }, tc(x.version)), el("span", { class: "pc-lbl" }, x.label))))),
+          el("span", { class: "pc-cap" }, el("b", { class: "pc-who" }, tc(x.version)), pcLbl(x.label))))),
         cr.url ? el("p", { class: "pf-src" }, t("pc_credit"), " ", ext(cr.url, cr.label || cr.url)) : null));
     }
     if ((m.ig_mentions || []).length) {
@@ -3017,7 +3022,7 @@ if ("serviceWorker" in navigator) {
   // 카드 아래: 멤버 이름(굵게) + 라벨(작게, 최대 2줄) — 멤버를 고른 상태면 이름은 빼고 라벨만
   const pcCard = (x, list, i, solo) => pcBtn(x, list, i, el("span", { class: "pc-cap" },
     solo ? null : el("b", { class: "pc-who" }, x.member),
-    el("span", { class: "pc-lbl" }, x.label || tc(x.version))));
+    pcLbl(x.label || tc(x.version))));
   // 새 포카 소식 (판매처 공지: 럭키드로우·응모 특전) — 카드 사진은 템플릿이 나오면 도감에 들어감
   const pcEv = data.pc_events || [];
   if (pcEv.length && $("pcNews")) {
