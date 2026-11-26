@@ -29,6 +29,8 @@ events:
   # 연말 무대
   - { date: 2026-12-18, type: 음방, title: KBS 가요대축제 출연 }
   - { date: 2026-12-25, type: 음방, title: SBS 가요대전 출연 }
+  - { date: 2026-12-03, time: "16:00", type: 행사, title: "세계청년대회 특집 콘서트 〈THE WAY〉 관람 신청 마감 (사연 신청)", short: 신청, url: "https://docs.google.com/forms/d/e/1FAIpQLScedqEnbzWigCxEGQZZUEWpp-4viuvfzH5iE8-nJIOWku6_FA/viewform" }
+  - { date: 2026-12-08, type: 행사, title: "세계청년대회 특집 콘서트 〈THE WAY〉 당첨 발표 (문자)", short: 발표, url: "https://docs.google.com/forms/d/e/1FAIpQLScedqEnbzWigCxEGQZZUEWpp-4viuvfzH5iE8-nJIOWku6_FA/viewform" }
   - { date: 2026-12-15, time: "18:30", type: 행사, title: "세계청년대회 특집 콘서트 〈THE WAY : 함께 걷는 길〉 출연 (여의도 KBS홀)", short: 콘서트, url: "https://www.instagram.com/reel/DgL4DVoRhwQ/" }
   - { date: 2026-11-18, title: 케이팝업 차트쇼 출연, hide: true }  # 사전녹화 공지를 출연으로 잘못 읽음
   - { date: 2026-11-18, time: "12:30", type: 기타, title: ENA 케이팝업 차트쇼 사전녹화, url: "https://x.com/A2O_SOUL/status/2122887531385835712" }
