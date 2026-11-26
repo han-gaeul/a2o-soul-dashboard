@@ -3113,12 +3113,27 @@
    "url": "https://x.com/JumpUp_ent/status/2122932820913860808"
   },
   {
+   "date": "2026-12-03",
+   "short": "신청",
+   "time": "16:00",
+   "title": "세계청년대회 특집 콘서트 〈THE WAY〉 관람 신청 마감 (사연 신청)",
+   "type": "행사",
+   "url": "https://docs.google.com/forms/d/e/1FAIpQLScedqEnbzWigCxEGQZZUEWpp-4viuvfzH5iE8-nJIOWku6_FA/viewform"
+  },
+  {
    "date": "2026-12-04",
    "short": "팬싸",
    "time": "20:00",
    "title": "Music Plant 팬사인회",
    "type": "행사",
    "url": "https://x.com/musicplant_kr/status/2125469534765347313"
+  },
+  {
+   "date": "2026-12-08",
+   "short": "발표",
+   "title": "세계청년대회 특집 콘서트 〈THE WAY〉 당첨 발표 (문자)",
+   "type": "행사",
+   "url": "https://docs.google.com/forms/d/e/1FAIpQLScedqEnbzWigCxEGQZZUEWpp-4viuvfzH5iE8-nJIOWku6_FA/viewform"
   },
   {
    "date": "2026-12-11",
@@ -18565,6 +18580,26 @@
    "pt": "Show especial da Jornada Mundial da Juventude “THE WAY” (KBS Hall, Yeouido)",
    "th": "คอนเสิร์ตพิเศษ World Youth Day “THE WAY” (KBS Hall ยออีโด)",
    "zh": "世界青年大会特别演唱会〈THE WAY：同行之路〉出演（汝矣岛KBS礼堂）"
+  },
+  "세계청년대회 특집 콘서트 〈THE WAY〉 관람 신청 마감 (사연 신청)": {
+   "en": "World Youth Day concert “THE WAY” — application deadline",
+   "es": "Concierto “THE WAY” (JMJ) — cierre de inscripciones",
+   "fil": "World Youth Day concert “THE WAY” — huling araw ng aplikasyon",
+   "id": "Konser “THE WAY” (WYD) — batas pendaftaran",
+   "ja": "世界青年大会特集コンサート〈THE WAY〉観覧申込締切",
+   "pt": "Show “THE WAY” (JMJ) — fim das inscrições",
+   "th": "คอนเสิร์ต “THE WAY” (WYD) — ปิดรับสมัครชม",
+   "zh": "世界青年大会特别演唱会〈THE WAY〉观看申请截止"
+  },
+  "세계청년대회 특집 콘서트 〈THE WAY〉 당첨 발표 (문자)": {
+   "en": "World Youth Day concert “THE WAY” — winners announced (text message)",
+   "es": "Concierto “THE WAY” (JMJ) — anuncio de ganadores (SMS)",
+   "fil": "World Youth Day concert “THE WAY” — anunsyo ng mga napili (text)",
+   "id": "Konser “THE WAY” (WYD) — pengumuman pemenang (SMS)",
+   "ja": "世界青年大会特集コンサート〈THE WAY〉当選発表（SMS）",
+   "pt": "Show “THE WAY” (JMJ) — anúncio dos sorteados (SMS)",
+   "th": "คอนเสิร์ต “THE WAY” (WYD) — ประกาศผล (SMS)",
+   "zh": "世界青年大会特别演唱会〈THE WAY〉中签公布（短信）"
   },
   "세트 판매": {
    "en": "Set sales",
