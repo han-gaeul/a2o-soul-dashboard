@@ -51,6 +51,7 @@ SEARCHES = [
     '(특전 OR 미공포 OR 드볼 OR 럭드 OR 럭키드로우 OR 앨포 OR 팬싸 OR 영통) (포카 OR 포토카드 OR 미공포 OR pc)' + TAIL_Q,
 ]
 DRIVE_FOLDER = "1_0U3zTDV2WDvJc3R8auhuenZF_oYTw1r"  # @soultemplates 공개 드라이브 (트윗에 링크된 폴더)
+AUTO = []  # 일반 계정 사진에서 자동으로 자른 카드 [(파일, 글, 작성자)]
 CAND = Path(__file__).resolve().parent.parent / "pc_candidates.md"
 STATE = Path(__file__).resolve().parent / "pc_state.json"
 REPORT = Path(__file__).resolve().parent.parent / "pc_report.md"
@@ -142,7 +143,7 @@ def search_candidates(state):
         print("[포카 검색] 6시간 안 지나서 건너뜀")
         return None
     state["search_at"] = now.isoformat(timespec="minutes")
-    deep = state.get("search_v") != 3  # 3: 한 번 더 7일치 다시 (예전엔 80개만 보여서 나머지가 안 보였음)
+    deep = state.get("search_v") != 4  # 4: 일반 계정 사진 자동 자르기 시작 — 7일치 한 번 다시 (묶음마다 최대 200개)
     if deep:
         state.pop("search_since", None)
     found = {}
@@ -150,7 +151,7 @@ def search_candidates(state):
         key = f"search_since_{i}"
         since = None if deep else state.get(key)
         try:
-            got = xposts.search_posts(q, since_id=since, max_results=100, pages=3 if deep else 1, media=True)  # 평소엔 묶음마다 최대 100개
+            got = xposts.search_posts(q, since_id=since, max_results=100, pages=2 if deep else 1, media=True)  # 평소엔 묶음마다 최대 100개
         except Exception as e:  # noqa: BLE001
             print(f"[포카 검색 {i}] 실패: {type(e).__name__} {e}")
             continue
@@ -158,12 +159,19 @@ def search_candidates(state):
             state[key] = max(got, key=lambda p: int(p["tweet_id"]))["tweet_id"]
         for p in got:
             found.setdefault(p["tweet_id"], p)
-    state["search_v"] = 3
+    state["search_v"] = 4
     posts = sorted(found.values(), key=lambda p: int(p["tweet_id"]), reverse=True)
     posts = [p for p in posts if p.get("images")]
     print(f"[포카 검색] 후보 {len(posts)}개")
     if not posts:
         return None
+    try:  # 일반 계정 사진에서 카드 찾아 자르기 (얼굴로 멤버, 글로 판매처) — 사이트에 없는 카드만
+        import pc_auto
+        AUTO.extend(pc_auto.process(posts, state))
+    except ImportError as e:
+        print(f"[포카 자동] 건너뜀 (모듈 없음: {e})")
+    except Exception as e:  # noqa: BLE001
+        print(f"[포카 자동] 실패: {type(e).__name__} {e}")
     # 이슈 댓글 하나에 다 안 들어가서(65,536자) 100개씩 나눠 여러 댓글로 — 전부 보이게
     per = 100
     parts = []
@@ -225,13 +233,20 @@ def main(backfill=False):
             (CAND if i == 0 else CAND.with_name(f"pc_candidates_{i + 1:02d}.md")).write_text(part)
     STATE.write_text(json.dumps(state, indent=1))
     report(found + drive_found)
-    print(f"[포카] 새 글 {len(posts)}개 · 템플릿 {len(found)}장 · 드라이브 {len(drive_found)}장")
+    print(f"[포카] 새 글 {len(posts)}개 · 템플릿 {len(found)}장 · 드라이브 {len(drive_found)}장 · 일반 사진 {len(AUTO)}장")
 
 
 def report(found):
-    if not found:
+    if not found and not AUTO:
         return
-    lines = ["@soultemplates 새 포카 템플릿을 멤버별로 잘랐어요. **Files changed**에서 잘린 카드와 라벨(파일 이름)을 확인하고 머지해 주세요.",
+    lines = []
+    if AUTO:
+        lines += ["### 일반 계정 사진에서 자른 카드", "멤버는 얼굴 인식, 판매처·종류는 글 내용으로 붙였어요. 잘못 잘렸거나 라벨이 틀리면 그 파일만 지우고 머지해 주세요.", "",
+                  "| 파일 | 원본 글 |", "|---|---|"] + [f"| {f} | [@{a}]({u}) |" for f, u, a in AUTO] + [""]
+    if not found:
+        REPORT.write_text("\n".join(lines) + "\n")
+        return
+    lines += ["@soultemplates 새 포카 템플릿을 멤버별로 잘랐어요. **Files changed**에서 잘린 카드와 라벨(파일 이름)을 확인하고 머지해 주세요.",
              "드라이브에서 바뀐 템플릿은 사이트에 없던 카드만 추가했어요.", "",
              "| 템플릿 | 원본 |", "|---|---|"]
     lines += [f"| {n} | {u} |" for n, u in dict(found).items()]
