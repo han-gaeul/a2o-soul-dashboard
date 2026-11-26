@@ -1787,7 +1787,7 @@ if ("serviceWorker" in navigator) {
   // 라벨 두 줄: 윗줄 판매처(또는 앨범 버전), 아랫줄 괄호 안 종류(Photobook 등) — 없으면 빈 줄로 높이 맞춤
   const pcLbl = (label) => {
     const m = /^(.*?)\s*\(([^)]*)\)\s*$/.exec(label || "");
-    return el("span", { class: "pc-lbl" }, el("span", {}, m ? m[1] : label || ""), el("span", {}, m ? m[2] : "\u00a0"));
+    return el("span", { class: "pc-lbl" }, el("span", {}, m ? m[1] : label || ""), el("span", {}, m ? `(${m[2]})` : "\u00a0"));
   };
   const pcBtn = (x, list, i, caption) => {
     const b = el("button", { type: "button", class: "pc", "aria-label": `${x.member} ${tc(x.version)} ${x.label}` },
