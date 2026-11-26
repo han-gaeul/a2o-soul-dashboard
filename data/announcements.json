@@ -1450,6 +1450,24 @@
    "permalink": "https://x.com/A2O_SOUL/status/2125824171108401477",
    "timestamp": "2026-11-26T05:29:12.000Z"
   },
+  "x:2125878441006526514": {
+   "caption": "[🔔]\n261128 MBC 쇼! 음악중심 생방송 참여\n\n🔗 https://artist.mnetplus.world/main/stg/a2osoul/surveys/6b07f61c9dfe070b80bd6c84\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark",
+   "excerpt": "[🔔]\n261128 MBC 쇼! 음악중심 생방송 참여\n\n🔗 https://artist.mnetplus.world/main/stg/a2osoul/surveys/6b07f61c9dfe070b80bd6c84\n\n#A2O #A2OSOUL\n#Dancing_in_",
+   "items": [
+    {
+     "confidence": 0.9,
+     "date": "2026-11-28",
+     "end_date": null,
+     "kind": "music_show",
+     "place": null,
+     "time": null,
+     "title": "음악중심 출연",
+     "url": null
+    }
+   ],
+   "permalink": "https://x.com/A2O_SOUL/status/2125878441006526514",
+   "timestamp": "2026-11-26T09:04:51.000Z"
+  },
   "xf:2121586007254708290": {
    "caption": "[📸] 261114 @A2O_SOUL \n\n2026.11.14\nMBC Show! Music Core\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2OSOULBASE/status/2121586007254708290/photo/1",
    "excerpt": "[📸] 261114 @A2O_SOUL \n\n2026.11.14\nMBC Show! Music Core\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2OSOULBASE/status/2121586007254708",
@@ -3502,7 +3520,7 @@
  "x": {
   "A2O_SOUL": {
    "id": "1986498790229262336",
-   "since_id": "2125824171108401477"
+   "since_id": "2125878441006526514"
   }
  },
  "x_fans": {
@@ -3516,8 +3534,8 @@
   }
  },
  "x_media": {
-  "at": "2026-11-26T18:00+09:00",
-  "auto_since": "2125875716206272887",
+  "at": "2026-11-26T18:10+09:00",
+  "auto_since": "2125879588463276115",
   "candidates": {},
   "checked": "2026-11-26T17:10+09:00",
   "missing": [],
@@ -3857,7 +3875,7 @@
   "since_id": "2125862551871471983"
  },
  "x_official_votes": {
-  "at": "2026-11-26T18:00+09:00",
+  "at": "2026-11-26T18:10+09:00",
   "deep": 1,
   "last": {
    "official": [],
@@ -3868,7 +3886,7 @@
   "v": 2
  },
  "x_show_photos": {
-  "at": "2026-11-26T17:10+09:00",
+  "at": "2026-11-26T18:10+09:00",
   "fancams": {},
   "posts": {
    "2123249908413268001": {
@@ -4262,7 +4280,7 @@
    "id": "1556541258696622080",
    "since_id": "2125848741030904013"
   },
-  "at": "2026-11-26T18:00+09:00",
+  "at": "2026-11-26T18:10+09:00",
   "coogoong": {
    "id": "1549266721516978176",
    "since_id": "2125757002387443979"
