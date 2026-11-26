@@ -1789,10 +1789,58 @@ if ("serviceWorker" in navigator) {
     const m = /^(.*?)\s*\(([^)]*)\)\s*$/.exec(label || "");
     return el("span", { class: "pc-lbl" }, el("span", {}, m ? m[1] : label || ""), el("span", {}, m ? `(${m[2]})` : "\u00a0"));
   };
+  // 구글 로그인 토큰 (커뮤니티·내 포카가 같이 씀) — sessionStorage 'gtoken', 바뀌면 'gtoken' 이벤트
+  const gtok = () => { try { const x = JSON.parse(sessionStorage.getItem("gtoken") || "null"); return x && x.exp > Date.now() ? x.t : ""; } catch (_) { return ""; } };
+  const gLogin = () => {
+    const GID = (data.push || {}).google_client_id || "";
+    if (!GID) return;
+    const go = () => { google.accounts.id.initialize({ client_id: GID, callback: (r) => {
+      const exp = JSON.parse(atob(r.credential.split(".")[1].replace(/-/g, "+").replace(/_/g, "/"))).exp * 1000;
+      try { sessionStorage.setItem("gtoken", JSON.stringify({ t: r.credential, exp })); } catch (_) {}
+      window.dispatchEvent(new CustomEvent("gtoken", { detail: r.credential }));
+    } }); google.accounts.id.prompt(); };
+    if (window.google?.accounts) return go();
+    const sc = document.createElement("script"); sc.src = "https://accounts.google.com/gsi/client"; sc.onload = go; document.head.append(sc);
+  };
+  // 내 포카: 가진 카드 — 이 기기(localStorage)에 바로 저장 + 구글 로그인하면 서버(D1)에도 저장해 다른 기기와 같이 봄
+  const PCM = (() => {
+    const KEY = "pc_have", API = ((data.push || {}).api || "").replace(/\/$/, "");
+    let have = new Set();
+    try { have = new Set(JSON.parse(localStorage.getItem(KEY) || "[]")); } catch (_) {}
+    const S = { on: false, filter: "", synced: false, fns: [] };
+    S.id = (x) => `${x.version}|${x.label}|${x.member}`;
+    S.has = (x) => have.has(S.id(x));
+    S.size = () => have.size;
+    S.emit = () => S.fns.forEach((f) => f());
+    const local = () => { try { localStorage.setItem(KEY, JSON.stringify([...have])); } catch (_) {} };
+    const call = (opts = {}) => fetch(API + "/pc/mine", { ...opts, headers: { "Content-Type": "application/json", Authorization: `Bearer ${gtok()}` } })
+      .then((r) => (r.ok ? r.json() : Promise.reject(r.status)));
+    let timer;
+    const push = () => { clearTimeout(timer); timer = setTimeout(() => { if (gtok()) call({ method: "POST", body: JSON.stringify({ ids: [...have] }) }).catch(() => {}); }, 1200); };
+    S.toggle = (x) => { const k = S.id(x); if (have.has(k)) have.delete(k); else have.add(k); local(); push(); S.emit(); };
+    S.pull = async () => {  // 로그인하면 서버 것과 합침 (이 기기에서 체크한 것도 안 잃게)
+      if (!gtok() || !API) return;
+      try {
+        const r = await call();
+        const before = have.size, server = new Set(r.ids || []);
+        server.forEach((k) => have.add(k));
+        local();
+        if (have.size !== server.size) push();
+        S.synced = true;
+        if (have.size !== before || !S.didPull) S.emit();
+        S.didPull = true;
+      } catch (_) { S.synced = false; S.emit(); }
+    };
+    window.addEventListener("gtoken", () => S.pull());
+    return S;
+  })();
   const pcBtn = (x, list, i, caption) => {
-    const b = el("button", { type: "button", class: "pc", "aria-label": `${x.member} ${tc(x.version)} ${x.label}` },
+    const b = el("button", { type: "button", class: `pc${PCM.has(x) ? " have" : ""}`, "aria-label": `${x.member} ${tc(x.version)} ${x.label}` },
       el("img", { src: x.src, alt: "", loading: "lazy", decoding: "async" }), caption);
-    b.addEventListener("click", () => openPcViewer(list, i));
+    b.addEventListener("click", () => {
+      if (PCM.on && b.closest("#pcSec")) { PCM.toggle(x); b.classList.toggle("have", PCM.has(x)); return; }
+      openPcViewer(list, i);
+    });
     return b;
   };
 
@@ -2635,11 +2683,12 @@ if ("serviceWorker" in navigator) {
       const go = () => { google.accounts.id.initialize({ client_id: GID, callback: (r) => {
         const exp = JSON.parse(atob(r.credential.split(".")[1].replace(/-/g, "+").replace(/_/g, "/"))).exp * 1000;
         token = r.credential; try { sessionStorage.setItem("gtoken", JSON.stringify({ t: token, exp })); } catch (_) {}
-        refresh();
+        window.dispatchEvent(new CustomEvent("gtoken", { detail: token }));
       } }); google.accounts.id.prompt(); };
       if (window.google?.accounts) return go();
       const sc = document.createElement("script"); sc.src = "https://accounts.google.com/gsi/client"; sc.onload = go; document.head.append(sc);
     };
+    window.addEventListener("gtoken", (e) => { token = e.detail; refresh(); });
     const alertBox = (msg) => open(t("cm_title"), el("p", {}, msg));
     const logout = () => { token = ""; try { sessionStorage.removeItem("gtoken"); } catch (_) {} board = "qna"; refresh(); };
 
@@ -3044,16 +3093,33 @@ if ("serviceWorker" in navigator) {
       b.addEventListener("click", fn);
       return b;
     };
+    // 내 포카: 개수 · 체크하기 · 가진 것/없는 것 · 로그인(다른 기기와 같이)
+    const drawMine = () => {
+      const n = pcs.filter((x) => PCM.has(x)).length;
+      const left = el("div", { class: "pcm-left" }, el("b", { class: "pcm-n" }, `${t("pcm_title")} `, el("span", {}, `${n}`), `/${pcs.length}`),
+        btn(PCM.on ? t("pcm_done") : t("pcm_check"), PCM.on, () => { PCM.on = !PCM.on; $("pcSec").classList.toggle("pc-checking", PCM.on); drawMine(); }),
+        n || PCM.filter ? el("div", { class: "pcm-seg" }, ...[["", "pcm_all"], ["have", "pcm_have"], ["need", "pcm_need"]].map(([f, k]) =>
+          btn(t(k), PCM.filter === f, () => { PCM.filter = f; drawPc(); drawMine(); }))) : null);
+      // 오른쪽 한 줄: 체크 중이면 안내, 아니면 로그인·동기화 상태
+      const right = el("div", { class: "pcm-right muted small" }, PCM.on ? t("pcm_hint")
+        : gtok() ? (PCM.synced ? t("pcm_synced") : "")
+          : (data.push || {}).google_client_id ? [t("pcm_login"), " ",
+            Object.assign(el("button", { type: "button", class: "linkbtn" }, t("pcm_login_btn")), { onclick: gLogin })] : "");
+      $("pcMine").replaceChildren(left, right);
+    };
+    PCM.fns.push(() => { drawMine(); drawPc(); });
     // 멤버를 고르면 '전체'(모든 버전을 버전별 묶음으로)가 기본 — 멤버 전체에서 '전체'는 너무 많아서 버전 하나씩
     const drawPc = () => {
-      const inWho = pcs.filter((x) => !pcWho || x.member === pcWho);
+      const inWho = pcs.filter((x) => (!pcWho || x.member === pcWho)
+        && (!PCM.filter || (PCM.filter === "have") === PCM.has(x)));
       if (!pcWho && pcVer === "") pcVer = versions[0];
       $("pcTabs").replaceChildren(
         ...(pcWho ? [btn(`${t("ev_all")} ${inWho.length}`, pcVer === "", () => { pcVer = ""; drawPc(); })] : []),
         ...versions.map((v) => btn(`${tc(v)} ${inWho.filter((x) => x.version === v).length}`, v === pcVer,
           () => { pcVer = v; drawPc(); })));
       $("pcMem").replaceChildren(btn(t("ev_all"), !pcWho, () => { pcWho = ""; drawPc(); }),
-        ...mems.map((m) => btn(m, m === pcWho, () => { pcWho = m; pcVer = ""; drawPc(); })));
+        ...mems.map((m) => btn(PCM.size() ? `${m} ${pcs.filter((x) => x.member === m && PCM.has(x)).length}/${pcs.filter((x) => x.member === m).length}` : m,
+          m === pcWho, () => { pcWho = m; pcVer = ""; drawPc(); })));
       if (pcVer === "") {
         $("pcGrid").replaceChildren(...versions.filter((v) => inWho.some((x) => x.version === v)).map((v) => {
           const list = inWho.filter((x) => x.version === v);
@@ -3083,6 +3149,8 @@ if ("serviceWorker" in navigator) {
       fold($("pcGrid"), MOBILE ? 12 : 24);
     };
     drawPc();
+    drawMine();
+    PCM.pull();
     $("pcCredit").replaceWith(Object.assign(pcCreditLine() || el("p"), { id: "pcCredit" }));
   } else {
     $("pcSec").remove();
