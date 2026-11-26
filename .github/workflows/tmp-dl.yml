@@ -1,9 +1,13 @@
 name: tmp-dl
-on: { push: { branches: [tmp-oy] } }
+on: { push: { branches: [tmp-oy], paths: [.github/workflows/tmp-dl.yml] } }
+permissions: { contents: write }
 jobs:
   dl:
     runs-on: ubuntu-latest
     steps:
-      - run: curl -sfL -o oy.jpg "https://pbs.twimg.com/media/HX3nIgBW4AAj85O?format=jpg&name=orig"
-      - uses: actions/upload-artifact@v4
-        with: { name: oy, path: oy.jpg }
+      - uses: actions/checkout@v4
+      - run: |
+          curl -sfL -o tmp_oy.jpg "https://pbs.twimg.com/media/HX3nIgBW4AAj85O?format=jpg&name=orig"
+          git config user.name github-actions
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tmp_oy.jpg && git commit -m "tmp img" && git push
