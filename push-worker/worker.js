@@ -490,7 +490,7 @@ async function postScheduled(env) {
     const rec = await env.SUBS.get(`_tw:${x.id}`, "json");
     if (!rec || rec.status !== (x.fb ? "pending" : "scheduled")) continue;  // fb: 안 보면 자동 — 그때까지 올리기·건너뛰기 안 했을 때만
     try { rec.tweet = await postTweet(env, rec.text, rec.image); Object.assign(rec, { status: "posted", auto: true, posted: Date.now() }); await noteAuto(env, rec); }
-    catch (e) { rec.status = "pending"; rec.error = String(e.message || e).slice(0, 200); }  // 실패하면 초안으로
+    catch (e) { rec.status = "pending"; rec.error = String(e.message || e).slice(0, 200); delete rec.fallback_at; }  // 실패하면 초안으로 (자동 시각은 지움 — 페이지에 오류 표시)
     await env.SUBS.put(`_tw:${x.id}`, JSON.stringify(rec), { expirationTtl: 3 * 86400 });
   }
 }

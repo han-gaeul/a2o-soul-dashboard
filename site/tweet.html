@@ -245,7 +245,10 @@
     const m = document.createElement("div"); m.className = "meta";
     const l = document.createElement("span"); l.innerHTML = `<span class="kind"></span> · ${when(d.at)}`;
     l.querySelector(".kind").textContent = KIND[d.kind] || d.kind;
-    if (d.status === "pending" && d.fallback_at) l.append(` · ⏰ ${when(d.fallback_at)}까지 안 누르면 자동으로 올라가요`);
+    if (d.status === "pending" && d.fallback_at) l.append(d.fallback_at < Date.now() - 120e3
+      ? ` · ⚠️ ${when(d.fallback_at)}에 자동으로 못 올렸어요 — 직접 올려 주세요`
+      : ` · ⏰ ${when(d.fallback_at)}까지 안 누르면 자동으로 올라가요`);
+    if (d.status === "pending" && d.error) l.append(` · ⚠️ 오류: ${d.error}`);
     m.append(l, right);
     return m;
   };
