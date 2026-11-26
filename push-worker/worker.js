@@ -185,6 +185,24 @@ async function banAuthor(env, row, why) {
   await env.DB.batch(keys.map((k) => env.DB.prepare("INSERT OR REPLACE INTO bans (key, until, why) VALUES (?, ?, ?)").bind(k, until, why)));
 }
 
+// 내 포카 (구글 로그인한 사람만) — 가진 카드 id 목록을 D1에 저장해 기기끼리 같이 봄. 이메일은 저장 안 함(해시 uid만)
+async function myPhotocards(req, env) {
+  if (!env.DB) return json(req, { error: "준비 중이에요" }, 503);
+  const me = await who(req, env);
+  if (!me.uid) return json(req, { error: "login" }, 401);
+  await env.DB.prepare("CREATE TABLE IF NOT EXISTS pcs (uid TEXT PRIMARY KEY, data TEXT, at INTEGER)").run();
+  if (req.method === "POST") {
+    const b = await req.json().catch(() => ({}));
+    const ids = [...new Set((Array.isArray(b.ids) ? b.ids : []).filter((x) => typeof x === "string" && x.length <= 160))].slice(0, 3000);
+    const at = Date.now();
+    await env.DB.prepare("INSERT INTO pcs (uid, data, at) VALUES (?, ?, ?) ON CONFLICT(uid) DO UPDATE SET data = excluded.data, at = excluded.at")
+      .bind(me.uid, JSON.stringify(ids), at).run();
+    return json(req, { ok: true, n: ids.length, at });
+  }
+  const r = await env.DB.prepare("SELECT data, at FROM pcs WHERE uid = ?").bind(me.uid).first();
+  return json(req, { ids: r ? JSON.parse(r.data) : [], at: r ? r.at : 0 });
+}
+
 async function board(req, env, url) {
   if (!env.DB) return json(req, { error: "게시판 준비 중이에요" }, 503);
   await schema(env);
@@ -724,6 +742,7 @@ export default {
     if (url.pathname === "/ft") return json(req, { t: arrived });  // GET = 시계 맞추기, POST = 모의 제출
 
     if (url.pathname === "/yt-hook") return youtubeHook(req, env);
+    if (url.pathname === "/pc/mine") return myPhotocards(req, env);
     if (url.pathname.startsWith("/board/")) return board(req, env, url);
     if (url.pathname.startsWith("/tweet/")) return tweets(req, env, url);
     if (req.method === "GET" && url.pathname === "/yt-renew") { // 10분에 한 번만

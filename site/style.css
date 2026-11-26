@@ -1277,3 +1277,13 @@ body[data-cur="overview"] .vote-bar:not(.live-bar) { display: none; }
   .pc-all .pc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); overflow: visible; gap: 12px 10px; }
   .pc-all .pc-grid .pc { flex: none; }
 }
+
+/* 내 포카 체크 */
+.pc-mine { margin: 0 0 10px; }
+.pc-mine .filter-row { align-items: center; gap: 6px; flex-wrap: wrap; }
+.pc-mine b { margin-right: 4px; }
+.pc-mine p { margin: 4px 0 0; }
+button.pc { position: relative; }
+.pc.have::after { content: "✓"; position: absolute; top: 4px; right: 4px; width: 22px; height: 22px; border-radius: 50%; background: var(--accent, #6c4cf5); color: #fff; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,.3); }
+.pc-checking .pc:not(.have) img { opacity: .45; }
+.pc-checking .pc { cursor: pointer; }
