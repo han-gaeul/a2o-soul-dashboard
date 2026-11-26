@@ -1294,3 +1294,6 @@ button.pc { position: relative; }
 .pc.have::after { content: "✓"; position: absolute; top: 4px; right: 4px; width: 22px; height: 22px; border-radius: 50%; background: var(--accent, #6c4cf5); color: #fff; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,.3); }
 .pc-checking .pc:not(.have) img { opacity: .45; }
 .pc-checking .pc { cursor: pointer; }
+/* 라벨 한 줄 말줄임이 카드 폭을 넓히지 않게 (모바일 옆으로 넘기기에서 긴 라벨 카드만 커지던 것) */
+button.pc { min-width: 0; }
+.pc-lbl { min-width: 0; max-width: 100%; }
