@@ -705,7 +705,7 @@ def vote_wins(store):
     return sorted(out, key=lambda x: x["at"], reverse=True)[:20]
 
 
-FANCAM_POST = re.compile(r"직캠|FANCAM|FAN\s?CAM|Choreo", re.I)
+FANCAM_POST = re.compile(r"직캠|FANCAM|FAN\s?CAM|풀캠|FULL\s?CAM|페이스캠|FACE\s?CAM|세로캠|Choreo", re.I)
 A2O_MENTION = re.compile(r"A2O\s?SOUL|A2OSOUL|에이투오\s?소울|에이투오소울", re.I)
 
 
@@ -1650,7 +1650,7 @@ def collect(cfg, rescan=False):
         if not sst.get("at") or now - datetime.fromisoformat(sst["at"]) >= (timedelta(hours=1) if show_day else timedelta(hours=3)):
             q = ("(\"A2O SOUL\" OR A2OSOUL OR 에이투오소울 OR \"에이투오 소울\") "
                  "(더쇼 OR THESHOW OR \"THE SHOW\" OR 쇼챔피언 OR 쇼챔 OR SHOWCHAMPION OR 엠카 OR 엠카운트다운 OR MCOUNTDOWN OR 뮤직뱅크 OR 뮤뱅 OR MUSICBANK "
-                 "OR 음악중심 OR 음중 OR MUSICCORE OR 인기가요 OR 인가 OR INKIGAYO) has:images is:verified -is:retweet -is:reply")  # 공식(인증) 계정 사진만 쓰니 검색부터 인증 계정만
+                 "OR 음악중심 OR 음중 OR MUSICCORE OR 인기가요 OR 인가 OR INKIGAYO) (has:images OR has:videos) is:verified -is:retweet -is:reply")  # 공식(인증) 계정 사진만 쓰니 검색부터 인증 계정만
             try:
                 got = xposts.search_posts(q, since_id=sst.get("since_id"), max_results=100, media=True)
                 sst["at"] = now.isoformat(timespec="minutes")
@@ -1661,7 +1661,7 @@ def collect(cfg, rescan=False):
                 fcs = sst.setdefault("fancams", {})
                 for p_ in got:
                     official = p_.get("verified_type") in ("business", "government") or p_["author"].lower() in known
-                    if official and FANCAM_POST.search(p_["caption"]) and A2O_MENTION.search(p_["caption"]):  # 방송사 직캠 글 → 리트윗용
+                    if official and (FANCAM_POST.search(p_["caption"]) or p_.get("video")) and A2O_MENTION.search(p_["caption"]):  # 방송사 직캠·풀캠·영상 글 → 리트윗용
                         fcs[p_["tweet_id"]] = {k: p_.get(k) for k in ("timestamp", "permalink", "author", "author_name")}
                         continue
                     if official and p_.get("images") and not p_.get("video") and A2O_MENTION.search(p_["caption"]) and show_photo_ok(cfg, p_):

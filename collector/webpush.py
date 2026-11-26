@@ -249,9 +249,9 @@ def candidates(dash, site, now):
         if x.get("at") and timedelta(0) <= now - _kst(x["at"]) < timedelta(hours=3) and f"rt|{x['url']}" not in {o[0] for o in out}:
             head = next((ln for ln in (x.get("text") or "").splitlines() if re.sub(r"#\S+|https?://\S+", "", ln).strip()), "")
             head = re.sub(r"\s*https?://\S+", "", head).strip()[:100]
-            out.append((f"{'rt' if x.get('listed', True) else 'md'}|{x['url']}", "media", "media", {"name": x.get("name") or x.get("handle") or "", "title": head, "url": x["url"],
+            out.append((f"rt|{x['url']}", "media", "media", {"name": x.get("name") or x.get("handle") or "", "title": head, "url": x["url"],
                                                             "members": _members_in({"title": x.get("text") or ""}, dash.get("members") or []),
-                                                            "rt": x.get("listed", True)}))  # 목록(x_media)에 넣은 계정만 바로 리트윗, 자동으로 찾은 계정(투표 앱 등)은 초안
+                                                            "rt": True}))  # 목록(x_media) 계정 + 자동으로 찾은 인증 기업·기관 계정(투표 앱·판매처 제외) 모두 바로 리트윗
     seen = set()
     for x in dash.get("photos") or []:  # 공식 계정 사진 글 ([📸]·컨셉 포토·생일 등, 공지 이미지는 사진 모음에서 이미 빠짐 · 3시간 안) — 확인 없이 바로 리트윗 (푸시는 안 보냄)
         u = x.get("url") or ""
