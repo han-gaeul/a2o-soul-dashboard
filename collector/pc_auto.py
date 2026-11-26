@@ -108,14 +108,25 @@ def find_cards(bgr):
     return out
 
 
+PRICE = re.compile(r"(?<![\d.])\d\s?[.,]\s?\d(?![\d.])|\d+\s?(?:만|천)\s?원?|\d{4,}\s?원|₩|\$\s?\d|\d\s?(?:usd|won|k)\b", re.I)
+
+
+def ok_card(card):
+    """흐린 카드(템플릿의 '?'·모자이크), 얼굴만 크게 잘린 것 빼기"""
+    import cv2
+    return cv2.Laplacian(cv2.cvtColor(card, cv2.COLOR_BGR2GRAY), cv2.CV_64F).var() >= 80
+
+
 def who(card, det, rec, R):
-    """카드 한 장 → 멤버 (얼굴 하나, 1등이 충분히 높고 2등과 차이 날 때만)"""
+    """카드 한 장 → 멤버 (얼굴 하나, 카드 안에서 알맞은 크기, 1등 0.6 이상이고 2등과 0.08 넘게 차이 날 때만)"""
     fs = faces._faces(card, det, rec, min_size=24)
     if len(fs) != 1:
         return None, 0
-    f = fs[0][0]
+    f, box = fs[0]
+    if not 0.25 <= box[2] / card.shape[1] <= 0.8:  # 얼굴이 너무 작거나(여러 장·배경) 너무 큼(얼굴만 잘림)
+        return None, 0
     sc = sorted(((max(faces._sim(f, r) for r in R[m]), m) for m in R if R[m]), reverse=True)
-    if not sc or sc[0][0] < 0.38 or (len(sc) > 1 and sc[0][0] - sc[1][0] < 0.05):
+    if not sc or sc[0][0] < 0.6 or (len(sc) > 1 and sc[0][0] - sc[1][0] < 0.08):
         return None, sc[0][0] if sc else 0
     return sc[0][1], sc[0][0]
 
@@ -148,6 +159,9 @@ def process(posts, state):
         if banned(cap):
             print(f"[포카 자동] 금지 문구 — 건너뜀 {p['permalink']}")
             continue
+        if PRICE.search(cap):  # 가격이 적힌 양도 글은 사진에도 가격을 써 둔 경우가 많아서
+            print(f"[포카 자동] 가격 적힌 글 — 건너뜀 {p['permalink']}")
+            continue
         lab = label_from(cap)
         for url in p["images"][:4]:
             try:
@@ -157,6 +171,8 @@ def process(posts, state):
                 print(f"[포카 자동] 사진 실패 {url}: {type(e).__name__}")
                 continue
             for card in find_cards(bgr):
+                if not ok_card(card):
+                    continue
                 member, score = who(card, det, rec, R)
                 if not member:
                     continue
