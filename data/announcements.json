@@ -8,7 +8,7 @@
   "xo:2125499982279221448||🎧K-POP K탑 CHART"
  ],
  "ig_media": {
-  "at": "2026-11-26T16:50+09:00",
+  "at": "2026-11-26T17:20+09:00",
   "sig": "myidol_miim,1thek,stonemusicent,kbskpop,a2o.story,studio_choom"
  },
  "posts": {
@@ -3509,8 +3509,8 @@
   }
  },
  "x_media": {
-  "at": "2026-11-26T17:10+09:00",
-  "auto_since": "2125864837553254624",
+  "at": "2026-11-26T17:20+09:00",
+  "auto_since": "2125867377707655500",
   "candidates": {},
   "checked": "2026-11-26T17:10+09:00",
   "missing": [],
@@ -3850,17 +3850,12 @@
   "since_id": "2125862551871471983"
  },
  "x_official_votes": {
-  "at": "2026-11-26T17:10+09:00",
+  "at": "2026-11-26T17:20+09:00",
   "deep": 1,
   "last": {
    "official": [],
-   "read": 4,
-   "verified": [
-    "SandLwSH:blue",
-    "TOP100KPOP:blue",
-    "a2osoulvote:blue",
-    "bybamonly:blue"
-   ]
+   "read": 0,
+   "verified": []
   },
   "since_id": "2125862125767721198",
   "v": 2
@@ -4260,7 +4255,7 @@
    "id": "1556541258696622080",
    "since_id": "2125848741030904013"
   },
-  "at": "2026-11-26T17:10+09:00",
+  "at": "2026-11-26T17:20+09:00",
   "coogoong": {
    "id": "1549266721516978176",
    "since_id": "2125757002387443979"
