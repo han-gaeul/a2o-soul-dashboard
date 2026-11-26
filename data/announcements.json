@@ -3378,6 +3378,13 @@
    "timestamp": "2026-11-18T06:00:01.000Z",
    "vendor": "Jumpup"
   },
+  "xv:2123657597698072762": {
+   "caption": "[LUCKY DRAW EVENT] \n#A2O #A2OSOUL\n#SUPERSTAR\n#Dancing_in_the_Dark\n\nA2O SOUL 럭키드로우는 뮤직플랜트 홍대점에서🍀\n\n[ONLINE] 🔗뮤직플랜트 온라인몰\n2026.11.19 (목) 11:00 ~ 2026.11.22 (일) 23:59\n\n[OFFLINE] 📍뮤직플랜트 홍대점\n2026.11.19 (목) ~ 2026.11.22 (일)\n매일 11:00~22:00(KST)\n\n🛒뮤직플랜트 온라인몰\nhttps://t.co/S0xiAsSBuB\n\n#뮤직플랜트 #MUSICPLANT",
+   "pc_only": true,
+   "permalink": "https://x.com/musicplant_kr/status/2123657597698072762",
+   "timestamp": "2026-11-20T06:00:01.000Z",
+   "vendor": "Music Plant"
+  },
   "xv:2123702905354023209": {
    "caption": "🖤 A2O SOUL DEBUT ALBUM [SUPERSTAR] MEET&amp;CALL EVENT 🖤\n\n📢 응모 마감 D-DAY‼\n\n🗓️ 이벤트 일시 : 11/29 (일) 18:00 (KST)\n🗓️ 응모 기간 : ~ 11/20 (금) 23:59 (KST)\n\n🤍 단체 영상통화 - 20명\n🤍 대면 - 30명\n\n#A2O #A2OSOUL\n#SUPERSTAR\n#Dancing_in_the_Dark https://twitter.com/JumpUp_ent/status/2122932820913860808",
    "excerpt": "🖤 A2O SOUL DEBUT ALBUM [SUPERSTAR] MEET&amp;CALL EVENT 🖤\n\n📢 응모 마감 D-DAY‼\n\n🗓️ 이벤트 일시 : 11/29 (일) 18:00 (KST)\n🗓️ 응모 기간 : ~ 11/20 (금) 23:59 (KS",
@@ -3456,8 +3463,8 @@
   }
  },
  "x_media": {
-  "at": "2026-11-26T14:00+09:00",
-  "auto_since": "2125815445177466916",
+  "at": "2026-11-26T14:10+09:00",
+  "auto_since": "2125818540028780681",
   "candidates": {},
   "checked": "2026-11-25T16:50+09:00",
   "missing": [],
@@ -4161,7 +4168,8 @@
   }
  },
  "x_vendors": {
-  "since_id": "2125469534765347313"
+  "since_id": "2125469534765347313",
+  "since_id_pc": "2123657597698072762"
  },
  "x_vote_tl": {
   "BIGCChoice": {
