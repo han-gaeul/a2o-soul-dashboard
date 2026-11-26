@@ -10641,6 +10641,51 @@
    "url": "https://x.com/A2O_SOUL/status/2123703606813872308"
   }
  ],
+ "pc_events": [
+  {
+   "at": "2026-11-25 15:00",
+   "count": 15,
+   "end": "11/27",
+   "kind": "pob",
+   "place": "뮤직플랜트 12/4 팬사인회",
+   "start": "11/25",
+   "tags": [
+    "unrel",
+    "selfie"
+   ],
+   "until": "2026-12-04",
+   "url": "https://x.com/musicplant_kr/status/2125469534765347313",
+   "vendor": "Music Plant"
+  },
+  {
+   "at": "2026-11-19 12:00",
+   "count": 15,
+   "end": "11/30",
+   "kind": "lucky",
+   "place": "올리브영 홍대놀이터점",
+   "start": "11/24",
+   "tags": [
+    "unrel"
+   ],
+   "until": "2026-12-07",
+   "url": "https://x.com/mnetplusmerch/status/2123249922237739012",
+   "vendor": "Mnet Plus Merch"
+  },
+  {
+   "at": "2026-11-16 15:00",
+   "count": 15,
+   "end": "11/18",
+   "kind": "pob",
+   "place": "",
+   "start": "11/16",
+   "tags": [
+    "unrel",
+    "selfie"
+   ],
+   "url": "https://x.com/musicplant_kr/status/2122208044436127838",
+   "vendor": "Music Plant"
+  }
+ ],
  "photocards": [
   {
    "label": "CARABINER Ver.",
