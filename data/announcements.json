@@ -3548,8 +3548,8 @@
   }
  },
  "x_media": {
-  "at": "2026-11-26T20:00+09:00",
-  "auto_since": "2125903247118589973",
+  "at": "2026-11-26T20:10+09:00",
+  "auto_since": "2125910056172736709",
   "candidates": {},
   "checked": "2026-11-26T17:10+09:00",
   "missing": [],
@@ -3900,7 +3900,7 @@
   "v": 2
  },
  "x_show_photos": {
-  "at": "2026-11-26T19:10+09:00",
+  "at": "2026-11-26T20:10+09:00",
   "fancams": {},
   "posts": {
    "2123249908413268001": {
@@ -3958,9 +3958,22 @@
     ],
     "permalink": "https://x.com/MBC_entertain/status/2125881329149747432",
     "timestamp": "2026-11-26T09:16:20.000Z"
+   },
+   "2125903247118589973": {
+    "author": "MBC_entertain",
+    "author_name": "MBCkpop",
+    "caption": "💫소울이들 너무 멋있다..\n아니? 너무 귀엽다..\n아니? 너무 멋있다..\n아니? 너무 귀엽다..\n.\n.\n.\n\n📷 ☞ https://program.imbc.com/Photo/musiccore?list_id=7188736&list_use=1&bbs_id=musiccore_photo&page=1\n\n261121 #쇼음악중심 #음중 #A2OSOUL #에이투오소울 #DancingintheDark @A2O_SOUL https://x.com/MBC_entertain/status/2125903247118589973/photo/1",
+    "images": [
+     "https://pbs.twimg.com/media/HYC5ua7a8AEJC-M.jpg",
+     "https://pbs.twimg.com/media/HYC5ua7bEAAj1KR.jpg",
+     "https://pbs.twimg.com/media/HYC5ua5bcAAY-ov.jpg",
+     "https://pbs.twimg.com/media/HYC5ua6aYAAfI7a.jpg"
+    ],
+    "permalink": "https://x.com/MBC_entertain/status/2125903247118589973",
+    "timestamp": "2026-11-26T10:43:26.000Z"
    }
   },
-  "since_id": "2125893956714307693"
+  "since_id": "2125903247118589973"
  },
  "x_stores": {
   "at": "2026-11-26T18:40+09:00",
