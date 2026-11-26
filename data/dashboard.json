@@ -3137,6 +3137,14 @@
    "url": "https://x.com/Makestarcorp/status/2124019989317390428"
   },
   {
+   "date": "2026-12-15",
+   "short": "콘서트",
+   "time": "18:30",
+   "title": "세계청년대회 특집 콘서트 〈THE WAY : 함께 걷는 길〉 출연 (여의도 KBS홀)",
+   "type": "행사",
+   "url": "https://www.instagram.com/reel/DgL4DVoRhwQ/"
+  },
+  {
    "date": "2026-12-18",
    "title": "KBS 가요대축제 출연",
    "type": "음방"
@@ -18547,6 +18555,16 @@
    "pt": "Photocard para os primeiros",
    "th": "โฟโต้การ์ดสำหรับผู้ซื้อก่อน",
    "zh": "先到先得小卡"
+  },
+  "세계청년대회 특집 콘서트 〈THE WAY : 함께 걷는 길〉 출연 (여의도 KBS홀)": {
+   "en": "World Youth Day special concert “THE WAY” (KBS Hall, Yeouido)",
+   "es": "Concierto especial de la Jornada Mundial de la Juventud “THE WAY” (KBS Hall, Yeouido)",
+   "fil": "World Youth Day special concert “THE WAY” (KBS Hall, Yeouido)",
+   "id": "Konser spesial World Youth Day “THE WAY” (KBS Hall, Yeouido)",
+   "ja": "世界青年大会特集コンサート〈THE WAY：共に歩む道〉出演（汝矣島KBSホール）",
+   "pt": "Show especial da Jornada Mundial da Juventude “THE WAY” (KBS Hall, Yeouido)",
+   "th": "คอนเสิร์ตพิเศษ World Youth Day “THE WAY” (KBS Hall ยออีโด)",
+   "zh": "世界青年大会特别演唱会〈THE WAY：同行之路〉出演（汝矣岛KBS礼堂）"
   },
   "세트 판매": {
    "en": "Set sales",
