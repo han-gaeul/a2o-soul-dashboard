@@ -33,7 +33,18 @@ jobs:
       - name: Install OCR
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq tesseract-ocr > /dev/null
-          pip install -q pytesseract scipy numpy pillow requests cryptography pywebpush
+          pip install -q pytesseract scipy numpy pillow requests cryptography pywebpush opencv-python-headless pyyaml
+      - name: Face models cache
+        uses: actions/cache@v4
+        with:
+          path: /tmp/fr
+          key: face-models-yunet2023mar-sface2021dec-lfs
+      - name: Face models
+        run: |
+          mkdir -p /tmp/fr
+          z=https://media.githubusercontent.com/media/opencv/opencv_zoo/main/models
+          [ $(stat -c%s /tmp/fr/face_detection_yunet_2023mar.onnx 2>/dev/null || echo 0) -gt 10000 ] || curl -sSL -o /tmp/fr/face_detection_yunet_2023mar.onnx $z/face_detection_yunet/face_detection_yunet_2023mar.onnx
+          [ $(stat -c%s /tmp/fr/face_recognition_sface_2021dec.onnx 2>/dev/null || echo 0) -gt 10000 ] || curl -sSL -o /tmp/fr/face_recognition_sface_2021dec.onnx $z/face_recognition_sface/face_recognition_sface_2021dec.onnx
       - name: Watch @soultemplates
         env:
           X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
@@ -59,12 +70,12 @@ jobs:
           if [ -n "$(git status --porcelain site/img/photocards)" ]; then
             BR=photocards-auto
             git checkout -B "$BR"
-            git add site/img/photocards collector/pc_state.json
-            git commit -m "포카: @soultemplates 새 템플릿 반영"
+            git add site/img/photocards collector/pc_state.json collector/pc_auto.json 2>/dev/null || git add site/img/photocards collector/pc_state.json
+            git commit -m "포카: 새 카드 (템플릿·일반 계정 사진)"
             git push -f origin "$BR"
             NUM=$(gh pr list --head "$BR" --state open --json number --jq '.[0].number')
             if [ -n "$NUM" ]; then gh pr edit "$NUM" --body-file pc_report.md
-            else gh pr create --head "$BR" --base main --title "포카: @soultemplates 새 템플릿" --body-file pc_report.md; fi
+            else gh pr create --head "$BR" --base main --title "포카: 새 카드 (템플릿·일반 계정 사진)" --body-file pc_report.md; fi
           elif [ -n "$(git status --porcelain collector/pc_state.json)" ]; then
             git add collector/pc_state.json
             git commit -m "포카 확인 기준점 갱신"
