@@ -1270,3 +1270,9 @@ body[data-cur="overview"] .vote-bar:not(.live-bar) { display: none; }
 .pc-news-row { display: flex; flex-wrap: wrap; gap: 2px 8px; align-items: baseline; padding: 8px 10px; border: 1px solid var(--line); border-radius: 10px; color: inherit; text-decoration: none; }
 .pc-news-row .muted { font-size: 13px; }
 .pc-news .pf-src { margin: 0; }
+
+/* 포카 '전체'(멤버 고름) — PC는 옆으로 넘기지 않고 줄 바꿔서 한눈에 */
+@media (min-width: 700px) {
+  .pc-all .pc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); overflow: visible; gap: 12px 10px; }
+  .pc-all .pc-grid .pc { flex: none; }
+}
