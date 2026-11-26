@@ -3018,6 +3018,17 @@ if ("serviceWorker" in navigator) {
   const pcCard = (x, list, i, solo) => pcBtn(x, list, i, el("span", { class: "pc-cap" },
     solo ? null : el("b", { class: "pc-who" }, x.member),
     el("span", { class: "pc-lbl" }, x.label || tc(x.version))));
+  // 새 포카 소식 (판매처 공지: 럭키드로우·응모 특전) — 카드 사진은 템플릿이 나오면 도감에 들어감
+  const pcEv = data.pc_events || [];
+  if (pcEv.length && $("pcNews")) {
+    $("pcNews").hidden = false;
+    $("pcNews").replaceChildren(el("h4", { class: "pc-group-h" }, `🆕 ${t("pc_new")}`),
+      ...pcEv.slice(0, 4).map((e) => el("a", { class: "pc-news-row", href: e.url, target: "_blank", rel: "noopener" },
+        el("b", {}, `${e.place || e.vendor} · ${t(e.kind === "lucky" ? "pc_lucky" : "pc_pob")}`),
+        el("span", { class: "muted" }, [...e.tags.map((k) => t(`pc_${k}`)), t("pc_kinds", { n: e.count })].join(" · ")
+          + (e.start ? ` · ${e.start}~${e.end}` : "") + " ↗"))),
+      el("p", { class: "pf-src" }, t("pc_pending")));
+  }
   if (pcs.length) {
     const versions = [...new Set(pcs.map((x) => x.version))];
     const mems = [...new Set(pcs.map((x) => x.member))].sort((a, b) => (a === bias ? -1 : b === bias ? 1 : 0));

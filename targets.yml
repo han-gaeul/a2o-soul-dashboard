@@ -141,6 +141,7 @@ x_vendors:
   - { handle: Ktown4u_main, name: Ktown4u }
   - { handle: EVERLINESHOP, name: Everline }
   - { handle: MusicKorea_kr, name: Music Korea }
+  - { handle: mnetplusmerch, name: Mnet Plus Merch }   # 올리브영 팝업·럭키드로우
 
 # 영상 개별 설정 — 다른 채널 영상 추가, 자동 분류 덮어쓰기
 #   category: mv | fancam | content
