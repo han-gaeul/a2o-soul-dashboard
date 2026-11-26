@@ -108,7 +108,7 @@ def find_cards(bgr):
     return out
 
 
-PRICE = re.compile(r"(?<![\d.])\d\s?[.,]\s?\d(?![\d.])|\d+\s?(?:만|천)\s?원?|\d{4,}\s?원|₩|\$\s?\d|\d\s?(?:usd|won|k)\b", re.I)
+PRICE = re.compile(r"\d+\s?\.-|฿|บาท|\bphp\b|₱|\brm\s?\d|\bidr\b|\brp\s?\d|(?<![\d.])\d\s?[.,]\s?\d(?![\d.])|\d+\s?(?:만|천)\s?원?|\d{4,}\s?원|₩|\$\s?\d|\d\s?(?:usd|won|k)\b", re.I)
 
 
 def ok_card(card):
@@ -131,8 +131,38 @@ def who(card, det, rec, R):
     return sc[0][1], sc[0][0]
 
 
-def _dupe(fp, have):
-    return any(int((fp != f2).sum()) < pc_crop.SAME for f2 in have)
+_ORB = None
+
+
+def _feat(pil):
+    """ORB 특징점 — 사진 찍은 카드 vs 템플릿 카드처럼 색감·각도가 달라도 같은 카드면 많이 맞음"""
+    import cv2
+    global _ORB
+    _ORB = _ORB or cv2.ORB_create(1500)
+    g = cv2.equalizeHist(cv2.cvtColor(np.array(pil.convert("RGB").resize((W, H))), cv2.COLOR_RGB2GRAY))
+    return _ORB.detectAndCompute(g, None)
+
+
+def _inliers(a, b):
+    import cv2
+    (ka, da), (kb, db) = a, b
+    if da is None or db is None:
+        return 0
+    good = [m[0] for m in cv2.BFMatcher(cv2.NORM_HAMMING).knnMatch(da, db, k=2) if len(m) == 2 and m[0].distance < 0.75 * m[1].distance]
+    if len(good) < 8:
+        return len(good)
+    _, mask = cv2.findHomography(np.float32([ka[g.queryIdx].pt for g in good]), np.float32([kb[g.trainIdx].pt for g in good]), cv2.RANSAC, 8)
+    return int(mask.sum()) if mask is not None else 0
+
+
+def _dupe(pil, fp, have):
+    """같은 멤버의 이미 있는 카드와 같은 카드인지 — 사진 지문이 아주 가깝거나, 가까운 후보 몇 장 중 특징점이 50개 넘게 맞으면 같은 카드
+    (같은 카드 100~170개 / 다른 카드 25개 이하로 확인함)"""
+    if any(int((fp != f2).sum()) < pc_crop.SAME for f2, _ in have):
+        return True
+    fe = _feat(pil)
+    near = sorted(have, key=lambda h: int((fp != h[0]).sum()))[:5]
+    return any(_inliers(fe, h[1]) >= 50 for h in near)
 
 
 def process(posts, state):
@@ -148,7 +178,8 @@ def process(posts, state):
     for f in pc_crop.OUT.glob("*.webp"):
         m = f.stem.split("_")[-1]
         try:
-            by_member.setdefault(m, []).append(pc_crop.dhash(Image.open(f)))
+            im = Image.open(f)
+            by_member.setdefault(m, []).append((pc_crop.dhash(im), _feat(im)))
         except Exception:  # noqa: BLE001
             pass
     log = json.loads(LOG.read_text()) if LOG.exists() else []
@@ -179,7 +210,7 @@ def process(posts, state):
                 pil = Image.fromarray(cv2.cvtColor(card, cv2.COLOR_BGR2RGB))
                 fp = pc_crop.dhash(pil)
                 have = by_member.setdefault(member, [])
-                if _dupe(fp, have):
+                if _dupe(pil, fp, have):
                     continue  # 이미 있는 카드
                 if not lab:
                     print(f"[포카 자동] 새 카드 같지만 판매처·종류를 못 정함 ({member}) {p['permalink']}")
@@ -191,7 +222,7 @@ def process(posts, state):
                     name = f"{version}_{store} {n}_{member}.webp"
                     n += 1
                 pil.save(pc_crop.OUT / name, "WEBP", quality=90, method=6)
-                have.append(fp)
+                have.append((fp, _feat(pil)))
                 added.append((name, p["permalink"], p.get("author", "")))
                 log.append({"file": name, "post": p["permalink"], "img": url, "credit": "@" + p.get("author", ""), "face": round(score, 3)})
                 print(f"[포카 자동] 추가 {name} ← {p['permalink']} (얼굴 {score:.2f})")
