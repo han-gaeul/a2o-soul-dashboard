@@ -36,6 +36,12 @@ votes:
     url: https://sports.khan.co.kr/en/article/202611171532017/
     in_app: true
     credit: "@a2osoulstation"
+  - app: 하이어(HIGHER)
+    title: "🎧 독보적인 보이스! 듣는 순간 귀에 꽂히는 음색의 아이돌은? (알루어 후보)"
+    start: "2026-11-19 18:00"
+    end: "2026-12-10 18:00"
+    url: https://higher.fan/app/theme/6afbc6ffe34afa6149cf0dc8
+    source: https://x.com/HIGHER_twt/status/2123340519757803745
   - show: 음악중심
     app: 뮤니버스(MUNIVERSE)
     title: STAGE M PICK (971회)
