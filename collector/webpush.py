@@ -441,7 +441,7 @@ def tweet_text(kind, data):
     if kind == "views":  # 예: #DITD_5M (100만 단위)
         ab = next((a for k, a in MS_ABBR.items() if k.lower() in (data.get("name") or "").lower()), None)
         if ab and data["n"] >= 1e6:
-            tags = f"#{ab}_{data['n'] / 1e6:g}M " + tags
+            tags = f"#{ab}_{data['n'] / 1e6:g}M #A2O_SOUL " + tags  # 팬덤 돌파 해시태그 묶음 (#DITD_5M #A2O_SOUL #에이투오소울)
     for m_en, m_ko in mems:  # 멤버 개인 게시글이면 이름 해시태그 (한글·영어)
         tags += f" #{m_ko} #{re.sub(r'[^A-Za-z0-9]', '', m_en)}" if m_ko else f" #{re.sub(r'[^A-Za-z0-9]', '', m_en)}"
 
