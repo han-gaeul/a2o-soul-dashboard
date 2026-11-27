@@ -3,11 +3,27 @@
  "circle": {
   "2026-46": {
    "rank": 11,
-   "sales": 108099
+   "sales": 162567,
+   "versions": [
+    {
+     "name": "SUPERSTAR",
+     "rank": 11,
+     "sales": 108099
+    },
+    {
+     "name": "SUPERSTAR (Nemo)",
+     "rank": 16,
+     "sales": 54468
+    }
+   ],
+   "v": 3
   },
   "2026-47": {
    "rank": null,
-   "sales": 0
+   "sales": 0,
+   "out": true,
+   "cut": 788,
+   "v": 3
   }
  },
  "hanteo": {
@@ -23,7 +39,7 @@
   "total": 216202,
   "post": "https://x.com/koreansales_twt"
  },
- "checked": "2026-11-27T04:11+09:00",
+ "checked": "2026-11-27T10:21+09:00",
  "hanteo_chart": {
   "daily": {
    "2026-11-23": {
@@ -39,8 +55,8 @@
     "sales": 45
    },
    "2026-11-25": {
-    "rank": 59,
-    "sales": 45
+    "rank": 77,
+    "sales": 56
    }
   },
   "weekly": {
@@ -48,6 +64,11 @@
     "rank": 36,
     "sales": 1017,
     "end": "2026-11-22"
+   },
+   "2026-09-21": {
+    "rank": 36,
+    "sales": 1017,
+    "end": "2026-09-27"
    }
   },
   "ranks": {
@@ -66,11 +87,47 @@
     "2026-11-20": 34,
     "2026-11-21": 12,
     "2026-11-22": 17,
-    "2026-11-23": 91
+    "2026-11-23": 91,
+    "2026-11-24": 57,
+    "2026-11-25": 59
    },
    "weekly": {
     "2026-W46": 4
    }
+  }
+ },
+ "retail": {
+  "2026-11-08": {
+   "rank": 6,
+   "sales": 68747,
+   "versions": [
+    {
+     "name": "SUPERSTAR",
+     "rank": 6,
+     "sales": 39527
+    },
+    {
+     "name": "SUPERSTAR (Nemo)",
+     "rank": 10,
+     "sales": 29220
+    }
+   ]
+  },
+  "2026-11-15": {
+   "rank": 13,
+   "sales": 11070,
+   "versions": [
+    {
+     "name": "SUPERSTAR",
+     "rank": 13,
+     "sales": 6508
+    },
+    {
+     "name": "SUPERSTAR (Nemo)",
+     "rank": 15,
+     "sales": 4562
+    }
+   ]
   }
  }
 }
