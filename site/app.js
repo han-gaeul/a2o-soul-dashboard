@@ -2951,6 +2951,23 @@ if ("serviceWorker" in navigator) {
     $("hsFoot").onclick = () => openHomeStyle();
   }
 
+  // ---------- 운영 후원 (개인 운영 · 운영비 공개) ----------
+  const openDonate = () => {
+    const d = data.donate || {};
+    $("donateTitle").textContent = `☕ ${t("donate_title")}`;
+    const rows = (d.costs || []).map((c) => el("li", {}, el("span", {}, tc(c.name)), el("b", {}, c.amount)));
+    $("donateBody").replaceChildren(
+      el("p", {}, t("donate_lead")),
+      rows.length ? el("div", { class: "donate-cost" }, el("div", { class: "muted small" }, t("donate_cost", { m: d.month || "" })), el("ul", {}, ...rows)) : null,
+      d.url ? el("a", { class: "donate-btn", href: d.url, target: "_blank", rel: "noopener" }, `☕ ${t("donate_btn", { site: d.site || "Ko-fi" })}`) : null,
+      el("p", { class: "muted small" }, t("donate_note")));
+    $("donateDlg").showModal();
+  };
+  $("donateFoot").textContent = `☕ ${t("donate_title")}`;
+  $("donateFoot").onclick = openDonate;
+  $("donateClose").onclick = () => $("donateDlg").close();
+  $("donateDlg").onclick = (e) => { if (e.target === $("donateDlg")) $("donateDlg").close(); };
+
   // ---------- 휴대폰 하단 탭바: 더보기 시트 ----------
   {
     const more = $("moreDlg");
@@ -2965,6 +2982,7 @@ if ("serviceWorker" in navigator) {
       item("🤝", t("tab.collab"), () => go("collab")),
       item("🔔", t("push_btn"), () => { more.close(); $("pushBtn").click(); }),
       item("🎨", t("hs_title"), () => { more.close(); openHomeStyle(); }),
+      item("☕", t("donate_title"), () => { more.close(); openDonate(); }),
       ...(!$("installBtn").hidden ? [item("📱", t("install"), () => { more.close(); $("installBtn").click(); })] : []),
       item("🌐", t("lang"), () => $("moreList").replaceChildren(...LANGS.map((l) => item(l === LANG ? "✓" : "", window.I18N[l].lang, () => {
         try { localStorage.setItem("lang", l); } catch (_) { /* 무시 */ }

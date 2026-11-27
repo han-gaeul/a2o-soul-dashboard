@@ -1314,3 +1314,11 @@ button.pc { position: relative; }
 /* 라벨 한 줄 말줄임이 카드 폭을 넓히지 않게 (모바일 옆으로 넘기기에서 긴 라벨 카드만 커지던 것) */
 button.pc { min-width: 0; }
 .pc-lbl { min-width: 0; max-width: 100%; }
+
+/* 운영 후원 */
+.donate { display: grid; gap: 12px; font-size: 14px; line-height: 1.6; }
+.donate p { margin: 0; }
+.donate-cost { background: var(--chip); border-radius: 12px; padding: 10px 12px; }
+.donate-cost ul { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 4px; }
+.donate-cost li { display: flex; justify-content: space-between; gap: 12px; }
+.donate-btn { display: block; text-align: center; background: var(--accent); color: #fff; font-weight: 700; border-radius: 12px; padding: 12px; text-decoration: none; }
