@@ -3840,3 +3840,12 @@
   th: "โอนผ่าน KakaoPay ในแชท · ไม่มีค่าธรรมเนียม"
   pt: "Envie por KakaoPay no chat · sem taxas"
   fil: "Magpadala gamit ang KakaoPay sa chat · walang bayad"
+"카드·네이버페이 등":
+  en: "Card, Naver Pay, etc."
+  ja: "カード・NAVER Payなど"
+  zh: "银行卡·Naver Pay 等"
+  es: "Tarjeta, Naver Pay, etc."
+  id: "Kartu, Naver Pay, dll."
+  th: "บัตร·Naver Pay ฯลฯ"
+  pt: "Cartão, Naver Pay etc."
+  fil: "Card, Naver Pay, atbp."

@@ -165,3 +165,4 @@ donate:
     - { name: "X API (자동 트윗·리트윗)", amount: "~$50" }
   links:
     - { site: 카카오톡 오픈채팅, site_en: KakaoTalk Open Chat, url: "https://open.kakao.com/o/sbr48UYi", region: kr, note: "채팅방에서 카카오페이 송금 · 수수료 없음" }
+    - { site: 포스타입, site_en: Postype, url: "https://posty.pe/36li5o", region: kr, note: "카드·네이버페이 등" }
