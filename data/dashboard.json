@@ -553,6 +553,27 @@
   }
  ],
  "debut_date": "2026-10-13",
+ "donate": {
+  "costs": [
+   {
+    "amount": "~$110",
+    "name": "X API (자동 수집)"
+   },
+   {
+    "amount": "~$50",
+    "name": "X API (자동 트윗·리트윗)"
+   }
+  ],
+  "links": [
+   {
+    "region": "kr",
+    "site": "투네이션",
+    "site_en": "Toonation",
+    "url": "https://toon.at/donate/a2osoul-tracker"
+   }
+  ],
+  "month": "2026년 12월 예상"
+ },
  "episodes": [
   {
    "date": "2026-11-22",
@@ -17153,6 +17174,16 @@
    "th": "ผู้เข้าชิงอันดับ 1 — เพลงที่ชิงอันดับ 1 ประจำสัปดาห์ของรายการเพลง (โหวตมีผลต่อคะแนน)",
    "zh": "一位候补 — 打歌节目当周争夺一位的歌曲（投票计入分数）"
   },
+  "2026년 12월 예상": {
+   "en": "Dec 2026, est.",
+   "es": "dic. 2026, estimado",
+   "fil": "Dis 2026, tantiya",
+   "id": "Des 2026, perkiraan",
+   "ja": "2026年12月・予想",
+   "pt": "dez. 2026, estimado",
+   "th": "ธ.ค. 2026 (ประมาณการ)",
+   "zh": "2026年12月 预计"
+  },
   "2027 D AWARDS 베스트 라이징 스타(남자) 본선": {
    "en": "2027 D AWARDS Best Rising Star (Male) — main round",
    "es": "2027 D AWARDS Best Rising Star (Masculino) — ronda principal",
@@ -17938,6 +17969,26 @@
    "th": "แฟนไซน์ Withmuu",
    "zh": "Withmuu 签售会"
   },
+  "X API (자동 수집)": {
+   "en": "X API (auto-collecting)",
+   "es": "X API (recopilación automática)",
+   "fil": "X API (auto-collect)",
+   "id": "X API (pengumpulan otomatis)",
+   "ja": "X API（自動収集）",
+   "pt": "X API (coleta automática)",
+   "th": "X API (เก็บข่าวอัตโนมัติ)",
+   "zh": "X API（自动收集）"
+  },
+  "X API (자동 트윗·리트윗)": {
+   "en": "X API (auto-posts & retweets)",
+   "es": "X API (publicaciones y retuits)",
+   "fil": "X API (auto-post at retweet)",
+   "id": "X API (posting & retweet otomatis)",
+   "ja": "X API（自動ポスト・リポスト）",
+   "pt": "X API (posts e retuítes)",
+   "th": "X API (โพสต์·รีทวีตอัตโนมัติ)",
+   "zh": "X API（自动发帖·转发）"
+  },
   "가볍고 정확한 춤선": {
    "en": "Light, precise dance lines",
    "es": "Líneas de baile ligeras y precisas",
@@ -18366,6 +18417,16 @@
    "pt": "Comece pelo MV da música de debut 'SUPERSTAR'",
    "th": "เริ่มจาก MV เพลงเดบิวต์ 'SUPERSTAR'",
    "zh": "从出道曲《SUPERSTAR》MV开始"
+  },
+  "도메인 (a2osoul-tracker.com)": {
+   "en": "Domain (a2osoul-tracker.com)",
+   "es": "Dominio (a2osoul-tracker.com)",
+   "fil": "Domain (a2osoul-tracker.com)",
+   "id": "Domain (a2osoul-tracker.com)",
+   "ja": "ドメイン（a2osoul-tracker.com）",
+   "pt": "Domínio (a2osoul-tracker.com)",
+   "th": "โดเมน (a2osoul-tracker.com)",
+   "zh": "域名（a2osoul-tracker.com）"
   },
   "도입 요정": {
    "en": "Intro fairy",
@@ -18972,6 +19033,16 @@
    "pt": "Preencha os intervalos com sucessos atuais — tocar só um artista em sequência pode ser filtrado como streaming anormal",
    "th": "เพลงคั่นให้ใช้เพลงที่ติดชาร์ตตอนนี้ ถ้าเปิดแต่ศิลปินเดียวติดกันอาจถูกกรองว่าเป็นการสตรีมผิดปกติ",
    "zh": "中间穿插当前榜单靠前的歌 — 只连续播放同一歌手可能被判定为异常播放而被过滤"
+  },
+  "사이트 서버 (GitHub·Cloudflare)": {
+   "en": "Site hosting (GitHub·Cloudflare)",
+   "es": "Servidor del sitio (GitHub·Cloudflare)",
+   "fil": "Site server (GitHub·Cloudflare)",
+   "id": "Server situs (GitHub·Cloudflare)",
+   "ja": "サイトサーバー（GitHub・Cloudflare）",
+   "pt": "Servidor do site (GitHub·Cloudflare)",
+   "th": "เซิร์ฟเวอร์เว็บ (GitHub·Cloudflare)",
+   "zh": "网站服务器（GitHub·Cloudflare）"
   },
   "사전투표 (1316회)": {
    "en": "Pre-vote (Ep. 1316)",
