@@ -112,10 +112,22 @@ def fetch_photo_posts(uid, username, pages=5):
             if imgs:
                 text = (t.get("note_tweet") or {}).get("text") or t.get("text") or ""
                 out.append({"id": f"x:{t['id']}", "caption": text[:400], "timestamp": t.get("created_at"),
-                            "permalink": f"https://x.com/{username}/status/{t['id']}", "images": imgs[:4]})
+                            "permalink": f"https://x.com/{username}/status/{t['id']}", "images": imgs[:20]})
         token = (res.get("meta") or {}).get("next_token")
         if not token:
             break
+    return out
+
+
+def tweet_images(ids):
+    """글 id들 → {id: [사진 주소…]} (검색 결과에 사진이 일부만 들어간 예전 글 다시 채우기용, 100개씩)"""
+    out = {}
+    for i in range(0, len(ids), 100):
+        res = _get("/tweets", {"ids": ",".join(ids[i:i + 100]), "expansions": "attachments.media_keys", "media.fields": "type,url"}, tag="사진 다시 받기")
+        media = {m["media_key"]: m for m in (res.get("includes") or {}).get("media", [])}
+        for t in res.get("data", []):
+            out[t["id"]] = [media[k]["url"] for k in (t.get("attachments") or {}).get("media_keys", [])
+                            if k in media and media[k].get("type") == "photo" and media[k].get("url")]
     return out
 
 
@@ -168,7 +180,7 @@ def _search_page(res):
                     "verified_type": (people.get(t.get("author_id")) or {}).get("verified_type"),
                     "author_name": (people.get(t.get("author_id")) or {}).get("name"),
                     "images": [u for u in (media[k].get("url") or media[k].get("preview_image_url")
-                                           for k in (t.get("attachments") or {}).get("media_keys", []) if k in media) if u][:4],
+                                           for k in (t.get("attachments") or {}).get("media_keys", []) if k in media) if u][:20],  # X는 한 글에 사진 4장 넘게도 올라감
                     "video": any(media[k].get("type") in ("video", "animated_gif")
                                  for k in (t.get("attachments") or {}).get("media_keys", []) if k in media)})
     return out

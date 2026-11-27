@@ -26,33 +26,38 @@ def save(d):
 
 
 def circle_week(year, week):
+    """써클 주간 앨범 차트 — 버전(예: SUPERSTAR, SUPERSTAR (Nemo))이 따로 오르면 합침.
+    차트가 아직 안 나왔으면 None, 나왔는데 100위 안에 없으면 out=True"""
     r = requests.post("https://circlechart.kr/data/api/chart/album", timeout=20,
                       data={"nationGbn": "T", "termGbn": "week", "hitYear": str(year), "targetTime": str(week), "yearTime": "3", "curUrl": "x"},
                       headers={"User-Agent": "Mozilla/5.0", "Referer": "https://circlechart.kr/page_chart/album.circle"})
     r.raise_for_status()
-    rows = (r.json().get("List") or {}).values()
-    for x in rows:
-        if isinstance(x, dict) and ARTIST_RX.search(x.get("ARTIST_NAME") or "") and ALBUM.lower() in (x.get("ALBUM_NAME") or "").lower():
-            return {"rank": int(x.get("SERVICE_RANKING") or 0), "sales": int(x.get("Album_CNT") or 0)}
-    return None
+    rows = [x for x in (r.json().get("List") or {}).values() if isinstance(x, dict)]
+    if not rows:
+        return None
+    hit = [x for x in rows if ARTIST_RX.search(x.get("ARTIST_NAME") or "") and ALBUM.lower() in (x.get("ALBUM_NAME") or "").lower()]
+    if not hit:
+        return {"rank": None, "sales": 0, "out": True, "v": 2}
+    vers = [{"name": x.get("ALBUM_NAME"), "rank": int(x.get("SERVICE_RANKING") or 0), "sales": int(x.get("Album_CNT") or 0)} for x in hit]
+    return {"rank": min(v["rank"] for v in vers), "sales": sum(v["sales"] for v in vers), "versions": vers, "v": 2}
 
 
 def update_circle(d):
-    """발매 주부터 지난주까지, 아직 없는 주만 물어봄 (한 번 찾은 주는 다시 안 물어봄)"""
+    """발매 주부터 지난주까지, 아직 없는(또는 예전 방식으로 저장된) 주만 물어봄"""
     today = datetime.now(KST).date()
     wk = RELEASE
     while wk <= today - timedelta(days=4):  # 써클 주간은 다음 주 목요일쯤 나옴
         y, w, _ = wk.isocalendar()
         key = f"{y}-{w:02d}"
-        if key not in d["circle"]:
+        if (d["circle"].get(key) or {}).get("v") != 2:
             try:
                 got = circle_week(y, w)
             except Exception as e:  # noqa: BLE001
                 print(f"[판매량] 써클 {key} 실패: {str(e)[:100]}")
                 break
-            if got is None and wk >= today - timedelta(days=10):
+            if got is None:
                 break  # 아직 발표 전
-            d["circle"][key] = got or {"rank": None, "sales": 0}
+            d["circle"][key] = got
             print(f"[판매량] 써클 {key}: {got}")
         wk += timedelta(days=7)
 
@@ -170,7 +175,7 @@ def summary():
     d = load()
     h = d.get("hanteo") or {}
     days = sorted(((int(k), v) for k, v in (h.get("days") or {}).items()))
-    weeks = [{"week": k, **v} for k, v in sorted((d.get("circle") or {}).items()) if v and v.get("sales")]
+    weeks = [{"week": k, **v} for k, v in sorted((d.get("circle") or {}).items()) if v and (v.get("sales") or v.get("out"))]
     hc = d.get("hanteo_chart") or {}
     first_end = (RELEASE + timedelta(days=6)).isoformat()
     ht_days = [{"date": k, **v} for k, v in sorted((hc.get("daily") or {}).items()) if k > first_end]  # 초동 이후 일간

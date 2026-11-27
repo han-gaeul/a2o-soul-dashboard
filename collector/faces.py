@@ -26,6 +26,7 @@ MODEL_DIR = Path(os.environ.get("FACE_MODELS", "/tmp/fr"))
 YUNET = "face_detection_yunet_2023mar.onnx"
 SFACE = "face_recognition_sface_2021dec.onnx"
 MATCH = 0.30   # 코사인 유사도 기준 (SFace 권장 0.363보다 조금 느슨 — 후보가 글에 적힌 멤버뿐이라)
+MATCH_ALL = 0.42  # 글에 멤버 이름이 없어 15명 전부가 후보일 때는 더 엄격하게
 LIMIT = 80     # 한 번에 처리할 사진 수
 UA = {"User-Agent": "Mozilla/5.0"}
 
@@ -39,7 +40,7 @@ def load():
 
 
 def todo(photos, cache):
-    return [p for p in photos if len(p.get("members") or []) >= 2 and p.get("url") and key(p) not in cache]
+    return [p for p in photos if (len(p.get("members") or []) >= 2 or p.get("cands")) and p.get("url") and key(p) not in cache]
 
 
 def _models():
@@ -105,12 +106,12 @@ def _sim(a, b):
     return float(np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b) + 1e-9))
 
 
-def assign(feats, cands, R):
+def assign(feats, cands, R, th=MATCH):
     """얼굴들 × 후보 멤버 → 높은 짝부터 한 명씩 (같은 멤버 두 번 X)"""
     pairs = sorted(((max(_sim(f, r) for r in R[m]), i, m) for i, f in enumerate(feats) for m in cands if R.get(m)), reverse=True)
     used_f, used_m, got = set(), set(), []
     for s, i, m in pairs:
-        if s < MATCH or i in used_f or m in used_m:
+        if s < th or i in used_f or m in used_m:
             continue
         used_f.add(i); used_m.add(m); got.append((m, round(s, 3)))
     return got
@@ -133,7 +134,11 @@ def run(photos, verbose=False):
         except Exception as e:  # noqa: BLE001 — 주소 만료 등은 다음에 다시
             print(f"[얼굴] 실패 {key(p)}: {type(e).__name__}")
             continue
-        got = assign([f for f, _ in fs], p["members"], R)
+        if p.get("cands"):  # 단체 글: 뒤에 흐리게 나온 멤버는 빼고, 가장 큰 얼굴의 절반 이상인 얼굴만
+            big = max((b[2] for _, b in fs), default=0)
+            got = assign([f for f, b in fs if b[2] >= big * 0.5], sorted(R), R, MATCH_ALL)
+        else:
+            got = assign([f for f, _ in fs], p["members"], R)
         cache[key(p)] = [m for m, _ in got]
         if verbose:
             print(f"[얼굴] {key(p)} 얼굴 {len(fs)} · 후보 {p['members']} → {got}")
