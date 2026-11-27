@@ -103,5 +103,26 @@
   "img": "https://pbs.twimg.com/media/HX3nIgBW4AAj85O.jpg",
   "credit": "@a2osouls",
   "manual": true
+ },
+ {
+  "file": "예판 특전_Mnet_TEO.webp",
+  "post": "https://x.com/chapchapreal/status/2126120285514707149",
+  "img": "https://pbs.twimg.com/media/HYF_IJ9acAENkRo.jpg",
+  "credit": "@chapchapreal",
+  "face": 0.76
+ },
+ {
+  "file": "팬사인·영통_Musicart_GAKU.webp",
+  "post": "https://x.com/kukuu_u10/status/2125990452340113821",
+  "img": "https://pbs.twimg.com/media/HYEJCoZawAIqgy7.jpg",
+  "credit": "@kukuu_u10",
+  "face": 0.835
+ },
+ {
+  "file": "팬사인·영통_Musicart_SORA.webp",
+  "post": "https://x.com/theiosv_/status/2125831664790274355",
+  "img": "https://pbs.twimg.com/media/HYB4oY0bEAAr6p6.jpg",
+  "credit": "@theiosv_",
+  "face": 0.786
  }
 ]
