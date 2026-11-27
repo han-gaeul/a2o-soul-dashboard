@@ -3714,8 +3714,8 @@
   }
  },
  "x_media": {
-  "at": "2026-11-27T16:50+09:00",
-  "auto_since": "2126222124528607261",
+  "at": "2026-11-27T17:00+09:00",
+  "auto_since": "2126224561033388234",
   "candidates": {},
   "checked": "2026-11-26T17:10+09:00",
   "missing": [],
@@ -4050,23 +4050,36 @@
     "permalink": "https://x.com/inga_sbs/status/2126176043346411692",
     "timestamp": "2026-11-27T04:47:25.000Z",
     "video": false
+   },
+   "2126224762108264535": {
+    "author": "myidolmiim",
+    "author_name": "miim miim",
+    "caption": "[EXCLUSIVE] 한 번 보면 잊을 수 없는 A2O SOUL 준 ✨\n\n단 3초면 충분합니다\n이 귀여움을 어떻게 지나쳐요 🥹\n\n🔗 https://www.instagram.com/reel/DgPM5jwhea8\n\n✔️ 밈 팔로우 하고 A2O SOUL 독점 콘텐츠 미리 보기 😁\n\n#A2OSOUL #에이투오소울\n#준 #JUNE\n#MIIM #마이밈 #kpop https://x.com/myidolmiim/status/2126224762108264535/photo/1",
+    "images": [
+     "https://pbs.twimg.com/media/HYHeJtnaQAA3oFZ.jpg"
+    ],
+    "permalink": "https://x.com/myidolmiim/status/2126224762108264535",
+    "timestamp": "2026-11-27T08:01:01.000Z",
+    "video": false
    }
   },
-  "since_id": "2126176043346411692"
+  "since_id": "2126224762108264535"
  },
  "x_official_votes": {
-  "at": "2026-11-27T16:50+09:00",
+  "at": "2026-11-27T17:00+09:00",
   "deep": 1,
   "last": {
    "official": [],
-   "read": 0,
-   "verified": []
+   "read": 1,
+   "verified": [
+    "TOP100KPOP:blue"
+   ]
   },
-  "since_id": "2126209755647557917",
+  "since_id": "2126224505991295052",
   "v": 2
  },
  "x_show_photos": {
-  "at": "2026-11-27T16:00+09:00",
+  "at": "2026-11-27T17:00+09:00",
   "fancams": {},
   "posts": {
    "2123249908413268001": {
@@ -4138,7 +4151,7 @@
     "timestamp": "2026-11-26T10:43:26.000Z"
    }
   },
-  "since_id": "2126194309745537267"
+  "since_id": "2126218216599081313"
  },
  "x_stores": {
   "at": "2026-11-27T12:41+09:00",
@@ -4465,11 +4478,11 @@
  "x_vote_tl": {
   "BIGCChoice": {
    "id": "1875087340986933248",
-   "since_id": "2126209412738261333"
+   "since_id": "2126224507379548450"
   },
   "HIGHER_twt": {
    "id": "1627593409719578626",
-   "since_id": "2126194309745537267"
+   "since_id": "2126224512396263572"
   },
   "KTOPSTAR_offcl": {
    "id": "1801139352342515712",
@@ -4481,20 +4494,20 @@
   },
   "UPICK_twt": {
    "id": "1556541258696622080",
-   "since_id": "2126216109917606397"
+   "since_id": "2126224524492292489"
   },
-  "at": "2026-11-27T16:50+09:00",
+  "at": "2026-11-27T17:00+09:00",
   "coogoong": {
    "id": "1549266721516978176",
    "since_id": "2126201472639701081"
   },
   "idolchamp1": {
    "id": "842271014520147968",
-   "since_id": "2126218430001123472"
+   "since_id": "2126223253819752679"
   },
   "kpopidol_en": {
    "id": "1133645883965263872",
-   "since_id": "2126221924808413363"
+   "since_id": "2126222744257736906"
   },
   "mnetplus": {
    "id": "1506519992665526276",
@@ -4506,7 +4519,7 @@
   },
   "myloveidol_kpop": {
    "id": "2999130457",
-   "since_id": "2126219724476313900"
+   "since_id": "2126224074154340788"
   },
   "twt_my1pick": {
    "id": "1139074639374704641",
