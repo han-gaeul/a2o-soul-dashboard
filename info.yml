@@ -164,4 +164,4 @@ donate:
     - { name: "X API (자동 수집)", amount: "~$110" }
     - { name: "X API (자동 트윗·리트윗)", amount: "~$50" }
   links:
-    - { site: 투네이션, site_en: Toonation, url: "https://toon.at/donate/a2osoul-tracker", region: kr }
+    - { site: 카카오톡 오픈채팅, site_en: KakaoTalk Open Chat, url: "https://open.kakao.com/o/sbr48UYi", region: kr, note: "채팅방에서 카카오페이 송금 · 수수료 없음" }

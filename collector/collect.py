@@ -221,7 +221,7 @@ def load_fan_files(cfg):
     dn = info.get("donate") or {}
     cfg["donate"] = {"month": str(dn.get("month") or ""),
                      "costs": [{"name": str(c["name"]), "amount": str(c["amount"])} for c in dn.get("costs") or [] if c.get("name")],
-                     "links": [{"site": str(x["site"]), "site_en": str(x.get("site_en") or x["site"]), "url": str(x["url"]), "region": str(x.get("region") or "")}
+                     "links": [{"site": str(x["site"]), "site_en": str(x.get("site_en") or x["site"]), "url": str(x["url"]), "region": str(x.get("region") or ""), "note": str(x.get("note") or "")}
                                for x in dn.get("links") or [] if str(x.get("url", "")).startswith("https://")]}
     cfg["info"] = {
         "lore": [str(x) for x in info.get("lore") or []],
