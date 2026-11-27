@@ -130,6 +130,12 @@ def candidates(dash, site, now):
         lst = _kst(f"{e['date']} {ltm}")
         base = {"name": e["title"], "t": ltm, "url": (live or {}).get("url") or site, "parts": [e["title"]], "tr": tr,
                 "credit": e.get("credit") or "", "draft_only": True}
+        key_live = f"ev|{e['date']}|{ltm}|{e['title']}|live"
+        bc_live = [x for x in dash.get("media_posts_tw") or [] if x.get("at") and -timedelta(minutes=40) <= _kst(x["at"]) - lst <= timedelta(minutes=30)
+                   and LIVE_POST.search(x.get("text") or "")]
+        if bc_live:  # 방송사·매체가 이 시간대에 '생방송·ON AIR' 글을 올림 → 그 글이 리트윗되니 우리 글은 취소
+            out.append(_cancel(key_live))
+            continue
         for tag, at, extra in (("live", lst, {"now": True}),):  # 생방송 시작 시각에 '지금 생방송 중' 하나만 (5분 전 '곧 시작'은 안 올림)
             if -timedelta(hours=3) <= now - at <= timedelta(minutes=20):  # 3시간 전부터 예약 · 놓쳤으면 20분 안엔 바로
                 out.append((f"ev|{e['date']}|{ltm}|{e['title']}|{tag}", "show", "show", {**base, **extra, "post_at": int(at.timestamp() * 1000)}))
@@ -219,8 +225,8 @@ def candidates(dash, site, now):
                                                                 "members": [], "rt": True}))
             out.extend(_cancel(f"vg|{ch}|{base[:60]}|{i}") for i in range(4))
             continue
-        if now - max(pub(v) for v, _ in lst) < timedelta(minutes=10):
-            continue  # 줄줄이 올라오는 중 — 마지막 영상 10분 뒤 묶어서 예약 (그사이 공식 글 나오면 리트윗)
+        if now - max(pub(v) for v, _ in lst) < timedelta(minutes=VIDEO_WAIT):
+            continue  # 줄줄이 올라오는 중 — 마지막 영상 30분 뒤 묶어서 예약 (그사이 공식 글 나오면 리트윗 — 우리 글(링크 $0.20)보다 쌈)
         lst.sort(key=lambda x: order.get(x[1][0], 99))
         for i in range(0, len(lst), 5):  # 5명씩 (280자 안에 들어가게)
             part = lst[i:i + 5]
@@ -240,7 +246,7 @@ def candidates(dash, site, now):
         if same_post(v):  # 공식·매체 X 글이 있으면 그 글이 리트윗되니 우리 예약 글은 취소
             out.append(_cancel(f"vd|{v['id']}"))
             continue
-        at = max(pub(v) + timedelta(minutes=10), now + timedelta(minutes=3))  # 올라오고 10분 뒤로 예약 — 그사이 공식 글 나오면 취소
+        at = max(pub(v) + timedelta(minutes=VIDEO_WAIT), now + timedelta(minutes=3))  # 올라오고 30분 뒤로 예약 — 그사이 공식 글 나오면 취소
         out.append((f"vd|{v['id']}", "video", "video", {"title": v["title"][:90], "url": f"https://youtu.be/{v['id']}",
                                                          "members": _members_in(v, mems), "auto": True, "post_at": int(at.timestamp() * 1000)}))
     for x in dash.get("media_posts_tw") or dash.get("media_posts") or []:  # 매체·방송사 계정의 A2O SOUL 글 (3시간 안) — 바로 리트윗, 푸시는 안 보냄
@@ -342,6 +348,8 @@ def compose(kind, data, lang, group=None):
 TAGS = "#A2OSOUL #A2O #에이투오소울 #에투소"
 SONG_TAGS = {"Dancing in the Dark": "#Dancing_in_the_Dark", "SUPERSTAR": "#SUPERSTAR"}  # 글에 곡 이름이 있으면
 ACTIVE_TAG = "#Dancing_in_the_Dark"  # 지금 활동곡 — 모든 초안에 항상 (활동이 바뀌면 고치기)
+LIVE_POST = re.compile(r"생방송|본방|ON\s?AIR|LIVE|잠시 후|곧 (?:시작|만나)|지금 (?:바로|방송)", re.I)
+VIDEO_WAIT = 30  # 새 영상 트윗 대기(분) — 그사이 공식·매체 글이 나오면 그 글 리트윗으로 대신 (X: 링크 글 $0.20 > 리트윗)
 NO_LINK_KINDS = {"birthday", "chart_day", "chart"}  # 생일·차트 요약·차트 진입
 MS_ABBR = {"Dancing in the Dark": "DITD"}  # 조회수 돌파 해시태그 (팬덤에서 쓰는 형식: #DITD_5M)
 ERA_TAGS = "#SUPERSTAR #ZalphaPop"  # 지금 활동(앨범·레이블) — 280자 넘으면 빠짐
