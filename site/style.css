@@ -1324,3 +1324,4 @@ button.pc { min-width: 0; }
 .donate-btn { display: grid; gap: 2px; text-align: center; background: var(--accent); color: #fff; font-weight: 700; border-radius: 12px; padding: 11px 12px; text-decoration: none; }
 .donate-btn small { font-weight: 500; opacity: .85; font-size: 12px; }
 .donate-btn.sub { background: var(--chip); color: var(--text); }
+@media (min-width: 721px) { #donateDlg { width: min(480px, calc(100vw - 32px)); } }
