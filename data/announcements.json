@@ -3714,7 +3714,7 @@
   }
  },
  "x_media": {
-  "at": "2026-11-27T17:20+09:00",
+  "at": "2026-11-27T17:30+09:00",
   "auto_since": "2126229539177243025",
   "candidates": {},
   "checked": "2026-11-27T17:10+09:00",
@@ -4066,7 +4066,7 @@
   "since_id": "2126224762108264535"
  },
  "x_official_votes": {
-  "at": "2026-11-27T17:20+09:00",
+  "at": "2026-11-27T17:30+09:00",
   "deep": 1,
   "last": {
    "official": [],
@@ -4171,6 +4171,13 @@
   "A2OSOUL_STREAM": {
    "id": "2122910820325847040",
    "posts": [
+    {
+     "caption": "🌝DANCING IN THE DARK🕺\n▶️Melon 스밍/다운로드총공 안내🔄\n📆2026.11.27. 17:30-19:00\n(음원점수 반영-스밍40%/다운60%)\n\n지치지 말아요 우리💙\n\nhttps://muzip.link/V4DxIT\n(플레이리스트 공유)",
+     "images": [],
+     "permalink": "https://x.com/A2OSOUL_STREAM/status/2126231804021731683",
+     "timestamp": "2026-11-27T08:29:00.000Z",
+     "tweet_id": "2126231804021731683"
+    },
     {
      "caption": "🌝DANCING IN THE DARK🕺\n▶️Melon 스밍/다운로드총공 안내🔄\n📆2026.11.27. 15:00-16:00\n(음원점수 반영-스밍40%/다운60%)\n\nhttps://muzip.link/V4DxIT\n(플레이리스트 공유)",
      "images": [],
@@ -4455,18 +4462,9 @@
      "permalink": "https://x.com/A2OSOUL_STREAM/status/2123883832651010399",
      "timestamp": "2026-11-20T20:59:00.000Z",
      "tweet_id": "2123883832651010399"
-    },
-    {
-     "caption": "혹시 주무시지 않는다면 \n아니 주무셔도 \n🌝DANCING IN THE DARK🕺 \n멜론 스밍 유지 부탁드립니다.\n너무 안타깝게도 다른 곡들의 차트인 영향으로 인해\n슈스마저 90위권 밖으로 하락한 상황입니다.\n여전히 잘 들어주고 계신 분들께는 감사드립니다. https://x.com/A2OSOUL_STREAM/status/2123812081506144586/photo/1",
-     "images": [
-      "https://pbs.twimg.com/media/HXlL1NuboAENnE9.jpg"
-     ],
-     "permalink": "https://x.com/A2OSOUL_STREAM/status/2123812081506144586",
-     "timestamp": "2026-11-20T16:13:53.000Z",
-     "tweet_id": "2123812081506144586"
     }
    ],
-   "since_id": "2126194055377731731"
+   "since_id": "2126231804021731683"
   }
  },
  "x_vendors": {
@@ -4494,7 +4492,7 @@
    "id": "1556541258696622080",
    "since_id": "2126224524492292489"
   },
-  "at": "2026-11-27T17:20+09:00",
+  "at": "2026-11-27T17:30+09:00",
   "coogoong": {
    "id": "1549266721516978176",
    "since_id": "2126201472639701081"
@@ -4517,7 +4515,7 @@
   },
   "myloveidol_kpop": {
    "id": "2999130457",
-   "since_id": "2126226323668676719"
+   "since_id": "2126231552329740605"
   },
   "twt_my1pick": {
    "id": "1139074639374704641",
