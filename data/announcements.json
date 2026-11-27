@@ -8,7 +8,7 @@
   "xo:2125499982279221448||🎧K-POP K탑 CHART"
  ],
  "ig_media": {
-  "at": "2026-11-27T16:20+09:00",
+  "at": "2026-11-27T16:50+09:00",
   "sig": "myidol_miim,1thek,stonemusicent,kbskpop,a2o.story,studio_choom,dazedkorea"
  },
  "posts": {
@@ -1513,6 +1513,24 @@
    ],
    "permalink": "https://x.com/A2O_SOUL/status/2126206524368580769",
    "timestamp": "2026-11-27T06:48:33.000Z"
+  },
+  "x:2126220731021209646": {
+   "caption": "[#뮤직뱅크]\n잠시 후, 5시 15분 '뮤직뱅크'에 A2O SOUL이 출연합니다.\n팬 여러분의 많은 시청 부탁드립니다. \n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark",
+   "excerpt": "[#뮤직뱅크]\n잠시 후, 5시 15분 '뮤직뱅크'에 A2O SOUL이 출연합니다.\n팬 여러분의 많은 시청 부탁드립니다. \n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark",
+   "items": [
+    {
+     "confidence": 0.9,
+     "date": "2026-11-27",
+     "end_date": null,
+     "kind": "music_show",
+     "place": null,
+     "time": "17:15",
+     "title": "뮤직뱅크 출연",
+     "url": null
+    }
+   ],
+   "permalink": "https://x.com/A2O_SOUL/status/2126220731021209646",
+   "timestamp": "2026-11-27T07:45:00.000Z"
   },
   "xf:2121586007254708290": {
    "caption": "[📸] 261114 @A2O_SOUL \n\n2026.11.14\nMBC Show! Music Core\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2OSOULBASE/status/2121586007254708290/photo/1",
@@ -3682,7 +3700,7 @@
  "x": {
   "A2O_SOUL": {
    "id": "1986498790229262336",
-   "since_id": "2126206524368580769"
+   "since_id": "2126220731021209646"
   }
  },
  "x_fans": {
@@ -3696,8 +3714,8 @@
   }
  },
  "x_media": {
-  "at": "2026-11-27T16:40+09:00",
-  "auto_since": "2126218817189896460",
+  "at": "2026-11-27T16:50+09:00",
+  "auto_since": "2126222124528607261",
   "candidates": {},
   "checked": "2026-11-26T17:10+09:00",
   "missing": [],
@@ -4037,7 +4055,7 @@
   "since_id": "2126176043346411692"
  },
  "x_official_votes": {
-  "at": "2026-11-27T16:40+09:00",
+  "at": "2026-11-27T16:50+09:00",
   "deep": 1,
   "last": {
    "official": [],
@@ -4465,7 +4483,7 @@
    "id": "1556541258696622080",
    "since_id": "2126216109917606397"
   },
-  "at": "2026-11-27T16:40+09:00",
+  "at": "2026-11-27T16:50+09:00",
   "coogoong": {
    "id": "1549266721516978176",
    "since_id": "2126201472639701081"
@@ -4476,7 +4494,7 @@
   },
   "kpopidol_en": {
    "id": "1133645883965263872",
-   "since_id": "2126211419775623523"
+   "since_id": "2126221924808413363"
   },
   "mnetplus": {
    "id": "1506519992665526276",
@@ -4488,7 +4506,7 @@
   },
   "myloveidol_kpop": {
    "id": "2999130457",
-   "since_id": "2126210161828045121"
+   "since_id": "2126219724476313900"
   },
   "twt_my1pick": {
    "id": "1139074639374704641",
