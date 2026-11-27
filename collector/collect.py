@@ -1572,7 +1572,9 @@ def collect(cfg, rescan=False):
                 for post in posts:
                     vendor = names.get(post["author"].lower(), post["author"])
                     # 본문에서 행사 날짜를 못 찾으면 공지 이미지 글자를 읽어 본문 뒤에 붙임
-                    if post.get("images") and not any(i.get("date") for i in rules.fansign_items(post["caption"], post.get("timestamp") or "", vendor)):
+                    # 당첨 발표일도 이미지에만 있는 경우가 많아서, 날짜나 발표일 중 하나라도 없으면 읽음
+                    its = rules.fansign_items(post["caption"], post.get("timestamp") or "", vendor)
+                    if post.get("images") and (not any(i.get("date") for i in its) or not any(i.get("announce") for i in its)):
                         import ocr
                         txt = ocr.read_images(post["images"])
                         if txt:
