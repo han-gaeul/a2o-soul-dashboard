@@ -2958,11 +2958,11 @@ if ("serviceWorker" in navigator) {
     const rows = (d.costs || []).map((c) => el("li", {}, el("span", {}, tc(c.name)), el("b", {}, c.amount)));
     $("donateBody").replaceChildren(
       el("p", {}, t("donate_lead")),
-      rows.length ? el("div", { class: "donate-cost" }, el("div", { class: "muted small" }, t("donate_cost", { m: d.month || "" })), el("ul", {}, ...rows)) : null,
+      rows.length ? el("div", { class: "donate-cost" }, el("div", { class: "muted small" }, t("donate_cost", { m: tc(d.month || "") })), el("ul", {}, ...rows)) : null,
       // 국내(투네이션 등)·해외(Ko-fi 등) 둘 다 — 한국어 화면은 국내 먼저, 그 외 언어는 해외 먼저
       ...(d.links || []).slice().sort((a, b) => ((a.region === "kr") === (LANG === "ko") ? -1 : 1) - ((b.region === "kr") === (LANG === "ko") ? -1 : 1))
         .map((x, i) => el("a", { class: `donate-btn${i ? " sub" : ""}`, href: x.url, target: "_blank", rel: "noopener" },
-          `${x.region === "kr" ? "🇰🇷" : "🌏"} ${t("donate_btn", { site: x.site })}`, el("small", {}, t(x.region === "kr" ? "donate_kr" : "donate_global")))),
+          `${x.region === "kr" ? "🇰🇷" : "🌏"} ${t("donate_btn", { site: LANG === "ko" ? x.site : x.site_en || x.site })}`, el("small", {}, t(x.region === "kr" ? "donate_kr" : "donate_global")))),
       el("p", { class: "muted small" }, t("donate_note")));
     $("donateDlg").showModal();
   };

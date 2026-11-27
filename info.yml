@@ -156,3 +156,14 @@ fanchant_call:
 pc_events:
   - { place: 올리브영 홍대놀이터점, vendor: Mnet Plus Merch, kind: lucky, count: 15, tags: [unrel], start: "11/24", end: "11/30", until: "2026-12-07", at: "2026-11-19 12:00", url: "https://x.com/mnetplusmerch/status/2123249922237739012" }
   - { place: 뮤직플랜트 12/4 팬사인회, vendor: Music Plant, kind: pob, count: 15, tags: [unrel, selfie], start: "11/25", end: "11/27", until: "2026-12-04", at: "2026-11-25 15:00", url: "https://x.com/musicplant_kr/status/2125469534765347313" }
+
+# 운영 후원 (사이트 더보기·하단 '☕ 운영 후원') — 운영비는 매달 갱신, 링크는 운영자 계정
+donate:
+  month: "2026년 12월 예상"
+  costs:
+    - { name: "X API (자동 수집)", amount: "~$110" }
+    - { name: "X API (자동 트윗·리트윗)", amount: "~$50" }
+    - { name: "도메인 (a2osoul-tracker.com)", amount: "~$1" }
+    - { name: "사이트 서버 (GitHub·Cloudflare)", amount: "$0" }
+  links:
+    - { site: 투네이션, site_en: Toonation, url: "https://toon.at/donate/a2osoul-tracker", region: kr }
