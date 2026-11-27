@@ -111,6 +111,26 @@ def find_cards(bgr):
 PRICE = re.compile(r"\d+\s?\.-|฿|บาท|\bphp\b|₱|\brm\s?\d|\bidr\b|\brp\s?\d|(?<![\d.])\d\s?[.,]\s?\d(?![\d.])|\d+\s?(?:만|천)\s?원?|\d{4,}\s?원|₩|\$\s?\d|\d\s?(?:usd|won|k)\b", re.I)
 
 
+# 양도·판매 글: 사진 위에 가격을 손글씨·스티커로 써 두는 경우가 대부분이라 자동으로 안 씀
+SALE = re.compile(r"양도|판매|교환|wts|\bsell|\bfs\b|\bptc\b|open\.kakao|오픈\s?채팅|오픈카톡|반택|택포|급처", re.I)
+
+
+def has_price_mark(card):
+    """잘린 카드 위에 '2.0' 같은 숫자가 크게 적혀 있으면 True (OCR, 숫자만)"""
+    try:
+        import pytesseract
+        from PIL import Image, ImageOps
+        import cv2
+        g = ImageOps.grayscale(Image.fromarray(cv2.cvtColor(card, cv2.COLOR_BGR2RGB)).resize((544, 840)))
+        for im in (g, ImageOps.invert(g)):
+            t = pytesseract.image_to_string(im, config="--psm 11 -c tessedit_char_whitelist=0123456789.,")
+            if re.search(r"\d\s?[.,]\s?\d", t):
+                return True
+    except Exception:  # noqa: BLE001
+        pass
+    return False
+
+
 def ok_card(card):
     """흐린 카드(템플릿의 '?'·모자이크), 얼굴만 크게 잘린 것 빼기"""
     import cv2
@@ -190,8 +210,8 @@ def process(posts, state):
         if banned(cap):
             print(f"[포카 자동] 금지 문구 — 건너뜀 {p['permalink']}")
             continue
-        if PRICE.search(cap):  # 가격이 적힌 양도 글은 사진에도 가격을 써 둔 경우가 많아서
-            print(f"[포카 자동] 가격 적힌 글 — 건너뜀 {p['permalink']}")
+        if PRICE.search(cap) or SALE.search(cap):  # 가격·양도 글은 사진에도 가격을 써 둔 경우가 많아서
+            print(f"[포카 자동] 가격·양도 글 — 건너뜀 {p['permalink']}")
             continue
         lab = label_from(cap)
         for url in p["images"][:4]:
@@ -202,7 +222,7 @@ def process(posts, state):
                 print(f"[포카 자동] 사진 실패 {url}: {type(e).__name__}")
                 continue
             for card in find_cards(bgr):
-                if not ok_card(card):
+                if not ok_card(card) or has_price_mark(card):
                     continue
                 member, score = who(card, det, rec, R)
                 if not member:
