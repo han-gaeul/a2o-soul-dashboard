@@ -2961,7 +2961,7 @@ if ("serviceWorker" in navigator) {
       rows.length ? el("div", { class: "donate-cost" }, el("div", { class: "muted small" }, t("donate_cost", { m: tc(d.month || "") })), el("ul", {}, ...rows)) : null,
       // 국내(투네이션 등)·해외(Ko-fi 등) 둘 다 — 한국어 화면은 국내 먼저, 그 외 언어는 해외 먼저
       ...(d.links || []).slice().sort((a, b) => ((a.region === "kr") === (LANG === "ko") ? -1 : 1) - ((b.region === "kr") === (LANG === "ko") ? -1 : 1))
-        .map((x, i) => el("a", { class: `donate-btn${i ? " sub" : ""}`, href: x.url, target: "_blank", rel: "noopener" },
+        .map((x) => el("a", { class: `donate-btn${(x.region === "kr") === (LANG === "ko") ? "" : " sub"}`, href: x.url, target: "_blank", rel: "noopener" },
           `${x.region === "kr" ? "🇰🇷" : "🌏"} ${t("donate_btn", { site: LANG === "ko" ? x.site : x.site_en || x.site })}`, el("small", {}, x.note ? tc(x.note) : t(x.region === "kr" ? "donate_kr" : "donate_global")))),
       el("p", { class: "muted small" }, t("donate_note")));
     $("donateDlg").showModal();
