@@ -1,5 +1,6 @@
 """앨범 판매량 → data/sales.json
-- 써클차트 주간 앨범 차트 (공식, 매주 목요일쯤 발표): 순위·판매량
+- 써클차트 주간 앨범 차트 (공식, 매주 목요일쯤 발표): 순위·판매량 (유통사 출고량 - 반품)
+- 써클차트 주간 리테일 앨범 차트 (소매점 실제 판매량, Top 50): 순위·판매량
 - 한터 초동 일차별 (@koreansales_twt 글의 DAY·TOTAL)
 - 한터 차트 일간·주간 판매량 (hanteochart.com 공식 차트 API, 100위 안에 있을 때) — 초동 이후 판매량
 """
@@ -160,9 +161,46 @@ def update_hanteo_ranks(d):
         wk += timedelta(days=7)
 
 
+def circle_retail_week(sunday):
+    """써클 리테일 앨범 차트 (일~토, 주 시작 일요일 날짜로 조회). 아직 안 나왔으면 None, 50위 밖이면 out=True"""
+    r = requests.post("https://circlechart.kr/data/api/chart/retail_list", timeout=20,
+                      data={"termGbn": "week", "yyyymmdd": sunday.strftime("%Y%m%d")},
+                      headers={"User-Agent": "Mozilla/5.0", "Referer": "https://circlechart.kr/page_chart/retail.circle"})
+    r.raise_for_status()
+    rows = [x for x in (r.json().get("List") or {}).values() if isinstance(x, dict)]
+    if not rows:
+        return None
+    hit = [x for x in rows if ARTIST_RX.search(x.get("Artist") or "") and ALBUM.lower() in (x.get("Album") or "").lower()]
+    if not hit:
+        return {"rank": None, "sales": 0, "out": True, "cut": min(int(x.get("rowSum") or 0) for x in rows)}
+    vers = [{"name": x.get("Album"), "rank": int(x.get("RankOrder") or 0), "sales": int(x.get("rowSum") or 0)} for x in hit]
+    return {"rank": min(v["rank"] for v in vers), "sales": sum(v["sales"] for v in vers), "versions": vers}
+
+
+def update_retail(d):
+    """발매 주(일요일 시작)부터, 끝난 주 중 아직 없는 주만"""
+    today = datetime.now(KST).date()
+    sun = RELEASE - timedelta(days=(RELEASE.weekday() + 1) % 7)
+    rt = d.setdefault("retail", {})
+    while sun + timedelta(days=6) < today:
+        key = sun.isoformat()
+        if key not in rt:
+            try:
+                got = circle_retail_week(sun)
+            except Exception as e:  # noqa: BLE001
+                print(f"[판매량] 써클 리테일 {key} 실패: {str(e)[:100]}")
+                break
+            if got is None:
+                break  # 아직 발표 전
+            rt[key] = got
+            print(f"[판매량] 써클 리테일 {key}: {got}")
+        sun += timedelta(days=7)
+
+
 def run(xposts=None):
     d = load()
     update_circle(d)
+    update_retail(d)
     update_hanteo_chart(d)
     update_hanteo_ranks(d)
     if xposts is not None and xposts.enabled():
@@ -196,4 +234,5 @@ def summary():
                        "total": h.get("total"), "first_week": first, "post": h.get("post"),
                        "week_rank": (rk.get("weekly") or {}).get(wk1) or None,
                        "week_url": f"https://www.hanteochart.com/ko/charts/album/weekly/{wk1}"},
-            "circle": weeks, "hanteo_daily": ht_days, "hanteo_weekly": ht_weeks}
+            "circle": weeks, "retail": [{"start": k, **v} for k, v in sorted((d.get("retail") or {}).items())],
+            "hanteo_daily": ht_days, "hanteo_weekly": ht_weeks}

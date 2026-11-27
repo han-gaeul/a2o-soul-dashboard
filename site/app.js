@@ -1094,8 +1094,16 @@ if ("serviceWorker" in navigator) {
         const m0 = new Date(j4.getTime() + ((w - 1) * 7 - ((j4.getUTCDay() + 6) % 7)) * 86400000).toISOString().slice(0, 10);
         const k = wkOf(m0); weeks[k] = { ...(weeks[k] || { label: mon(m0) }), ...(x.out ? { ciOut: true, ciCut: x.cut } : { ci: x.sales, ciRank: x.rank, ciVers: x.versions || [] }) };
       }
+      for (const x of sl.retail || []) {  // 리테일 주는 일요일 시작 → 다음 날(월)로 주차 맞춤
+        const k = wkOf(new Date(new Date(`${x.start}T00:00:00Z`).getTime() + 86400000).toISOString().slice(0, 10));
+        weeks[k] = { ...(weeks[k] || { label: mon(x.start) }), ...(x.out ? { rtOut: true, rtCut: x.cut } : { rt: x.sales, rtRank: x.rank, rtVers: x.versions || [] }) };
+      }
       const curWk = wkOf(new Date(Date.now() + 9 * 3600000).toISOString().slice(0, 10));
       for (let k = 1; k <= curWk; k++) weeks[k] ||= { label: mon(new Date(rel.getTime() + (k - 1) * 7 * 86400000).toISOString().slice(0, 10)) };
+      const cell = (lab, v, rank, vers, out, cut, kCut, kOut, empty) => el("td", { "data-l": lab }, el("div", { class: "cv" }, ...(v != null
+        ? [n(v), vers && vers.length > 1 ? null : (rank ? el("small", { class: "muted" }, ` #${rank}`) : null),
+           ...(vers && vers.length > 1 ? vers.map((x) => el("div", { class: "muted small ver" }, el("i", {}, x.name.replace(/^.*?\((.+)\)$/, "$1")), " ", el("span", { class: "nw" }, `${n(x.sales)} #${x.rank}`))) : [])]
+        : [el("span", { class: "muted small" }, out ? (cut ? t(kCut, { n: n(cut) }) : t(kOut)) : empty)])));
       salesPane.append(el("details", { class: "sp-box sales-box", open: "" },
         el("summary", { class: "sp-head" }, el("b", {}, t("sales_title", { a: sl.album }))),
         el("div", { class: "sales-tiles" },
@@ -1104,13 +1112,12 @@ if ("serviceWorker" in navigator) {
           hw.length ? el("div", { class: "now-tile" }, el("span", { class: "muted small" }, t("sales_last_week")), el("b", {}, n(hw.at(-1).sales)), el("small", { class: "muted" }, `${mon(hw.at(-1).start)} · #${hw.at(-1).rank}`)) : null,
           yest ? el("div", { class: "now-tile" }, el("span", { class: "muted small" }, t("sales_yday")), el("b", {}, n(yest.sales)), el("small", { class: "muted" }, `${yest.date.slice(5).replace("-", "/")} · #${yest.rank}`)) : null),
         el("table", { class: "sp-table sales-weeks" },
-          el("thead", {}, el("tr", {}, el("th", {}, t("sales_week")), el("th", {}, "Hanteo"), el("th", {}, "Circle"))),
+          el("thead", {}, el("tr", {}, el("th", {}, t("sales_week")), el("th", {}, "Hanteo"), el("th", {}, "Circle"), el("th", {}, t("sales_retail")))),
           el("tbody", {}, ...weeks.map((w, k) => w ? el("tr", {},
             el("td", {}, el("b", {}, t("sales_wk_n", { n: k })), " ", el("span", { class: "muted small" }, w.label)),
-            el("td", {}, ...(w.ht != null ? [n(w.ht), w.htRank ? el("small", { class: "muted" }, ` #${w.htRank}`) : null] : [el("span", { class: "muted small" }, k === curWk ? t("sales_counting") : "–")])),
-            el("td", {}, ...(w.ci != null ? [n(w.ci), w.ciVers && w.ciVers.length > 1 ? null : (w.ciRank ? el("small", { class: "muted" }, ` #${w.ciRank}`) : null),
-              ...(w.ciVers && w.ciVers.length > 1 ? w.ciVers.map((v) => el("div", { class: "muted small" }, `${v.name.replace(/^.*?\((.+)\)$/, "$1")} ${n(v.sales)} #${v.rank}`)) : [])]
-              : [el("span", { class: "muted small" }, w.ciOut ? (w.ciCut ? t("sales_out_cut", { n: n(w.ciCut) }) : t("sales_out")) : k >= curWk - 1 ? t("sales_soon") : "–")]))) : null).filter(Boolean))),
+            el("td", { "data-l": "Hanteo" }, el("div", { class: "cv" }, ...(w.ht != null ? [n(w.ht), w.htRank ? el("small", { class: "muted" }, ` #${w.htRank}`) : null] : [el("span", { class: "muted small" }, k === curWk ? t("sales_counting") : "–")]))),
+            cell("Circle", w.ci, w.ciRank, w.ciVers, w.ciOut, w.ciCut, "sales_out_cut", "sales_out", k >= curWk - 1 ? t("sales_soon") : "–"),
+            cell(t("sales_retail"), w.rt, w.rtRank, w.rtVers, w.rtOut, w.rtCut, "sales_out50_cut", "sales_out50", k >= curWk - 1 ? t("sales_soon") : "–")) : null).filter(Boolean))),
         hd.length ? el("details", { class: "sales-firstweek" }, el("summary", { class: "small" }, t("sales_first_days")),
           el("div", { class: "sales-bars", role: "img", "aria-label": hd.map((x) => `${x.date.slice(5)} ${n(x.n)}${x.rank ? ` #${x.rank}` : ""}`).join(", ") },
             ...hd.map((x) => el("div", { class: "sb", title: `${x.date.slice(5).replace("-", "/")} · ${n(x.n)}` },
