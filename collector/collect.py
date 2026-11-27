@@ -706,7 +706,7 @@ def vote_wins(store):
 
 
 FANCAM_POST = re.compile(r"직캠|FANCAM|FAN\s?CAM|풀캠|FULL\s?CAM|페이스캠|FACE\s?CAM|세로캠|Choreo", re.I)
-A2O_MENTION = re.compile(r"A2O\s?SOUL|A2OSOUL|에이투오\s?소울|에이투오소울", re.I)
+A2O_MENTION = re.compile(r"A2O\s?SOUL|A2OSOUL|에이투오\s?소울|에이투오소울|@a2o\.soul\b", re.I)  # @a2o.soul = 공식 인스타 태그
 
 
 def official_extract(caption, posted, today):
