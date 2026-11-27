@@ -1259,6 +1259,16 @@ body[data-cur="overview"] .vote-bar:not(.live-bar) { display: none; }
 .sales-tiles .now-tile b { font-size: 18px; }
 .sales-tiles .now-tile.big b { font-size: 24px; color: var(--accent); }
 .sales-weeks td:nth-child(2), .sales-weeks td:nth-child(3), .sales-weeks th:nth-child(2), .sales-weeks th:nth-child(3) { text-align: right; }
+.sales-weeks td:nth-child(4), .sales-weeks th:nth-child(4) { text-align: right; }
+.sales-weeks .ver { white-space: nowrap; }
+@media (max-width: 560px) {  /* 폰: 4칸이 들어가게 — 버전 이름은 숫자 위 줄로 */
+  .sales-weeks { font-size: 13px; }
+  .sales-weeks th, .sales-weeks td { padding-left: 4px; padding-right: 4px; }
+  .sales-weeks .ver { white-space: normal; font-size: 11px; line-height: 1.25; margin-top: 2px; }
+  .sales-weeks .ver i { display: block; font-style: normal; }
+  .sales-weeks td, .sales-weeks td span { white-space: normal; word-break: keep-all; }
+  .sales-weeks .nw { white-space: nowrap; }
+}
 .sales-firstweek { margin: 10px 0 4px; }
 .sales-firstweek > summary { cursor: pointer; color: var(--muted); }
 .pf-press { display: grid; gap: 10px; }
