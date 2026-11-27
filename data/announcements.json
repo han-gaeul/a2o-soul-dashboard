@@ -1539,6 +1539,24 @@
    "permalink": "https://x.com/A2O_SOUL/status/2126246297510572229",
    "timestamp": "2026-11-27T09:26:35.000Z"
   },
+  "x:2126264087286034667": {
+   "caption": "[🔔]\n261129 SBS 인기가요 사전녹화 참여\n\n🔗 https://artist.mnetplus.world/main/stg/a2osoul/surveys/6b07f8419dfe070b80bd6c89\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark",
+   "excerpt": "[🔔]\n261129 SBS 인기가요 사전녹화 참여\n\n🔗 https://artist.mnetplus.world/main/stg/a2osoul/surveys/6b07f8419dfe070b80bd6c89\n\n#A2O #A2OSOUL\n#Dancing_in_th",
+   "items": [
+    {
+     "confidence": 0.85,
+     "date": "2026-11-29",
+     "end_date": null,
+     "kind": "music_show",
+     "place": null,
+     "time": null,
+     "title": "인기가요 출연",
+     "url": null
+    }
+   ],
+   "permalink": "https://x.com/A2O_SOUL/status/2126264087286034667",
+   "timestamp": "2026-11-27T10:37:17.000Z"
+  },
   "xf:2121586007254708290": {
    "caption": "[📸] 261114 @A2O_SOUL \n\n2026.11.14\nMBC Show! Music Core\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2OSOULBASE/status/2121586007254708290/photo/1",
    "excerpt": "[📸] 261114 @A2O_SOUL \n\n2026.11.14\nMBC Show! Music Core\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2OSOULBASE/status/2121586007254708",
@@ -3721,7 +3739,7 @@
  "x": {
   "A2O_SOUL": {
    "id": "1986498790229262336",
-   "since_id": "2126246297510572229"
+   "since_id": "2126264087286034667"
   }
  },
  "x_fans": {
@@ -3735,8 +3753,8 @@
   }
  },
  "x_media": {
-  "at": "2026-11-27T19:30+09:00",
-  "auto_since": "2126262136158687697",
+  "at": "2026-11-27T19:40+09:00",
+  "auto_since": "2126264990420422951",
   "candidates": {},
   "checked": "2026-11-27T17:10+09:00",
   "missing": [],
@@ -4530,7 +4548,7 @@
    "id": "1556541258696622080",
    "since_id": "2126224524492292489"
   },
-  "at": "2026-11-27T19:10+09:00",
+  "at": "2026-11-27T19:40+09:00",
   "coogoong": {
    "id": "1549266721516978176",
    "since_id": "2126252188607655960"
@@ -4541,11 +4559,11 @@
   },
   "kpopidol_en": {
    "id": "1133645883965263872",
-   "since_id": "2126251181827620924"
+   "since_id": "2126263261599588793"
   },
   "mnetplus": {
    "id": "1506519992665526276",
-   "since_id": "2126254958186303615"
+   "since_id": "2126264356648386893"
   },
   "muniverse_io": {
    "id": "1912737786052112386",
@@ -4553,7 +4571,7 @@
   },
   "myloveidol_kpop": {
    "id": "2999130457",
-   "since_id": "2126251433418748127"
+   "since_id": "2126262758383771718"
   },
   "twt_my1pick": {
    "id": "1139074639374704641",
