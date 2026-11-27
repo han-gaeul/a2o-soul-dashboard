@@ -3634,8 +3634,8 @@
   }
  },
  "x_media": {
-  "at": "2026-11-27T14:50+09:00",
-  "auto_since": "2126191381677060251",
+  "at": "2026-11-27T15:00+09:00",
+  "auto_since": "2126194309745537267",
   "candidates": {},
   "checked": "2026-11-26T17:10+09:00",
   "missing": [],
@@ -3990,7 +3990,7 @@
   "v": 2
  },
  "x_show_photos": {
-  "at": "2026-11-27T14:00+09:00",
+  "at": "2026-11-27T15:00+09:00",
   "fancams": {},
   "posts": {
    "2123249908413268001": {
@@ -4062,7 +4062,7 @@
     "timestamp": "2026-11-26T10:43:26.000Z"
    }
   },
-  "since_id": "2126178205401043286"
+  "since_id": "2126194309745537267"
  },
  "x_stores": {
   "at": "2026-11-27T12:41+09:00",
@@ -4084,6 +4084,13 @@
   "A2OSOUL_STREAM": {
    "id": "2122910820325847040",
    "posts": [
+    {
+     "caption": "🌝DANCING IN THE DARK🕺\n▶️Melon 스밍/다운로드총공 안내🔄\n📆2026.11.27. 15:00-16:00\n(음원점수 반영-스밍40%/다운60%)\n\nhttps://muzip.link/V4DxIT\n(플레이리스트 공유)",
+     "images": [],
+     "permalink": "https://x.com/A2OSOUL_STREAM/status/2126194055377731731",
+     "timestamp": "2026-11-27T05:59:00.000Z",
+     "tweet_id": "2126194055377731731"
+    },
     {
      "caption": "🌝DANCING IN THE DARK🕺\n▶️Melon 스밍/다운로드총공 안내🔄\n📆2026.11.21. 11:30-13:30\n(음원점수 반영-스밍40%/다운60%)\n\nhttps://muzip.link/V4DxIT\n(플레이리스트 공유)",
      "images": [],
@@ -4370,18 +4377,9 @@
      "permalink": "https://x.com/A2OSOUL_STREAM/status/2123812081506144586",
      "timestamp": "2026-11-20T16:13:53.000Z",
      "tweet_id": "2123812081506144586"
-    },
-    {
-     "caption": "#에이투오소울 #A2OSOUL #스밍총공 https://x.com/A2OSOUL_STREAM/status/2123792654114963942/photo/1",
-     "images": [
-      "https://pbs.twimg.com/media/HXk6KDYbIAE5obZ.jpg"
-     ],
-     "permalink": "https://x.com/A2OSOUL_STREAM/status/2123792654114963942",
-     "timestamp": "2026-11-20T14:56:41.000Z",
-     "tweet_id": "2123792654114963942"
     }
    ],
-   "since_id": "2126141676330893409"
+   "since_id": "2126194055377731731"
   }
  },
  "x_vendors": {
