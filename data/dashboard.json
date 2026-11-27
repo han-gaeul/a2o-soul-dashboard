@@ -178,7 +178,7 @@
     ],
     [
      "2026-11-27",
-     90
+     85
     ]
    ],
    "service": "멜론",
@@ -206,6 +206,10 @@
     [
      "2026-11-26",
      95
+    ],
+    [
+     "2026-11-27",
+     100
     ]
    ],
    "service": "멜론",
@@ -12852,6 +12856,7 @@
    "account": "show",
    "at": "2026-11-26 19:43",
    "by": "MBCkpop",
+   "cands": 1,
    "members": [],
    "n": 0,
    "src": "https://pbs.twimg.com/media/HYC5ua7a8AEJC-M.jpg",
@@ -12862,6 +12867,7 @@
    "account": "show",
    "at": "2026-11-26 19:43",
    "by": "MBCkpop",
+   "cands": 1,
    "members": [],
    "n": 1,
    "src": "https://pbs.twimg.com/media/HYC5ua7bEAAj1KR.jpg",
@@ -12872,6 +12878,7 @@
    "account": "show",
    "at": "2026-11-26 19:43",
    "by": "MBCkpop",
+   "cands": 1,
    "members": [],
    "n": 2,
    "src": "https://pbs.twimg.com/media/HYC5ua5bcAAY-ov.jpg",
@@ -12882,6 +12889,7 @@
    "account": "show",
    "at": "2026-11-26 19:43",
    "by": "MBCkpop",
+   "cands": 1,
    "members": [],
    "n": 3,
    "src": "https://pbs.twimg.com/media/HYC5ua6aYAAfI7a.jpg",
@@ -12892,6 +12900,7 @@
    "account": "show",
    "at": "2026-11-26 18:16",
    "by": "MBCkpop",
+   "cands": 1,
    "members": [],
    "n": 0,
    "src": "https://pbs.twimg.com/media/HYCj--7a0AAvCER.jpg",
@@ -12902,6 +12911,7 @@
    "account": "show",
    "at": "2026-11-26 18:16",
    "by": "MBCkpop",
+   "cands": 1,
    "members": [],
    "n": 1,
    "src": "https://pbs.twimg.com/media/HYCkEsTagAAlJkn.jpg",
@@ -12912,6 +12922,7 @@
    "account": "show",
    "at": "2026-11-26 18:16",
    "by": "MBCkpop",
+   "cands": 1,
    "members": [],
    "n": 2,
    "src": "https://pbs.twimg.com/media/HYCkF0dboAAPjHf.jpg",
@@ -12922,6 +12933,7 @@
    "account": "show",
    "at": "2026-11-26 18:16",
    "by": "MBCkpop",
+   "cands": 1,
    "members": [],
    "n": 3,
    "src": "https://pbs.twimg.com/media/HYCkHX5bwAAU6P0.jpg",
