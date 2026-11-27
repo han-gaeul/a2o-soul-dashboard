@@ -342,6 +342,7 @@ def compose(kind, data, lang, group=None):
 TAGS = "#A2OSOUL #A2O #에이투오소울 #에투소"
 SONG_TAGS = {"Dancing in the Dark": "#Dancing_in_the_Dark", "SUPERSTAR": "#SUPERSTAR"}  # 글에 곡 이름이 있으면
 ACTIVE_TAG = "#Dancing_in_the_Dark"  # 지금 활동곡 — 모든 초안에 항상 (활동이 바뀌면 고치기)
+NO_LINK_KINDS = {"birthday", "chart_day", "chart"}  # 생일·차트 요약·차트 진입
 MS_ABBR = {"Dancing in the Dark": "DITD"}  # 조회수 돌파 해시태그 (팬덤에서 쓰는 형식: #DITD_5M)
 ERA_TAGS = "#SUPERSTAR #ZalphaPop"  # 지금 활동(앨범·레이블) — 280자 넘으면 빠짐
 # 확실한 정보라 확인 없이 바로 올리는 종류 (일정·생일·조회수처럼 데이터에서 그대로 나오는 것)
@@ -442,6 +443,9 @@ def tweet_text(kind, data):
             tags = f"#{ab}_{data['n'] / 1e6:g}M #A2O_SOUL " + tags  # 팬덤 돌파 해시태그 묶음 (#DITD_5M #A2O_SOUL #에이투오소울)
     for m_en, m_ko in mems:  # 멤버 개인 게시글이면 이름 해시태그 (한글·영어)
         tags += f" #{m_ko} #{re.sub(r'[^A-Za-z0-9]', '', m_en)}" if m_ko else f" #{re.sub(r'[^A-Za-z0-9]', '', m_en)}"
+
+    if kind in NO_LINK_KINDS:  # X는 링크 있는 글 올리기가 13배 넘게 비쌈($0.20 vs $0.015) → 링크 없어도 되는 글은 빼고 올림
+        links, url, quote = [""], None, ""
 
     def build(with_en, with_era):
         tag2 = " ".join(x for x in (ACTIVE_TAG, song, ERA_TAGS if with_era else "") if x)
