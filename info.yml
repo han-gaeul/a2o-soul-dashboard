@@ -163,7 +163,5 @@ donate:
   costs:
     - { name: "X API (자동 수집)", amount: "~$110" }
     - { name: "X API (자동 트윗·리트윗)", amount: "~$50" }
-    - { name: "도메인 (a2osoul-tracker.com)", amount: "~$1" }
-    - { name: "사이트 서버 (GitHub·Cloudflare)", amount: "$0" }
   links:
     - { site: 투네이션, site_en: Toonation, url: "https://toon.at/donate/a2osoul-tracker", region: kr }
