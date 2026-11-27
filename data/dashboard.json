@@ -566,10 +566,11 @@
   ],
   "links": [
    {
+    "note": "채팅방에서 카카오페이 송금 · 수수료 없음",
     "region": "kr",
-    "site": "투네이션",
-    "site_en": "Toonation",
-    "url": "https://toon.at/donate/a2osoul-tracker"
+    "site": "카카오톡 오픈채팅",
+    "site_en": "KakaoTalk Open Chat",
+    "url": "https://open.kakao.com/o/sbr48UYi"
    }
   ],
   "month": "2026년 12월 예상"
@@ -18168,6 +18169,16 @@
    "th": "ตามหา",
    "zh": "求"
   },
+  "국내 계좌·카드": {
+   "en": "Korean bank·card",
+   "es": "Banco·tarjeta de Corea",
+   "fil": "Korean bank·card",
+   "id": "Bank·kartu Korea",
+   "ja": "韓国の口座・カード",
+   "pt": "Banco·cartão coreano",
+   "th": "บัญชี·บัตรเกาหลี",
+   "zh": "韩国账户·银行卡"
+  },
   "그냥 좋아서": {
    "en": "Just because I love it",
    "es": "Simplemente me encanta",
@@ -20409,6 +20420,16 @@
    "th": "เคยฝึกที่ TNS Vocal & Dance Academy ชางวอน",
    "zh": "出身昌原TNS声乐舞蹈学院"
   },
+  "채팅방에서 카카오페이 송금 · 수수료 없음": {
+   "en": "Send via KakaoPay in the chat · no fees",
+   "es": "Envía por KakaoPay en el chat · sin comisión",
+   "fil": "Magpadala gamit ang KakaoPay sa chat · walang bayad",
+   "id": "Kirim lewat KakaoPay di chat · tanpa biaya",
+   "ja": "チャットでカカオペイ送金・手数料なし",
+   "pt": "Envie por KakaoPay no chat · sem taxas",
+   "th": "โอนผ่าน KakaoPay ในแชท · ไม่มีค่าธรรมเนียม",
+   "zh": "在聊天室用 KakaoPay 转账 · 无手续费"
+  },
   "첫날 목표: Dancing in the Dark 10만 스트리밍 · SUPERSTAR EP 전체 20만": {
    "en": "Day 1 goals: 100K streams for Dancing in the Dark · 200K for the whole SUPERSTAR EP",
    "es": "Metas del día 1: 100K streams de Dancing in the Dark · 200K para todo el EP SUPERSTAR",
@@ -20473,6 +20494,16 @@
    "pt": "Junte votos com antecedência com check-ins, anúncios e missões, e vote no A2O SOUL durante o período",
    "th": "สะสมสิทธิ์โหวตล่วงหน้าจากการเช็กอิน ดูโฆษณา และภารกิจ แล้วโหวตให้ A2O SOUL ในช่วงโหวต",
    "zh": "通过签到、看广告、做任务提前攒票，投票期间投给A2O SOUL"
+  },
+  "카카오페이 송금 · 수수료 없음": {
+   "en": "KakaoPay transfer · no fees",
+   "es": "Transferencia KakaoPay · sin comisión",
+   "fil": "KakaoPay transfer · walang bayad",
+   "id": "Transfer KakaoPay · tanpa biaya",
+   "ja": "カカオペイ送金・手数料なし",
+   "pt": "Transferência KakaoPay · sem taxas",
+   "th": "โอนผ่าน KakaoPay · ไม่มีค่าธรรมเนียม",
+   "zh": "KakaoPay 转账 · 无手续费"
   },
   "케이팝업 차트쇼": {
    "en": "K-POP UP CHART SHOW",
