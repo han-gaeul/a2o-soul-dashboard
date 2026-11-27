@@ -111,6 +111,7 @@ instagram_media:
   - { username: kbskpop, name: KBS Kpop }
   - { username: a2o.story, name: A2O STORY }
   - { username: studio_choom, name: STUDIO CHOOM }
+  - { username: dazedkorea, name: Dazed Korea }
 
 # 공식 X 계정 (@ 없이). 음방 공지 등을 읽어 일정 후보로 정리 — X_BEARER_TOKEN 필요(사용량 과금)
 x:
