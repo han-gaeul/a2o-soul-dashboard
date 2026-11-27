@@ -67,17 +67,23 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # 1) 확인 기준점(since_id·검색 시각)은 새 카드가 있든 없든 항상 main에 바로 저장
+          #    (예전엔 새 카드가 있으면 PR 브랜치에만 들어가서, 다음 실행이 같은 글을 계속 다시 읽어 X 비용이 샜음)
+          git add collector/pc_state.json collector/pc_auto.json 2>/dev/null || git add collector/pc_state.json
+          if ! git diff --cached --quiet; then
+            git commit -q -m "포카 확인 기준점 갱신"
+            git stash push -u -q -- site/img/photocards || true
+            for i in 1 2 3; do git pull --rebase -q && git push -q && break; sleep 5; done
+            git stash pop -q || true
+          fi
+          # 2) 새 카드 사진만 PR로 (사람이 보고 머지)
           if [ -n "$(git status --porcelain site/img/photocards)" ]; then
             BR=photocards-auto
             git checkout -B "$BR"
-            git add site/img/photocards collector/pc_state.json collector/pc_auto.json 2>/dev/null || git add site/img/photocards collector/pc_state.json
+            git add site/img/photocards
             git commit -m "포카: 새 카드 (템플릿·일반 계정 사진)"
             git push -f origin "$BR"
             NUM=$(gh pr list --head "$BR" --state open --json number --jq '.[0].number')
             if [ -n "$NUM" ]; then gh pr edit "$NUM" --body-file pc_report.md
             else gh pr create --head "$BR" --base main --title "포카: 새 카드 (템플릿·일반 계정 사진)" --body-file pc_report.md; fi
-          elif [ -n "$(git status --porcelain collector/pc_state.json)" ]; then
-            git add collector/pc_state.json
-            git commit -m "포카 확인 기준점 갱신"
-            for i in 1 2 3; do git pull --rebase -q && git push -q && break; sleep 5; done
           fi
