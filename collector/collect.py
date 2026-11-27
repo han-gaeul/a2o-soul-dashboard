@@ -218,6 +218,11 @@ def load_fan_files(cfg):
     cfg["pc_events"] = [{**{k: str(v) for k, v in e.items() if k != "tags"}, "count": int(e.get("count") or 0),
                          "tags": [str(x) for x in e.get("tags") or []]}
                         for e in info.get("pc_events") or [] if isinstance(e, dict) and e.get("url")]
+    dn = info.get("donate") or {}
+    cfg["donate"] = {"month": str(dn.get("month") or ""),
+                     "costs": [{"name": str(c["name"]), "amount": str(c["amount"])} for c in dn.get("costs") or [] if c.get("name")],
+                     "links": [{"site": str(x["site"]), "site_en": str(x.get("site_en") or x["site"]), "url": str(x["url"]), "region": str(x.get("region") or "")}
+                               for x in dn.get("links") or [] if str(x.get("url", "")).startswith("https://")]}
     cfg["info"] = {
         "lore": [str(x) for x in info.get("lore") or []],
         "albums": [{"title": str(a["title"]), "type": str(a.get("type") or ""), "date": str(a.get("date") or ""),
@@ -2377,6 +2382,7 @@ def build(cfg):
         "chart_moves": cfg.get("chart_moves", [])[-30:],
         "supports": sorted((x for x in cfg["supports"] if x["end"] >= today), key=lambda x: x["start"]),
         "howto": cfg["howto"],
+        "donate": cfg["donate"],
         "tr": cfg["tr"],
         "info": {**cfg["info"], "offline_stores": [  # 입고 글이 더 최근에 잡혔으면 날짜·글 링크 갱신 + 입고 글 목록
             {**x, **({"date": seen["date"], "url": seen["url"]} if (seen := (stores_state.get("seen") or {}).get(x["handle"].lower()) or {})

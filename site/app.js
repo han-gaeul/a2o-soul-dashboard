@@ -2951,6 +2951,26 @@ if ("serviceWorker" in navigator) {
     $("hsFoot").onclick = () => openHomeStyle();
   }
 
+  // ---------- 운영 후원 (개인 운영 · 운영비 공개) ----------
+  const openDonate = () => {
+    const d = data.donate || {};
+    $("donateTitle").textContent = `☕ ${t("donate_title")}`;
+    const rows = (d.costs || []).map((c) => el("li", {}, el("span", {}, tc(c.name)), el("b", {}, c.amount)));
+    $("donateBody").replaceChildren(
+      el("p", {}, t("donate_lead")),
+      rows.length ? el("div", { class: "donate-cost" }, el("div", { class: "muted small" }, t("donate_cost", { m: tc(d.month || "") })), el("ul", {}, ...rows)) : null,
+      // 국내(투네이션 등)·해외(Ko-fi 등) 둘 다 — 한국어 화면은 국내 먼저, 그 외 언어는 해외 먼저
+      ...(d.links || []).slice().sort((a, b) => ((a.region === "kr") === (LANG === "ko") ? -1 : 1) - ((b.region === "kr") === (LANG === "ko") ? -1 : 1))
+        .map((x, i) => el("a", { class: `donate-btn${i ? " sub" : ""}`, href: x.url, target: "_blank", rel: "noopener" },
+          `${x.region === "kr" ? "🇰🇷" : "🌏"} ${t("donate_btn", { site: LANG === "ko" ? x.site : x.site_en || x.site })}`, el("small", {}, t(x.region === "kr" ? "donate_kr" : "donate_global")))),
+      el("p", { class: "muted small" }, t("donate_note")));
+    $("donateDlg").showModal();
+  };
+  $("donateFoot").textContent = `☕ ${t("donate_title")}`;
+  $("donateFoot").onclick = openDonate;
+  $("donateClose").onclick = () => $("donateDlg").close();
+  $("donateDlg").onclick = (e) => { if (e.target === $("donateDlg")) $("donateDlg").close(); };
+
   // ---------- 휴대폰 하단 탭바: 더보기 시트 ----------
   {
     const more = $("moreDlg");
@@ -2965,6 +2985,7 @@ if ("serviceWorker" in navigator) {
       item("🤝", t("tab.collab"), () => go("collab")),
       item("🔔", t("push_btn"), () => { more.close(); $("pushBtn").click(); }),
       item("🎨", t("hs_title"), () => { more.close(); openHomeStyle(); }),
+      item("☕", t("donate_title"), () => { more.close(); openDonate(); }),
       ...(!$("installBtn").hidden ? [item("📱", t("install"), () => { more.close(); $("installBtn").click(); })] : []),
       item("🌐", t("lang"), () => $("moreList").replaceChildren(...LANGS.map((l) => item(l === LANG ? "✓" : "", window.I18N[l].lang, () => {
         try { localStorage.setItem("lang", l); } catch (_) { /* 무시 */ }
