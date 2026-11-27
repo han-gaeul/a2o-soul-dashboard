@@ -448,6 +448,9 @@ header .head-right { margin-left: auto; }
 .cal-ev.ev-show { background: var(--chip); color: var(--chip-fg); }
 .cal-ev.ev-anniv { background: #fdf0db; color: #8a5a00; }
 .cal-ev.ev-etc { background: var(--line); color: var(--text); }
+.cal-ev.ev-vote { background: #dcecff; color: #1d4fa3; }   /* 투표 */
+.cal-ev.ev-event { background: #dff3e6; color: #1e6b3d; }  /* 행사(팬싸·콘서트·신청 등) */
+@media (prefers-color-scheme: dark) { .cal-ev.ev-vote { background: #1c2f4d; color: #9cc3ff; } .cal-ev.ev-event { background: #173326; color: #8fdcac; } }
 @media (prefers-color-scheme: dark) { .cal-ev.ev-anniv { background: #3a2c12; color: #f3c46b; } }
 .cal-more { font-size: 9px; color: var(--muted); font-weight: 700; }
 .cal-cell.past .cal-ev { opacity: .75; }

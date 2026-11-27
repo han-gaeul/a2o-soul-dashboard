@@ -303,7 +303,7 @@ if ("serviceWorker" in navigator) {
   }
   const voteEvents = [...voteBuckets.values()].map((vs) => {
     const v = vs[0];
-    const base = { date: v.end.slice(0, 10), time: v.end.slice(11), type: t("votes"), short: short(v.show) || t("votes") };
+    const base = { date: v.end.slice(0, 10), time: v.end.slice(11), type: t("votes"), short: short(v.show) || t("votes"), vote: true };
     if (vs.length === 1) return { ...base, title: `🗳 ${[tc(v.show), tc(v.title)].filter(Boolean).join(" ")}`, url: v.url };
     // 제목 끝의 같은 말('투표 (애프터)')은 묶음 제목으로, 앞부분은 각 링크 이름으로
     const words = vs.map((x) => tc(x.title).split(" "));
@@ -412,7 +412,7 @@ if ("serviceWorker" in navigator) {
       const cell = el("button", { type: "button", class: `cal-cell${iso === todayKst ? " is-today" : ""}${iso === calSel ? " is-sel" : ""}${iso < todayKst ? " past" : ""}`,
         "aria-label": `${iso} ${list.length}` },
         el("span", { class: "cal-d" }, String(d)),
-        el("span", { class: "cal-evs" }, ...list.slice(0, 2).map((e) => el("span", { class: `cal-ev ev-${e.group}` }, shortOf(e))),
+        el("span", { class: "cal-evs" }, ...list.slice(0, 2).map((e) => el("span", { class: `cal-ev ev-${e.group}${e.group === "etc" ? (e.vote ? " ev-vote" : " ev-event") : ""}` }, shortOf(e))),
           list.length > 2 ? el("span", { class: "cal-more" }, `+${list.length - 2}`) : null));
       cell.addEventListener("click", () => { calSel = iso; renderCal(); });
       grid.append(cell);
