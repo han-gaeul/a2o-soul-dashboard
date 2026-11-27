@@ -1092,7 +1092,7 @@ if ("serviceWorker" in navigator) {
       for (const x of sl.circle || []) {
         const [y, w] = x.week.split("-").map(Number); const j4 = new Date(Date.UTC(y, 0, 4));
         const m0 = new Date(j4.getTime() + ((w - 1) * 7 - ((j4.getUTCDay() + 6) % 7)) * 86400000).toISOString().slice(0, 10);
-        const k = wkOf(m0); weeks[k] = { ...(weeks[k] || { label: mon(m0) }), ci: x.sales, ciRank: x.rank };
+        const k = wkOf(m0); weeks[k] = { ...(weeks[k] || { label: mon(m0) }), ...(x.out ? { ciOut: true } : { ci: x.sales, ciRank: x.rank }) };
       }
       const curWk = wkOf(new Date(Date.now() + 9 * 3600000).toISOString().slice(0, 10));
       for (let k = 1; k <= curWk; k++) weeks[k] ||= { label: mon(new Date(rel.getTime() + (k - 1) * 7 * 86400000).toISOString().slice(0, 10)) };
@@ -1108,7 +1108,7 @@ if ("serviceWorker" in navigator) {
           el("tbody", {}, ...weeks.map((w, k) => w ? el("tr", {},
             el("td", {}, el("b", {}, t("sales_wk_n", { n: k })), " ", el("span", { class: "muted small" }, w.label)),
             el("td", {}, ...(w.ht != null ? [n(w.ht), w.htRank ? el("small", { class: "muted" }, ` #${w.htRank}`) : null] : [el("span", { class: "muted small" }, k === curWk ? t("sales_counting") : "–")])),
-            el("td", {}, ...(w.ci != null ? [n(w.ci), w.ciRank ? el("small", { class: "muted" }, ` #${w.ciRank}`) : null] : [el("span", { class: "muted small" }, k >= curWk - 1 ? t("sales_soon") : "–")]))) : null).filter(Boolean))),
+            el("td", {}, ...(w.ci != null ? [n(w.ci), w.ciRank ? el("small", { class: "muted" }, ` #${w.ciRank}`) : null] : [el("span", { class: "muted small" }, w.ciOut ? t("sales_out") : k >= curWk - 1 ? t("sales_soon") : "–")]))) : null).filter(Boolean))),
         hd.length ? el("details", { class: "sales-firstweek" }, el("summary", { class: "small" }, t("sales_first_days")),
           el("div", { class: "sales-bars", role: "img", "aria-label": hd.map((x) => `${x.date.slice(5)} ${n(x.n)}${x.rank ? ` #${x.rank}` : ""}`).join(", ") },
             ...hd.map((x) => el("div", { class: "sb", title: `${x.date.slice(5).replace("-", "/")} · ${n(x.n)}` },

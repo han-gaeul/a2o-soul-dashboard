@@ -438,15 +438,16 @@ def photo_feed(cfg, registry, store, limit=600):
         text = (post.get("caption") or "").strip()
         if not show_photo_ok(cfg, post):  # 투표 앱 홍보·라인업·이벤트 이미지는 멤버 사진이 아님
             continue
+        mem = detect_members(cfg, text)
         for i, src in enumerate(post.get("images") or []):
             out.append({"src": src, "url": post.get("permalink"), "at": kst_datetime(post.get("timestamp")), "account": "show",
-                        "by": post.get("author_name") or post.get("author"), "members": detect_members(cfg, text),
-                        "text": text.split("\n")[0][:80], "n": i})
+                        "by": post.get("author_name") or post.get("author"), "members": mem,
+                        "text": text.split("\n")[0][:80], "n": i, **({} if mem else {"cands": 1})})  # 멤버 이름 없는 단체 글 → 얼굴로 누군지 찾기
     # 여러 멤버 게시물은 사진마다 얼굴로 가린 멤버만 (collector/faces.py — 아직 안 본 사진은 글에 적힌 멤버 그대로)
     faces = load_json("photo_faces.json", {})
     for p in out:
         k = f"{p['url']}#{p['n']}"
-        if len(p["members"]) >= 2 and k in faces:
+        if (len(p["members"]) >= 2 or p.get("cands")) and k in faces:
             p["members"] = faces[k]
     out.sort(key=lambda x: (x["at"], -x["n"]), reverse=True)
     return out[:limit]
@@ -1673,6 +1674,21 @@ def collect(cfg, rescan=False):
                 for k in [k for k, m in fcs.items() if (m.get("timestamp") or "") < cut]:
                     fcs.pop(k)
                 print(f"[음방 사진] 검색 {len(got)}개 · 새 공식 사진 글 {n_new}개 · 보관 {len(sposts)}개")
+                # 최근 2일 글은 다시 확인: 지운 글(정정해서 다시 올린 경우 등)은 빼고, 예전에 4장까지만 받은 글은 사진 전부 채움
+                recent = (now - timedelta(days=2)).isoformat()
+                redo = [k for k, m in sposts.items() if (m.get("timestamp") or "") >= recent[:10]
+                        or (len(m.get("images") or []) == 4 and not m.get("full"))][:100]
+                if redo:
+                    full = xposts.tweet_images(redo)
+                    gone = [k for k in redo if k not in full]
+                    for k in redo:
+                        if k in full:
+                            if len(full[k]) > len(sposts[k].get("images") or []):
+                                sposts[k]["images"] = full[k]
+                            sposts[k]["full"] = True
+                        else:
+                            sposts.pop(k)
+                    print(f"[음방 사진] 다시 확인 {len(redo)}개 글 · 지워진 글 {len(gone)}개 뺌")
             except Exception as e:  # noqa: BLE001
                 print(f"[음방 사진] 검색 실패: {e}")
 
