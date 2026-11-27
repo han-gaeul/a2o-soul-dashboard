@@ -1261,14 +1261,21 @@ body[data-cur="overview"] .vote-bar:not(.live-bar) { display: none; }
 .sales-weeks td:nth-child(2), .sales-weeks td:nth-child(3), .sales-weeks th:nth-child(2), .sales-weeks th:nth-child(3) { text-align: right; }
 .sales-weeks td:nth-child(4), .sales-weeks th:nth-child(4) { text-align: right; }
 .sales-weeks .ver { white-space: nowrap; }
-@media (max-width: 560px) {  /* 폰: 4칸이 들어가게 — 버전 이름은 숫자 위 줄로 */
-  .sales-weeks { font-size: 13px; }
-  .sales-weeks th, .sales-weeks td { padding-left: 4px; padding-right: 4px; }
-  .sales-weeks .ver { white-space: normal; font-size: 11px; line-height: 1.25; margin-top: 2px; }
-  .sales-weeks .ver i { display: block; font-style: normal; }
-  .sales-weeks td, .sales-weeks td span { white-space: normal; word-break: keep-all; }
-  .sales-weeks .nw { white-space: nowrap; }
+.sales-weeks .ver i { font-style: normal; }
+@media (max-width: 560px) {  /* 폰: 표 대신 주차마다 세로로 (출처 이름 | 숫자) */
+  .sales-weeks thead { display: none; }
+  .sales-weeks, .sales-weeks tbody, .sales-weeks tr { display: block; width: 100%; }
+  .sales-weeks tr { padding: 10px 0 8px; border-bottom: 1px solid var(--line); }
+  .sales-weeks td { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 3px 0; border: 0; text-align: right !important; }
+  .sales-weeks td:first-child { display: block; text-align: left !important; padding-bottom: 4px; }
+  .sales-weeks td[data-l]::before { content: attr(data-l); color: var(--muted); font-size: 13px; flex: none; }
+  .sales-weeks td { padding: 3px 0 !important; }
+  .sales-weeks { min-width: 0 !important; table-layout: auto; }
+  .sales-weeks .cv { min-width: 0; }
+  .sales-weeks .ver { display: block; white-space: nowrap; font-size: 12px; }
+  .sales-weeks .ver i { font-style: normal; }
 }
+
 .sales-firstweek { margin: 10px 0 4px; }
 .sales-firstweek > summary { cursor: pointer; color: var(--muted); }
 .pf-press { display: grid; gap: 10px; }
