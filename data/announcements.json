@@ -3634,8 +3634,8 @@
   }
  },
  "x_media": {
-  "at": "2026-11-27T13:40+09:00",
-  "auto_since": "2126174167297081434",
+  "at": "2026-11-27T13:50+09:00",
+  "auto_since": "2126176740460666936",
   "candidates": {},
   "checked": "2026-11-26T17:10+09:00",
   "missing": [],
@@ -3959,9 +3959,20 @@
     "permalink": "https://x.com/myidolmiim/status/2125862551871471983",
     "timestamp": "2026-11-26T08:01:43.000Z",
     "video": false
+   },
+   "2126176043346411692": {
+    "author": "inga_sbs",
+    "author_name": "SBS 인기가요 (SBS Inkigayo)",
+    "caption": "📍이번 주 인기가요 Ep.1333 라인업 공개✨\n\n나연 / LNGSHOT / 앰퍼샌드원 / UNCHILD / AIMERS / A2O SOUL / ENHYPEN / 윤서빈 / 이예지 / izna / KIIRAS / Keyveatz /  KEYVITUP / 투모로우바이투게더 / H1-KEY / HEART OF WOMAN\n\n🔗https://programs.sbs.co.kr/enter/gayo/board/54772?cmd=view&page=1&board_no=152439\n\n#인기가요 #인기가요_라인업 https://x.com/inga_sbs/status/2126176043346411692/photo/1",
+    "images": [
+     "https://pbs.twimg.com/media/HYGx1z9bUAAYYiJ.jpg"
+    ],
+    "permalink": "https://x.com/inga_sbs/status/2126176043346411692",
+    "timestamp": "2026-11-27T04:47:25.000Z",
+    "video": false
    }
   },
-  "since_id": "2125862551871471983"
+  "since_id": "2126176043346411692"
  },
  "x_official_votes": {
   "at": "2026-11-27T12:50+09:00",
