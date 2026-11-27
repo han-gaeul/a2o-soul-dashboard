@@ -6,7 +6,7 @@
 import re
 from datetime import date, timedelta
 
-RULES_VERSION = 13  # 규칙을 바꾸면 올리기 → 다음 수집 때 최근 공지를 다시 읽어 일정을 새로 뽑음
+RULES_VERSION = 14  # 규칙을 바꾸면 올리기 → 다음 수집 때 최근 공지를 다시 읽어 일정을 새로 뽑음
 
 SHOWS = [
     ("더쇼", r"더\s?쇼(?!\s?챔)|THE\s?SHOW"),
@@ -356,7 +356,7 @@ FACE = re.compile(r"대면|오프라인|OFFLINE|IN[-\s]?PERSON", re.I)
 
 
 APPLY_HEAD = re.compile(r"응모\s*(기간|마감|일정)|ENTRY\s*PERIOD|APPLY\s*PERIOD|応募期間", re.I)
-WIN_HEAD = re.compile(r"당첨(자)?\s*(발표|안내)|WINNER", re.I)
+WIN_HEAD = re.compile(r"당첨(자)?\s*(발표|안내|공지)|WINNER", re.I)
 
 
 def apply_period(caption, posted):
@@ -375,11 +375,20 @@ def apply_period(caption, posted):
             return None
         return f"{d.isoformat()} {_time(text) or '23:59'}"
 
+    win_next = False  # '당첨자 공지' 머리줄만 있고 날짜는 다음 줄 (이미지 공지에 흔함)
     for ln in [x.strip() for x in (caption or "").splitlines() if x.strip()]:
+        if win_next and "announce" not in out:
+            win_next = False
+            a = at(ln)
+            if a:
+                out["announce"] = a if _time(ln) else a[:10]
+                continue
         if WIN_HEAD.search(ln) and "announce" not in out:
             a = at(ln.split(":", 1)[-1] if re.search(r"발표\s*:", ln) else ln)
             if a:
                 out["announce"] = a[:10]
+            else:
+                win_next = True
             continue
         is_head = bool(APPLY_HEAD.search(ln))
         rangey = "~" in ln and _dates(ln, pday)
