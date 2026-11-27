@@ -3714,8 +3714,8 @@
   }
  },
  "x_media": {
-  "at": "2026-11-27T17:51+09:00",
-  "auto_since": "2126235345830531577",
+  "at": "2026-11-27T18:00+09:00",
+  "auto_since": "2126239352309309842",
   "candidates": {},
   "checked": "2026-11-27T17:10+09:00",
   "missing": [],
@@ -4061,9 +4061,26 @@
     "permalink": "https://x.com/myidolmiim/status/2126224762108264535",
     "timestamp": "2026-11-27T08:01:01.000Z",
     "video": false
+   },
+   "2126239666102055359": {
+    "author": "ena_kpopupshow",
+    "author_name": "ENA 케이팝업 차트쇼 (K-POP UP CHARTSHOW)",
+    "caption": "🎞 필름 카메라에 담긴 #A2OSOUL Ɛ ❤︎︎ 3\n\n💘 ENA 케이팝업 차트쇼 방송 \n: 매월 마지막 주 화요일 오후 5시 40분\n\n#ENA케이팝업차트쇼 #ENAKPOPUPCHARTSHOW https://x.com/ena_kpopupshow/status/2126239666102055359/photo/1",
+    "images": [
+     "https://pbs.twimg.com/media/HYHrrLebUAAL0a9.jpg",
+     "https://pbs.twimg.com/media/HYHrrgVbYAAy1N9.jpg",
+     "https://pbs.twimg.com/media/HYHrr4SaoAAN7mG.jpg",
+     "https://pbs.twimg.com/media/HYHrsL8b0AAWB2n.jpg",
+     "https://pbs.twimg.com/media/HYHrshEacAAtcGd.jpg",
+     "https://pbs.twimg.com/media/HYHrszjaQAAR9WK.jpg",
+     "https://pbs.twimg.com/media/HYHrtOha8AAHs9S.jpg"
+    ],
+    "permalink": "https://x.com/ena_kpopupshow/status/2126239666102055359",
+    "timestamp": "2026-11-27T09:00:14.000Z",
+    "video": false
    }
   },
-  "since_id": "2126224762108264535"
+  "since_id": "2126239666102055359"
  },
  "x_official_votes": {
   "at": "2026-11-27T17:51+09:00",
@@ -4077,7 +4094,7 @@
   "v": 2
  },
  "x_show_photos": {
-  "at": "2026-11-27T17:00+09:00",
+  "at": "2026-11-27T18:00+09:00",
   "fancams": {},
   "posts": {
    "2123249908413268001": {
@@ -4149,7 +4166,7 @@
     "timestamp": "2026-11-26T10:43:26.000Z"
    }
   },
-  "since_id": "2126218216599081313"
+  "since_id": "2126238999560016114"
  },
  "x_stores": {
   "at": "2026-11-27T12:41+09:00",
