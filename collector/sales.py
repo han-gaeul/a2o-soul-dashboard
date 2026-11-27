@@ -36,10 +36,11 @@ def circle_week(year, week):
     if not rows:
         return None
     hit = [x for x in rows if ARTIST_RX.search(x.get("ARTIST_NAME") or "") and ALBUM.lower() in (x.get("ALBUM_NAME") or "").lower()]
-    if not hit:
-        return {"rank": None, "sales": 0, "out": True, "v": 2}
+    if not hit:  # 100위 밖 — 써클은 100위 밖 판매량을 공개 안 함, 100위 판매량(=이보다 적게 팔림)만 남김
+        cut = min(int(x.get("Album_CNT") or 0) for x in rows)
+        return {"rank": None, "sales": 0, "out": True, "cut": cut, "v": 3}
     vers = [{"name": x.get("ALBUM_NAME"), "rank": int(x.get("SERVICE_RANKING") or 0), "sales": int(x.get("Album_CNT") or 0)} for x in hit]
-    return {"rank": min(v["rank"] for v in vers), "sales": sum(v["sales"] for v in vers), "versions": vers, "v": 2}
+    return {"rank": min(v["rank"] for v in vers), "sales": sum(v["sales"] for v in vers), "versions": vers, "v": 3}
 
 
 def update_circle(d):
@@ -49,7 +50,7 @@ def update_circle(d):
     while wk <= today - timedelta(days=4):  # 써클 주간은 다음 주 목요일쯤 나옴
         y, w, _ = wk.isocalendar()
         key = f"{y}-{w:02d}"
-        if (d["circle"].get(key) or {}).get("v") != 2:
+        if (d["circle"].get(key) or {}).get("v") != 3:
             try:
                 got = circle_week(y, w)
             except Exception as e:  # noqa: BLE001
