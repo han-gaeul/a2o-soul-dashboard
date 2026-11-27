@@ -344,6 +344,7 @@ def compose(kind, data, lang, group=None):
 TAGS = "#A2OSOUL #A2O #에이투오소울 #에투소"
 SONG_TAGS = {"Dancing in the Dark": "#Dancing_in_the_Dark", "SUPERSTAR": "#SUPERSTAR"}  # 글에 곡 이름이 있으면
 ACTIVE_TAG = "#Dancing_in_the_Dark"  # 지금 활동곡 — 모든 초안에 항상 (활동이 바뀌면 고치기)
+MS_ABBR = {"Dancing in the Dark": "DITD"}  # 조회수 돌파 해시태그 (팬덤에서 쓰는 형식: #DITD_5M)
 ERA_TAGS = "#SUPERSTAR #ZalphaPop"  # 지금 활동(앨범·레이블) — 280자 넘으면 빠짐
 # 확실한 정보라 확인 없이 바로 올리는 종류 (일정·생일·조회수처럼 데이터에서 그대로 나오는 것)
 AUTO_POST = {"show", "birthday", "views", "subs"}
@@ -437,6 +438,10 @@ def tweet_text(kind, data):
     text_all = f"{title} {body} {data.get('name', '')} {data.get('title', '')}"
     song = " ".join(t for k, t in SONG_TAGS.items() if k.lower() in text_all.lower() and t not in ERA_TAGS and t != ACTIVE_TAG)
     mems = data.get("members") or ([(data["name"], data.get("ko"))] if kind == "birthday" else [])
+    if kind == "views":  # 예: #DITD_5M (100만 단위)
+        ab = next((a for k, a in MS_ABBR.items() if k.lower() in (data.get("name") or "").lower()), None)
+        if ab and data["n"] >= 1e6:
+            tags = f"#{ab}_{data['n'] / 1e6:g}M " + tags
     for m_en, m_ko in mems:  # 멤버 개인 게시글이면 이름 해시태그 (한글·영어)
         tags += f" #{m_ko} #{re.sub(r'[^A-Za-z0-9]', '', m_en)}" if m_ko else f" #{re.sub(r'[^A-Za-z0-9]', '', m_en)}"
 
