@@ -38,6 +38,9 @@ channels:
     filter: group
     kpi: false
     show: 뮤직뱅크
+  - id: UCFpfKdO4MMSc9ZoMjk2Tikg   # ENA K-POP (케이팝업 차트쇼)
+    filter: group
+    kpi: false
   - id: UCe52oeb7Xv_KaJsEzcKXJJg   # MBCkpop (음악중심)
     filter: group
     kpi: false
