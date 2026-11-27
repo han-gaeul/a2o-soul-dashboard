@@ -234,7 +234,8 @@ def candidates(dash, site, now):
                         {"title": base[:90], "url": f"https://youtu.be/{part[0][0]['id']}", "members": [],
                          "cams": [[m[1] or m[0], v["id"]] for v, m in part], "auto": True,
                          "post_at": int((now + timedelta(minutes=5)).timestamp() * 1000)}))  # 5분 예약 (예약됨에서 취소 가능)
-    mposts = dash.get("media_posts_tw") or []
+    # 매체 글 + @A2O_SOUL 공식 글(본문에 유튜브·쇼츠 주소) — 공식이 같은 영상을 올렸으면 그 글이 리트윗되니 우리 글 안 올림
+    mposts = (dash.get("media_posts_tw") or []) + [x for x in dash.get("ig_feed") or [] if x.get("account") == "x"]
 
     def same_post(v):  # 이 영상을 알리는 매체·공식 X 글 (영상 주소가 있거나, 같은 채널 계정이 같은 제목으로 올림) → 그 글은 리트윗되니 초안 안 만듦
         core = re.sub(r"\s*[｜|]\s*#?Shorts.*$|#\S+", "", v["title"], flags=re.I).strip()[:30].lower()
