@@ -571,6 +571,13 @@
     "site": "카카오톡 오픈채팅",
     "site_en": "KakaoTalk Open Chat",
     "url": "https://open.kakao.com/o/sbr48UYi"
+   },
+   {
+    "note": "카드·네이버페이 등",
+    "region": "kr",
+    "site": "포스타입",
+    "site_en": "Postype",
+    "url": "https://posty.pe/36li5o"
    }
   ],
   "month": "2026년 12월 예상"
@@ -20499,6 +20506,16 @@
    "pt": "Junte votos com antecedência com check-ins, anúncios e missões, e vote no A2O SOUL durante o período",
    "th": "สะสมสิทธิ์โหวตล่วงหน้าจากการเช็กอิน ดูโฆษณา และภารกิจ แล้วโหวตให้ A2O SOUL ในช่วงโหวต",
    "zh": "通过签到、看广告、做任务提前攒票，投票期间投给A2O SOUL"
+  },
+  "카드·네이버페이 등": {
+   "en": "Card, Naver Pay, etc.",
+   "es": "Tarjeta, Naver Pay, etc.",
+   "fil": "Card, Naver Pay, atbp.",
+   "id": "Kartu, Naver Pay, dll.",
+   "ja": "カード・NAVER Payなど",
+   "pt": "Cartão, Naver Pay etc.",
+   "th": "บัตร·Naver Pay ฯลฯ",
+   "zh": "银行卡·Naver Pay 等"
   },
   "카카오페이 송금 · 수수료 없음": {
    "en": "KakaoPay transfer · no fees",
