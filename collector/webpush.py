@@ -136,6 +136,13 @@ def candidates(dash, site, now):
         if bc_live:  # 방송사·매체가 이 시간대에 '생방송·ON AIR' 글을 올림 → 그 글이 리트윗되니 우리 글은 취소
             out.append(_cancel(key_live))
             continue
+        # 방송 시각이 기본값(air)과 다르게 확정되면(예: 음악중심 15:15 → 15:20) 기본 시각으로 걸어 둔 예약은 취소.
+        #   기본 시각이 이미 지났으면 그 글이 올라갔을 테니 새 시각 글은 안 올림 (두 번 올라가는 것 막기)
+        dtm = next((t for sh, t in air.items() if sh in (e.get("title") or "")), None)
+        if dtm and dtm != ltm and -timedelta(hours=3) <= now - lst <= timedelta(minutes=20):
+            out.append(_cancel(f"ev|{e['date']}|{dtm}|{e['title']}|live"))
+            if now >= _kst(f"{e['date']} {dtm}"):
+                continue
         for tag, at, extra in (("live", lst, {"now": True}),):  # 생방송 시작 시각에 '지금 생방송 중' 하나만 (5분 전 '곧 시작'은 안 올림)
             if -timedelta(hours=3) <= now - at <= timedelta(minutes=20):  # 3시간 전부터 예약 · 놓쳤으면 20분 안엔 바로
                 out.append((f"ev|{e['date']}|{ltm}|{e['title']}|{tag}", "show", "show", {**base, **extra, "post_at": int(at.timestamp() * 1000)}))
