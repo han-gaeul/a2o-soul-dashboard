@@ -1602,6 +1602,42 @@
    "permalink": "https://x.com/A2O_SOUL/status/2126520180381761975",
    "timestamp": "2026-11-28T03:34:54.000Z"
   },
+  "x:2126554500026810438": {
+   "caption": "[#음악중심] \n잠시 후, 3시 20분 ‘쇼! 음악중심’에 A2O SOUL이 출연합니다. 팬 여러분의 많은 시청 부탁드립니다. \n\n#A2O #A2OSOUL \n#Dancing_in_the_Dark",
+   "excerpt": "[#음악중심] \n잠시 후, 3시 20분 ‘쇼! 음악중심’에 A2O SOUL이 출연합니다. 팬 여러분의 많은 시청 부탁드립니다. \n\n#A2O #A2OSOUL \n#Dancing_in_the_Dark",
+   "items": [
+    {
+     "confidence": 0.9,
+     "date": "2026-11-28",
+     "end_date": null,
+     "kind": "music_show",
+     "place": null,
+     "time": "15:20",
+     "title": "음악중심 출연",
+     "url": null
+    }
+   ],
+   "permalink": "https://x.com/A2O_SOUL/status/2126554500026810438",
+   "timestamp": "2026-11-28T05:51:16.000Z"
+  },
+  "x:2126554743321624753": {
+   "caption": "[🔔]\n261129 SBS 인기가요 사전녹화 참여자 안내\n\n🔗 https://artist.mnetplus.world/main/stg/a2osoul/contents/6b0a6b4a5ba978540e6d4cc4\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark",
+   "excerpt": "[🔔]\n261129 SBS 인기가요 사전녹화 참여자 안내\n\n🔗 https://artist.mnetplus.world/main/stg/a2osoul/contents/6b0a6b4a5ba978540e6d4cc4\n\n#A2O #A2OSOUL\n#Dancing_",
+   "items": [
+    {
+     "confidence": 0.85,
+     "date": "2026-11-29",
+     "end_date": null,
+     "kind": "music_show",
+     "place": null,
+     "time": null,
+     "title": "인기가요 출연",
+     "url": null
+    }
+   ],
+   "permalink": "https://x.com/A2O_SOUL/status/2126554743321624753",
+   "timestamp": "2026-11-28T05:52:14.000Z"
+  },
   "xf:2121586007254708290": {
    "caption": "[📸] 261114 @A2O_SOUL \n\n2026.11.14\nMBC Show! Music Core\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2OSOULBASE/status/2121586007254708290/photo/1",
    "excerpt": "[📸] 261114 @A2O_SOUL \n\n2026.11.14\nMBC Show! Music Core\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2OSOULBASE/status/2121586007254708",
@@ -3820,7 +3856,7 @@
  "x": {
   "A2O_SOUL": {
    "id": "1986498790229262336",
-   "since_id": "2126520180381761975"
+   "since_id": "2126554743321624753"
   }
  },
  "x_fans": {
@@ -3834,7 +3870,7 @@
   }
  },
  "x_media": {
-  "at": "2026-11-28T14:50+09:00",
+  "at": "2026-11-28T15:00+09:00",
   "auto_since": "2126521303272489128",
   "candidates": {},
   "checked": "2026-11-27T17:10+09:00",
@@ -4172,7 +4208,7 @@
   "since_id": "2126482456123420999"
  },
  "x_official_votes": {
-  "at": "2026-11-28T14:50+09:00",
+  "at": "2026-11-28T15:00+09:00",
   "deep": 1,
   "last": {
    "official": [],
@@ -4183,7 +4219,7 @@
   "v": 2
  },
  "x_show_photos": {
-  "at": "2026-11-28T14:00+09:00",
+  "at": "2026-11-28T15:00+09:00",
   "fancams": {
    "2126482456123420999": {
     "author": "StudioK_twt",
@@ -4284,6 +4320,13 @@
   "A2OSOUL_STREAM": {
    "id": "2122910820325847040",
    "posts": [
+    {
+     "caption": "🌝DANCING IN THE DARK🕺\n▶️Melon 스밍/다운로드총공 안내🔄\n📆2026.11.28. 15:00-16:00\n(음원점수 반영-스밍40%/다운60%)\n\n다운로드 점수도 꽤 큽니다!\n이미 다운받았다면 선물하기도 가능해요.\n다운 후 꼭 삭제하고 스밍하기..! \n\nhttps://muzip.link/V4DxIT\n(플리 클릭)",
+     "images": [],
+     "permalink": "https://x.com/A2OSOUL_STREAM/status/2126556443130085722",
+     "timestamp": "2026-11-28T05:59:00.000Z",
+     "tweet_id": "2126556443130085722"
+    },
     {
      "caption": "🌝DANCING IN THE DARK🕺\n▶️Melon 스밍/다운로드총공 안내🔄\n📆2026.11.28. 11:30-13:30\n(음원점수 반영-스밍40%/다운60%)\n\n순위 반영되려면 플레이 리스트 잘 만드는 거 중요!\n\nhttps://muzip.link/V4DxIT\n잘 모르겠다면 플리를 클릭하는 것도 방법",
      "images": [],
@@ -4568,18 +4611,9 @@
      "permalink": "https://x.com/A2OSOUL_STREAM/status/2123966879803089317",
      "timestamp": "2026-11-21T02:29:00.000Z",
      "tweet_id": "2123966879803089317"
-    },
-    {
-     "caption": "📢 스밍이 자꾸 끊겨서 고민이신 분들!\n\n안드로이드 이용자는 멜론 앱의 '음악 알람' 기능을 활용해 보세요! 🍈\n\n멜론 앱 → 우측 하단 점 3개 → 설정 → 알람에서 1시간 단위로 알람을 설정할 수 있습니다.\n#A2OSOUL\n마지막은 제가 설정한 음악알람입니다. https://x.com/A2OSOUL_STREAM/status/2123916776568434750/photo/1",
-     "images": [
-      "https://pbs.twimg.com/media/HXmrCOIaEAAbb2d.jpg"
-     ],
-     "permalink": "https://x.com/A2OSOUL_STREAM/status/2123916776568434750",
-     "timestamp": "2026-11-20T23:09:54.000Z",
-     "tweet_id": "2123916776568434750"
     }
    ],
-   "since_id": "2126503595109417130"
+   "since_id": "2126556443130085722"
   }
  },
  "x_vendors": {
@@ -4607,7 +4641,7 @@
    "id": "1556541258696622080",
    "since_id": "2126541597697507729"
   },
-  "at": "2026-11-28T14:50+09:00",
+  "at": "2026-11-28T15:00+09:00",
   "coogoong": {
    "id": "1549266721516978176",
    "since_id": "2126252188607655960"
