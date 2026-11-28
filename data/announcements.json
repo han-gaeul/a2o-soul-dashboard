@@ -8,7 +8,7 @@
   "xo:2125499982279221448||🎧K-POP K탑 CHART"
  ],
  "ig_media": {
-  "at": "2026-11-28T09:40+09:00",
+  "at": "2026-11-28T10:10+09:00",
   "sig": "myidol_miim,1thek,stonemusicent,kbskpop,a2o.story,studio_choom,dazedkorea"
  },
  "posts": {
@@ -3813,8 +3813,8 @@
   }
  },
  "x_media": {
-  "at": "2026-11-28T10:01+09:00",
-  "auto_since": "2126480188695257328",
+  "at": "2026-11-28T10:10+09:00",
+  "auto_since": "2126483785688752472",
   "candidates": {},
   "checked": "2026-11-27T17:10+09:00",
   "missing": [],
@@ -4135,9 +4135,20 @@
     "permalink": "https://x.com/ena_kpopupshow/status/2126239666102055359",
     "timestamp": "2026-11-27T09:00:14.000Z",
     "video": false
+   },
+   "2126482456123420999": {
+    "author": "StudioK_twt",
+    "author_name": "KBS Kpop",
+    "caption": "[🖥/ #K_Choreo8K]\n8K Full 직캠을 지금 바로 확인하세요!\n\n261127 #A2OSOUL - 'Dancing in the Dark'\n\n▶︎ https://youtu.be/9XvzSlFqkdU\n\n#뮤직뱅크 #뮤뱅 #StudioK #8K \n#직캠 #직캠8K #뮤뱅직캠 #뮤뱅8K \n@A2O_SOUL https://x.com/StudioK_twt/status/2126482456123420999/photo/1",
+    "images": [
+     "https://pbs.twimg.com/media/HYIIvxNbEAA_dZI.jpg"
+    ],
+    "permalink": "https://x.com/StudioK_twt/status/2126482456123420999",
+    "timestamp": "2026-11-28T01:05:00.000Z",
+    "video": false
    }
   },
-  "since_id": "2126239666102055359"
+  "since_id": "2126482456123420999"
  },
  "x_official_votes": {
   "at": "2026-11-28T09:10+09:00",
