@@ -191,10 +191,10 @@ def candidates(dash, site, now):
                 "draft_only": True}
         key = f"{'sg' if kind == 'stream' else 'cb'}|{e['date']}|{e['time']}|{e['title']}"
         # fallback_at: 그때까지 tweet.html에서 올리기·건너뛰기를 안 하면 워커가 자동으로 올림 (자는 시간 대비)
-        if kind == "stream":  # 음원 총공: 시작 시각에 '지금 진행 중' 하나만 (시작 1시간 전부터 초안, 늦게 알면 끝나기 30분 전까지)
-            if -timedelta(hours=1, minutes=10) <= now - st <= end - st - timedelta(minutes=30):
-                out.append((key + "|live", "show", kind, {**base, "now": True,
-                            "fallback_at": int(max(st, now + timedelta(minutes=10) if now > st else st).timestamp() * 1000)}))
+        if kind == "stream":  # 음원 총공: 우리 글(링크 $0.20) 대신 시작 시각에 총공팀 공지를 리트윗 (끝나기 30분 전까지)
+            if "/status/" in base["post"] and timedelta(0) <= now - st <= end - st - timedelta(minutes=30):
+                out.append((f"rt|{base['post']}", "media", "media", {"name": e.get("credit") or "총공팀", "title": "음원 총공",
+                                                                    "url": base["post"], "members": [], "rt": True}))
             continue
         if -timedelta(minutes=20) <= st - now <= timedelta(hours=1, minutes=10):  # 시작 전 → 시작 10분 전 자동
             out.append((key, "show", kind, {**base, "fallback_at": int((st - timedelta(minutes=10)).timestamp() * 1000)}))
@@ -363,7 +363,7 @@ SONG_TAGS = {"Dancing in the Dark": "#Dancing_in_the_Dark", "SUPERSTAR": "#SUPER
 ACTIVE_TAG = "#Dancing_in_the_Dark"  # 지금 활동곡 — 모든 초안에 항상 (활동이 바뀌면 고치기)
 LIVE_POST = re.compile(r"생방송|본방|ON\s?AIR|LIVE|잠시 후|곧 (?:시작|만나)|지금 (?:바로|방송)", re.I)
 VIDEO_WAIT = 30  # 새 영상 트윗 대기(분) — 그사이 공식·매체 글이 나오면 그 글 리트윗으로 대신 (X: 링크 글 $0.20 > 리트윗)
-NO_LINK_KINDS = {"birthday", "chart_day", "chart"}  # 생일·차트 요약·차트 진입
+NO_LINK_KINDS = {"birthday", "chart_day", "chart", "views"}  # 생일·차트 요약·차트 진입
 MS_ABBR = {"Dancing in the Dark": "DITD"}  # 조회수 돌파 해시태그 (팬덤에서 쓰는 형식: #DITD_5M)
 ERA_TAGS = "#SUPERSTAR #ZalphaPop"  # 지금 활동(앨범·레이블) — 280자 넘으면 빠짐
 # 확실한 정보라 확인 없이 바로 올리는 종류 (일정·생일·조회수처럼 데이터에서 그대로 나오는 것)
