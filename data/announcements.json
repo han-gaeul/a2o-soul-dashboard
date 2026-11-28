@@ -1581,6 +1581,27 @@
    "permalink": "https://x.com/A2O_SOUL/status/2126308350233305297",
    "timestamp": "2026-11-27T13:33:10.000Z"
   },
+  "x:2126520180381761975": {
+   "caption": "[📍]\n261128 (토) A2O SOUL MBC 쇼! 음악중심 생방송에 참여하시는 분은 인원 체크 시간에 맞춰 사진 속 장소로 모여주시기 바랍니다🪩\n\n인원 체크 시작 시간 - PM 1:00 (KST)\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2O_SOUL/status/2126520180381761975/photo/1",
+   "excerpt": "[📍]\n261128 (토) A2O SOUL MBC 쇼! 음악중심 생방송에 참여하시는 분은 인원 체크 시간에 맞춰 사진 속 장소로 모여주시기 바랍니다🪩\n\n인원 체크 시작 시간 - PM 1:00 (KST)\n\n#A2O #A2OSOUL\n#Dancing_in_",
+   "images": [
+    "https://pbs.twimg.com/media/HYLq1Eha4AANyc-.jpg"
+   ],
+   "items": [
+    {
+     "confidence": 0.9,
+     "date": "2026-11-28",
+     "end_date": null,
+     "kind": "music_show",
+     "place": null,
+     "time": null,
+     "title": "음악중심 출연",
+     "url": null
+    }
+   ],
+   "permalink": "https://x.com/A2O_SOUL/status/2126520180381761975",
+   "timestamp": "2026-11-28T03:34:54.000Z"
+  },
   "xf:2121586007254708290": {
    "caption": "[📸] 261114 @A2O_SOUL \n\n2026.11.14\nMBC Show! Music Core\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2OSOULBASE/status/2121586007254708290/photo/1",
    "excerpt": "[📸] 261114 @A2O_SOUL \n\n2026.11.14\nMBC Show! Music Core\n\n#A2O #A2OSOUL\n#Dancing_in_the_Dark https://x.com/A2OSOULBASE/status/2121586007254708",
@@ -3799,7 +3820,7 @@
  "x": {
   "A2O_SOUL": {
    "id": "1986498790229262336",
-   "since_id": "2126308350233305297"
+   "since_id": "2126520180381761975"
   }
  },
  "x_fans": {
@@ -3813,8 +3834,8 @@
   }
  },
  "x_media": {
-  "at": "2026-11-28T12:01+09:00",
-  "auto_since": "2126511195092119633",
+  "at": "2026-11-28T12:40+09:00",
+  "auto_since": "2126521303272489128",
   "candidates": {},
   "checked": "2026-11-27T17:10+09:00",
   "missing": [],
@@ -4151,19 +4172,28 @@
   "since_id": "2126482456123420999"
  },
  "x_official_votes": {
-  "at": "2026-11-28T09:10+09:00",
+  "at": "2026-11-28T12:40+09:00",
   "deep": 1,
   "last": {
    "official": [],
-   "read": 0,
-   "verified": []
+   "read": 2,
+   "verified": [
+    "ishkpopvotes:blue"
+   ]
   },
-  "since_id": "2126336255235662284",
+  "since_id": "2126475849449046157",
   "v": 2
  },
  "x_show_photos": {
-  "at": "2026-11-28T09:10+09:00",
-  "fancams": {},
+  "at": "2026-11-28T12:40+09:00",
+  "fancams": {
+   "2126482456123420999": {
+    "author": "StudioK_twt",
+    "author_name": "KBS Kpop",
+    "permalink": "https://x.com/StudioK_twt/status/2126482456123420999",
+    "timestamp": "2026-11-28T01:05:00.000Z"
+   }
+  },
   "posts": {
    "2123249908413268001": {
     "author": "BIGCChoice",
@@ -4234,7 +4264,7 @@
     "timestamp": "2026-11-26T10:43:26.000Z"
    }
   },
-  "since_id": "2126339573064372377"
+  "since_id": "2126520180381761975"
  },
  "x_stores": {
   "at": "2026-11-28T06:50+09:00",
