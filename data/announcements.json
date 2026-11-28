@@ -8,7 +8,7 @@
   "xo:2125499982279221448||🎧K-POP K탑 CHART"
  ],
  "ig_media": {
-  "at": "2026-11-28T22:30+09:00",
+  "at": "2026-11-28T23:00+09:00",
   "sig": "myidol_miim,1thek,stonemusicent,kbskpop,a2o.story,studio_choom,dazedkorea"
  },
  "posts": {
@@ -3948,7 +3948,7 @@
   }
  },
  "x_media": {
-  "at": "2026-11-28T22:50+09:00",
+  "at": "2026-11-28T23:00+09:00",
   "auto_since": "2126521303272489128",
   "candidates": {},
   "checked": "2026-11-28T17:10+09:00",
@@ -4286,18 +4286,16 @@
   "since_id": "2126482456123420999"
  },
  "x_official_votes": {
-  "at": "2026-11-28T19:51+09:00",
+  "at": "2026-11-28T23:00+09:00",
   "deep": 1,
   "last": {
-   "official": [
-    "muniverse_io"
-   ],
+   "official": [],
    "read": 1,
    "verified": [
-    "muniverse_io:blue"
+    "sellvote17:blue"
    ]
   },
-  "since_id": "2126586895484551249",
+  "since_id": "2126637771678949555",
   "v": 2
  },
  "x_show_photos": {
@@ -4408,6 +4406,13 @@
   "A2OSOUL_STREAM": {
    "id": "2122910820325847040",
    "posts": [
+    {
+     "caption": "🌝DANCING IN THE DARK🕺\n▶️Melon 스밍/다운로드총공 안내🔄\n📆2026.11.28. 23:00-26:00\n(음원점수 반영-스밍40%/다운60%)\n\n애둘 영상 보다 보면 잠깐 스밍 끊을 때가 있는데 오히려 자연스러운 플레이 같아서 좋아요.\n대신 다 본뒤 리플레이 버튼 필수!\nhttps://muzip.link/V4DxIT\n(플레이리스트 공유)",
+     "images": [],
+     "permalink": "https://x.com/A2OSOUL_STREAM/status/2126677239563452429",
+     "timestamp": "2026-11-28T13:59:00.000Z",
+     "tweet_id": "2126677239563452429"
+    },
     {
      "caption": "🌝DANCING IN THE DARK🕺\n▶️Melon 스밍/다운로드총공 안내🔄\n📆2026.11.28. 17:30-19:00\n(음원점수 반영-스밍40%/다운60%)\n\n한 사람의 스밍이 별 것 아닌 것 같아도\n생각보다 큰 힘이 돼요.\n음방을 한 번 볼 거 두 번 보고 애들이 안 나와도 상을 타요.\n\nhttps://muzip.link/V4DxIT\n(플레이리스트 공유)",
      "images": [],
@@ -4690,18 +4695,9 @@
      "permalink": "https://x.com/A2OSOUL_STREAM/status/2124004467825844306",
      "timestamp": "2026-11-21T04:58:21.000Z",
      "tweet_id": "2124004467825844306"
-    },
-    {
-     "caption": "各位中国粉丝大家好！如果有A2OSoul的微信群，麻烦邀请我加入一下，非常感谢大家！❤️ https://x.com/A2OSOUL_STREAM/status/2123976662857744806/photo/1",
-     "images": [
-      "https://pbs.twimg.com/media/HXnhhHnawAAH8Ri.jpg"
-     ],
-     "permalink": "https://x.com/A2OSOUL_STREAM/status/2123976662857744806",
-     "timestamp": "2026-11-21T03:07:52.000Z",
-     "tweet_id": "2123976662857744806"
     }
    ],
-   "since_id": "2126594193413849091"
+   "since_id": "2126677239563452429"
   }
  },
  "x_vendors": {
