@@ -712,6 +712,7 @@ def vote_wins(store):
 
 
 FANCAM_POST = re.compile(r"직캠|FANCAM|FAN\s?CAM|풀캠|FULL\s?CAM|페이스캠|FACE\s?CAM|세로캠|Choreo", re.I)
+X_AUTO_VERIFIED = False  # 목록에 없는 인증 계정 자동 찾기 검색 (X 비용 커서 꺼 둠)
 A2O_MENTION = re.compile(r"A2O\s?SOUL|A2OSOUL|에이투오\s?소울|에이투오소울|@a2o\.soul\b", re.I)  # @a2o.soul = 공식 인스타 태그
 
 
@@ -1637,8 +1638,10 @@ def collect(cfg, rescan=False):
             skip = ({"a2o_soul"} | mknown | {v["handle"].lower() for v in cfg.get("x_vendors") or []} | {u.lower() for u in cfg["x_vote_accounts"]}
                     | {str(x.get("handle") or "").lower() for x in cfg["info"].get("offline_stores") or []})
             try:
+                # 꺼 둠(11/28): is:verified에 유료 파란 체크 팬 계정까지 걸려 읽기의 90%(하루 ~$7)인데 새로 찾는 기업 글은 거의 없음
+                #   → 목록(targets.yml x_media)에 있는 계정만. 다시 켜려면 X_AUTO_VERIFIED = True
                 auto = xposts.search_posts(base + "is:verified -from:A2O_SOUL -is:retweet -is:reply",
-                                           since_id=mst.get("auto_since"), max_results=100, media=True)
+                                           since_id=mst.get("auto_since"), max_results=100, media=True) if X_AUTO_VERIFIED else []
                 if auto:
                     mst["auto_since"] = max(auto, key=lambda p_: int(p_["tweet_id"]))["tweet_id"]
                 n_auto = 0
